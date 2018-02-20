@@ -1,0 +1,210 @@
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="unqualified" attributeFormDefault="unqualified">
+	<!-- include constructs -->
+	<xsd:include schemaLocation="externalmsg.xsd"/>
+	<xsd:complexType name="ASCIIFixedFormat">
+		<xsd:complexContent>
+			<xsd:extension base="ExternalMessageType"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:element name="ASCIIFixedfields" substitutionGroup="ExternalMessageFields">
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="ExternalMessageFieldsType">
+					<xsd:sequence>
+						<xsd:element name="batchmode" type="xsd:boolean"/>
+						<xsd:element name="headerdelimiter" type="xsd:string" minOccurs="0"/>
+						<xsd:element name="datadelimiter" type="xsd:string" minOccurs="0"/>
+						<xsd:element name="trailerdelimiter" type="xsd:string" minOccurs="0"/>
+						<xsd:element name="fieldoptions">
+							<xsd:complexType>
+								<xsd:sequence>
+									<xsd:element ref="stringfieldoption"/>
+									<xsd:element ref="integerfieldoption"/>
+									<xsd:element ref="bigintegerfieldoption"/>
+									<xsd:element ref="longfieldoption"/>
+									<xsd:element ref="datefieldoption"/>
+									<xsd:element ref="floatfieldoption"/>
+									<xsd:element ref="doublefieldoption"/>
+									<xsd:element ref="bigdecimalfieldoption"/>
+									<xsd:element ref="booleanfieldoption"/>
+								</xsd:sequence>
+							</xsd:complexType>
+						</xsd:element>
+						<xsd:element ref="target-namespace" minOccurs="0"/>
+						<xsd:element ref="xpath-namespaces" minOccurs="0"/>
+						<xsd:element ref="platforminfo" minOccurs="0"/>
+						<xsd:element ref="field-attributes" minOccurs="0"/>
+						<xsd:element name="headerfields" type="ASCIIFixedFieldStructType"/>
+						<xsd:element name="datafields" type="ASCIIFixedFieldStructType"/>
+						<xsd:element name="trailerfields" type="ASCIIFixedFieldStructType"/>
+					</xsd:sequence>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:complexType name="ASCIIFixedAbstractFieldType" abstract="true">
+		<xsd:sequence>
+			<xsd:element name="name" type="xsd:string"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="ASCIIFixedFieldStructType">
+		<xsd:sequence>
+			<xsd:element ref="platforminfo" minOccurs="0"/>
+			<xsd:element ref="field-attributes" minOccurs="0"/>
+			<xsd:element name="field" type="ASCIIFixedAbstractFieldType" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="ASCIIFixedSectionType">
+		<xsd:complexContent>
+			<xsd:extension base="ASCIIFixedAbstractFieldType">
+				<xsd:sequence>
+					<xsd:element name="datatype" type="xsd:string" fixed="Section"/>
+					<xsd:element name="detailed-name" type="xsd:string" minOccurs="0"/>
+					<xsd:element name="description" type="xsd:string" minOccurs="0"/>
+					<xsd:element name="aliasname" type="xsd:string" minOccurs="0"/>
+					<xsd:element name="minoccurs" type="xsd:integer"/>
+					<xsd:element name="maxoccurs" type="xsd:integer"/>
+					<xsd:element name="fields">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="field" type="ASCIIFixedAbstractFieldType" minOccurs="0" maxOccurs="unbounded"/>
+							</xsd:sequence>
+						</xsd:complexType>
+					</xsd:element>
+					<xsd:element ref="platforminfo" minOccurs="0"/>
+					<xsd:element ref="field-attributes" minOccurs="0"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="ASCIIFixedFieldType">
+		<xsd:complexContent>
+			<xsd:extension base="ASCIIFixedAbstractFieldType">
+				<xsd:sequence>
+					<xsd:element name="enabled" type="xsd:boolean" minOccurs="0"/>
+					<xsd:element name="datatype" type="xsd:string"/>
+					<xsd:element name="detailed-name" type="xsd:string" minOccurs="0"/>
+					<xsd:element name="description" type="xsd:string" minOccurs="0"/>
+					<xsd:element name="comment" type="xsd:string" minOccurs="0"/>
+					<xsd:element name="aliasname" type="xsd:string" minOccurs="0"/>
+					<xsd:element name="required" type="xsd:boolean"/>
+					<xsd:element name="defaultvalue" type="xsd:string" minOccurs="0"/>
+					<xsd:element name="dateformat" type="xsd:string" minOccurs="0"/>
+					<xsd:element name="width" type="xsd:integer"/>
+					<xsd:element ref="FieldOptions" minOccurs="0" maxOccurs="unbounded"/>
+					<xsd:element ref="platforminfo" minOccurs="0"/>
+					<xsd:element ref="field-attributes" minOccurs="0"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="FieldOptionsType"/>
+	<xsd:element name="FieldOptions" type="FieldOptionsType"/>
+	<xsd:element name="stringfieldoption" substitutionGroup="FieldOptions">
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="FieldOptionsType">
+					<xsd:sequence>
+						<xsd:element name="justification" type="xsd:integer" minOccurs="0"/>
+						<xsd:element name="trimoption" type="xsd:integer" minOccurs="0"/>
+					</xsd:sequence>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="integerfieldoption" substitutionGroup="FieldOptions">
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="FieldOptionsType">
+					<xsd:sequence>
+						<xsd:element name="justification" type="xsd:integer" minOccurs="0"/>
+					</xsd:sequence>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="bigintegerfieldoption" substitutionGroup="FieldOptions">
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="FieldOptionsType">
+					<xsd:sequence>
+						<xsd:element name="justification" type="xsd:integer" minOccurs="0"/>
+					</xsd:sequence>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="longfieldoption" substitutionGroup="FieldOptions">
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="FieldOptionsType">
+					<xsd:sequence>
+						<xsd:element name="justification" type="xsd:integer" minOccurs="0"/>
+					</xsd:sequence>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="datefieldoption" substitutionGroup="FieldOptions">
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="FieldOptionsType">
+					<xsd:sequence>
+						<xsd:element name="justification" type="xsd:integer" minOccurs="0"/>
+					</xsd:sequence>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="floatfieldoption" substitutionGroup="FieldOptions">
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="FieldOptionsType">
+					<xsd:sequence>
+						<xsd:element name="justification" type="xsd:integer" minOccurs="0"/>
+						<xsd:element name="decimalpointoption" type="xsd:integer" minOccurs="0"/>
+						<xsd:element name="format" type="xsd:string" minOccurs="0"/>
+					</xsd:sequence>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="doublefieldoption" substitutionGroup="FieldOptions">
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="FieldOptionsType">
+					<xsd:sequence>
+						<xsd:element name="justification" type="xsd:integer" minOccurs="0"/>
+						<xsd:element name="decimalpointoption" type="xsd:integer" minOccurs="0"/>
+						<xsd:element name="format" type="xsd:string" minOccurs="0"/>
+					</xsd:sequence>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="bigdecimalfieldoption" substitutionGroup="FieldOptions">
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="FieldOptionsType">
+					<xsd:sequence>
+						<xsd:element name="justification" type="xsd:integer" minOccurs="0"/>
+						<xsd:element name="decimalpointoption" type="xsd:integer" minOccurs="0"/>
+						<xsd:element name="format" type="xsd:string" minOccurs="0"/>
+					</xsd:sequence>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="booleanfieldoption" substitutionGroup="FieldOptions">
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="FieldOptionsType">
+					<xsd:sequence>
+						<xsd:element name="truevalue" type="xsd:string" minOccurs="0"/>
+						<xsd:element name="falsevalue" type="xsd:string" minOccurs="0"/>
+					</xsd:sequence>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+</xsd:schema>

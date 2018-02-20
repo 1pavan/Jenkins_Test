@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<SwiftMessageFormat name="MTGeneric">
+	<standard>SWIFT</standard>
+	<standard-name>MTGeneric</standard-name>
+	<standard-version>SRG 2017</standard-version>
+	<standard-release-qualifier>20170227</standard-release-qualifier>
+	<DescriptiveName><![CDATA[Generic Message]]></DescriptiveName>
+	<Category>Common</Category>
+	<SwiftFields>
+		<xpath-namespaces>
+			<namespace value="http://www.w3.org/2005/xpath-functions" prefix="fn"/>
+			<namespace value="http://www.w3.org/2001/XMLSchema" prefix="xs"/>
+			<namespace value="java:com.tplus.transform.runtime.swift.SwiftXPathFunctions" prefix="swift"/>
+		</xpath-namespaces>
+		<customizable>true</customizable>
+		<modifiable>false</modifiable>
+		<SwiftMessageType>User</SwiftMessageType>
+		<HeaderAndTrailerType>SWIFT_INPUT_OUTPUT_HEADER</HeaderAndTrailerType>
+		<Header>
+		</Header>
+		<Data>
+			<Fields>
+				<CopyOfFields Name="AllFields">
+					<Description><![CDATA[AllFields]]></Description>
+					<Mandatory>false</Mandatory>
+				</CopyOfFields>
+			</Fields>
+		</Data>
+		<Trailer>
+		</Trailer>
+	</SwiftFields>
+	<validationrules name="Default">
+		<hdrvalidationrules>
+			<fieldvalidations>
+			</fieldvalidations>
+		</hdrvalidationrules>
+		<datavalidationrules>
+			<fieldvalidations>
+			</fieldvalidations>
+		</datavalidationrules>
+		<tlrvalidationrules>
+			<fieldvalidations>
+			</fieldvalidations>
+		</tlrvalidationrules>
+	</validationrules>
+</SwiftMessageFormat>
+

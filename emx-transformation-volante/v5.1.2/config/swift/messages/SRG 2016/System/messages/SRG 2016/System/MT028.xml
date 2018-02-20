@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<SwiftMessageFormat name="MT028">
+	<standard-version><![CDATA[SRG 2016]]></standard-version>
+	<standard-release-qualifier>20160308</standard-release-qualifier>
+	<DescriptiveName><![CDATA[SWIFTNet FIN Copy Message Status Request]]></DescriptiveName>
+	<Category><![CDATA[System]]></Category>
+	<Description><![CDATA[This message is used for monitoring FIN Copy Service Messages within a specific time range.Unless the range is set, it defaults to cut-off time. It lists the messages held in the FIN Copy hold queue that have not yet been authorised. The response to this message is an MT 029 FIN Copy Message Status Report containing counts of messages queued by the FIN Copy Service.
+
+See the FIN Copy Service Description module for further information.
+
+From:FIN Copy Server    To: FIN
+
+
+Notes:
+
+When the <date-time> fields are absent, current <date-time> is assumed as the cut-off time. The
+cut-off time is local to the FIN Copy Server.
+
+If the request specifies the <date-time> field, the response provides the status as of the specified <datetime>.When only one field 177 is present, it is interpreted as the cut-off time; when both are present the first field 177 is interpreted as the start time. All times are local and are compared with the emission time of the
+user messages
+
+When field 243:<hold-queue-request-type> is 1, the MT 029 FIN Copy Message
+Status Report provides the MIR for all messages in the hold queue. Otherwise, only the counts are provided.
+
+]]></Description>
+	<SwiftFields>
+		<customizable>false</customizable>
+		<modifiable>true</modifiable>
+		<SwiftMessageType>System</SwiftMessageType>
+		<HeaderAndTrailerType>SWIFT_INPUT_HEADER</HeaderAndTrailerType>
+		<Header>
+		</Header>
+		<Data>
+			<Fields>
+				<SystemField Name="service-code">
+					<description><![CDATA[FIN Copy Service Code.]]></description>
+					<datatype>String</datatype>
+					<required>true</required>
+					<SwiftSystemFieldDef Name="service-code" Tag="103">
+						<Format><![CDATA[3!a]]></Format>
+						<Specification><![CDATA[(service-code)]]></Specification>
+						<Description><![CDATA[FIN Copy Service Code.]]></Description>
+					</SwiftSystemFieldDef>
+				</SystemField>
+				<SystemField Name="hold-queue-request-type">
+					<description><![CDATA[Type of Hold Queue report, where:
+
+a)  1 = counts and MIRs
+
+b)  2 = counts only
+
+c)  3 = counts and message input references of MT 096 copy message]]></description>
+					<datatype>String</datatype>
+					<required>true</required>
+					<SwiftSystemFieldDef Name="hold-queue-request-type" Tag="243">
+						<Format><![CDATA[1!n]]></Format>
+						<Specification><![CDATA[(hold-queue-request-type)]]></Specification>
+						<Description><![CDATA[Type of Hold Queue report, where:
+
+a)  1 = counts and MIRs of original message.
+
+b)  2 = counts only
+
+c)  3 = counts and message input references of MT 096 copy message]]></Description>
+						<Validations>
+							<Validation>
+								<formula>In($value, "1", "2", "3")</formula>
+								<error-code>V08</error-code>
+								<actionmessage>"Invalid Hold Queue Report Type '" + $value + "'. hold-queue-report-types are:1,2,3"</actionmessage>
+							</Validation>
+						</Validations>
+					</SwiftSystemFieldDef>
+				</SystemField>
+				<SystemGroup Name="Group177">
+					<datatype>Section</datatype>
+					<minoccurs>0</minoccurs>
+					<maxoccurs>2</maxoccurs>
+					<Fields>
+						<SystemField Name="date-time">
+							<description><![CDATA[Local to the FIN Copy Server.]]></description>
+							<datatype>String</datatype>
+							<required>false</required>
+							<SwiftSystemFieldDef Name="date-time" Tag="177">
+								<Format><![CDATA[(10!n)]]></Format>
+								<Specification><![CDATA[(date-time)]]></Specification>
+								<Additional-Format><![CDATA[YYMMDDHHMM]]></Additional-Format>
+								<Description><![CDATA[Date and time are always given as local, unless otherwise specified. Local time for the SWIFTNetwork is in GMT.]]></Description>
+								<Validations>
+									<Validation>
+										<formula>IsDate($value,"yyMMddHHmm")</formula>
+										<error-code>V05</error-code>
+										<actionmessage>"Invalid Date/Time '" + $value + "'"</actionmessage>
+									</Validation>
+								</Validations>
+							</SwiftSystemFieldDef>
+						</SystemField>
+					</Fields>
+				</SystemGroup>
+			</Fields>
+		</Data>
+		<Trailer>
+		</Trailer>
+	</SwiftFields>
+	<validationrules name="Default">
+		<hdrvalidationrules>
+			<fieldvalidations>
+			</fieldvalidations>
+		</hdrvalidationrules>
+		<datavalidationrules>
+			<fieldvalidations>
+			</fieldvalidations>
+		</datavalidationrules>
+		<tlrvalidationrules>
+			<fieldvalidations>
+			</fieldvalidations>
+		</tlrvalidationrules>
+	</validationrules>
+</SwiftMessageFormat>
+

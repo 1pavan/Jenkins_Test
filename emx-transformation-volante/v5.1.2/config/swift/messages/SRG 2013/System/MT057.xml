@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<SwiftMessageFormat name="MT057">
+	<standard-version><![CDATA[SRG 2012]]></standard-version>
+	<DescriptiveName><![CDATA[Time Zone Status Report]]></DescriptiveName>
+	<Category><![CDATA[System]]></Category>
+	<Description><![CDATA[This message indicates the Delta Time in use in a given SWIFT region, or in all SWIFT regions. It is the
+response to an MT 037 Time Zone Status Request.
+
+
+From: GPA or FIN To: User]]></Description>
+	<SwiftFields>
+		<customizable>true</customizable>
+		<modifiable>true</modifiable>
+		<SwiftMessageType>System</SwiftMessageType>
+		<HeaderAndTrailerType>SWIFT_INPUT_HEADER</HeaderAndTrailerType>
+		<Header>
+		</Header>
+		<Data>
+			<Fields>
+				<SystemField Name="section-number">
+					<description><![CDATA[Sequential section number, beginning with 0001, to identify the position of an individual message in a multiple-section message.]]></description>
+					<datatype>String</datatype>
+					<required>true</required>
+					<SwiftSystemFieldDef Name="section-number" Tag="202">
+						<Format><![CDATA[4!n]]></Format>
+						<Specification><![CDATA[(section-number)]]></Specification>
+						<Description><![CDATA[Sequential section number, beginning with 0001, to identify the position of an individual message in a multiple-section message.]]></Description>
+						<Validations>
+							<Validation>
+								<formula>(ToInt($value) &gt; 0)</formula>
+								<error-code>V07</error-code>
+								<actionmessage>"Invalid Section Number '" + $value + "'"</actionmessage>
+							</Validation>
+						</Validations>
+					</SwiftSystemFieldDef>
+				</SystemField>
+				<SystemField Name="total-sections">
+					<description><![CDATA[Total number of sections in a multi-section message.]]></description>
+					<datatype>String</datatype>
+					<required>true</required>
+					<SwiftSystemFieldDef Name="total-sections" Tag="203">
+						<Format><![CDATA[4!n]]></Format>
+						<Specification><![CDATA[(total-sections)]]></Specification>
+						<Description><![CDATA[Total number of sections in a multi-section message.]]></Description>
+					</SwiftSystemFieldDef>
+				</SystemField>
+				<SystemField Name="region-info">
+					<description><![CDATA[Region information, including:
+
+a)  country and region code
+
+b)  region delta hour
+
+c)  region delta minutes]]></description>
+					<datatype>Section</datatype>
+					<minoccurs>1</minoccurs>
+					<maxoccurs>-1</maxoccurs>
+					<SwiftSystemFieldDef Name="region-info" Tag="334">
+						<Format><![CDATA[(3!c)(4!n)]]></Format>
+						<Specification><![CDATA[(region)(region-delta-time)]]></Specification>
+						<Additional-Format><![CDATA[<region>3!c<hour>2!n<minutes>2!n]]></Additional-Format>
+						<Description><![CDATA[Region information, including:
+
+a)  country and region code
+
+b)  region delta hour
+
+c)  region delta minutes]]></Description>
+						<Validations>
+							<Validation>
+								<subfield>region-delta-time</subfield>
+								<formula>IsDate($value,"HHmm")</formula>
+								<error-code>V05</error-code>
+								<actionmessage>"Invalid Region Delta Time '" + $value + "'. region-delta-time should be in the format HHmm."</actionmessage>
+							</Validation>
+						</Validations>
+					</SwiftSystemFieldDef>
+				</SystemField>
+			</Fields>
+		</Data>
+		<Trailer>
+		</Trailer>
+	</SwiftFields>
+	<validationrules name="Default">
+		<hdrvalidationrules>
+			<fieldvalidations>
+			</fieldvalidations>
+		</hdrvalidationrules>
+		<datavalidationrules>
+			<fieldvalidations>
+			</fieldvalidations>
+		</datavalidationrules>
+		<tlrvalidationrules>
+			<fieldvalidations>
+			</fieldvalidations>
+		</tlrvalidationrules>
+	</validationrules>
+</SwiftMessageFormat>
+

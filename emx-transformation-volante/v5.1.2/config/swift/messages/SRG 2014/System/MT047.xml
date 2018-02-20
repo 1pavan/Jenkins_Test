@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<SwiftMessageFormat name="MT047">
+	<standard-version><![CDATA[SRG 2014]]></standard-version>
+	<standard-release-qualifier>20140520</standard-release-qualifier>
+	<DescriptiveName><![CDATA[Delivery Instructions Redefinition Request]]></DescriptiveName>
+	<Category><![CDATA[System]]></Category>
+	<Description><![CDATA[This message allows a logical terminal to create FIN delivery subsets for the destination to which it belongs. It
+specifies how the FIN output messages are to be assigned to the delivery subsets, based on priority, category,
+message type, service code, branch code, or field tag.
+
+From: User        To: General Purpose Application]]></Description>
+	<SwiftFields>
+		<customizable>true</customizable>
+		<modifiable>true</modifiable>
+		<SwiftMessageType>System</SwiftMessageType>
+		<HeaderAndTrailerType>SWIFT_INPUT_HEADER</HeaderAndTrailerType>
+		<Header>
+		</Header>
+		<Data>
+			<Fields>
+				<SystemField Name="value-date-ordering">
+					<description><![CDATA[Value date ordering, where:
+
+a)  Y = on
+
+b)  N = off]]></description>
+					<datatype>String</datatype>
+					<required>true</required>
+					<SwiftSystemFieldDef Name="value-date-ordering" Tag="206">
+						<Format><![CDATA[1!a]]></Format>
+						<Specification><![CDATA[(value-date-ordering)]]></Specification>
+						<Additional-Format><![CDATA[Y/N]]></Additional-Format>
+						<Description><![CDATA[Value date ordering, where:
+
+a)  Y = on
+
+b)  N = off]]></Description>
+						<Validations>
+							<Validation>
+								<formula>In($value, "Y", "N")</formula>
+								<error-code>V08</error-code>
+								<actionmessage>"Invalid Value Date Ordering '" + $value + "'"</actionmessage>
+							</Validation>
+						</Validations>
+					</SwiftSystemFieldDef>
+				</SystemField>
+				<SystemField Name="subset-sharing">
+					<description><![CDATA[Indicates the way in which selected FIN delivery subsets can be shared among multiple logical terminals of a destination, where:
+
+a)  N = subset sharing is not allowed
+
+b)  O = sharing allowed using overflow mechanism
+
+c)  L = sharing allowed using load-balancing mechanism. If this field is not present, then subset sharing is not allowed]]></description>
+					<datatype>String</datatype>
+					<required>false</required>
+					<SwiftSystemFieldDef Name="subset-sharing" Tag="348">
+						<Format><![CDATA[1!c]]></Format>
+						<Specification><![CDATA[(subset-sharing)]]></Specification>
+						<Description><![CDATA[Indicates the way in which selected FIN delivery subsets can be shared among multiple logical terminals of a destination, where:
+
+a)  N = subset sharing is not allowed
+
+b)  O = sharing allowed using overflow mechanism
+
+c)  L = sharing allowed using load-balancing mechanism.If this field is not present, then subset sharing is not allowed]]></Description>
+						<Validations>
+							<Validation>
+								<formula>In($value, "N", "O", "L")</formula>
+								<error-code>V08</error-code>
+								<actionmessage>"Invalid subset-sharing '" + $value + "'"</actionmessage>
+							</Validation>
+						</Validations>
+					</SwiftSystemFieldDef>
+				</SystemField>
+				<SystemGroup Name="Group339">
+					<datatype>Section</datatype>
+					<minoccurs>1</minoccurs>
+					<maxoccurs>30</maxoccurs>
+					<Fields>
+						<SystemField Name="delivery-subset-name">
+							<description><![CDATA[Name assigned by the user to a delivery subset.]]></description>
+							<datatype>String</datatype>
+							<required>true</required>
+							<SwiftSystemFieldDef Name="delivery-subset-name" Tag="339">
+								<Format><![CDATA[6!c]]></Format>
+								<Specification><![CDATA[(delivery-subset-name)]]></Specification>
+								<Description><![CDATA[Name assigned by the user to a delivery subset.]]></Description>
+							</SwiftSystemFieldDef>
+						</SystemField>
+						<SystemField Name="combined-criteria">
+							<description><![CDATA[Indicates the way in which fields are combined to form delivery subset selection logic, where:
+
+a)  0 = not combined
+
+b)  1 = branch code combined with other fields.]]></description>
+							<datatype>String</datatype>
+							<required>false</required>
+							<SwiftSystemFieldDef Name="combined-criteria" Tag="349">
+								<Format><![CDATA[1!n]]></Format>
+								<Specification><![CDATA[(combined-criteria)]]></Specification>
+								<Description><![CDATA[Indicates the way in which fields are combined to form delivery subset selection logic, where:
+
+a)  0 = not combined
+
+b)  1 = branch code combined with other fields..]]></Description>
+								<Validations>
+									<Validation>
+										<formula>In($value, "0", "1")</formula>
+										<error-code>V08</error-code>
+										<actionmessage>"Invalid scombined-criteria '" + $value + "'"</actionmessage>
+									</Validation>
+								</Validations>
+							</SwiftSystemFieldDef>
+						</SystemField>
+						<SystemGroup Name="Group344">
+							<datatype>Section</datatype>
+							<minoccurs>1</minoccurs>
+							<maxoccurs>3</maxoccurs>
+							<Fields>
+								<SystemField Name="priority-category">
+									<description><![CDATA[Priority and, optionally, message categories where:
+S = system
+
+U = urgent
+
+N = normal. Can appear up to three times for each occurrence of field 339.]]></description>
+									<datatype>Section</datatype>
+									<minoccurs>1</minoccurs>
+									<maxoccurs>1</maxoccurs>
+									<SwiftSystemFieldDef Name="priority-category" Tag="344">
+										<Format><![CDATA[(1!a)([9n])]]></Format>
+										<Specification><![CDATA[(priority)(msg-category)]]></Specification>
+										<Additional-Format><![CDATA[<priority> 1!a[<msg-category>9!n ]]]></Additional-Format>
+										<Description><![CDATA[Priority and, optionally, message categories where:
+S = system
+
+U = urgent
+
+N = normal. Can appear up to three times for each occurrence of field 339.]]></Description>
+										<Validations>
+											<Validation>
+												<subfield>priority</subfield>
+												<formula>In($value, "S", "U","N")</formula>
+												<error-code>V08</error-code>
+												<actionmessage>"Invalid priority	'"+$value+"'. Valid priority Codes are : S, N, U."</actionmessage>
+											</Validation>
+										</Validations>
+									</SwiftSystemFieldDef>
+								</SystemField>
+								<SystemField Name="msg-type-service-code-list">
+									<description><![CDATA[List of up to 10 Message Types and/or Service Codes in any combination. Can appear once for each occurrence of field 344.]]></description>
+									<datatype>String</datatype>
+									<required>false</required>
+									<SwiftSystemFieldDef Name="msg-type-service-code-list" Tag="345">
+										<Format><![CDATA[30c]]></Format>
+										<Specification><![CDATA[(msg-type-service-code-list)]]></Specification>
+										<Additional-Format><![CDATA[3!c[*10]]]></Additional-Format>
+										<Description><![CDATA[List of up to 10 Message Types and/or Service Codes in any combination. Can appear once for each occurrence of field 344.]]></Description>
+										<Validations>
+											<Validation>
+												<formula>Length($value)%3==0</formula>
+												<error-code>V07</error-code>
+												<actionmessage>"Invalid Message Type Service Code List '"+$value+"'"</actionmessage>
+											</Validation>
+										</Validations>
+									</SwiftSystemFieldDef>
+								</SystemField>
+								<SystemField Name="branch-code-list">
+									<description><![CDATA[List of up to 10 branch codes. Can appear once for each occurrence of field 344.Default branch code "XXX" is not allowed.Branch code must be a valid branch code when the MT 047 is issued.]]></description>
+									<datatype>String</datatype>
+									<required>false</required>
+									<SwiftSystemFieldDef Name="branch-code-list" Tag="346">
+										<Format><![CDATA[30c]]></Format>
+										<Specification><![CDATA[(branch-code-list)]]></Specification>
+										<Additional-Format><![CDATA[3!c[*10]]]></Additional-Format>
+										<Description><![CDATA[List of up to 10 branch codes. Can appear once for each occurrence of field 344.Default branch code "XXX" is not allowed.Branch code must be a valid branch code when the MT 047 is issued.]]></Description>
+										<Validations>
+											<Validation>
+												<formula>Length($value)%3==0</formula>
+												<error-code>V07</error-code>
+												<actionmessage>"Invalid Branch Code List '"+$value+"'"</actionmessage>
+											</Validation>
+										</Validations>
+									</SwiftSystemFieldDef>
+								</SystemField>
+								<SystemField Name="field-list">
+									<description><![CDATA[List of up to 10 field tags.
+
+13C is the only field currently supported.]]></description>
+									<datatype>String</datatype>
+									<required>false</required>
+									<SwiftSystemFieldDef Name="field-list" Tag="347">
+										<Format><![CDATA[30c]]></Format>
+										<Specification><![CDATA[(field-list)]]></Specification>
+										<Additional-Format><![CDATA[3!c[*10]]]></Additional-Format>
+										<Description><![CDATA[List of up to 10 field tags.
+
+13C is the only field currently supported.]]></Description>
+										<Validations>
+											<Validation>
+												<formula>Length($value)%3==0</formula>
+												<error-code>V07</error-code>
+												<actionmessage>"Invalid Field List '"+$value+"'"</actionmessage>
+											</Validation>
+										</Validations>
+									</SwiftSystemFieldDef>
+								</SystemField>
+							</Fields>
+						</SystemGroup>
+					</Fields>
+				</SystemGroup>
+			</Fields>
+		</Data>
+		<Trailer>
+		</Trailer>
+	</SwiftFields>
+	<validationrules name="Default">
+		<hdrvalidationrules>
+			<fieldvalidations>
+			</fieldvalidations>
+		</hdrvalidationrules>
+		<datavalidationrules>
+			<fieldvalidations>
+				<fieldvalidation>
+					<name>E1-1</name>
+					<fieldname>Group339</fieldname>
+					<comment><![CDATA[E1-1
+If field 349:<combined-criteria> is 1, then: Field 346:<branch-code> must be present. Field 347:<field-list> is not allowed.]]></comment>
+					<formula><![CDATA[If(!IsNull($value.combined_criteria) && $value.combined_criteria == "1", 
+   !FieldExists($value.Group344, "field_list") && 
+     FieldExistsInAll($value.Group344, "branch_code_list"), 
+   true)]]></formula>
+					<severity>error</severity>
+					<cascade>true</cascade>
+					<error-code>V68</error-code>
+					<actionmessage><![CDATA["If field 349 'combined-criteria' is 1, then Field 346 'branch-code' must be present. Field 347 'field-list' is not allowed."]]></actionmessage>
+				</fieldvalidation>
+				<fieldvalidation>
+					<name>E1-2</name>
+					<fieldname>Group339</fieldname>
+					<comment><![CDATA[E1-2
+If field 349:<combined-criteria> is 1, then: Either field 344:<priority-category> must contain one or more categories, or field 345:<msg-typeservice- code-list> must be present, or both.]]></comment>
+					<formula><![CDATA[Implies(!IsNull($value.combined_criteria) && $value.combined_criteria == "1", 
+        FieldExistsInAll($value.Group344, "msg_type_service_code_list") || 
+          FieldExistsInAtLeastOne($value.Group344, 
+                                  "priority_category.msg_category"))]]></formula>
+					<severity>error</severity>
+					<cascade>true</cascade>
+					<error-code>V68</error-code>
+					<actionmessage><![CDATA["If field 349 'combined-criteria' is 1, then  Either field 344 'priority-category' must contain one or more categories, or field 345 'msg-typeservice- code-list' must be present, or both."]]></actionmessage>
+				</fieldvalidation>
+			</fieldvalidations>
+		</datavalidationrules>
+		<tlrvalidationrules>
+			<fieldvalidations>
+			</fieldvalidations>
+		</tlrvalidationrules>
+	</validationrules>
+</SwiftMessageFormat>
+

@@ -1,0 +1,258 @@
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="unqualified"
+            attributeFormDefault="unqualified">
+    <!-- include constructs -->
+    <xsd:include schemaLocation="cartridge-include.xsd"/>
+    <xsd:include schemaLocation="functiondeffolder.xsd"/>
+    <!-- Internal Message -->
+    <xsd:element name="internalmessage" type="InternalMsgType" substitutionGroup="ServiceElement"/>
+    <xsd:complexType name="InternalMsgType">
+        <xsd:complexContent>
+            <xsd:extension base="ServiceElementType">
+                <xsd:sequence>
+                    <xsd:element name="description" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="standard-name" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="standard-version" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="standard-detailed-name" type="xsd:string" minOccurs="0"/>
+                    <xsd:element ref="version"/>
+                    <xsd:element ref="additional-properties" minOccurs="0"/>
+                    <xsd:element name="normalizedformat">
+                        <xsd:complexType>
+                            <xsd:sequence>
+                                <xsd:element ref="target-namespace" minOccurs="0"/>
+                                <xsd:element ref="xpath-namespaces" minOccurs="0"/>
+                                <xsd:element ref="platforminfo" minOccurs="0"/>
+                                <xsd:element ref="field-attributes" minOccurs="0"/>
+                                <xsd:element ref="fields"/>
+                            </xsd:sequence>
+                        </xsd:complexType>
+                    </xsd:element>
+                    <!--xsd:element name="validationrules" type="InternalMsgValidationRulesType"/-->
+                    <xsd:group ref="internalMsgGroup" minOccurs="0" maxOccurs="unbounded"/>
+                    <xsd:element name="triggers" minOccurs="0">
+                        <xsd:complexType>
+                            <xsd:sequence>
+                                <xsd:element name="trigger" minOccurs="0" maxOccurs="unbounded">
+                                    <xsd:complexType>
+                                        <xsd:sequence>
+                                            <xsd:element name="name" type="xsd:string"/>
+                                            <xsd:element name="triggertype" type="xsd:string"/>
+                                            <xsd:element name="condition" type="xsd:string" minOccurs="0"/>
+                                            <xsd:element name="classname" type="xsd:string"/>
+                                            <xsd:element name="comment" type="xsd:string" minOccurs="0"/>
+                                            <xsd:element ref="properties" minOccurs="0"/>
+                                        </xsd:sequence>
+                                    </xsd:complexType>
+                                </xsd:element>
+                            </xsd:sequence>
+                        </xsd:complexType>
+                    </xsd:element>
+                    <xsd:element ref="elementproperties" minOccurs="0"/>
+                </xsd:sequence>
+                <xsd:attribute name="name" type="xsd:string" use="required"/>
+                <xsd:attribute name="type" type="xsd:string" use="required"/>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="InternalMsgValidationRulesType">
+        <xsd:sequence>
+            <xsd:element ref="fieldvalidation" minOccurs="0" maxOccurs="unbounded"/>
+        </xsd:sequence>
+        <xsd:attribute name="name" type="xsd:string" use="required"/>
+        <xsd:attribute name="type" type="xsd:string" use="required"/>
+    </xsd:complexType>
+    <xsd:group name="internalMsgGroup">
+        <xsd:choice>
+            <xsd:element name="validationrules" type="InternalMsgValidationRulesType"/>
+            <xsd:element ref="processing"/>
+            <xsd:element ref="PersistenceManager"/>
+            <xsd:element ref="InternalMsgExtElement"/>
+            <xsd:element name="folder" type="FunctionDefFolder"/>
+        </xsd:choice>
+    </xsd:group>
+    <xsd:element name="fields">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="field" type="InternalMsgAbstractField" minOccurs="0" maxOccurs="unbounded"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:complexType name="InternalMsgAbstractField" abstract="true">
+        <xsd:sequence>
+            <xsd:element name="name" type="xsd:string"/>
+            <xsd:element name="type" type="xsd:string"/>
+            <xsd:element name="aliasname" type="xsd:string" minOccurs="0"/>
+            <xsd:element name="detailed-name" type="xsd:string" minOccurs="0"/>
+            <xsd:element name="description" type="xsd:string" minOccurs="0"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="InternalMessageFieldType">
+        <xsd:complexContent>
+            <xsd:extension base="InternalMsgAbstractField">
+                <xsd:sequence>
+                    <xsd:element name="defaultvalue" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="hidden" type="xsd:boolean" minOccurs="0"/>
+                    <xsd:element name="notnull" type="xsd:boolean" minOccurs="0"/>
+                    <xsd:element name="length" type="xsd:integer" minOccurs="0"/>
+                    <xsd:element ref="platforminfo" minOccurs="0"/>
+                    <xsd:element ref="field-attributes" minOccurs="0"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="InternalMessageSectionType">
+        <xsd:complexContent>
+            <xsd:extension base="InternalMsgAbstractField">
+                <xsd:sequence>
+                    <xsd:element name="minoccurs" type="xsd:integer"/>
+                    <xsd:element name="maxoccurs" type="xsd:integer"/>
+                    <xsd:element ref="platforminfo" minOccurs="0"/>
+                    <xsd:element ref="field-attributes" minOccurs="0"/>
+                    <xsd:element ref="fields"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <!-- Persistence Manager -->
+    <xsd:element name="PersistenceManager">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="persist-xml" type="xsd:boolean" minOccurs="0"/>
+                <xsd:element name="databaseformat">
+                    <xsd:complexType>
+                        <xsd:sequence>
+                            <xsd:element name="table" type="xsd:string"/>
+                            <xsd:element name="schemaname" type="xsd:string" minOccurs="0"/>
+                            <xsd:element name="fields">
+                                <xsd:complexType>
+                                    <xsd:sequence>
+                                        <xsd:element name="field" type="DatabaseField" minOccurs="0"
+                                                     maxOccurs="unbounded"/>
+                                    </xsd:sequence>
+                                </xsd:complexType>
+                            </xsd:element>
+                        </xsd:sequence>
+                    </xsd:complexType>
+                </xsd:element>
+                <xsd:element name="queries">
+                    <xsd:complexType>
+                        <xsd:sequence>
+                            <xsd:element name="query" minOccurs="0" maxOccurs="unbounded">
+                                <xsd:complexType>
+                                    <xsd:all>
+                                        <xsd:element name="name" type="xsd:string"/>
+                                        <xsd:element name="condition" type="xsd:string" minOccurs="0"/>
+                                        <xsd:element name="sql" type="xsd:string" minOccurs="0"/>
+                                        <xsd:element name="params" minOccurs="0">
+                                            <xsd:complexType>
+                                                <xsd:sequence>
+                                                    <xsd:element name="param" minOccurs="0" maxOccurs="unbounded">
+                                                        <xsd:complexType>
+                                                            <xsd:sequence>
+                                                                <xsd:element name="name" type="xsd:string"/>
+                                                                <xsd:element name="type" type="xsd:string"/>
+                                                            </xsd:sequence>
+                                                        </xsd:complexType>
+                                                    </xsd:element>
+                                                </xsd:sequence>
+                                            </xsd:complexType>
+                                        </xsd:element>
+                                    </xsd:all>
+                                </xsd:complexType>
+                            </xsd:element>
+                        </xsd:sequence>
+                    </xsd:complexType>
+                </xsd:element>
+                <xsd:element ref="mappingrules"/>
+                <xsd:element ref="elementproperties"/>
+            </xsd:sequence>
+            <xsd:attribute name="type" type="xsd:string" fixed="PersistenceManager"/>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:complexType name="DatabaseField" abstract="true">
+        <xsd:sequence>
+            <xsd:element name="name" type="xsd:string" minOccurs="1"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="DatabaseTable">
+        <xsd:complexContent>
+            <xsd:extension base="DatabaseField">
+                <xsd:sequence>
+                    <xsd:element name="type" type="xsd:string" fixed="Section"/>
+                    <xsd:element name="description" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="table" type="xsd:string"/>
+                    <xsd:element name="schemaname" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="fields" minOccurs="0">
+                        <xsd:complexType>
+                            <xsd:sequence>
+                                <xsd:element name="field" type="DatabaseField" minOccurs="0" maxOccurs="unbounded"/>
+                            </xsd:sequence>
+                        </xsd:complexType>
+                    </xsd:element>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="DatabaseColumn">
+        <xsd:complexContent>
+            <xsd:extension base="DatabaseField">
+                <xsd:sequence>
+                    <xsd:element name="type" type="xsd:string"/>
+                    <xsd:element name="description" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="sqltype" type="xsd:string"/>
+                    <xsd:element name="xmlfield" type="xsd:boolean" minOccurs="0"/>
+                    <xsd:element name="notnull" type="xsd:boolean" minOccurs="0"/>
+                    <xsd:element name="length" type="xsd:integer" minOccurs="0"/>
+                    <xsd:element name="decimal-length" type="xsd:integer" minOccurs="0"/>
+                    <!-- <xsd:choice minOccurs="0">-->
+                    <xsd:group ref="primaryKeyCol"/>
+                    <xsd:group ref="foreignKeyCol"/>
+                    <!-- </xsd:choice> -->
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:group name="primaryKeyCol">
+        <xsd:sequence>
+            <xsd:element name="primarykey" type="xsd:boolean" minOccurs="0"/>
+            <xsd:element name="autogenerate" type="xsd:boolean" minOccurs="0"/>
+            <xsd:element name="autogenerate-formula" type="xsd:string" minOccurs="0"/>
+        </xsd:sequence>
+    </xsd:group>
+    <xsd:group name="foreignKeyCol">
+        <xsd:sequence>
+            <xsd:element name="foreignkey" type="xsd:boolean" minOccurs="0"/>
+            <xsd:element name="referencedtable" type="xsd:string" minOccurs="0"/>
+            <xsd:element name="referencedcolumn" type="xsd:string" minOccurs="0"/>
+        </xsd:sequence>
+    </xsd:group>
+    <!-- Processing -->
+    <xsd:element name="processing">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="processingclass" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="comment" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="fieldprocessingrules" minOccurs="0">
+                    <xsd:complexType>
+                        <xsd:sequence>
+                            <xsd:element name="fieldprocessingrule" minOccurs="0" maxOccurs="unbounded">
+                                <xsd:complexType>
+                                    <xsd:sequence>
+                                        <xsd:element name="fieldname" type="xsd:string"/>
+                                        <xsd:element name="formula" type="xsd:string" minOccurs="0"/>
+                                        <xsd:element name="class" type="xsd:string" minOccurs="0"/>
+                                        <xsd:element name="comment" type="xsd:string" minOccurs="0"/>
+                                    </xsd:sequence>
+                                </xsd:complexType>
+                            </xsd:element>
+                        </xsd:sequence>
+                    </xsd:complexType>
+                </xsd:element>
+            </xsd:sequence>
+            <xsd:attribute name="name" type="xsd:string"/>
+            <xsd:attribute name="type" type="xsd:string" fixed="BusinessProcessingRule"/>
+        </xsd:complexType>
+    </xsd:element>
+    <!-- End Processing -->
+    <xsd:complexType name="InternalMsgExtType"/>
+    <xsd:element name="InternalMsgExtElement" type="InternalMsgExtType"/>
+</xsd:schema>

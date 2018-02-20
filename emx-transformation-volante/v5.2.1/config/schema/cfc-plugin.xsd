@@ -1,0 +1,94 @@
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="unqualified"
+            attributeFormDefault="unqualified">
+    <!-- include constructs -->
+    <xsd:include schemaLocation="externalmsg.xsd"/>
+    <xsd:include schemaLocation="cartridge-include.xsd"/>
+    <xsd:complexType name="CFCFormat">
+        <xsd:complexContent>
+            <xsd:extension base="ExternalMessageType"/>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:element name="CFCfields" substitutionGroup="ExternalMessageFields">
+        <xsd:complexType>
+            <xsd:complexContent>
+                <xsd:extension base="ExternalMessageFieldsType">
+                    <xsd:sequence>
+                        <xsd:element ref="target-namespace" minOccurs="0"/>
+                        <xsd:element ref="xpath-namespaces" minOccurs="0"/>
+                        <xsd:element ref="platforminfo" minOccurs="0"/>
+                        <xsd:element ref="field-attributes" minOccurs="0"/>
+                        <xsd:element name="headerfields" type="CFCFieldStruct"/>
+                        <xsd:element name="datafields" type="CFCFieldStruct"/>
+                        <xsd:element name="trailerfields" type="CFCFieldStruct"/>
+                        <xsd:element name="options" minOccurs="0">
+                            <xsd:complexType>
+                                <xsd:sequence>
+                                    <xsd:element name="source-type"/>
+                                    <xsd:element name="property" minOccurs="0" maxOccurs="unbounded">
+                                        <xsd:complexType>
+                                            <xsd:attribute name="name" type="xsd:string"/>
+                                            <xsd:attribute name="value" type="xsd:string"/>
+                                        </xsd:complexType>
+                                    </xsd:element>
+                                </xsd:sequence>
+                            </xsd:complexType>
+                        </xsd:element>
+                    </xsd:sequence>
+                </xsd:extension>
+            </xsd:complexContent>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:complexType name="CFCAbstractFieldType" abstract="true">
+        <xsd:sequence>
+            <xsd:element name="name" type="xsd:string"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="CFCFieldStruct">
+        <xsd:sequence>
+            <xsd:element ref="platforminfo" minOccurs="0"/>
+            <xsd:element ref="field-attributes" minOccurs="0"/>
+            <xsd:element name="field" type="CFCAbstractFieldType" minOccurs="0" maxOccurs="unbounded"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="CFCFieldType">
+        <xsd:complexContent>
+            <xsd:extension base="CFCAbstractFieldType">
+                <xsd:sequence>
+                    <xsd:element name="datatype" type="xsd:string"/>
+                    <xsd:element name="detailed-name" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="description" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="aliasname" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="required" type="xsd:boolean" minOccurs="0"/>
+                    <xsd:element name="defaultvalue" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="dateformat" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="minoccurs" type="xsd:integer" minOccurs="0"/>
+                    <xsd:element name="maxoccurs" type="xsd:integer" minOccurs="0"/>
+                    <xsd:element name="cfc-name" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="cfc-type" type="xsd:string" minOccurs="0"/>
+                    <xsd:element ref="platforminfo" minOccurs="0"/>
+                    <xsd:element ref="field-attributes" minOccurs="0"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="CFCSectionType">
+        <xsd:complexContent>
+            <xsd:extension base="CFCAbstractFieldType">
+                <xsd:sequence>
+                    <xsd:element name="datatype" type="xsd:string" fixed="Section"/>
+                    <xsd:element name="detailed-name" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="description" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="aliasname" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="minoccurs" type="xsd:integer" minOccurs="0"/>
+                    <xsd:element name="maxoccurs" type="xsd:integer" minOccurs="0"/>
+                    <xsd:element name="cfc-name" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="cfc-type" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="cfc-array" type="xsd:boolean" minOccurs="0"/>
+                    <xsd:element name="fields" type="CFCFieldStruct"/>
+                    <xsd:element ref="platforminfo" minOccurs="0"/>
+                    <xsd:element ref="field-attributes" minOccurs="0"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+</xsd:schema>

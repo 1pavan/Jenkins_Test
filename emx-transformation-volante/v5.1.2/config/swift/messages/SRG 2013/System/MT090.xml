@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<SwiftMessageFormat name="MT090">
+	<standard-version><![CDATA[SRG 2012]]></standard-version>
+	<DescriptiveName><![CDATA[User-to-SWIFT Message]]></DescriptiveName>
+	<Category><![CDATA[System]]></Category>
+	<Description><![CDATA[This message permits a FIN or GPA user to send text to SWIFT Headquarters or Customer Service Centres.
+
+Application: GPA and FIN
+
+From: User To: SWIFT HQ, CSC-HK, CSC-NL, or CSC-US
+
+From To Address
+User SWIFT HQ (Headquarters) SWHQBEBBXXXX
+User CSC - HK (Asia - Pacific) SWHQHKHKXXXX
+User CSC - NL (Netherlands) SWHQNLNLXXXX
+User CSC - US (United States) SWHQUSUSXXXX]]></Description>
+	<SwiftFields>
+		<customizable>true</customizable>
+		<modifiable>true</modifiable>
+		<SwiftMessageType>System</SwiftMessageType>
+		<HeaderAndTrailerType>SWIFT_INPUT_HEADER</HeaderAndTrailerType>
+		<Header>
+		</Header>
+		<Data>
+			<Fields>
+				<SystemField Name="text">
+					<description><![CDATA[Free format text for SWIFT-to-user and user-to-SWIFT messages. Text is in lines of 65 characters separated by CrLf. Maximum size of text is 1800 characters. Last character must not be CrLf. Upper case is mandatory.]]></description>
+					<datatype>String</datatype>
+					<required>true</required>
+					<SwiftSystemFieldDef Name="text" Tag="311">
+						<Format><![CDATA[(1000*65x)]]></Format>
+						<Specification><![CDATA[(text)]]></Specification>
+						<Additional-Format><![CDATA[ 65x[65x]...]]></Additional-Format>
+						<Description><![CDATA[Free format text for SWIFT-to-user and user-to-SWIFT messages. Text is in lines of 65 characters separated by CrLf. Maximum size of text is 1800 characters. Last character must not be CrLf. Upper case is mandatory.]]></Description>
+					</SwiftSystemFieldDef>
+				</SystemField>
+			</Fields>
+		</Data>
+		<Trailer>
+		</Trailer>
+	</SwiftFields>
+	<validationrules name="Default">
+		<hdrvalidationrules>
+			<fieldvalidations>
+			</fieldvalidations>
+		</hdrvalidationrules>
+		<datavalidationrules>
+			<fieldvalidations>
+			</fieldvalidations>
+		</datavalidationrules>
+		<tlrvalidationrules>
+			<fieldvalidations>
+			</fieldvalidations>
+		</tlrvalidationrules>
+	</validationrules>
+</SwiftMessageFormat>
+

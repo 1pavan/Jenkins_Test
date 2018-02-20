@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<SwiftMessageFormat name="MT073">
+	<standard-version><![CDATA[SRG 2015]]></standard-version>
+	<standard-release-qualifier>20150731</standard-release-qualifier>
+	<DescriptiveName><![CDATA[Message Sample Request]]></DescriptiveName>
+	<Category><![CDATA[System]]></Category>
+	<Description><![CDATA[This message is sent by a Test & Training user to request the system to send a sample of messages from the
+tank file following a predefined pattern. Message examples in the tank file are technically correct and are
+not intended to reflect accurate business examples.
+
+From: User To: FIN]]></Description>
+	<SwiftFields>
+		<customizable>true</customizable>
+		<modifiable>true</modifiable>
+		<SwiftMessageType>System</SwiftMessageType>
+		<HeaderAndTrailerType>SWIFT_INPUT_HEADER</HeaderAndTrailerType>
+		<Header>
+		</Header>
+		<Data>
+			<Fields>
+				<SystemGroup Name="Group1">
+					<datatype>Section</datatype>
+					<minoccurs>0</minoccurs>
+					<maxoccurs>1</maxoccurs>
+					<Fields>
+						<SystemField Name="msg-identifier">
+							<description><![CDATA[Identifies a specific message in a tank file as specified in the first field 20 or 20C::SEME of the message. No duplicates are allowed.Can be repeated up to 200 times.]]></description>
+							<datatype>Section</datatype>
+							<minoccurs>1</minoccurs>
+							<maxoccurs>200</maxoccurs>
+							<SwiftSystemFieldDef Name="msg-identifier" Tag="120">
+								<Format><![CDATA[16x]]></Format>
+								<Specification><![CDATA[(msg-identifier)]]></Specification>
+								<Additional-Format><![CDATA[]]></Additional-Format>
+								<Description><![CDATA[Refers to a specific message in a tank file by means of the message-identifier, which is recorded in the first field 20 or 20C::SEME of the message. No duplicates are allowed.
+
+Can be repeated up to 999 times.]]></Description>
+							</SwiftSystemFieldDef>
+						</SystemField>
+					</Fields>
+				</SystemGroup>
+				<SystemGroup Name="Group2">
+					<datatype>Section</datatype>
+					<minoccurs>0</minoccurs>
+					<maxoccurs>1</maxoccurs>
+					<Fields>
+						<SystemField Name="msg-list">
+							<description><![CDATA[Whole tank file. It should contain the value ALL, indicating that the entire set of user to user tank file messages is selected.Note that system message examples contained in the tank file
+                                                                              will not be selected when option ALL is used. These messages must be specifically requested using field tag 124.The tank file currently contains examples of the following system messages:
+              MT 066 Solicited Undelivered Message Report
+              MT 071 Undelivered SSI Update Notification Report
+              MT 082 Undelivered Message Report at a Fixed Hour
+              MT 083 Undelivered Message Report at Cut-off Time
+              MT 094 Broadcast message]]></description>
+							<datatype>String</datatype>
+							<required>true</required>
+							<SwiftSystemFieldDef Name="msg-list" Tag="123">
+								<Format><![CDATA[3!a]]></Format>
+								<Specification><![CDATA[(msg-list)]]></Specification>
+								<Description><![CDATA[Whole tank file. It should contain the value ALL, indicating that the entire set of tank file messages is requested.]]></Description>
+							</SwiftSystemFieldDef>
+						</SystemField>
+						<SystemField Name="random-number-seed">
+							<description><![CDATA[Identifies a set of test messages. It contains a seed defined by the user, which allows them to receive the same set of messages in a subsequent session if the same seed is used.]]></description>
+							<datatype>String</datatype>
+							<required>true</required>
+							<SwiftSystemFieldDef Name="random-number-seed" Tag="126">
+								<Format><![CDATA[4!n]]></Format>
+								<Specification><![CDATA[(random-number-seed)]]></Specification>
+								<Description><![CDATA[Identifies a set of test messages. It contains a seed defined by the user, which allows them to receive the same set of messages in a subsequent session if the same seed is used.]]></Description>
+							</SwiftSystemFieldDef>
+						</SystemField>
+						<SystemField Name="number-of-messages">
+							<description><![CDATA[Number of messages requested to be sent by the system to the Test & Training logical terminal in local test mode. A maximum of 999 messages may be requested.]]></description>
+							<datatype>String</datatype>
+							<required>true</required>
+							<SwiftSystemFieldDef Name="number-of-messages" Tag="122">
+								<Format><![CDATA[3n]]></Format>
+								<Specification><![CDATA[(number-of-messages)]]></Specification>
+								<Description><![CDATA[Number of messages that can be requested to be sent by the system to a Test & Training LT in Local Test mode. A maximum of 999 messages may be requested.]]></Description>
+							</SwiftSystemFieldDef>
+						</SystemField>
+					</Fields>
+				</SystemGroup>
+				<SystemGroup Name="Group3">
+					<datatype>Section</datatype>
+					<minoccurs>0</minoccurs>
+					<maxoccurs>1</maxoccurs>
+					<Fields>
+						<SystemField Name="msg-type">
+							<description><![CDATA[A valid FIN user-to-user message type or one of the following message types: MT 066, MT071, MT 082, MT 083 or MT 094. These are the only system message in the tank file and can only be requested by explicit use of field 124.Field tag 
+124 can be repeated up to a value equal to the number of different user-to-user or system messages. No duplicates are allowed.]]></description>
+							<datatype>Section</datatype>
+							<minoccurs>1</minoccurs>
+							<maxoccurs>200</maxoccurs>
+							<SwiftSystemFieldDef Name="msg-type" Tag="124">
+								<Format><![CDATA[3!n]]></Format>
+								<Specification><![CDATA[(msg-type)]]></Specification>
+								<Description><![CDATA[A valid FIN user-to-user Message Type, or Message Type 094. It can be repeated up to a value equal to the number of different user-to-user messages plus 1 (for MT 094). No duplicates are allowed.]]></Description>
+							</SwiftSystemFieldDef>
+						</SystemField>
+						<SystemField Name="random-number-seed">
+							<description><![CDATA[Identifies a set of test messages. It contains a seed defined by the user, which allows them to receive the same set of messages in a subsequent session if the same seed is used.]]></description>
+							<datatype>String</datatype>
+							<required>true</required>
+							<SwiftSystemFieldDef Name="random-number-seed" Tag="126">
+								<Format><![CDATA[4!n]]></Format>
+								<Specification><![CDATA[(random-number-seed)]]></Specification>
+								<Description><![CDATA[Identifies a set of test messages. It contains a seed defined by the user, which allows them to receive the same set of messages in a subsequent session if the same seed is used.]]></Description>
+							</SwiftSystemFieldDef>
+						</SystemField>
+						<SystemField Name="number-of-messages">
+							<description><![CDATA[Number of messages requested to be sent by the system to the Test & Training logical terminal in local test mode. A maximum of 999 messages may be requested.]]></description>
+							<datatype>String</datatype>
+							<required>true</required>
+							<SwiftSystemFieldDef Name="number-of-messages" Tag="122">
+								<Format><![CDATA[3n]]></Format>
+								<Specification><![CDATA[(number-of-messages)]]></Specification>
+								<Description><![CDATA[Number of messages that can be requested to be sent by the system to a Test & Training LT in Local Test mode. A maximum of 999 messages may be requested.]]></Description>
+							</SwiftSystemFieldDef>
+						</SystemField>
+					</Fields>
+				</SystemGroup>
+				<SystemGroup Name="Group4">
+					<datatype>Section</datatype>
+					<minoccurs>0</minoccurs>
+					<maxoccurs>1</maxoccurs>
+					<Fields>
+						<SystemField Name="msg-category">
+							<description><![CDATA[A valid SWIFTNet FIN user-to-user Message Category. It can be repeated up to 9 times. No duplicates are allowed.
+
+See the SWIFTStandards Message Reference Guides for more information.]]></description>
+							<datatype>Section</datatype>
+							<minoccurs>1</minoccurs>
+							<maxoccurs>9</maxoccurs>
+							<SwiftSystemFieldDef Name="msg-category" Tag="125">
+								<Format><![CDATA[1!n]]></Format>
+								<Specification><![CDATA[(msg-category)]]></Specification>
+								<Description><![CDATA[A valid SWIFTNet FIN user-to-user Message Category. It can be repeated up to 9 times. No duplicates are allowed.
+
+See the SWIFTStandards Message Reference Guides for more information.]]></Description>
+							</SwiftSystemFieldDef>
+						</SystemField>
+						<SystemField Name="random-number-seed">
+							<description><![CDATA[Identifies a set of test messages. It contains a seed defined by the user, which allows them to receive the same set of messages in a subsequent session if the same seed is used.]]></description>
+							<datatype>String</datatype>
+							<required>true</required>
+							<SwiftSystemFieldDef Name="random-number-seed" Tag="126">
+								<Format><![CDATA[4!n]]></Format>
+								<Specification><![CDATA[(random-number-seed)]]></Specification>
+								<Description><![CDATA[Identifies a set of test messages. It contains a seed defined by the user, which allows them to receive the same set of messages in a subsequent session if the same seed is used.]]></Description>
+							</SwiftSystemFieldDef>
+						</SystemField>
+						<SystemField Name="number-of-messages">
+							<description><![CDATA[Number of messages requested to be sent by the system to the Test & Training logical terminal in local test mode. A maximum of 999 messages may be requested.]]></description>
+							<datatype>String</datatype>
+							<required>true</required>
+							<SwiftSystemFieldDef Name="number-of-messages" Tag="122">
+								<Format><![CDATA[3n]]></Format>
+								<Specification><![CDATA[(number-of-messages)]]></Specification>
+								<Description><![CDATA[Number of messages that can be requested to be sent by the system to a Test & Training LT in Local Test mode. A maximum of 999 messages may be requested.]]></Description>
+							</SwiftSystemFieldDef>
+						</SystemField>
+					</Fields>
+				</SystemGroup>
+			</Fields>
+		</Data>
+		<Trailer>
+		</Trailer>
+	</SwiftFields>
+	<validationrules name="Default">
+		<hdrvalidationrules>
+			<fieldvalidations>
+			</fieldvalidations>
+		</hdrvalidationrules>
+		<datavalidationrules>
+			<fieldvalidations>
+				<fieldvalidation>
+					<name>E1</name>
+					<comment><![CDATA[ONLY ONE of Group 1, Group 2, Group 3 or Group 4 be present.]]></comment>
+					<formula><![CDATA[(Group1.$size+Group2.$size+Group3.$size+Group4.$size)==1]]></formula>
+					<severity>error</severity>
+					<cascade>true</cascade>
+					<error-code>V03</error-code>
+					<actionmessage><![CDATA["ONLY ONE of Group 1, Group 2, Group 3 or Group 4 be present."]]></actionmessage>
+				</fieldvalidation>
+			</fieldvalidations>
+		</datavalidationrules>
+		<tlrvalidationrules>
+			<fieldvalidations>
+			</fieldvalidations>
+		</tlrvalidationrules>
+	</validationrules>
+</SwiftMessageFormat>
+

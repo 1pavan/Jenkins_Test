@@ -1,0 +1,98 @@
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="unqualified" attributeFormDefault="unqualified">
+	<!-- include constructs -->
+	<xsd:include schemaLocation="cartridge-include.xsd"/>
+	<!-- Resources -->
+	<xsd:element name="resources" type="ResourcesType" substitutionGroup="ServiceElement"/>
+	<xsd:complexType name="ResourcesType">
+		<xsd:complexContent>
+			<xsd:extension base="ServiceElementType">
+				<xsd:sequence>
+					<xsd:element ref="Locales" minOccurs="0"/>
+					<xsd:element ref="resourcefields"/>
+				</xsd:sequence>
+				<xsd:attribute name="type" fixed="Resources"/>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:element name="resourcefields">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="resourcefield" minOccurs="0" maxOccurs="unbounded"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="resourcefield">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="name" type="xsd:string"/>
+				<xsd:element name="type" type="xsd:string"/>
+				<xsd:group ref="resourcefieldtype"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:group name="resourcefieldtype">
+		<xsd:choice>
+			<xsd:element ref="resourcefields" minOccurs="0"/>
+			<xsd:group ref="resourcefieldGrp"/>
+		</xsd:choice>
+	</xsd:group>
+	<xsd:group name="resourcefieldGrp">
+		<xsd:sequence>
+			<xsd:element name="list" type="xsd:boolean" minOccurs="0"/>
+			<xsd:element name="message" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="detailed-name" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="description" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="value" minOccurs="0" maxOccurs="unbounded">
+				<xsd:complexType>
+					<xsd:simpleContent>
+						<xsd:extension base="xsd:string">
+							<xsd:attribute name="locale" type="xsd:string"/>
+						</xsd:extension>
+					</xsd:simpleContent>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="indexes" minOccurs="0">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="index" type="xsd:string"/>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:group>
+	<xsd:element name="Locales">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="locale" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
+			</xsd:sequence>
+			<xsd:attribute name="active" default=""/>
+		</xsd:complexType>
+	</xsd:element>
+	<!-- End Resources -->
+	<xsd:element name="file" type="FileType" substitutionGroup="ServiceElement"/>
+	<xsd:complexType name="FileType">
+		<xsd:complexContent>
+			<xsd:extension base="ServiceElementType">
+				<xsd:attribute name="type" type="xsd:string" use="required" fixed="DirectoryFileElement"/>
+				<xsd:attribute name="name" type="xsd:string"/>
+			</xsd:extension>
+			<!-- mixed="true"> -->
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:element name="references" type="ReferenceType"/>
+	<xsd:complexType name="ReferenceType">
+		<xsd:sequence>
+			<xsd:element name="reference" minOccurs="0" maxOccurs="unbounded">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="type" type="xsd:string"/>
+						<xsd:element name="relative-path" type="xsd:string"/>
+						<xsd:element name="absolute-path" type="xsd:string"/>
+                        <xsd:element name="read-only" type="xsd:boolean" minOccurs="0"/>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+		</xsd:sequence>
+		<xsd:attribute name="type" type="xsd:string" fixed="References"/>
+	</xsd:complexType>
+</xsd:schema>

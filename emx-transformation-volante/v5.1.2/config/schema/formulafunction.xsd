@@ -1,0 +1,144 @@
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="unqualified"
+            attributeFormDefault="unqualified">
+    <!-- include constructs -->
+    <xsd:include schemaLocation="cartridge-include.xsd"/>
+    <xsd:include schemaLocation="mapping-data.xsd"/>
+    <xsd:element name="FormulaFunctionDef" type="FormulaFunctionDefType" substitutionGroup="ServiceElement"/>
+    <xsd:complexType name="FormulaFunctionDefType">
+        <xsd:complexContent>
+            <xsd:extension base="ServiceElementType">
+                <xsd:sequence>
+                    <xsd:element name="description" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="Category" type="xsd:string"/>
+                    <xsd:element ref="additional-properties" minOccurs="0"/>
+                    <xsd:element name="parameterfields">
+                        <xsd:complexType>
+                            <xsd:sequence>
+                                <xsd:element name="parameterfield" minOccurs="0" maxOccurs="unbounded">
+                                    <xsd:complexType>
+                                        <xsd:sequence>
+                                            <xsd:element name="name" type="xsd:string"/>
+                                            <xsd:element name="type" type="xsd:string"/>
+                                            <xsd:element name="required" type="xsd:boolean" minOccurs="0"/>
+                                            <xsd:element name="detailed-name" type="xsd:string" minOccurs="0"/>
+                                            <xsd:element name="allow-any" type="xsd:boolean" minOccurs="0"/>
+                                            <xsd:element name="allow-untyped" type="xsd:boolean" minOccurs="0"/>
+                                            <xsd:element name="output" type="xsd:boolean" minOccurs="0"/>
+                                            <xsd:element name="message" type="xsd:string" minOccurs="0"/>
+                                            <xsd:element name="minoccurs" type="xsd:integer" minOccurs="0"/>
+                                            <xsd:element name="maxoccurs" type="xsd:integer" minOccurs="0"/>
+                                            <xsd:element name="description" type="xsd:string" minOccurs="0"/>
+                                        </xsd:sequence>
+                                    </xsd:complexType>
+                                </xsd:element>
+                            </xsd:sequence>
+                        </xsd:complexType>
+                    </xsd:element>
+                    <xsd:element name="ReturnType" type="xsd:string"/>
+                    <xsd:element name="ReturnOptional" type="xsd:boolean" minOccurs="0"/>
+                    <xsd:element name="Code" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="function-type" type="xsd:string"/>
+                    <xsd:element name="query" minOccurs="0" maxOccurs="unbounded">
+                        <xsd:complexType>
+                            <xsd:sequence>
+                                <xsd:element name="data-source" type="xsd:string"/>
+                                <xsd:element name="sql" type="xsd:string"/>
+                                <xsd:element name="cache" type="xsd:string" minOccurs="0"/>
+                                <xsd:element name="operation" type="xsd:string" minOccurs="0"/>
+                                <xsd:element name="resultfields">
+                                    <xsd:complexType>
+                                        <xsd:sequence>
+                                            <xsd:element name="resultfield" maxOccurs="unbounded">
+                                                <xsd:complexType>
+                                                    <xsd:sequence>
+                                                        <xsd:element name="name" type="xsd:string"/>
+                                                        <xsd:element name="type" type="xsd:string"/>
+                                                    </xsd:sequence>
+                                                </xsd:complexType>
+                                            </xsd:element>
+                                        </xsd:sequence>
+                                    </xsd:complexType>
+                                </xsd:element>
+                            </xsd:sequence>
+                        </xsd:complexType>
+                    </xsd:element>
+                    <xsd:element name="native-function" type="xsd:boolean" minOccurs="0"/>
+                    <xsd:choice minOccurs="0">
+                        <xsd:group ref="nativeCodeFunctionGroup"/>
+                        <xsd:group ref="nativeStaticMethodFunctionGroup"/>
+                        <xsd:group ref="mappingFunctionGroup"/>
+                        <xsd:group ref="nativeClassFunctionGroup"/>
+                    </xsd:choice>
+                </xsd:sequence>
+                <xsd:attribute name="name" type="xsd:string"/>
+                <xsd:attribute name="type" type="xsd:string" use="required" fixed="FormulaFunctionDef"/>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:group name="nativeCodeFunctionGroup">
+        <xsd:sequence>
+            <xsd:element name="native-code" type="xsd:string"/>
+        </xsd:sequence>
+    </xsd:group>
+    <xsd:group name="nativeStaticMethodFunctionGroup">
+        <xsd:sequence>
+            <xsd:element name="native-method-ref" type="xsd:string"/>
+            <xsd:element name="native-source" type="xsd:string"/>
+        </xsd:sequence>
+    </xsd:group>
+    <xsd:group name="nativeClassFunctionGroup">
+        <xsd:sequence>
+            <xsd:element name="native-class-ref" type="xsd:string"/>
+        </xsd:sequence>
+    </xsd:group>
+    <xsd:group name="mappingFunctionGroup">
+        <xsd:sequence>
+            <xsd:element name="source-format" type="FunctionDataFormat"/>
+            <xsd:element name="destination-format" type="FunctionDataFormat"/>
+            <xsd:element ref="mappingrules"/>
+        </xsd:sequence>
+    </xsd:group>
+    <xsd:complexType name="FunctionParamType">
+        <xsd:sequence>
+            <xsd:element name="name" type="xsd:string"/>
+            <xsd:element name="type" type="xsd:string"/>
+            <xsd:choice minOccurs="0">
+                <xsd:group ref="dataObjSectionParam"/>
+                <xsd:group ref="primitiveParam"/>
+            </xsd:choice>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="FunctionDataFormat">
+        <xsd:sequence>
+            <xsd:element ref="xpath-namespaces"/>
+            <xsd:element name="fields">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="field" type="FunctionParamType" minOccurs="0" maxOccurs="unbounded"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:group name="primitiveParam">
+        <xsd:sequence>
+            <xsd:element name="notnull" type="xsd:boolean" minOccurs="0"/>
+            <xsd:element name="length" type="xsd:integer" minOccurs="0"/>
+
+        </xsd:sequence>
+    </xsd:group>
+    <xsd:group name="dataObjSectionParam">
+        <xsd:sequence>
+            <xsd:element name="minoccurs" type="xsd:integer" minOccurs="0"/>
+            <xsd:element name="maxoccurs" type="xsd:integer" minOccurs="0"/>
+            <xsd:element name="message" type="xsd:string" minOccurs="0"/>
+            <xsd:element name="fields">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="field" type="FunctionParamType" minOccurs="0" maxOccurs="unbounded"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:group>
+</xsd:schema>

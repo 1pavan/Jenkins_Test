@@ -1,0 +1,95 @@
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="unqualified" attributeFormDefault="unqualified">
+	<!-- include constructs -->
+	<xsd:include schemaLocation="externalmsg.xsd"/>
+	<xsd:complexType name="ReutersFormat">
+		<xsd:complexContent>
+			<xsd:extension base="ExternalMessageType"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:element name="reutersfields" substitutionGroup="ExternalMessageFields">
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="ExternalMessageFieldsType">
+					<xsd:sequence>
+						<xsd:element name="model" type="xsd:string" minOccurs="0"/>
+						<xsd:element ref="target-namespace" minOccurs="0"/>
+                        <xsd:element ref="xpath-namespaces" minOccurs="0"/>
+						<xsd:element ref="platforminfo" minOccurs="0"/>
+						<xsd:element ref="field-attributes" minOccurs="0"/>
+						<xsd:element name="headerfields" type="ReutersFieldStructType"/>
+						<xsd:element name="datafields" type="ReutersFieldStructType"/>
+						<xsd:element name="trailerfields" type="ReutersFieldStructType"/>
+					</xsd:sequence>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:complexType name="ReutersAbstractFieldType" abstract="true">
+		<xsd:sequence>
+			<xsd:element name="name" type="xsd:string"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="ReutersFieldStructType">
+		<xsd:sequence>
+			<xsd:element ref="platforminfo" minOccurs="0"/>
+			<xsd:element ref="field-attributes" minOccurs="0"/>
+			<xsd:element name="field-type" type="xsd:string"/>
+			<xsd:element name="field" type="ReutersAbstractFieldType" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="ReutersFieldType">
+		<xsd:complexContent>
+			<xsd:extension base="ReutersAbstractFieldType">
+				<xsd:sequence>
+					<xsd:element name="datatype" type="xsd:string"/>
+					<xsd:element name="detailed-name" type="xsd:string" minOccurs="0"/>
+					<xsd:element name="description" type="xsd:string" minOccurs="0"/>
+					<xsd:element name="aliasname" type="xsd:string" minOccurs="0"/>
+					<xsd:element name="required" type="xsd:boolean" minOccurs="0"/>
+					<xsd:element name="defaultvalue" type="xsd:string" minOccurs="0"/>
+					<xsd:element name="dateformat" type="xsd:string" minOccurs="0"/>
+					<xsd:element name="acronym" type="xsd:string" minOccurs="0"/>
+					<xsd:element name="ddeAcronym" type="xsd:string" minOccurs="0"/>
+					<xsd:element name="id" type="xsd:string" minOccurs="0"/>
+					<xsd:element name="enumeration" minOccurs="0">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="enum" minOccurs="0" maxOccurs="unbounded">
+									<xsd:complexType>
+										<xsd:attribute name="value" type="xsd:string"/>
+										<xsd:attribute name="display" type="xsd:string"/>
+									</xsd:complexType>
+								</xsd:element>
+							</xsd:sequence>
+						</xsd:complexType>
+					</xsd:element>
+					<xsd:element name="rwfType" type="xsd:string" minOccurs="0"/>
+					<xsd:element name="mfType" type="xsd:string" minOccurs="0"/>
+					<xsd:element name="mfMaxLength" type="xsd:integer" minOccurs="0"/>
+					<xsd:element name="rwfLength" type="xsd:integer" minOccurs="0"/>
+					<xsd:element name="ripplesto" type="xsd:string" minOccurs="0"/>
+					<xsd:element ref="platforminfo" minOccurs="0"/>
+					<xsd:element ref="field-attributes" minOccurs="0"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="ReutersSectionType">
+		<xsd:complexContent>
+			<xsd:extension base="ReutersAbstractFieldType">
+				<xsd:sequence>
+					<xsd:element name="datatype" type="xsd:string" fixed="Section"/>
+					<xsd:element name="aliasname" type="xsd:string" minOccurs="0"/>
+					<xsd:element name="detailed-name" type="xsd:string" minOccurs="0"/>
+					<xsd:element name="description" type="xsd:string" minOccurs="0"/>
+					<xsd:element name="minoccurs" type="xsd:integer"/>
+					<xsd:element name="maxoccurs" type="xsd:integer"/>
+					<xsd:element name="fields" type="ReutersFieldStructType"/>
+					<xsd:element name="id" type="xsd:integer"/>
+					<xsd:element ref="platforminfo" minOccurs="0"/>
+					<xsd:element ref="field-attributes" minOccurs="0"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+</xsd:schema>

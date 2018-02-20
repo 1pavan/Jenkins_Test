@@ -1,0 +1,2078 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<SwiftMessageFormat name="MT567">
+	<standard>SWIFT</standard>
+	<standard-name>MT567</standard-name>
+	<standard-version>SRG 2016</standard-version>
+	<standard-release-qualifier>20160308</standard-release-qualifier>
+	<DescriptiveName><![CDATA[Corporate Action Status and Processing Advice]]></DescriptiveName>
+	<Category>Securities Markets</Category>
+	<Description>This message is sent by an account servicer (account servicing institution) to an account owner or its designated agent. The account servicer may be a local agent (sub-custodian) acting on behalf of their global custodian customer, or a custodian acting on behalf of an investment management institution or a broker/dealer.
+
+This message is used to advise the status, or a change in status, of a corporate action-related transaction previously instructed by, or executed on behalf of, the account owner. This will include the acknowledgement/ rejection of a corporate action instruction or the acknowledgement/rejection of a request to cancel an outstanding instruction. It may also be used to provide a reason as to why a corporate action event has not been completed by the announced payment dates.
+
+This message may also be used to:
+
+a) re-send a corporate action status previously sent
+
+b) provide a third party with a copy of the message.</Description>
+	<SwiftFields>
+		<customizable>true</customizable>
+		<modifiable>true</modifiable>
+		<SwiftMessageType>User</SwiftMessageType>
+		<max-length>10000</max-length>
+		<HeaderAndTrailerType>SWIFT_INPUT_OUTPUT_HEADER</HeaderAndTrailerType>
+		<Header>
+		</Header>
+		<Data>
+			<Fields>
+				<SwiftSequence Name="A">
+					<Name>A</Name>
+					<Description><![CDATA[General Information]]></Description>
+					<Mandatory>true</Mandatory>
+					<Repeating>false</Repeating>
+					<BlockDelimited>true</BlockDelimited>
+					<Code>GENL</Code>
+					<StartBlockField>16R</StartBlockField>
+					<StartFieldFormat>16c</StartFieldFormat>
+					<EndBlockField>16S</EndBlockField>
+					<EndFieldFormat>16c</EndFieldFormat>
+					<Fields>
+						<SwiftField Name="20C">
+							<SwiftFieldDef Name="20">
+								<Generic>true</Generic>
+								<Description><![CDATA[Reference]]></Description>
+								<Option Name="C">
+									<Format><![CDATA[:4!c//16x]]></Format>
+									<Specification><![CDATA[(Qualifier) (Reference)]]></Specification>
+								</Option>
+							</SwiftFieldDef>
+							<Qualifier Name="CORP">
+								<Description><![CDATA[Corporate Action Reference]]></Description>
+								<Repeating>false</Repeating>
+								<Presence>M</Presence>
+								<Options>C</Options>
+							</Qualifier>
+							<Qualifier Name="SEME">
+								<Description><![CDATA[Sender's Message Reference]]></Description>
+								<Repeating>false</Repeating>
+								<Presence>M</Presence>
+								<Options>C</Options>
+							</Qualifier>
+							<Qualifier Name="COAF">
+								<Description><![CDATA[Official Corporate Action Event Reference]]></Description>
+								<Repeating>false</Repeating>
+								<Presence>O</Presence>
+								<Options>C</Options>
+							</Qualifier>
+							<Validations>
+								<SubField Name="Reference">
+									<Validation>
+										<Qualifiers>COAF, CORP, SEME</Qualifiers>
+										<Options>C</Options>
+										<ErrorCode>T26</ErrorCode>
+										<Comment><![CDATA[Reference must not start or end with a slash '/' and not contain two consecutive slashes '//'  (Error code(s): T26).]]></Comment>
+										<ValidationPattern xsi:type="T26" Type="T26">
+											<Type>T26</Type>
+										</ValidationPattern>
+									</Validation>
+								</SubField>
+							</Validations>
+						</SwiftField>
+						<SwiftField Name="23G">
+							<SwiftFieldDef Name="23">
+								<Generic>false</Generic>
+								<Description><![CDATA[Function of the Message]]></Description>
+								<Option Name="G">
+									<Format><![CDATA[4!c[/4!c]]]></Format>
+									<Specification><![CDATA[(Function) (Subfunction)]]></Specification>
+									<Description><![CDATA[Function of the Message]]></Description>
+								</Option>
+							</SwiftFieldDef>
+							<Repeating>false</Repeating>
+							<Presence>M</Presence>
+							<Options>G</Options>
+							<Validations>
+								<SubField Name="Function">
+									<Validation>
+										<Options>G</Options>
+										<ErrorCode>T86</ErrorCode>
+										<Comment><![CDATA[Function must contain one of the following codes (Error code(s): T86):]]></Comment>
+										<ValidationPattern xsi:type="CODE" Type="CODE">
+											<Type>CODE</Type>
+											<Codes>
+												<Code Name="CAST">
+													<DetailedName>Cancellation Request Status </DetailedName>
+													<Description>Message reporting on a cancellation request status.</Description>
+												</Code>
+												<Code Name="EVST">
+													<DetailedName>Event Status</DetailedName>
+													<Description>Message reporting on a corporate action event status.</Description>
+												</Code>
+												<Code Name="INST">
+													<DetailedName>Instruction Status</DetailedName>
+													<Description>Message reporting on an instruction status.</Description>
+												</Code>
+											</Codes>
+										</ValidationPattern>
+									</Validation>
+								</SubField>
+								<SubField Name="Subfunction">
+									<Validation>
+										<Options>G</Options>
+										<ErrorCode>T85</ErrorCode>
+										<Comment><![CDATA[Subfunction, when present, must contain one of the following codes (Error code(s): T85):]]></Comment>
+										<ValidationPattern xsi:type="CODE" Type="CODE">
+											<Type>CODE</Type>
+											<Codes>
+												<Code Name="CODU">
+													<DetailedName>Copy Duplicate</DetailedName>
+													<Description>Message is a copy to a party other than the account owner/account servicer, for information purposes and the message is a duplicate of a message previously sent.</Description>
+												</Code>
+												<Code Name="COPY">
+													<DetailedName>Copy</DetailedName>
+													<Description>Message is a copy to a party other than the account owner/account servicer, for information purposes.</Description>
+												</Code>
+												<Code Name="DUPL">
+													<DetailedName>Duplicate</DetailedName>
+													<Description>Message is for information/confirmation purposes. It is a duplicate of a message previously sent.</Description>
+												</Code>
+											</Codes>
+										</ValidationPattern>
+									</Validation>
+								</SubField>
+							</Validations>
+						</SwiftField>
+						<SwiftField Name="22F">
+							<SwiftFieldDef Name="22">
+								<Generic>true</Generic>
+								<Description><![CDATA[Indicator]]></Description>
+								<Option Name="F">
+									<Format><![CDATA[:4!c/[8c]/4!c]]></Format>
+									<Specification><![CDATA[(Qualifier) (Data Source Scheme) (Indicator)]]></Specification>
+									<Description><![CDATA[Indicator]]></Description>
+								</Option>
+							</SwiftFieldDef>
+							<Qualifier Name="CAEV">
+								<Description><![CDATA[Corporate Action Event Indicator]]></Description>
+								<Repeating>false</Repeating>
+								<Presence>M</Presence>
+								<Options>F</Options>
+							</Qualifier>
+							<Validations>
+								<SubField Name="Indicator">
+									<Validation>
+										<Qualifiers>CAEV</Qualifiers>
+										<Options>F</Options>
+										<NullField>Data_Source_Scheme</NullField>
+										<ErrorCode>K22</ErrorCode>
+										<Comment><![CDATA[If Qualifier is CAEV and Data Source Scheme is not present, Indicator must contain one of the  following codes (Error code(s): K22):]]></Comment>
+										<ValidationPattern xsi:type="CODE" Type="CODE">
+											<Type>CODE</Type>
+											<Codes>
+												<Code Name="ACTV">
+													<DetailedName>Trading Status: Active</DetailedName>
+													<Description>Trading in the security has commenced or security has been re-activated after a suspension in trading.</Description>
+												</Code>
+												<Code Name="ATTI">
+													<DetailedName>Attachment</DetailedName>
+													<Description>Combination of different security types to create a unit. Units are usually comprised of warrants and bonds or warrants and equities. Securities may be combined at the request of the security holder or based on market convention.</Description>
+												</Code>
+												<Code Name="BIDS">
+													<DetailedName>Repurchase Offer/Issuer Bid/Reverse Rights</DetailedName>
+													<Description>Offer to existing holders by the issuing company to repurchase its own securities. The objective of the offer is to reduce the number of outstanding securities.</Description>
+												</Code>
+												<Code Name="BMET">
+													<DetailedName>Bond Holder Meeting </DetailedName>
+													<Description>Physical meeting of bond holders.</Description>
+												</Code>
+												<Code Name="BONU">
+													<DetailedName>Bonus Issue/ Capitalisation Issue</DetailedName>
+													<Description>Bonus or capitalisation issue. Security holders receive additional assets free of payment from the issuer, in proportion to their holding.</Description>
+												</Code>
+												<Code Name="BPUT">
+													<DetailedName>Put Redemption</DetailedName>
+													<Description>Early redemption of a security at the election of the holder subject to the terms and condition of the issue with no reduction in nominal value .</Description>
+												</Code>
+												<Code Name="BRUP">
+													<DetailedName>Bankruptcy</DetailedName>
+													<Description>Legal status of a company unable to pay creditors. Bankruptcy usually involves a formal court ruling. Securities may become valueless.</Description>
+												</Code>
+												<Code Name="CAPD">
+													<DetailedName>Capital Distribution </DetailedName>
+													<Description>The Corporate event pays shareholders an amount in cash issued from the Capital account. There is no reduction to the face value of a single share(or the share has no par value). The number of circulating shares remains unchanged. </Description>
+												</Code>
+												<Code Name="CAPG">
+													<DetailedName>Capital Gains Distribution</DetailedName>
+													<Description>Distribution of profits resulting from the sale of company assets, eg, Shareholders of Mutual Funds, Unit Trusts, or Sicavs are recipients of capital gains distributions which are often reinvested in additional shares of the fund.</Description>
+												</Code>
+												<Code Name="CAPI">
+													<DetailedName>Capitalisation</DetailedName>
+													<Description>Increase of the current principal of a debt instrument without increasing the nominal value. It normally arises from the incorporation of due but unpaid interest into the principal. This is commonly done by increasing the pool factor value, eg, capitalisation, and negative amortisation </Description>
+												</Code>
+												<Code Name="CERT">
+													<DetailedName>Non-US TEFRA D Certification</DetailedName>
+													<Description>Non-US beneficial owner certification requirement for exchange of temporary to permanent notes.</Description>
+												</Code>
+												<Code Name="CHAN">
+													<DetailedName>Change</DetailedName>
+													<Description>Information regarding a change further described in the corporate action details.</Description>
+												</Code>
+												<Code Name="CLSA">
+													<DetailedName>Class Action/Proposed Settlement</DetailedName>
+													<Description>Situation where interested parties seek restitution for financial loss. The security holder may be offered the opportunity to join a class action proceeding and would need to respond with an instruction.</Description>
+												</Code>
+												<Code Name="CMET">
+													<DetailedName>Court Meeting</DetailedName>
+													<Description>Announcement of a meeting at a Court.</Description>
+												</Code>
+												<Code Name="CONS">
+													<DetailedName>Consent</DetailedName>
+													<Description>Procedure that aims to obtain consent of holder to a proposal by the issuer or a third party without convening a meeting. For example, consent to change the terms of a bond</Description>
+												</Code>
+												<Code Name="CONV">
+													<DetailedName>Conversion</DetailedName>
+													<Description>Conversion of securities (generally convertible bonds or preferred shares) into another form of securities (usually common shares) at a pre-stated price/ratio.</Description>
+												</Code>
+												<Code Name="COOP">
+													<DetailedName>Company Option</DetailedName>
+													<Description>A Company Option may be granted by the company, allowing the holder to take up shares at some future date(s) at a pre arranged price in the company. A company may not grant options which enable the holder to take up unissued shares at a time which is five or more years from the date of the grant. Option holders are not members of a company. They are contingent creditors of a company and hence may, in some instances, be entitled to vote on and be bound by a scheme of arrangement between the creditors and the company. As many options have multiple exercise periods a company option will either lapse or carry on to the next expiry date.</Description>
+												</Code>
+												<Code Name="CREV">
+													<DetailedName>Credit Event</DetailedName>
+													<Description>An occurrence of credit derivative for which the issuer of one or several underlying securities is unable to fulfill his financial obligations (as defined in terms and conditions).</Description>
+												</Code>
+												<Code Name="DECR">
+													<DetailedName>Decrease in Value</DetailedName>
+													<Description>Reduction of face value of a single share or the value of fund assets . The number of circulating shares/units remains unchanged. This event may include a cash payout to holders.</Description>
+												</Code>
+												<Code Name="DETI">
+													<DetailedName>Detachment</DetailedName>
+													<Description>Separation of components that comprise a security, eg, usually units comprised of warrants and bond or warrants and equity. Units may be broken up at the request of the security holder or based on market convention.</Description>
+												</Code>
+												<Code Name="DFLT">
+													<DetailedName>Bond Default</DetailedName>
+													<Description>Failure by the company to perform obligations defined as default events under the bond agreement and that have not been remedied.</Description>
+												</Code>
+												<Code Name="DLST">
+													<DetailedName>Trading Status: Delisted</DetailedName>
+													<Description>Security  is no longer able to comply with the listing requirements of a stock exchange and is removed from official board quotation.</Description>
+												</Code>
+												<Code Name="DRAW">
+													<DetailedName>Drawing</DetailedName>
+													<Description>Redemption in part before the scheduled final maturity date of a security. Drawing is distinct from partial call since drawn bonds are chosen by lottery and with no reduction in nominal value </Description>
+												</Code>
+												<Code Name="DRCA">
+													<DetailedName>Cash Distribution From Non-Eligible Securities Sales</DetailedName>
+													<Description>Distribution to shareholders of cash resulting from the selling of non-eligible securities, for example, in the frame of a depositary receipt program</Description>
+												</Code>
+												<Code Name="DRIP">
+													<DetailedName>Dividend Reinvestment</DetailedName>
+													<Description>Dividend payment where holders can keep cash or have the cash reinvested in the market by the issuer into additional shares in the issuing company. To be distinguished from DVOP as the company invests the dividend in the market rather than creating new share capital in exchange for the dividend.</Description>
+												</Code>
+												<Code Name="DSCL">
+													<DetailedName>Disclosure</DetailedName>
+													<Description>Requirement for holders or beneficial owners to disclose their name, location and holdings of any issue to the issuer.</Description>
+												</Code>
+												<Code Name="DTCH">
+													<DetailedName>Dutch Auction</DetailedName>
+													<Description>An action by a party wishing to acquire a security. Holders of the security are invited to make an offer to sell, within a specific price range. The acquiring party will buy from the holder with lowest offer.</Description>
+												</Code>
+												<Code Name="DVCA">
+													<DetailedName>Cash Dividend</DetailedName>
+													<Description>Distribution of cash to shareholders, in proportion to their equity holding. Ordinary dividends are recurring and regular.</Description>
+												</Code>
+												<Code Name="DVOP">
+													<DetailedName>Dividend Option</DetailedName>
+													<Description>Distribution of a dividend to shareholders with a choice of benefit to receive. Shareholders may choose to receive shares or cash. To be distinguished from DRIP as the company creates new share capital in exchange for the dividend rather than investing the dividend in the market.</Description>
+												</Code>
+												<Code Name="DVSC">
+													<DetailedName>Scrip Dividend/ Payment</DetailedName>
+													<Description>Dividend or interest paid in the form of scrip.</Description>
+												</Code>
+												<Code Name="DVSE">
+													<DetailedName>Stock Dividend</DetailedName>
+													<Description>Dividend paid to shareholders in the form of equities of the issuing corporation.</Description>
+												</Code>
+												<Code Name="EXOF">
+													<DetailedName>Exchange</DetailedName>
+													<Description>Exchange of holdings for other securities and/or cash. The exchange can be either mandatory or voluntary involving the exchange of outstanding securities for different securities and/or cash. For example "exchange offer". "capital reorganisation" or "funds separation".</Description>
+												</Code>
+												<Code Name="EXRI">
+													<DetailedName>Call on Intermediate Securities</DetailedName>
+													<Description>Call or exercise on nil paid securities or intermediate securities resulting from an intermediate securities distribution (RHDI). This code is used for the second event, when an intermediate securities' issue (rights/coupons) is composed of two events, the first event being the distribution of intermediate securities.</Description>
+												</Code>
+												<Code Name="EXTM">
+													<DetailedName>Maturity Extension</DetailedName>
+													<Description>As stipulated in a bond's Terms and Conditions, the issuer or the bond-holder may prolong the maturity date of a bond. After extension, the security may differ from original issue (new rate or maturity date). May be subject to bondholder's approval.</Description>
+												</Code>
+												<Code Name="EXWA">
+													<DetailedName>Warrant Exercise</DetailedName>
+													<Description>Option offered to holders to buy (call warrant) or to sell (put warrant) a specific amount of stock, cash, or commodity, at a predetermined price, during a predetermined period of time (which usually corresponds to the life of the issue).</Description>
+												</Code>
+												<Code Name="INCR">
+													<DetailedName>Increase in Value</DetailedName>
+													<Description>Increase in the face value of a single security. The number of circulating securities remains unchanged .</Description>
+												</Code>
+												<Code Name="INTR">
+													<DetailedName>Interest Payment</DetailedName>
+													<Description>Interest payment distributed to holders of an interest bearing asset.</Description>
+												</Code>
+												<Code Name="LIQU">
+													<DetailedName>Liquidation Dividend/Liquidation Payment</DetailedName>
+													<Description>A distribution of cash, assets or both. Debt may be paid in order of priority based on preferred claims to assets specified by the security.</Description>
+												</Code>
+												<Code Name="MCAL">
+													<DetailedName>Full Call/ Early Redemption</DetailedName>
+													<Description>The redemption of an entire issue outstanding of securities, eg, bonds, preferred equity, funds, by the issuer or its agent, eg, asset manager, before final maturity</Description>
+												</Code>
+												<Code Name="MEET">
+													<DetailedName>Annual General Meeting</DetailedName>
+													<Description>Annual general meeting.</Description>
+												</Code>
+												<Code Name="MRGR">
+													<DetailedName>Merger</DetailedName>
+													<Description>Exchange of outstanding securities, initiated by the issuer which may include options, as the result of two or more companies combining assets, ie, an external, third party company.Cashpayments may accompany share exchange.</Description>
+												</Code>
+												<Code Name="NOOF">
+													<DetailedName>Non-Official Offer</DetailedName>
+													<Description>Offers that are not supervised or regulated by an official entity and being offered by a party, for example a broker, usually at a discount price, for example broker offer, mini-tender, mini odd lot offer or third party offer.</Description>
+												</Code>
+												<Code Name="ODLT">
+													<DetailedName>Odd Lot Sale/Purchase</DetailedName>
+													<Description>Sale or purchase of odd-lots to/from the issuing company, initiated either by the holder of the security or through an offer made by the issuer.</Description>
+												</Code>
+												<Code Name="OMET">
+													<DetailedName>Ordinary General Meeting</DetailedName>
+													<Description>Ordinary general meeting.</Description>
+												</Code>
+												<Code Name="OTHR">
+													<DetailedName>Other event</DetailedName>
+													<Description>Other event, use only when no other event type applies, eg, a new event type.</Description>
+												</Code>
+												<Code Name="PARI">
+													<DetailedName>Pari-Passu</DetailedName>
+													<Description>Occurs when securities with different characteristics, eg, shareswith different entitlements to dividend or voting rights, become identical in all respects, eg, pari-passu or assimilation. May be scheduled in advance, eg, shares resulting from a bonus may become fungible after a pre-set period of time, or may result from outside events, eg, merger, reorganisation, issue of supplementary tranches, etc.</Description>
+												</Code>
+												<Code Name="PCAL">
+													<DetailedName>Partial Redemption With Reduction of Nominal Value </DetailedName>
+													<Description>Securities are redeemed in part before their scheduled final maturity date with reduction of the nominal value of the securities. The outstanding amount of securities will be reduced proportionally.</Description>
+												</Code>
+												<Code Name="PDEF">
+													<DetailedName>Partial Defeasance/Pre-funding</DetailedName>
+													<Description>Issuer has money set aside to redeem a portion of an issue and the indenture states that the securities could be called earlier than the stated maturity.</Description>
+												</Code>
+												<Code Name="PINK">
+													<DetailedName>Pay In Kind</DetailedName>
+													<Description>Interest payment, in any kind except cash, distributed to holders of an interest bearing asset.</Description>
+												</Code>
+												<Code Name="PLAC">
+													<DetailedName>Place of Incorporation</DetailedName>
+													<Description>Changes in the state of incorporation for US companies and changes in the place of incorporation for foreign companies. Where shares need to be registered following the incorporation change, the holder(s) may have to elect the registrar.</Description>
+												</Code>
+												<Code Name="PPMT">
+													<DetailedName>Instalment Call</DetailedName>
+													<Description>An instalment towards the purchase of equity capital, subject to an agreement between an issuer and a purchaser.</Description>
+												</Code>
+												<Code Name="PRED">
+													<DetailedName>Partial Redemption Without Reduction of Nominal Value</DetailedName>
+													<Description>Securities are redeemed in part before their scheduled final maturity date without reduction of the nominal value of the securities. This is commonly done by pool factor reduction.</Description>
+												</Code>
+												<Code Name="PRII">
+													<DetailedName>Interest Payment with Principal</DetailedName>
+													<Description>An event which consists of two components, the decrease of the amortized value of a pool factor security and an interest payment.</Description>
+												</Code>
+												<Code Name="PRIO">
+													<DetailedName>Priority Issue</DetailedName>
+													<Description>Form of open or public offer where, due to a limited amount of securities available, priority is given to existing shareholders.</Description>
+												</Code>
+												<Code Name="REDM">
+													<DetailedName>Final Maturity</DetailedName>
+													<Description>The redemption of an entire issue outstanding of securities, eg, bonds,preferred equity, funds, by the issuer or its agent, eg, asset manager, at final maturity.</Description>
+												</Code>
+												<Code Name="REDO">
+													<DetailedName>Redenomination</DetailedName>
+													<Description>Event by which the unit (currency and/or nominal) of a security is restated, eg, nominal/par value of security in a national currency is restated in another currency.</Description>
+												</Code>
+												<Code Name="REMK">
+													<DetailedName>Remarketing Agreement</DetailedName>
+													<Description>Purchase and sale of remarketed preferred equities/bonds through the negotiation of interest rate between the issuers and the holders.</Description>
+												</Code>
+												<Code Name="RHDI">
+													<DetailedName>Intermediate Securities Distribution</DetailedName>
+													<Description>The distribution of intermediate securities that gives the holder the right to take part in a future event.</Description>
+												</Code>
+												<Code Name="RHTS">
+													<DetailedName>Rights Issue / Subscription Rights / Rights Offer</DetailedName>
+													<Description>Offer to holders of a security to subscribe for additional securities via the distribution of an intermediate security. Both processes are included in the same event.</Description>
+												</Code>
+												<Code Name="SHPR">
+													<DetailedName>Shares Premium Dividend</DetailedName>
+													<Description>This corporate event pays shareholders an amount in cash issued from the shares premium reserve. It is similar to a dividend but with different tax implications.</Description>
+												</Code>
+												<Code Name="SMAL">
+													<DetailedName>Smallest Negotiable Unit</DetailedName>
+													<Description>Modification of the smallest negotiable unit of shares in order to obtain a new negotiable unit.</Description>
+												</Code>
+												<Code Name="SOFF">
+													<DetailedName>Spin-Off</DetailedName>
+													<Description>A distribution of securities issued by another company. The distributed securities may either be of a newly created or of an existing company. For example, spin-off, demerger, unbundling, divestment.</Description>
+												</Code>
+												<Code Name="SPLF">
+													<DetailedName>Stock Split/Change in Nominal Value/Subdivision</DetailedName>
+													<Description>Increase in a corporation's number of outstanding equities without any change in the shareholder's equity or the aggregate market value at the time of the split. Equity price and nominal value are reduced accordingly.</Description>
+												</Code>
+												<Code Name="SPLR">
+													<DetailedName>Reverse Stock Split/Change in Nominal Value</DetailedName>
+													<Description>Decrease in a company's number of outstanding equities without any change in the shareholder's equity or the aggregate market value at the time of the split.Equity price and nominal value are increased accordingly.</Description>
+												</Code>
+												<Code Name="SUSP">
+													<DetailedName>Trading Status: Suspended</DetailedName>
+													<Description>Trading in the security has been suspended.</Description>
+												</Code>
+												<Code Name="TEND">
+													<DetailedName>Tender/Acquisition/Takeover /Purchase Offer</DetailedName>
+													<Description>An offer made to holders by a third party, requesting them to sell (tender) or exchange their securities.</Description>
+												</Code>
+												<Code Name="TREC">
+													<DetailedName>Tax Reclaim</DetailedName>
+													<Description>Event related to tax reclaim activities.</Description>
+												</Code>
+												<Code Name="WRTH">
+													<DetailedName>Worthless</DetailedName>
+													<Description>Booking out of valueless securities.</Description>
+												</Code>
+												<Code Name="WTRC">
+													<DetailedName>Withholding Tax Relief Certification</DetailedName>
+													<Description>Certification process for withholding tax reduction or exemption based on the tax status of the holder.</Description>
+												</Code>
+												<Code Name="XMET">
+													<DetailedName>Extraordinary or Special General Meeting</DetailedName>
+													<Description>Extraordinary or special general meeting.</Description>
+												</Code>
+											</Codes>
+										</ValidationPattern>
+									</Validation>
+								</SubField>
+							</Validations>
+						</SwiftField>
+						<SwiftField Name="98a">
+							<SwiftFieldDef Name="98">
+								<Generic>true</Generic>
+								<Description><![CDATA[Date/Time]]></Description>
+								<Option Name="A">
+									<Format><![CDATA[:4!c//8!n]]></Format>
+									<Specification><![CDATA[(Qualifier)(Date)]]></Specification>
+								</Option>
+								<Option Name="C">
+									<Format><![CDATA[:4!c//8!n6!n]]></Format>
+									<Specification><![CDATA[(Qualifier) (Date) (Time)]]></Specification>
+								</Option>
+							</SwiftFieldDef>
+							<Qualifier Name="PREP">
+								<Description><![CDATA[Preparation Date]]></Description>
+								<Repeating>false</Repeating>
+								<Presence>O</Presence>
+								<Options>A, C</Options>
+							</Qualifier>
+							<Validations>
+								<SubField Name="Date">
+									<Validation>
+										<Qualifiers>PREP</Qualifiers>
+										<Options>A, C</Options>
+										<ErrorCode>T50</ErrorCode>
+										<Comment><![CDATA[Date must be a valid date expressed as YYYYMMDD (Error code(s): T50).]]></Comment>
+										<ValidationPattern xsi:type="DATE" Type="DATE">
+											<Type>DATE</Type>
+											<Format>yyyyMMdd</Format>
+										</ValidationPattern>
+									</Validation>
+								</SubField>
+								<SubField Name="Time">
+									<Validation>
+										<Qualifiers>PREP</Qualifiers>
+										<Options>C</Options>
+										<ErrorCode>T38</ErrorCode>
+										<Comment><![CDATA[Time must be a valid time expressed as HHMMSS (Error code(s): T38).]]></Comment>
+										<ValidationPattern xsi:type="DATE" Type="DATE">
+											<Type>DATE</Type>
+											<Format>HHmmss</Format>
+										</ValidationPattern>
+									</Validation>
+								</SubField>
+							</Validations>
+						</SwiftField>
+						<SwiftSequence Name="A1">
+							<Name>A1</Name>
+							<Description><![CDATA[Linkages]]></Description>
+							<Mandatory>true</Mandatory>
+							<Repeating>true</Repeating>
+							<BlockDelimited>true</BlockDelimited>
+							<Code>LINK</Code>
+							<StartBlockField>16R</StartBlockField>
+							<StartFieldFormat>16c</StartFieldFormat>
+							<EndBlockField>16S</EndBlockField>
+							<EndFieldFormat>16c</EndFieldFormat>
+							<Fields>
+								<SwiftField Name="13a">
+									<SwiftFieldDef Name="13">
+										<Generic>true</Generic>
+										<Description><![CDATA[Number Identification]]></Description>
+										<Option Name="A">
+											<Format><![CDATA[:4!c//3!c]]></Format>
+											<Specification><![CDATA[(Qualifier)(Number Id)]]></Specification>
+										</Option>
+										<Option Name="B">
+											<Format><![CDATA[:4!c/[8c]/30x]]></Format>
+											<Specification><![CDATA[(Qualifier) (Data Source Scheme) (Number)]]></Specification>
+										</Option>
+									</SwiftFieldDef>
+									<Qualifier Name="LINK">
+										<Description><![CDATA[Linked Message]]></Description>
+										<Repeating>false</Repeating>
+										<Presence>O</Presence>
+										<Options>A, B</Options>
+									</Qualifier>
+									<Validations>
+										<SubField Name="Number">
+											<Validation>
+												<Qualifiers>LINK</Qualifiers>
+												<Options>B</Options>
+												<ErrorCode>T26</ErrorCode>
+												<Comment><![CDATA[Number (Format Option B) must not start or end with a slash '/' and not contain two consecutive slashes '//' (Error code(s): T26).]]></Comment>
+												<ValidationPattern xsi:type="T26" Type="T26">
+													<Type>T26</Type>
+												</ValidationPattern>
+											</Validation>
+										</SubField>
+									</Validations>
+								</SwiftField>
+								<SwiftField Name="20C">
+									<SwiftFieldDef Name="20">
+										<Generic>true</Generic>
+										<Description><![CDATA[Reference]]></Description>
+										<Option Name="C">
+											<Format><![CDATA[:4!c//16x]]></Format>
+											<Specification><![CDATA[(Qualifier) (Reference)]]></Specification>
+										</Option>
+									</SwiftFieldDef>
+									<Qualifier Name="CORP">
+										<Description><![CDATA[Corporate Action Reference]]></Description>
+										<Repeating>false</Repeating>
+										<Presence>M</Presence>
+										<Options>C</Options>
+									</Qualifier>
+									<Qualifier Name="PREV">
+										<Description><![CDATA[Previous Message Reference]]></Description>
+										<Repeating>false</Repeating>
+										<Presence>OR</Presence>
+										<Options>C</Options>
+									</Qualifier>
+									<Qualifier Name="RELA">
+										<Description><![CDATA[Related Message Reference]]></Description>
+										<Repeating>false</Repeating>
+										<Presence>OR</Presence>
+										<Options>C</Options>
+									</Qualifier>
+									<Qualifier Name="CACN">
+										<Description><![CDATA[Case Number]]></Description>
+										<Repeating>false</Repeating>
+										<Presence>OR</Presence>
+										<Options>C</Options>
+									</Qualifier>
+									<Qualifier Name="COAF">
+										<Description><![CDATA[Official Corporate Action Event Reference]]></Description>
+										<Repeating>false</Repeating>
+										<Presence>OR</Presence>
+										<Options>C</Options>
+									</Qualifier>
+									<Validations>
+										<SubField Name="Reference">
+											<Validation>
+												<Qualifiers>CACN, COAF, CORP, PREV, RELA</Qualifiers>
+												<Options>C</Options>
+												<ErrorCode>T26</ErrorCode>
+												<Comment><![CDATA[Reference must not start or end with a slash '/' and not contain two consecutive slashes '//'  (Error code(s): T26).]]></Comment>
+												<ValidationPattern xsi:type="T26" Type="T26">
+													<Type>T26</Type>
+												</ValidationPattern>
+											</Validation>
+										</SubField>
+									</Validations>
+								</SwiftField>
+							</Fields>
+						</SwiftSequence>
+						<SwiftSequence Name="A2">
+							<Name>A2</Name>
+							<Description><![CDATA[Status]]></Description>
+							<Mandatory>true</Mandatory>
+							<Repeating>true</Repeating>
+							<BlockDelimited>true</BlockDelimited>
+							<Code>STAT</Code>
+							<StartBlockField>16R</StartBlockField>
+							<StartFieldFormat>16c</StartFieldFormat>
+							<EndBlockField>16S</EndBlockField>
+							<EndFieldFormat>16c</EndFieldFormat>
+							<Fields>
+								<SwiftField Name="25D">
+									<SwiftFieldDef Name="25">
+										<Generic>true</Generic>
+										<Description><![CDATA[Status Code]]></Description>
+										<Option Name="D">
+											<Format><![CDATA[:4!c/[8c]/4!c]]></Format>
+											<Specification><![CDATA[(Qualifier) (Data Source Scheme) (Status Code)]]></Specification>
+										</Option>
+									</SwiftFieldDef>
+									<Qualifier Name="CPRC">
+										<Description><![CDATA[Cancellation Processing Status]]></Description>
+										<Repeating>false</Repeating>
+										<Presence>M</Presence>
+										<Options>D</Options>
+									</Qualifier>
+									<Qualifier Name="EPRC">
+										<Description><![CDATA[Corporate Action Event Processing Status]]></Description>
+										<Repeating>false</Repeating>
+										<Presence>OR</Presence>
+										<Options>D</Options>
+									</Qualifier>
+									<Qualifier Name="IPRC">
+										<Description><![CDATA[Instruction Processing Status]]></Description>
+										<Repeating>false</Repeating>
+										<Presence>OR</Presence>
+										<Options>D</Options>
+									</Qualifier>
+									<Validations>
+										<SubField Name="Status_Code">
+											<Validation>
+												<Qualifiers>EPRC</Qualifiers>
+												<Options>D</Options>
+												<NullField>Data_Source_Scheme</NullField>
+												<ErrorCode>K25</ErrorCode>
+												<Comment><![CDATA[If Qualifier is EPRC and Data Source Scheme is not present, Status Code must contain one of the following codes (Error code(s): K25):]]></Comment>
+												<ValidationPattern xsi:type="CODE" Type="CODE">
+													<Type>CODE</Type>
+													<Codes>
+														<Code Name="COMP">
+															<DetailedName>Complete</DetailedName>
+															<Description>Processing has been completed.</Description>
+														</Code>
+														<Code Name="PEND">
+															<DetailedName>Pending</DetailedName>
+															<Description>Processing has not been completed.</Description>
+														</Code>
+														<Code Name="RECD">
+															<DetailedName>Reconciled</DetailedName>
+															<Description>Indicates that the funds paid have been reconciled with the funds received from the Agent (meaning that there is no more risk of payment to be reversed).</Description>
+														</Code>
+													</Codes>
+												</ValidationPattern>
+											</Validation>
+											<Validation>
+												<Qualifiers>IPRC</Qualifiers>
+												<Options>D</Options>
+												<NullField>Data_Source_Scheme</NullField>
+												<ErrorCode>K25</ErrorCode>
+												<Comment><![CDATA[If Qualifier is IPRC and Data Source Scheme is not present, Status Code must contain one of  the following codes (Error code(s): K25):]]></Comment>
+												<ValidationPattern xsi:type="CODE" Type="CODE">
+													<Type>CODE</Type>
+													<Codes>
+														<Code Name="CAND">
+															<DetailedName>Instruction Cancelled</DetailedName>
+															<Description>Instruction has been cancelled.</Description>
+														</Code>
+														<Code Name="DFLA">
+															<DetailedName>Default Action</DetailedName>
+															<Description>Default action is taken.</Description>
+														</Code>
+														<Code Name="PACK">
+															<DetailedName>Accepted for Further Processing</DetailedName>
+															<Description>Instruction has been accepted. This means that the instruction has been received, is processable and has been validated for further processing .</Description>
+														</Code>
+														<Code Name="PEND">
+															<DetailedName>Pending</DetailedName>
+															<Description>Instruction's processing is pending.</Description>
+														</Code>
+														<Code Name="REJT">
+															<DetailedName>Rejected</DetailedName>
+															<Description>Instruction has been rejected for further processing due to system reasons.</Description>
+														</Code>
+														<Code Name="STIN">
+															<DetailedName>Standing Instruction</DetailedName>
+															<Description>Standing instruction is applied.</Description>
+														</Code>
+													</Codes>
+												</ValidationPattern>
+											</Validation>
+											<Validation>
+												<Qualifiers>CPRC</Qualifiers>
+												<Options>D</Options>
+												<NullField>Data_Source_Scheme</NullField>
+												<ErrorCode>K25</ErrorCode>
+												<Comment><![CDATA[If Qualifier is CPRC and Data Source Scheme is not present, Status Code must contain one of  the following codes (Error code(s): K25):]]></Comment>
+												<ValidationPattern xsi:type="CODE" Type="CODE">
+													<Type>CODE</Type>
+													<Codes>
+														<Code Name="CAND">
+															<DetailedName>Cancellation Completed</DetailedName>
+															<Description>Cancellation request has been completed.</Description>
+														</Code>
+														<Code Name="CANP">
+															<DetailedName>Pending Cancellation</DetailedName>
+															<Description>Cancellation request is pending. It is not known at this time whether cancellation can be affected.</Description>
+														</Code>
+														<Code Name="PACK">
+															<DetailedName>Accepted</DetailedName>
+															<Description>Cancellation request has been accepted for further processing.</Description>
+														</Code>
+														<Code Name="REJT">
+															<DetailedName>Rejected</DetailedName>
+															<Description>Cancellation request has been rejected for further processing due to system (data) reasons.</Description>
+														</Code>
+													</Codes>
+												</ValidationPattern>
+											</Validation>
+										</SubField>
+									</Validations>
+								</SwiftField>
+								<SwiftSequence Name="A2a">
+									<Name>A2a</Name>
+									<Description><![CDATA[Reason]]></Description>
+									<Mandatory>false</Mandatory>
+									<Repeating>true</Repeating>
+									<BlockDelimited>true</BlockDelimited>
+									<Code>REAS</Code>
+									<StartBlockField>16R</StartBlockField>
+									<StartFieldFormat>16c</StartFieldFormat>
+									<EndBlockField>16S</EndBlockField>
+									<EndFieldFormat>16c</EndFieldFormat>
+									<Fields>
+										<SwiftField Name="24B">
+											<SwiftFieldDef Name="24">
+												<Generic>true</Generic>
+												<Description><![CDATA[Reason Code]]></Description>
+												<Option Name="B">
+													<Format><![CDATA[:4!c/[8c]/4!c]]></Format>
+													<Specification><![CDATA[(Qualifier) (Data Source Scheme) (Reason Code)]]></Specification>
+												</Option>
+											</SwiftFieldDef>
+											<Qualifier Name="PEND">
+												<Description><![CDATA[Pending Reason]]></Description>
+												<Repeating>false</Repeating>
+												<Presence>M</Presence>
+												<Options>B</Options>
+											</Qualifier>
+											<Qualifier Name="REJT">
+												<Description><![CDATA[Rejection Reason]]></Description>
+												<Repeating>false</Repeating>
+												<Presence>OR</Presence>
+												<Options>B</Options>
+											</Qualifier>
+											<Qualifier Name="CAND">
+												<Description><![CDATA[Cancellation Reason]]></Description>
+												<Repeating>false</Repeating>
+												<Presence>OR</Presence>
+												<Options>B</Options>
+											</Qualifier>
+											<Qualifier Name="CANP">
+												<Description><![CDATA[Cancellation Pending Reason]]></Description>
+												<Repeating>false</Repeating>
+												<Presence>OR</Presence>
+												<Options>B</Options>
+											</Qualifier>
+											<Qualifier Name="PACK">
+												<Description><![CDATA[Accepted Reason]]></Description>
+												<Repeating>false</Repeating>
+												<Presence>OR</Presence>
+												<Options>B</Options>
+											</Qualifier>
+											<Validations>
+												<SubField Name="Reason_Code">
+													<Validation>
+														<Qualifiers>PEND</Qualifiers>
+														<Options>B</Options>
+														<NullField>Data_Source_Scheme</NullField>
+														<ErrorCode>K24</ErrorCode>
+														<Comment><![CDATA[If Qualifier is PEND and Data Source Scheme is not present, Reason Code must contain one of  the following codes (Error code(s): K24):]]></Comment>
+														<ValidationPattern xsi:type="CODE" Type="CODE">
+															<Type>CODE</Type>
+															<Codes>
+																<Code Name="ADEA">
+																	<DetailedName>Account Servicer Deadline Missed</DetailedName>
+																	<Description>Received after the account servicer's deadline. Processed on best effort basis.</Description>
+																</Code>
+																<Code Name="AUTH">
+																	<DetailedName>Sent to Tax Authorities</DetailedName>
+																	<Description>For tax reclaim, the event is pending because the reclaim is sent to the tax authorities.</Description>
+																</Code>
+																<Code Name="BOIS">
+																	<DetailedName>Pending Beneficiary Owner Details</DetailedName>
+																	<Description>Pending receipt of beneficiary owner details.</Description>
+																</Code>
+																<Code Name="CERT">
+																	<DetailedName> Incorrect Certification </DetailedName>
+																	<Description> Instruction is rejected since the provided certification is incorrect or incomplete. </Description>
+																</Code>
+																<Code Name="DQUA">
+																	<DetailedName>Disagreement on Quantity</DetailedName>
+																	<Description>Unrecognised or invalid instructed quantity.</Description>
+																</Code>
+																<Code Name="LACK">
+																	<DetailedName>Lack of Securities</DetailedName>
+																	<Description>Insufficient financial instruments in your account.</Description>
+																</Code>
+																<Code Name="LATE">
+																	<DetailedName>Market Deadline Missed</DetailedName>
+																	<Description>Instruction was received after market deadline.</Description>
+																</Code>
+																<Code Name="MCER">
+																	<DetailedName>Missing or Invalid Certification</DetailedName>
+																	<Description>Awaiting receipt of adequate certification.</Description>
+																</Code>
+																<Code Name="MONY">
+																	<DetailedName>Insufficient Cash</DetailedName>
+																	<Description>Insufficient cash in your account.</Description>
+																</Code>
+																<Code Name="NARR">
+																	<DetailedName>Narrative Reason</DetailedName>
+																	<Description>See narrative field for reason.</Description>
+																</Code>
+																<Code Name="NPAY">
+																	<DetailedName>Payment Not Made</DetailedName>
+																	<Description>Payment has not been made by issuer.</Description>
+																</Code>
+																<Code Name="NSEC">
+																	<DetailedName>Securities Not Delivered</DetailedName>
+																	<Description>Financial instruments have not been delivered by the issuer.</Description>
+																</Code>
+																<Code Name="PENR">
+																	<DetailedName>Pending Receipt</DetailedName>
+																	<Description>The instruction is pending receipt of securities, eg, from a purchase, loan etc .</Description>
+																</Code>
+																<Code Name="VLDA">
+																	<DetailedName>Valid for Tax Authorities</DetailedName>
+																	<Description>For tax reclaim, the event is pending, the tax reclaim is valid for the tax authorities.</Description>
+																</Code>
+															</Codes>
+														</ValidationPattern>
+													</Validation>
+													<Validation>
+														<Qualifiers>REJT</Qualifiers>
+														<Options>B</Options>
+														<NullField>Data_Source_Scheme</NullField>
+														<ErrorCode>K24</ErrorCode>
+														<Comment><![CDATA[If Qualifier is REJT and Data Source Scheme is not present, Reason Code must contain one of  the following codes (Error code(s): K24):]]></Comment>
+														<ValidationPattern xsi:type="CODE" Type="CODE">
+															<Type>CODE</Type>
+															<Codes>
+																<Code Name="ADEA">
+																	<DetailedName>Account Servicer Deadline Missed</DetailedName>
+																	<Description>Received after the account servicer's deadline.</Description>
+																</Code>
+																<Code Name="BOIS">
+																	<DetailedName>Missing Beneficiary Owner Details</DetailedName>
+																	<Description>Rejected due to missing beneficiary owner details. </Description>
+																</Code>
+																<Code Name="CANC">
+																	<DetailedName>Cancelled</DetailedName>
+																	<Description>Option is not valid; it has been cancelled by the market or service provider, and cannot be responded to. Any responses already processed against this option are considered void and new responses will be required .</Description>
+																</Code>
+																<Code Name="CERT">
+																	<DetailedName>Incorrect Certification </DetailedName>
+																	<Description>Instruction is rejected since the provided certification is incorrect or incomplete. </Description>
+																</Code>
+																<Code Name="DCAN">
+																	<DetailedName>Rejected Since Already Cancelled</DetailedName>
+																	<Description>Cancellation request was rejected since the instruction has already been cancelled.</Description>
+																</Code>
+																<Code Name="DPRG">
+																	<DetailedName>Rejected Since In Progress</DetailedName>
+																	<Description>Cancellation request has been rejected because the instruction process is in progress or has been processed.</Description>
+																</Code>
+																<Code Name="DQUA">
+																	<DetailedName>Quantity Rejection</DetailedName>
+																	<Description>Unrecognised or invalid instructed quantity.</Description>
+																</Code>
+																<Code Name="DSEC">
+																	<DetailedName>Security Rejection</DetailedName>
+																	<Description>Unrecognised or invalid financial instrument identification.</Description>
+																</Code>
+																<Code Name="EVNM">
+																	<DetailedName>Unrecognised Corporate Action Event Number Rejection</DetailedName>
+																	<Description>Unrecognised corporate action event number.</Description>
+																</Code>
+																<Code Name="INIR">
+																	<DetailedName>Instruction Irrevocable</DetailedName>
+																	<Description>The instruction is irrevocable</Description>
+																</Code>
+																<Code Name="INTV">
+																	<DetailedName>Inactive</DetailedName>
+																	<Description>Option is not active and can no longer be responded to. Any responses already processed against this option will remain valid, eg, expired option.</Description>
+																</Code>
+																<Code Name="INVA">
+																	<DetailedName>Invalid for Tax Authorities</DetailedName>
+																	<Description>For tax reclaim, the reclaim is invalid for the tax authorities.</Description>
+																</Code>
+																<Code Name="LACK">
+																	<DetailedName>Lack of Securities</DetailedName>
+																	<Description>Instructed position exceeds the eligible balance.</Description>
+																</Code>
+																<Code Name="LATE">
+																	<DetailedName>Market Deadline Missed</DetailedName>
+																	<Description>Received after market deadline.</Description>
+																</Code>
+																<Code Name="NARR">
+																	<DetailedName>Narrative Reason</DetailedName>
+																	<Description>See narrative field for reason</Description>
+																</Code>
+																<Code Name="NMTY">
+																	<DetailedName>Mismatch Option Number and Option Type Rejection</DetailedName>
+																	<Description>Mismatch between option number and option type.</Description>
+																</Code>
+																<Code Name="OPNM">
+																	<DetailedName>Option Number Rejection</DetailedName>
+																	<Description>Unrecognised option number.</Description>
+																</Code>
+																<Code Name="OPTY">
+																	<DetailedName>Option Type Rejection</DetailedName>
+																	<Description>Invalid option type.</Description>
+																</Code>
+																<Code Name="REFT">
+																	<DetailedName>Refused by the Tax Authorities</DetailedName>
+																	<Description>Reclaim is refused by the tax authorities.</Description>
+																</Code>
+																<Code Name="SAFE">
+																	<DetailedName>Safekeeping Account Rejection</DetailedName>
+																	<Description>Unrecognised or invalid message sender's safekeeping account.</Description>
+																</Code>
+																<Code Name="ULNK">
+																	<DetailedName>Unknown</DetailedName>
+																	<Description>Linked reference is unknown.</Description>
+																</Code>
+															</Codes>
+														</ValidationPattern>
+													</Validation>
+													<Validation>
+														<Qualifiers>CANP</Qualifiers>
+														<Options>B</Options>
+														<NullField>Data_Source_Scheme</NullField>
+														<ErrorCode>K24</ErrorCode>
+														<Comment><![CDATA[If Qualifier is CANP and Data Source Scheme is not present, Reason Code must contain one of the following codes (Error code(s): K24):]]></Comment>
+														<ValidationPattern xsi:type="CODE" Type="CODE">
+															<Type>CODE</Type>
+															<Codes>
+																<Code Name="ADEA">
+																	<DetailedName>Account Servicer Deadline Missed</DetailedName>
+																	<Description>Received after the account servicer's deadline. Processed on best effort basis. </Description>
+																</Code>
+																<Code Name="DQUA">
+																	<DetailedName>Disagreement on Quantity</DetailedName>
+																	<Description>Unrecognised or invalid instructed quantity.</Description>
+																</Code>
+																<Code Name="LATE">
+																	<DetailedName>Market Deadline Missed</DetailedName>
+																	<Description>Received after market deadline.</Description>
+																</Code>
+																<Code Name="NARR">
+																	<DetailedName>Narrative Reason</DetailedName>
+																	<Description>See narrative field for reason.</Description>
+																</Code>
+															</Codes>
+														</ValidationPattern>
+													</Validation>
+													<Validation>
+														<Qualifiers>CAND</Qualifiers>
+														<Options>B</Options>
+														<NullField>Data_Source_Scheme</NullField>
+														<ErrorCode>K24</ErrorCode>
+														<Comment><![CDATA[If Qualifier is CAND and Data Source Scheme is not present, Reason Code must contain one of the following codes (Error code(s): K24):]]></Comment>
+														<ValidationPattern xsi:type="CODE" Type="CODE">
+															<Type>CODE</Type>
+															<Codes>
+																<Code Name="CANI">
+																	<DetailedName>Cancelled By Yourselves</DetailedName>
+																	<Description>Instruction has been cancelled as per your request.</Description>
+																</Code>
+																<Code Name="CANO">
+																	<DetailedName>Cancelled by another party</DetailedName>
+																	<Description>Instruction has been cancelled by another party than the instructing party, e.g.market infrastructure such as a Stock Exchange.</Description>
+																</Code>
+																<Code Name="CANS">
+																	<DetailedName>Cancelled By System</DetailedName>
+																	<Description>Instruction has been cancelled by the system.</Description>
+																</Code>
+																<Code Name="CSUB">
+																	<DetailedName>Cancelled by Subcustodian</DetailedName>
+																	<Description>Instruction has been cancelled by the agent, for example, due to an event deadline extension. </Description>
+																</Code>
+																<Code Name="NARR">
+																	<DetailedName>Narrative Reason</DetailedName>
+																	<Description>See narrative field for reason.</Description>
+																</Code>
+															</Codes>
+														</ValidationPattern>
+													</Validation>
+													<Validation>
+														<Qualifiers>PACK</Qualifiers>
+														<Options>B</Options>
+														<NullField>Data_Source_Scheme</NullField>
+														<ErrorCode>K24</ErrorCode>
+														<Comment><![CDATA[If Qualifier is PACK and Data Source Scheme is not present, Reason Code must contain one of the following codes (Error code(s): K24):]]></Comment>
+														<ValidationPattern xsi:type="CODE" Type="CODE">
+															<Type>CODE</Type>
+															<Codes>
+																<Code Name="NARR">
+																	<DetailedName>Narrative Reason</DetailedName>
+																	<Description>See narrative field for reason.</Description>
+																</Code>
+																<Code Name="NSTP">
+																	<DetailedName>Not STP</DetailedName>
+																	<Description>Instruction was not STP and had to be processed manually .</Description>
+																</Code>
+															</Codes>
+														</ValidationPattern>
+													</Validation>
+												</SubField>
+											</Validations>
+										</SwiftField>
+										<SwiftField Name="70D">
+											<SwiftFieldDef Name="70">
+												<Generic>true</Generic>
+												<Description><![CDATA[Narrative]]></Description>
+												<Option Name="D">
+													<Format><![CDATA[:4!c//6*35x]]></Format>
+													<Specification><![CDATA[(Qualifier) (Narrative)]]></Specification>
+												</Option>
+											</SwiftFieldDef>
+											<Qualifier Name="REAS">
+												<Description><![CDATA[Reason Narrative]]></Description>
+												<Repeating>false</Repeating>
+												<Presence>O</Presence>
+												<Options>D</Options>
+											</Qualifier>
+										</SwiftField>
+									</Fields>
+								</SwiftSequence>
+							</Fields>
+						</SwiftSequence>
+					</Fields>
+				</SwiftSequence>
+				<SwiftSequence Name="B">
+					<Name>B</Name>
+					<Description><![CDATA[Corporate Action Details]]></Description>
+					<Mandatory>false</Mandatory>
+					<Repeating>false</Repeating>
+					<BlockDelimited>true</BlockDelimited>
+					<Code>CADETL</Code>
+					<StartBlockField>16R</StartBlockField>
+					<StartFieldFormat>16c</StartFieldFormat>
+					<EndBlockField>16S</EndBlockField>
+					<EndFieldFormat>16c</EndFieldFormat>
+					<Fields>
+						<SwiftField Name="13A">
+							<SwiftFieldDef Name="13">
+								<Generic>true</Generic>
+								<Description><![CDATA[Number Identification]]></Description>
+								<Option Name="A">
+									<Format><![CDATA[:4!c//3!c]]></Format>
+									<Specification><![CDATA[(Qualifier)(Number Id)]]></Specification>
+								</Option>
+							</SwiftFieldDef>
+							<Qualifier Name="CAON">
+								<Description><![CDATA[CA Option Number]]></Description>
+								<Repeating>false</Repeating>
+								<Presence>O</Presence>
+								<Options>A</Options>
+							</Qualifier>
+						</SwiftField>
+						<SwiftField Name="22a">
+							<SwiftFieldDef Name="22">
+								<Generic>true</Generic>
+								<Description><![CDATA[Indicator]]></Description>
+								<Option Name="F">
+									<Format><![CDATA[:4!c/[8c]/4!c]]></Format>
+									<Specification><![CDATA[(Qualifier) (Data Source Scheme) (Indicator)]]></Specification>
+									<Description><![CDATA[Indicator]]></Description>
+								</Option>
+								<Option Name="H">
+									<Format><![CDATA[:4!c//4!c]]></Format>
+									<Specification><![CDATA[(Qualifier) (Indicator)]]></Specification>
+									<Description><![CDATA[Indicator]]></Description>
+								</Option>
+							</SwiftFieldDef>
+							<Qualifier Name="CAOP">
+								<Description><![CDATA[Corporate Action Option Code Indicator]]></Description>
+								<Repeating>false</Repeating>
+								<Presence>O</Presence>
+								<Options>F, H</Options>
+							</Qualifier>
+							<Validations>
+								<SubField Name="Indicator">
+									<Validation>
+										<Qualifiers>CAOP</Qualifiers>
+										<Options>F, H</Options>
+										<NullField>Data_Source_Scheme</NullField>
+										<ErrorCode>K22</ErrorCode>
+										<Comment><![CDATA[In option F or H, if Qualifier is CAOP and Data Source Scheme is not present, Indicator must contain one of the following codes (Error code(s): K22):]]></Comment>
+										<ValidationPattern xsi:type="CODE" Type="CODE">
+											<Type>CODE</Type>
+											<Codes>
+												<Code Name="ABST">
+													<DetailedName>Abstain</DetailedName>
+													<Description>Vote expressed as abstain. In this case, the issuing company will add the number of shares to the quorum of the meeting. If the voting right is not executed, it will not be added to the quorum. In this case, code NOAC should be used.</Description>
+												</Code>
+												<Code Name="AMGT">
+													<DetailedName>Vote Against Management</DetailedName>
+													<Description>Vote against management.</Description>
+												</Code>
+												<Code Name="BSPL">
+													<DetailedName>Bonus Share Plan</DetailedName>
+													<Description>Receive equities from the Share Premium Reserve of the company and considered as a capital distribution rather than a disbursement of income with different tax implications (typically found in Australia).</Description>
+												</Code>
+												<Code Name="BUYA">
+													<DetailedName>Buy Up</DetailedName>
+													<Description>Buy additional securities to round up position.</Description>
+												</Code>
+												<Code Name="CASE">
+													<DetailedName>Cash and Securities</DetailedName>
+													<Description>Corporate action option  includes a distribution of both cash and securities to holders.</Description>
+												</Code>
+												<Code Name="CASH">
+													<DetailedName>Cash</DetailedName>
+													<Description>Distribution of cash to holders.</Description>
+												</Code>
+												<Code Name="CEXC">
+													<DetailedName>Consent and Exchange</DetailedName>
+													<Description>Vote to consent to change the terms of the securities agreement and to exchange securities.</Description>
+												</Code>
+												<Code Name="CONN">
+													<DetailedName>Consent Denied</DetailedName>
+													<Description>Vote not to approve the event or proposal.</Description>
+												</Code>
+												<Code Name="CONY">
+													<DetailedName>Consent Granted</DetailedName>
+													<Description>Vote to approve the event or proposal.</Description>
+												</Code>
+												<Code Name="CTEN">
+													<DetailedName>Consent and Tender</DetailedName>
+													<Description>Vote to consent to change the terms of the securities agreement and to tender securities for cash.</Description>
+												</Code>
+												<Code Name="EXER">
+													<DetailedName>Exercise</DetailedName>
+													<Description>Exercise intermediate securities or warrants.</Description>
+												</Code>
+												<Code Name="LAPS">
+													<DetailedName>Lapse</DetailedName>
+													<Description>Allow event or entitled security to expire.</Description>
+												</Code>
+												<Code Name="MKDW">
+													<DetailedName>Mark-Down</DetailedName>
+													<Description>Mark down the global certificate as a result of a corporate action (instruction from ICSDs to common depositories who are holding the global certificate on behalf of the ICSDs.</Description>
+												</Code>
+												<Code Name="MKUP">
+													<DetailedName>Mark-Up</DetailedName>
+													<Description>Mark up the global certificate as a result of a corporate action (instruction from ICSDs to common depositories who are holding the global certificate on behalf of the ICSDs).</Description>
+												</Code>
+												<Code Name="MNGT">
+													<DetailedName>Vote With Management</DetailedName>
+													<Description>Vote with management.</Description>
+												</Code>
+												<Code Name="MPUT">
+													<DetailedName>Retain</DetailedName>
+													<Description>An option that allows a holder to elect to retain their holding, eg, a putable bond.</Description>
+												</Code>
+												<Code Name="NOAC">
+													<DetailedName>No Action</DetailedName>
+													<Description>Option for the account owner not to take part in the event. This would include opt-out for class actions and lodging of dissenters' rights. </Description>
+												</Code>
+												<Code Name="NOQU">
+													<DetailedName>Non Qualified Investor</DetailedName>
+													<Description>The account owner is a Non-Qualified Investor.</Description>
+												</Code>
+												<Code Name="OFFR">
+													<DetailedName>Proposed Rate</DetailedName>
+													<Description>In a remarketing of variable notes, the margin that shareholders can propose in respect of the next interest period.</Description>
+												</Code>
+												<Code Name="OTHR">
+													<DetailedName>Other</DetailedName>
+													<Description>Generic corporate action option to be used in case that no other specific code is appropriate.</Description>
+												</Code>
+												<Code Name="OVER">
+													<DetailedName>Oversubscribe</DetailedName>
+													<Description>Subscribe to more equities than underlying securities position allows.</Description>
+												</Code>
+												<Code Name="PROX">
+													<DetailedName>Proxy Card</DetailedName>
+													<Description>Issue a proxy card in case of voting.</Description>
+												</Code>
+												<Code Name="PRUN">
+													<DetailedName>Unknown Proceeds</DetailedName>
+													<Description>Proceeds not known during election period. The option can result in cash and/or securities.</Description>
+												</Code>
+												<Code Name="QINV">
+													<DetailedName>Qualified Investor</DetailedName>
+													<Description>The account owner is a Qualified Investor</Description>
+												</Code>
+												<Code Name="SECU">
+													<DetailedName>Securities Option</DetailedName>
+													<Description>Distribution of securities to holders.</Description>
+												</Code>
+												<Code Name="SLLE">
+													<DetailedName>Sell Entitlement</DetailedName>
+													<Description>Sell the intermediate securities.</Description>
+												</Code>
+												<Code Name="SPLI">
+													<DetailedName>Split Instruction</DetailedName>
+													<Description>Option to give a split instruction, eg, a split voting instruction on a meeting.</Description>
+												</Code>
+												<Code Name="TAXI">
+													<DetailedName>Tax Instruction</DetailedName>
+													<Description>Tax instruction. </Description>
+												</Code>
+											</Codes>
+										</ValidationPattern>
+									</Validation>
+								</SubField>
+							</Validations>
+						</SwiftField>
+						<SwiftField Name="95a">
+							<SwiftFieldDef Name="95">
+								<Generic>true</Generic>
+								<Description><![CDATA[Party]]></Description>
+								<Option Name="P">
+									<Format><![CDATA[:4!c(//4!a2!a2!c[3!c])]]></Format>
+									<Specification><![CDATA[(Qualifier) (Identifier Code)]]></Specification>
+								</Option>
+								<Option Name="R">
+									<Format><![CDATA[:4!c/8c/34x]]></Format>
+									<Specification><![CDATA[(Qualifier) (Data Source Scheme) (Proprietary Code)]]></Specification>
+								</Option>
+							</SwiftFieldDef>
+							<Qualifier Name="ACOW">
+								<Description><![CDATA[Account Owner]]></Description>
+								<Repeating>false</Repeating>
+								<Presence>O</Presence>
+								<Options>P, R</Options>
+							</Qualifier>
+							<Validations>
+								<SubField Name="Identifier_Code">
+									<Validation>
+										<Qualifiers>ACOW</Qualifiers>
+										<Options>P</Options>
+										<ErrorCode>T27, T28, T29, T45</ErrorCode>
+										<Comment><![CDATA[Identifier Code must be a registered BIC or BEI (Error code(s): T27,T28,T29,T45)]]></Comment>
+										<ValidationPattern xsi:type="BIC" Type="BIC">
+											<Type>BIC</Type>
+										</ValidationPattern>
+									</Validation>
+								</SubField>
+								<SubField Name="Proprietary_Code">
+									<Validation>
+										<Qualifiers>ACOW</Qualifiers>
+										<Options>R</Options>
+										<ErrorCode>T26</ErrorCode>
+										<Comment><![CDATA[Proprietary code (Format Option R) must not start or end with a slash '/' and not contain two consecutive slashes '//'.(Error code(s): T26).]]></Comment>
+										<ValidationPattern xsi:type="T26" Type="T26">
+											<Type>T26</Type>
+										</ValidationPattern>
+									</Validation>
+								</SubField>
+							</Validations>
+						</SwiftField>
+						<SwiftField Name="97a">
+							<SwiftFieldDef Name="97">
+								<Generic>true</Generic>
+								<Description><![CDATA[Account]]></Description>
+								<Option Name="A">
+									<Format><![CDATA[:4!c//35x]]></Format>
+									<Specification><![CDATA[(Qualifier) (Account Number)]]></Specification>
+								</Option>
+								<Option Name="E">
+									<Format><![CDATA[:4!c//34x]]></Format>
+									<Specification><![CDATA[(Qualifier) (International Bank Account Number)]]></Specification>
+								</Option>
+							</SwiftFieldDef>
+							<Qualifier Name="SAFE">
+								<Description><![CDATA[Safekeeping Account]]></Description>
+								<Repeating>false</Repeating>
+								<Presence>O</Presence>
+								<Options>A</Options>
+							</Qualifier>
+							<Qualifier Name="CASH">
+								<Description><![CDATA[Cash Account]]></Description>
+								<Repeating>false</Repeating>
+								<Presence>O</Presence>
+								<Options>A, E</Options>
+							</Qualifier>
+						</SwiftField>
+						<SwiftField Name="94a">
+							<SwiftFieldDef Name="94">
+								<Generic>true</Generic>
+								<Description><![CDATA[Place]]></Description>
+								<Option Name="B">
+									<Format><![CDATA[:4!c/[8c]/4!c[/30x]]]></Format>
+									<Specification><![CDATA[(Qualifier) (Data Source Scheme) (Place Code) (Narrative)]]></Specification>
+								</Option>
+								<Option Name="C">
+									<Format><![CDATA[:4!c//2!a]]></Format>
+									<Specification><![CDATA[(Qualifier) (Country)]]></Specification>
+								</Option>
+								<Option Name="F">
+									<Format><![CDATA[:4!c//4!c(/4!a2!a2!c[3!c])]]></Format>
+									<Specification><![CDATA[(Qualifier) (Place Code) (Identifier Code)]]></Specification>
+								</Option>
+							</SwiftFieldDef>
+							<Qualifier Name="SAFE">
+								<Description><![CDATA[Place of Safekeeping]]></Description>
+								<Repeating>false</Repeating>
+								<Presence>O</Presence>
+								<Options>B, C, F</Options>
+							</Qualifier>
+							<Validations>
+								<SubField Name="Narrative">
+									<Validation>
+										<Qualifiers>SAFE</Qualifiers>
+										<Options>B</Options>
+										<ErrorCode>T26</ErrorCode>
+										<Comment><![CDATA[Narrative (Format Option B) must not start or end with a slash '/' and not contain two consecutive slashes '//' (Error code(s): T26).]]></Comment>
+										<ValidationPattern xsi:type="T26" Type="T26">
+											<Type>T26</Type>
+										</ValidationPattern>
+									</Validation>
+								</SubField>
+								<SubField Name="Country">
+									<Validation>
+										<Qualifiers>SAFE</Qualifiers>
+										<Options>C</Options>
+										<ErrorCode>T73</ErrorCode>
+										<Comment><![CDATA[Country must be a valid ISO country code (Error code(s): T73).]]></Comment>
+										<ValidationPattern xsi:type="Country_Code" Type="Country Code">
+											<Type>Country Code</Type>
+										</ValidationPattern>
+									</Validation>
+								</SubField>
+								<SubField Name="Identifier_Code">
+									<Validation>
+										<Qualifiers>SAFE</Qualifiers>
+										<Options>F</Options>
+										<ErrorCode>T27, T28, T29, T45</ErrorCode>
+										<Comment><![CDATA[Identifier Code must be a registered BIC or BEI (Error code(s): T27,T28,T29,T45)]]></Comment>
+										<ValidationPattern xsi:type="BIC" Type="BIC">
+											<Type>BIC</Type>
+										</ValidationPattern>
+									</Validation>
+								</SubField>
+								<SubField Name="Place_Code">
+									<Validation>
+										<Qualifiers>SAFE</Qualifiers>
+										<Options>B</Options>
+										<NullField>Data_Source_Scheme</NullField>
+										<ErrorCode>K94</ErrorCode>
+										<Comment><![CDATA[In option B, if Data Source Scheme is not present, Place Code must contain one of the following codes (Error code(s): K94):]]></Comment>
+										<ValidationPattern xsi:type="CODE" Type="CODE">
+											<Type>CODE</Type>
+											<Codes>
+												<Code Name="ALLP">
+													<DetailedName>All Places of Safekeeping</DetailedName>
+													<Description>Used when there is a need to indicate that the details apply to all places of safekeeping where the financial instrument is held.</Description>
+												</Code>
+												<Code Name="SHHE">
+													<DetailedName>Shares Held Elsewhere</DetailedName>
+													<Description>Used for certain financial instruments, eg, US mutual funds, where settlement is internal only, ie, there is no external movement of securities.</Description>
+												</Code>
+											</Codes>
+										</ValidationPattern>
+									</Validation>
+									<Validation>
+										<Qualifiers>SAFE</Qualifiers>
+										<Options>F</Options>
+										<ErrorCode>K94</ErrorCode>
+										<Comment><![CDATA[In option F, Place Code must contain one of the following codes (Error code(s): K94):]]></Comment>
+										<ValidationPattern xsi:type="CODE" Type="CODE">
+											<Type>CODE</Type>
+											<Codes>
+												<Code Name="CUST">
+													<DetailedName>Local Custodian</DetailedName>
+													<Description>Financial instruments held at a local custodian.</Description>
+												</Code>
+												<Code Name="ICSD">
+													<DetailedName>International Central Securities Depository</DetailedName>
+													<Description>Financial instruments held at an International Central Securities Depository.</Description>
+												</Code>
+												<Code Name="NCSD">
+													<DetailedName>National Central Securities Depository</DetailedName>
+													<Description>Financial instruments held at a National Central Securities Depository.</Description>
+												</Code>
+												<Code Name="SHHE">
+													<DetailedName>Shares Held Elsewhere</DetailedName>
+													<Description>Used for certain financial instruments, eg, US mutual funds, where settlement is internal only, ie, there is no external movement of securities.</Description>
+												</Code>
+											</Codes>
+										</ValidationPattern>
+									</Validation>
+								</SubField>
+							</Validations>
+						</SwiftField>
+						<SwiftField Name="35B">
+							<SwiftFieldDef Name="35">
+								<Generic>false</Generic>
+								<Option Name="B">
+									<Format><![CDATA[(ISIN1!e12!c)([CRLF4*35x]) | 4*35x]]></Format>
+									<Specification><![CDATA[(Identification Of Security)(Description Of Security) |(Description Of Security)]]></Specification>
+									<Description><![CDATA[Identification of the Financial Instrument]]></Description>
+								</Option>
+							</SwiftFieldDef>
+							<Repeating>false</Repeating>
+							<Presence>O</Presence>
+							<Options>B</Options>
+						</SwiftField>
+						<SwiftField Name="36B">
+							<SwiftFieldDef Name="36">
+								<Generic>true</Generic>
+								<Description><![CDATA[Quantity of Financial Instrument]]></Description>
+								<Option Name="B">
+									<Format><![CDATA[:4!c//4!c/15d]]></Format>
+									<Specification><![CDATA[(Qualifier) (Quantity Type Code) (Quantity)]]></Specification>
+								</Option>
+							</SwiftFieldDef>
+							<Qualifier Name="STAQ">
+								<Description><![CDATA[Status Quantity]]></Description>
+								<Repeating>true</Repeating>
+								<Presence>O</Presence>
+								<Options>B</Options>
+							</Qualifier>
+							<Validations>
+								<SubField Name="Quantity_Type_Code">
+									<Validation>
+										<Qualifiers>QREC, STAQ</Qualifiers>
+										<Options>B</Options>
+										<ErrorCode>K36</ErrorCode>
+										<Comment><![CDATA[Quantity Type Code must contain one of the following codes (Error code(s): K36):]]></Comment>
+										<ValidationPattern xsi:type="CODE" Type="CODE">
+											<Type>CODE</Type>
+											<Codes>
+												<Code Name="AMOR">
+													<DetailedName>Amortised Value</DetailedName>
+													<Description>Quantity expressed as an amount representing the current amortised face amount of a bond, for example, a periodic reduction/increase of a bond's principal amount.</Description>
+												</Code>
+												<Code Name="FAMT">
+													<DetailedName>Face Amount</DetailedName>
+													<Description>Quantity expressed as an amount representing the face amount, ie, the principal, of a debt instrument.</Description>
+												</Code>
+												<Code Name="UNIT">
+													<DetailedName>Unit Number</DetailedName>
+													<Description>Quantity expressed as a number, eg, a number of shares.</Description>
+												</Code>
+											</Codes>
+										</ValidationPattern>
+									</Validation>
+								</SubField>
+							</Validations>
+						</SwiftField>
+						<SwiftField Name="19B">
+							<SwiftFieldDef Name="19">
+								<Generic>true</Generic>
+								<Description><![CDATA[Amount]]></Description>
+								<Option Name="B">
+									<Format><![CDATA[:4!c//3!a15d]]></Format>
+									<Specification><![CDATA[(Qualifier) (Currency Code) (Amount)]]></Specification>
+								</Option>
+							</SwiftFieldDef>
+							<Qualifier Name="CAPG">
+								<Description><![CDATA[Capital Gains Amount]]></Description>
+								<Repeating>false</Repeating>
+								<Presence>O</Presence>
+								<Options>B</Options>
+							</Qualifier>
+							<Qualifier Name="INDM">
+								<Description><![CDATA[Indemnity Amount]]></Description>
+								<Repeating>false</Repeating>
+								<Presence>O</Presence>
+								<Options>B</Options>
+							</Qualifier>
+							<Qualifier Name="CINL">
+								<Description><![CDATA[Cash in Lieu of Shares]]></Description>
+								<Repeating>false</Repeating>
+								<Presence>O</Presence>
+								<Options>B</Options>
+							</Qualifier>
+							<Qualifier Name="CHAR">
+								<Description><![CDATA[Charges/Fees Amount]]></Description>
+								<Repeating>false</Repeating>
+								<Presence>O</Presence>
+								<Options>B</Options>
+							</Qualifier>
+							<Qualifier Name="FLFR">
+								<Description><![CDATA[Fully Franked Amount]]></Description>
+								<Repeating>false</Repeating>
+								<Presence>O</Presence>
+								<Options>B</Options>
+							</Qualifier>
+							<Qualifier Name="UNFR">
+								<Description><![CDATA[Unfranked Amount]]></Description>
+								<Repeating>false</Repeating>
+								<Presence>O</Presence>
+								<Options>B</Options>
+							</Qualifier>
+							<Qualifier Name="TXFR">
+								<Description><![CDATA[Tax Free Amount]]></Description>
+								<Repeating>false</Repeating>
+								<Presence>O</Presence>
+								<Options>B</Options>
+							</Qualifier>
+							<Qualifier Name="TXDF">
+								<Description><![CDATA[Tax Deferred Amount]]></Description>
+								<Repeating>false</Repeating>
+								<Presence>O</Presence>
+								<Options>B</Options>
+							</Qualifier>
+							<Qualifier Name="SOIC">
+								<Description><![CDATA[Sundry / Other Income Amount]]></Description>
+								<Repeating>false</Repeating>
+								<Presence>O</Presence>
+								<Options>B</Options>
+							</Qualifier>
+							<Qualifier Name="GRSS">
+								<Description><![CDATA[Gross Amount]]></Description>
+								<Repeating>false</Repeating>
+								<Presence>O</Presence>
+								<Options>B</Options>
+							</Qualifier>
+							<Qualifier Name="INTR">
+								<Description><![CDATA[Interest Amount]]></Description>
+								<Repeating>false</Repeating>
+								<Presence>O</Presence>
+								<Options>B</Options>
+							</Qualifier>
+							<Qualifier Name="INCO">
+								<Description><![CDATA[Income Portion ]]></Description>
+								<Repeating>false</Repeating>
+								<Presence>O</Presence>
+								<Options>B</Options>
+							</Qualifier>
+							<Qualifier Name="MKTC">
+								<Description><![CDATA[Market Claim]]></Description>
+								<Repeating>false</Repeating>
+								<Presence>O</Presence>
+								<Options>B</Options>
+							</Qualifier>
+							<Qualifier Name="NETT">
+								<Description><![CDATA[Net Cash Amount]]></Description>
+								<Repeating>false</Repeating>
+								<Presence>O</Presence>
+								<Options>B</Options>
+							</Qualifier>
+							<Qualifier Name="PRIN">
+								<Description><![CDATA[Principal or Corpus]]></Description>
+								<Repeating>false</Repeating>
+								<Presence>O</Presence>
+								<Options>B</Options>
+							</Qualifier>
+							<Qualifier Name="REIN">
+								<Description><![CDATA[Reinvestment Amount]]></Description>
+								<Repeating>false</Repeating>
+								<Presence>O</Presence>
+								<Options>B</Options>
+							</Qualifier>
+							<Qualifier Name="TAXC">
+								<Description><![CDATA[Amount of Tax Credit]]></Description>
+								<Repeating>false</Repeating>
+								<Presence>O</Presence>
+								<Options>B</Options>
+							</Qualifier>
+							<Qualifier Name="TAXR">
+								<Description><![CDATA[Withholding Tax Amount]]></Description>
+								<Repeating>false</Repeating>
+								<Presence>O</Presence>
+								<Options>B</Options>
+							</Qualifier>
+							<Qualifier Name="WITL">
+								<Description><![CDATA[Second Level Tax Amount]]></Description>
+								<Repeating>false</Repeating>
+								<Presence>O</Presence>
+								<Options>B</Options>
+							</Qualifier>
+							<Qualifier Name="REDP">
+								<Description><![CDATA[Redemption Premium Amount]]></Description>
+								<Repeating>false</Repeating>
+								<Presence>O</Presence>
+								<Options>B</Options>
+							</Qualifier>
+							<Qualifier Name="ATAX">
+								<Description><![CDATA[Additional Tax Amount]]></Description>
+								<Repeating>false</Repeating>
+								<Presence>O</Presence>
+								<Options>B</Options>
+							</Qualifier>
+							<Qualifier Name="COUN">
+								<Description><![CDATA[Country, National, Federal Tax]]></Description>
+								<Repeating>false</Repeating>
+								<Presence>O</Presence>
+								<Options>B</Options>
+							</Qualifier>
+							<Qualifier Name="EXEC">
+								<Description><![CDATA[Executing Broker's Amount]]></Description>
+								<Repeating>false</Repeating>
+								<Presence>O</Presence>
+								<Options>B</Options>
+							</Qualifier>
+							<Qualifier Name="ISDI">
+								<Description><![CDATA[Issue Discount Amount]]></Description>
+								<Repeating>false</Repeating>
+								<Presence>O</Presence>
+								<Options>B</Options>
+							</Qualifier>
+							<Qualifier Name="LEVY">
+								<Description><![CDATA[Payment Levy Tax]]></Description>
+								<Repeating>false</Repeating>
+								<Presence>O</Presence>
+								<Options>B</Options>
+							</Qualifier>
+							<Qualifier Name="LOCL">
+								<Description><![CDATA[Local Tax]]></Description>
+								<Repeating>false</Repeating>
+								<Presence>O</Presence>
+								<Options>B</Options>
+							</Qualifier>
+							<Qualifier Name="LOCO">
+								<Description><![CDATA[Local Broker's Commission]]></Description>
+								<Repeating>false</Repeating>
+								<Presence>O</Presence>
+								<Options>B</Options>
+							</Qualifier>
+							<Qualifier Name="PAMM">
+								<Description><![CDATA[Paying/Sub-paying Agent Commission]]></Description>
+								<Repeating>false</Repeating>
+								<Presence>O</Presence>
+								<Options>B</Options>
+							</Qualifier>
+							<Qualifier Name="REGF">
+								<Description><![CDATA[Regulatory Fees]]></Description>
+								<Repeating>false</Repeating>
+								<Presence>O</Presence>
+								<Options>B</Options>
+							</Qualifier>
+							<Qualifier Name="SHIP">
+								<Description><![CDATA[Shipping]]></Description>
+								<Repeating>false</Repeating>
+								<Presence>O</Presence>
+								<Options>B</Options>
+							</Qualifier>
+							<Qualifier Name="SOFE">
+								<Description><![CDATA[Solicitation Fee]]></Description>
+								<Repeating>false</Repeating>
+								<Presence>O</Presence>
+								<Options>B</Options>
+							</Qualifier>
+							<Qualifier Name="SPCN">
+								<Description><![CDATA[Special Concessions]]></Description>
+								<Repeating>false</Repeating>
+								<Presence>O</Presence>
+								<Options>B</Options>
+							</Qualifier>
+							<Qualifier Name="STAM">
+								<Description><![CDATA[Stamp Duty]]></Description>
+								<Repeating>false</Repeating>
+								<Presence>O</Presence>
+								<Options>B</Options>
+							</Qualifier>
+							<Qualifier Name="STEX">
+								<Description><![CDATA[Stock Exchange Tax]]></Description>
+								<Repeating>false</Repeating>
+								<Presence>O</Presence>
+								<Options>B</Options>
+							</Qualifier>
+							<Qualifier Name="SUBS">
+								<Description><![CDATA[Additional Subscription Costs]]></Description>
+								<Repeating>false</Repeating>
+								<Presence>O</Presence>
+								<Options>B</Options>
+							</Qualifier>
+							<Qualifier Name="TRAN">
+								<Description><![CDATA[Transfer Tax]]></Description>
+								<Repeating>false</Repeating>
+								<Presence>O</Presence>
+								<Options>B</Options>
+							</Qualifier>
+							<Qualifier Name="TRAX">
+								<Description><![CDATA[Transaction Tax]]></Description>
+								<Repeating>false</Repeating>
+								<Presence>O</Presence>
+								<Options>B</Options>
+							</Qualifier>
+							<Qualifier Name="VATA">
+								<Description><![CDATA[Value-Added Tax]]></Description>
+								<Repeating>false</Repeating>
+								<Presence>O</Presence>
+								<Options>B</Options>
+							</Qualifier>
+							<Qualifier Name="TXRC">
+								<Description><![CDATA[Reclaim of Taxes]]></Description>
+								<Repeating>false</Repeating>
+								<Presence>O</Presence>
+								<Options>B</Options>
+							</Qualifier>
+							<Validations>
+								<SubField Name="Currency_Code">
+									<Validation>
+										<Qualifiers>ATAX, CAPG, CHAR, CINL, COUN, EXEC, FLFR, GRSS, INCO, INDM, INTR, ISDI, LEVY, LOCL, LOCO, MKTC, NETT, PAMM, PRIN, REDP, REGF, REIN, SHIP, SOFE, SOIC, SPCN, STAM, STEX, SUBS, TAXC, TAXR, TRAN, TRAX, TXDF, TXFR, TXRC, UNFR, VATA, WITF, WITL</Qualifiers>
+										<Options>B</Options>
+										<ErrorCode>T52</ErrorCode>
+										<Comment><![CDATA[Currency Code must be a valid ISO 4217 currency code (Error code(s): T52).]]></Comment>
+										<ValidationPattern xsi:type="Currency_Code" Type="Currency Code">
+											<Type>Currency Code</Type>
+										</ValidationPattern>
+									</Validation>
+								</SubField>
+								<SubField Name="Amount">
+									<Validation>
+										<Qualifiers>ATAX, CAPG, CHAR, CINL, COUN, EXEC, FLFR, GRSS, INCO, INDM, INTR, ISDI, LEVY, LOCL, LOCO, MKTC, NETT, PAMM, PRIN, REDP, REGF, REIN, SHIP, SOFE, SOIC, SPCN, STAM, STEX, SUBS, TAXC, TAXR, TRAN, TRAX, TXDF, TXFR, TXRC, UNFR, VATA, WITF, WITL</Qualifiers>
+										<Options>B</Options>
+										<ErrorCode>C03</ErrorCode>
+										<Comment><![CDATA[The number of digits following the comma must not exceed the maximum allowed for the specified currency.]]></Comment>
+										<ValidationPattern xsi:type="Decimal" Type="Decimal">
+											<Type>Decimal</Type>
+											<currency-field>Currency_Code</currency-field>
+										</ValidationPattern>
+									</Validation>
+								</SubField>
+							</Validations>
+						</SwiftField>
+						<SwiftField Name="93B">
+							<SwiftFieldDef Name="93">
+								<Generic>true</Generic>
+								<Description><![CDATA[Balance]]></Description>
+								<Option Name="B">
+									<Format><![CDATA[:4!c/[8c]/4!c/[N]15d]]></Format>
+									<Specification><![CDATA[(Qualifier) (Data Source Scheme) (Quantity Type Code) (Sign) (Balance)]]></Specification>
+								</Option>
+							</SwiftFieldDef>
+							<Qualifier Name="ELIG">
+								<Description><![CDATA[Total Eligible for Corporate Action Balance]]></Description>
+								<Repeating>false</Repeating>
+								<Presence>O</Presence>
+								<Options>B</Options>
+							</Qualifier>
+							<Qualifier Name="INBA">
+								<Description><![CDATA[Instructed Balance]]></Description>
+								<Repeating>false</Repeating>
+								<Presence>O</Presence>
+								<Options>B</Options>
+							</Qualifier>
+							<Qualifier Name="UNBA">
+								<Description><![CDATA[Uninstructed Balance]]></Description>
+								<Repeating>false</Repeating>
+								<Presence>O</Presence>
+								<Options>B</Options>
+							</Qualifier>
+							<Validations>
+								<SubField Name="Balance">
+									<Validation>
+										<Qualifiers>ELIG, INBA, UNBA</Qualifiers>
+										<Options>B</Options>
+										<ErrorCode>T14</ErrorCode>
+										<Comment><![CDATA[When Sign is present, Balance must not be zero (Error code(s): T14).]]></Comment>
+										<ValidationPattern xsi:type="T14" Type="T14">
+											<Type>T14</Type>
+											<sign-field>Sign</sign-field>
+										</ValidationPattern>
+									</Validation>
+								</SubField>
+								<SubField Name="Quantity_Type_Code">
+									<Validation>
+										<Qualifiers>ELIG, INBA, UNBA</Qualifiers>
+										<Options>B</Options>
+										<NullField>Data_Source_Scheme</NullField>
+										<ErrorCode>K93</ErrorCode>
+										<Comment><![CDATA[If Data Source Scheme is not present, Quantity Type Code must contain one of the following codes (Error code(s): K93):]]></Comment>
+										<ValidationPattern xsi:type="CODE" Type="CODE">
+											<Type>CODE</Type>
+											<Codes>
+												<Code Name="AMOR">
+													<DetailedName>Amortised Value</DetailedName>
+													<Description>Quantity expressed as an amount representing the current amortised face amount of a bond, for example, a periodic reduction/increase of a bond's principal amount.</Description>
+												</Code>
+												<Code Name="FAMT">
+													<DetailedName>Face Amount</DetailedName>
+													<Description>Quantity expressed as an amount representing the face amount, that is, the principal, of a debt instrument.</Description>
+												</Code>
+												<Code Name="UNIT">
+													<DetailedName>Unit Number</DetailedName>
+													<Description>Quantity expressed as a number, for example, a number of shares.</Description>
+												</Code>
+											</Codes>
+										</ValidationPattern>
+									</Validation>
+								</SubField>
+							</Validations>
+						</SwiftField>
+					</Fields>
+				</SwiftSequence>
+				<SwiftSequence Name="C">
+					<Name>C</Name>
+					<Description><![CDATA[Additional Information]]></Description>
+					<Mandatory>false</Mandatory>
+					<Repeating>false</Repeating>
+					<BlockDelimited>true</BlockDelimited>
+					<Code>ADDINFO</Code>
+					<StartBlockField>16R</StartBlockField>
+					<StartFieldFormat>16c</StartFieldFormat>
+					<EndBlockField>16S</EndBlockField>
+					<EndFieldFormat>16c</EndFieldFormat>
+					<Fields>
+						<SwiftField Name="70E">
+							<SwiftFieldDef Name="70">
+								<Generic>true</Generic>
+								<Description><![CDATA[Narrative]]></Description>
+								<Option Name="E">
+									<Format><![CDATA[:4!c//10*35x]]></Format>
+									<Specification><![CDATA[(Qualifier) (Narrative)]]></Specification>
+								</Option>
+							</SwiftFieldDef>
+							<Qualifier Name="ADTX">
+								<Description><![CDATA[Additional Text]]></Description>
+								<Repeating>true</Repeating>
+								<Presence>O</Presence>
+								<Options>E</Options>
+							</Qualifier>
+							<Qualifier Name="PACO">
+								<Description><![CDATA[Party Narrative]]></Description>
+								<Repeating>true</Repeating>
+								<Presence>O</Presence>
+								<Options>E</Options>
+							</Qualifier>
+						</SwiftField>
+						<SwiftField Name="95a">
+							<SwiftFieldDef Name="95">
+								<Generic>true</Generic>
+								<Description><![CDATA[Party]]></Description>
+								<Option Name="P">
+									<Format><![CDATA[:4!c(//4!a2!a2!c[3!c])]]></Format>
+									<Specification><![CDATA[(Qualifier) (Identifier Code)]]></Specification>
+								</Option>
+								<Option Name="Q">
+									<Format><![CDATA[:4!c//4*35x]]></Format>
+									<Specification><![CDATA[ (Qualifier) (Name & Address) ]]></Specification>
+								</Option>
+								<Option Name="R">
+									<Format><![CDATA[:4!c/8c/34x]]></Format>
+									<Specification><![CDATA[(Qualifier) (Data Source Scheme) (Proprietary Code)]]></Specification>
+								</Option>
+							</SwiftFieldDef>
+							<Qualifier Name="MEOR">
+								<Description><![CDATA[Originator of Message]]></Description>
+								<Repeating>false</Repeating>
+								<Presence>O</Presence>
+								<Options>P, Q, R</Options>
+							</Qualifier>
+							<Qualifier Name="MERE">
+								<Description><![CDATA[Recipient of Message]]></Description>
+								<Repeating>false</Repeating>
+								<Presence>O</Presence>
+								<Options>P, Q, R</Options>
+							</Qualifier>
+							<Validations>
+								<SubField Name="Identifier_Code">
+									<Validation>
+										<Qualifiers>MEOR, MERE</Qualifiers>
+										<Options>P</Options>
+										<ErrorCode>T27, T28, T29, T45</ErrorCode>
+										<Comment><![CDATA[Identifier Code must be a registered BIC or BEI (Error code(s): T27,T28,T29,T45)]]></Comment>
+										<ValidationPattern xsi:type="BIC" Type="BIC">
+											<Type>BIC</Type>
+										</ValidationPattern>
+									</Validation>
+								</SubField>
+								<SubField Name="Name_&amp;_Address">
+									<Validation>
+										<Qualifiers>MEOR, MERE</Qualifiers>
+										<Options>Q</Options>
+										<ErrorCode>T26</ErrorCode>
+										<Comment><![CDATA[Name & Address (Format Option V) must not start or end with a slash '/' and not contain two consecutive slashes '//'. For field formats with more than 1 line, the rule applies for each line (Error code(s): T26).]]></Comment>
+										<ValidationPattern xsi:type="T26" Type="T26">
+											<Type>T26</Type>
+										</ValidationPattern>
+									</Validation>
+								</SubField>
+								<SubField Name="Proprietary_Code">
+									<Validation>
+										<Qualifiers>MEOR, MERE</Qualifiers>
+										<Options>R</Options>
+										<ErrorCode>T26</ErrorCode>
+										<Comment><![CDATA[Proprietary code (Format Option R) must not start or end with a slash '/' and not contain two consecutive slashes '//'. For field formats with more than 1 line, the rule applies for each line (Error code(s): T26).]]></Comment>
+										<ValidationPattern xsi:type="T26" Type="T26">
+											<Type>T26</Type>
+										</ValidationPattern>
+									</Validation>
+								</SubField>
+							</Validations>
+						</SwiftField>
+					</Fields>
+				</SwiftSequence>
+			</Fields>
+		</Data>
+		<Trailer>
+		</Trailer>
+	</SwiftFields>
+	<validationrules name="Default">
+		<hdrvalidationrules>
+			<fieldvalidations>
+				<fieldvalidation>
+					<name>U09</name>
+					<formula><![CDATA[if($this.Header.GetFieldIndex("User_Header") != -1) {
+    def userHeader = $this.Header.GetSection("User_Header");
+    if(userHeader.$size > 0 && userHeader[0].IsNotNull("Validation_Flag")) {
+        return false;
+    }
+}
+return true;
+]]></formula>
+					<severity>error</severity>
+					<cascade>true</cascade>
+					<error-code>U09</error-code>
+					<actionmessage><![CDATA["User has used tag 119 in a message that is not a candidate for special processing"]]></actionmessage>
+				</fieldvalidation>
+	<fieldvalidation>
+		<name>U03</name>
+		<fieldname>User Header</fieldname>
+		<formula><![CDATA[Iff(IsNotNull(User_Header.Service_Type_Identifier), 
+    IsNotNull(User_Header.Unique_End_To_End_Transaction_Reference))]]></formula>
+		<severity>error</severity>
+		<cascade>true</cascade>
+		<error-code>U03</error-code>
+		<actionmessage><![CDATA["When populating an end-to-end reference, both fields 111 and 121 must be populated: a message that contains only one of these two fields will not be accepted by FIN."]]></actionmessage>
+	</fieldvalidation>
+			</fieldvalidations>
+		</hdrvalidationrules>
+		<datavalidationrules>
+			<fieldvalidations>
+				<fieldvalidation>
+					<name>C1</name>
+					<fieldname>A.A2</fieldname>
+					<comment><![CDATA[C1
+"Within each occurrence of subsequence A2a, the qualifier in field 24B must be the same as the code word (Status Code) used with the appropriate qualifier in field 25D of its surrounding subsequence A2 Status. If the Data Source Scheme is present in field :25D:: then the conditional rule does not apply."]]></comment>
+					<formula><![CDATA[def DSSabsent = $value.F25D.GetStrings("*.Data_Source_Scheme").Length() == 0;
+def statusCodes = $value.F25D.GetStrings("*.Status_Code");
+if(DSSabsent) {
+    foreach(def a2a in $value.A2a) {
+        def F24B = a2a.F24B[0];
+        for(def i = 0; i < F24B.GetFieldCount(); ++i) {
+            def qualSec = F24B.GetSection(i);
+            if(qualSec.$size > 0) {
+                def qualifier = F24B.GetFieldName(i);
+                if(statusCodes.Length() == 0 || qualifier != statusCodes[0])
+                    return false;
+
+            }
+        }
+    }
+}
+return true;
+]]></formula>
+					<severity>error</severity>
+					<cascade>true</cascade>
+					<error-code>E37</error-code>
+					<actionmessage><![CDATA["Within each occurrence of subsequence A2a, the qualifier in field 24B must be the same as the code word (Status Code) used with the appropriate qualifier in field 25D of its surrounding subsequence A2 Status. If the Data Source Scheme is present in field :25D:: then the conditional rule does not apply."]]></actionmessage>
+				</fieldvalidation>
+				<fieldvalidation>
+					<name>C2</name>
+					<fieldname>A.23G.Function</fieldname>
+					<formula><![CDATA[If(In($value, "INST", "CAST") && B.$size > 0, 
+   SecExistsInAtLeastOne(B, "13A.CAON") && SecExistsInAtLeastOne(B, "22a.CAOP"), 
+   true)]]></formula>
+					<severity>error</severity>
+					<cascade>true</cascade>
+					<error-code>D29</error-code>
+					<actionmessage><![CDATA["If the message is an instruction status or a cancellation request status (:23G:INST or CAST), AND Sequence B is present,then sequence B should contain a CA option number and code (:13A::CAON and :22a::CAOP are mandatory)."]]></actionmessage>
+				</fieldvalidation>
+				<fieldvalidation>
+					<name>C3</name>
+					<fieldname>B.36B</fieldname>
+					<comment><![CDATA[C3:
+In sequence B, field :36B::STAQ or QREC cannot appear more than twice (maximum two occurrences). When repeated, one occurrence must have Quantity Type Code FAMT and the other occurrence must have Quantity Type Code AMOR (Error code(s): C71).]]></comment>
+					<formula><![CDATA[If(SecCount(B.F36B, "STAQ")  > 1,
+   SecCount(B.F36B, "STAQ") == 2 &&
+     FieldValueExistsInAtleastOne(B.F36B, "STAQ.Quantity_Type_Code", "FAMT") &&
+     FieldValueExistsInAtleastOne(B.F36B, "STAQ.Quantity_Type_Code", "AMOR"),
+   true)]]></formula>
+					<severity>error</severity>
+					<cascade>true</cascade>
+					<error-code>C71</error-code>
+					<actionmessage><![CDATA["In sequence B, field :36B::STAQ cannot appear more than twice (maximum two occurrences). When repeated, one occurrence must have Quantity Type Code FAMT and the other occurrence must have Quantity Type Code AMOR."]]></actionmessage>
+				</fieldvalidation>
+				<fieldvalidation>
+					<name>C4-1</name>
+					<fieldname>A.23G.Function</fieldname>
+					<comment><![CDATA[C4-1:
+If the message is a cancellation request status (:23G::CAST), then, in every occurrence of sequence A2 Status, a cancellation processing status must be reported (:25D::CPRC).]]></comment>
+					<formula><![CDATA[Implies($value == "CAST", SecExistsInAll(A.A2, "F25D.CPRC"))]]></formula>
+					<severity>error</severity>
+					<cascade>true</cascade>
+					<error-code>C65</error-code>
+					<actionmessage><![CDATA["If the message is a cancellation request status (:23G::CAST), then, in every occurrence of sequence A2 Status, a cancellation processing status must be reported (:25D::CPRC)."]]></actionmessage>
+				</fieldvalidation>
+				<fieldvalidation>
+					<name>C4-2</name>
+					<fieldname>A.23G.Function</fieldname>
+					<comment><![CDATA[C4-2:
+If the message is an instruction status (:23G::INST) then, in every occurrence of sequence A2 Status, an instruction processing status (:25D::IPRC...) must be reported.]]></comment>
+					<formula><![CDATA[Implies($value == "INST", SecExistsInAll(A.A2, "F25D.IPRC"))]]></formula>
+					<severity>error</severity>
+					<cascade>true</cascade>
+					<error-code>C65</error-code>
+					<actionmessage><![CDATA["If the message is an instruction status (:23G::INST) then, in every occurrence of sequence A2 Status, an instruction processing status (:25D::IPRC...) must be reported."]]></actionmessage>
+				</fieldvalidation>
+				<fieldvalidation>
+					<name>C4-3</name>
+					<fieldname>A.23G.Function</fieldname>
+					<comment><![CDATA[C4-3:
+If the message is corporate action event processing status (:23G::EVST), then, in every occurrence of sequence A2 Status, an event status (:25D::EPRC...) must be reported.]]></comment>
+					<formula><![CDATA[Implies($value == "EVST", SecExistsInAll(A.A2, "F25D.EPRC"))]]></formula>
+					<severity>error</severity>
+					<cascade>true</cascade>
+					<error-code>C65</error-code>
+					<actionmessage><![CDATA["If the message is corporate action event processing status (:23G::EVST), then, in every occurrence of sequence A2 Status, an event status (:25D::EPRC...) must be reported"]]></actionmessage>
+				</fieldvalidation>
+				<fieldvalidation>
+					<name>FB-35B-A</name>
+					<fieldname>B.35B.Identification_Of_Security</fieldname>
+					<formula><![CDATA[Equal(Left($value, 5), "ISIN ") && 
+  VerifyFormat(RightStr($value, "ISIN "), "12!c")]]></formula>
+					<severity>error</severity>
+					<cascade>true</cascade>
+					<error-code>T12</error-code>
+					<actionmessage><![CDATA[B.F35B.Identification_Of_Security + 
+  " is not a valid Security Identification. Required format is ISIN1!e12!c"]]></actionmessage>
+				</fieldvalidation>
+				<fieldvalidation>
+					<name>FB-35B-B</name>
+					<fieldname>B.35B</fieldname>
+					<formula><![CDATA[if(IsNotNull($value.Description_Of_Security) && IsNull($value.Identification_Of_Security)) {
+    def Actual_Description_Value = replace($value.Description_Of_Security, "\r\n", "\n");
+def lines = Split("\n", Actual_Description_Value);
+    if(EqualIgnoreCase(Left(lines[0], 4), "ISIN"))
+                return (Equal(Left(lines[0], 5), "ISIN "));
+}
+return true;]]></formula>
+					<severity>error</severity>
+					<cascade>true</cascade>
+					<error-code>T12</error-code>
+					<actionmessage><![CDATA["Not a valid Security Identification. Required format is ISIN1!e12!c";]]></actionmessage>
+				</fieldvalidation>
+				<fieldvalidation>
+					<name>FB-13A-A</name>
+					<fieldname>B.13A.CAON.Number_Id</fieldname>
+					<formula><![CDATA[$value == "UNS" || 
+  If(IsInt($value), Between(ToInt($value), 1, 999), false)]]></formula>
+					<severity>error</severity>
+					<cascade>true</cascade>
+					<error-code>K13</error-code>
+					<actionmessage><![CDATA["Number Id must be a number ranging from 001 to 999 or (Unsolicited) value UNS."]]></actionmessage>
+				</fieldvalidation>
+			</fieldvalidations>
+		</datavalidationrules>
+		<tlrvalidationrules>
+			<fieldvalidations>
+			</fieldvalidations>
+		</tlrvalidationrules>
+	</validationrules>
+</SwiftMessageFormat>
+

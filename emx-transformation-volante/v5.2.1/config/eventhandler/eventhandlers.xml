@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<eventhandlers>
+	<eventhandler name="RouterTrigger">
+		<properties>
+			<property name="output.format">
+				<description><![CDATA[Transformation name of the output format to which this internal message needs to be converted.]]></description>
+				<optional>true</optional>
+			</property>
+			<property name="output.protocol">
+				<description><![CDATA[Name of the protocol to be used to look up the output device and subsequently transfer the output data (e.g rmi, context, queue).]]></description>
+				<optional>true</optional>
+			</property>
+			<property name="output.device">
+				<description><![CDATA[Lookup name of the output device object (to which the output data needs to be sent).]]></description>
+				<optional>true</optional>
+			</property>
+		</properties>
+		<platforms>
+			<platform name="Java" binding="com.tplus.transform.runtime.RouterTrigger"/>
+			<platform name="CPP" binding="RouterTrigger"/>
+			<platform name="C#" binding="com.tplus.transform.runtime.RouterTrigger"/>
+		</platforms>
+	</eventhandler>
+
+	<eventhandler name="InternalRouterTrigger">
+		<properties>
+			<property name="internalmapping.format">
+				<description><![CDATA[This should correspond to the transformation name given to an internal message mapping, which defines the transformation from the source internal message to the target internal message.]]></description>				
+				<optional>false</optional>
+			</property>
+			<property name="output.format">
+				<description><![CDATA[This should correspond to the transformation name given to an output format of an internal message (business transaction).]]></description>
+				<optional>true</optional>
+			</property>
+			<property name="output.protocol">
+				<description><![CDATA[This specifies the name of the protocol bean to be used to look up the output device and subsequently transfer the output data.]]></description>
+				<optional>true</optional>
+			</property>
+			<property name="output.device">
+				<description><![CDATA[The lookup name of the output handler object (to which the output data needs to be sent).]]></description>
+				<optional>true</optional>
+			</property>
+		</properties>
+		<platforms>
+			<platform name="Java" binding="com.tplus.transform.runtime.InternalRouterTrigger"/>
+			<platform name="CPP" binding="InternalRouterTrigger"/>
+			<platform name="C#" binding="com.tplus.transform.runtime.InternalRouterTrigger"/>
+		</platforms>
+	</eventhandler>
+
+	<eventhandler name="PersistenceTrigger">
+		<platforms>
+			<platform name="Java" binding="com.tplus.transform.runtime.PersistenceTrigger"/>
+			<platform name="CPP" binding="PersistenceTrigger"/>
+			<platform name="C#" binding="com.tplus.transform.runtime.PersistenceTrigger"/>
+		</platforms>
+	</eventhandler>
+</eventhandlers>

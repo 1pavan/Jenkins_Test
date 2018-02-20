@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<formulae> 
+		<formula name="Abs">
+			<description>Returns the absolute value of a number, a number without its sign</description>
+			<signature>Abs(number)</signature>
+			<category>Math</category>
+	  		<Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+			<property name="class" value="com.tplus.transform.runtime.formula.MathFunctions" />
+			<property name="method" value="abs" />
+		</formula>
+
+		<formula name="Ceiling">
+			<description>Rounds a number away from zero, to the nearest multiple of significance</description>
+			<signature>Ceiling(number, significance)</signature>
+			<category>Math</category>
+	  		<Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+			<property name="class" value="com.tplus.transform.runtime.formula.MathFunctions" />
+			<property name="method" value="ceiling" />
+		</formula>
+
+		<formula name="Degrees">
+			<description>Converts radians to degrees</description>
+			<signature>Degrees(angle)</signature>
+			<category>Math</category>
+	  		<Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+			<property name="class" value="com.tplus.transform.runtime.formula.MathFunctions" />
+			<property name="method" value="degrees" />
+		</formula>
+
+		<formula name="Radians">
+			<description>Converts degrees to radians</description>
+			<signature>Radians(angle)</signature>
+			<category>Math</category>
+	  		<Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+			<property name="class" value="com.tplus.transform.runtime.formula.MathFunctions" />
+			<property name="method" value="radians" />
+		</formula>
+
+		<formula name="Even">
+			<description>Rounds a number up to the nearest even integer adjusted away from zero</description>
+			<signature>Even(number)</signature>
+			<category>Math</category>
+	  		<Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+			<property name="class" value="com.tplus.transform.runtime.formula.MathFunctions" />
+			<property name="method" value="even" />
+		</formula>
+
+		<formula name="Odd">
+			<description>Rounds a number up to the nearest odd integer adjusted away from zero</description>
+			<signature>Odd(number)</signature>
+			<category>Math</category>
+	  		<Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+			<property name="class" value="com.tplus.transform.runtime.formula.MathFunctions" />
+			<property name="method" value="odd" />
+		</formula>
+
+		<formula name="Exp">
+			<description>Returns e raised to the power of a given number</description>
+			<signature>Exp(number)</signature>
+			<category>Math</category>
+	  		<Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+			<property name="class" value="com.tplus.transform.runtime.formula.MathFunctions" />
+			<property name="method" value="exp" />
+		</formula>
+
+		<formula name="Log">
+			<description>Returns the logarithm of the positive real number to the base specified</description>
+			<signature>Log(number, base)</signature>
+			<category>Math</category>
+	  		<Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+			<property name="class" value="com.tplus.transform.runtime.formula.MathFunctions" />
+			<property name="method" value="log" />
+		</formula>
+
+		<formula name="Log10">
+			<description>Returns the base-10 logarithm of a positive real number</description>
+			<signature>Log10(number)</signature>
+			<category>Math</category>
+	  		<Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+			<property name="class" value="com.tplus.transform.runtime.formula.MathFunctions" />
+			<property name="method" value="log10" />
+		</formula>
+		<formula name="Ln">
+			<description>Returns the natural logarithm of a positive real number</description>
+			<signature>Ln(number)</signature>
+			<category>Math</category>
+	  		<Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+			<property name="class" value="com.tplus.transform.runtime.formula.MathFunctions" />
+			<property name="method" value="ln" />
+		</formula>
+
+		<formula name="Fact">
+			<description>Returns the factorial of a number</description>
+			<signature>Fact(number)</signature>
+			<category>Math</category>
+	  		<Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+			<property name="class" value="com.tplus.transform.runtime.formula.MathFunctions" />
+			<property name="method" value="fact" />
+		</formula>
+
+		<formula name="Int">
+			<description>Rounds a number to the nearest integer</description>
+			<signature>Int(number)</signature>
+			<category>Math</category>
+	  		<Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+			<property name="class" value="com.tplus.transform.runtime.formula.MathFunctions" />
+			<property name="method" value="roundToInt" />
+		</formula>
+
+		<formula name="Pi">
+			<description>Returns the value of PI accurate to 15 digits</description>
+			<signature>Pi()</signature>
+			<category>Math</category>
+	  		<Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+			<property name="class" value="com.tplus.transform.runtime.formula.MathFunctions" />
+			<property name="method" value="pi" />
+		</formula>
+
+		<formula name="Power">
+			<description>Returns the result of a number raised to a power</description>
+			<signature>Power(number,power)</signature>
+			<category>Math</category>
+	  		<Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+			<property name="class" value="com.tplus.transform.runtime.formula.MathFunctions" />
+			<property name="method" value="power" />
+		</formula>
+
+		<formula name="Rand">
+			<description>Returns an evenly distributed random number greater than or equal to zero and less than 1</description>
+			<signature>Rand()</signature>
+			<category>Math</category>
+	  		<Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+			<property name="class" value="com.tplus.transform.runtime.formula.MathFunctions" />
+			<property name="method" value="rand" />
+		</formula>
+
+		<formula name="Round">
+			<description>Rounds a number to a specified number of digits</description>
+			<signature>Round(number,num_digits)</signature>
+			<category>Math</category>
+	  		<Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+			<property name="class" value="com.tplus.transform.runtime.formula.MathFunctions" />
+			<property name="method" value="round" />
+		</formula>
+
+		<formula name="Sign">
+			<description>Returns the sign of a number: 1 if positive, zero if the number is zero, or -1 if the number is negative</description>
+			<signature>Sign(number)</signature>
+			<category>Math</category>
+	  		<Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+			<property name="class" value="com.tplus.transform.runtime.formula.MathFunctions" />
+			<property name="method" value="sign" />
+		</formula>
+
+		<formula name="Sqrt">
+			<description>Returns the square root of a number</description>
+			<signature>Sqrt(number)</signature>
+			<category>Math</category>
+	  		<Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+			<property name="class" value="com.tplus.transform.runtime.formula.MathFunctions" />
+			<property name="method" value="sqrt" />
+		</formula>
+
+		<formula name="Trunc">
+			<description>Truncates a number to the number of digits specified by the num_digits</description>
+			<signature>Trunc(number, num_digits)</signature>
+			<category>Math</category>
+	  		<Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+			<property name="class" value="com.tplus.transform.runtime.formula.MathFunctions" />
+			<property name="method" value="trunc" />
+		</formula>
+		
+		<formula name="Max">
+			<description>Returns maximum of two input numbers.</description>
+			<signature>Max(number1, number2)</signature>
+			<category>Math</category>
+	  		<Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+			<property name="class" value="com.tplus.transform.runtime.formula.MathFunctions" />
+			<property name="method" value="max" />
+		</formula>
+		
+		<formula name="Min">
+			<description>Returns minimum of two input numbers.</description>
+			<signature>Min(number1, number2)</signature>
+			<category>Math</category>
+	  		<Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+			<property name="class" value="com.tplus.transform.runtime.formula.MathFunctions" />
+			<property name="method" value="min" />
+		</formula>
+		
+		<formula name="Negate">
+			<description>Negation of input number. Supports BigInteger, BigDecimal and ScaledDecimals only.</description>
+			<signature>Negate(number)</signature>
+			<category>Math</category>
+	  		<Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+			<property name="class" value="com.tplus.transform.runtime.formula.MathFunctions" />
+			<property name="method" value="negate" />
+		</formula>
+		
+		<formula name="ApproxEquals">
+			<description>Returns true if number1 and number2 are approximately equal(diffrence less than equal to 0.0001).</description>
+			<signature>ApproxEquals(number1, number2)</signature>
+			<category>Math</category>
+	  		<Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+			<property name="class" value="com.tplus.transform.runtime.formula.MathFunctions" />
+			<property name="method" value="approxEquals" />
+		</formula>
+
+</formulae> 

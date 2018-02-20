@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<cartridge xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="5.2.1" name="Messages" type="Cartridge">
+	<version>1.0</version>
+	<private>
+		<summary>
+			<function name="IsSwiftSequenceEmpty"/>
+			<function name="IsSwiftSequenceEmpty"/>
+			<function name="IsSwiftSequenceEmpty"/>
+			<function name="IsSwiftSequenceEmpty"/>
+			<function name="IsSwiftSequenceEmpty"/>
+			<function name="IsSwiftSequenceEmpty"/>
+			<function name="IsSwiftSequenceEmpty"/>
+			<function name="IsSwiftSequenceEmpty"/>
+			<function name="IsSwiftSequenceEmpty"/>
+			<function name="IsSwiftSequenceEmpty"/>
+			<function name="IsSwiftSequenceEmpty"/>
+			<function name="IsSwiftSequenceEmpty"/>
+			<function name="IsSwiftSequenceEmpty"/>
+			<function name="IsSwiftSequenceEmpty"/>
+			<function name="IsSwiftSequenceEmpty"/>
+			<function name="IsSwiftSequenceEmpty"/>
+		</summary>
+	</private>
+	<references type="References">
+		<reference>
+			<type>Cartridge</type>
+			<relative-path>MT3-4_2015.car</relative-path>
+			<absolute-path>E:\Mounika\PROJECTS\FNI\August\22082017\FNIV1.3-RT1\src\Transformation_Flows\Messages\MT3-4_2015.car</absolute-path>
+		</reference>
+		<reference>
+			<type>Cartridge</type>
+			<relative-path>MT1-2_2015.car</relative-path>
+			<absolute-path>E:\Mounika\PROJECTS\FNI\August\22082017\FNIV1.3-RT1\src\Transformation_Flows\Messages\MT1-2_2015.car</absolute-path>
+		</reference>
+		<reference>
+			<type>Cartridge</type>
+			<relative-path>MT6-7_2015.car</relative-path>
+			<absolute-path>E:\Mounika\PROJECTS\FNI\August\22082017\FNIV1.3-RT1\src\Transformation_Flows\Messages\MT6-7_2015.car</absolute-path>
+		</reference>
+		<reference>
+			<type>Cartridge</type>
+			<relative-path>MT8-9_2015.car</relative-path>
+			<absolute-path>E:\Mounika\PROJECTS\FNI\August\22082017\FNIV1.3-RT1\src\Transformation_Flows\Messages\MT8-9_2015.car</absolute-path>
+		</reference>
+		<reference>
+			<type>Cartridge</type>
+			<relative-path>MT5_2015.car</relative-path>
+			<absolute-path>E:\Mounika\PROJECTS\FNI\August\22082017\FNIV1.3-RT1\src\Transformation_Flows\Messages\MT5_2015.car</absolute-path>
+		</reference>
+	</references>
+	<elementproperties>
+		<propertymap>
+			<property name="DOCUMENT_PROPERTIES">
+				<value>
+					<propertymap>
+						<property name="Creation Time" value="Tue Nov 08 00:34:04 EST 2011"/>
+						<property name="Author" value="adcxy95"/>
+						<property name="Title" value="Messages"/>
+						<property name="Client Id" value="mounikaHYD@volantetech.com"/>
+						<property name="Last Author" value="sys"/>
+						<property name="Last Save Time" value="Thu Aug 24 11:55:56 IST 2017"/>
+						<property name="Designer Build" value="1631"/>
+						<property name="Revision Number" value="26"/>
+					</propertymap>
+				</value>
+			</property>
+			<property name="CARTRIDGE_INFO">
+				<value>
+					<propertymap type="com.tplus.transform.design.CartridgeInfo">
+						<property name="GeneratedFiles">
+							<value>
+								<propertymap>
+								</propertymap>
+							</value>
+						</property>
+						<property name="cartridgefilename" value="E:\Mounika\PROJECTS\FNI\August\22082017\FNIV1.3-RT1\src\Transformation_Flows\Messages\Messages.car"/>
+					</propertymap>
+				</value>
+			</property>
+			<property name="codegen.java.options">
+				<value>
+					<propertymap type="com.tplus.transform.design.codegen.java.JavaCodeGeneratorOptions">
+						<property name="isJBoss" value="false"/>
+						<property name="resource-references">
+							<value>
+								<propertylist>
+								</propertylist>
+							</value>
+						</property>
+						<property name="isWAR" value="false"/>
+						<property name="isOSGI" value="true"/>
+						<property name="isGenerateALSB" value="false"/>
+						<property name="isEJB" value="false"/>
+						<property name="osgi-options">
+							<value>
+								<propertymap>
+									<property name="include-dependencies" value="false"/>
+								</propertymap>
+							</value>
+						</property>
+						<property name="isOrion" value="false"/>
+						<property name="isWebSphere" value="false"/>
+						<property name="isVolante" value="true"/>
+						<property name="isRemote" value="false"/>
+						<property name="isLocal" value="false"/>
+						<property name="isWebLogic" value="false"/>
+						<property name="isGeronimo" value="false"/>
+						<property name="isGenerateJNDILinks" value="false"/>
+						<property name="isWLEVS" value="false"/>
+						<property name="ejb-jndi-prefix" value=""/>
+						<property name="isGenerateEAR" value="false"/>
+					</propertymap>
+				</value>
+			</property>
+			<property name="codegen.java.properties">
+				<value>
+					<propertymap type="com.tplus.transform.design.PropertiesDef">
+						<property name="Java Package Name" value="com.transform.cartridge.%c"/>
+						<property name="Max Class Length" value="150"/>
+					</propertymap>
+				</value>
+			</property>
+			<property name="codegen.java.bindings">
+				<value>
+					<propertymap type="com.tplus.transform.design.codegen.DefaultLanguageMapping">
+					</propertymap>
+				</value>
+			</property>
+			<property name="codegen.java.general">
+				<value>
+					<propertymap>
+						<property name="additionalClasspath" value=""/>
+						<property name="debugInfo" value="false"/>
+					</propertymap>
+				</value>
+			</property>
+		</propertymap>
+	</elementproperties>
+	<workspace>
+		<selected-element root="E:\Mounika\PROJECTS\FNI\August\22082017\FNIV1.3-RT1\src\Transformation_Flows\Messages\Messages.car">Messages</selected-element>
+	</workspace>
+</cartridge>
+

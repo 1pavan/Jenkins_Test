@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<SwiftMessageFormat name="MTGeneric">
+	<standard>SWIFT</standard>
+	<standard-name>MTGeneric</standard-name>
+	<standard-version>SRG 2016</standard-version>
+	<standard-release-qualifier>20160308</standard-release-qualifier>
+	<DescriptiveName><![CDATA[Generic Message]]></DescriptiveName>
+	<Category>Common</Category>
+	<SwiftFields>
+		<xpath-namespaces>
+			<namespace value="http://www.w3.org/2005/xpath-functions" prefix="fn"/>
+			<namespace value="http://www.w3.org/2001/XMLSchema" prefix="xs"/>
+			<namespace value="java:com.tplus.transform.runtime.swift.SwiftXPathFunctions" prefix="swift"/>
+		</xpath-namespaces>
+		<customizable>true</customizable>
+		<modifiable>false</modifiable>
+		<SwiftMessageType>User</SwiftMessageType>
+		<HeaderAndTrailerType>SWIFT_INPUT_OUTPUT_HEADER</HeaderAndTrailerType>
+		<Header>
+		</Header>
+		<Data>
+			<Fields>
+				<CopyOfFields Name="AllFields">
+					<Description><![CDATA[AllFields]]></Description>
+					<Mandatory>false</Mandatory>
+				</CopyOfFields>
+			</Fields>
+		</Data>
+		<Trailer>
+		</Trailer>
+	</SwiftFields>
+	<validationrules name="Default">
+		<hdrvalidationrules>
+			<fieldvalidations>
+	<fieldvalidation>
+		<name>U03</name>
+		<fieldname>User Header</fieldname>
+		<formula><![CDATA[Iff(IsNotNull(User_Header.Service_Type_Identifier), 
+    IsNotNull(User_Header.Unique_End_To_End_Transaction_Reference))]]></formula>
+		<severity>error</severity>
+		<cascade>true</cascade>
+		<error-code>U03</error-code>
+		<actionmessage><![CDATA["When populating an end-to-end reference, both fields 111 and 121 must be populated: a message that contains only one of these two fields will not be accepted by FIN."]]></actionmessage>
+	</fieldvalidation>
+			</fieldvalidations>
+		</hdrvalidationrules>
+		<datavalidationrules>
+			<fieldvalidations>
+			</fieldvalidations>
+		</datavalidationrules>
+		<tlrvalidationrules>
+			<fieldvalidations>
+			</fieldvalidations>
+		</tlrvalidationrules>
+	</validationrules>
+</SwiftMessageFormat>
+

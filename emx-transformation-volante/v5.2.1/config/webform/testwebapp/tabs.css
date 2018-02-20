@@ -1,0 +1,180 @@
+#tabs10
+{
+    PADDING-RIGHT: 0px;
+    PADDING-LEFT: 0px;
+    FLOAT: left;
+    PADDING-BOTTOM: 0px;
+    MARGIN: 0px;
+    FONT: bold 9px/1.5em Verdana;
+    WIDTH: 100%;
+    PADDING-TOP: 0px;
+    BORDER-BOTTOM: #2763a5 1px solid
+}
+#tabs10 UL
+{
+    PADDING-RIGHT: 10px;
+    PADDING-LEFT: 0px;
+    PADDING-BOTTOM: 0px;
+    MARGIN: 0px;
+    PADDING-TOP: 10px;
+    LIST-STYLE-TYPE: none
+}
+#tabs10 LI
+{
+    PADDING-RIGHT: 0px;
+    DISPLAY: inline;
+    PADDING-LEFT: 0px;
+    PADDING-BOTTOM: 0px;
+    MARGIN: 0px;
+    PADDING-TOP: 0px
+}
+#tabs10 DIV
+{
+    PADDING-RIGHT: 0px;
+    PADDING-LEFT: 4px;
+    BACKGROUND: url(images/tableft10.gif) no-repeat left top;
+    FLOAT: left;
+    PADDING-BOTTOM: 0px;
+    MARGIN: 0px;
+    PADDING-TOP: 0px;
+    TEXT-DECORATION: none
+}
+#tabs10 DIV SPAN
+{
+    PADDING-RIGHT: 15px;
+    DISPLAY: block;
+    PADDING-LEFT: 6px;
+    BACKGROUND: url(images/tabright10.gif) no-repeat right top;
+    FLOAT: left;
+    PADDING-BOTTOM: 4px;
+    COLOR: #fff;
+    PADDING-TOP: 5px
+}
+
+#tabs10 A
+{
+    PADDING-RIGHT: 0px;
+    PADDING-LEFT: 4px;
+    BACKGROUND: url(images/tableft10.gif) no-repeat left top;
+    FLOAT: left;
+    PADDING-BOTTOM: 0px;
+    MARGIN: 0px;
+    PADDING-TOP: 0px;
+    TEXT-DECORATION: none
+}
+#tabs10 A SPAN
+{
+    PADDING-RIGHT: 15px;
+    DISPLAY: block;
+    PADDING-LEFT: 6px;
+    BACKGROUND: url(images/tabright10.gif) no-repeat right top;
+    FLOAT: left;
+    PADDING-BOTTOM: 4px;
+    COLOR: #fff;
+    PADDING-TOP: 5px
+}
+#tabs10 A SPAN
+{
+    FLOAT: none
+}
+#tabs10 A:hover SPAN
+{
+    COLOR: #fff
+}
+#tabs10 A:hover
+{
+    BACKGROUND-POSITION: 0% -42px
+}
+#tabs10 A:hover SPAN
+{
+    BACKGROUND-POSITION: 100% -42px
+}
+#tabs11
+{
+    FLOAT: left;
+    BACKGROUND-IMAGE: none;
+    FONT: bold 10px/1.5em Verdana;
+    WIDTH: 100%;
+    BORDER-BOTTOM: #c2bdae 1px solid;
+    BACKGROUND-REPEAT: repeat
+}
+#tabs11 UL
+{
+    PADDING-RIGHT: 10px;
+    PADDING-LEFT: 0px;
+    PADDING-BOTTOM: 0px;
+    MARGIN: 0px;
+    PADDING-TOP: 2px;
+    LIST-STYLE-TYPE: none
+}
+#tabs11 LI
+{
+    PADDING-RIGHT: 0px;
+    DISPLAY: inline;
+    PADDING-LEFT: 0px;
+    PADDING-BOTTOM: 0px;
+    MARGIN: 0px;
+    PADDING-TOP: 0px
+}
+
+#tabs11 DIV
+{
+    PADDING-RIGHT: 0px;
+    PADDING-LEFT: 4px;
+    BACKGROUND: url(images/tableft11.gif) no-repeat left top;
+    FLOAT: left;
+    PADDING-BOTTOM: 0px;
+    MARGIN: 0px;
+    PADDING-TOP: 0px;
+    TEXT-DECORATION: none
+}
+#tabs11 DIV SPAN
+{
+    PADDING-RIGHT: 15px;
+    DISPLAY: block;
+    PADDING-LEFT: 6px;
+    BACKGROUND: url(images/tabright11.gif) no-repeat right top;
+    FLOAT: left;
+    PADDING-BOTTOM: 1px;
+    COLOR: #000000;
+    PADDING-TOP: 2px
+}
+
+#tabs11 A
+{
+    PADDING-RIGHT: 0px;
+    PADDING-LEFT: 4px;
+    BACKGROUND: url(images/tableft11.gif) no-repeat left top;
+    FLOAT: left;
+    PADDING-BOTTOM: 0px;
+    MARGIN: 0px;
+    PADDING-TOP: 0px;
+    TEXT-DECORATION: none
+}
+#tabs11 A SPAN
+{
+    PADDING-RIGHT: 15px;
+    DISPLAY: block;
+    PADDING-LEFT: 6px;
+    BACKGROUND: url(images/tabright11.gif) no-repeat right top;
+    FLOAT: left;
+    PADDING-BOTTOM: 1px;
+    COLOR: #9f9584;
+    PADDING-TOP: 2px
+}
+#tabs11 A SPAN
+{
+    FLOAT: none
+}
+#tabs11 A:hover SPAN
+{
+    COLOR: #fff
+}
+#tabs11 A:hover
+{
+    BACKGROUND-POSITION: 0% -42px
+}
+#tabs11 A:hover SPAN
+{
+    BACKGROUND-POSITION: 100% -42px
+}

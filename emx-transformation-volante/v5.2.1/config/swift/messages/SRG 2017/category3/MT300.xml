@@ -1,0 +1,4634 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<SwiftMessageFormat xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="MT300">
+	<standard>SWIFT</standard>
+	<standard-name>MT300</standard-name>
+	<standard-version>SRG 2017</standard-version>
+	<standard-release-qualifier>20170227</standard-release-qualifier>
+	<DescriptiveName><![CDATA[Foreign Exchange Confirmation]]></DescriptiveName>
+	<Category>Treasury Markets Foreign Exchange,Money Markets &amp;Derivatives</Category>
+	<Description>The MT 300 is used to: 
+a) confirm the details of a new contract between the parties
+b) confirm an exercised foreign currency option 
+c) confirm the details of an amendment to a previously sent confirmation 
+d) cancel a previously sent confirmation. 
+e) report to a trade repository
+
+This message is exchanged by or on behalf of the institutions or corporate customers, party A and party B, which have agreed to a foreign exchange contract. 
+ 
+This message may also be sent by a money broker to the two parties (party A and party B) for which the broker arranged the deal. 
+ 
+Where there are two money brokers involved in arranging a deal between party A and party B, this message is also exchanged between these money brokers. 
+ 
+This message is also used when one of the trading parties is a fund manager as the fund manager has to specify the fund for which he is dealing. 
+ 
+Party A and party B are the legal entities which have agreed to the transaction. 
+
+Party A is either: 
+a) the Sender, or 
+b) the institution/corporate on behalf of which the message is sent, or 
+c) one of the institutions for which the broker arranged the deal and to whom it is sending the confirmation, or 
+d) when a money broker confirms to another money broker, the party for which the sending broker arranged the deal. 
+
+Party B is either: 
+a) the Receiver, or 
+b) the institution/corporate on behalf of which the message is received, or 
+c) the other institution for which the broker arranged the deal, ie, party A's counterparty, or 
+d) when a money broker confirms to another money broker, party A's counterparty. 
+
+This message allows: 
+a) the specification of the legal counterparties 
+b) the inclusion of a beneficiary 
+c) a split settlement 
+d) the inclusion of the underlying legal agreement.</Description>
+	<SwiftFields>
+		<customizable>true</customizable>
+		<modifiable>true</modifiable>
+		<SwiftMessageType>User</SwiftMessageType>
+		<max-length>10000</max-length>
+		<HeaderAndTrailerType>SWIFT_INPUT_OUTPUT_HEADER</HeaderAndTrailerType>
+		<Header>
+		</Header>
+		<Data>
+			<Fields>
+				<SwiftSequence Name="A">
+					<Name>A</Name>
+					<Description><![CDATA[General Information]]></Description>
+					<Mandatory>true</Mandatory>
+					<Repeating>false</Repeating>
+					<NewSequeceStart>true</NewSequeceStart>
+					<StartBlockField>15A</StartBlockField>
+					<Fields>
+						<SwiftField Name="20">
+							<SwiftFieldDef Name="20">
+								<Generic>false</Generic>
+								<Description><![CDATA[Reference]]></Description>
+								<Option Name="">
+									<Format><![CDATA[16x]]></Format>
+									<Specification><![CDATA[(Sender's Reference)]]></Specification>
+									<Description><![CDATA[Sender's Reference]]></Description>
+								</Option>
+							</SwiftFieldDef>
+							<Repeating>false</Repeating>
+							<Presence>M</Presence>
+							<Options> </Options>
+							<Validations>
+								<SubField Name="Sender's_Reference">
+									<Validation>
+										<Options> </Options>
+										<ErrorCode>T26</ErrorCode>
+										<Comment><![CDATA[This field must not start or end with a slash '/' and must not contain two consecutive slashes '//'(Error code(s): T26).]]></Comment>
+										<ValidationPattern xsi:type="T26" Type="T26">
+											<Type>T26</Type>
+										</ValidationPattern>
+									</Validation>
+								</SubField>
+							</Validations>
+						</SwiftField>
+						<SwiftField Name="21">
+							<SwiftFieldDef Name="21">
+								<Generic>false</Generic>
+								<Option Name="">
+									<Format><![CDATA[16x]]></Format>
+									<Specification><![CDATA[(Related Reference)]]></Specification>
+									<Description><![CDATA[Related Reference]]></Description>
+								</Option>
+							</SwiftFieldDef>
+							<Repeating>false</Repeating>
+							<Presence>O</Presence>
+							<Options> </Options>
+							<Validations>
+								<SubField Name="Related_Reference">
+									<Validation>
+										<Options> </Options>
+										<ErrorCode>T26</ErrorCode>
+										<Comment><![CDATA[This field must not start or end with a slash '/' and must not contain two consecutive slashes '//'(Error code(s): T26).]]></Comment>
+										<ValidationPattern xsi:type="T26" Type="T26">
+											<Type>T26</Type>
+										</ValidationPattern>
+									</Validation>
+								</SubField>
+							</Validations>
+						</SwiftField>
+						<SwiftField Name="22A">
+							<SwiftFieldDef Name="22">
+								<Generic>false</Generic>
+								<Description><![CDATA[Indicator]]></Description>
+								<Option Name="A">
+									<Format><![CDATA[4!c]]></Format>
+									<Specification><![CDATA[(Type)]]></Specification>
+									<Description><![CDATA[Type of Operation]]></Description>
+								</Option>
+							</SwiftFieldDef>
+							<Repeating>false</Repeating>
+							<Presence>M</Presence>
+							<Options>A</Options>
+							<Validations>
+								<SubField Name="Type">
+									<Validation>
+										<Options>A</Options>
+										<ErrorCode>T36</ErrorCode>
+										<Comment><![CDATA[One of the following codes must be used (Error code(s): T36):]]></Comment>
+										<ValidationPattern xsi:type="CODE" Type="CODE">
+											<Type>CODE</Type>
+											<Codes>
+												<Code Name="AMND">
+													<DetailedName>Amendment</DetailedName>
+													<Description>Replaces a previously sent confirmation with the amended one contained in this message. 
+ Used to add settlement agents to an MT 300 previously sent
+ -or-
+ to correct error(s) in an MT 300 previously sent.
+</Description>
+												</Code>
+												<Code Name="CANC">
+													<DetailedName>Cancellation</DetailedName>
+													<Description>Cancels a previously sent confirmation.
+Used to cancel an MT 300 previously sent
+-or-
+to cancel an MT 300 which contains erroneous information.
+</Description>
+												</Code>
+												<Code Name="DUPL">
+													<DetailedName>Duplicate</DetailedName>
+													<Description>Duplicates a previously sent confirmation.
+Used to inform the Receiver that a confirmation was already sent by telex, fax or SWIFT</Description>
+												</Code>
+												<Code Name="EXOP">
+													<DetailedName>Option Exercise</DetailedName>
+													<Description>Confirms the mutually agreed exercise of an option.</Description>
+												</Code>
+												<Code Name="NEWT">
+													<DetailedName>New Confirmation</DetailedName>
+													<Description>Used to send a confirmation for the first time
+-or-
+to send a corrected MT 300 when the erroneous one was cancelled using an MT 300 with function
+CANC
+</Description>
+												</Code>
+											</Codes>
+										</ValidationPattern>
+									</Validation>
+								</SubField>
+							</Validations>
+						</SwiftField>
+						<SwiftField Name="94A">
+							<SwiftFieldDef Name="94">
+								<Generic>false</Generic>
+								<Description><![CDATA[Place]]></Description>
+								<Option Name="A">
+									<Format><![CDATA[4!c]]></Format>
+									<Specification><![CDATA[(Scope)]]></Specification>
+									<Description><![CDATA[Scope of Operation]]></Description>
+								</Option>
+							</SwiftFieldDef>
+							<Repeating>false</Repeating>
+							<Presence>O</Presence>
+							<Options>A</Options>
+							<Validations>
+								<SubField Name="Scope">
+									<Validation>
+										<Options>A</Options>
+										<ErrorCode>T36</ErrorCode>
+										<Comment><![CDATA[One of the following codes must be used (Error code(s): T36):]]></Comment>
+										<ValidationPattern xsi:type="CODE" Type="CODE">
+											<Type>CODE</Type>
+											<Codes>
+												<Code Name="AGNT">
+													<Description>Sender/Receiver is sending/receiving the message on behalf of a third party.</Description>
+												</Code>
+												<Code Name="BILA">
+													<Description>Bilateral confirmation, ie, the Sender and the Receiver are the principals.</Description>
+												</Code>
+												<Code Name="BROK">
+													<Description>The confirmation is sent by a money broker.</Description>
+												</Code>
+											</Codes>
+										</ValidationPattern>
+									</Validation>
+								</SubField>
+							</Validations>
+						</SwiftField>
+						<SwiftField Name="22C">
+							<SwiftFieldDef Name="22">
+								<Generic>false</Generic>
+								<Description><![CDATA[Indicator]]></Description>
+								<Option Name="C">
+									<Format><![CDATA[4!a2!c4!n4!a2!c]]></Format>
+									<Specification><![CDATA[(Bank Code 1) (Location Code 1)(Reference Code) (Bank Code 2)(Location Code 2)]]></Specification>
+									<Description><![CDATA[Common Reference]]></Description>
+								</Option>
+							</SwiftFieldDef>
+							<Repeating>false</Repeating>
+							<Presence>M</Presence>
+							<Options>C</Options>
+						</SwiftField>
+						<SwiftField Name="17T">
+							<SwiftFieldDef Name="17">
+								<Generic>false</Generic>
+								<Description><![CDATA[Flag]]></Description>
+								<Option Name="T">
+									<Format><![CDATA[1!a]]></Format>
+									<Specification><![CDATA[(Indicator)]]></Specification>
+									<Description><![CDATA[Block Trade Indicator]]></Description>
+								</Option>
+							</SwiftFieldDef>
+							<Repeating>false</Repeating>
+							<Presence>O</Presence>
+							<Options>T</Options>
+							<Validations>
+								<SubField Name="Indicator">
+									<Validation>
+										<Options>T</Options>
+										<ErrorCode>T36</ErrorCode>
+										<Comment><![CDATA[One of the following codes must be used (Error code(s): T36):]]></Comment>
+										<ValidationPattern xsi:type="CODE" Type="CODE">
+											<Type>CODE</Type>
+											<Codes>
+												<Code Name="N">
+													<Description>If a normal trade, no MT 303 will be sent.</Description>
+												</Code>
+												<Code Name="Y">
+													<Description>If a block trade, an MT 303 will be sent by the fund manager.</Description>
+												</Code>
+											</Codes>
+										</ValidationPattern>
+									</Validation>
+								</SubField>
+							</Validations>
+						</SwiftField>
+						<SwiftField Name="17U">
+							<SwiftFieldDef Name="17">
+								<Generic>false</Generic>
+								<Description><![CDATA[Flag]]></Description>
+								<Option Name="U">
+									<Format><![CDATA[1!a]]></Format>
+									<Specification><![CDATA[(Indicator)]]></Specification>
+									<Description><![CDATA[Split Settlement Indicator]]></Description>
+								</Option>
+							</SwiftFieldDef>
+							<Repeating>false</Repeating>
+							<Presence>O</Presence>
+							<Options>U</Options>
+							<Validations>
+								<SubField Name="Indicator">
+									<Validation>
+										<Options>U</Options>
+										<ErrorCode>T36</ErrorCode>
+										<Comment><![CDATA[One of the following codes must be used (Error code(s): T36):]]></Comment>
+										<ValidationPattern xsi:type="CODE" Type="CODE">
+											<Type>CODE</Type>
+											<Codes>
+												<Code Name="N">
+													<Description>The settlement of the amount as a whole.</Description>
+												</Code>
+												<Code Name="Y">
+													<Description>Split settlements.</Description>
+												</Code>
+											</Codes>
+										</ValidationPattern>
+									</Validation>
+								</SubField>
+							</Validations>
+						</SwiftField>
+						<SwiftField Name="17I">
+							<SwiftFieldDef Name="17">
+								<Generic>false</Generic>
+								<Description><![CDATA[Flag]]></Description>
+								<Option Name="I">
+									<Format><![CDATA[1!a]]></Format>
+									<Specification><![CDATA[(Indicator)]]></Specification>
+									<Description><![CDATA[Payment versus Payment Settlement Indicator]]></Description>
+								</Option>
+							</SwiftFieldDef>
+							<Repeating>false</Repeating>
+							<Presence>O</Presence>
+							<Options>I</Options>
+							<Validations>
+								<SubField Name="Indicator">
+									<Validation>
+										<Options>I</Options>
+										<ErrorCode>T36</ErrorCode>
+										<Comment><![CDATA[Indicator must contain one of the following codes (Error code(s): T36):]]></Comment>
+										<ValidationPattern xsi:type="CODE" Type="CODE">
+											<Type>CODE</Type>
+											<Codes>
+												<Code Name="N">
+													<Description>The FX transaction is not PVP</Description>
+												</Code>
+												<Code Name="Y">
+													<Description>The FX transaction is PVP</Description>
+												</Code>
+											</Codes>
+										</ValidationPattern>
+									</Validation>
+								</SubField>
+							</Validations>
+						</SwiftField>
+						<SwiftField Name="82a">
+							<SwiftFieldDef Name="82">
+								<Generic>false</Generic>
+								<Option Name="A">
+									<Format><![CDATA[/1!a([/34x])(CRLF4!a2!a2!c[3!c]) | [/34xCRLF](4!a2!a2!c[3!c])]]></Format>
+									<Specification><![CDATA[(CreditDebit)(Party Identifier)(Identifier Code) | (Party Identifier)(Identifier Code)]]></Specification>
+									<Description><![CDATA[Party A]]></Description>
+								</Option>
+								<Option Name="D">
+									<Format><![CDATA[/1!a([/34x])(CRLF4*35x) | ([/34xCRLF])(4*35x)]]></Format>
+									<Specification><![CDATA[(CreditDebit)(Party Identifier)(Name & Address)|(Party Identifier)(Name & Address)]]></Specification>
+									<Description><![CDATA[Party A]]></Description>
+								</Option>
+								<Option Name="J">
+									<Format><![CDATA[5*40x]]></Format>
+									<Specification><![CDATA[(Party Identification)]]></Specification>
+									<Description><![CDATA[Party A]]></Description>
+								</Option>
+							</SwiftFieldDef>
+							<Repeating>false</Repeating>
+							<Presence>M</Presence>
+							<Options>A, D, J</Options>
+							<Validations>
+								<SubField Name="Identifier_Code">
+									<Validation>
+										<Options>A</Options>
+										<ErrorCode>T27, T28, T29, T45</ErrorCode>
+										<Comment><![CDATA[Identifier Code must be a registered BIC or BEI (Error code(s): T27,T28,T29,T45)]]></Comment>
+										<ValidationPattern xsi:type="BIC" Type="BIC">
+											<Type>BIC</Type>
+										</ValidationPattern>
+									</Validation>
+								</SubField>
+								<SubField Name="Party_Identification">
+									<Validation>
+										<Options>J</Options>
+										<ErrorCode>T78</ErrorCode>
+										<Comment><![CDATA[In option J, Party Identification must be specified as a list of pairs (Code)(Value) and the following codes and format must be used (Error code(s): T78).]]></Comment>
+										<ValidationPattern xsi:type="Party_Identification" Type="Party Identification">
+											<Type>Party Identification</Type>
+											<Codes>
+												<Code Name="ABIC">
+													<NewGroup>true</NewGroup>
+													<Format>4!a2!a2!c3!c | 4!a2!a2!c | UKWN</Format>
+													<Mandatory>true</Mandatory>
+													<Description>followed by the BIC/BEI or UKWN if BIC/BEI not known</Description>
+												</Code>
+												<Code Name="ACCT">
+													<Format>34x</Format>
+													<Description>followed by the account number</Description>
+												</Code>
+												<Code Name="NAME">
+													<Format>34x</Format>
+													<Mandatory>true</Mandatory>
+													<Description>followed by the name</Description>
+												</Code>
+												<Code Name="ADD1">
+													<Format>35x</Format>
+													<Description>followed by the first line of the address</Description>
+												</Code>
+												<Code Name="ADD2">
+													<Format>35x</Format>
+													<Description>followed by the second line of the address</Description>
+												</Code>
+												<Code Name="CITY">
+													<Format>35x</Format>
+													<Description>followed by the city (and state, country)</Description>
+												</Code>
+												<Code Name="USFW">
+													<Format>9!n</Format>
+													<Description>followed by FedWire Routing Number</Description>
+												</Code>
+												<Code Name="USCH">
+													<Format>6!n</Format>
+													<Description>followed by CHIPS UID</Description>
+												</Code>
+												<Code Name="GBSC">
+													<Format>6!n</Format>
+													<Description>followed by UK domestic sort code</Description>
+												</Code>
+												<Code Name="LEIC">
+													<Format>18!c2!n</Format>
+													<Description>Legal Entity Identifier</Description>
+												</Code>
+												<Code Name="CLRC">
+													<Format>35x</Format>
+													<Description>followed by a clearing code</Description>
+												</Code>
+											</Codes>
+										</ValidationPattern>
+									</Validation>
+								</SubField>
+								<SubField Name="CreditDebit">
+									<Validation>
+										<Options>A, D</Options>
+										<ErrorCode>T51</ErrorCode>
+										<Comment><![CDATA[CreditDebit must contain the following codes (Error Code:T51)]]></Comment>
+										<ValidationPattern xsi:type="CODE" Type="CODE">
+											<Type>CODE</Type>
+											<Codes>
+												<Code Name="C">
+													<DetailedName>Credit</DetailedName>
+												</Code>
+												<Code Name="D">
+													<DetailedName>Debit</DetailedName>
+												</Code>
+											</Codes>
+										</ValidationPattern>
+									</Validation>
+								</SubField>
+							</Validations>
+						</SwiftField>
+						<SwiftField Name="87a">
+							<SwiftFieldDef Name="87">
+								<Generic>false</Generic>
+								<Option Name="A">
+									<Format><![CDATA[/1!a([/34x])(CRLF4!a2!a2!c[3!c]) | [/34xCRLF](4!a2!a2!c[3!c])]]></Format>
+									<Specification><![CDATA[(CreditDebit)(Party Identifier)(Identifier Code) | (Party Identifier)(Identifier Code)]]></Specification>
+									<Description><![CDATA[Party B]]></Description>
+								</Option>
+								<Option Name="D">
+									<Format><![CDATA[/1!a([/34x])(CRLF4*35x) | ([/34xCRLF])(4*35x)]]></Format>
+									<Specification><![CDATA[(CreditDebit)(Party Identifier)(Name & Address)|(Party Identifier)(Name & Address)]]></Specification>
+									<Description><![CDATA[Party B]]></Description>
+								</Option>
+								<Option Name="J">
+									<Format><![CDATA[5*40x]]></Format>
+									<Specification><![CDATA[(Party Identification)]]></Specification>
+									<Description><![CDATA[Party B]]></Description>
+								</Option>
+							</SwiftFieldDef>
+							<Repeating>false</Repeating>
+							<Presence>M</Presence>
+							<Options>A, D, J</Options>
+							<Validations>
+								<SubField Name="Identifier_Code">
+									<Validation>
+										<Options>A</Options>
+										<ErrorCode>T27, T28, T29, T45</ErrorCode>
+										<Comment><![CDATA[Identifier Code must be a registered BIC or BEI (Error code(s): T27,T28,T29,T45)]]></Comment>
+										<ValidationPattern xsi:type="BIC" Type="BIC">
+											<Type>BIC</Type>
+										</ValidationPattern>
+									</Validation>
+								</SubField>
+								<SubField Name="Party_Identification">
+									<Validation>
+										<Options>J</Options>
+										<ErrorCode>T78</ErrorCode>
+										<Comment><![CDATA[In option J, Party Identification must be specified as a list of pairs (Code)(Value) and the following codes and format must be used (Error code(s): T78).]]></Comment>
+										<ValidationPattern xsi:type="Party_Identification" Type="Party Identification">
+											<Type>Party Identification</Type>
+											<Codes>
+												<Code Name="ABIC">
+													<NewGroup>true</NewGroup>
+													<Format>4!a2!a2!c3!c | 4!a2!a2!c | UKWN</Format>
+													<Mandatory>true</Mandatory>
+													<Description>followed by the BIC/BEI or UKWN if BIC/BEI not known</Description>
+												</Code>
+												<Code Name="ACCT">
+													<Format>34x</Format>
+													<Description>followed by the account number</Description>
+												</Code>
+												<Code Name="NAME">
+													<Format>34x</Format>
+													<Mandatory>true</Mandatory>
+													<Description>followed by the name</Description>
+												</Code>
+												<Code Name="ADD1">
+													<Format>35x</Format>
+													<Description>followed by the first line of the address</Description>
+												</Code>
+												<Code Name="ADD2">
+													<Format>35x</Format>
+													<Description>followed by the second line of the address</Description>
+												</Code>
+												<Code Name="CITY">
+													<Format>35x</Format>
+													<Description>followed by the city (and state, country)</Description>
+												</Code>
+												<Code Name="USFW">
+													<Format>9!n</Format>
+													<Description>followed by FedWire Routing Number</Description>
+												</Code>
+												<Code Name="USCH">
+													<Format>6!n</Format>
+													<Description>followed by CHIPS UID</Description>
+												</Code>
+												<Code Name="GBSC">
+													<Format>6!n</Format>
+													<Description>followed by UK domestic sort code</Description>
+												</Code>
+												<Code Name="LEIC">
+													<Format>18!c2!n</Format>
+													<Description>Legal Entity Identifier</Description>
+												</Code>
+												<Code Name="CLRC">
+													<Format>35x</Format>
+													<Description>followed by a clearing code</Description>
+												</Code>
+											</Codes>
+										</ValidationPattern>
+									</Validation>
+								</SubField>
+								<SubField Name="CreditDebit">
+									<Validation>
+										<Options>A, D</Options>
+										<ErrorCode>T51</ErrorCode>
+										<Comment><![CDATA[CreditDebit must contain the following codes (Error Code:T51)]]></Comment>
+										<ValidationPattern xsi:type="CODE" Type="CODE">
+											<Type>CODE</Type>
+											<Codes>
+												<Code Name="C">
+													<DetailedName>Credit</DetailedName>
+												</Code>
+												<Code Name="D">
+													<DetailedName>Debit</DetailedName>
+												</Code>
+											</Codes>
+										</ValidationPattern>
+									</Validation>
+								</SubField>
+							</Validations>
+						</SwiftField>
+						<SwiftField Name="83a">
+							<SwiftFieldDef Name="83">
+								<Generic>false</Generic>
+								<Option Name="A">
+									<Format><![CDATA[/1!a([/34x])(CRLF4!a2!a2!c[3!c]) | [/34xCRLF](4!a2!a2!c[3!c])]]></Format>
+									<Specification><![CDATA[(CreditDebit)(Party Identifier)(Identifier Code) | (Party Identifier)(Identifier Code)]]></Specification>
+									<Description><![CDATA[Fund or Beneficiary Customer]]></Description>
+								</Option>
+								<Option Name="D">
+									<Format><![CDATA[/1!a([/34x])(CRLF4*35x) | ([/34xCRLF])(4*35x)]]></Format>
+									<Specification><![CDATA[(CreditDebit)(Party Identifier)(Name & Address)|(Party Identifier)(Name & Address)]]></Specification>
+									<Description><![CDATA[Fund or Beneficiary Customer]]></Description>
+								</Option>
+								<Option Name="J">
+									<Format><![CDATA[5*40x]]></Format>
+									<Specification><![CDATA[(Party Identification)]]></Specification>
+									<Description><![CDATA[Fund or Beneficiary Customer]]></Description>
+								</Option>
+							</SwiftFieldDef>
+							<Repeating>false</Repeating>
+							<Presence>O</Presence>
+							<Options>A, D, J</Options>
+							<Validations>
+								<SubField Name="Identifier_Code">
+									<Validation>
+										<Options>A</Options>
+										<ErrorCode>T27, T28, T29, T45</ErrorCode>
+										<Comment><![CDATA[Identifier Code must be a registered BIC or BEI (Error code(s): T27,T28,T29,T45)]]></Comment>
+										<ValidationPattern xsi:type="BIC" Type="BIC">
+											<Type>BIC</Type>
+										</ValidationPattern>
+									</Validation>
+								</SubField>
+								<SubField Name="Party_Identification">
+									<Validation>
+										<Options>J</Options>
+										<ErrorCode>T78</ErrorCode>
+										<Comment><![CDATA[In option J, Party Identification must be specified as a list of pairs (Code)(Value) and the following codes and format must be used (Error code(s): T78).]]></Comment>
+										<ValidationPattern xsi:type="Party_Identification" Type="Party Identification">
+											<Type>Party Identification</Type>
+											<Codes>
+												<Code Name="ABIC">
+													<NewGroup>true</NewGroup>
+													<Format>4!a2!a2!c3!c | 4!a2!a2!c | UKWN</Format>
+													<Description>followed by the BIC/BEI or UKWN if BIC/BEI not known</Description>
+												</Code>
+												<Code Name="ACCT">
+													<Format>34x</Format>
+													<Description>followed by the account number</Description>
+												</Code>
+												<Code Name="NAME">
+													<Format>34x</Format>
+													<Mandatory>true</Mandatory>
+													<Description>followed by the name</Description>
+												</Code>
+												<Code Name="ADD1">
+													<Format>35x</Format>
+													<Description>followed by the first line of the address</Description>
+												</Code>
+												<Code Name="ADD2">
+													<Format>35x</Format>
+													<Description>followed by the second line of the address</Description>
+												</Code>
+												<Code Name="CITY">
+													<Format>35x</Format>
+													<Description>followed by the city (and state, country)</Description>
+												</Code>
+												<Code Name="USFW">
+													<Format>9!n</Format>
+													<Description>followed by FedWire Routing Number</Description>
+												</Code>
+												<Code Name="USCH">
+													<Format>6!n</Format>
+													<Description>followed by CHIPS UID</Description>
+												</Code>
+												<Code Name="GBSC">
+													<Format>6!n</Format>
+													<Description>followed by UK domestic sort code</Description>
+												</Code>
+												<Code Name="LEIC">
+													<Format>18!c2!n</Format>
+													<Description>Legal Entity Identifier</Description>
+												</Code>
+												<Code Name="CLRC">
+													<Format>35x</Format>
+													<Description>followed by a clearing code</Description>
+												</Code>
+											</Codes>
+										</ValidationPattern>
+									</Validation>
+								</SubField>
+								<SubField Name="CreditDebit">
+									<Validation>
+										<Options>A, D</Options>
+										<ErrorCode>T51</ErrorCode>
+										<Comment><![CDATA[CreditDebit must contain the following codes (Error Code:T51)]]></Comment>
+										<ValidationPattern xsi:type="CODE" Type="CODE">
+											<Type>CODE</Type>
+											<Codes>
+												<Code Name="C">
+													<DetailedName>Credit</DetailedName>
+												</Code>
+												<Code Name="D">
+													<DetailedName>Debit</DetailedName>
+												</Code>
+											</Codes>
+										</ValidationPattern>
+									</Validation>
+								</SubField>
+							</Validations>
+						</SwiftField>
+						<SwiftField Name="77H">
+							<SwiftFieldDef Name="77">
+								<Generic>false</Generic>
+								<Option Name="H">
+									<Format><![CDATA[6a[/8!n][//4!n]]]></Format>
+									<Specification><![CDATA[(Type of Agreement) (Date) (Version)]]></Specification>
+									<Description><![CDATA[Type, Date, Version of the Agreement]]></Description>
+								</Option>
+							</SwiftFieldDef>
+							<Repeating>false</Repeating>
+							<Presence>O</Presence>
+							<Options>H</Options>
+							<Validations>
+								<SubField Name="Type_of_Agreement">
+									<Validation>
+										<Options>H</Options>
+										<ErrorCode>T47</ErrorCode>
+										<Comment><![CDATA[Type of Agreement must contain one of the following codes (Error code(s): T47):]]></Comment>
+										<ValidationPattern xsi:type="CODE" Type="CODE">
+											<Type>CODE</Type>
+											<Codes>
+												<Code Name="AFB">
+													<Description>AFB Master Agreement</Description>
+												</Code>
+												<Code Name="DERV">
+													<Description>Deutscher Rahmenvertrag fur Finanztermingeschafte</Description>
+												</Code>
+												<Code Name="FBF">
+													<Description>Federation Bancaire Francaise Master Agreement</Description>
+												</Code>
+												<Code Name="FEOMA">
+													<Description>FEOMA Master Agreement</Description>
+												</Code>
+												<Code Name="ICOM">
+													<Description>ICOM Master Agreement</Description>
+												</Code>
+												<Code Name="IFEMA">
+													<Description>IFEMA Master Agreement</Description>
+												</Code>
+												<Code Name="ISDA">
+													<Description>ISDA Master Agreement</Description>
+												</Code>
+												<Code Name="ISDACN">
+													<Description>ISDA Master Agreement plus Additional Disruption Event Provisions for an Offshore Deliverable CNY Transaction </Description>
+												</Code>
+												<Code Name="OTHER">
+													<Description>Another type of bilateral agreement signed up front between party A and party B. The agreement must be specified in field 77D</Description>
+												</Code>
+											</Codes>
+										</ValidationPattern>
+									</Validation>
+								</SubField>
+								<SubField Name="Date">
+									<Validation>
+										<Options>H</Options>
+										<ErrorCode>T50</ErrorCode>
+										<Comment><![CDATA[Date must be a valid date expressed as YYYYMMDD (Error code(s): T50).]]></Comment>
+										<ValidationPattern xsi:type="DATE" Type="DATE">
+											<Type>DATE</Type>
+											<Format>yyyyMMdd</Format>
+										</ValidationPattern>
+									</Validation>
+								</SubField>
+								<SubField Name="Version">
+									<Validation>
+										<Options>H</Options>
+										<ErrorCode>T50</ErrorCode>
+										<Comment><![CDATA[Version must be a valid year expressed as YYYY (Error code(s): T50).]]></Comment>
+										<ValidationPattern xsi:type="DATE" Type="DATE">
+											<Type>DATE</Type>
+											<Format>yyyy</Format>
+										</ValidationPattern>
+									</Validation>
+								</SubField>
+							</Validations>
+						</SwiftField>
+						<SwiftField Name="77D">
+							<SwiftFieldDef Name="77">
+								<Generic>false</Generic>
+								<Option Name="D">
+									<Format><![CDATA[6*35x]]></Format>
+									<Specification><![CDATA[(Narrative)]]></Specification>
+									<Description><![CDATA[Terms and Conditions]]></Description>
+								</Option>
+							</SwiftFieldDef>
+							<Repeating>false</Repeating>
+							<Presence>O</Presence>
+							<Options>D</Options>
+						</SwiftField>
+						<SwiftField Name="14C">
+							<SwiftFieldDef Name="14">
+								<Generic>false</Generic>
+								<Option Name="C">
+									<Format><![CDATA[4!n]]></Format>
+									<Specification><![CDATA[(Year)]]></Specification>
+									<Description><![CDATA[Year of Definitions]]></Description>
+								</Option>
+							</SwiftFieldDef>
+							<Repeating>false</Repeating>
+							<Presence>O</Presence>
+							<Options>C</Options>
+						</SwiftField>
+							<SwiftField Name="17F">
+								<SwiftFieldDef Name="17">
+									<Generic>false</Generic>
+									<Description><![CDATA[Non-Deliverable Indicator]]></Description>
+									<Option Name="F">
+										<Format><![CDATA[1!a]]></Format>
+										<Specification><![CDATA[(Indicator)]]></Specification>
+										<Description><![CDATA[Non-Deliverable Indicator]]></Description>
+									</Option>
+								</SwiftFieldDef>
+								<Repeating>false</Repeating>
+								<Presence>O</Presence>
+								<Options>F</Options>
+								<Validations>
+									<SubField Name="Indicator">
+										<Validation>
+											<Options>F</Options>
+											<ErrorCode>T36</ErrorCode>
+											<Comment><![CDATA[Indicator must contain one of the following codes (Error code(s): T36)]]></Comment>
+											<ValidationPattern xsi:type="CODE" Type="CODE">
+												<Type>CODE</Type>
+												<Codes>
+													<Code Name="N">
+														<Description>A deliverable trade</Description>
+													</Code>
+													<Code Name="Y">
+														<Description>A non-deliverable trade, that is the deal will be cash-settled</Description>
+													</Code>
+												</Codes>
+											</ValidationPattern>
+										</Validation>
+									</SubField>
+								</Validations>
+							</SwiftField>
+							<SwiftField Name="17O">
+								<SwiftFieldDef Name="17">
+									<Generic>false</Generic>
+									<Description><![CDATA[Flag]]></Description>
+									<Option Name="O">
+										<Format><![CDATA[1!a]]></Format>
+										<Specification><![CDATA[(Indicator)]]></Specification>
+										<Description><![CDATA[NDF Open Indicator]]></Description>
+									</Option>
+								</SwiftFieldDef>
+								<Repeating>false</Repeating>
+								<Presence>O</Presence>
+								<Options>O</Options>
+								<Validations>
+									<SubField Name="Indicator">
+										<Validation>
+											<Options>O</Options>
+											<ErrorCode>T36</ErrorCode>
+											<Comment><![CDATA[Indicator must contain one of the following codes (Error code(s): T36):]]></Comment>
+											<ValidationPattern xsi:type="CODE" Type="CODE">
+												<Type>CODE</Type>
+												<Codes>
+													<Code Name="N">
+														<Description>The valuation confirmation</Description>
+													</Code>
+													<Code Name="Y">
+														<Description>The opening confirmation</Description>
+													</Code>
+												</Codes>
+											</ValidationPattern>
+										</Validation>
+									</SubField>
+								</Validations>
+							</SwiftField>
+							<SwiftField Name="32E">
+								<SwiftFieldDef Name="32">
+									<Generic>false</Generic>
+									<Description><![CDATA[Value Date, Currency Code, Amount]]></Description>
+									<Option Name="E">
+										<Format><![CDATA[3!a]]></Format>
+										<Specification><![CDATA[(Currency)]]></Specification>
+										<Description><![CDATA[Settlement Currency]]></Description>
+									</Option>
+								</SwiftFieldDef>
+								<Repeating>false</Repeating>
+								<Presence>O</Presence>
+								<Options>E</Options>
+								<Validations>
+									<SubField Name="Currency">
+										<Validation>
+											<Options>E</Options>
+											<ErrorCode>T52</ErrorCode>
+											<Comment><![CDATA[Currency must be a valid ISO 4217 currency code (Error code(s): T52).]]></Comment>
+											<ValidationPattern xsi:type="Currency_Code" Type="Currency Code">
+												<Type>Currency Code</Type>
+											</ValidationPattern>
+										</Validation>
+									</SubField>
+								</Validations>
+							</SwiftField>
+							<SwiftField Name="30U">
+								<SwiftFieldDef Name="30">
+									<Generic>false</Generic>
+									<Description><![CDATA[Next Interest Due Date]]></Description>
+									<Option Name="U">
+										<Format><![CDATA[8!n]]></Format>
+										<Specification><![CDATA[(Date)]]></Specification>
+										<Description><![CDATA[Valuation Date]]></Description>
+									</Option>
+								</SwiftFieldDef>
+								<Repeating>false</Repeating>
+								<Presence>O</Presence>
+								<Options>U</Options>
+								<Validations>
+									<SubField Name="Date">
+										<Validation>
+											<Options>U</Options>
+											<ErrorCode>T50</ErrorCode>
+											<Comment><![CDATA[Date must be a valid date expressed as YYYYMMDD (Error code(s): T50).]]></Comment>
+											<ValidationPattern xsi:type="DATE" Type="DATE">
+												<Type>DATE</Type>
+												<Format>yyyyMMdd</Format>
+											</ValidationPattern>
+										</Validation>
+									</SubField>
+								</Validations>
+							</SwiftField>
+							<SwiftField Name="14S">
+								<SwiftFieldDef Name="14">
+									<Generic>false</Generic>
+									<Option Name="S">
+										<Format><![CDATA[(3!a2n)[(/4!n)(/4!c)]]]></Format>
+										<Specification><![CDATA[(Rate Source)(Time)(Location)]]></Specification>
+										<Description><![CDATA[Settlement Rate Source]]></Description>
+									</Option>
+								</SwiftFieldDef>
+								<Repeating>true</Repeating>
+								<Presence>O</Presence>
+								<Options>S</Options>
+								<Validations>
+									<SubField Name="Time">
+										<Validation>
+											<Options>S</Options>
+											<ErrorCode>T38</ErrorCode>
+											<Comment><![CDATA[Time must be a valid time expressed as HHMM (Error code(s): T38).]]></Comment>
+											<ValidationPattern xsi:type="DATE" Type="DATE">
+												<Type>DATE</Type>
+												<Format>HHmm</Format>
+											</ValidationPattern>
+										</Validation>
+									</SubField>
+								</Validations>
+							</SwiftField>
+							<SwiftField Name="21A">
+								<SwiftFieldDef Name="21">
+									<Generic>false</Generic>
+									<Description><![CDATA[Related Reference]]></Description>
+									<Option Name="A">
+										<Format><![CDATA[16x]]></Format>
+										<Specification><![CDATA[(Related Sequence Reference)]]></Specification>
+										<Description><![CDATA[ Reference to Opening Confirmation]]></Description>
+									</Option>
+								</SwiftFieldDef>
+								<Repeating>false</Repeating>
+								<Presence>O</Presence>
+								<Options>A</Options>
+								<Validations>
+									<SubField Name="Related_Sequence_Reference">
+										<Validation>
+											<Options>A</Options>
+											<ErrorCode>T26</ErrorCode>
+											<Comment><![CDATA[This field must not start or end with a slash '/' and must not contain two consecutive slashes '//' (Error code(s): T26).]]></Comment>
+											<ValidationPattern xsi:type="T26" Type="T26">
+												<Type>T26</Type>
+											</ValidationPattern>
+										</Validation>
+									</SubField>
+								</Validations>
+							</SwiftField>
+							<SwiftField Name="14E">
+								<SwiftFieldDef Name="14">
+									<Generic>false</Generic>
+									<Option Name="E">
+										<Format><![CDATA[35x]]></Format>
+										<Specification><![CDATA[(Reference)]]></Specification>
+										<Description><![CDATA[Clearing or Settlement Session]]></Description>
+									</Option>
+								</SwiftFieldDef>
+								<Repeating>false</Repeating>
+								<Presence>O</Presence>
+								<Options>E</Options>
+							</SwiftField>
+					</Fields>
+				</SwiftSequence>
+				<SwiftSequence Name="B">
+					<Name>B</Name>
+					<Description><![CDATA[Transaction Details]]></Description>
+					<Mandatory>true</Mandatory>
+					<Repeating>false</Repeating>
+					<NewSequeceStart>true</NewSequeceStart>
+					<StartBlockField>15B</StartBlockField>
+					<Fields>
+						<SwiftField Name="30T">
+							<SwiftFieldDef Name="30">
+								<Generic>false</Generic>
+								<Option Name="T">
+									<Format><![CDATA[8!n]]></Format>
+									<Specification><![CDATA[(Date)]]></Specification>
+									<Description><![CDATA[Trade Date]]></Description>
+								</Option>
+							</SwiftFieldDef>
+							<Repeating>false</Repeating>
+							<Presence>M</Presence>
+							<Options>T</Options>
+							<Validations>
+								<SubField Name="Date">
+									<Validation>
+										<Options>T</Options>
+										<ErrorCode>T50</ErrorCode>
+										<Comment><![CDATA[Date must be a valid date expressed as YYYYMMDD (Error code(s): T50).]]></Comment>
+										<ValidationPattern xsi:type="DATE" Type="DATE">
+											<Type>DATE</Type>
+											<Format>yyyyMMdd</Format>
+										</ValidationPattern>
+									</Validation>
+								</SubField>
+							</Validations>
+						</SwiftField>
+						<SwiftField Name="30V">
+							<SwiftFieldDef Name="30">
+								<Generic>false</Generic>
+								<Option Name="V">
+									<Format><![CDATA[8!n]]></Format>
+									<Specification><![CDATA[(Date)]]></Specification>
+									<Description><![CDATA[Value Date]]></Description>
+								</Option>
+							</SwiftFieldDef>
+							<Repeating>false</Repeating>
+							<Presence>M</Presence>
+							<Options>V</Options>
+							<Validations>
+								<SubField Name="Date">
+									<Validation>
+										<Options>V</Options>
+										<ErrorCode>T50</ErrorCode>
+										<Comment><![CDATA[Date must be a valid date expressed as YYYYMMDD (Error code(s): T50).]]></Comment>
+										<ValidationPattern xsi:type="DATE" Type="DATE">
+											<Type>DATE</Type>
+											<Format>yyyyMMdd</Format>
+										</ValidationPattern>
+									</Validation>
+								</SubField>
+							</Validations>
+						</SwiftField>
+						<SwiftField Name="36">
+							<SwiftFieldDef Name="36">
+								<Generic>false</Generic>
+								<Description><![CDATA[Quantity of Financial Instrument]]></Description>
+								<Option Name="">
+									<Format><![CDATA[12d]]></Format>
+									<Specification><![CDATA[(Rate)]]></Specification>
+									<Description><![CDATA[Exchange Rate]]></Description>
+								</Option>
+							</SwiftFieldDef>
+							<Repeating>false</Repeating>
+							<Presence>M</Presence>
+							<Options> </Options>
+						</SwiftField>
+						<SwiftSequence Name="B1">
+							<Name>B1</Name>
+							<Description><![CDATA[Amount Bought]]></Description>
+							<Mandatory>true</Mandatory>
+							<Repeating>false</Repeating>
+							<Fields>
+								<SwiftField Name="32B">
+									<SwiftFieldDef Name="32">
+										<Generic>false</Generic>
+										<Option Name="B">
+											<Format><![CDATA[3!a15d]]></Format>
+											<Specification><![CDATA[(Currency) (Amount)]]></Specification>
+											<Description><![CDATA[Currency, Amount]]></Description>
+										</Option>
+									</SwiftFieldDef>
+									<Repeating>false</Repeating>
+									<Presence>M</Presence>
+									<Options>B</Options>
+									<Validations>
+										<SubField Name="Currency">
+											<Validation>
+												<Options>B</Options>
+												<ErrorCode>T52</ErrorCode>
+												<Comment><![CDATA[Currency must be a valid ISO 4217 currency code (Error code(s): T52).]]></Comment>
+												<ValidationPattern xsi:type="Currency_Code" Type="Currency Code">
+													<Type>Currency Code</Type>
+												</ValidationPattern>
+											</Validation>
+										</SubField>
+										<SubField Name="Amount">
+											<Validation>
+												<Options>B</Options>
+												<ErrorCode>C03</ErrorCode>
+												<Comment><![CDATA[The number of digits following the comma must not exceed the maximum number allowed for the specified currency.]]></Comment>
+												<ValidationPattern xsi:type="Decimal" Type="Decimal">
+													<Type>Decimal</Type>
+													<currency-field>Currency</currency-field>
+												</ValidationPattern>
+											</Validation>
+										</SubField>
+									</Validations>
+								</SwiftField>
+								<SwiftField Name="53a">
+									<SwiftFieldDef Name="53">
+										<Generic>false</Generic>
+										<Description><![CDATA[Delivery Agent]]></Description>
+										<Option Name="A">
+											<Format><![CDATA[/1!a([/34x])(CRLF4!a2!a2!c[3!c]) | [/34xCRLF](4!a2!a2!c[3!c])]]></Format>
+											<Specification><![CDATA[(CreditDebit)(Party Identifier)(Identifier Code) | (Party Identifier)(Identifier Code)]]></Specification>
+											<Description><![CDATA[Delivery Agent]]></Description>
+										</Option>
+										<Option Name="D">
+											<Format><![CDATA[/1!a([/34x])(CRLF4*35x) | ([/34xCRLF])(4*35x)]]></Format>
+											<Specification><![CDATA[(CreditDebit)(Party Identifier)(Name & Address)|(Party Identifier)(Name & Address)]]></Specification>
+											<Description><![CDATA[Delivery Agent]]></Description>
+										</Option>
+										<Option Name="J">
+											<Format><![CDATA[5*40x]]></Format>
+											<Specification><![CDATA[(Party Identification)]]></Specification>
+											<Description><![CDATA[Delivery Agent]]></Description>
+										</Option>
+									</SwiftFieldDef>
+									<Repeating>false</Repeating>
+									<Presence>O</Presence>
+									<Options>A, D, J</Options>
+									<Validations>
+										<SubField Name="Identifier_Code">
+											<Validation>
+												<Options>A</Options>
+												<ErrorCode>T27, T28, T29, T45</ErrorCode>
+												<Comment><![CDATA[Identifier Code must be a registered BIC or BEI (Error code(s): T27,T28,T29,T45)]]></Comment>
+												<ValidationPattern xsi:type="BIC" Type="BIC">
+													<Type>BIC</Type>
+												</ValidationPattern>
+											</Validation>
+											<Validation>
+												<Options>A</Options>
+												<ErrorCode>C05</ErrorCode>
+												<Comment><![CDATA[Identifier Code must not be a BEI, ie must not be of subtype BEID, MCCO, TESP or TRCO]]></Comment>
+												<ValidationPattern xsi:type="C05" Type="C05">
+													<Type>C05</Type>
+												</ValidationPattern>
+											</Validation>
+										</SubField>
+										<SubField Name="Party_Identification">
+											<Validation>
+												<Options>J</Options>
+												<ErrorCode>T78</ErrorCode>
+												<Comment><![CDATA[With option J, the following codes must be used (Error code(s): T78):]]></Comment>
+												<ValidationPattern xsi:type="Party_Identification" Type="Party Identification">
+													<Type>Party Identification</Type>
+													<Codes>
+														<Code Name="ABIC">
+															<NewGroup>true</NewGroup>
+															<Format>4!a2!a2!c3!c | 4!a2!a2!c | UKWN</Format>
+															<Mandatory>true</Mandatory>
+															<Description>followed by the BIC/BEI or UKWN if BIC/BEI not known</Description>
+														</Code>
+														<Code Name="ACCT">
+															<Format>34x</Format>
+															<Description>followed by the account number</Description>
+														</Code>
+														<Code Name="NAME">
+															<Format>34x</Format>
+															<Mandatory>true</Mandatory>
+															<Description>followed by the name</Description>
+														</Code>
+														<Code Name="ADD1">
+															<Format>35x</Format>
+															<Description>followed by the first line of the address</Description>
+														</Code>
+														<Code Name="ADD2">
+															<Format>35x</Format>
+															<Description>followed by the second line of the address</Description>
+														</Code>
+														<Code Name="CITY">
+															<Format>35x</Format>
+															<Description>followed by the city (and state, country)</Description>
+														</Code>
+														<Code Name="USFW">
+															<Format>9!n</Format>
+															<Description>followed by FedWire Routing Number</Description>
+														</Code>
+														<Code Name="USCH">
+															<Format>6!n</Format>
+															<Description>followed by CHIPS UID</Description>
+														</Code>
+														<Code Name="GBSC">
+															<Format>6!n</Format>
+															<Description>followed by UK domestic sort code</Description>
+														</Code>
+														<Code Name="CLRC">
+															<Format>35x</Format>
+															<Description>followed by a clearing code</Description>
+														</Code>
+														<Code Name="NETS">
+															<NewGroup>true</NewGroup>
+															<Mandatory>true</Mandatory>
+															<Description>A net settlement is taking place</Description>
+														</Code>
+														<Code Name="SSIS">
+															<NewGroup>true</NewGroup>
+															<Mandatory>true</Mandatory>
+															<Description>Standard settlement instructions are used</Description>
+														</Code>
+													</Codes>
+												</ValidationPattern>
+											</Validation>
+										</SubField>
+										<SubField Name="CreditDebit">
+											<Validation>
+												<Options>A, D</Options>
+												<ErrorCode>T51</ErrorCode>
+												<Comment><![CDATA[CreditDebit must contain the following codes (Error Code:T51)]]></Comment>
+												<ValidationPattern xsi:type="CODE" Type="CODE">
+													<Type>CODE</Type>
+													<Codes>
+														<Code Name="C">
+															<DetailedName>Credit</DetailedName>
+														</Code>
+														<Code Name="D">
+															<DetailedName>Debit</DetailedName>
+														</Code>
+													</Codes>
+												</ValidationPattern>
+											</Validation>
+										</SubField>
+									</Validations>
+								</SwiftField>
+								<SwiftField Name="56a">
+									<SwiftFieldDef Name="56">
+										<Generic>false</Generic>
+										<Description><![CDATA[Intermediary]]></Description>
+										<Option Name="A">
+											<Format><![CDATA[/1!a([/34x])(CRLF4!a2!a2!c[3!c]) | [/34xCRLF](4!a2!a2!c[3!c])]]></Format>
+											<Specification><![CDATA[(CreditDebit)(Party Identifier)(Identifier Code) | (Party Identifier)(Identifier Code)]]></Specification>
+											<Description><![CDATA[Intermediary]]></Description>
+										</Option>
+										<Option Name="D">
+											<Format><![CDATA[/1!a([/34x])(CRLF4*35x) | ([/34xCRLF])(4*35x)]]></Format>
+											<Specification><![CDATA[(CreditDebit)(Party Identifier)(Name & Address)|(Party Identifier)(Name & Address)]]></Specification>
+											<Description><![CDATA[Intermediary]]></Description>
+										</Option>
+										<Option Name="J">
+											<Format><![CDATA[5*40x]]></Format>
+											<Specification><![CDATA[(Party Identification)]]></Specification>
+											<Description><![CDATA[Intermediary]]></Description>
+										</Option>
+									</SwiftFieldDef>
+									<Repeating>false</Repeating>
+									<Presence>O</Presence>
+									<Options>A, D, J</Options>
+									<Validations>
+										<SubField Name="Identifier_Code">
+											<Validation>
+												<Options>A</Options>
+												<ErrorCode>T27, T28, T29, T45</ErrorCode>
+												<Comment><![CDATA[Identifier Code must be a registered BIC or BEI (Error code(s): T27,T28,T29,T45)]]></Comment>
+												<ValidationPattern xsi:type="BIC" Type="BIC">
+													<Type>BIC</Type>
+												</ValidationPattern>
+											</Validation>
+											<Validation>
+												<Options>A</Options>
+												<ErrorCode>C05</ErrorCode>
+												<Comment><![CDATA[Identifier Code must not be a BEI, ie must not be of subtype BEID, MCCO, TESP or TRCO]]></Comment>
+												<ValidationPattern xsi:type="C05" Type="C05">
+													<Type>C05</Type>
+												</ValidationPattern>
+											</Validation>
+										</SubField>
+										<SubField Name="Party_Identification">
+											<Validation>
+												<Options>J</Options>
+												<ErrorCode>T78</ErrorCode>
+												<Comment><![CDATA[With option J, the following codes must be used (Error code(s): T78):]]></Comment>
+												<ValidationPattern xsi:type="Party_Identification" Type="Party Identification">
+													<Type>Party Identification</Type>
+													<Codes>
+														<Code Name="ABIC">
+															<NewGroup>true</NewGroup>
+															<Format>4!a2!a2!c3!c | 4!a2!a2!c | UKWN</Format>
+															<Mandatory>true</Mandatory>
+															<Description>followed by the BIC/BEI or UKWN if BIC/BEI not known</Description>
+														</Code>
+														<Code Name="ACCT">
+															<Format>34x</Format>
+															<Description>followed by the account number</Description>
+														</Code>
+														<Code Name="NAME">
+															<Format>34x</Format>
+															<Mandatory>true</Mandatory>
+															<Description>followed by the name</Description>
+														</Code>
+														<Code Name="ADD1">
+															<Format>35x</Format>
+															<Description>followed by the first line of the address</Description>
+														</Code>
+														<Code Name="ADD2">
+															<Format>35x</Format>
+															<Description>followed by the second line of the address</Description>
+														</Code>
+														<Code Name="CITY">
+															<Format>35x</Format>
+															<Description>followed by the city (and state, country)</Description>
+														</Code>
+														<Code Name="USFW">
+															<Format>9!n</Format>
+															<Description>followed by FedWire Routing Number</Description>
+														</Code>
+														<Code Name="USCH">
+															<Format>6!n</Format>
+															<Description>followed by CHIPS UID</Description>
+														</Code>
+														<Code Name="GBSC">
+															<Format>6!n</Format>
+															<Description>followed by UK domestic sort code</Description>
+														</Code>
+														<Code Name="CLRC">
+															<Format>35x</Format>
+															<Description>followed by a clearing code</Description>
+														</Code>
+														<Code Name="NETS">
+															<NewGroup>true</NewGroup>
+															<Mandatory>true</Mandatory>
+															<Description>A net settlement is taking place</Description>
+														</Code>
+														<Code Name="SSIS">
+															<NewGroup>true</NewGroup>
+															<Mandatory>true</Mandatory>
+															<Description>Standard settlement instructions are used</Description>
+														</Code>
+													</Codes>
+												</ValidationPattern>
+											</Validation>
+										</SubField>
+										<SubField Name="CreditDebit">
+											<Validation>
+												<Options>A, D</Options>
+												<ErrorCode>T51</ErrorCode>
+												<Comment><![CDATA[CreditDebit must contain the following codes (Error Code:T51)]]></Comment>
+												<ValidationPattern xsi:type="CODE" Type="CODE">
+													<Type>CODE</Type>
+													<Codes>
+														<Code Name="C">
+															<DetailedName>Credit</DetailedName>
+														</Code>
+														<Code Name="D">
+															<DetailedName>Debit</DetailedName>
+														</Code>
+													</Codes>
+												</ValidationPattern>
+											</Validation>
+										</SubField>
+									</Validations>
+								</SwiftField>
+								<SwiftField Name="57a">
+									<SwiftFieldDef Name="57">
+										<Generic>false</Generic>
+										<Description><![CDATA[Receiving Agent]]></Description>
+										<Option Name="A">
+											<Format><![CDATA[/1!a([/34x])(CRLF4!a2!a2!c[3!c]) | [/34xCRLF](4!a2!a2!c[3!c])]]></Format>
+											<Specification><![CDATA[(CreditDebit)(Party Identifier)(Identifier Code) | (Party Identifier)(Identifier Code)]]></Specification>
+											<Description><![CDATA[Receiving Agent]]></Description>
+										</Option>
+										<Option Name="D">
+											<Format><![CDATA[/1!a([/34x])(CRLF4*35x) | ([/34xCRLF])(4*35x)]]></Format>
+											<Specification><![CDATA[(CreditDebit)(Party Identifier)(Name & Address)|(Party Identifier)(Name & Address)]]></Specification>
+											<Description><![CDATA[Receiving Agent]]></Description>
+										</Option>
+										<Option Name="J">
+											<Format><![CDATA[5*40x]]></Format>
+											<Specification><![CDATA[(Party Identification)]]></Specification>
+											<Description><![CDATA[Receiving Agent]]></Description>
+										</Option>
+									</SwiftFieldDef>
+									<Repeating>false</Repeating>
+									<Presence>M</Presence>
+									<Options>A, D, J</Options>
+									<Validations>
+										<SubField Name="Identifier_Code">
+											<Validation>
+												<Options>A</Options>
+												<ErrorCode>T27, T28, T29, T45</ErrorCode>
+												<Comment><![CDATA[Identifier Code must be a registered BIC or BEI (Error code(s): T27,T28,T29,T45)]]></Comment>
+												<ValidationPattern xsi:type="BIC" Type="BIC">
+													<Type>BIC</Type>
+												</ValidationPattern>
+											</Validation>
+											<Validation>
+												<Options>A</Options>
+												<ErrorCode>C05</ErrorCode>
+												<Comment><![CDATA[Identifier Code must not be a BEI, ie must not be of subtype BEID, MCCO, TESP or TRCO]]></Comment>
+												<ValidationPattern xsi:type="C05" Type="C05">
+													<Type>C05</Type>
+												</ValidationPattern>
+											</Validation>
+										</SubField>
+										<SubField Name="Party_Identification">
+											<Validation>
+												<Options>J</Options>
+												<ErrorCode>T78</ErrorCode>
+												<Comment><![CDATA[With option J, the following codes must be used (Error code(s): T78):]]></Comment>
+												<ValidationPattern xsi:type="Party_Identification" Type="Party Identification">
+													<Type>Party Identification</Type>
+													<Codes>
+														<Code Name="ABIC">
+															<NewGroup>true</NewGroup>
+															<Format>4!a2!a2!c3!c | 4!a2!a2!c | UKWN</Format>
+															<Mandatory>true</Mandatory>
+															<Description>followed by the BIC/BEI or UKWN if BIC/BEI not known</Description>
+														</Code>
+														<Code Name="ACCT">
+															<Format>34x</Format>
+															<Description>followed by the account number</Description>
+														</Code>
+														<Code Name="NAME">
+															<Format>34x</Format>
+															<Mandatory>true</Mandatory>
+															<Description>followed by the name</Description>
+														</Code>
+														<Code Name="ADD1">
+															<Format>35x</Format>
+															<Description>followed by the first line of the address</Description>
+														</Code>
+														<Code Name="ADD2">
+															<Format>35x</Format>
+															<Description>followed by the second line of the address</Description>
+														</Code>
+														<Code Name="CITY">
+															<Format>35x</Format>
+															<Description>followed by the city (and state, country)</Description>
+														</Code>
+														<Code Name="USFW">
+															<Format>9!n</Format>
+															<Description>followed by FedWire Routing Number</Description>
+														</Code>
+														<Code Name="USCH">
+															<Format>6!n</Format>
+															<Description>followed by CHIPS UID</Description>
+														</Code>
+														<Code Name="GBSC">
+															<Format>6!n</Format>
+															<Description>followed by UK domestic sort code</Description>
+														</Code>
+														<Code Name="CLRC">
+															<Format>35x</Format>
+															<Description>followed by a clearing code</Description>
+														</Code>
+														<Code Name="NETS">
+															<NewGroup>true</NewGroup>
+															<Mandatory>true</Mandatory>
+															<Description>A net settlement is taking place</Description>
+														</Code>
+														<Code Name="SSIS">
+															<NewGroup>true</NewGroup>
+															<Mandatory>true</Mandatory>
+															<Description>Standard settlement instructions are used</Description>
+														</Code>
+													</Codes>
+												</ValidationPattern>
+											</Validation>
+										</SubField>
+										<SubField Name="CreditDebit">
+											<Validation>
+												<Options>A, D</Options>
+												<ErrorCode>T51</ErrorCode>
+												<Comment><![CDATA[CreditDebit must contain the following codes (Error Code:T51)]]></Comment>
+												<ValidationPattern xsi:type="CODE" Type="CODE">
+													<Type>CODE</Type>
+													<Codes>
+														<Code Name="C">
+															<DetailedName>Credit</DetailedName>
+														</Code>
+														<Code Name="D">
+															<DetailedName>Debit</DetailedName>
+														</Code>
+													</Codes>
+												</ValidationPattern>
+											</Validation>
+										</SubField>
+									</Validations>
+								</SwiftField>
+							</Fields>
+						</SwiftSequence>
+						<SwiftSequence Name="B2">
+							<Name>B2</Name>
+							<Description><![CDATA[Amount Sold]]></Description>
+							<Mandatory>true</Mandatory>
+							<Repeating>false</Repeating>
+							<Fields>
+								<SwiftField Name="33B">
+									<SwiftFieldDef Name="33">
+										<Generic>false</Generic>
+										<Description><![CDATA[Currency, Amount Sold]]></Description>
+										<Option Name="B">
+											<Format><![CDATA[3!a15d]]></Format>
+											<Specification><![CDATA[(Currency) (Amount)]]></Specification>
+											<Description><![CDATA[Currency, Amount]]></Description>
+										</Option>
+									</SwiftFieldDef>
+									<Repeating>false</Repeating>
+									<Presence>M</Presence>
+									<Options>B</Options>
+									<Validations>
+										<SubField Name="Currency">
+											<Validation>
+												<Options>B</Options>
+												<ErrorCode>T52</ErrorCode>
+												<Comment><![CDATA[Currency must be a valid ISO 4217 currency code (Error code(s): T52).]]></Comment>
+												<ValidationPattern xsi:type="Currency_Code" Type="Currency Code">
+													<Type>Currency Code</Type>
+												</ValidationPattern>
+											</Validation>
+										</SubField>
+										<SubField Name="Amount">
+											<Validation>
+												<Options>B</Options>
+												<ErrorCode>C03</ErrorCode>
+												<Comment><![CDATA[The number of digits following the comma must not exceed the maximum number allowed for the specified currency.]]></Comment>
+												<ValidationPattern xsi:type="Decimal" Type="Decimal">
+													<Type>Decimal</Type>
+													<currency-field>Currency</currency-field>
+												</ValidationPattern>
+											</Validation>
+										</SubField>
+									</Validations>
+								</SwiftField>
+								<SwiftField Name="53a">
+									<SwiftFieldDef Name="53">
+										<Generic>false</Generic>
+										<Description><![CDATA[Delivery Agent]]></Description>
+										<Option Name="A">
+											<Format><![CDATA[/1!a([/34x])(CRLF4!a2!a2!c[3!c]) | [/34xCRLF](4!a2!a2!c[3!c])]]></Format>
+											<Specification><![CDATA[(CreditDebit)(Party Identifier)(Identifier Code) | (Party Identifier)(Identifier Code)]]></Specification>
+											<Description><![CDATA[Delivery Agent]]></Description>
+										</Option>
+										<Option Name="D">
+											<Format><![CDATA[/1!a([/34x])(CRLF4*35x) | ([/34xCRLF])(4*35x)]]></Format>
+											<Specification><![CDATA[(CreditDebit)(Party Identifier)(Name & Address)|(Party Identifier)(Name & Address)]]></Specification>
+											<Description><![CDATA[Delivery Agent]]></Description>
+										</Option>
+										<Option Name="J">
+											<Format><![CDATA[5*40x]]></Format>
+											<Specification><![CDATA[(Party Identification)]]></Specification>
+											<Description><![CDATA[Delivery Agent]]></Description>
+										</Option>
+									</SwiftFieldDef>
+									<Repeating>false</Repeating>
+									<Presence>O</Presence>
+									<Options>A, D, J</Options>
+									<Validations>
+										<SubField Name="Identifier_Code">
+											<Validation>
+												<Options>A</Options>
+												<ErrorCode>T27, T28, T29, T45</ErrorCode>
+												<Comment><![CDATA[Identifier Code must be a registered BIC or BEI (Error code(s): T27,T28,T29,T45)]]></Comment>
+												<ValidationPattern xsi:type="BIC" Type="BIC">
+													<Type>BIC</Type>
+												</ValidationPattern>
+											</Validation>
+											<Validation>
+												<Options>A</Options>
+												<ErrorCode>C05</ErrorCode>
+												<Comment><![CDATA[Identifier Code must not be a BEI, ie must not be of subtype BEID, MCCO, TESP or TRCO]]></Comment>
+												<ValidationPattern xsi:type="C05" Type="C05">
+													<Type>C05</Type>
+												</ValidationPattern>
+											</Validation>
+										</SubField>
+										<SubField Name="Party_Identification">
+											<Validation>
+												<Options>J</Options>
+												<ErrorCode>T78</ErrorCode>
+												<Comment><![CDATA[With option J, the following codes must be used (Error code(s): T78):]]></Comment>
+												<ValidationPattern xsi:type="Party_Identification" Type="Party Identification">
+													<Type>Party Identification</Type>
+													<Codes>
+														<Code Name="ABIC">
+															<NewGroup>true</NewGroup>
+															<Format>4!a2!a2!c3!c | 4!a2!a2!c | UKWN</Format>
+															<Mandatory>true</Mandatory>
+															<Description>followed by the BIC/BEI or UKWN if BIC/BEI not known</Description>
+														</Code>
+														<Code Name="ACCT">
+															<Format>34x</Format>
+															<Description>followed by the account number</Description>
+														</Code>
+														<Code Name="NAME">
+															<Format>34x</Format>
+															<Mandatory>true</Mandatory>
+															<Description>followed by the name</Description>
+														</Code>
+														<Code Name="ADD1">
+															<Format>35x</Format>
+															<Description>followed by the first line of the address</Description>
+														</Code>
+														<Code Name="ADD2">
+															<Format>35x</Format>
+															<Description>followed by the second line of the address</Description>
+														</Code>
+														<Code Name="CITY">
+															<Format>35x</Format>
+															<Description>followed by the city (and state, country)</Description>
+														</Code>
+														<Code Name="USFW">
+															<Format>9!n</Format>
+															<Description>followed by FedWire Routing Number</Description>
+														</Code>
+														<Code Name="USCH">
+															<Format>6!n</Format>
+															<Description>followed by CHIPS UID</Description>
+														</Code>
+														<Code Name="GBSC">
+															<Format>6!n</Format>
+															<Description>followed by UK domestic sort code</Description>
+														</Code>
+														<Code Name="CLRC">
+															<Format>35x</Format>
+															<Description>followed by a clearing code</Description>
+														</Code>
+														<Code Name="NETS">
+															<NewGroup>true</NewGroup>
+															<Mandatory>true</Mandatory>
+															<Description>A net settlement is taking place</Description>
+														</Code>
+														<Code Name="SSIS">
+															<NewGroup>true</NewGroup>
+															<Mandatory>true</Mandatory>
+															<Description>Standard settlement instructions are used</Description>
+														</Code>
+													</Codes>
+												</ValidationPattern>
+											</Validation>
+										</SubField>
+										<SubField Name="CreditDebit">
+											<Validation>
+												<Options>A, D</Options>
+												<ErrorCode>T51</ErrorCode>
+												<Comment><![CDATA[CreditDebit must contain the following codes (Error Code:T51)]]></Comment>
+												<ValidationPattern xsi:type="CODE" Type="CODE">
+													<Type>CODE</Type>
+													<Codes>
+														<Code Name="C">
+															<DetailedName>Credit</DetailedName>
+														</Code>
+														<Code Name="D">
+															<DetailedName>Debit</DetailedName>
+														</Code>
+													</Codes>
+												</ValidationPattern>
+											</Validation>
+										</SubField>
+									</Validations>
+								</SwiftField>
+								<SwiftField Name="56a">
+									<SwiftFieldDef Name="56">
+										<Generic>false</Generic>
+										<Description><![CDATA[Intermediary]]></Description>
+										<Option Name="A">
+											<Format><![CDATA[/1!a([/34x])(CRLF4!a2!a2!c[3!c]) | [/34xCRLF](4!a2!a2!c[3!c])]]></Format>
+											<Specification><![CDATA[(CreditDebit)(Party Identifier)(Identifier Code) | (Party Identifier)(Identifier Code)]]></Specification>
+											<Description><![CDATA[Intermediary]]></Description>
+										</Option>
+										<Option Name="D">
+											<Format><![CDATA[/1!a([/34x])(CRLF4*35x) | ([/34xCRLF])(4*35x)]]></Format>
+											<Specification><![CDATA[(CreditDebit)(Party Identifier)(Name & Address)|(Party Identifier)(Name & Address)]]></Specification>
+											<Description><![CDATA[Intermediary]]></Description>
+										</Option>
+										<Option Name="J">
+											<Format><![CDATA[5*40x]]></Format>
+											<Specification><![CDATA[(Party Identification)]]></Specification>
+											<Description><![CDATA[Intermediary]]></Description>
+										</Option>
+									</SwiftFieldDef>
+									<Repeating>false</Repeating>
+									<Presence>O</Presence>
+									<Options>A, D, J</Options>
+									<Validations>
+										<SubField Name="Identifier_Code">
+											<Validation>
+												<Options>A</Options>
+												<ErrorCode>T27, T28, T29, T45</ErrorCode>
+												<Comment><![CDATA[Identifier Code must be a registered BIC or BEI (Error code(s): T27,T28,T29,T45)]]></Comment>
+												<ValidationPattern xsi:type="BIC" Type="BIC">
+													<Type>BIC</Type>
+												</ValidationPattern>
+											</Validation>
+											<Validation>
+												<Options>A</Options>
+												<ErrorCode>C05</ErrorCode>
+												<Comment><![CDATA[Identifier Code must not be a BEI, ie must not be of subtype BEID, MCCO, TESP or TRCO]]></Comment>
+												<ValidationPattern xsi:type="C05" Type="C05">
+													<Type>C05</Type>
+												</ValidationPattern>
+											</Validation>
+										</SubField>
+										<SubField Name="Party_Identification">
+											<Validation>
+												<Options>J</Options>
+												<ErrorCode>T78</ErrorCode>
+												<Comment><![CDATA[With option J, the following codes must be used (Error code(s): T78):]]></Comment>
+												<ValidationPattern xsi:type="Party_Identification" Type="Party Identification">
+													<Type>Party Identification</Type>
+													<Codes>
+														<Code Name="ABIC">
+															<NewGroup>true</NewGroup>
+															<Format>4!a2!a2!c3!c | 4!a2!a2!c | UKWN</Format>
+															<Mandatory>true</Mandatory>
+															<Description>followed by the BIC/BEI or UKWN if BIC/BEI not known</Description>
+														</Code>
+														<Code Name="ACCT">
+															<Format>34x</Format>
+															<Description>followed by the account number</Description>
+														</Code>
+														<Code Name="NAME">
+															<Format>34x</Format>
+															<Mandatory>true</Mandatory>
+															<Description>followed by the name</Description>
+														</Code>
+														<Code Name="ADD1">
+															<Format>35x</Format>
+															<Description>followed by the first line of the address</Description>
+														</Code>
+														<Code Name="ADD2">
+															<Format>35x</Format>
+															<Description>followed by the second line of the address</Description>
+														</Code>
+														<Code Name="CITY">
+															<Format>35x</Format>
+															<Description>followed by the city (and state, country)</Description>
+														</Code>
+														<Code Name="USFW">
+															<Format>9!n</Format>
+															<Description>followed by FedWire Routing Number</Description>
+														</Code>
+														<Code Name="USCH">
+															<Format>6!n</Format>
+															<Description>followed by CHIPS UID</Description>
+														</Code>
+														<Code Name="GBSC">
+															<Format>6!n</Format>
+															<Description>followed by UK domestic sort code</Description>
+														</Code>
+														<Code Name="CLRC">
+															<Format>35x</Format>
+															<Description>followed by a clearing code</Description>
+														</Code>
+														<Code Name="NETS">
+															<NewGroup>true</NewGroup>
+															<Mandatory>true</Mandatory>
+															<Description>A net settlement is taking place</Description>
+														</Code>
+														<Code Name="SSIS">
+															<NewGroup>true</NewGroup>
+															<Mandatory>true</Mandatory>
+															<Description>Standard settlement instructions are used</Description>
+														</Code>
+													</Codes>
+												</ValidationPattern>
+											</Validation>
+										</SubField>
+										<SubField Name="CreditDebit">
+											<Validation>
+												<Options>A, D</Options>
+												<ErrorCode>T51</ErrorCode>
+												<Comment><![CDATA[CreditDebit must contain the following codes (Error Code:T51)]]></Comment>
+												<ValidationPattern xsi:type="CODE" Type="CODE">
+													<Type>CODE</Type>
+													<Codes>
+														<Code Name="C">
+															<DetailedName>Credit</DetailedName>
+														</Code>
+														<Code Name="D">
+															<DetailedName>Debit</DetailedName>
+														</Code>
+													</Codes>
+												</ValidationPattern>
+											</Validation>
+										</SubField>
+									</Validations>
+								</SwiftField>
+								<SwiftField Name="57a">
+									<SwiftFieldDef Name="57">
+										<Generic>false</Generic>
+										<Description><![CDATA[Receiving Agent]]></Description>
+										<Option Name="A">
+											<Format><![CDATA[/1!a([/34x])(CRLF4!a2!a2!c[3!c]) | [/34xCRLF](4!a2!a2!c[3!c])]]></Format>
+											<Specification><![CDATA[(CreditDebit)(Party Identifier)(Identifier Code) | (Party Identifier)(Identifier Code)]]></Specification>
+											<Description><![CDATA[Receiving Agent]]></Description>
+										</Option>
+										<Option Name="D">
+											<Format><![CDATA[/1!a([/34x])(CRLF4*35x) | ([/34xCRLF])(4*35x)]]></Format>
+											<Specification><![CDATA[(CreditDebit)(Party Identifier)(Name & Address)|(Party Identifier)(Name & Address)]]></Specification>
+											<Description><![CDATA[Receiving Agent]]></Description>
+										</Option>
+										<Option Name="J">
+											<Format><![CDATA[5*40x]]></Format>
+											<Specification><![CDATA[(Party Identification)]]></Specification>
+											<Description><![CDATA[Receiving Agent]]></Description>
+										</Option>
+									</SwiftFieldDef>
+									<Repeating>false</Repeating>
+									<Presence>M</Presence>
+									<Options>A, D, J</Options>
+									<Validations>
+										<SubField Name="Identifier_Code">
+											<Validation>
+												<Options>A</Options>
+												<ErrorCode>T27, T28, T29, T45</ErrorCode>
+												<Comment><![CDATA[Identifier Code must be a registered BIC or BEI (Error code(s): T27,T28,T29,T45)]]></Comment>
+												<ValidationPattern xsi:type="BIC" Type="BIC">
+													<Type>BIC</Type>
+												</ValidationPattern>
+											</Validation>
+											<Validation>
+												<Options>A</Options>
+												<ErrorCode>C05</ErrorCode>
+												<Comment><![CDATA[Identifier Code must not be a BEI, ie must not be of subtype BEID, MCCO, TESP or TRCO]]></Comment>
+												<ValidationPattern xsi:type="C05" Type="C05">
+													<Type>C05</Type>
+												</ValidationPattern>
+											</Validation>
+										</SubField>
+										<SubField Name="Party_Identification">
+											<Validation>
+												<Options>J</Options>
+												<ErrorCode>T78</ErrorCode>
+												<Comment><![CDATA[With option J, the following codes must be used (Error code(s): T78):]]></Comment>
+												<ValidationPattern xsi:type="Party_Identification" Type="Party Identification">
+													<Type>Party Identification</Type>
+													<Codes>
+														<Code Name="ABIC">
+															<NewGroup>true</NewGroup>
+															<Format>4!a2!a2!c3!c | 4!a2!a2!c | UKWN</Format>
+															<Mandatory>true</Mandatory>
+															<Description>followed by the BIC/BEI or UKWN if BIC/BEI not known</Description>
+														</Code>
+														<Code Name="ACCT">
+															<Format>34x</Format>
+															<Description>followed by the account number</Description>
+														</Code>
+														<Code Name="NAME">
+															<Format>34x</Format>
+															<Mandatory>true</Mandatory>
+															<Description>followed by the name</Description>
+														</Code>
+														<Code Name="ADD1">
+															<Format>35x</Format>
+															<Description>followed by the first line of the address</Description>
+														</Code>
+														<Code Name="ADD2">
+															<Format>35x</Format>
+															<Description>followed by the second line of the address</Description>
+														</Code>
+														<Code Name="CITY">
+															<Format>35x</Format>
+															<Description>followed by the city (and state, country)</Description>
+														</Code>
+														<Code Name="USFW">
+															<Format>9!n</Format>
+															<Description>followed by FedWire Routing Number</Description>
+														</Code>
+														<Code Name="USCH">
+															<Format>6!n</Format>
+															<Description>followed by CHIPS UID</Description>
+														</Code>
+														<Code Name="GBSC">
+															<Format>6!n</Format>
+															<Description>followed by UK domestic sort code</Description>
+														</Code>
+														<Code Name="CLRC">
+															<Format>35x</Format>
+															<Description>followed by a clearing code</Description>
+														</Code>
+														<Code Name="NETS">
+															<NewGroup>true</NewGroup>
+															<Mandatory>true</Mandatory>
+															<Description>A net settlement is taking place</Description>
+														</Code>
+														<Code Name="SSIS">
+															<NewGroup>true</NewGroup>
+															<Mandatory>true</Mandatory>
+															<Description>Standard settlement instructions are used</Description>
+														</Code>
+													</Codes>
+												</ValidationPattern>
+											</Validation>
+										</SubField>
+										<SubField Name="CreditDebit">
+											<Validation>
+												<Options>A, D</Options>
+												<ErrorCode>T51</ErrorCode>
+												<Comment><![CDATA[CreditDebit must contain the following codes (Error Code:T51)]]></Comment>
+												<ValidationPattern xsi:type="CODE" Type="CODE">
+													<Type>CODE</Type>
+													<Codes>
+														<Code Name="C">
+															<DetailedName>Credit</DetailedName>
+														</Code>
+														<Code Name="D">
+															<DetailedName>Debit</DetailedName>
+														</Code>
+													</Codes>
+												</ValidationPattern>
+											</Validation>
+										</SubField>
+									</Validations>
+								</SwiftField>
+								<SwiftField Name="58a">
+									<SwiftFieldDef Name="58">
+										<Generic>false</Generic>
+										<Description><![CDATA[Beneficiary Bank]]></Description>
+										<Option Name="A">
+											<Format><![CDATA[/1!a([/34x])(CRLF4!a2!a2!c[3!c]) | [/34xCRLF](4!a2!a2!c[3!c])]]></Format>
+											<Specification><![CDATA[(CreditDebit)(Party Identifier)(Identifier Code) | (Party Identifier)(Identifier Code)]]></Specification>
+											<Description><![CDATA[Beneficiary Institution]]></Description>
+										</Option>
+										<Option Name="D">
+											<Format><![CDATA[/1!a([/34x])(CRLF4*35x) | ([/34xCRLF])(4*35x)]]></Format>
+											<Specification><![CDATA[(CreditDebit)(Party Identifier)(Name & Address)|(Party Identifier)(Name & Address)]]></Specification>
+											<Description><![CDATA[Beneficiary Institution]]></Description>
+										</Option>
+										<Option Name="J">
+											<Format><![CDATA[5*40x]]></Format>
+											<Specification><![CDATA[(Party Identification)]]></Specification>
+											<Description><![CDATA[Beneficiary Institution]]></Description>
+										</Option>
+									</SwiftFieldDef>
+									<Repeating>false</Repeating>
+									<Presence>O</Presence>
+									<Options>A, D, J</Options>
+									<Validations>
+										<SubField Name="Identifier_Code">
+											<Validation>
+												<Options>A</Options>
+												<ErrorCode>T27, T28, T29, T45</ErrorCode>
+												<Comment><![CDATA[Identifier Code must be a registered BIC or BEI (Error code(s): T27,T28,T29,T45)]]></Comment>
+												<ValidationPattern xsi:type="BIC" Type="BIC">
+													<Type>BIC</Type>
+												</ValidationPattern>
+											</Validation>
+										</SubField>
+										<SubField Name="Party_Identification">
+											<Validation>
+												<Options>J</Options>
+												<ErrorCode>T78</ErrorCode>
+												<Comment><![CDATA[In option J, Party Identification must be specified as a list of pairs (Code)(Value) and the following codes and format must be used (Error code(s): T78).]]></Comment>
+												<ValidationPattern xsi:type="Party_Identification" Type="Party Identification">
+													<Type>Party Identification</Type>
+													<Codes>
+														<Code Name="ABIC">
+															<NewGroup>true</NewGroup>
+															<Format>4!a2!a2!c3!c | 4!a2!a2!c | UKWN</Format>
+															<Mandatory>true</Mandatory>
+															<Description>followed by the BIC/BEI or UKWN if BIC/BEI not known</Description>
+														</Code>
+														<Code Name="ACCT">
+															<Format>34x</Format>
+															<Description>followed by the account number</Description>
+														</Code>
+														<Code Name="NAME">
+															<Format>34x</Format>
+															<Mandatory>true</Mandatory>
+															<Description>followed by the name</Description>
+														</Code>
+														<Code Name="ADD1">
+															<Format>35x</Format>
+															<Description>followed by the first line of the address</Description>
+														</Code>
+														<Code Name="ADD2">
+															<Format>35x</Format>
+															<Description>followed by the second line of the address</Description>
+														</Code>
+														<Code Name="CITY">
+															<Format>35x</Format>
+															<Description>followed by the city (and state, country)</Description>
+														</Code>
+														<Code Name="USFW">
+															<Format>9!n</Format>
+															<Description>followed by FedWire Routing Number</Description>
+														</Code>
+														<Code Name="USCH">
+															<Format>6!n</Format>
+															<Description>followed by CHIPS UID</Description>
+														</Code>
+														<Code Name="GBSC">
+															<Format>6!n</Format>
+															<Description>followed by UK domestic sort code</Description>
+														</Code>
+														<Code Name="LEIC">
+															<Format>18!c2!n</Format>
+															<Description>Legal Entity Identifier</Description>
+														</Code>
+														<Code Name="CLRC">
+															<Format>35x</Format>
+															<Description>followed by a clearing code</Description>
+														</Code>
+													</Codes>
+												</ValidationPattern>
+											</Validation>
+										</SubField>
+										<SubField Name="CreditDebit">
+											<Validation>
+												<Options>A, D</Options>
+												<ErrorCode>T51</ErrorCode>
+												<Comment><![CDATA[CreditDebit must contain the following codes (Error Code:T51)]]></Comment>
+												<ValidationPattern xsi:type="CODE" Type="CODE">
+													<Type>CODE</Type>
+													<Codes>
+														<Code Name="C">
+															<DetailedName>Credit</DetailedName>
+														</Code>
+														<Code Name="D">
+															<DetailedName>Debit</DetailedName>
+														</Code>
+													</Codes>
+												</ValidationPattern>
+											</Validation>
+										</SubField>
+									</Validations>
+								</SwiftField>
+							</Fields>
+						</SwiftSequence>
+					</Fields>
+				</SwiftSequence>
+				<SwiftSequence Name="C">
+					<Name>C</Name>
+					<Description><![CDATA[Optional General Information]]></Description>
+					<Mandatory>false</Mandatory>
+					<Repeating>false</Repeating>
+					<NewSequeceStart>true</NewSequeceStart>
+					<StartBlockField>15C</StartBlockField>
+					<Fields>
+						<SwiftField Name="29A">
+							<SwiftFieldDef Name="29">
+								<Generic>false</Generic>
+								<Option Name="A">
+									<Format><![CDATA[4*35x]]></Format>
+									<Specification><![CDATA[(Narrative)]]></Specification>
+									<Description><![CDATA[Contact Information]]></Description>
+								</Option>
+							</SwiftFieldDef>
+							<Repeating>false</Repeating>
+							<Presence>O</Presence>
+							<Options>A</Options>
+						</SwiftField>
+						<SwiftField Name="24D">
+							<SwiftFieldDef Name="24">
+								<Generic>false</Generic>
+								<Description><![CDATA[Reason Code]]></Description>
+								<Option Name="D">
+									<Format><![CDATA[4!c[/35x]]]></Format>
+									<Specification><![CDATA[(Method) (Additional Information)]]></Specification>
+									<Description><![CDATA[Dealing Method]]></Description>
+								</Option>
+							</SwiftFieldDef>
+							<Repeating>false</Repeating>
+							<Presence>O</Presence>
+							<Options>D</Options>
+							<Validations>
+								<SubField Name="Method">
+									<Validation>
+										<Options>D</Options>
+										<ErrorCode>T68</ErrorCode>
+										<Comment><![CDATA[Method must contain one of the following codes, optionally followed with additional information (Error code(s): T68):]]></Comment>
+										<ValidationPattern xsi:type="CODE" Type="CODE">
+											<Type>CODE</Type>
+											<Codes>
+												<Code Name="BROK">
+													<Description>Deal arranged by a voice broker.</Description>
+												</Code>
+												<Code Name="ELEC">
+													<Description>Deal made via an electronic system (Reuters, EBS etc.).</Description>
+												</Code>
+												<Code Name="FAXT">
+													<Description>Deal agreed by fax.</Description>
+												</Code>
+												<Code Name="PHON">
+													<Description>Deal agreed on the phone.</Description>
+												</Code>
+												<Code Name="TELX">
+													<Description>Deal agreed by telex.</Description>
+												</Code>
+											</Codes>
+										</ValidationPattern>
+									</Validation>
+								</SubField>
+							</Validations>
+						</SwiftField>
+						<SwiftField Name="84a">
+							<SwiftFieldDef Name="84">
+								<Generic>false</Generic>
+								<Option Name="A">
+									<Format><![CDATA[/1!a([/34x])(CRLF4!a2!a2!c[3!c]) | [/34xCRLF](4!a2!a2!c[3!c])]]></Format>
+									<Specification><![CDATA[(CreditDebit)(Party Identifier)(Identifier Code) | (Party Identifier)(Identifier Code)]]></Specification>
+									<Description><![CDATA[Dealing Branch Party A]]></Description>
+								</Option>
+								<Option Name="B">
+									<Format><![CDATA[/1!a[/34x](CRLF35x) | /1!a[/34x] | [/34xCRLF]35x | /34x]]></Format>
+									<Specification><![CDATA[(CreditDebit) (Party Identifier) (Location) | (CreditDebit)(Party Identifier) |(Party Identifier) (Location) | (Party Identifier)]]></Specification>
+									<Description><![CDATA[Dealing Branch Party A]]></Description>
+								</Option>
+								<Option Name="D">
+									<Format><![CDATA[/1!a([/34x])(CRLF4*35x) | ([/34xCRLF])(4*35x)]]></Format>
+									<Specification><![CDATA[(CreditDebit)(Party Identifier)(Name & Address)|(Party Identifier)(Name & Address)]]></Specification>
+									<Description><![CDATA[Dealing Branch Party A]]></Description>
+								</Option>
+								<Option Name="J">
+									<Format><![CDATA[5*40x]]></Format>
+									<Specification><![CDATA[(Party Identification)]]></Specification>
+									<Description><![CDATA[Dealing Branch Party A]]></Description>
+								</Option>
+							</SwiftFieldDef>
+							<Repeating>false</Repeating>
+							<Presence>O</Presence>
+							<Options>A, J, D, B</Options>
+							<Validations>
+								<SubField Name="Identifier_Code">
+									<Validation>
+										<Options>A</Options>
+										<ErrorCode>T27, T28, T29, T45</ErrorCode>
+										<Comment><![CDATA[Identifier Code must be a registered BIC or BEI (Error code(s): T27,T28,T29,T45)]]></Comment>
+										<ValidationPattern xsi:type="BIC" Type="BIC">
+											<Type>BIC</Type>
+										</ValidationPattern>
+									</Validation>
+								</SubField>
+								<SubField Name="Party_Identification">
+									<Validation>
+										<Options>J</Options>
+										<ErrorCode>T78</ErrorCode>
+										<Comment><![CDATA[In option J, Party Identification must be specified as a list of pairs (Code)(Value) and the following codes and format must be used (Error code(s): T78).]]></Comment>
+										<ValidationPattern xsi:type="Party_Identification" Type="Party Identification">
+											<Type>Party Identification</Type>
+											<Codes>
+												<Code Name="ABIC">
+													<NewGroup>true</NewGroup>
+													<Format>4!a2!a2!c3!c | 4!a2!a2!c | UKWN</Format>
+													<Mandatory>true</Mandatory>
+													<Description>followed by the BIC/BEI or UKWN if BIC/BEI not known</Description>
+												</Code>
+												<Code Name="ACCT">
+													<Format>34x</Format>
+													<Description>followed by the account number</Description>
+												</Code>
+												<Code Name="NAME">
+													<Format>34x</Format>
+													<Mandatory>true</Mandatory>
+													<Description>followed by the name</Description>
+												</Code>
+												<Code Name="ADD1">
+													<Format>35x</Format>
+													<Description>followed by the first line of the address</Description>
+												</Code>
+												<Code Name="ADD2">
+													<Format>35x</Format>
+													<Description>followed by the second line of the address</Description>
+												</Code>
+												<Code Name="CITY">
+													<Format>35x</Format>
+													<Description>followed by the city (and state, country)</Description>
+												</Code>
+												<Code Name="USFW">
+													<Format>9!n</Format>
+													<Description>followed by FedWire Routing Number</Description>
+												</Code>
+												<Code Name="USCH">
+													<Format>6!n</Format>
+													<Description>followed by CHIPS UID</Description>
+												</Code>
+												<Code Name="GBSC">
+													<Format>6!n</Format>
+													<Description>followed by UK domestic sort code</Description>
+												</Code>
+												<Code Name="LEIC">
+													<Format>18!c2!n</Format>
+													<Description>Legal Entity Identifier</Description>
+												</Code>
+												<Code Name="CLRC">
+													<Format>35x</Format>
+													<Description>followed by a clearing code</Description>
+												</Code>
+											</Codes>
+										</ValidationPattern>
+									</Validation>
+								</SubField>
+								<SubField Name="CreditDebit">
+									<Validation>
+										<Options>A, B, D</Options>
+										<ErrorCode>T51</ErrorCode>
+										<Comment><![CDATA[CreditDebit must contain the following codes (Error Code:T51)]]></Comment>
+										<ValidationPattern xsi:type="CODE" Type="CODE">
+											<Type>CODE</Type>
+											<Codes>
+												<Code Name="C">
+													<DetailedName>Credit</DetailedName>
+												</Code>
+												<Code Name="D">
+													<DetailedName>Debit</DetailedName>
+												</Code>
+											</Codes>
+										</ValidationPattern>
+									</Validation>
+								</SubField>
+							</Validations>
+						</SwiftField>
+						<SwiftField Name="85a">
+							<SwiftFieldDef Name="85">
+								<Generic>false</Generic>
+								<Option Name="A">
+									<Format><![CDATA[/1!a([/34x])(CRLF4!a2!a2!c[3!c]) | [/34xCRLF](4!a2!a2!c[3!c])]]></Format>
+									<Specification><![CDATA[(CreditDebit)(Party Identifier)(Identifier Code) | (Party Identifier)(Identifier Code)]]></Specification>
+									<Description><![CDATA[Dealing Branch Party B]]></Description>
+								</Option>
+								<Option Name="B">
+									<Format><![CDATA[/1!a[/34x](CRLF35x) | /1!a[/34x] | [/34xCRLF]35x | /34x]]></Format>
+									<Specification><![CDATA[(CreditDebit) (Party Identifier) (Location) | (CreditDebit)(Party Identifier) |(Party Identifier) (Location) | (Party Identifier)
+]]></Specification>
+									<Description><![CDATA[Dealing Branch Party B]]></Description>
+								</Option>
+								<Option Name="D">
+									<Format><![CDATA[/1!a([/34x])(CRLF4*35x) | ([/34xCRLF])(4*35x)]]></Format>
+									<Specification><![CDATA[(CreditDebit)(Party Identifier)(Name & Address)|(Party Identifier)(Name & Address)]]></Specification>
+									<Description><![CDATA[Dealing Branch Party B]]></Description>
+								</Option>
+								<Option Name="J">
+									<Format><![CDATA[5*40x]]></Format>
+									<Specification><![CDATA[(Party Identification)]]></Specification>
+									<Description><![CDATA[Dealing Branch Party B]]></Description>
+								</Option>
+							</SwiftFieldDef>
+							<Repeating>false</Repeating>
+							<Presence>O</Presence>
+							<Options>A, B, D, J</Options>
+							<Validations>
+								<SubField Name="Identifier_Code">
+									<Validation>
+										<Options>A</Options>
+										<ErrorCode>T27, T28, T29, T45</ErrorCode>
+										<Comment><![CDATA[Identifier Code must be a registered BIC or BEI (Error code(s): T27,T28,T29,T45)]]></Comment>
+										<ValidationPattern xsi:type="BIC" Type="BIC">
+											<Type>BIC</Type>
+										</ValidationPattern>
+									</Validation>
+								</SubField>
+								<SubField Name="Party_Identification">
+									<Validation>
+										<Options>J</Options>
+										<ErrorCode>T78</ErrorCode>
+										<Comment><![CDATA[In option J, Party Identification must be specified as a list of pairs (Code)(Value) and the following codes and format must be used (Error code(s): T78).]]></Comment>
+										<ValidationPattern xsi:type="Party_Identification" Type="Party Identification">
+											<Type>Party Identification</Type>
+											<Codes>
+												<Code Name="ABIC">
+													<NewGroup>true</NewGroup>
+													<Format>4!a2!a2!c3!c | 4!a2!a2!c | UKWN</Format>
+													<Mandatory>true</Mandatory>
+													<Description>followed by the BIC/BEI or UKWN if BIC/BEI not known</Description>
+												</Code>
+												<Code Name="ACCT">
+													<Format>34x</Format>
+													<Description>followed by the account number</Description>
+												</Code>
+												<Code Name="NAME">
+													<Format>34x</Format>
+													<Mandatory>true</Mandatory>
+													<Description>followed by the name</Description>
+												</Code>
+												<Code Name="ADD1">
+													<Format>35x</Format>
+													<Description>followed by the first line of the address</Description>
+												</Code>
+												<Code Name="ADD2">
+													<Format>35x</Format>
+													<Description>followed by the second line of the address</Description>
+												</Code>
+												<Code Name="CITY">
+													<Format>35x</Format>
+													<Description>followed by the city (and state, country)</Description>
+												</Code>
+												<Code Name="USFW">
+													<Format>9!n</Format>
+													<Description>followed by FedWire Routing Number</Description>
+												</Code>
+												<Code Name="USCH">
+													<Format>6!n</Format>
+													<Description>followed by CHIPS UID</Description>
+												</Code>
+												<Code Name="GBSC">
+													<Format>6!n</Format>
+													<Description>followed by UK domestic sort code</Description>
+												</Code>
+												<Code Name="LEIC">
+													<Format>18!c2!n</Format>
+													<Description>Legal Entity Identifier</Description>
+												</Code>
+												<Code Name="CLRC">
+													<Format>35x</Format>
+													<Description>followed by a clearing code</Description>
+												</Code>
+											</Codes>
+										</ValidationPattern>
+									</Validation>
+								</SubField>
+								<SubField Name="CreditDebit">
+									<Validation>
+										<Options>A, B, D</Options>
+										<ErrorCode>T51</ErrorCode>
+										<Comment><![CDATA[CreditDebit must contain the following codes (Error Code:T51)]]></Comment>
+										<ValidationPattern xsi:type="CODE" Type="CODE">
+											<Type>CODE</Type>
+											<Codes>
+												<Code Name="C">
+													<DetailedName>Credit</DetailedName>
+												</Code>
+												<Code Name="D">
+													<DetailedName>Debit</DetailedName>
+												</Code>
+											</Codes>
+										</ValidationPattern>
+									</Validation>
+								</SubField>
+							</Validations>
+						</SwiftField>
+						<SwiftField Name="88a">
+							<SwiftFieldDef Name="88">
+								<Generic>false</Generic>
+								<Option Name="A">
+									<Format><![CDATA[/1!a([/34x])(CRLF4!a2!a2!c[3!c]) | [/34xCRLF](4!a2!a2!c[3!c])]]></Format>
+									<Specification><![CDATA[(CreditDebit)(Party Identifier)(Identifier Code) | (Party Identifier)(Identifier Code)]]></Specification>
+									<Description><![CDATA[Broker Identification]]></Description>
+								</Option>
+								<Option Name="D">
+									<Format><![CDATA[/1!a([/34x])(CRLF4*35x) | ([/34xCRLF])(4*35x)]]></Format>
+									<Specification><![CDATA[(CreditDebit)(Party Identifier)(Name & Address)|(Party Identifier)(Name & Address)]]></Specification>
+									<Description><![CDATA[Broker Identification]]></Description>
+								</Option>
+								<Option Name="J">
+									<Format><![CDATA[5*40x]]></Format>
+									<Specification><![CDATA[(Party Identification)]]></Specification>
+									<Description><![CDATA[Broker Identification]]></Description>
+								</Option>
+							</SwiftFieldDef>
+							<Repeating>false</Repeating>
+							<Presence>O</Presence>
+							<Options>A, D, J</Options>
+							<Validations>
+								<SubField Name="Identifier_Code">
+									<Validation>
+										<Options>A</Options>
+										<ErrorCode>T27, T28, T29, T45</ErrorCode>
+										<Comment><![CDATA[Identifier Code must be a registered BIC or BEI (Error code(s): T27,T28,T29,T45)]]></Comment>
+										<ValidationPattern xsi:type="BIC" Type="BIC">
+											<Type>BIC</Type>
+										</ValidationPattern>
+									</Validation>
+								</SubField>
+								<SubField Name="Party_Identification">
+									<Validation>
+										<Options>J</Options>
+										<ErrorCode>T78</ErrorCode>
+										<Comment><![CDATA[In option J, Party Identification must be specified as a list of pairs (Code)(Value) and the following codes and format must be used (Error code(s): T78).]]></Comment>
+										<ValidationPattern xsi:type="Party_Identification" Type="Party Identification">
+											<Type>Party Identification</Type>
+											<Codes>
+												<Code Name="ABIC">
+													<NewGroup>true</NewGroup>
+													<Format>4!a2!a2!c3!c | 4!a2!a2!c | UKWN</Format>
+													<Mandatory>true</Mandatory>
+													<Description>followed by the BIC/BEI or UKWN if BIC/BEI not known</Description>
+												</Code>
+												<Code Name="ACCT">
+													<Format>34x</Format>
+													<Description>followed by the account number</Description>
+												</Code>
+												<Code Name="NAME">
+													<Format>34x</Format>
+													<Mandatory>true</Mandatory>
+													<Description>followed by the name</Description>
+												</Code>
+												<Code Name="ADD1">
+													<Format>35x</Format>
+													<Description>followed by the first line of the address</Description>
+												</Code>
+												<Code Name="ADD2">
+													<Format>35x</Format>
+													<Description>followed by the second line of the address</Description>
+												</Code>
+												<Code Name="CITY">
+													<Format>35x</Format>
+													<Description>followed by the city (and state, country)</Description>
+												</Code>
+												<Code Name="USFW">
+													<Format>9!n</Format>
+													<Description>followed by FedWire Routing Number</Description>
+												</Code>
+												<Code Name="USCH">
+													<Format>6!n</Format>
+													<Description>followed by CHIPS UID</Description>
+												</Code>
+												<Code Name="GBSC">
+													<Format>6!n</Format>
+													<Description>followed by UK domestic sort code</Description>
+												</Code>
+												<Code Name="LEIC">
+													<Format>18!c2!n</Format>
+													<Description>Legal Entity Identifier</Description>
+												</Code>
+												<Code Name="CLRC">
+													<Format>35x</Format>
+													<Description>followed by a clearing code</Description>
+												</Code>
+											</Codes>
+										</ValidationPattern>
+									</Validation>
+								</SubField>
+								<SubField Name="CreditDebit">
+									<Validation>
+										<Options>A, D</Options>
+										<ErrorCode>T51</ErrorCode>
+										<Comment><![CDATA[CreditDebit must contain the following codes (Error Code:T51)]]></Comment>
+										<ValidationPattern xsi:type="CODE" Type="CODE">
+											<Type>CODE</Type>
+											<Codes>
+												<Code Name="C">
+													<DetailedName>Credit</DetailedName>
+												</Code>
+												<Code Name="D">
+													<DetailedName>Debit</DetailedName>
+												</Code>
+											</Codes>
+										</ValidationPattern>
+									</Validation>
+								</SubField>
+							</Validations>
+						</SwiftField>
+						<SwiftField Name="71F">
+							<SwiftFieldDef Name="71">
+								<Generic>false</Generic>
+								<Option Name="F">
+									<Format><![CDATA[3!a15d]]></Format>
+									<Specification><![CDATA[(Currency) (Amount)]]></Specification>
+									<Description><![CDATA[Broker's Commission]]></Description>
+								</Option>
+							</SwiftFieldDef>
+							<Repeating>false</Repeating>
+							<Presence>O</Presence>
+							<Options>F</Options>
+							<Validations>
+								<SubField Name="Currency">
+									<Validation>
+										<Options>F</Options>
+										<ErrorCode>T52</ErrorCode>
+										<Comment><![CDATA[Currency must be a valid ISO 4217 currency code (Error code(s): T52).]]></Comment>
+										<ValidationPattern xsi:type="Currency_Code" Type="Currency Code">
+											<Type>Currency Code</Type>
+										</ValidationPattern>
+									</Validation>
+								</SubField>
+								<SubField Name="Amount">
+									<Validation>
+										<Options>F</Options>
+										<ErrorCode>C03</ErrorCode>
+										<Comment><![CDATA[The number of digits following the comma must not exceed the maximum number allowed for the specified currency.]]></Comment>
+										<ValidationPattern xsi:type="Decimal" Type="Decimal">
+											<Type>Decimal</Type>
+											<currency-field>Currency</currency-field>
+										</ValidationPattern>
+									</Validation>
+								</SubField>
+							</Validations>
+						</SwiftField>
+						<SwiftField Name="26H">
+							<SwiftFieldDef Name="26">
+								<Generic>false</Generic>
+								<Option Name="H">
+									<Format><![CDATA[16x]]></Format>
+									<Specification><![CDATA[(Counterparty's Reference)]]></Specification>
+									<Description><![CDATA[Counterparty's Reference]]></Description>
+								</Option>
+							</SwiftFieldDef>
+							<Repeating>false</Repeating>
+							<Presence>O</Presence>
+							<Options>H</Options>
+						</SwiftField>
+						<SwiftField Name="21G">
+							<SwiftFieldDef Name="21">
+								<Generic>false</Generic>
+								<Option Name="G">
+									<Format><![CDATA[16x]]></Format>
+									<Specification><![CDATA[(Broker's Reference)]]></Specification>
+									<Description><![CDATA[Broker's Reference]]></Description>
+								</Option>
+							</SwiftFieldDef>
+							<Repeating>false</Repeating>
+							<Presence>O</Presence>
+							<Options>G</Options>
+							<Validations>
+								<SubField Name="Broker's_Reference">
+									<Validation>
+										<Options>G</Options>
+										<ErrorCode>T26</ErrorCode>
+										<Comment><![CDATA[This field must not start or end with a slash '/' and must not contain two consecutive slashes '//'. (Error code(s): T26).]]></Comment>
+										<ValidationPattern xsi:type="T26" Type="T26">
+											<Type>T26</Type>
+										</ValidationPattern>
+									</Validation>
+								</SubField>
+							</Validations>
+						</SwiftField>
+						<SwiftField Name="72">
+							<SwiftFieldDef Name="72">
+								<Generic>false</Generic>
+								<Description><![CDATA[Sender to Receiver Information]]></Description>
+								<Option Name="">
+									<Format><![CDATA[6*35x]]></Format>
+									<Specification><![CDATA[(Narrative)]]></Specification>
+									<Description><![CDATA[Sender to Receiver Information]]></Description>
+								</Option>
+							</SwiftFieldDef>
+							<Repeating>false</Repeating>
+							<Presence>O</Presence>
+							<Options> </Options>
+						</SwiftField>
+					</Fields>
+				</SwiftSequence>
+				<SwiftSequence Name="D">
+					<Name>D</Name>
+					<Description><![CDATA[Split Settlement Details]]></Description>
+					<Mandatory>false</Mandatory>
+					<Repeating>false</Repeating>
+					<NewSequeceStart>true</NewSequeceStart>
+					<StartBlockField>15D</StartBlockField>
+					<Fields>
+						<SwiftSequence Name="D1">
+							<Name>D1</Name>
+							<Description><![CDATA[Subsequence of D]]></Description>
+							<Mandatory>true</Mandatory>
+							<Repeating>true</Repeating>
+							<Fields>
+								<SwiftField Name="17A">
+									<SwiftFieldDef Name="17">
+										<Generic>false</Generic>
+										<Description><![CDATA[Flag]]></Description>
+										<Option Name="A">
+											<Format><![CDATA[1!a]]></Format>
+											<Specification><![CDATA[(Indicator)]]></Specification>
+											<Description><![CDATA[Buy (Sell) Indicator]]></Description>
+										</Option>
+									</SwiftFieldDef>
+									<Repeating>false</Repeating>
+									<Presence>M</Presence>
+									<Options>A</Options>
+									<Validations>
+										<SubField Name="Indicator">
+											<Validation>
+												<Options>A</Options>
+												<ErrorCode>T36</ErrorCode>
+												<Comment><![CDATA[One of the following codes must be used (Error code(s): T36):]]></Comment>
+												<ValidationPattern xsi:type="CODE" Type="CODE">
+													<Type>CODE</Type>
+													<Codes>
+														<Code Name="N">
+															<Description>Party A pays the amount.</Description>
+														</Code>
+														<Code Name="Y">
+															<Description>Party A receives the amount.</Description>
+														</Code>
+													</Codes>
+												</ValidationPattern>
+											</Validation>
+										</SubField>
+									</Validations>
+								</SwiftField>
+								<SwiftField Name="32B">
+									<SwiftFieldDef Name="32">
+										<Generic>false</Generic>
+										<Option Name="B">
+											<Format><![CDATA[3!a15d]]></Format>
+											<Specification><![CDATA[(Currency) (Amount)]]></Specification>
+											<Description><![CDATA[Currency, Amount]]></Description>
+										</Option>
+									</SwiftFieldDef>
+									<Repeating>false</Repeating>
+									<Presence>M</Presence>
+									<Options>B</Options>
+									<Validations>
+										<SubField Name="Currency">
+											<Validation>
+												<Options>B</Options>
+												<ErrorCode>T52</ErrorCode>
+												<Comment><![CDATA[Currency must be a valid ISO 4217 currency code (Error code(s): T52).]]></Comment>
+												<ValidationPattern xsi:type="Currency_Code" Type="Currency Code">
+													<Type>Currency Code</Type>
+												</ValidationPattern>
+											</Validation>
+										</SubField>
+										<SubField Name="Amount">
+											<Validation>
+												<Options>B</Options>
+												<ErrorCode>C03</ErrorCode>
+												<Comment><![CDATA[The number of digits following the comma must not exceed the maximum number allowed for the specified currency.]]></Comment>
+												<ValidationPattern xsi:type="Decimal" Type="Decimal">
+													<Type>Decimal</Type>
+													<currency-field>Currency</currency-field>
+												</ValidationPattern>
+											</Validation>
+										</SubField>
+									</Validations>
+								</SwiftField>
+								<SwiftField Name="53a">
+									<SwiftFieldDef Name="53">
+										<Generic>false</Generic>
+										<Option Name="A">
+											<Format><![CDATA[/1!a([/34x])(CRLF4!a2!a2!c[3!c]) | [/34xCRLF](4!a2!a2!c[3!c])]]></Format>
+											<Specification><![CDATA[(CreditDebit)(Party Identifier)(Identifier Code) | (Party Identifier)(Identifier Code)]]></Specification>
+											<Description><![CDATA[Delivery Agent]]></Description>
+										</Option>
+										<Option Name="D">
+											<Format><![CDATA[/1!a([/34x])(CRLF4*35x) | ([/34xCRLF])(4*35x)]]></Format>
+											<Specification><![CDATA[(CreditDebit)(Party Identifier)(Name & Address)|(Party Identifier)(Name & Address)]]></Specification>
+											<Description><![CDATA[Delivery Agent]]></Description>
+										</Option>
+										<Option Name="J">
+											<Format><![CDATA[5*40x]]></Format>
+											<Specification><![CDATA[(Party Identification)]]></Specification>
+											<Description><![CDATA[Delivery Agent]]></Description>
+										</Option>
+									</SwiftFieldDef>
+									<Repeating>false</Repeating>
+									<Presence>O</Presence>
+									<Options>A, D, J</Options>
+									<Validations>
+										<SubField Name="Identifier_Code">
+											<Validation>
+												<Options>A</Options>
+												<ErrorCode>T27, T28, T29, T45</ErrorCode>
+												<Comment><![CDATA[Identifier Code must be a registered BIC or BEI (Error code(s): T27,T28,T29,T45)]]></Comment>
+												<ValidationPattern xsi:type="BIC" Type="BIC">
+													<Type>BIC</Type>
+												</ValidationPattern>
+											</Validation>
+											<Validation>
+												<Options>A</Options>
+												<ErrorCode>C05</ErrorCode>
+												<Comment><![CDATA[Identifier Code must not be a BEI, ie must not be of subtype BEID, MCCO, TESP or TRCO]]></Comment>
+												<ValidationPattern xsi:type="C05" Type="C05">
+													<Type>C05</Type>
+												</ValidationPattern>
+											</Validation>
+										</SubField>
+										<SubField Name="Party_Identification">
+											<Validation>
+												<Options>J</Options>
+												<ErrorCode>T78</ErrorCode>
+												<Comment><![CDATA[With option J, the following codes must be used (Error code(s): T78):]]></Comment>
+												<ValidationPattern xsi:type="Party_Identification" Type="Party Identification">
+													<Type>Party Identification</Type>
+													<Codes>
+														<Code Name="ABIC">
+															<NewGroup>true</NewGroup>
+															<Format>4!a2!a2!c3!c | 4!a2!a2!c | UKWN</Format>
+															<Mandatory>true</Mandatory>
+															<Description>followed by the BIC/BEI or UKWN if BIC/BEI not known</Description>
+														</Code>
+														<Code Name="ACCT">
+															<Format>34x</Format>
+															<Description>followed by the account number</Description>
+														</Code>
+														<Code Name="NAME">
+															<Format>34x</Format>
+															<Mandatory>true</Mandatory>
+															<Description>followed by the name</Description>
+														</Code>
+														<Code Name="ADD1">
+															<Format>35x</Format>
+															<Description>followed by the first line of the address</Description>
+														</Code>
+														<Code Name="ADD2">
+															<Format>35x</Format>
+															<Description>followed by the second line of the address</Description>
+														</Code>
+														<Code Name="CITY">
+															<Format>35x</Format>
+															<Description>followed by the city (and state, country)</Description>
+														</Code>
+														<Code Name="USFW">
+															<Format>9!n</Format>
+															<Description>followed by FedWire Routing Number</Description>
+														</Code>
+														<Code Name="USCH">
+															<Format>6!n</Format>
+															<Description>followed by CHIPS UID</Description>
+														</Code>
+														<Code Name="GBSC">
+															<Format>6!n</Format>
+															<Description>followed by UK domestic sort code</Description>
+														</Code>
+														<Code Name="CLRC">
+															<Format>35x</Format>
+															<Description>followed by a clearing code</Description>
+														</Code>
+														<Code Name="NETS">
+															<NewGroup>true</NewGroup>
+															<Mandatory>true</Mandatory>
+															<Description>A net settlement is taking place</Description>
+														</Code>
+														<Code Name="SSIS">
+															<NewGroup>true</NewGroup>
+															<Mandatory>true</Mandatory>
+															<Description>Standard settlement instructions are used</Description>
+														</Code>
+													</Codes>
+												</ValidationPattern>
+											</Validation>
+										</SubField>
+										<SubField Name="CreditDebit">
+											<Validation>
+												<Options>A, D</Options>
+												<ErrorCode>T51</ErrorCode>
+												<Comment><![CDATA[CreditDebit must contain the following codes (Error Code:T51)]]></Comment>
+												<ValidationPattern xsi:type="CODE" Type="CODE">
+													<Type>CODE</Type>
+													<Codes>
+														<Code Name="C">
+															<DetailedName>Credit</DetailedName>
+														</Code>
+														<Code Name="D">
+															<DetailedName>Debit</DetailedName>
+														</Code>
+													</Codes>
+												</ValidationPattern>
+											</Validation>
+										</SubField>
+									</Validations>
+								</SwiftField>
+								<SwiftField Name="56a">
+									<SwiftFieldDef Name="56">
+										<Generic>false</Generic>
+										<Option Name="A">
+											<Format><![CDATA[/1!a([/34x])(CRLF4!a2!a2!c[3!c]) | [/34xCRLF](4!a2!a2!c[3!c])]]></Format>
+											<Specification><![CDATA[(CreditDebit)(Party Identifier)(Identifier Code) | (Party Identifier)(Identifier Code)]]></Specification>
+											<Description><![CDATA[Intermediary]]></Description>
+										</Option>
+										<Option Name="D">
+											<Format><![CDATA[/1!a([/34x])(CRLF4*35x) | ([/34xCRLF])(4*35x)]]></Format>
+											<Specification><![CDATA[(CreditDebit)(Party Identifier)(Name & Address)|(Party Identifier)(Name & Address)]]></Specification>
+											<Description><![CDATA[Intermediary]]></Description>
+										</Option>
+										<Option Name="J">
+											<Format><![CDATA[5*40x]]></Format>
+											<Specification><![CDATA[(Party Identification)]]></Specification>
+											<Description><![CDATA[Intermediary]]></Description>
+										</Option>
+									</SwiftFieldDef>
+									<Repeating>false</Repeating>
+									<Presence>O</Presence>
+									<Options>A, D, J</Options>
+									<Validations>
+										<SubField Name="Identifier_Code">
+											<Validation>
+												<Options>A</Options>
+												<ErrorCode>T27, T28, T29, T45</ErrorCode>
+												<Comment><![CDATA[Identifier Code must be a registered BIC or BEI (Error code(s): T27,T28,T29,T45)]]></Comment>
+												<ValidationPattern xsi:type="BIC" Type="BIC">
+													<Type>BIC</Type>
+												</ValidationPattern>
+											</Validation>
+											<Validation>
+												<Options>A</Options>
+												<ErrorCode>C05</ErrorCode>
+												<Comment><![CDATA[Identifier Code must not be a BEI, ie must not be of subtype BEID, MCCO, TESP or TRCO]]></Comment>
+												<ValidationPattern xsi:type="C05" Type="C05">
+													<Type>C05</Type>
+												</ValidationPattern>
+											</Validation>
+										</SubField>
+										<SubField Name="Party_Identification">
+											<Validation>
+												<Options>J</Options>
+												<ErrorCode>T78</ErrorCode>
+												<Comment><![CDATA[With option J, the following codes must be used (Error code(s): T78):]]></Comment>
+												<ValidationPattern xsi:type="Party_Identification" Type="Party Identification">
+													<Type>Party Identification</Type>
+													<Codes>
+														<Code Name="ABIC">
+															<NewGroup>true</NewGroup>
+															<Format>4!a2!a2!c3!c | 4!a2!a2!c | UKWN</Format>
+															<Mandatory>true</Mandatory>
+															<Description>followed by the BIC/BEI or UKWN if BIC/BEI not known</Description>
+														</Code>
+														<Code Name="ACCT">
+															<Format>34x</Format>
+															<Description>followed by the account number</Description>
+														</Code>
+														<Code Name="NAME">
+															<Format>34x</Format>
+															<Mandatory>true</Mandatory>
+															<Description>followed by the name</Description>
+														</Code>
+														<Code Name="ADD1">
+															<Format>35x</Format>
+															<Description>followed by the first line of the address</Description>
+														</Code>
+														<Code Name="ADD2">
+															<Format>35x</Format>
+															<Description>followed by the second line of the address</Description>
+														</Code>
+														<Code Name="CITY">
+															<Format>35x</Format>
+															<Description>followed by the city (and state, country)</Description>
+														</Code>
+														<Code Name="USFW">
+															<Format>9!n</Format>
+															<Description>followed by FedWire Routing Number</Description>
+														</Code>
+														<Code Name="USCH">
+															<Format>6!n</Format>
+															<Description>followed by CHIPS UID</Description>
+														</Code>
+														<Code Name="GBSC">
+															<Format>6!n</Format>
+															<Description>followed by UK domestic sort code</Description>
+														</Code>
+														<Code Name="CLRC">
+															<Format>35x</Format>
+															<Description>followed by a clearing code</Description>
+														</Code>
+														<Code Name="NETS">
+															<NewGroup>true</NewGroup>
+															<Mandatory>true</Mandatory>
+															<Description>A net settlement is taking place</Description>
+														</Code>
+														<Code Name="SSIS">
+															<NewGroup>true</NewGroup>
+															<Mandatory>true</Mandatory>
+															<Description>Standard settlement instructions are used</Description>
+														</Code>
+													</Codes>
+												</ValidationPattern>
+											</Validation>
+										</SubField>
+										<SubField Name="CreditDebit">
+											<Validation>
+												<Options>A, D</Options>
+												<ErrorCode>T51</ErrorCode>
+												<Comment><![CDATA[CreditDebit must contain the following codes (Error Code:T51)]]></Comment>
+												<ValidationPattern xsi:type="CODE" Type="CODE">
+													<Type>CODE</Type>
+													<Codes>
+														<Code Name="C">
+															<DetailedName>Credit</DetailedName>
+														</Code>
+														<Code Name="D">
+															<DetailedName>Debit</DetailedName>
+														</Code>
+													</Codes>
+												</ValidationPattern>
+											</Validation>
+										</SubField>
+									</Validations>
+								</SwiftField>
+								<SwiftField Name="57a">
+									<SwiftFieldDef Name="57">
+										<Generic>false</Generic>
+										<Description><![CDATA[Receiving Agent]]></Description>
+										<Option Name="A">
+											<Format><![CDATA[/1!a([/34x])(CRLF4!a2!a2!c[3!c]) | [/34xCRLF](4!a2!a2!c[3!c])]]></Format>
+											<Specification><![CDATA[(CreditDebit)(Party Identifier)(Identifier Code) | (Party Identifier)(Identifier Code)]]></Specification>
+											<Description><![CDATA[Receiving Agent]]></Description>
+										</Option>
+										<Option Name="D">
+											<Format><![CDATA[/1!a([/34x])(CRLF4*35x) | ([/34xCRLF])(4*35x)]]></Format>
+											<Specification><![CDATA[(CreditDebit)(Party Identifier)(Name & Address)|(Party Identifier)(Name & Address)]]></Specification>
+											<Description><![CDATA[Receiving Agent]]></Description>
+										</Option>
+										<Option Name="J">
+											<Format><![CDATA[5*40x]]></Format>
+											<Specification><![CDATA[(Party Identification)]]></Specification>
+											<Description><![CDATA[Receiving Agent]]></Description>
+										</Option>
+									</SwiftFieldDef>
+									<Repeating>false</Repeating>
+									<Presence>M</Presence>
+									<Options>A, D, J</Options>
+									<Validations>
+										<SubField Name="Identifier_Code">
+											<Validation>
+												<Options>A</Options>
+												<ErrorCode>T27, T28, T29, T45</ErrorCode>
+												<Comment><![CDATA[Identifier Code must be a registered BIC or BEI (Error code(s): T27,T28,T29,T45)]]></Comment>
+												<ValidationPattern xsi:type="BIC" Type="BIC">
+													<Type>BIC</Type>
+												</ValidationPattern>
+											</Validation>
+											<Validation>
+												<Options>A</Options>
+												<ErrorCode>C05</ErrorCode>
+												<Comment><![CDATA[Identifier Code must not be a BEI, ie must not be of subtype BEID, MCCO, TESP or TRCO]]></Comment>
+												<ValidationPattern xsi:type="C05" Type="C05">
+													<Type>C05</Type>
+												</ValidationPattern>
+											</Validation>
+										</SubField>
+										<SubField Name="Party_Identification">
+											<Validation>
+												<Options>J</Options>
+												<ErrorCode>T78</ErrorCode>
+												<Comment><![CDATA[With option J, the following codes must be used (Error code(s): T78):]]></Comment>
+												<ValidationPattern xsi:type="Party_Identification" Type="Party Identification">
+													<Type>Party Identification</Type>
+													<Codes>
+														<Code Name="ABIC">
+															<NewGroup>true</NewGroup>
+															<Format>4!a2!a2!c3!c | 4!a2!a2!c | UKWN</Format>
+															<Mandatory>true</Mandatory>
+															<Description>followed by the BIC/BEI or UKWN if BIC/BEI not known</Description>
+														</Code>
+														<Code Name="ACCT">
+															<Format>34x</Format>
+															<Description>followed by the account number</Description>
+														</Code>
+														<Code Name="NAME">
+															<Format>34x</Format>
+															<Mandatory>true</Mandatory>
+															<Description>followed by the name</Description>
+														</Code>
+														<Code Name="ADD1">
+															<Format>35x</Format>
+															<Description>followed by the first line of the address</Description>
+														</Code>
+														<Code Name="ADD2">
+															<Format>35x</Format>
+															<Description>followed by the second line of the address</Description>
+														</Code>
+														<Code Name="CITY">
+															<Format>35x</Format>
+															<Description>followed by the city (and state, country)</Description>
+														</Code>
+														<Code Name="USFW">
+															<Format>9!n</Format>
+															<Description>followed by FedWire Routing Number</Description>
+														</Code>
+														<Code Name="USCH">
+															<Format>6!n</Format>
+															<Description>followed by CHIPS UID</Description>
+														</Code>
+														<Code Name="GBSC">
+															<Format>6!n</Format>
+															<Description>followed by UK domestic sort code</Description>
+														</Code>
+														<Code Name="CLRC">
+															<Format>35x</Format>
+															<Description>followed by a clearing code</Description>
+														</Code>
+														<Code Name="NETS">
+															<NewGroup>true</NewGroup>
+															<Mandatory>true</Mandatory>
+															<Description>A net settlement is taking place</Description>
+														</Code>
+														<Code Name="SSIS">
+															<NewGroup>true</NewGroup>
+															<Mandatory>true</Mandatory>
+															<Description>Standard settlement instructions are used</Description>
+														</Code>
+													</Codes>
+												</ValidationPattern>
+											</Validation>
+										</SubField>
+										<SubField Name="CreditDebit">
+											<Validation>
+												<Options>A, D</Options>
+												<ErrorCode>T51</ErrorCode>
+												<Comment><![CDATA[CreditDebit must contain the following codes (Error Code:T51)]]></Comment>
+												<ValidationPattern xsi:type="CODE" Type="CODE">
+													<Type>CODE</Type>
+													<Codes>
+														<Code Name="C">
+															<DetailedName>Credit</DetailedName>
+														</Code>
+														<Code Name="D">
+															<DetailedName>Debit</DetailedName>
+														</Code>
+													</Codes>
+												</ValidationPattern>
+											</Validation>
+										</SubField>
+									</Validations>
+								</SwiftField>
+								<SwiftField Name="58a">
+									<SwiftFieldDef Name="58">
+										<Generic>false</Generic>
+										<Option Name="A">
+											<Format><![CDATA[/1!a([/34x])(CRLF4!a2!a2!c[3!c]) | [/34xCRLF](4!a2!a2!c[3!c])]]></Format>
+											<Specification><![CDATA[(CreditDebit)(Party Identifier)(Identifier Code) | (Party Identifier)(Identifier Code)]]></Specification>
+											<Description><![CDATA[Beneficiary Institution]]></Description>
+										</Option>
+										<Option Name="D">
+											<Format><![CDATA[/1!a([/34x])(CRLF4*35x) | ([/34xCRLF])(4*35x)]]></Format>
+											<Specification><![CDATA[(CreditDebit)(Party Identifier)(Name & Address)|(Party Identifier)(Name & Address)]]></Specification>
+											<Description><![CDATA[Beneficiary Institution]]></Description>
+										</Option>
+										<Option Name="J">
+											<Format><![CDATA[5*40x]]></Format>
+											<Specification><![CDATA[(Party Identification)]]></Specification>
+											<Description><![CDATA[Beneficiary Institution]]></Description>
+										</Option>
+									</SwiftFieldDef>
+									<Repeating>false</Repeating>
+									<Presence>O</Presence>
+									<Options>A, D, J</Options>
+									<Validations>
+										<SubField Name="Identifier_Code">
+											<Validation>
+												<Options>A</Options>
+												<ErrorCode>T27, T28, T29, T45</ErrorCode>
+												<Comment><![CDATA[Identifier Code must be a registered BIC or BEI (Error code(s): T27,T28,T29,T45)]]></Comment>
+												<ValidationPattern xsi:type="BIC" Type="BIC">
+													<Type>BIC</Type>
+												</ValidationPattern>
+											</Validation>
+										</SubField>
+										<SubField Name="Party_Identification">
+											<Validation>
+												<Options>J</Options>
+												<ErrorCode>T78</ErrorCode>
+												<Comment><![CDATA[In option J, Party Identification must be specified as a list of pairs (Code)(Value) and the following codes and format must be used (Error code(s): T78).]]></Comment>
+												<ValidationPattern xsi:type="Party_Identification" Type="Party Identification">
+													<Type>Party Identification</Type>
+													<Codes>
+														<Code Name="ABIC">
+															<NewGroup>true</NewGroup>
+															<Format>4!a2!a2!c3!c | 4!a2!a2!c | UKWN</Format>
+															<Mandatory>true</Mandatory>
+															<Description>followed by the BIC/BEI or UKWN if BIC/BEI not known</Description>
+														</Code>
+														<Code Name="ACCT">
+															<Format>34x</Format>
+															<Description>followed by the account number</Description>
+														</Code>
+														<Code Name="NAME">
+															<Format>34x</Format>
+															<Mandatory>true</Mandatory>
+															<Description>followed by the name</Description>
+														</Code>
+														<Code Name="ADD1">
+															<Format>35x</Format>
+															<Description>followed by the first line of the address</Description>
+														</Code>
+														<Code Name="ADD2">
+															<Format>35x</Format>
+															<Description>followed by the second line of the address</Description>
+														</Code>
+														<Code Name="CITY">
+															<Format>35x</Format>
+															<Description>followed by the city (and state, country)</Description>
+														</Code>
+														<Code Name="USFW">
+															<Format>9!n</Format>
+															<Description>followed by FedWire Routing Number</Description>
+														</Code>
+														<Code Name="USCH">
+															<Format>6!n</Format>
+															<Description>followed by CHIPS UID</Description>
+														</Code>
+														<Code Name="GBSC">
+															<Format>6!n</Format>
+															<Description>followed by UK domestic sort code</Description>
+														</Code>
+														<Code Name="LEIC">
+															<Format>18!c2!n</Format>
+															<Description>Legal Entity Identifier</Description>
+														</Code>
+														<Code Name="CLRC">
+															<Format>35x</Format>
+															<Description>followed by a clearing code</Description>
+														</Code>
+													</Codes>
+												</ValidationPattern>
+											</Validation>
+										</SubField>
+										<SubField Name="CreditDebit">
+											<Validation>
+												<Options>A, D</Options>
+												<ErrorCode>T51</ErrorCode>
+												<Comment><![CDATA[CreditDebit must contain the following codes (Error Code:T51)]]></Comment>
+												<ValidationPattern xsi:type="CODE" Type="CODE">
+													<Type>CODE</Type>
+													<Codes>
+														<Code Name="C">
+															<DetailedName>Credit</DetailedName>
+														</Code>
+														<Code Name="D">
+															<DetailedName>Debit</DetailedName>
+														</Code>
+													</Codes>
+												</ValidationPattern>
+											</Validation>
+										</SubField>
+									</Validations>
+								</SwiftField>
+							</Fields>
+						</SwiftSequence>
+						<SwiftField Name="16A">
+							<SwiftFieldDef Name="16">
+								<Generic>false</Generic>
+								<Description><![CDATA[Sequence]]></Description>
+								<Option Name="A">
+									<Format><![CDATA[5n]]></Format>
+									<Specification><![CDATA[(Number)]]></Specification>
+									<Description><![CDATA[Number of Settlements]]></Description>
+								</Option>
+							</SwiftFieldDef>
+							<Repeating>false</Repeating>
+							<Presence>M</Presence>
+							<Options>A</Options>
+						</SwiftField>
+					</Fields>
+				</SwiftSequence>
+				<SwiftSequence Name="E">
+					<Name>E</Name>
+					<Description><![CDATA[Reporting Information]]></Description>
+					<Mandatory>false</Mandatory>
+					<Repeating>false</Repeating>
+					<NewSequeceStart>true</NewSequeceStart>
+					<StartBlockField>15E</StartBlockField>
+					<Fields>
+						<SwiftSequence Name="E1">
+							<Name>E1</Name>
+							<Description><![CDATA[Reporting Parties]]></Description>
+							<Mandatory>false</Mandatory>
+							<Repeating>true</Repeating>
+							<Fields>
+								<SwiftField Name="22L">
+									<SwiftFieldDef Name="22">
+										<Generic>false</Generic>
+										<Description><![CDATA[Indicator]]></Description>
+										<Option Name="L">
+											<Format><![CDATA[35x]]></Format>
+											<Specification><![CDATA[(Reporting Jurisdiction)]]></Specification>
+											<Description><![CDATA[Reporting Jurisdiction]]></Description>
+										</Option>
+									</SwiftFieldDef>
+									<Repeating>false</Repeating>
+									<Presence>M</Presence>
+									<Options>L</Options>
+								</SwiftField>
+								<SwiftField Name="91a">
+									<SwiftFieldDef Name="91">
+										<Generic>false</Generic>
+										<Option Name="A">
+											<Format><![CDATA[/1!a([/34x])(CRLF4!a2!a2!c[3!c]) | [/34xCRLF](4!a2!a2!c[3!c])]]></Format>
+											<Specification><![CDATA[(CreditDebit)(Party Identifier)(Identifier Code) | (Party Identifier)(Identifier Code)]]></Specification>
+											<Description><![CDATA[Reporting Party]]></Description>
+										</Option>
+										<Option Name="D">
+											<Format><![CDATA[/1!a([/34x])(CRLF4*35x) | ([/34xCRLF])(4*35x)]]></Format>
+											<Specification><![CDATA[(CreditDebit)(Party Identifier)(Name & Address)|(Party Identifier)(Name & Address)]]></Specification>
+											<Description><![CDATA[Reporting Party]]></Description>
+										</Option>
+										<Option Name="J">
+											<Format><![CDATA[5*40x]]></Format>
+											<Specification><![CDATA[(Party Identification)]]></Specification>
+											<Description><![CDATA[Reporting Party]]></Description>
+										</Option>
+									</SwiftFieldDef>
+									<Repeating>false</Repeating>
+									<Presence>O</Presence>
+									<Options>J, A, D</Options>
+									<Validations>
+										<SubField Name="Party_Identification">
+											<Validation>
+												<Options>J</Options>
+												<ErrorCode>T78</ErrorCode>
+												<Comment><![CDATA[In option J, Party Identification must be specified as a list of pairs (Code)(Value) and the following codes and format must be used (Error code(s): T78):]]></Comment>
+												<ValidationPattern xsi:type="Party_Identification" Type="Party Identification">
+													<Type>Party Identification</Type>
+													<Codes>
+														<Code Name="ABIC">
+															<NewGroup>true</NewGroup>
+															<Format>4!a2!a2!c3!c | 4!a2!a2!c | UKWN</Format>
+															<Mandatory>true</Mandatory>
+															<Description>followed by the BIC/BEI or UKWN if BIC/BEI not known</Description>
+														</Code>
+														<Code Name="NAME">
+															<Format>34x</Format>
+															<Mandatory>true</Mandatory>
+															<Description>followed by the name</Description>
+														</Code>
+														<Code Name="LEIC">
+															<Format>18!c2!n</Format>
+															<Description>Legal Entity Identifier</Description>
+														</Code>
+														<Code Name="CLRC">
+															<Format>35x</Format>
+															<Description>followed by a clearing code</Description>
+														</Code>
+													</Codes>
+												</ValidationPattern>
+											</Validation>
+										</SubField>
+										<SubField Name="Identifier_Code">
+											<Validation>
+												<Options>A</Options>
+												<ErrorCode>T27, T28, T29, T45</ErrorCode>
+												<Comment><![CDATA[Identifier Code must be a registered BIC (Error code(s): T27,T28,T29,T45).]]></Comment>
+												<ValidationPattern xsi:type="BIC" Type="BIC">
+													<Type>BIC</Type>
+												</ValidationPattern>
+											</Validation>
+										</SubField>
+										<SubField Name="CreditDebit">
+											<Validation>
+												<Options>A, D</Options>
+												<ErrorCode>T51</ErrorCode>
+												<Comment><![CDATA[CreditDebit must contain the following codes (Error Code:T51)]]></Comment>
+												<ValidationPattern xsi:type="CODE" Type="CODE">
+													<Type>CODE</Type>
+													<Codes>
+														<Code Name="C">
+															<DetailedName>Credit</DetailedName>
+														</Code>
+														<Code Name="D">
+															<DetailedName>Debit</DetailedName>
+														</Code>
+													</Codes>
+												</ValidationPattern>
+											</Validation>
+										</SubField>
+									</Validations>
+								</SwiftField>
+								<SwiftSequence Name="E1a">
+									<Name>E1a</Name>
+									<Description><![CDATA[Unique Transaction Identifier]]></Description>
+									<Mandatory>false</Mandatory>
+									<Repeating>true</Repeating>
+									<Fields>
+										<SwiftField Name="22M">
+											<SwiftFieldDef Name="22">
+												<Generic>false</Generic>
+												<Description><![CDATA[Indicator]]></Description>
+												<Option Name="M">
+													<Format><![CDATA[30x]]></Format>
+													<Specification><![CDATA[(Namespace)]]></Specification>
+													<Description><![CDATA[UTI Namespace/Issuer Code]]></Description>
+												</Option>
+											</SwiftFieldDef>
+											<Repeating>false</Repeating>
+											<Presence>M</Presence>
+											<Options>M</Options>
+										</SwiftField>
+										<SwiftField Name="22N">
+											<SwiftFieldDef Name="22">
+												<Generic>false</Generic>
+												<Description><![CDATA[Indicator]]></Description>
+												<Option Name="N">
+													<Format><![CDATA[32x]]></Format>
+													<Specification><![CDATA[(Transaction Identifier)]]></Specification>
+													<Description><![CDATA[Transaction Identifier]]></Description>
+												</Option>
+											</SwiftFieldDef>
+											<Repeating>false</Repeating>
+											<Presence>M</Presence>
+											<Options>N</Options>
+										</SwiftField>
+										<SwiftSequence Name="E1a1">
+											<Name>E1a1</Name>
+											<Description><![CDATA[Prior Unique Transaction Identifier]]></Description>
+											<Mandatory>false</Mandatory>
+											<Repeating>true</Repeating>
+											<Fields>
+												<SwiftField Name="22P">
+													<SwiftFieldDef Name="22">
+														<Generic>false</Generic>
+														<Description><![CDATA[Indicator]]></Description>
+														<Option Name="P">
+															<Format><![CDATA[30x]]></Format>
+															<Specification><![CDATA[(Namespace)]]></Specification>
+															<Description><![CDATA[PUTI Namespace/Issuer Code]]></Description>
+														</Option>
+													</SwiftFieldDef>
+													<Repeating>false</Repeating>
+													<Presence>M</Presence>
+													<Options>P</Options>
+												</SwiftField>
+												<SwiftField Name="22R">
+													<SwiftFieldDef Name="22">
+														<Generic>false</Generic>
+														<Description><![CDATA[Indicator]]></Description>
+														<Option Name="R">
+															<Format><![CDATA[32x]]></Format>
+															<Specification><![CDATA[(Prior Transaction Identifier)]]></Specification>
+															<Description><![CDATA[Prior Transaction Identifier]]></Description>
+														</Option>
+													</SwiftFieldDef>
+													<Repeating>false</Repeating>
+													<Presence>M</Presence>
+													<Options>R</Options>
+												</SwiftField>
+											</Fields>
+										</SwiftSequence>
+									</Fields>
+								</SwiftSequence>
+							</Fields>
+						</SwiftSequence>
+						<SwiftField Name="81a">
+							<SwiftFieldDef Name="81">
+								<Generic>false</Generic>
+								<Option Name="A">
+									<Format><![CDATA[/1!a([/34x])(CRLF4!a2!a2!c[3!c]) | [/34xCRLF](4!a2!a2!c[3!c])]]></Format>
+									<Specification><![CDATA[(CreditDebit)(Party Identifier)(Identifier Code) | (Party Identifier)(Identifier Code)]]></Specification>
+									<Description><![CDATA[Central Counterparty Clearing House (CCP)]]></Description>
+								</Option>
+								<Option Name="D">
+									<Format><![CDATA[/1!a([/34x])(CRLF4*35x) | ([/34xCRLF])(4*35x)]]></Format>
+									<Specification><![CDATA[(CreditDebit)(Party Identifier)(Name & Address)|(Party Identifier)(Name & Address)]]></Specification>
+									<Description><![CDATA[Central Counterparty Clearing House (CCP)]]></Description>
+								</Option>
+								<Option Name="J">
+									<Format><![CDATA[5*40x]]></Format>
+									<Specification><![CDATA[(Party Identification)]]></Specification>
+									<Description><![CDATA[Central Counterparty Clearing House (CCP)]]></Description>
+								</Option>
+							</SwiftFieldDef>
+							<Repeating>false</Repeating>
+							<Presence>O</Presence>
+							<Options>A, D, J</Options>
+							<Validations>
+								<SubField Name="Identifier_Code">
+									<Validation>
+										<Options>A</Options>
+										<ErrorCode>T27, T28, T29, T45</ErrorCode>
+										<Comment><![CDATA[Identifier Code must be a registered BIC (Error code(s): T27,T28,T29,T45).]]></Comment>
+										<ValidationPattern xsi:type="BIC" Type="BIC">
+											<Type>BIC</Type>
+										</ValidationPattern>
+									</Validation>
+								</SubField>
+								<SubField Name="CreditDebit">
+									<Validation>
+										<Options>A, D</Options>
+										<ErrorCode>T51</ErrorCode>
+										<Comment><![CDATA[CreditDebit must contain the following codes (Error Code:T51)]]></Comment>
+										<ValidationPattern xsi:type="CODE" Type="CODE">
+											<Type>CODE</Type>
+											<Codes>
+												<Code Name="C">
+													<DetailedName>Credit</DetailedName>
+												</Code>
+												<Code Name="D">
+													<DetailedName>Debit</DetailedName>
+												</Code>
+											</Codes>
+										</ValidationPattern>
+									</Validation>
+								</SubField>
+								<SubField Name="Party_Identification">
+									<Validation>
+										<Options>J</Options>
+										<ErrorCode>T78</ErrorCode>
+										<Comment><![CDATA[In option J, Party Identification must be specified as a list of pairs (Code)(Value) and the following codes and format must be used (Error code(s): T78):]]></Comment>
+										<ValidationPattern xsi:type="Party_Identification" Type="Party Identification">
+											<Type>Party Identification</Type>
+											<Codes>
+												<Code Name="ABIC">
+													<NewGroup>true</NewGroup>
+													<Format>4!a2!a2!c3!c | 4!a2!a2!c | UKWN</Format>
+													<Mandatory>true</Mandatory>
+													<Description>followed by the BIC/BEI or UKWN if BIC/BEI not known</Description>
+												</Code>
+												<Code Name="NAME">
+													<Format>34x</Format>
+													<Mandatory>true</Mandatory>
+													<Description>followed by the name</Description>
+												</Code>
+												<Code Name="LEIC">
+													<Format>18!c2!n</Format>
+													<Description>Legal Entity Identifier</Description>
+												</Code>
+												<Code Name="CLRC">
+													<Format>35x</Format>
+													<Description>followed by a clearing code</Description>
+												</Code>
+											</Codes>
+										</ValidationPattern>
+									</Validation>
+								</SubField>
+							</Validations>
+						</SwiftField>
+						<SwiftField Name="89a">
+							<SwiftFieldDef Name="89">
+								<Generic>false</Generic>
+								<Option Name="A">
+									<Format><![CDATA[/1!a([/34x])(CRLF4!a2!a2!c[3!c]) | [/34xCRLF](4!a2!a2!c[3!c])]]></Format>
+									<Specification><![CDATA[(CreditDebit)(Party Identifier)(Identifier Code) | (Party Identifier)(Identifier Code)]]></Specification>
+									<Description><![CDATA[Clearing Broker]]></Description>
+								</Option>
+								<Option Name="D">
+									<Format><![CDATA[/1!a([/34x])(CRLF4*35x) | ([/34xCRLF])(4*35x)]]></Format>
+									<Specification><![CDATA[(CreditDebit)(Party Identifier)(Name & Address)|(Party Identifier)(Name & Address)]]></Specification>
+									<Description><![CDATA[Clearing Broker]]></Description>
+								</Option>
+								<Option Name="J">
+									<Format><![CDATA[5*40x]]></Format>
+									<Specification><![CDATA[(Party Identification)]]></Specification>
+									<Description><![CDATA[Clearing Broker]]></Description>
+								</Option>
+							</SwiftFieldDef>
+							<Repeating>false</Repeating>
+							<Presence>O</Presence>
+							<Options>A, D, J</Options>
+							<Validations>
+								<SubField Name="CreditDebit">
+									<Validation>
+										<Options>A, D</Options>
+										<ErrorCode>T51</ErrorCode>
+										<Comment><![CDATA[CreditDebit must contain the following codes (Error Code:T51)]]></Comment>
+										<ValidationPattern xsi:type="CODE" Type="CODE">
+											<Type>CODE</Type>
+											<Codes>
+												<Code Name="C">
+													<DetailedName>Credit</DetailedName>
+												</Code>
+												<Code Name="D">
+													<DetailedName>Debit</DetailedName>
+												</Code>
+											</Codes>
+										</ValidationPattern>
+									</Validation>
+								</SubField>
+								<SubField Name="Identifier_Code">
+									<Validation>
+										<Options>A</Options>
+										<ErrorCode>T27, T28, T29, T45</ErrorCode>
+										<Comment><![CDATA[Identifier Code must be a registered BIC (Error code(s): T27,T28,T29,T45).]]></Comment>
+										<ValidationPattern xsi:type="BIC" Type="BIC">
+											<Type>BIC</Type>
+										</ValidationPattern>
+									</Validation>
+								</SubField>
+								<SubField Name="Party_Identification">
+									<Validation>
+										<Options>J</Options>
+										<ErrorCode>T78</ErrorCode>
+										<Comment><![CDATA[In option J, Party Identification must be specified as a list of pairs (Code)(Value) and the following codes and format must be used (Error code(s): T78):]]></Comment>
+										<ValidationPattern xsi:type="Party_Identification" Type="Party Identification">
+											<Type>Party Identification</Type>
+											<Codes>
+												<Code Name="ABIC">
+													<NewGroup>true</NewGroup>
+													<Format>4!a2!a2!c3!c | 4!a2!a2!c | UKWN</Format>
+													<Mandatory>true</Mandatory>
+													<Description>followed by the BIC/BEI or UKWN if BIC/BEI not known</Description>
+												</Code>
+												<Code Name="CLRC">
+													<Format>35x</Format>
+													<Description>followed by a clearing code</Description>
+												</Code>
+												<Code Name="LEIC">
+													<Format>18!c2!n</Format>
+													<Description>Legal Entity Identifier</Description>
+												</Code>
+												<Code Name="NAME">
+													<Format>34x</Format>
+													<Mandatory>true</Mandatory>
+													<Description>followed by the name</Description>
+												</Code>
+											</Codes>
+										</ValidationPattern>
+									</Validation>
+								</SubField>
+							</Validations>
+						</SwiftField>
+						<SwiftField Name="96a">
+							<SwiftFieldDef Name="96">
+								<Generic>false</Generic>
+								<Option Name="A">
+									<Format><![CDATA[/1!a([/34x])(CRLF4!a2!a2!c[3!c]) | [/34xCRLF](4!a2!a2!c[3!c])]]></Format>
+									<Specification><![CDATA[(CreditDebit)(Party Identifier)(Identifier Code) | (Party Identifier)(Identifier Code)]]></Specification>
+									<Description><![CDATA[Clearing Exception Party]]></Description>
+								</Option>
+								<Option Name="D">
+									<Format><![CDATA[/1!a([/34x])(CRLF4*35x) | ([/34xCRLF])(4*35x)]]></Format>
+									<Specification><![CDATA[(CreditDebit)(Party Identifier)(Name & Address)|(Party Identifier)(Name & Address)]]></Specification>
+									<Description><![CDATA[Clearing Exception Party]]></Description>
+								</Option>
+								<Option Name="J">
+									<Format><![CDATA[5*40x]]></Format>
+									<Specification><![CDATA[(Party Identification)]]></Specification>
+									<Description><![CDATA[Clearing Exception Party]]></Description>
+								</Option>
+							</SwiftFieldDef>
+							<Repeating>false</Repeating>
+							<Presence>O</Presence>
+							<Options>A, D, J</Options>
+							<Validations>
+								<SubField Name="Party_Identification">
+									<Validation>
+										<Options>J</Options>
+										<ErrorCode>T78</ErrorCode>
+										<Comment><![CDATA[In option J, Party Identification must be specified as a list of pairs (Code)(Value) and the following codes and format must be used (Error code(s): T78):]]></Comment>
+										<ValidationPattern xsi:type="Party_Identification" Type="Party Identification">
+											<Type>Party Identification</Type>
+											<Codes>
+												<Code Name="ABIC">
+													<NewGroup>true</NewGroup>
+													<Format>4!a2!a2!c3!c | 4!a2!a2!c | UKWN</Format>
+													<Mandatory>true</Mandatory>
+													<Description>followed by the BIC/BEI or UKWN if BIC/BEI not known</Description>
+												</Code>
+												<Code Name="NAME">
+													<Format>34x</Format>
+													<Mandatory>true</Mandatory>
+													<Description>followed by the name</Description>
+												</Code>
+												<Code Name="LEIC">
+													<Format>18!c2!n</Format>
+													<Description>Legal Entity Identifier</Description>
+												</Code>
+												<Code Name="CLRC">
+													<Format>35x</Format>
+													<Description>followed by a clearing code</Description>
+												</Code>
+											</Codes>
+										</ValidationPattern>
+									</Validation>
+								</SubField>
+								<SubField Name="Identifier_Code">
+									<Validation>
+										<Options>A</Options>
+										<ErrorCode>T27, T28, T29, T45</ErrorCode>
+										<Comment><![CDATA[Identifier Code must be a registered BIC (Error code(s): T27,T28,T29,T45).]]></Comment>
+										<ValidationPattern xsi:type="BIC" Type="BIC">
+											<Type>BIC</Type>
+										</ValidationPattern>
+									</Validation>
+								</SubField>
+								<SubField Name="CreditDebit">
+									<Validation>
+										<Options>A, D</Options>
+										<ErrorCode>T51</ErrorCode>
+										<Comment><![CDATA[CreditDebit must contain the following codes (Error Code:T51)]]></Comment>
+										<ValidationPattern xsi:type="CODE" Type="CODE">
+											<Type>CODE</Type>
+											<Codes>
+												<Code Name="C">
+													<DetailedName>Credit</DetailedName>
+												</Code>
+												<Code Name="D">
+													<DetailedName>Debit</DetailedName>
+												</Code>
+											</Codes>
+										</ValidationPattern>
+									</Validation>
+								</SubField>
+							</Validations>
+						</SwiftField>
+						<SwiftField Name="22S">
+							<SwiftFieldDef Name="22">
+								<Generic>false</Generic>
+								<Description><![CDATA[Indicator]]></Description>
+								<Option Name="S">
+									<Format><![CDATA[1!a/35x]]></Format>
+									<Specification><![CDATA[(Side Indicator)(Identification)]]></Specification>
+									<Description><![CDATA[Clearing Broker Identification]]></Description>
+								</Option>
+							</SwiftFieldDef>
+							<Repeating>true</Repeating>
+							<Presence>O</Presence>
+							<Options>S</Options>
+							<Validations>
+								<SubField Name="Side_Indicator">
+									<Validation>
+										<Options>S</Options>
+										<ErrorCode>T36</ErrorCode>
+										<Comment><![CDATA[One of the following codes must be used in Side Indicator (Error code(s): T36):]]></Comment>
+										<ValidationPattern xsi:type="CODE" Type="CODE">
+											<Type>CODE</Type>
+											<Codes>
+												<Code Name="C">
+													<Description>The clearing broker identification is for the client leg</Description>
+												</Code>
+												<Code Name="P">
+													<Description>The clearing broker identification is for the Central Counterparty (CCP) leg.</Description>
+												</Code>
+											</Codes>
+										</ValidationPattern>
+									</Validation>
+								</SubField>
+							</Validations>
+						</SwiftField>
+						<SwiftField Name="22T">
+							<SwiftFieldDef Name="22">
+								<Generic>false</Generic>
+								<Description><![CDATA[Indicator]]></Description>
+								<Option Name="T">
+									<Format><![CDATA[35x]]></Format>
+									<Specification><![CDATA[(Identification)]]></Specification>
+									<Description><![CDATA[Cleared Product Identification]]></Description>
+								</Option>
+							</SwiftFieldDef>
+							<Repeating>false</Repeating>
+							<Presence>O</Presence>
+							<Options>T</Options>
+						</SwiftField>
+						<SwiftField Name="17E">
+							<SwiftFieldDef Name="17">
+								<Generic>false</Generic>
+								<Description><![CDATA[Flag]]></Description>
+								<Option Name="E">
+									<Format><![CDATA[1!a]]></Format>
+									<Specification><![CDATA[(Indicator)]]></Specification>
+									<Description><![CDATA[Clearing Threshold Indicator]]></Description>
+								</Option>
+							</SwiftFieldDef>
+							<Repeating>false</Repeating>
+							<Presence>O</Presence>
+							<Options>E</Options>
+							<Validations>
+								<SubField Name="Indicator">
+									<Validation>
+										<Options>E</Options>
+										<ErrorCode>T36</ErrorCode>
+										<Comment><![CDATA[The following codes must be used (Error code(s): T36):]]></Comment>
+										<ValidationPattern xsi:type="CODE" Type="CODE">
+											<Type>CODE</Type>
+											<Codes>
+												<Code Name="N">
+													<Description>The contract is below the clearing threshold.</Description>
+												</Code>
+												<Code Name="Y">
+													<Description>The contract is above the clearing threshold.</Description>
+												</Code>
+											</Codes>
+										</ValidationPattern>
+									</Validation>
+								</SubField>
+							</Validations>
+						</SwiftField>
+						<SwiftField Name="22U">
+							<SwiftFieldDef Name="22">
+								<Generic>false</Generic>
+								<Description><![CDATA[Indicator]]></Description>
+								<Option Name="U">
+									<Format><![CDATA[6a]]></Format>
+									<Specification><![CDATA[(Product Identifier)]]></Specification>
+									<Description><![CDATA[Underlying Product Identifier]]></Description>
+								</Option>
+							</SwiftFieldDef>
+							<Repeating>false</Repeating>
+							<Presence>O</Presence>
+							<Options>U</Options>
+						</SwiftField>
+							<SwiftField Name="35B">
+								<SwiftFieldDef Name="35">
+									<Generic>false</Generic>
+									<Option Name="B">
+										<Format><![CDATA[(ISIN1!e12!c)([CRLF4*35x]) | 4*35x]]></Format>
+										<Specification><![CDATA[(Identification of Instrument)(Description of Instrument) |(Description of Instrument) ]]></Specification>
+										<Description><![CDATA[Identification of Financial Instrument]]></Description>
+									</Option>
+								</SwiftFieldDef>
+								<Repeating>false</Repeating>
+								<Presence>O</Presence>
+								<Options>B</Options>
+							</SwiftField>
+						<SwiftField Name="17H">
+							<SwiftFieldDef Name="17">
+								<Generic>false</Generic>
+								<Description><![CDATA[Flag]]></Description>
+								<Option Name="H">
+									<Format><![CDATA[1!a]]></Format>
+									<Specification><![CDATA[(Indicator)]]></Specification>
+									<Description><![CDATA[Allocation Indicator]]></Description>
+								</Option>
+							</SwiftFieldDef>
+							<Repeating>false</Repeating>
+							<Presence>O</Presence>
+							<Options>H</Options>
+							<Validations>
+								<SubField Name="Indicator">
+									<Validation>
+										<Options>H</Options>
+										<ErrorCode>T67</ErrorCode>
+										<Comment><![CDATA[The following codes must be used (Error code(s): T67):]]></Comment>
+										<ValidationPattern xsi:type="CODE" Type="CODE">
+											<Type>CODE</Type>
+											<Codes>
+												<Code Name="A">
+													<Description>Post-allocation</Description>
+												</Code>
+												<Code Name="P">
+													<Description>Pre-allocation</Description>
+												</Code>
+												<Code Name="U">
+													<Description>Unallocated</Description>
+												</Code>
+											</Codes>
+										</ValidationPattern>
+									</Validation>
+								</SubField>
+							</Validations>
+						</SwiftField>
+						<SwiftField Name="17P">
+							<SwiftFieldDef Name="17">
+								<Generic>false</Generic>
+								<Description><![CDATA[Flag]]></Description>
+								<Option Name="P">
+									<Format><![CDATA[1!a]]></Format>
+									<Specification><![CDATA[(Indicator)]]></Specification>
+									<Description><![CDATA[Collateralisation Indicator]]></Description>
+								</Option>
+							</SwiftFieldDef>
+							<Repeating>false</Repeating>
+							<Presence>O</Presence>
+							<Options>P</Options>
+							<Validations>
+								<SubField Name="Indicator">
+									<Validation>
+										<Options>P</Options>
+										<ErrorCode>T67</ErrorCode>
+										<Comment><![CDATA[The following codes must be used (Error code(s): T67):]]></Comment>
+										<ValidationPattern xsi:type="CODE" Type="CODE">
+											<Type>CODE</Type>
+											<Codes>
+												<Code Name="F">
+													<Description>Fully collateralised</Description>
+												</Code>
+												<Code Name="O">
+													<Description>One-way collateralised</Description>
+												</Code>
+												<Code Name="P">
+													<Description>Partially collateralised</Description>
+												</Code>
+												<Code Name="U">
+													<Description>Uncollateralised</Description>
+												</Code>
+											</Codes>
+										</ValidationPattern>
+									</Validation>
+								</SubField>
+							</Validations>
+						</SwiftField>
+						<SwiftField Name="22V">
+							<SwiftFieldDef Name="22">
+								<Generic>false</Generic>
+								<Description><![CDATA[Indicator]]></Description>
+								<Option Name="V">
+									<Format><![CDATA[35x]]></Format>
+									<Specification><![CDATA[(Execution Venue)]]></Specification>
+									<Description><![CDATA[Execution Venue]]></Description>
+								</Option>
+							</SwiftFieldDef>
+							<Repeating>false</Repeating>
+							<Presence>O</Presence>
+							<Options>V</Options>
+						</SwiftField>
+						<SwiftField Name="98D">
+							<SwiftFieldDef Name="98">
+								<Generic>false</Generic>
+								<Description><![CDATA[Date/Time]]></Description>
+								<Option Name="D">
+									<Format><![CDATA[8!n6!n[(',')(2n[1!n])]([/[N]2!n[2!n]])]]></Format>
+									<Specification><![CDATA[(Date)(Time)(COMMA)(Decimals)(UTC Indicator)]]></Specification>
+									<Description><![CDATA[Execution Timestamp]]></Description>
+								</Option>
+							</SwiftFieldDef>
+							<Repeating>false</Repeating>
+							<Presence>O</Presence>
+							<Options>D</Options>
+							<Validations>
+								<SubField Name="Date">
+									<Validation>
+										<Options>D</Options>
+										<ErrorCode>T50</ErrorCode>
+										<Comment><![CDATA[Date must be a valid date expressed as YYYYMMDD (Error code(s): T50).]]></Comment>
+										<ValidationPattern xsi:type="DATE" Type="DATE">
+											<Type>DATE</Type>
+											<Format>yyyyMMdd</Format>
+										</ValidationPattern>
+									</Validation>
+								</SubField>
+								<SubField Name="Time">
+									<Validation>
+										<Options>D</Options>
+										<ErrorCode>T38</ErrorCode>
+										<Comment><![CDATA[Time must be a valid time expressed as HHMMSS (Error code(s): T38).]]></Comment>
+										<ValidationPattern xsi:type="DATE" Type="DATE">
+											<Type>DATE</Type>
+											<Format>HHmmss</Format>
+										</ValidationPattern>
+									</Validation>
+								</SubField>
+								<SubField Name="UTC_Indicator">
+									<Validation>
+										<Options>D</Options>
+										<ErrorCode>T39</ErrorCode>
+										<Comment><![CDATA[UTC Indicator must be a valid time expressed as HH[MM] (Error code(s): T39).]]></Comment>
+										<ValidationPattern xsi:type="UTC_Offset" Type="UTC Offset">
+											<Type>UTC Offset</Type>
+										</ValidationPattern>
+									</Validation>
+									<Validation>
+										<Options>D</Options>
+										<ErrorCode>T14</ErrorCode>
+										<Comment><![CDATA[Sign ([N]) must not be used when UTC Indicator is equal to all zeroes (Error code(s): T14).]]></Comment>
+										<ValidationPattern xsi:type="UTC_Sign" Type="UTC Sign">
+											<Type>UTC Sign</Type>
+										</ValidationPattern>
+									</Validation>
+								</SubField>
+							</Validations>
+						</SwiftField>
+						<SwiftField Name="17W">
+							<SwiftFieldDef Name="17">
+								<Generic>false</Generic>
+								<Description><![CDATA[Flag]]></Description>
+								<Option Name="W">
+									<Format><![CDATA[1!a]]></Format>
+									<Specification><![CDATA[(Flag)]]></Specification>
+									<Description><![CDATA[Non Standard Flag]]></Description>
+								</Option>
+							</SwiftFieldDef>
+							<Repeating>false</Repeating>
+							<Presence>O</Presence>
+							<Options>W</Options>
+							<Validations>
+								<SubField Name="Flag">
+									<Validation>
+										<Options>W</Options>
+										<ErrorCode>T36</ErrorCode>
+										<Comment><![CDATA[The following code must be used (Error code(s): T36):]]></Comment>
+										<ValidationPattern xsi:type="CODE" Type="CODE">
+											<Type>CODE</Type>
+											<Codes>
+												<Code Name="Y">
+													<Description>The transaction is non-standard.</Description>
+												</Code>
+											</Codes>
+										</ValidationPattern>
+									</Validation>
+								</SubField>
+							</Validations>
+						</SwiftField>
+						<SwiftField Name="22W">
+							<SwiftFieldDef Name="22">
+								<Generic>false</Generic>
+								<Description><![CDATA[Indicator]]></Description>
+								<Option Name="W">
+									<Format><![CDATA[42x]]></Format>
+									<Specification><![CDATA[(Identification)]]></Specification>
+									<Description><![CDATA[Link Swap Identification]]></Description>
+								</Option>
+							</SwiftFieldDef>
+							<Repeating>false</Repeating>
+							<Presence>O</Presence>
+							<Options>W</Options>
+							<Validations>
+								<SubField Name="Identification">
+									<Validation>
+										<Options>W</Options>
+										<ErrorCode>T26</ErrorCode>
+										<Comment><![CDATA[This field must not start or end with a slash '/' and must not contain two consecutive slashes '//' (Error code(s): T26).]]></Comment>
+										<ValidationPattern xsi:type="T26" Type="T26">
+											<Type>T26</Type>
+										</ValidationPattern>
+									</Validation>
+								</SubField>
+							</Validations>
+						</SwiftField>
+						<SwiftField Name="17Y">
+							<SwiftFieldDef Name="17">
+								<Generic>false</Generic>
+								<Description><![CDATA[Flag]]></Description>
+								<Option Name="Y">
+									<Format><![CDATA[1!a]]></Format>
+									<Specification><![CDATA[(Indicator)]]></Specification>
+									<Description><![CDATA[Financial Nature of the Counterparty Indicator]]></Description>
+								</Option>
+							</SwiftFieldDef>
+							<Repeating>false</Repeating>
+							<Presence>O</Presence>
+							<Options>Y</Options>
+							<Validations>
+								<SubField Name="Indicator">
+									<Validation>
+										<Options>Y</Options>
+										<ErrorCode>T67</ErrorCode>
+										<Comment><![CDATA[Indicator must contain one of the following codes (Error code(s): T67)]]></Comment>
+										<ValidationPattern xsi:type="CODE" Type="CODE">
+											<Type>CODE</Type>
+											<Codes>
+												<Code Name="F">
+													<Description>The party is a financial counterparty</Description>
+												</Code>
+												<Code Name="N">
+													<Description>The party is a non-financial counterparty</Description>
+												</Code>
+											</Codes>
+										</ValidationPattern>
+									</Validation>
+								</SubField>
+							</Validations>
+						</SwiftField>
+						<SwiftField Name="17Z">
+							<SwiftFieldDef Name="17">
+								<Generic>false</Generic>
+								<Description><![CDATA[Flag]]></Description>
+								<Option Name="Z">
+									<Format><![CDATA[1!a]]></Format>
+									<Specification><![CDATA[(Indicator)]]></Specification>
+									<Description><![CDATA[Collateral Portfolio Indicator]]></Description>
+								</Option>
+							</SwiftFieldDef>
+							<Repeating>false</Repeating>
+							<Presence>O</Presence>
+							<Options>Z</Options>
+							<Validations>
+								<SubField Name="Indicator">
+									<Validation>
+										<Options>Z</Options>
+										<ErrorCode>T36</ErrorCode>
+										<Comment><![CDATA[Indicator must contain one of the following codes (Error code(s): T36):]]></Comment>
+										<ValidationPattern xsi:type="CODE" Type="CODE">
+											<Type>CODE</Type>
+											<Codes>
+												<Code Name="N">
+													<Description>The collateral is posted on a trade by trade basis</Description>
+												</Code>
+												<Code Name="Y">
+													<Description>The collateral is posted at a portfolio level</Description>
+												</Code>
+											</Codes>
+										</ValidationPattern>
+									</Validation>
+								</SubField>
+							</Validations>
+						</SwiftField>
+						<SwiftField Name="22Q">
+							<SwiftFieldDef Name="22">
+								<Generic>false</Generic>
+								<Description><![CDATA[Indicator]]></Description>
+								<Option Name="Q">
+									<Format><![CDATA[[10x]]]></Format>
+									<Specification><![CDATA[(Portfolio)]]></Specification>
+									<Description><![CDATA[Collateral Portfolio Code]]></Description>
+								</Option>
+							</SwiftFieldDef>
+							<Repeating>false</Repeating>
+							<Presence>O</Presence>
+							<Options>Q</Options>
+						</SwiftField>
+						<SwiftField Name="17L">
+							<SwiftFieldDef Name="17">
+								<Generic>false</Generic>
+								<Description><![CDATA[Flag]]></Description>
+								<Option Name="L">
+									<Format><![CDATA[1!a]]></Format>
+									<Specification><![CDATA[(Indicator)]]></Specification>
+									<Description><![CDATA[Portfolio Compression Indicator]]></Description>
+								</Option>
+							</SwiftFieldDef>
+							<Repeating>false</Repeating>
+							<Presence>O</Presence>
+							<Options>L</Options>
+							<Validations>
+								<SubField Name="Indicator">
+									<Validation>
+										<Options>L</Options>
+										<ErrorCode>T36</ErrorCode>
+										<Comment><![CDATA[Indicator must contain one of the following codes (Error code(s): T36):]]></Comment>
+										<ValidationPattern xsi:type="CODE" Type="CODE">
+											<Type>CODE</Type>
+											<Codes>
+												<Code Name="N">
+													<Description>The trade is not the result of a portfolio compression exercise.</Description>
+												</Code>
+												<Code Name="Y">
+													<Description>The trade is the result of a portfolio compression exercise.</Description>
+												</Code>
+											</Codes>
+										</ValidationPattern>
+									</Validation>
+								</SubField>
+							</Validations>
+						</SwiftField>
+						<SwiftField Name="17M">
+							<SwiftFieldDef Name="17">
+								<Generic>false</Generic>
+								<Description><![CDATA[Flag]]></Description>
+								<Option Name="M">
+									<Format><![CDATA[1!a]]></Format>
+									<Specification><![CDATA[(Indicator)]]></Specification>
+									<Description><![CDATA[Corporate Sector Indicator]]></Description>
+								</Option>
+							</SwiftFieldDef>
+							<Repeating>false</Repeating>
+							<Presence>O</Presence>
+							<Options>M</Options>
+						</SwiftField>
+						<SwiftField Name="17Q">
+							<SwiftFieldDef Name="17">
+								<Generic>false</Generic>
+								<Description><![CDATA[Flag]]></Description>
+								<Option Name="Q">
+									<Format><![CDATA[1!a]]></Format>
+									<Specification><![CDATA[(Indicator)]]></Specification>
+									<Description><![CDATA[Trade with Non-EEA Counterparty Indicator]]></Description>
+								</Option>
+							</SwiftFieldDef>
+							<Repeating>false</Repeating>
+							<Presence>O</Presence>
+							<Options>Q</Options>
+							<Validations>
+								<SubField Name="Indicator">
+									<Validation>
+										<Options>Q</Options>
+										<ErrorCode>T36</ErrorCode>
+										<Comment><![CDATA[Indicator must contain one of the following codes (Error code(s): T36):]]></Comment>
+										<ValidationPattern xsi:type="CODE" Type="CODE">
+											<Type>CODE</Type>
+											<Codes>
+												<Code Name="N">
+													<Description>No, the counterparty is domiciled inside the EEA.</Description>
+												</Code>
+												<Code Name="Y">
+													<Description>Yes, the counterparty is domiciled outside the EEA.</Description>
+												</Code>
+											</Codes>
+										</ValidationPattern>
+									</Validation>
+								</SubField>
+							</Validations>
+						</SwiftField>
+						<SwiftField Name="17S">
+							<SwiftFieldDef Name="17">
+								<Generic>false</Generic>
+								<Description><![CDATA[Flag]]></Description>
+								<Option Name="S">
+									<Format><![CDATA[1!a]]></Format>
+									<Specification><![CDATA[(Indicator)]]></Specification>
+									<Description><![CDATA[Intragroup Trade Indicator]]></Description>
+								</Option>
+							</SwiftFieldDef>
+							<Repeating>false</Repeating>
+							<Presence>O</Presence>
+							<Options>S</Options>
+							<Validations>
+								<SubField Name="Indicator">
+									<Validation>
+										<Options>S</Options>
+										<ErrorCode>T36</ErrorCode>
+										<Comment><![CDATA[Indicator must contain one of the following codes (Error code(s): T36):]]></Comment>
+										<ValidationPattern xsi:type="CODE" Type="CODE">
+											<Type>CODE</Type>
+											<Codes>
+												<Code Name="N">
+													<Description>No, the reported trade does not fall under the definition of an intragroup transaction.</Description>
+												</Code>
+												<Code Name="Y">
+													<Description>Yes, the reported trade falls under the definition of an intragroup transaction.</Description>
+												</Code>
+											</Codes>
+										</ValidationPattern>
+									</Validation>
+								</SubField>
+							</Validations>
+						</SwiftField>
+						<SwiftField Name="17X">
+							<SwiftFieldDef Name="17">
+								<Generic>false</Generic>
+								<Description><![CDATA[Flag]]></Description>
+								<Option Name="X">
+									<Format><![CDATA[1!a]]></Format>
+									<Specification><![CDATA[(Indicator)]]></Specification>
+									<Description><![CDATA[Commercial or Treasury Financing Indicator]]></Description>
+								</Option>
+							</SwiftFieldDef>
+							<Repeating>false</Repeating>
+							<Presence>O</Presence>
+							<Options>X</Options>
+							<Validations>
+								<SubField Name="Indicator">
+									<Validation>
+										<Options>X</Options>
+										<ErrorCode>T36</ErrorCode>
+										<Comment><![CDATA[Indicator must contain one of the following codes (Error code(s): T36):]]></Comment>
+										<ValidationPattern xsi:type="CODE" Type="CODE">
+											<Type>CODE</Type>
+											<Codes>
+												<Code Name="N">
+													<Description>No, the contract is not directly linked to the non-financial counterparty's commercial or treasury financing activity.</Description>
+												</Code>
+												<Code Name="Y">
+													<Description>Yes, the contract is directly linked to the non-financial counterparty's commercial or treasury financing activity.</Description>
+												</Code>
+											</Codes>
+										</ValidationPattern>
+									</Validation>
+								</SubField>
+							</Validations>
+						</SwiftField>
+						<SwiftField Name="98G">
+							<SwiftFieldDef Name="98">
+								<Generic>false</Generic>
+								<Description><![CDATA[Date/Time]]></Description>
+								<Option Name="G">
+									<Format><![CDATA[8!n6!n[(',')(2n[1!n])]([/[N]2!n[2!n]])]]></Format>
+									<Specification><![CDATA[(Date)(Time)(COMMA)(Decimals)(UTC Indicator)]]></Specification>
+									<Description><![CDATA[Confirmation Timestamp]]></Description>
+								</Option>
+							</SwiftFieldDef>
+							<Repeating>false</Repeating>
+							<Presence>O</Presence>
+							<Options>G</Options>
+							<Validations>
+								<SubField Name="Date">
+									<Validation>
+										<Options>G</Options>
+										<ErrorCode>T50</ErrorCode>
+										<Comment><![CDATA[Date must be a valid date expressed as YYYYMMDD (Error code(s): T50).]]></Comment>
+										<ValidationPattern xsi:type="DATE" Type="DATE">
+											<Type>DATE</Type>
+											<Format>yyyyMMdd</Format>
+										</ValidationPattern>
+									</Validation>
+								</SubField>
+								<SubField Name="Time">
+									<Validation>
+										<Options>G</Options>
+										<ErrorCode>T38</ErrorCode>
+										<Comment><![CDATA[Time must be a valid time expressed as HHMMSS (Error code(s): T38).]]></Comment>
+										<ValidationPattern xsi:type="DATE" Type="DATE">
+											<Type>DATE</Type>
+											<Format>HHmmss</Format>
+										</ValidationPattern>
+									</Validation>
+								</SubField>
+								<SubField Name="UTC_Indicator">
+									<Validation>
+										<Options>G</Options>
+										<ErrorCode>T39</ErrorCode>
+										<Comment><![CDATA[UTC Indicator must be a valid time expressed as HH[MM] (Error code(s): T39).]]></Comment>
+										<ValidationPattern xsi:type="UTC_Offset" Type="UTC Offset">
+											<Type>UTC Offset</Type>
+										</ValidationPattern>
+									</Validation>
+									<Validation>
+										<Options>G</Options>
+										<ErrorCode>T14</ErrorCode>
+										<Comment><![CDATA[Sign ([N]) must not be used when UTC Indicator is zero (Error code(s): T14).]]></Comment>
+										<ValidationPattern xsi:type="UTC_Sign" Type="UTC Sign">
+											<Type>UTC Sign</Type>
+										</ValidationPattern>
+									</Validation>
+								</SubField>
+							</Validations>
+						</SwiftField>
+						<SwiftField Name="98H">
+							<SwiftFieldDef Name="98">
+								<Generic>false</Generic>
+								<Description><![CDATA[Date/Time]]></Description>
+								<Option Name="H">
+									<Format><![CDATA[6!n[(',')(2n[1!n])]([/[N]2!n[2!n]])]]></Format>
+									<Specification><![CDATA[(Time)(COMMA)(Decimals)(UTC Indicator)]]></Specification>
+									<Description><![CDATA[Clearing Timestamp]]></Description>
+								</Option>
+							</SwiftFieldDef>
+							<Repeating>false</Repeating>
+							<Presence>O</Presence>
+							<Options>H</Options>
+							<Validations>
+								<SubField Name="Time">
+									<Validation>
+										<Options>H</Options>
+										<ErrorCode>T38</ErrorCode>
+										<Comment><![CDATA[Time must be a valid time expressed as HHMMSS (Error code(s): T38).]]></Comment>
+										<ValidationPattern xsi:type="DATE" Type="DATE">
+											<Type>DATE</Type>
+											<Format>HHmmss</Format>
+										</ValidationPattern>
+									</Validation>
+								</SubField>
+								<SubField Name="UTC_Indicator">
+									<Validation>
+										<Options>H</Options>
+										<ErrorCode>T39</ErrorCode>
+										<Comment><![CDATA[UTC Indicator must be a valid time expressed as HH[MM] (Error code(s): T39).]]></Comment>
+										<ValidationPattern xsi:type="UTC_Offset" Type="UTC Offset">
+											<Type>UTC Offset</Type>
+										</ValidationPattern>
+									</Validation>
+									<Validation>
+										<Options>H</Options>
+										<ErrorCode>T14</ErrorCode>
+										<Comment><![CDATA[Sign ([N]) must not be used when UTC Indicator is zero (Error code(s): T14).]]></Comment>
+										<ValidationPattern xsi:type="UTC_Sign" Type="UTC Sign">
+											<Type>UTC Sign</Type>
+										</ValidationPattern>
+									</Validation>
+								</SubField>
+							</Validations>
+						</SwiftField>
+						<SwiftField Name="77A">
+							<SwiftFieldDef Name="77">
+								<Generic>false</Generic>
+								<Option Name="A">
+									<Format><![CDATA[20*35x]]></Format>
+									<Specification><![CDATA[(Narrative)]]></Specification>
+									<Description><![CDATA[Additional Reporting Information ]]></Description>
+								</Option>
+							</SwiftFieldDef>
+							<Repeating>false</Repeating>
+							<Presence>O</Presence>
+							<Options>A</Options>
+						</SwiftField>
+					</Fields>
+				</SwiftSequence>
+			</Fields>
+		</Data>
+		<Trailer>
+		</Trailer>
+	</SwiftFields>
+	<validationrules name="Default">
+		<hdrvalidationrules>
+			<fieldvalidations>
+				<fieldvalidation>
+					<name>U09</name>
+					<formula><![CDATA[if($this.Header.GetFieldIndex("User_Header") != -1) {
+    def userHeader = $this.Header.GetSection("User_Header");
+    if(userHeader.$size > 0 && userHeader[0].IsNotNull("Validation_Flag")) {
+        return false;
+    }
+}
+return true;
+]]></formula>
+					<severity>error</severity>
+					<cascade>true</cascade>
+					<error-code>U09</error-code>
+					<actionmessage><![CDATA["User has used tag 119 in a message that is not a candidate for special processing"]]></actionmessage>
+				</fieldvalidation>
+	<fieldvalidation>
+						<name>U12</name>
+		<fieldname>User Header</fieldname>
+		<formula><![CDATA[Iff(IsNotNull(User_Header.Service_Type_Identifier), 
+    IsNotNull(User_Header.Unique_End_To_End_Transaction_Reference))]]></formula>
+		<severity>error</severity>
+		<cascade>true</cascade>
+						<error-code>U12</error-code>
+		<actionmessage><![CDATA["When populating an end-to-end reference, both fields 111 and 121 must be populated: a message that contains only one of these two fields will not be accepted by FIN."]]></actionmessage>
+	</fieldvalidation>
+					<fieldvalidation>
+						<name>U03</name>
+						<fieldname>User Header.Unique End-To-End Transaction Reference</fieldname>
+						<formula><![CDATA[Matches("[a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[a-b8-9]{1}[a-f0-9]{3}-[a-f0-9]{12}", $value)]]></formula>
+						<severity>error</severity>
+						<cascade>true</cascade>
+						<error-code>U03</error-code>
+						<actionmessage><![CDATA["Invalid format! Format must be 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx' where x is any hexadecimal character (lower case only) and y is one of 8, 9, a, or b."]]></actionmessage>
+					</fieldvalidation>
+			</fieldvalidations>
+		</hdrvalidationrules>
+		<datavalidationrules>
+			<fieldvalidations>
+				<fieldvalidation>
+					<name>C1</name>
+					<fieldname>A.22A.Type</fieldname>
+					<formula><![CDATA[If(In($value, "AMND", "CANC"), A[0].F21.$size > 0, true)]]></formula>
+					<severity>error</severity>
+					<cascade>true</cascade>
+					<error-code>D70</error-code>
+					<actionmessage><![CDATA["In sequence A, field 21 is mandatory if field 22A contains the code AMND or CANC."]]></actionmessage>
+				</fieldvalidation>
+				<fieldvalidation>
+					<name>C2-A</name>
+					<fieldname>A.94A.Scope</fieldname>
+					<formula><![CDATA[If(In($value, "AGNT", "BILA"), 
+   If(C.$size > 0, C[0].F71F.$size == 0, true), 
+   true)]]></formula>
+					<severity>error</severity>
+					<cascade>true</cascade>
+					<error-code>D74</error-code>
+					<actionmessage><![CDATA["Field 71F is not allowed in sequence C (if present), if field 94A contains one of the following codes: AGNT, BILA."]]></actionmessage>
+				</fieldvalidation>
+				<fieldvalidation>
+					<name>C2-B</name>
+					<fieldname>C.71F</fieldname>
+					<formula><![CDATA[A[0].F94A.$size > 0]]></formula>
+					<severity>error</severity>
+					<cascade>true</cascade>
+					<error-code>D74</error-code>
+					<actionmessage><![CDATA["Field 71F is not allowed in sequence C (if present), if field 94A (in sequence A) is not present."]]></actionmessage>
+				</fieldvalidation>
+				<fieldvalidation>
+					<name>C2-C</name>
+					<fieldname>A.94A.Scope</fieldname>
+					<formula><![CDATA[If($value == "BROK", 
+   C.$size > 0 && C[0].F88a.$size > 0, 
+   true)]]></formula>
+					<severity>error</severity>
+					<cascade>true</cascade>
+					<error-code>D74</error-code>
+					<actionmessage><![CDATA["Sequence C with field 88a is mandatory, if field 94A (in sequence A) contains the code BROK."]]></actionmessage>
+				</fieldvalidation>
+				<fieldvalidation>
+					<name>C3-A</name>
+					<fieldname>A.17U.Indicator</fieldname>
+					<formula><![CDATA[If($value == "Y", 
+   D.$size > 0, 
+   If($value == "N", D.$size == 0, true))]]></formula>
+					<severity>error</severity>
+					<cascade>true</cascade>
+					<error-code>D76</error-code>
+					<actionmessage><![CDATA["If field 17U in sequence A is Y, then sequence D is mandatory; if field 17U in sequence A is N, then sequence D is not allowed."]]></actionmessage>
+				</fieldvalidation>
+				<fieldvalidation>
+					<name>C3-B</name>
+					<fieldname>D</fieldname>
+					<formula><![CDATA[A[0].F17U.$size > 0]]></formula>
+					<severity>error</severity>
+					<cascade>true</cascade>
+					<error-code>D76</error-code>
+					<actionmessage><![CDATA["If field 17U in sequence A is not present, then sequence D is not allowed."]]></actionmessage>
+				</fieldvalidation>
+				<fieldvalidation>
+					<name>C5</name>
+					<fieldname>E</fieldname>
+					<formula><![CDATA[IsSwiftSequenceEmpty($value)]]></formula>
+					<severity>error</severity>
+					<cascade>true</cascade>
+					<error-code>C98</error-code>
+					<actionmessage><![CDATA["In sequence E, field 15E may not be the only field, that is, if field 15E is present then at least one of the other fields of sequence E must be present (Error code(s): C98)."]]></actionmessage>
+				</fieldvalidation>
+				<fieldvalidation>
+					<name>C6</name>
+					<fieldname>E</fieldname>
+					<formula><![CDATA[Implies($value.F17Z.$size > 0 && $value.F17Z[0].Indicator == "Y", $value.F22Q.$size > 0)]]></formula>
+					<severity>error</severity>
+					<cascade>true</cascade>
+					<error-code>C56</error-code>
+					<actionmessage><![CDATA["In sequence E, when field 17Z is 'Y' then 22Q must be present (Error code(s): C56)."]]></actionmessage>
+				</fieldvalidation>
+				<fieldvalidation>
+						<name>C7</name>
+						<fieldname>A</fieldname>
+						<formula><![CDATA[If(($value.F17F.$size > 0 && $value.F17F.Indicator == "Y"), 
+   $value.F17O.$size > 0, 
+   $value.F17O.$size == 0)]]></formula>
+						<severity>error</severity>
+						<cascade>true</cascade>
+						<error-code>C87</error-code>
+						<actionmessage><![CDATA["In sequence A, if field 17F is present and contains 'Y', then field 17O must also be present, otherwise field 17O is not allowed (Error code(s): C87)"]]></actionmessage>
+					</fieldvalidation>
+					<fieldvalidation>
+						<name>C8</name>
+						<fieldname>A</fieldname>
+						<formula><![CDATA[If($value.F17O.$size > 0 && $value.F17O.Indicator == "Y", 
+   $value.F32E.$size > 0 && $value.F30U.$size > 0 && $value.F14S.$size > 0 && $value.F21A.$size == 0, 
+   If($value.F17O.$size > 0 && $value.F17O.Indicator == "N", 
+      $value.F21A.$size > 0 && $value.F32E.$size == 0 && $value.F30U.$size == 0 && 
+        $value.F14S.$size == 0, 
+      If($value.F17O.$size == 0, 
+         $value.F21A.$size == 0 && $value.F32E.$size == 0 && $value.F30U.$size == 0 && 
+           $value.F14S.$size == 0, 
+         true)))]]></formula>
+						<severity>error</severity>
+						<cascade>true</cascade>
+						<error-code>C87</error-code>
+						<actionmessage><![CDATA["In sequence A, if field 17O is present and contains 'Y', then fields 32E, 30U, and at least one occurrence of 14S must also be present and field 21A is not allowed. If 17O is present and contains 'N', then field 21A must be present and fields 32E, 30U, and 14S are not allowed. If field 17O is not present, then fields 32E, 30U, 14S, and 21A are not allowed (Error code(s): C87):"]]></actionmessage>
+					</fieldvalidation>
+					<fieldvalidation>
+					<name>F-C08-1</name>
+					<fieldname>B.B1.32B.Currency</fieldname>
+					<formula><![CDATA[!In($value, "XAU", "XAG", "XPD", "XPT")
+]]></formula>
+					<severity>error</severity>
+					<cascade>true</cascade>
+					<error-code>C08</error-code>
+					<actionmessage><![CDATA["In Subsequence B1 Amount Bought, field 32B Currency Amount, the codes XAU, XAG, XPD and XPT are not allowed, as these are codes for commodities for which the category 6 commodities messages must be used (Error code(s): C08)"]]></actionmessage>
+				</fieldvalidation>
+				<fieldvalidation>
+					<name>F-C08-2</name>
+					<fieldname>B.B2.33B.Currency</fieldname>
+					<formula><![CDATA[!In($value, "XAU", "XAG", "XPD", "XPT")
+]]></formula>
+					<severity>error</severity>
+					<cascade>true</cascade>
+					<error-code>C08</error-code>
+					<actionmessage><![CDATA["In Subsequence B2 Amount Bought, field 33B Currency Amount, the codes XAU, XAG, XPD and XPT are not allowed, as these are codes for commodities for which the category 6 commodities messages must be used (Error code(s): C08)"]]></actionmessage>
+				</fieldvalidation>
+				<fieldvalidation>
+					<name>F-C08-3</name>
+					<fieldname>C.71F.Currency</fieldname>
+					<formula><![CDATA[!In($value, "XAU", "XAG", "XPD", "XPT")]]></formula>
+					<severity>error</severity>
+					<cascade>true</cascade>
+					<error-code>C08</error-code>
+					<actionmessage><![CDATA["In Sequence C Optional General Information, field 71F Broker's Commission, the codes XAU, XAG, XPD and XPT are not allowed, as these are codes for commodities for which the category 6 commodities messages must be used (Error code(s): C08)"]]></actionmessage>
+				</fieldvalidation>
+				<fieldvalidation>
+					<name>F-C08-4</name>
+					<fieldname>D.D1.32B.Currency</fieldname>
+					<formula><![CDATA[!In($value, "XAU", "XAG", "XPD", "XPT")]]></formula>
+					<severity>error</severity>
+					<cascade>true</cascade>
+					<error-code>C08</error-code>
+					<actionmessage><![CDATA["In Sequence D Split Settlement Details, field 32B Currency Amount, the codes XAU, XAG, XPD and XPT are not allowed, as these are codes for commodities for which the category 6 commodities messages must be used (Error code(s): C08)"]]></actionmessage>
+				</fieldvalidation>
+				<fieldvalidation>
+						<name>F-C08-5</name>
+						<fieldname>A.32E.Currency</fieldname>
+						<formula><![CDATA[!In($value, "XAU", "XAG", "XPD", "XPT")]]></formula>
+					<severity>error</severity>
+					<cascade>true</cascade>
+						<error-code>C08</error-code>
+						<actionmessage><![CDATA["The codes XAU, XAG, XPD and XPT are not allowed, as these are codes for commodities for which the category 6 commodities messages must be used (Error code(s): C08)."]]></actionmessage>
+				</fieldvalidation>
+				<fieldvalidation>
+						<name>FA-77D</name>
+					<fieldname>A.77D.Narrative</fieldname>
+						<formula><![CDATA[def Actualvalue = Replace($value, "\r\n", "\n");
+def lines = Split("\n", Actualvalue);
+for(def i = 0; i < lines.Length(); ++i) {
+    if(lines[i].StartsWith("/FIX/") || lines[i].StartsWith("/SETC/") || 
+         lines[i].StartsWith("/SRCE/") || lines[i].StartsWith("/VALD/"))
+        return false;
+}
+return true;
+]]></formula>
+					<severity>error</severity>
+					<cascade>true</cascade>
+						<error-code>T70</error-code>
+						<actionmessage><![CDATA["/FIX/, /SETC/, /SRCE/ or /VALD/ must not be present at the start of any line (Error code(s): T70)."]]></actionmessage>
+				</fieldvalidation>
+				<fieldvalidation>
+					<name>FA-22C-A</name>
+					<fieldname>A.22C</fieldname>
+					<formula><![CDATA[$str1 = A.F22C.Bank_Code_1 + A.F22C.Location_Code_1;
+$str2 = A.F22C.Bank_Code_2 + A.F22C.Location_Code_2;
+CompareWhereLettersPrecedeNumbers($str1, $str2) <= 0;
+]]></formula>
+					<severity>error</severity>
+					<cascade>true</cascade>
+					<error-code>T96</error-code>
+					<actionmessage><![CDATA["This field consists of the bank and location codes (from the ISO Bank Identifier Code) of both the Sender and the Receiver of the MT 300. These codes must appear in alphabetical order (letters take precedence over numbers)."]]></actionmessage>
+				</fieldvalidation>
+				<fieldvalidation>
+					<name>FA-22C-B</name>
+					<fieldname>A.22C.Reference_Code</fieldname>
+					<formula><![CDATA[$value == ExtractNonZeroDigits(B[0].F36[0].Rate, 4)
+]]></formula>
+					<severity>error</severity>
+					<cascade>true</cascade>
+					<error-code>T22</error-code>
+					<actionmessage><![CDATA["Location Code 1 and Bank Code 2 are separated by four digits, which must consist of the rightmost non-zero digit of field 36 in sequence B, preceded by the three digits to the left of it. If there are no digits to the left of it, the space must be zero filled."]]></actionmessage>
+				</fieldvalidation>
+				<fieldvalidation>
+					<name>FA-22C-C</name>
+					<fieldname>A.22C</fieldname>
+					<formula><![CDATA[def header = $this.Header;
+def appheader;
+def commonRef = $value.Bank_Code_1 + $value.Location_Code_1 + $value.Reference_Code + 
+                  $value.Bank_Code_2 + $value.Location_Code_2;
+if(Length(commonRef) != 16){
+  return false;
+}
+if(header.GetFieldCount() == 0 || 
+     (header.GetFieldCount() > 0 && header.GetFieldIndex("Basic_Header") == -1)) {
+	// No Header or FICC Header
+	return true;
+}
+else if(header.GetFieldCount() == 4) {
+	// Input-Output Header
+    appheader = If(header.GetSection(1).$size > 0, 
+                   header.GetSection(1)[0], 
+                   header.GetSection(2)[0]);
+}
+else  {
+    appheader = header.GetSection(1)[0];
+}
+def basicheader = header.GetSection(0)[0];
+def identifier = appheader.GetString("Input/Output Identifier");
+def recvAddr;
+def senderAddr;
+if(identifier == "I") {
+	senderAddr = basicheader.GetString("LT Identifier");
+    recvAddr = appheader.GetString("Receiver's Address");
+}
+else if(identifier == "O") {
+    recvAddr = basicheader.GetString("LT Identifier");
+   	senderAddr = appheader.GetString("Message Input Reference").Mid(6, 12);
+}
+// Remove Country Code from BIC
+def senderBankLocCode = senderAddr.Mid(0, 8).Delete(4, 2);
+def receiverBankLocCode = recvAddr.Mid(0, 8).Delete(4, 2);
+def firstcode = Left(commonRef, 6);
+def secondcode = Right(commonRef, 6);
+def bankLocCodes = [senderBankLocCode, receiverBankLocCode];
+def Field22Codes = [firstcode, secondcode];
+return ContainsAll(Field22Codes, bankLocCodes) && ContainsAll(bankLocCodes, Field22Codes);
+]]></formula>
+					<severity>error</severity>
+					<cascade>true</cascade>
+					<error-code>T95</error-code>
+					<actionmessage><![CDATA["Common Reference must contain the bank and location codes of the Sender and Receiver, ie, their BIC without the country code"]]></actionmessage>
+				</fieldvalidation>
+				<fieldvalidation>
+					<name>FC-72-A</name>
+					<fieldname>C.72.Narrative</fieldname>
+					<formula><![CDATA[VerifyField72NarrativeText($value)]]></formula>
+					<severity>error</severity>
+					<cascade>true</cascade>
+					<error-code>T32</error-code>
+					<actionmessage><![CDATA["The first line of field 72 should be of the following format: /8c/[additional information]. The remaining lines (2 - 6) should be of the following format: [//continuation of additional information] or [/8c/[additional information]]."]]></actionmessage>
+				</fieldvalidation>
+				<fieldvalidation>
+					<name>FC-72-B</name>
+					<fieldname>C.72.Narrative</fieldname>
+						<formula><![CDATA[def Actualvalue = Replace($value, "\r\n", "\n");
+def lines = Split("\n", Actualvalue);
+for(def i = 0; i < lines.Length(); ++i) {
+    if(lines[i].StartsWith("/PUSI/") || lines[i].StartsWith("/PUTI/") || 
+         lines[i].StartsWith("/USI/") || lines[i].StartsWith("/UTI/"))
+        return false;
+}
+return true;
+]]></formula>
+					<severity>error</severity>
+					<cascade>true</cascade>
+					<error-code>T49</error-code>
+					<actionmessage><![CDATA["Any line in field 72 should not start with code /PUSI/, /PUTI/, /USI/ or /UTI/."]]></actionmessage>
+				</fieldvalidation>
+				<fieldvalidation>
+						<name>FC-72-C</name>
+						<fieldname>C.72.Narrative</fieldname>
+						<formula><![CDATA[def Actualvalue = Replace($value, "\r\n", "\n");
+def lines = Split("\n", Actualvalue);
+for(def i = 0; i < lines.Length(); ++i) {
+    if(lines[i].StartsWith("/FIX/") || lines[i].StartsWith("/SETC/") || 
+         lines[i].StartsWith("/SRCE/") || lines[i].StartsWith("/VALD/"))
+        return false;
+}
+return true;
+]]></formula>
+						<severity>error</severity>
+						<cascade>true</cascade>
+						<error-code>T70</error-code>
+						<actionmessage><![CDATA["Any line in field 72 should not start with code /FIX/, /SETC/, /SRCE/ or /VALD/."]]></actionmessage>
+					</fieldvalidation>
+					<fieldvalidation>
+					<name>FC-29A-A</name>
+					<fieldname>C.29A.Narrative</fieldname>
+					<comment><![CDATA["At least one of the following codes should be used: /DEPT/ followed by the name of the department, /FAXT/ followed by fax number, /NAME/ followed by the name of the contact person, /PHON/ followed by the telephone number, /TELX/ followed by the telex number."]]></comment>
+					<formula><![CDATA[$sec1 = GetCodeValueSection($value);
+$sec2 = SecGroup($sec1, "Code");
+$sec3 = SecFilter($sec1, 
+                  "In($filterObj.Code, \"DEPT\", \"FAXT\", \"NAME\", \"PHON\", \"TELX\")");
+$sec1.$size > 0 && $sec1.$size == $sec2.$size && 
+  $sec1.$size == $sec3.$size && 
+  !FieldValueExistsInAtLeastOne($sec1, "Value", "");
+]]></formula>
+					<enabled>false</enabled>
+					<severity>error</severity>
+					<cascade>true</cascade>
+					<error-code>FC-29A-A</error-code>
+					<actionmessage><![CDATA["At least one of the following codes should be used: /DEPT/ followed by the name of the department, /FAXT/ followed by fax number, /NAME/ followed by the name of the contact person, /PHON/ followed by the telephone number, /TELX/ followed by the telex number."]]></actionmessage>
+				</fieldvalidation>
+				<fieldvalidation>
+					<name>FD-16A</name>
+					<fieldname>D.16A.Number</fieldname>
+					<formula><![CDATA[$value == D.D1.$size]]></formula>
+					<severity>error</severity>
+					<cascade>true</cascade>
+					<error-code>D96</error-code>
+					<actionmessage><![CDATA["In field 16A of sequence D, Number must equal the number of repetitions within sequence D."]]></actionmessage>
+				</fieldvalidation>
+				<fieldvalidation>
+					<name>FE-77A-ERI</name>
+					<fieldname>E.77A.Narrative</fieldname>
+					<formula><![CDATA[ApplyERICodeValidationStructured($value)]]></formula>
+					<severity>error</severity>
+					<cascade>true</cascade>
+					<error-code>T47</error-code>
+					<actionmessage><![CDATA["In an ERI field (i.e. fields 61, 72, 77A, 79, 86) the data part of a code word /OCMT/, or /CHGS/, is being validated, but the ending separator (i.e. third slash) is missing or the code words are duplicated."]]></actionmessage>
+				</fieldvalidation>
+				<fieldvalidation>
+					<name>ERI</name>
+					<fieldname>C.72.Narrative</fieldname>
+					<formula><![CDATA[ApplyERICodeValidationStructured($value);]]></formula>
+					<severity>error</severity>
+					<cascade>true</cascade>
+					<error-code>T47</error-code>
+					<actionmessage><![CDATA["In an ERI field (i.e. fields 61, 72, 77A, 79, 86) the data part of a code word /OCMT/, or /CHGS/, is being validated, but the ending separator (i.e. third slash) is missing or the code words are duplicated."]]></actionmessage>
+				</fieldvalidation>
+					<fieldvalidation>
+						<name>FA-14S</name>
+						<fieldname>A.14S</fieldname>
+						<rule type="MaxOccurs">2</rule>
+						<severity>error</severity>
+						<cascade>true</cascade>
+						<error-code>T10</error-code>
+					</fieldvalidation>
+					<fieldvalidation>
+						<name>FE-35B-A</name>
+						<fieldname>E.35B.Identification_of_Instrument</fieldname>
+						<formula><![CDATA[Equal(Left($value, 5), "ISIN ") && 
+  VerifyFormat(RightStr($value, "ISIN "), "12!c");
+]]></formula>
+						<severity>error</severity>
+						<cascade>true</cascade>
+						<error-code>T12</error-code>
+						<actionmessage><![CDATA[E.F35B.Identification_of_Instrument + 
+  " is not a valid Identification of Financial Instrument. Required format is ISIN1!e12!c"]]></actionmessage>
+					</fieldvalidation>
+					<fieldvalidation>
+						<name>FE-35B-B</name>
+						<fieldname>E.35B</fieldname>
+						<formula><![CDATA[if(IsNotNull($value.Description_of_Instrument) && IsNull($value.Identification_of_Instrument)) {
+	def Actual_Description_Value = replace($value.Description_of_Instrument, "\r\n", "\n");
+    def lines = Split("\n", Actual_Description_Value);
+    if(EqualIgnoreCase(Left(lines[0], 4), "ISIN"))
+                return (Equal(Left(lines[0], 5), "ISIN "));
+}
+return true;]]></formula>
+						<severity>error</severity>
+						<cascade>true</cascade>
+						<error-code>T12</error-code>
+						<actionmessage><![CDATA["Not a valid Identification of Financial Instrument. Required format is ISIN1!e12!c";]]></actionmessage>
+					</fieldvalidation>
+			</fieldvalidations>
+		</datavalidationrules>
+		<tlrvalidationrules>
+			<fieldvalidations>
+			</fieldvalidations>
+		</tlrvalidationrules>
+	</validationrules>
+	<folder name="Function Definitions" type="FunctionDefFolder">
+		<FormulaFunctionDef name="IsSwiftSequenceEmpty" type="FormulaFunctionDef">
+			<description>Returns false if the sequence is empty. If the sequence has atleast one valid field present, returns true.</description>
+			<Category>User Defined</Category>
+			<parameterfields>
+				<parameterfield>
+					<name>Obj</name>
+					<type>Any</type>
+				</parameterfield>
+			</parameterfields>
+			<ReturnType>Boolean</ReturnType>
+			<Code><![CDATA[def fldcount = 0;
+for(def i = 0; i < Obj[0].GetFieldCount(); ++i) {
+	def count = Obj[0].GetFieldCount();
+    def fld = Obj[0].GetSection(i);
+    if(fld.$size > 0)
+	    fldcount += 1;
+    if(fldcount > 0)
+	    break;
+}
+if(fldcount == 0)
+    return false;
+return true;
+]]></Code>
+			<function-type>Formula</function-type>
+		</FormulaFunctionDef>
+		<elementproperties>
+			<propertymap>
+			</propertymap>
+		</elementproperties>
+	</folder>
+</SwiftMessageFormat>
+

@@ -1,0 +1,218 @@
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="unqualified"
+            attributeFormDefault="unqualified">
+    <!-- include constructs -->
+    <xsd:include schemaLocation="cartridge-include.xsd"/>
+    <xsd:group name="SectionRefModel">
+        <xsd:sequence>
+            <xsd:element name="ref" type="xsd:string"/>
+            <xsd:element name="type-substitution" type="xsd:boolean" minOccurs="0"/>
+            <xsd:element name="model" type="xsd:string"/>
+        </xsd:sequence>
+    </xsd:group>
+    <xsd:group name="SectionModelField">
+        <xsd:sequence>
+            <xsd:element name="type-substitution" type="xsd:boolean" minOccurs="0"/>
+            <xsd:element name="model" type="xsd:string"/>
+            <xsd:element name="field" type="XMLAbstractFieldType" minOccurs="0" maxOccurs="unbounded"/>
+        </xsd:sequence>
+    </xsd:group>
+    <xsd:complexType name="XMLFieldStruct">
+        <xsd:sequence>
+            <xsd:element ref="platforminfo" minOccurs="0"/>
+            <xsd:element ref="field-attributes" minOccurs="0"/>
+            <xsd:choice>
+                <xsd:group ref="SectionRefModel"/>
+                <xsd:group ref="SectionModelField"/>
+            </xsd:choice>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="XMLAbstractFieldType" abstract="true">
+        <xsd:sequence>
+            <xsd:element name="name" type="xsd:string"/>
+            <xsd:element name="enabled" type="xsd:boolean" minOccurs="0"/>
+            <xsd:element name="datatype" type="xsd:string"/>
+            <xsd:element name="detailed-name" type="xsd:string" minOccurs="0"/>
+            <xsd:element name="description" type="xsd:string" minOccurs="0"/>
+            <xsd:element name="aliasname" type="xsd:string" minOccurs="0"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="XMLFieldType">
+        <xsd:complexContent>
+            <xsd:extension base="XMLAbstractFieldType">
+                <xsd:sequence>
+                    <xsd:element name="required" type="xsd:boolean"/>
+                    <xsd:element name="defaultvalue" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="dateformat" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="xml-name" minOccurs="0">
+                        <xsd:complexType>
+                            <xsd:simpleContent>
+                                <xsd:extension base="xsd:string">
+                                    <xsd:attribute name="namespace" type="xsd:string"/>
+                                </xsd:extension>
+                            </xsd:simpleContent>
+                        </xsd:complexType>
+                    </xsd:element>
+                    <xsd:element name="xmltype" type="xsd:string"/>
+                    <xsd:element name="node-type" type="xsd:string"/>
+                    <xsd:element name="fixed-value" type="xsd:boolean" minOccurs="0"/>
+                    <xsd:element name="nillable" type="xsd:boolean" minOccurs="0"/>
+                    <xsd:element ref="facets" minOccurs="0"/>
+                    <xsd:element ref="platforminfo" minOccurs="0"/>
+                    <xsd:element ref="field-attributes" minOccurs="0"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="XMLSectionType">
+        <xsd:complexContent>
+            <xsd:extension base="XMLAbstractFieldType">
+                <xsd:sequence>
+                    <xsd:element name="minoccurs" type="xsd:integer"/>
+                    <xsd:element name="maxoccurs" type="xsd:integer"/>
+                    <xsd:element name="xml-name" minOccurs="0">
+                        <xsd:complexType>
+                            <xsd:simpleContent>
+                                <xsd:extension base="xsd:string">
+                                    <xsd:attribute name="namespace" type="xsd:string"/>
+                                </xsd:extension>
+                            </xsd:simpleContent>
+                        </xsd:complexType>
+                    </xsd:element>
+                    <xsd:element name="node-type" type="xsd:string"/>
+                    <xsd:element name="fields" type="XMLFieldStruct"/>
+                    <xsd:element ref="platforminfo" minOccurs="0"/>
+                    <xsd:element ref="field-attributes" minOccurs="0"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:element name="facets">
+        <xsd:complexType>
+            <xsd:choice minOccurs="0" maxOccurs="unbounded">
+                <xsd:element name="length" type="FacetType" minOccurs="0"/>
+                <xsd:element name="minLength" type="FacetType" minOccurs="0"/>
+                <xsd:element name="maxLength" type="FacetType" minOccurs="0"/>
+                <xsd:element name="maxExclusive" type="FacetType" minOccurs="0"/>
+                <xsd:element name="minExclusive" type="FacetType" minOccurs="0"/>
+                <xsd:element name="maxInclusive" type="FacetType" minOccurs="0"/>
+                <xsd:element name="minInclusive" type="FacetType" minOccurs="0"/>
+                <xsd:element name="totalDigits" type="FacetType"/>
+                <xsd:element name="fractionDigits" type="FacetType"/>
+                <xsd:element name="whiteSpace" type="FacetType" minOccurs="0"/>
+                <xsd:element name="pattern" type="FacetType" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="enumeration" type="FacetType" minOccurs="0" maxOccurs="unbounded"/>
+            </xsd:choice>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:complexType name="FacetType">
+        <xsd:sequence>
+            <xsd:element name="detailed-name" type="xsd:string" minOccurs="0"/>
+            <xsd:element name="description" type="xsd:string" minOccurs="0"/>
+        </xsd:sequence>
+        <xsd:attribute name="value" type="xsd:string"/>
+    </xsd:complexType>
+    <xsd:element name="xml-options">
+        <xsd:complexType>
+            <xsd:all>
+                <xsd:element name="dtd" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="xsd" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="batch" type="xsd:boolean" minOccurs="0"/>
+                <xsd:element name="root-tag" minOccurs="0">
+                    <xsd:complexType>
+                        <xsd:simpleContent>
+                            <xsd:extension base="xsd:string">
+                                <xsd:attribute name="namespace" type="xsd:string"/>
+                            </xsd:extension>
+                        </xsd:simpleContent>
+                    </xsd:complexType>
+                </xsd:element>
+                <xsd:element name="record-tag" minOccurs="0">
+                    <xsd:complexType>
+                        <xsd:simpleContent>
+                            <xsd:extension base="xsd:string">
+                                <xsd:attribute name="namespace" type="xsd:string"/>
+                            </xsd:extension>
+                        </xsd:simpleContent>
+                    </xsd:complexType>
+                </xsd:element>
+                <xsd:element name="header-tag" minOccurs="0">
+                    <xsd:complexType>
+                        <xsd:simpleContent>
+                            <xsd:extension base="xsd:string">
+                                <xsd:attribute name="namespace" type="xsd:string"/>
+                            </xsd:extension>
+                        </xsd:simpleContent>
+                    </xsd:complexType>
+                </xsd:element>
+                <xsd:element name="trailer-tag" minOccurs="0">
+                    <xsd:complexType>
+                        <xsd:simpleContent>
+                            <xsd:extension base="xsd:string">
+                                <xsd:attribute name="namespace" type="xsd:string"/>
+                            </xsd:extension>
+                        </xsd:simpleContent>
+                    </xsd:complexType>
+                </xsd:element>
+                <xsd:element name="body-tag" minOccurs="0">
+                    <xsd:complexType>
+                        <xsd:simpleContent>
+                            <xsd:extension base="xsd:string">
+                                <xsd:attribute name="namespace" type="xsd:string"/>
+                            </xsd:extension>
+                        </xsd:simpleContent>
+                    </xsd:complexType>
+                </xsd:element>
+                <xsd:element name="ignore-fixed-attributes" type="xsd:boolean" minOccurs="0"/>
+                <xsd:element name="ignore-fixed-elements" type="xsd:boolean" minOccurs="0"/>
+                <xsd:element name="validate" type="xsd:boolean" minOccurs="0"/>
+                <xsd:element name="validate-with-schema" type="xsd:boolean" minOccurs="0"/>
+                <xsd:element name="namespace-aware" type="xsd:boolean" minOccurs="0"/>
+                <xsd:element name="ignore-unrecognized-top-level-element" type="xsd:boolean" minOccurs="0"/>
+                <xsd:element name="remove-default-type-info" type="xsd:boolean" minOccurs="0"/>
+                <xsd:element name="allow-type-substitution" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="model-flattener-options" minOccurs="0">
+                    <xsd:complexType>
+                        <xsd:sequence>
+                            <xsd:element name="flatten-choice" type="xsd:boolean"/>
+                            <xsd:element name="flatten-optional-group" type="xsd:boolean"/>
+                            <xsd:element name="flatten-named-group" type="xsd:boolean" minOccurs="0"/>
+                        </xsd:sequence>
+                    </xsd:complexType>
+                </xsd:element>
+                <xsd:element ref="property" minOccurs="0"/>
+                <xsd:element name="type-substitutions" minOccurs="0">
+                    <xsd:complexType>
+                        <xsd:sequence>
+                            <xsd:element name="type-substitution" minOccurs="0" maxOccurs="unbounded">
+                                <xsd:complexType>
+                                    <xsd:sequence>
+                                        <xsd:element name="block" minOccurs="0" maxOccurs="unbounded">
+                                            <xsd:complexType>
+                                                <xsd:attribute name="name" type="xsd:string"/>
+                                                <xsd:attribute name="namespace" type="xsd:string"/>
+                                            </xsd:complexType>
+                                        </xsd:element>
+                                    </xsd:sequence>
+                                    <xsd:attribute name="name" type="xsd:string"/>
+                                    <xsd:attribute name="namespace" type="xsd:string"/>
+                                </xsd:complexType>
+                            </xsd:element>
+                        </xsd:sequence>
+                    </xsd:complexType>
+                </xsd:element>
+                <xsd:element name="type-mappings" minOccurs="0">
+                    <xsd:complexType>
+                        <xsd:sequence>
+                            <xsd:element name="type-mapping" minOccurs="0" maxOccurs="unbounded">
+                                <xsd:complexType>
+                                    <xsd:attribute name="xmltype" type="xsd:string"/>
+                                    <xsd:attribute name="datatype" type="xsd:string"/>
+                                </xsd:complexType>
+                            </xsd:element>
+                        </xsd:sequence>
+                    </xsd:complexType>
+                </xsd:element>
+            </xsd:all>
+        </xsd:complexType>
+    </xsd:element>
+</xsd:schema>

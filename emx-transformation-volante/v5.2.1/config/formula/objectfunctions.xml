@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<formulae>
+    <formula name="IsNull">
+        <description>Returns true if the value of the variant is null.</description>
+        <signature>IsNull(variant)</signature>
+        <category>General</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.ObjectFunctions"/>
+        <property name="method" value="isNull"/>
+    </formula>
+	<formula name="IsNull">
+        <description>Returns true if the value of the object is null.</description>
+        <signature>IsNull(obj)</signature>
+        <category>General</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.ObjectFunctions"/>
+        <property name="method" value="isNull"/>
+    </formula>
+	
+    <formula name="IsNotNull">
+        <description>Returns true if the variant has a non-null value</description>
+        <signature>IsNotNull(variant)</signature>
+        <category>General</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.ObjectFunctions"/>
+        <property name="method" value="isNotNull"/>
+    </formula>
+	<formula name="IsNotNull">
+        <description>Returns true if the object has a non-null value</description>
+        <signature>IsNotNull(obj)</signature>
+        <category>General</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.ObjectFunctions"/>
+        <property name="method" value="isNotNull"/>
+    </formula>
+	
+    <formula name="Equal">
+        <description>Returns TRUE if variant1 is equal to variant2. Returns FALSE otherwise</description>
+        <signature>Equal(variant1, variant2)</signature>
+        <category>Logical</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.ObjectFunctions"/>
+        <property name="method" value="equal"/>
+        <property name="nullable" value="true"/>
+    </formula>
+
+    <formula name="NotEqual">
+        <description>Returns TRUE if variant1 is not equal to variant2. Returns FALSE otherwise</description>
+        <signature>NotEqual(variant1, variant2)</signature>
+        <category>Logical</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.ObjectFunctions"/>
+        <property name="method" value="notEqual"/>
+        <property name="nullable" value="true"/>
+    </formula>
+
+    <formula name="GetType">
+        <description>Gets the type of the variant value.</description>
+        <signature>GetType(variant)</signature>
+        <category>General</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.ObjectFunctions"/>
+        <property name="method" value="getType"/>
+        <property name="nullable" value="true"/>
+    </formula>
+
+    <formula name="NullValue">
+        <description>Gets the null value variant for the specified type.</description>
+        <signature>NullValue(type)</signature>
+        <category>General</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.ObjectFunctions"/>
+        <property name="method" value="nullValue"/>
+    </formula>
+
+    <formula name="Out">
+        <description>Create an output parameter.</description>
+        <signature>Out(type)</signature>
+        <category>General</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.ObjectFunctions"/>
+        <property name="method" value="out"/>
+    </formula>
+
+    <formula name="InOut">
+        <description>Create an output parameter.</description>
+        <signature>InOut(value)</signature>
+        <category>General</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.ObjectFunctions"/>
+        <property name="method" value="inOut"/>
+    </formula>
+    <formula name="Map">
+        <description>Returns a new map.</description>
+        <signature>Map()</signature>
+        <category>General</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.ObjectFunctions"/>
+        <property name="method" value="createMap"/>
+    </formula>
+	<formula name="OrderedMap">
+        <description>Returns a new OrderedMap.</description>
+        <signature>OrderedMap()</signature>
+        <category>General</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.ObjectFunctions"/>
+        <property name="method" value="createOrderedMap"/>
+    </formula>
+    <formula name="getValue">
+        <description>Returns value for given map and key.</description>
+        <signature>getValue(map, key)</signature>
+        <category>General</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.ObjectFunctions"/>
+        <property name="method" value="get"/>
+        <property name="nullable" value="true" />
+    </formula>
+    <formula name="putValue">
+        <description>Put given value for given map and key .</description>
+        <signature>putValue(map, key, value)</signature>
+        <category>General</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.ObjectFunctions"/>
+        <property name="method" value="put"/>
+        <property name="nullable" value="true" />
+    </formula>
+</formulae>

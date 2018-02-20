@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<SwiftMessageFormat name="MT985">
+	<standard>SWIFT</standard>
+	<standard-name>MT985</standard-name>
+	<standard-version>SRG 2016</standard-version>
+	<standard-release-qualifier>20160308</standard-release-qualifier>
+	<DescriptiveName><![CDATA[Status Enquiry]]></DescriptiveName>
+	<Category>Cash Management &amp; Customer Status</Category>
+	<Description>This message type is sent by a financial institution, to another financial institution, to request an MT 986 Status Report.</Description>
+	<SwiftFields>
+		<customizable>true</customizable>
+		<modifiable>false</modifiable>
+		<SwiftMessageType>User</SwiftMessageType>
+		<max-length>2000</max-length>
+		<HeaderAndTrailerType>SWIFT_INPUT_OUTPUT_HEADER</HeaderAndTrailerType>
+		<Header>
+			</Header>
+		<Data>
+			<Fields>
+				<SwiftField Name="20">
+					<SwiftFieldDef Name="20">
+						<Generic>false</Generic>
+						<Description><![CDATA[Transaction Reference Number]]></Description>
+						<Option Name="">
+							<Format><![CDATA[16x]]></Format>
+							<Specification><![CDATA[(Reference)]]></Specification>
+							<Description><![CDATA[Transaction Reference Number]]></Description>
+						</Option>
+					</SwiftFieldDef>
+					<Repeating>false</Repeating>
+					<Presence>M</Presence>
+					<Options> </Options>
+					<Validations>
+						<SubField Name="Reference">
+							<Validation>
+								<Options> </Options>
+								<ErrorCode>T26</ErrorCode>
+								<Comment><![CDATA[This field must not start or end with a slash '/' and must not contain two consecutive slashes '//' (Error code(s): T26) .]]></Comment>
+								<ValidationPattern xsi:type="T26" Type="T26">
+									<Type>T26</Type>
+								</ValidationPattern>
+							</Validation>
+						</SubField>
+					</Validations>
+				</SwiftField>
+				<SwiftField Name="57a">
+					<SwiftFieldDef Name="57">
+						<Generic>false</Generic>
+						<Description><![CDATA[Account With Institution]]></Description>
+						<Option Name="A">
+							<Format><![CDATA[/1!a([/34x])(CRLF4!a2!a2!c[3!c]) | [/34xCRLF](4!a2!a2!c[3!c])]]></Format>
+							<Specification><![CDATA[(CreditDebit)(Party Identifier)(Identifier Code) | (Party Identifier)(Identifier Code)]]></Specification>
+							<Description><![CDATA[Account With Institution]]></Description>
+						</Option>
+						<Option Name="B">
+							<Format><![CDATA[/1!a[/34x](CRLF35x) | /1!a[/34x] | [/34xCRLF]35x | /34x]]></Format>
+							<Specification><![CDATA[(CreditDebit) (Party Identifier) (Location) | (CreditDebit)(Party Identifier) |(Party Identifier) (Location) | (Party Identifier)]]></Specification>
+							<Description><![CDATA[Account With Institution]]></Description>
+						</Option>
+						<Option Name="D">
+							<Format><![CDATA[/1!a([/34x])(CRLF4*35x) | ([/34xCRLF])(4*35x)]]></Format>
+							<Specification><![CDATA[(CreditDebit)(Party Identifier)(Name & Address)|(Party Identifier)(Name & Address)]]></Specification>
+							<Description><![CDATA[Account With Institution]]></Description>
+						</Option>
+					</SwiftFieldDef>
+					<Repeating>false</Repeating>
+					<Presence>O</Presence>
+					<Options>A, B, D</Options>
+					<Validations>
+						<SubField Name="Identifier_Code">
+							<Validation>
+								<Options>A</Options>
+								<ErrorCode>T27, T28, T29, T45</ErrorCode>
+								<Comment><![CDATA[Identifier Code must be a registered BIC or BEI (Error code(s): T27,T28,T29,T45)]]></Comment>
+								<ValidationPattern xsi:type="BIC" Type="BIC">
+									<Type>BIC</Type>
+								</ValidationPattern>
+							</Validation>
+							<Validation>
+								<Options>A</Options>
+								<ErrorCode>C05</ErrorCode>
+								<Comment><![CDATA[Identifier Code must not be a BEI. Please refer to the latest version of the BIC Directory - Corporations for more information on BEIs. This error code applies to all types of BICs referenced in a FIN message including SWIFT BICs, non-SWIFT BICs, Masters, Synonyms, Live destinations and Test & Training destinations (Error code(s): C05) .]]></Comment>
+								<ValidationPattern xsi:type="C05" Type="C05">
+									<Type>C05</Type>
+								</ValidationPattern>
+							</Validation>
+						</SubField>
+						<SubField Name="CreditDebit">
+							<Validation>
+								<Options>A, B, D</Options>
+								<ErrorCode>T51</ErrorCode>
+								<Comment><![CDATA[CreditDebit must contain the following codes (Error Code:T51)]]></Comment>
+								<ValidationPattern xsi:type="CODE" Type="CODE">
+									<Type>CODE</Type>
+									<Codes>
+										<Code Name="C">
+											<DetailedName>Credit</DetailedName>
+										</Code>
+										<Code Name="D">
+											<DetailedName>Debit</DetailedName>
+										</Code>
+									</Codes>
+								</ValidationPattern>
+							</Validation>
+						</SubField>
+					</Validations>
+				</SwiftField>
+				<SwiftField Name="59">
+					<SwiftFieldDef Name="59">
+						<Generic>false</Generic>
+						<Description><![CDATA[Enquired Party]]></Description>
+						<Option Name="">
+							<Format><![CDATA[[/34xCRLF]4*35x]]></Format>
+							<Specification><![CDATA[(Account) (Name & Address)]]></Specification>
+							<Description><![CDATA[Enquired Party]]></Description>
+						</Option>
+					</SwiftFieldDef>
+					<Repeating>false</Repeating>
+					<Presence>M</Presence>
+					<Options> </Options>
+				</SwiftField>
+				<SwiftField Name="75">
+					<SwiftFieldDef Name="75">
+						<Generic>false</Generic>
+						<Description><![CDATA[Queries]]></Description>
+						<Option Name="">
+							<Format><![CDATA[6*35x]]></Format>
+							<Specification><![CDATA[(Narrative)]]></Specification>
+							<Description><![CDATA[Queries]]></Description>
+						</Option>
+					</SwiftFieldDef>
+					<Repeating>false</Repeating>
+					<Presence>O</Presence>
+					<Options> </Options>
+				</SwiftField>
+			</Fields>
+		</Data>
+		<Trailer>
+			</Trailer>
+	</SwiftFields>
+	<validationrules name="Default">
+		<hdrvalidationrules>
+			<fieldvalidations>
+				<fieldvalidation>
+					<name>U09</name>
+					<formula><![CDATA[if($this.Header.GetFieldIndex("User_Header") != -1) {
+    def userHeader = $this.Header.GetSection("User_Header");
+    if(userHeader.$size > 0 && userHeader[0].IsNotNull("Validation_Flag")) {
+        return false;
+    }
+}
+return true;
+]]></formula>
+					<severity>error</severity>
+					<cascade>true</cascade>
+					<error-code>U09</error-code>
+					<actionmessage><![CDATA["User has used tag 119 in a message that is not a candidate for special processing"]]></actionmessage>
+				</fieldvalidation>
+	<fieldvalidation>
+		<name>U03</name>
+		<fieldname>User Header</fieldname>
+		<formula><![CDATA[Iff(IsNotNull(User_Header.Service_Type_Identifier), 
+    IsNotNull(User_Header.Unique_End_To_End_Transaction_Reference))]]></formula>
+		<severity>error</severity>
+		<cascade>true</cascade>
+		<error-code>U03</error-code>
+		<actionmessage><![CDATA["When populating an end-to-end reference, both fields 111 and 121 must be populated: a message that contains only one of these two fields will not be accepted by FIN."]]></actionmessage>
+	</fieldvalidation>
+			</fieldvalidations>
+		</hdrvalidationrules>
+		<datavalidationrules>
+			<fieldvalidations>
+			</fieldvalidations>
+		</datavalidationrules>
+		<tlrvalidationrules>
+			<fieldvalidations>
+			</fieldvalidations>
+		</tlrvalidationrules>
+	</validationrules>
+</SwiftMessageFormat>
+

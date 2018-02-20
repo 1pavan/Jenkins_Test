@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<messageflowtemplate name="NO2Output">
+	<descriptiveName><![CDATA[NO2OuputTransformation]]></descriptiveName>
+	<category><![CDATA[General]]></category>
+	<description><![CDATA[This template can used to transform input in normalized form to output.]]></description>
+	<serviceelements>
+		<serviceelement>
+			<reference-value>MT543BT</reference-value>
+			<prompt>Internal Message Name</prompt>
+			<type>Internal Message</type>
+		</serviceelement>
+		<serviceelement>
+			<reference-value>MT543BTToMT543</reference-value>
+			<prompt>Output Mapping Name</prompt>
+			<type>Mapping</type>
+		</serviceelement>
+		<serviceelement>
+			<reference-value>MT543</reference-value>
+			<prompt>Output Message Name</prompt>
+			<type>External Message</type>
+		</serviceelement>
+	</serviceelements>
+	<variables>
+		<variable>
+			<reference-value>rawin</reference-value>
+			<template-value>rawin</template-value>
+			<type>Binary</type>
+		</variable>
+		<variable>
+			<reference-value>MT543NO</reference-value>
+			<template-value>${MT543}NO</template-value>
+			<type>Internal Format</type>
+		</variable>
+		<variable>
+			<reference-value>MT543OutObj</reference-value>
+			<template-value>${MT543}OutObj</template-value>
+			<type>MT543</type>
+		</variable>
+		<variable>
+			<reference-value>rawout</reference-value>
+			<template-value>rawout</template-value>
+			<type>Binary</type>
+		</variable>
+	</variables>
+	<originalmessageflow>
+		<messageflow name="NO2Output" type="MessageFlow">
+			<version>1.0</version>
+			<description></description>
+			<transaction>Required</transaction>
+			<variables>
+				<fields>
+					<field>
+						<name>rawin</name>
+						<type>Binary</type>
+						<variabletype>INPUT</variabletype>
+					</field>
+					<field>
+						<name>MT543NO</name>
+						<type>Message</type>
+						<minoccurs>0</minoccurs>
+						<maxoccurs>1</maxoccurs>
+						<variabletype>LOCAL</variabletype>
+						<message>MT543BT</message>
+						<fields>
+						</fields>
+					</field>
+					<field>
+						<name>MT543OutObj</name>
+						<type>Message</type>
+						<minoccurs>0</minoccurs>
+						<maxoccurs>1</maxoccurs>
+						<variabletype>LOCAL</variabletype>
+						<message>MT543</message>
+						<fields>
+						</fields>
+					</field>
+					<field>
+						<name>rawout</name>
+						<type>Binary</type>
+						<variabletype>OUTPUT</variabletype>
+					</field>
+				</fields>
+			</variables>
+			<flowelement name="Start1" uid="1049fc9f-dc3c-4b7f-a3ab-dcff6e2c2c54" type="Start" >
+				<label>Start</label>
+				<visual>
+					<position x="187" y="42"/>
+					<line-color>#008000</line-color>
+					<text-color>#000000</text-color>
+					<fill-color>#F0F0FF</fill-color>
+				</visual>
+			</flowelement>
+			<flowelement name="Parse1" uid="59f98d6f-f785-4ae1-b008-7adcf4d588ed" type="Parse" >
+				<label>Parse</label>
+				<in>rawin</in>
+				<out>MT543NO</out>
+				<message>MT543BT</message>
+				<visual>
+					<position x="187" y="108"/>
+					<line-color>#008000</line-color>
+					<text-color>#000000</text-color>
+					<fill-color>#FFFFE1</fill-color>
+				</visual>
+			</flowelement>
+			<flowelement name="Mapping1" uid="1cda8096-cac9-4987-a45b-62ca39454f09" type="Mapping" >
+				<label>Mapping</label>
+				<in>MT543NO</in>
+				<out>MT543OutObj</out>
+				<messagemapping>MT543BTToMT543</messagemapping>
+				<visual>
+					<position x="187" y="187"/>
+					<line-color>#FFA200</line-color>
+					<text-color>#000000</text-color>
+					<fill-color>#FFFFCC</fill-color>
+				</visual>
+			</flowelement>
+			<flowelement name="Serialize1" uid="81ff8d1e-88ec-48f5-b0cb-2317d59623ce" type="Serialize" >
+				<label>Serialize</label>
+				<in>MT543OutObj</in>
+				<out>rawout</out>
+				<message>MT543</message>
+				<visual>
+					<position x="187" y="266"/>
+					<line-color>#008000</line-color>
+					<text-color>#000000</text-color>
+					<fill-color>#FFFFE1</fill-color>
+				</visual>
+			</flowelement>
+			<flowelement name="Stop1" uid="fc1fcc55-4a5b-4163-aa3c-ee0855d037ad" type="Stop" >
+				<label>Stop</label>
+				<visual>
+					<position x="186" y="332"/>
+					<line-color>#008000</line-color>
+					<text-color>#000000</text-color>
+					<fill-color>#F0F0FF</fill-color>
+				</visual>
+			</flowelement>
+			<link type="Default">
+				<controlflow>true</controlflow>
+				<dataflow>false</dataflow>
+				<outputport uid="1049fc9f-dc3c-4b7f-a3ab-dcff6e2c2c54" portindex="0"/>
+				<inputport uid="59f98d6f-f785-4ae1-b008-7adcf4d588ed" portindex="0"/>
+				<edge-type>DIRECT</edge-type>
+			</link>
+			<link type="Default">
+				<controlflow>true</controlflow>
+				<dataflow>false</dataflow>
+				<outputport uid="59f98d6f-f785-4ae1-b008-7adcf4d588ed" portindex="1"/>
+				<inputport uid="1cda8096-cac9-4987-a45b-62ca39454f09" portindex="0"/>
+				<edge-type>DIRECT</edge-type>
+			</link>
+			<link type="Default">
+				<controlflow>true</controlflow>
+				<dataflow>false</dataflow>
+				<outputport uid="1cda8096-cac9-4987-a45b-62ca39454f09" portindex="1"/>
+				<inputport uid="81ff8d1e-88ec-48f5-b0cb-2317d59623ce" portindex="0"/>
+				<edge-type>DIRECT</edge-type>
+			</link>
+			<link type="Default">
+				<controlflow>true</controlflow>
+				<dataflow>false</dataflow>
+				<outputport uid="81ff8d1e-88ec-48f5-b0cb-2317d59623ce" portindex="1"/>
+				<inputport uid="fc1fcc55-4a5b-4163-aa3c-ee0855d037ad" portindex="0"/>
+				<edge-type>DIRECT</edge-type>
+			</link>
+			<visual>
+				<bounds x="156" y="30" width="67" height="315"/>
+			</visual>
+			<elementproperties>
+				<propertymap>
+				</propertymap>
+			</elementproperties>
+		</messageflow>
+	</originalmessageflow>
+</messageflowtemplate>
+

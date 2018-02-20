@@ -1,0 +1,301 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<SwiftMessageFormat name="MT066">
+	<standard-version><![CDATA[SRG 2012]]></standard-version>
+	<DescriptiveName><![CDATA[Solicited Undelivered Message Report]]></DescriptiveName>
+	<Category><![CDATA[System]]></Category>
+	<Description><![CDATA[This report lists undelivered messages according to the rules defined in an MT 046 Undelivered Message
+Report Request.
+
+From: FIN To: User]]></Description>
+	<SwiftFields>
+		<customizable>true</customizable>
+		<modifiable>true</modifiable>
+		<SwiftMessageType>System</SwiftMessageType>
+		<HeaderAndTrailerType>SWIFT_INPUT_HEADER</HeaderAndTrailerType>
+		<Header>
+		</Header>
+		<Data>
+			<Fields>
+				<SystemField Name="section-number">
+					<description><![CDATA[Sequential section number, beginning with 0001, to identify the position of an individual message in a multiple-section message.]]></description>
+					<datatype>String</datatype>
+					<required>true</required>
+					<SwiftSystemFieldDef Name="section-number" Tag="202">
+						<Format><![CDATA[4!n]]></Format>
+						<Specification><![CDATA[(section-number)]]></Specification>
+						<Description><![CDATA[Sequential section number, beginning with 0001, to identify the position of an individual message in a multiple-section message.]]></Description>
+						<Validations>
+							<Validation>
+								<formula>(ToInt($value) &gt; 0)</formula>
+								<error-code>V07</error-code>
+								<actionmessage>"Invalid Section Number '" + $value + "'"</actionmessage>
+							</Validation>
+						</Validations>
+					</SwiftSystemFieldDef>
+				</SystemField>
+				<SystemField Name="total-sections">
+					<description><![CDATA[Total number of sections in a multi-section message.]]></description>
+					<datatype>String</datatype>
+					<required>true</required>
+					<SwiftSystemFieldDef Name="total-sections" Tag="203">
+						<Format><![CDATA[4!n]]></Format>
+						<Specification><![CDATA[(total-sections)]]></Specification>
+						<Description><![CDATA[Total number of sections in a multi-section message.]]></Description>
+					</SwiftSystemFieldDef>
+				</SystemField>
+				<SystemField Name="date">
+					<description><![CDATA[Date, in GMT, of report generation.]]></description>
+					<datatype>String</datatype>
+					<required>true</required>
+					<SwiftSystemFieldDef Name="date" Tag="171">
+						<Format><![CDATA[6!n]]></Format>
+						<Specification><![CDATA[(date)]]></Specification>
+						<Additional-Format><![CDATA[YYMMDD]]></Additional-Format>
+						<Description><![CDATA[See the note above this table.]]></Description>
+						<Validations>
+							<Validation>
+								<formula>IsDate($value,"yyMMdd")</formula>
+								<error-code>V04</error-code>
+								<actionmessage>"Invalid Date '" + $value + "'"</actionmessage>
+							</Validation>
+						</Validations>
+					</SwiftSystemFieldDef>
+				</SystemField>
+				<SystemField Name="time">
+					<description><![CDATA[Time, in GMT, of report generation.]]></description>
+					<datatype>String</datatype>
+					<required>true</required>
+					<SwiftSystemFieldDef Name="time" Tag="175">
+						<Format><![CDATA[4!n]]></Format>
+						<Specification><![CDATA[(time)]]></Specification>
+						<Additional-Format><![CDATA[HHMM]]></Additional-Format>
+						<Description><![CDATA[See the note above this table.]]></Description>
+						<Validations>
+							<Validation>
+								<formula>IsDate($value,"HHmm")</formula>
+								<error-code>V05</error-code>
+								<actionmessage>"Invalid Time '" + $value + "'"</actionmessage>
+							</Validation>
+						</Validations>
+					</SwiftSystemFieldDef>
+				</SystemField>
+				<SystemField Name="reporting-options">
+					<description><![CDATA[Reporting Options, where:
+
+a)  RT = all undelivered at report time
+
+b)  nn = undelivered for more than nn hours (range: 00 < nn < 24)
+
+c)  VD = value-date-sensitive message undelivered after the Receiver's cut-off time on the value date.]]></description>
+					<datatype>String</datatype>
+					<required>true</required>
+					<SwiftSystemFieldDef Name="reporting-options" Tag="301">
+						<Format><![CDATA[2!c]]></Format>
+						<Specification><![CDATA[(reporting-options)]]></Specification>
+						<Description><![CDATA[Reporting Options, where:
+
+a)  RT = all undelivered at report time
+
+b)  nn = undelivered for more than nn hours (range: 00 < nn < 24)
+
+c)  VD = value-date-sensitive message undelivered after the Receiver's cut-off time on the value date.]]></Description>
+						<Validations>
+							<Validation>
+								<formula>If(IsInt($value), 
+	   						Between(ToInt($value), 0, 24), 
+	   						In($value, "RT", "VD","CS"))
+				</formula>
+								<error-code>V08</error-code>
+								<actionmessage>"Invalid Reporting Options '" + $value + "'"</actionmessage>
+							</Validation>
+						</Validations>
+					</SwiftSystemFieldDef>
+				</SystemField>
+				<SystemGroup Name="Group_1">
+					<datatype>Section</datatype>
+					<minoccurs>0</minoccurs>
+					<maxoccurs>95</maxoccurs>
+					<Fields>
+						<SystemGroup Name="Group_11">
+							<datatype>Section</datatype>
+							<minoccurs>1</minoccurs>
+							<maxoccurs>1</maxoccurs>
+							<Fields>
+								<SystemField Name="report-line">
+									<description><![CDATA[For each message, the report line gives:
+
+a)  The time, local to the sender, when the message entered the system
+
+b)  The MIR of the message being reported
+
+c)  The Message Type (of the message being reported)
+
+d)  The intended receiver's address
+
+e)  The time, local to the receiver, when the last delivery attempt was made]]></description>
+									<datatype>Section</datatype>
+									<minoccurs>1</minoccurs>
+									<maxoccurs>1</maxoccurs>
+									<SwiftSystemFieldDef Name="report-line" Tag="335">
+										<Format><![CDATA[(4!n)(28!c)(3!n)(4!a2!a2!c1!c3!c)([4!n])]]></Format>
+										<Specification><![CDATA[(sender-time)(mir)(msg-type)(address)(receiver-time)]]></Specification>
+										<Description><![CDATA[For each message, the report line gives:
+
+a)  The time, local to the sender, when the message entered the system
+
+b)  The MIR of the message being reported
+
+c)  The Message Type (of the message being reported)
+
+d)  The intended receiver's address
+
+e)  The time, local to the receiver, when the last delivery attempt was made]]></Description>
+										<Validations>
+											<Validation>
+												<subfield>sender-time</subfield>
+												<formula>IsDate($value, "HHmm")</formula>
+												<error-code>V05</error-code>
+												<actionmessage>"Invalid Sender Time'"+$value+"'."</actionmessage>
+											</Validation>
+											<Validation>
+												<subfield>receiver-time</subfield>
+												<formula>IsDate($value, "HHmm")</formula>
+												<error-code>V05</error-code>
+												<actionmessage>"Invalid Receiver Time'"+$value+"'."</actionmessage>
+											</Validation>
+										</Validations>
+									</SwiftSystemFieldDef>
+								</SystemField>
+								<SystemField Name="mur">
+									<description><![CDATA[Message user reference as used in the user header of the original message, or in the text block (when not present in the user header),but only if alphabetical characters were in upper case.]]></description>
+									<datatype>String</datatype>
+									<required>false</required>
+									<SwiftSystemFieldDef Name="mur" Tag="108">
+										<Format><![CDATA[16x]]></Format>
+										<Specification><![CDATA[(mur)]]></Specification>
+										<Description><![CDATA[Message User Reference as used in the header of the original message]]></Description>
+									</SwiftSystemFieldDef>
+								</SystemField>
+							</Fields>
+						</SystemGroup>
+						<SystemGroup Name="Group_12">
+							<datatype>Section</datatype>
+							<minoccurs>0</minoccurs>
+							<maxoccurs>1</maxoccurs>
+							<Fields>
+								<SystemField Name="msg-status">
+									<description><![CDATA[Message status (for example, whether delivered or aborted). See the FIN Error Codes module for the full set of error codes.]]></description>
+									<datatype>String</datatype>
+									<required>true</required>
+									<SwiftSystemFieldDef Name="msg-status" Tag="431">
+										<Format><![CDATA[2!n]]></Format>
+										<Specification><![CDATA[(msg-status)]]></Specification>
+										<Description><![CDATA[Message status (for example, whether delivered or aborted). See the FIN Error Codes module for the full set of error codes.]]></Description>
+									</SwiftSystemFieldDef>
+								</SystemField>
+								<SystemField Name="service-code">
+									<description><![CDATA[FIN Copy Service Code.]]></description>
+									<datatype>String</datatype>
+									<required>true</required>
+									<SwiftSystemFieldDef Name="service-code" Tag="103">
+										<Format><![CDATA[3!a]]></Format>
+										<Specification><![CDATA[(service-code)]]></Specification>
+										<Description><![CDATA[FIN Copy Service Code.]]></Description>
+									</SwiftSystemFieldDef>
+								</SystemField>
+							</Fields>
+						</SystemGroup>
+					</Fields>
+				</SystemGroup>
+				<SystemGroup Name="Group_2">
+					<datatype>Section</datatype>
+					<minoccurs>0</minoccurs>
+					<maxoccurs>1</maxoccurs>
+					<Fields>
+						<SystemField Name="report-code">
+							<description><![CDATA[Report error code. See the FIN Error Codes module for the full set of error codes.]]></description>
+							<datatype>String</datatype>
+							<required>true</required>
+							<SwiftSystemFieldDef Name="report-code" Tag="461">
+								<Format><![CDATA[3!c]]></Format>
+								<Specification><![CDATA[(report-code)]]></Specification>
+								<Description><![CDATA[Report error code. See the FIN Error Codes module for the full set of error codes.]]></Description>
+							</SwiftSystemFieldDef>
+						</SystemField>
+					</Fields>
+				</SystemGroup>
+			</Fields>
+		</Data>
+		<Trailer>
+		</Trailer>
+	</SwiftFields>
+	<validationrules name="Default">
+		<hdrvalidationrules>
+			<fieldvalidations>
+			</fieldvalidations>
+		</hdrvalidationrules>
+		<datavalidationrules>
+			<fieldvalidations>
+				<fieldvalidation>
+					<name>E1</name>
+					<comment><![CDATA[At least one of groups Group_1 or Group_2 is present.]]></comment>
+					<formula><![CDATA[Group_1.$size>0 || Group_2.$size > 0]]></formula>
+					<severity>error</severity>
+					<cascade>true</cascade>
+					<error-code>V03</error-code>
+					<actionmessage><![CDATA["At least one of groups Group 1 or Group 2 must be present."]]></actionmessage>
+				</fieldvalidation>
+				<fieldvalidation>
+					<name>E2</name>
+					<comment><![CDATA[Group_2 indicates the end of a multi-section report, it is always present in a single-section report.]]></comment>
+					<formula><![CDATA[IF(IsInt(total_sections) && ToInt(total_sections) == 1,Group_2.$size==1,true);]]></formula>
+					<severity>error</severity>
+					<cascade>true</cascade>
+					<error-code>V03</error-code>
+					<actionmessage><![CDATA["Group 2 must be present if the message is a single section report";]]></actionmessage>
+				</fieldvalidation>
+				<fieldvalidation>
+					<name>E3</name>
+					<comment><![CDATA[Group_2 is Mandatory in the last section of the report.]]></comment>
+					<formula><![CDATA[$intVal = IsInt(total_sections) && 
+            IsInt(section_number);
+$totalSec = If($intVal, ToInt(total_sections), 0);
+$seqNo = If($intVal, ToInt(section_number), 0);
+If($intVal, 
+   If($totalSec > 1 && ($seqNo == $totalSec), 
+      Group_2.$size == 1, 
+      true), 
+   false);
+]]></formula>
+					<severity>error</severity>
+					<cascade>true</cascade>
+					<error-code>V03</error-code>
+					<actionmessage><![CDATA["In a multi section report Group 2 must be present in the last section of the report"]]></actionmessage>
+				</fieldvalidation>
+				<fieldvalidation>
+					<name>E4</name>
+					<comment><![CDATA[Group_2 is Mandatory in the last section of the report, it is not present in the other sections.
+]]></comment>
+					<formula><![CDATA[$intVal = IsInt(total_sections) && 
+            IsInt(section_number);
+$totalSec = If($intVal, ToInt(total_sections), 0);
+$seqNo = If($intVal, ToInt(section_number), 0);
+If($intVal, 
+   If($totalSec > 1 && ($seqNo != $totalSec), 
+      Group_2.$size == 0, 
+      true), 
+   false);]]></formula>
+					<severity>error</severity>
+					<cascade>true</cascade>
+					<error-code>V03</error-code>
+					<actionmessage><![CDATA["In a multi section report Group 2 must be present only in the last section of the report"]]></actionmessage>
+				</fieldvalidation>
+			</fieldvalidations>
+		</datavalidationrules>
+		<tlrvalidationrules>
+			<fieldvalidations>
+			</fieldvalidations>
+		</tlrvalidationrules>
+	</validationrules>
+</SwiftMessageFormat>
+

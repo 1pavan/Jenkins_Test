@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<SwiftMessageFormat name="MT077">
+	<standard-version><![CDATA[SRG 2017]]></standard-version>
+	<standard-release-qualifier>20170918</standard-release-qualifier>
+	<DescriptiveName><![CDATA[Additional Selection Criteria for FIN]]></DescriptiveName>
+	<Category><![CDATA[System]]></Category>
+	<Description><![CDATA[This message is sent by a user to specify additional selection criteria for the next FIN application session.
+
+WARNING
+Selecting Y in field 116 can cause messages to remain undelivered, and should beregarded only as an emergency procedure.
+From: User                              To: GPA
+
+Notes
+--------
+Selection criteria can be changed only when FIN is not selected.
+The default Select status (<value-date-today = N>) can only be changed by this message, and is reset to N at session termination.
+
+The default status for field 118:<lt-subsets-shared-flag> is N, and is reset to N at session termination.]]></Description>
+	<SwiftFields>
+		<customizable>false</customizable>
+		<modifiable>true</modifiable>
+		<SwiftMessageType>System</SwiftMessageType>
+		<HeaderAndTrailerType>SWIFT_INPUT_HEADER</HeaderAndTrailerType>
+		<Header>
+		</Header>
+		<Data>
+			<Fields>
+				<SystemField Name="value-date-today">
+					<description><![CDATA[Restricts delivery of messages, where:
+
+a)  Y = yes. Only deliver messages with a value date of today or earlier
+
+b)  N = no. Do not restrict delivery based on value date]]></description>
+					<datatype>String</datatype>
+					<required>false</required>
+					<SwiftSystemFieldDef Name="value-date-today" Tag="116">
+						<Format><![CDATA[1!a]]></Format>
+						<Specification><![CDATA[(value-date-today)]]></Specification>
+						<Description><![CDATA[Restricts delivery of messages, where:
+
+a)  Y = yes. Only deliver messages with a value date of today or earlier
+
+b)  N = no. Do not restrict delivery based on value date]]></Description>
+						<Validations>
+							<Validation>
+								<formula>In($value, "Y", "N")</formula>
+								<error-code>V08</error-code>
+								<actionmessage>"Invalid Value Date Today '" + $value + "'"</actionmessage>
+							</Validation>
+						</Validations>
+					</SwiftSystemFieldDef>
+				</SystemField>
+				<SystemField Name="lt-subsets-shared-flag">
+					<description><![CDATA[Whether an LT allows sharing of its selected FIN delivery subsets with other LTs at the same destination, where:
+
+a)  Y = yes. Destination operating in shared mode using overflow mechanism.]]></description>
+					<datatype>String</datatype>
+					<required>false</required>
+					<SwiftSystemFieldDef Name="lt-subsets-shared-flag" Tag="118">
+						<Format><![CDATA[1!a]]></Format>
+						<Specification><![CDATA[(lt-subsets-shared-flag)]]></Specification>
+						<Description><![CDATA[Whether an LT allows sharing of its selected FIN delivery subsets with other LTs at the same destination, where:
+
+a)  Y = yes. Destination operating in shared mode using overflow mechanism.]]></Description>
+						<Validations>
+							<Validation>
+								<formula>In($value, "Y")</formula>
+								<error-code>V08</error-code>
+								<actionmessage>"Invalid VLT Subsets Shared Flag '" + $value + "'"</actionmessage>
+							</Validation>
+						</Validations>
+					</SwiftSystemFieldDef>
+				</SystemField>
+			</Fields>
+		</Data>
+		<Trailer>
+		</Trailer>
+	</SwiftFields>
+	<validationrules name="Default">
+		<hdrvalidationrules>
+			<fieldvalidations>
+			</fieldvalidations>
+		</hdrvalidationrules>
+		<datavalidationrules>
+			<fieldvalidations>
+			</fieldvalidations>
+		</datavalidationrules>
+		<tlrvalidationrules>
+			<fieldvalidations>
+			</fieldvalidations>
+		</tlrvalidationrules>
+	</validationrules>
+</SwiftMessageFormat>
+

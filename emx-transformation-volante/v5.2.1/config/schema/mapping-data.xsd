@@ -1,0 +1,54 @@
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="unqualified" attributeFormDefault="unqualified">
+	<xsd:element name="mappingrules">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="mappingclass" type="xsd:string" minOccurs="0"/>
+				<xsd:element name="mappings">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element ref="mapping" minOccurs="0" maxOccurs="unbounded"/>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name="mapping-infos" minOccurs="0">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="mapping-info" minOccurs="0" maxOccurs="unbounded">
+								<xsd:complexType>
+									<xsd:sequence>
+										<xsd:element name="add-field" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
+										<xsd:element name="remove-field" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
+									</xsd:sequence>
+									<xsd:attribute name="name" type="xsd:string"/>
+								</xsd:complexType>
+							</xsd:element>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name="field-infos" minOccurs="0">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="field-info" minOccurs="0" maxOccurs="unbounded">
+								<xsd:complexType>
+									<xsd:sequence>
+										<xsd:element name="comment" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
+									</xsd:sequence>
+									<xsd:attribute name="name" type="xsd:string"/>
+								</xsd:complexType>
+							</xsd:element>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="mapping">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="source-field" type="xsd:string"/>
+				<xsd:element name="destination-field" type="xsd:string"/>
+			</xsd:sequence>
+			<xsd:attribute name="type" type="xsd:string"/>
+		</xsd:complexType>
+	</xsd:element>
+</xsd:schema>

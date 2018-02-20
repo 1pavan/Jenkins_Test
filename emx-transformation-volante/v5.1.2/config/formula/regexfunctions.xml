@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<formulae>
+    <formula name="MatchesExact">
+        <description>Returns true if string matches the regular expression.</description>
+        <signature>MatchesExact(regex, str)</signature>
+        <category>RegEx</category>
+          <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.RegExFunctions" />
+        <property name="method" value="matchesExact" />
+    </formula>
+		<formula name="Matches">
+			<description>Returns true if string matches the regular expression.</description>
+			<signature>Matches(regex, str, indexOpt)</signature>
+			<category>RegEx</category>
+	  		<Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+			<property name="class" value="com.tplus.transform.runtime.formula.RegExFunctions" />
+			<property name="method" value="matches" />
+    	</formula>
+    <formula name="MatchGroup">
+        <description>Returns true if string matches the regular expression.</description>
+        <signature>matchGroup(regex, str, indexOpt)</signature>
+        <category>RegEx</category>
+          <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.RegExFunctions" />
+        <property name="method" value="matchGroup" />
+    </formula>
+
+		<formula name="SplitEx">
+			<description>Splits the string into number of strings using regex as boundary and returns the collection of string.</description>
+			<signature>SplitEx(regex, str)</signature>
+			<category>RegEx</category>
+	  		<Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+			<property name="class" value="com.tplus.transform.runtime.formula.RegExFunctions" />
+			<property name="method" value="split" />
+    	</formula>
+
+		<formula name="SplitFirst">
+			<description>Splits the string into number of string using regex as boundary and returns the first string.</description>
+			<signature>SplitFirst(regex, str)</signature>
+			<category>RegEx</category>
+	  		<Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+			<property name="class" value="com.tplus.transform.runtime.formula.RegExFunctions" />
+			<property name="method" value="splitFirst" />
+    	</formula>
+
+		<formula name="SplitLast">
+			<description>Splits the string into number of string using regex as boundary and returns the last string.</description>
+			<signature>SplitLast(regex, str)</signature>
+			<category>RegEx</category>
+	  		<Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+			<property name="class" value="com.tplus.transform.runtime.formula.RegExFunctions" />
+			<property name="method" value="splitLast" />
+    	</formula>
+
+		<formula name="Subst">
+			<description>Substitutes all matches of the regular expression in 'inStr' with the string 'withStr'. This method works like the Perl function of the same name. Given a regular expression of "a*b", a String to substituteIn of "aaaabfooaaabgarplyaaabwackyb" and the substitution String "-", the resulting String returned by subst would be "-foo-garply-wacky-".</description>
+			<signature>Subst(regex, inStr, withStr)</signature>
+			<category>RegEx</category>
+	  		<Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+			<property name="class" value="com.tplus.transform.runtime.formula.RegExFunctions" />
+			<property name="method" value="subst" />
+    	</formula>
+
+		<formula name="SubstFirst">
+			<description>Substitutes the first match of the regular expression in 'inStr' with the string 'withStr'. This method works like the Perl function of the same name.</description>
+			<signature>SubstFirst(regex, inStr, withStr)</signature>
+			<category>RegEx</category>
+	  		<Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+			<property name="class" value="com.tplus.transform.runtime.formula.RegExFunctions" />
+			<property name="method" value="substFirst" />
+    	</formula>
+
+</formulae> 

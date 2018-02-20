@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<SwiftMessageFormat name="MT072">
+	<standard-version><![CDATA[SRG 2012]]></standard-version>
+	<DescriptiveName><![CDATA[Test Mode Selection]]></DescriptiveName>
+	<Category><![CDATA[System]]></Category>
+	<Description><![CDATA[This message is sent by a Test & Training user to specify the mode of the next FIN application test session. The LT can work in either the default Full Function Mode or in Local Test Mode. Current or, when available, Future Message Type formats can be selected.
+
+From: User                To: GPA
+
+Notes
+-------
+Modes and formats can be changed only when FIN is not selected. The change becomes effective immediately and remains in effect until either a further test mode selection is made, or the GPA session is terminated.
+
+For further details see the chapter describing Test & Training facilities in the SWIFTNet FIN Service Description.
+]]></Description>
+	<SwiftFields>
+		<customizable>false</customizable>
+		<modifiable>true</modifiable>
+		<SwiftMessageType>System</SwiftMessageType>
+		<HeaderAndTrailerType>SWIFT_INPUT_HEADER</HeaderAndTrailerType>
+		<Header>
+		</Header>
+		<Data>
+			<Fields>
+				<SystemField Name="test-mode-selection">
+					<description><![CDATA[Test mode selection must be one of the following:
+
+a)  FC = full function mode, current
+
+b)  FF = full function mode, future
+
+c)  LC = local test mode, current
+
+d)  LF = local test mode, future]]></description>
+					<datatype>String</datatype>
+					<required>true</required>
+					<SwiftSystemFieldDef Name="test-mode-selection" Tag="127">
+						<Format><![CDATA[2!a]]></Format>
+						<Specification><![CDATA[(test-mode-selection)]]></Specification>
+						<Description><![CDATA[Test mode selection must be one of the following:
+
+a)  FC = full function mode, current
+
+b)  FF = full function mode, future
+
+c)  LC = local test mode, current
+
+d)  LF = local test mode, future]]></Description>
+						<Validations>
+							<Validation>
+								<formula>In($value, "FC", "FF", "LC", "LF")</formula>
+								<error-code>V08</error-code>
+								<actionmessage>"Invalid Test mode Selection '" + $value + "'. Valid test-mode-selection Values:FC,FF,LC,LF."</actionmessage>
+							</Validation>
+						</Validations>
+					</SwiftSystemFieldDef>
+				</SystemField>
+			</Fields>
+		</Data>
+		<Trailer>
+		</Trailer>
+	</SwiftFields>
+	<validationrules name="Default">
+		<hdrvalidationrules>
+			<fieldvalidations>
+			</fieldvalidations>
+		</hdrvalidationrules>
+		<datavalidationrules>
+			<fieldvalidations>
+			</fieldvalidations>
+		</datavalidationrules>
+		<tlrvalidationrules>
+			<fieldvalidations>
+			</fieldvalidations>
+		</tlrvalidationrules>
+	</validationrules>
+</SwiftMessageFormat>
+

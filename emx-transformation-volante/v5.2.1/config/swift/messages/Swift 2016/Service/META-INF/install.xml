@@ -1,0 +1,4 @@
+<install>
+    <copy src="${src}\messages\SRG 2016\Service" dest="${config}\swift\messages\SRG 2016\Service"></copy>
+    <copy src="${src}\dictionary\SRG 2016" dest="${config}\swift\dictionary\SRG 2016"></copy>
+</install>

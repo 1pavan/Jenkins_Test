@@ -1,0 +1,17 @@
+file:/C:\Users\sys\Desktop\Source_Maven\emx-transformation-volante\v5.2.1\lib\runtime\resourcemanager.jar
+file:/C:\Users\sys\Desktop\Source_Maven\emx-transformation-volante\v5.2.1\lib\runtime\jta.jar
+file:/C:\Users\sys\Desktop\Source_Maven\emx-transformation-volante\v5.2.1\lib\runtime\generalutils.jar
+file:/C:\Users\sys\Desktop\Source_Maven\Transformation_Flows\Messages\java\Messages.jar
+file:/C:\Users\sys\Desktop\Source_Maven\Transformation_Flows\Messages\java\MT3-4_2015.jar
+file:/C:\Users\sys\Desktop\Source_Maven\Transformation_Flows\Messages\java\MT6-7_2015.jar
+file:/C:\Users\sys\Desktop\Source_Maven\Transformation_Flows\Messages\java\MT5_2015.jar
+file:/C:\Users\sys\Desktop\Source_Maven\Transformation_Flows\Messages\java\MT1-2_2015.jar
+file:/C:\Users\sys\Desktop\Source_Maven\Transformation_Flows\Messages\java\MT8-9_2015.jar
+file:/C:\Users\sys\Desktop\Source_Maven\emx-transformation-volante\v5.2.1\lib\runtime\swiftresources.jar
+file:/C:\Users\sys\Desktop\Source_Maven\emx-transformation-volante\v5.2.1\lib\runtime\transformrt.jar
+file:/C:\Users\sys\Desktop\Source_Maven\emx-transformation-volante\v5.2.1\lib\runtime\swiftrt.jar
+file:/C:\Users\sys\Desktop\Source_Maven\emx-transformation-volante\v5.2.1\lib\runtime\generalutils.jar
+file:/C:\Users\sys\Desktop\Source_Maven\emx-transformation-volante\v5.2.1\lib\runtime\volante-osgirt.jar
+file:/C:\Users\sys\Desktop\Source_Maven\emx-transformation-volante\v5.2.1\lib\runtime\volante-client.jar
+
+

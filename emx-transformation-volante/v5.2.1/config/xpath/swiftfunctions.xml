@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xpath-functions>
+	<function>
+		<name>isSwiftXString</name>
+		<signature>isSwiftXString(str)</signature>
+		<category>Swift</category>
+		<arg>
+			<name>$str</name>
+			<type>String</type>
+		</arg>
+		<result>boolean</result>
+		<description>Enforces the rule that the string (str) must not start or end with a slash '/' and not contain two consecutive slashes '//'. If the string has multiple lines, the rule applies for each line (Error code(s): T26).</description>
+		<uri>java:com.tplus.transform.runtime.swift.SwiftXPathFunctions</uri>
+	</function>
+	<function>
+		<name>isTimeOffset</name>
+		<signature>isTimeOffset(timeOffset)</signature>
+		<category>Swift</category>
+		<arg>
+			<name>$timeOffset</name>
+			<type>String</type>
+		</arg>
+		<result>boolean</result>
+		<description>Returns true if timeOffset is expressed as 'HHMM', where the hour component, i.e., 'HH', must be in the range of 00 through 13, and the minute component, i.e., 'MM' must be in the range of 00 through 59. Any 'HH' or 'MM' component outside of these range checks will be disallowed.</description>
+		<uri>java:com.tplus.transform.runtime.swift.SwiftXPathFunctions</uri>
+	</function>
+	<function>
+		<name>isValidBIC</name>
+		<signature>isValidBIC(bic)</signature>
+		<category>Swift</category>
+		<arg>
+			<name>$bic</name>
+			<type>String</type>
+		</arg>
+		<result>boolean</result>
+		<description>Returns true if the BIC is well formed and it exists in the BIC directory.</description>
+		<uri>java:com.tplus.transform.runtime.swift.SwiftXPathFunctions</uri>
+	</function>
+      <function>
+        <name>isValidBEI</name>
+        <signature>isValidBEI(bic)</signature>
+        <category>Swift</category>
+        <arg>
+            <name>$bic</name>
+            <type>String</type>
+        </arg>
+        <result>boolean</result>
+        <description>Returns true if the BIC is well formed and it is present in the BIC directory as a BEI.</description>
+        <uri>java:com.tplus.transform.runtime.swift.SwiftXPathFunctions</uri>
+    </function> 
+	<function>
+		<name>isBICNotBEI</name>
+		<signature>isBICNotBEI(str)</signature>
+		<category>Swift</category>
+		<arg>
+			<name>$str</name>
+			<type>String</type>
+		</arg>
+		<result>boolean</result>
+		<description>Returns true if the BIC is not a BEI , ie must not be of subtype BEID, MCCO, TRCO ,SMDP or CORP .</description>
+		<uri>java:com.tplus.transform.runtime.swift.SwiftXPathFunctions</uri>
+	</function>
+	<function>
+		<name>isISOCurrencyCode</name>
+		<signature>isISOCurrencyCode(code)</signature>
+		<category>Swift</category>
+		<arg>
+			<name>$code</name>
+			<type>String</type>
+		</arg>
+		<result>boolean</result>
+		<description>Returns "True" if the given string is a valid ISO currency code based on the ISO 4217 standard</description>
+		<uri>java:com.tplus.transform.runtime.swift.SwiftXPathFunctions</uri>
+	</function>
+	<function>
+		<name>isISOCountryCode</name>
+		<signature>isISOCountryCode(code)</signature>
+		<category>Swift</category>
+		<arg>
+			<name>$code</name>
+			<type>String</type>
+		</arg>
+		<result>boolean</result>
+		<description>Returns "True" if the given string is a valid ISO country code element based on the ISO 3166 standard</description>
+		<uri>java:com.tplus.transform.runtime.swift.SwiftXPathFunctions</uri>
+	</function>
+	<function>
+		<name>isSwiftDate</name>
+		<signature>isSwiftDate(dateStr, format)</signature>
+		<category>Swift</category>
+		<arg>
+			<name>$dateStr</name>
+			<type>String</type>
+		</arg>
+		<arg>
+			<name>$format</name>
+			<type>String</type>
+		</arg>
+		<result>boolean</result>
+		<description>Returns 'true' if the given string value can be converted to date with specified format based on the Swift specification for dates.</description>
+		<uri>java:com.tplus.transform.runtime.swift.SwiftXPathFunctions</uri>
+	</function>
+	<function>
+		<name>isValidAmountDecimals</name>
+		<signature>isValidAmountDecimals(currencyCode, amount)</signature>
+		<category>Swift</category>
+		<arg>
+			<name>$currencyCode</name>
+			<type>String</type>
+		</arg>
+		<arg>
+			<name>$amount</name>
+			<type>String</type>
+		</arg>
+		<result>boolean</result>
+		<description>Returns true if the decimal length of the amount is less than or equal to the maximum allowed for the currency.</description>
+		<uri>java:com.tplus.transform.runtime.swift.SwiftXPathFunctions</uri>
+	</function>
+	<function>
+		<name>isValidPartyIdentification</name>
+		<signature>isValidPartyIdentification(fieldValue, metaStr)</signature>
+		<category>Swift</category>
+		<arg>
+			<name>$fieldValue</name>
+			<type>String</type>
+		</arg>
+		<arg>
+			<name>$metaStr</name>
+			<type>String</type>
+		</arg>
+		<result>boolean</result>
+		<description>Returns "True" if the given field value contains the codes specified by the meta string and the code values conform to their respective formats.
+Value for this function is in multiple lines, but multiple lines cannot be passed as argument, so multiple lines should be concatenated as string with CRLF as separator.</description>
+		<uri>java:com.tplus.transform.runtime.swift.SwiftXPathFunctions</uri>
+	</function>
+	<function>
+		<name>isValidBICInPartyIdentification</name>
+		<signature>isValidBICInPartyIdentification(fieldValue)</signature>
+		<category>Swift</category>
+		<arg>
+			<name>$fieldValue</name>
+			<type>String</type>
+		</arg>
+		<result>boolean</result>
+		<description>Returns "True" if the BIC value given in Party Identification is  well formed and it exists in the BIC directory.
+Value for this function is in multiple lines, but multiple lines cannot be passed as argument, so multiple lines should be concatenated as string with CRLF as separator.</description>
+		<uri>java:com.tplus.transform.runtime.swift.SwiftXPathFunctions</uri>
+	</function>
+	<function>
+		<name>isBICNotBEIInPartyIdentification</name>
+		<signature>isBICNotBEIInPartyIdentification(fieldValue)</signature>
+		<category>Swift</category>
+		<arg>
+			<name>$fieldValue</name>
+			<type>String</type>
+		</arg>
+		<result>boolean</result>
+		<description>Returns "True" if the given Party Identification value's BIC is not a BEI, i.e. must not be of subtype BEID, MCCO, TRCO,SMDP or CORP.
+Value for this function is in multiple lines, but multiple lines cannot be passed as argument, so multiple lines should be concatenated as string with CRLF as separator.</description>
+		<uri>java:com.tplus.transform.runtime.swift.SwiftXPathFunctions</uri>
+	</function>
+        <function>
+        <name>applyERIValidation</name>
+        <signature>applyERIValidation(valueDateFieldName, currencyFieldName)</signature>
+        <category>Swift</category>
+        <arg>
+            <name>$valueDateFieldName</name>
+            <type>String</type>
+        </arg>
+        <arg>
+            <name>$currencyFieldName</name>
+            <type>String</type>
+        </arg>
+        <result>boolean</result>
+        <description>Returns false if the currency is a European currency and the date is after the ERI cut off date (31-12-2001). That is it ensures that European currency is not used after the ERI cutoff date.</description>
+        <uri>java:com.tplus.transform.runtime.swift.SwiftXPathFunctions</uri>
+    </function>
+    <function>
+        <name>applyERICodeValidationStructured</name>
+        <signature>applyERICodeValidationStructured(narrative)</signature>
+        <category>Swift</category>
+        <arg>
+            <name>$narrative</name>
+            <type>String</type>
+        </arg>
+        <result>boolean</result>
+        <description>Checks whether ERI codes in narrative or structured fields is as per the ERI conventions. Specifically check is made to ensure that values for /OCMT/ and /CHGS/ are as per ERI code recommendations.
+Value for this function is in multiple lines, but multiple lines cannot be passed as argument, so multiple lines should be concatenated as string with CRLF as separator.</description>
+        <uri>java:com.tplus.transform.runtime.swift.SwiftXPathFunctions</uri>
+    </function> 
+    <function>
+        <name>applyERICodeValidationUnstructured</name>
+        <signature>applyERICodeValidationUnstructured(narrative)</signature>
+        <category>Swift</category>
+        <arg>
+            <name>$narrative</name>
+            <type>String</type>
+        </arg>
+        <result>boolean</result>
+        <description>Checks whether ERI codes in narrative or structured fields is as per the ERI conventions. Specifically check is made to ensure that values for /OCMT/ and /CHGS/ are as per ERI code recommendations.
+Value for this function is in multiple lines, but multiple lines cannot be passed as argument, so multiple lines should be concatenated as string with CRLF as separator.</description>
+        <uri>java:com.tplus.transform.runtime.swift.SwiftXPathFunctions</uri>
+    </function>
+    <function>
+        <name>verifyFormat</name>
+        <signature>verifyFormat(value, format)</signature>
+        <category>Swift</category>
+        <arg>
+            <name>$value</name>
+            <type>String</type>
+        </arg>
+        <arg>
+            <name>$format</name>
+            <type>String</type>
+        </arg>
+        <result>boolean</result>
+        <description>Verifies whether the value conforms to the swift format (requires swift plugin)</description>
+        <uri>java:com.tplus.transform.runtime.swift.SwiftXPathFunctions</uri>
+    </function>
+    <function>
+        <name>verifyField72NarrativeText</name>
+        <signature>verifyField72NarrativeText(fieldValue)</signature>
+        <category>Swift</category>
+        <arg>
+            <name>$fieldValue</name>
+            <type>String</type>
+        </arg>
+        <result>boolean</result>
+        <description>Verifies Narrative subfield of Field 72.
+Value for this function is in multiple lines, but multiple lines cannot be passed as argument, so multiple lines should be concatenated as string with CRLF as separator. This formula is to be applied to parent section of multi-line structure.</description>
+        <uri>java:com.tplus.transform.runtime.swift.SwiftXPathFunctions</uri>
+    </function>
+    <function>
+        <name>verifyCopyOfFieldsSyntax</name>
+        <signature>verifyCopyOfFieldsSyntax(fieldValue)</signature>
+        <category>Swift</category>
+        <arg>
+            <name>$fieldValue</name>
+            <type>String</type>
+        </arg>
+        <result>boolean</result>
+        <description>Given the 'Copy of fields' value (fieldValue), it validates the syntax of the constituent fields.</description>
+        <uri>java:com.tplus.transform.runtime.swift.SwiftXPathFunctions</uri>
+    </function> 
+    <function>
+        <name>verify50FNmandAdrLines</name>
+        <signature>verify50FNmandAdrLines(NmandAdr, partyId)</signature>
+        <category>Swift</category>
+        <arg>
+            <name>$NmandAdr</name>
+            <type>String</type>
+        </arg>
+        <arg>
+            <name>$partyId</name>
+            <type>String</type>
+        </arg>
+        <result>boolean</result>
+        <description>Returns true if the Name and Address satisfy the Line formatting rules specified in SWIFT spec.
+Value for this function is in multiple lines with Number and Details in each line, but multiple lines cannot be passed as argument, so multiple lines should be concatenated as string with CRLF as separator.</description>
+        <uri>java:com.tplus.transform.runtime.swift.SwiftXPathFunctions</uri>
+    </function>
+    <function>
+        <name>isISOIBAN</name>
+        <signature>isISOIBAN(IBANStr)</signature>
+        <category>Swift</category>
+        <arg>
+            <name>$IBANStr</name>
+            <type>String</type>
+        </arg>
+        <result>boolean</result>
+        <description>Returns "True" if the given string is a valid IBAN based on the European Committee for Banking Standards (ECBS) standard.</description>
+        <uri>java:com.tplus.transform.runtime.swift.SwiftXPathFunctions</uri>
+    </function>
+    <function>
+        <name>isValidUTCIndicatorSign</name>
+        <signature>isValidUTCIndicatorSign(UTCIndicator)</signature>
+        <category>Swift</category>
+        <arg>
+            <name>$UTCIndicator</name>
+            <type>String</type>
+        </arg>
+        <result>boolean</result>
+        <description>Returns "True" if Sign is not used when UTC Indicator is equal to all zeroes.</description>
+        <uri>java:com.tplus.transform.runtime.swift.SwiftXPathFunctions</uri>
+    </function>
+    <function>
+        <name>isValidUTCIndicatorTime</name>
+        <signature>isValidUTCIndicatorTime(UTCIndicator)</signature>
+        <category>Swift</category>
+        <arg>
+            <name>$UTCIndicator</name>
+            <type>String</type>
+            <description>UTC Indicator has valid time expressed as HH[MM]</description>
+        </arg>
+        <result>boolean</result>
+        <description>Returns "True" if UTC Indicator has valid time expressed as HH[MM]</description>
+        <uri>java:com.tplus.transform.runtime.swift.SwiftXPathFunctions</uri>
+    </function>          
+</xpath-functions>

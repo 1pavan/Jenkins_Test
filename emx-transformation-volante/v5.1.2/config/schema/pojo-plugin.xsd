@@ -1,0 +1,80 @@
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="unqualified"
+            attributeFormDefault="unqualified">
+    <!-- include constructs -->
+    <xsd:include schemaLocation="externalmsg.xsd"/>
+    <xsd:complexType name="POJOFormat">
+        <xsd:complexContent>
+            <xsd:extension base="ExternalMessageType"/>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:element name="POJOfields" substitutionGroup="ExternalMessageFields">
+        <xsd:complexType>
+            <xsd:complexContent>
+                <xsd:extension base="ExternalMessageFieldsType">
+                    <xsd:sequence>
+                        <xsd:element name="class-name" type="xsd:string" minOccurs="0"/>
+                        <xsd:element name="class-path" type="xsd:string" minOccurs="0"/>
+                        <xsd:element name="runtime-dependency" type="xsd:boolean" minOccurs="0"/>
+                        <xsd:element name="target-namespace" type="xsd:string" minOccurs="0"/>
+                        <xsd:element ref="xpath-namespaces" minOccurs="0"/>
+                        <xsd:element name="headerfields" type="POJOFieldStructType"/>
+                        <xsd:element name="datafields" type="POJOFieldStructType"/>
+                        <xsd:element name="trailerfields" type="POJOFieldStructType"/>
+                    </xsd:sequence>
+                </xsd:extension>
+            </xsd:complexContent>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:complexType name="POJOAbstractFieldType" abstract="true">
+        <xsd:sequence>
+            <xsd:element name="name" type="xsd:string"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="POJOFieldStructType">
+        <xsd:sequence>
+            <xsd:element ref="platforminfo" minOccurs="0"/>
+            <xsd:element ref="field-attributes" minOccurs="0"/>
+            <xsd:element name="field" type="POJOAbstractFieldType" minOccurs="0" maxOccurs="unbounded"/>
+            <xsd:element name="ref" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="POJOFieldType">
+        <xsd:complexContent>
+            <xsd:extension base="POJOAbstractFieldType">
+                <xsd:sequence>
+                    <xsd:element name="datatype" type="xsd:string"/>
+                    <xsd:element name="detailed-name" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="description" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="aliasname" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="required" type="xsd:boolean" minOccurs="0"/>
+                    <xsd:element name="defaultvalue" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="dateformat" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="pojo-type" type="xsd:string"/>
+                    <xsd:element name="pojo-converter-class" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="class-name" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="pojo-name" type="xsd:string" minOccurs="0"/>
+                    <xsd:element ref="platforminfo" minOccurs="0"/>
+                    <xsd:element ref="field-attributes" minOccurs="0"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="POJOSectionType">
+        <xsd:complexContent>
+            <xsd:extension base="POJOAbstractFieldType">
+                <xsd:sequence>
+                    <xsd:element name="datatype" type="xsd:string" fixed="Section"/>
+                    <xsd:element name="detailed-name" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="description" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="aliasname" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="minoccurs" type="xsd:integer"/>
+                    <xsd:element name="maxoccurs" type="xsd:integer"/>
+                    <xsd:element name="pojo-type" type="xsd:string"/>
+                    <xsd:element name="pojo-name" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="class-name" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="fields" type="POJOFieldStructType"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+</xsd:schema>

@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<SwiftMessageFormat name="MT43_SNK">
+	<standard-version><![CDATA[SRG 2017]]></standard-version>
+	<standard-release-qualifier>20170918</standard-release-qualifier>
+	<DescriptiveName><![CDATA[Select Negative Acknowledgement (SNK)]]></DescriptiveName>
+	<Category><![CDATA[Service]]></Category>
+	<Description><![CDATA[This message is sent to the user by the system to refuse an 03 Select Command.
+From: GPA To: User
+
+Notes
+The Basic Header identifies the SELECT Request message which is being negatively acknowledged.]]></Description>
+	<SwiftFields>
+		<customizable>false</customizable>
+		<modifiable>true</modifiable>
+		<SwiftMessageType>Service</SwiftMessageType>
+		<HeaderAndTrailerType>SWIFT_INPUT_HEADER</HeaderAndTrailerType>
+		<Header>
+		</Header>
+		<Data>
+			<Fields>
+				<SystemField Name="application-id">
+					<description><![CDATA[Application Identifier, where:
+
+a)  F = FIN application
+
+b)  A/L = GPA application
+
+c)  X = all applications]]></description>
+					<datatype>String</datatype>
+					<required>true</required>
+					<SwiftSystemFieldDef Name="application-id" Tag="101">
+						<Format><![CDATA[1!c]]></Format>
+						<Specification><![CDATA[(application-id)]]></Specification>
+						<Description><![CDATA[Application Identifier, where:
+
+a)  F = FIN application
+
+b)  A/L = GPA application
+
+c)  X = all applications]]></Description>
+						<Validations>
+							<Validation>
+								<formula>In($value, "F", "A", "L", "X")</formula>
+								<error-code>V08</error-code>
+								<actionmessage>"Invalid Application Identifier '" + $value + "'. Valid Application Identifier values are : F, A, L, X."</actionmessage>
+							</Validation>
+						</Validations>
+					</SwiftSystemFieldDef>
+				</SystemField>
+				<SystemField Name="error-code-l/s">
+					<description><![CDATA[Reason why the Select was rejected. Error code is in the form Snn where nn is a two-digit number. See FIN Error Codes for the full set of error codes.]]></description>
+					<datatype>String</datatype>
+					<required>true</required>
+					<SwiftSystemFieldDef Name="error-code-l/s" Tag="503">
+						<Format><![CDATA[3!c]]></Format>
+						<Specification><![CDATA[(error-code-l/s)]]></Specification>
+						<Description><![CDATA[Reason why the Select was rejected. Error code is in the form Snn where nn is a two-digit number. See FIN Error Codes for the full set of error codes.]]></Description>
+					</SwiftSystemFieldDef>
+				</SystemField>
+				<SystemField Name="date-time">
+					<description><![CDATA[Date and time, local to the user, of the rejection.]]></description>
+					<datatype>String</datatype>
+					<required>true</required>
+					<SwiftSystemFieldDef Name="date-time" Tag="177">
+						<Format><![CDATA[(10!n)]]></Format>
+						<Specification><![CDATA[(date-time)]]></Specification>
+						<Additional-Format><![CDATA[YYMMDDHHMM]]></Additional-Format>
+						<Description><![CDATA[Date and time are always given as local, unless otherwise specified. Local time for the SWIFTNetwork is in GMT.]]></Description>
+						<Validations>
+							<Validation>
+								<formula>IsDate($value,"yyMMddHHmm")</formula>
+								<error-code>V05</error-code>
+								<actionmessage>"Invalid Date/Time '" + $value + "'"</actionmessage>
+							</Validation>
+						</Validations>
+					</SwiftSystemFieldDef>
+				</SystemField>
+			</Fields>
+		</Data>
+		<Trailer>
+		</Trailer>
+	</SwiftFields>
+	<validationrules name="Default">
+		<hdrvalidationrules>
+			<fieldvalidations>
+			</fieldvalidations>
+		</hdrvalidationrules>
+		<datavalidationrules>
+			<fieldvalidations>
+<fieldvalidation>
+						<name>E1</name>
+						<fieldname>error-code-l/s</fieldname>
+						<comment><![CDATA[Reason why the Select was rejected. Error code is in the form
+Snn where nn is a two-digit number.]]></comment>
+						<rule type="Enumeration">"S10",
+"S11",
+"S12",
+"S13",
+"S14",
+"S15",
+"S16",
+"S17",
+"S19",
+"S20",
+"S21",
+"S30",
+"S31",
+"S35",
+"S36",
+"S42",
+"S43",
+"S44",
+"S61",
+"S63",
+"S64",
+"S65",
+"S66",
+"S68"</rule>
+						<severity>error</severity>
+						<cascade>true</cascade>
+						<error-code>V08</error-code>
+					</fieldvalidation>
+			</fieldvalidations>
+		</datavalidationrules>
+		<tlrvalidationrules>
+			<fieldvalidations>
+			</fieldvalidations>
+		</tlrvalidationrules>
+	</validationrules>
+</SwiftMessageFormat>
+

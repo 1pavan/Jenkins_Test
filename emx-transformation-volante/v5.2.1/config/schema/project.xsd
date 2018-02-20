@@ -1,0 +1,63 @@
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="unqualified"
+            attributeFormDefault="unqualified">
+    <xsd:annotation>
+        <xsd:documentation xml:lang="en">
+            This schema is used to describe the structure of volante project file (.vpj).
+        </xsd:documentation>
+    </xsd:annotation>
+    <!-- include constructs -->
+    <xsd:include schemaLocation="cartridge.xsd"/>
+    <!-- End include -->
+    <xsd:element name="project" type="ProjectType"/>
+    <xsd:complexType name="ProjectType">
+        <xsd:sequence>
+            <xsd:element name="description" type="xsd:string" minOccurs="0"/>
+            <xsd:element ref="version"/>
+            <xsd:element name="references" minOccurs="0">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="reference" minOccurs="0" maxOccurs="unbounded">
+                            <xsd:complexType>
+                                <xsd:sequence>
+                                    <xsd:element name="relative-path" type="xsd:string"/>
+                                    <xsd:element name="absolute-path" type="xsd:string"/>
+                                    <xsd:element name="read-only" type="xsd:boolean" minOccurs="0"/>
+                                </xsd:sequence>
+                            </xsd:complexType>
+                        </xsd:element>
+                    </xsd:sequence>
+                    <xsd:attribute name="type" type="xsd:string" fixed="VolanteProjectReferences"/>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element ref="folder-set" minOccurs="0" maxOccurs="unbounded"/>
+            <xsd:element ref="workspace" minOccurs="0" maxOccurs="unbounded"/>
+            <xsd:element ref="elementproperties" minOccurs="0" maxOccurs="unbounded"/>
+        </xsd:sequence>
+        <xsd:attribute name="name" type="xsd:string"/>
+        <xsd:attribute name="type" type="xsd:string" fixed="VolanteProject"/>
+    </xsd:complexType>
+
+    <xsd:element name="folder-set">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="folder" type="FolderSetFolderType" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="exclude" type="FolderSetExcludeType" minOccurs="0" maxOccurs="unbounded"/>
+            </xsd:sequence>
+            <xsd:attribute name="root" type="xsd:string"/>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:complexType name="FolderSetFolderType">
+        <xsd:simpleContent>
+            <xsd:extension base="xsd:string">
+                <xsd:attribute name="type" type="xsd:string"
+                               use="required"/>
+            </xsd:extension>
+        </xsd:simpleContent>
+    </xsd:complexType>
+
+    <xsd:complexType name="FolderSetExcludeType">
+        <xsd:attribute name="name" type="xsd:string"/>
+    </xsd:complexType>
+
+</xsd:schema>

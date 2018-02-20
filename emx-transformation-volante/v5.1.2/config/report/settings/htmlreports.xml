@@ -1,0 +1,838 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<reports>
+	<name>Default</name>
+	<report name="ASCIIDelimitedFieldsFormat" visible="true">
+		<item name="Summary Table" type="table" visible="true">
+			<item name="Name" type="column" visible="true"/>
+			<item name="Type" type="column" visible="true"/>
+			<item name="Description" type="column" visible="true"/>
+		</item>
+		<item name="Details Table" type="table" visible="true">
+			<item name="Name" type="column" visible="true"/>
+			<item name="Parent Section" type="column" visible="true"/>
+			<item name="Alias" type="column" visible="true"/>
+			<item name="Type" type="column" visible="true"/>
+			<item name="Default Value" type="column" visible="true"/>
+			<item name="Max Length" type="column" visible="true"/>
+			<item name="Optional" type="column" visible="true"/>
+			<item name="Min Occurs" type="column" visible="true"/>
+			<item name="Max Occurs" type="column" visible="true"/>
+			<item name="Description" type="column" visible="true"/>
+			<item name="Format" type="column" visible="true"/>
+			<item name="Validations" type="column" visible="true"/>
+		</item>
+		<item name="Format Options" type="table" visible="true">
+			<item name="Delimiter" type="column" visible="true"/>
+			<item name="Message Type" type="column" visible="true"/>
+			<item name="Message Mode" type="column" visible="true"/>
+			<item name="Header" type="column" visible="true"/>
+			<item name="Trailer" type="column" visible="true"/>
+		</item>
+	</report>
+	<report name="ASCIIFixedFieldsFormat" visible="true">
+		<item name="Summary Table" type="table" visible="true">
+			<item name="Name" type="column" visible="true"/>
+			<item name="Type" type="column" visible="true"/>
+			<item name="Description" type="column" visible="true"/>
+			<item name="Field Width" type="column" visible="false"/>
+			<item name="Start Location" type="column" visible="false"/>
+		</item>
+		<item name="Details Table" type="table" visible="true">
+			<item name="Name" type="column" visible="true"/>
+			<item name="Parent Section" type="column" visible="true"/>
+			<item name="Alias" type="column" visible="true"/>
+			<item name="Type" type="column" visible="true"/>
+			<item name="Default Value" type="column" visible="true"/>
+			<item name="Max Length" type="column" visible="true"/>
+			<item name="Optional" type="column" visible="true"/>
+			<item name="Min Occurs" type="column" visible="true"/>
+			<item name="Max Occurs" type="column" visible="true"/>
+			<item name="Description" type="column" visible="true"/>
+			<item name="Format" type="column" visible="true"/>
+			<item name="Validations" type="column" visible="true"/>
+			<item name="Field Width" type="column" visible="true"/>
+			<item name="Start Location" type="column" visible="true"/>
+			<item name="Justification" type="column" visible="true"/>
+			<item name="Trim Option" type="column" visible="true"/>
+			<item name="Decimal Point Option" type="column" visible="true"/>
+			<item name="Field Format" type="column" visible="true"/>
+			<item name="True Value" type="column" visible="true"/>
+			<item name="False Value" type="column" visible="true"/>
+		</item>
+		<item name="Format Options" type="table" visible="true">
+			<item name="Message Type" type="column" visible="true"/>
+			<item name="Message Mode" type="column" visible="true"/>
+			<item name="Header Delimiter" type="column" visible="true"/>
+			<item name="Data Delimiter" type="column" visible="true"/>
+			<item name="Trailer Delimiter" type="column" visible="true"/>
+			<item name="String Field Options" type="column" visible="true"/>
+			<item name="Boolean Field Options" type="column" visible="true"/>
+			<item name="Date Field Options" type="column" visible="true"/>
+			<item name="Long Field Options" type="column" visible="true"/>
+			<item name="Integer Field Options" type="column" visible="true"/>
+			<item name="Float Field Options" type="column" visible="true"/>
+			<item name="Double Field Options" type="column" visible="true"/>
+		</item>
+	</report>
+	<report name="BloombergFieldsFormat" visible="true">
+		<item name="Summary Table" type="table" visible="true">
+			<item name="Name" type="column" visible="true"/>
+			<item name="Type" type="column" visible="true"/>
+			<item name="Description" type="column" visible="true"/>
+		</item>
+		<item name="Details Table" type="table" visible="true">
+			<item name="Designer Name" type="column" visible="true"/>
+			<item name="Bloomberg Name" type="column" visible="true"/>
+			<item name="Designer Type" type="column" visible="true"/>
+			<item name="Bloomberg Type" type="column" visible="true"/>
+			<item name="Optional" type="column" visible="true"/>
+			<item name="Default Value" type="column" visible="true"/>
+			<item name="Enumeration" type="column" visible="true"/>
+		</item>
+	</report>
+	<report name="Cartridge" visible="true">
+		<item name="Details Table" type="table" visible="true">
+			<item name="Name" type="column" visible="true"/>
+			<item name="Version" type="column" visible="true"/>
+			<item name="Description" type="column" visible="true"/>
+		</item>
+		<item name="Summary Table" type="table" visible="true">
+			<item name="Name" type="column" visible="true"/>
+			<item name="Description" type="column" visible="true"/>
+		</item>
+	</report>
+	<report name="Database Table Design" visible="true">
+		<item name="Summary Table" type="table" visible="true">
+			<item name="Name" type="column" visible="true"/>
+			<item name="Type" type="column" visible="true"/>
+			<item name="SQL Type" type="column" visible="true"/>
+			<item name="Description" type="column" visible="true"/>
+		</item>
+		<item name="Details Table" type="table" visible="true">
+			<item name="Table Name" type="column" visible="true"/>
+			<item name="Schema" type="column" visible="true"/>
+			<item name="Optional" type="column" visible="true"/>
+			<item name="Min Occurs" type="column" visible="true"/>
+			<item name="Max Occurs" type="column" visible="true"/>
+			<item name="Primary Key" type="column" visible="true"/>
+			<item name="Auto Generate" type="column" visible="true"/>
+			<item name="Foreign Key" type="column" visible="true"/>
+			<item name="Length" type="column" visible="true"/>
+			<item name="Decimal Length" type="column" visible="true"/>
+		</item>
+	</report>
+	<report name="Event Management" visible="true">
+		<item name="Summary Table" type="table" visible="true">
+			<item name="Name" type="column" visible="true"/>
+			<item name="Event Type" type="column" visible="true"/>
+			<item name="Condition" type="column" visible="true"/>
+		</item>
+		<item name="Details Table" type="table" visible="true">
+			<item name="Trigger Type" type="column" visible="true"/>
+			<item name="Condition" type="column" visible="true"/>
+			<item name="Handler Class" type="column" visible="true"/>
+			<item name="Comment" type="column" visible="true"/>
+			<item name="Properties" type="column" visible="true"/>
+		</item>
+	</report>
+	<report name="ExternalMessage" visible="true">
+		<item name="Details Table" type="table" visible="true">
+			<item name="Name" type="column" visible="true"/>
+			<item name="Description" type="column" visible="true"/>
+			<item name="Standard" type="column" visible="true"/>
+			<item name="Version" type="column" visible="true"/>
+			<item name="Standard Name" type="column" visible="false"/>
+			<item name="Standard Version" type="column" visible="false"/>
+			<item name="Standard Detailed Name" type="column" visible="false"/>
+			<item name="Standard Category" type="column" visible="false"/>
+		</item>
+	</report>
+	<report name="FIX Fields" visible="true">
+		<item name="Summary Table" type="table" visible="true">
+			<item name="Tag" type="column" visible="true"/>
+			<item name="Name" type="column" visible="true"/>
+			<item name="Type" type="column" visible="true"/>
+			<item name="Description" type="column" visible="true"/>
+		</item>
+		<item name="Details Table" type="table" visible="true">
+			<item name="Name" type="column" visible="true"/>
+			<item name="FIX Tag" type="column" visible="true"/>
+			<item name="Parent Section" type="column" visible="true"/>
+			<item name="FIX Type" type="column" visible="true"/>
+			<item name="Alias" type="column" visible="true"/>
+			<item name="Type" type="column" visible="true"/>
+			<item name="Default Value" type="column" visible="true"/>
+			<item name="Max Length" type="column" visible="true"/>
+			<item name="Optional" type="column" visible="true"/>
+			<item name="Min Occurs" type="column" visible="true"/>
+			<item name="Max Occurs" type="column" visible="true"/>
+			<item name="Description" type="column" visible="true"/>
+			<item name="Format" type="column" visible="true"/>
+			<item name="Validations" type="column" visible="true"/>
+			<item name="User Defined" type="column" visible="true"/>
+			<item name="Enabled" type="column" visible="true"/>
+		</item>
+		<item name="Format Options" type="table" visible="true">
+			<item name="Ignore Unrecognized Fields" type="column" visible="true"/>
+		</item>
+	</report>
+	<report name="FIXExternalMessage" visible="true">
+		<item name="Details Table" type="table" visible="true">
+			<item name="Name" type="column" visible="true"/>
+			<item name="Description" type="column" visible="true"/>
+			<item name="Standard" type="column" visible="true"/>
+			<item name="Version" type="column" visible="true"/>
+			<item name="Standard Name" type="column" visible="true"/>
+			<item name="Standard Version" type="column" visible="true"/>
+			<item name="Standard Detailed Name" type="column" visible="true"/>
+			<item name="Standard Category" type="column" visible="true"/>
+			<item name="Message Type" type="column" visible="true"/>
+		</item>
+	</report>
+	<report name="FastFieldsFormat" visible="true">
+		<item name="Summary Table" type="table" visible="true">
+			<item name="Name" type="column" visible="true"/>
+			<item name="Type" type="column" visible="true"/>
+			<item name="FAST Type" type="column" visible="true"/>
+			<item name="Operator" type="column" visible="true"/>
+			<item name="Description" type="column" visible="true"/>
+		</item>
+		<item name="Details Table" type="table" visible="true">
+			<item name="Name" type="column" visible="true"/>
+			<item name="Parent Section" type="column" visible="true"/>
+			<item name="Type" type="column" visible="true"/>
+			<item name="FAST Type" type="column" visible="true"/>
+			<item name="Operator" type="column" visible="true"/>
+			<item name="Optional" type="column" visible="true"/>
+			<item name="Value" type="column" visible="true"/>
+			<item name="id" type="column" visible="true"/>
+			<item name="slot" type="column" visible="true"/>
+			<item name="Dictionary" type="column" visible="true"/>
+			<item name="Key" type="column" visible="true"/>
+			<item name="Namespace" type="column" visible="true"/>
+			<item name="Description" type="column" visible="true"/>
+			<item name="Count Field" type="column" visible="true"/>
+		</item>
+		<item name="Format Options" type="table" visible="true">
+			<item name="Template Name" type="column" visible="true"/>
+			<item name="Template Id" type="column" visible="true"/>
+			<item name="Template Namespace" type="column" visible="true"/>
+			<item name="Type Name" type="column" visible="true"/>
+			<item name="Type Namespace" type="column" visible="true"/>
+			<item name="Dictionary" type="column" visible="true"/>
+			<item name="Namespace" type="column" visible="true"/>
+		</item>
+	</report>
+	<report name="FieldValidationRules" visible="true">
+		<item name="Summary Table" type="table" visible="true">
+			<item name="Name" type="column" visible="true"/>
+			<item name="Validation" type="column" visible="false"/>
+			<item name="Error Code" type="column" visible="true"/>
+			<item name="Action Message" type="column" visible="true"/>
+			<item name="Applies To" type="column" visible="true"/>
+		</item>
+		<item name="Details Table" type="table" visible="true">
+			<item name="Name" type="column" visible="true"/>
+			<item name="Error Code" type="column" visible="true"/>
+			<item name="Validation" type="column" visible="true"/>
+			<item name="Applies To" type="column" visible="true"/>
+			<item name="Action Message" type="column" visible="true"/>
+			<item name="Type" type="column" visible="true"/>
+			<item name="Enabled" type="column" visible="true"/>
+			<item name="Severity" type="column" visible="true"/>
+			<item name="Cascade Errors" type="column" visible="true"/>
+			<item name="Comment" type="column" visible="true"/>
+		</item>
+	</report>
+	<report name="FolderElement" visible="true">
+		<item name="Details Table" type="table" visible="true">
+			<item name="Name" type="column" visible="true"/>
+			<item name="Description" type="column" visible="true"/>
+		</item>
+	</report>
+	<report name="Function Definition" visible="true">
+		<item name="Details Table" type="table" visible="true">
+			<item name="Name" type="column" visible="true"/>
+			<item name="Category" type="column" visible="true"/>
+			<item name="Description" type="column" visible="true"/>
+			<item name="Return Type" type="column" visible="true"/>
+			<item name="Parameters" type="column" visible="true"/>
+			<item name="Code" type="column" visible="true"/>
+			<item name="Native Class" type="column" visible="true"/>
+		</item>
+	</report>
+	<report name="ISO8583FieldsFormat" visible="true">
+		<item name="Summary Table" type="table" visible="true">
+			<item name="Name" type="column" visible="true"/>
+			<item name="Type" type="column" visible="true"/>
+			<item name="Index" type="column" visible="false"/>
+			<item name="Representation" type="column" visible="true"/>
+			<item name="Data Encoding" type="column" visible="true"/>
+			<item name="Description" type="column" visible="false"/>
+		</item>
+		<item name="Details Table" type="table" visible="true">
+			<item name="Name" type="column" visible="true"/>
+			<item name="Parent Section" type="column" visible="true"/>
+			<item name="Type" type="column" visible="true"/>
+			<item name="ISO8583 Type" type="column" visible="true"/>
+			<item name="Index" type="column" visible="true"/>
+			<item name="Representation" type="column" visible="true"/>
+			<item name="Padding" type="column" visible="true"/>
+			<item name="Data Encoding" type="column" visible="true"/>
+			<item name="Length Encoding" type="column" visible="true"/>
+			<item name="Optional" type="column" visible="true"/>
+			<item name="Description" type="column" visible="true"/>
+		</item>
+		<item name="Format Options" type="table" visible="true">
+			<item name="Encoding" type="column" visible="true"/>
+			<item name="Version" type="column" visible="true"/>
+			<item name="Binary Bitmap" type="column" visible="true"/>
+		</item>
+	</report>
+	<report name="InputFormat" visible="true">
+		<item name="Details Table" type="table" visible="true">
+			<item name="Name" type="column" visible="true"/>
+			<item name="Description" type="column" visible="true"/>
+			<item name="Standard" type="column" visible="true"/>
+			<item name="Version" type="column" visible="true"/>
+			<item name="Standard Name" type="column" visible="true"/>
+			<item name="Standard Version" type="column" visible="true"/>
+			<item name="Standard Detailed Name" type="column" visible="true"/>
+			<item name="Standard Category" type="column" visible="true"/>
+		</item>
+	</report>
+	<report name="Internal Format" visible="true">
+		<item name="Summary Table" type="table" visible="true">
+			<item name="Name" type="column" visible="true"/>
+			<item name="Type" type="column" visible="true"/>
+			<item name="Description" type="column" visible="true"/>
+		</item>
+		<item name="Details Table" type="table" visible="true">
+			<item name="Name" type="column" visible="true"/>
+			<item name="Parent Section" type="column" visible="true"/>
+			<item name="Alias" type="column" visible="true"/>
+			<item name="Type" type="column" visible="true"/>
+			<item name="Default Value" type="column" visible="true"/>
+			<item name="Max Length" type="column" visible="true"/>
+			<item name="Optional" type="column" visible="true"/>
+			<item name="Min Occurs" type="column" visible="true"/>
+			<item name="Max Occurs" type="column" visible="true"/>
+			<item name="Description" type="column" visible="true"/>
+			<item name="Validations" type="column" visible="true"/>
+			<item name="Hidden Field" type="column" visible="true"/>
+			<item name="Platform Specific Attributes" type="column" visible="true"/>
+		</item>
+	</report>
+	<report name="InternalMessage" visible="true">
+		<item name="Details Table" type="table" visible="true">
+			<item name="Name" type="column" visible="true"/>
+			<item name="Version" type="column" visible="true"/>
+			<item name="Standard Name" type="column" visible="true"/>
+			<item name="Standard Version" type="column" visible="true"/>
+			<item name="Standard Detailed Name" type="column" visible="true"/>
+			<item name="Standard Category" type="column" visible="true"/>
+			<item name="Description" type="column" visible="true"/>
+		</item>
+	</report>
+	<report name="JSONFieldsFormat" visible="true">
+		<item name="Summary Table" type="table" visible="true">
+			<item name="Name" type="column" visible="true"/>
+			<item name="Type" type="column" visible="true"/>
+			<item name="Tervela Name" type="column" visible="true"/>
+			<item name="Tervela Type" type="column" visible="true"/>
+			<item name="Description" type="column" visible="true"/>
+		</item>
+		<item name="Details Table" type="table" visible="true">
+			<item name="Name" type="column" visible="true"/>
+			<item name="Parent Section" type="column" visible="true"/>
+			<item name="Type" type="column" visible="true"/>
+			<item name="Tervela Name" type="column" visible="true"/>
+			<item name="Tervela Type" type="column" visible="true"/>
+			<item name="Optional" type="column" visible="true"/>
+			<item name="Description" type="column" visible="true"/>
+			<item name="Count Field" type="column" visible="true"/>
+		</item>
+		<item name="Format Options" type="table" visible="true"/>
+	</report>
+	<report name="Mapping Rules" visible="true">
+		<item name="Summary Table" type="table" visible="true">
+			<item name="Name" type="column" visible="true"/>
+			<item name="Type" type="column" visible="true"/>
+			<item name="Mapping" type="column" visible="true"/>
+			<item name="Comment" type="column" visible="false"/>
+		</item>
+		<item name="Details Table" type="table" visible="true">
+			<item name="Name" type="column" visible="true"/>
+			<item name="Type" type="column" visible="true"/>
+			<item name="Mapping" type="column" visible="true"/>
+			<item name="Comment" type="column" visible="true"/>
+			<item name="Source Fields" type="column" visible="false"/>
+		</item>
+	</report>
+	<report name="Message Flow" visible="true">
+		<item name="Message Flow Variables" type="table" visible="true">
+			<item name="Name" type="column" visible="true"/>
+			<item name="Scope" type="column" visible="true"/>
+			<item name="Repeating" type="column" visible="true"/>
+			<item name="Type" type="column" visible="true"/>
+			<item name="Description" type="column" visible="true"/>
+			<item name="Optional" type="column" visible="true"/>
+		</item>
+		<item name="Message Flow Properties" type="table" visible="true">
+			<item name="Name" type="column" visible="true"/>
+			<item name="Description" type="column" visible="true"/>
+			<item name="Version" type="column" visible="true"/>
+			<item name="Transaction Type" type="column" visible="true"/>
+			<item name="Ports" type="column" visible="true"/>
+			<item name="References" type="column" visible="true"/>
+		</item>
+		<item name="Message Flow Activities" type="table" visible="true">
+			<item name="Type" type="column" visible="true"/>
+			<item name="Name" type="column" visible="true"/>
+			<item name="Label" type="column" visible="true"/>
+			<item name="Description" type="column" visible="true"/>
+			<item name="Mapping Name" type="column" visible="true"/>
+			<item name="Source Variables" type="column" visible="true"/>
+			<item name="Destination Variables" type="column" visible="true"/>
+			<item name="Message Name" type="column" visible="true"/>
+			<item name="Validation Name" type="column" visible="true"/>
+			<item name="Processing Name" type="column" visible="true"/>
+			<item name="Output Port" type="column" visible="true"/>
+			<item name="Cascade Exceptions" type="column" visible="true"/>
+			<item name="Other Options" type="column" visible="true"/>
+			<item name="Code" type="column" visible="true"/>
+			<item name="Persistence Type" type="column" visible="true"/>
+			<item name="Query To Execute" type="column" visible="true"/>
+			<item name="Parameters" type="column" visible="true"/>
+			<item name="Invoked Message Flow" type="column" visible="true"/>
+			<item name="Input Variables" type="column" visible="true"/>
+			<item name="Output Variables" type="column" visible="true"/>
+			<item name="External Class" type="column" visible="true"/>
+			<item name="Initializer Code" type="column" visible="true"/>
+			<item name="Initializer Code" type="column" visible="true"/>
+			<item name="Condition Code" type="column" visible="true"/>
+			<item name="Increment Code" type="column" visible="true"/>
+			<item name="Branches" type="column" visible="true"/>
+			<item name="Add to destination" type="column" visible="true"/>
+			<item name="Exception Mapping" type="column" visible="true"/>
+		</item>
+	</report>
+	<report name="Message Mapping" visible="true">
+		<item name="Details Table" type="table" visible="true">
+			<item name="Name" type="column" visible="true"/>
+			<item name="Description" type="column" visible="true"/>
+			<item name="Mapping Type" type="column" visible="true"/>
+			<item name="Source Message" type="column" visible="true"/>
+			<item name="Destination Message" type="column" visible="true"/>
+		</item>
+	</report>
+	<report name="Mount Directory" visible="true">
+		<item name="Summary Table" type="table" visible="true">
+			<item name="Name" type="column" visible="true"/>
+			<item name="Size" type="column" visible="true"/>
+			<item name="Date Modified" type="column" visible="true"/>
+		</item>
+	</report>
+	<report name="NormalizedObjectMappingFormat" visible="true">
+		<item name="Details Table" type="table" visible="true">
+			<item name="Name" type="column" visible="true"/>
+			<item name="Description" type="column" visible="true"/>
+		</item>
+	</report>
+	<report name="NormalizedObjectValidationRules" visible="true">
+		<item name="Summary Table" type="table" visible="true">
+			<item name="Name" type="column" visible="true"/>
+			<item name="Validation" type="column" visible="true"/>
+			<item name="Error Code" type="column" visible="true"/>
+			<item name="Action Message" type="column" visible="true"/>
+			<item name="Applies To" type="column" visible="true"/>
+		</item>
+		<item name="Details Table" type="table" visible="true">
+			<item name="Name" type="column" visible="true"/>
+			<item name="Error Code" type="column" visible="true"/>
+			<item name="Validation" type="column" visible="true"/>
+			<item name="Applies To" type="column" visible="true"/>
+			<item name="Action Message" type="column" visible="true"/>
+			<item name="Type" type="column" visible="true"/>
+			<item name="Enabled" type="column" visible="true"/>
+			<item name="Severity" type="column" visible="true"/>
+			<item name="Cascade Errors" type="column" visible="true"/>
+			<item name="Comment" type="column" visible="true"/>
+		</item>
+	</report>
+	<report name="OutputFormat" visible="true">
+		<item name="Details Table" type="table" visible="true">
+			<item name="Name" type="column" visible="true"/>
+			<item name="Description" type="column" visible="true"/>
+			<item name="Standard" type="column" visible="true"/>
+			<item name="Version" type="column" visible="true"/>
+			<item name="Standard Name" type="column" visible="true"/>
+			<item name="Standard Version" type="column" visible="true"/>
+			<item name="Standard Detailed Name" type="column" visible="true"/>
+			<item name="Standard Category" type="column" visible="true"/>
+		</item>
+	</report>
+	<report name="Persistence Designer" visible="true">
+		<item name="Details Table" type="table" visible="true">
+			<item name="Name" type="column" visible="true"/>
+			<item name="Internal Message Name" type="column" visible="true"/>
+		</item>
+	</report>
+	<report name="Processing Rules" visible="true">
+		<item name="Details Table" type="table" visible="true">
+			<item name="Name" type="column" visible="true"/>
+			<item name="Formula" type="column" visible="true"/>
+			<item name="Custom Class" type="column" visible="true"/>
+			<item name="Comment" type="column" visible="true"/>
+		</item>
+	</report>
+	<report name="Query Manager" visible="true">
+		<item name="Details Table" type="table" visible="true">
+			<item name="Query Name" type="column" visible="true"/>
+			<item name="Method Signature" type="column" visible="true"/>
+			<item name="Condition" type="column" visible="true"/>
+			<item name="SQL Condition" type="column" visible="true"/>
+		</item>
+	</report>
+	<report name="REAL Fields" visible="true">
+		<item name="Summary Table" type="table" visible="true">
+			<item name="Name" type="column" visible="true"/>
+			<item name="Type" type="column" visible="true"/>
+			<item name="Description" type="column" visible="true"/>
+		</item>
+		<item name="Details Table" type="table" visible="true">
+			<item name="Name" type="column" visible="true"/>
+			<item name="Parent Section" type="column" visible="true"/>
+			<item name="ID" type="column" visible="true"/>
+			<item name="Alias" type="column" visible="true"/>
+			<item name="Type" type="column" visible="true"/>
+			<item name="Real Type" type="column" visible="true"/>
+			<item name="Default Value" type="column" visible="true"/>
+			<item name="Max Length" type="column" visible="true"/>
+			<item name="Optional" type="column" visible="true"/>
+			<item name="Min Occurs" type="column" visible="true"/>
+			<item name="Max Occurs" type="column" visible="true"/>
+			<item name="Description" type="column" visible="true"/>
+			<item name="Format" type="column" visible="true"/>
+			<item name="Validations" type="column" visible="true"/>
+			<item name="Field Length" type="column" visible="true"/>
+			<item name="Length" type="column" visible="true"/>
+			<item name="XML Name" type="column" visible="true"/>
+		</item>
+		<item name="Format Options" type="table" visible="true">
+			<item name="Message Type" type="column" visible="true"/>
+		</item>
+	</report>
+	<report name="REALExternalMessage" visible="true">
+		<item name="Details Table" type="table" visible="true">
+			<item name="Name" type="column" visible="true"/>
+			<item name="Description" type="column" visible="true"/>
+			<item name="Standard" type="column" visible="true"/>
+			<item name="Version" type="column" visible="true"/>
+			<item name="Standard Name" type="column" visible="true"/>
+			<item name="Standard Version" type="column" visible="true"/>
+			<item name="Standard Detailed Name" type="column" visible="true"/>
+			<item name="Standard Category" type="column" visible="true"/>
+			<item name="Message ID" type="column" visible="true"/>
+		</item>
+	</report>
+	<report name="References" visible="true">
+		<item name="Details Table" type="table" visible="true">
+			<item name="Name" type="column" visible="true"/>
+		</item>
+	</report>
+	<report name="Resources" visible="true">
+		<item name="Summary Table" type="table" visible="true">
+			<item name="Resource Name" type="column" visible="true"/>
+			<item name="Type" type="column" visible="true"/>
+			<item name="List" type="column" visible="true"/>
+			<item name="Locales" type="column" visible="true"/>
+			<item name="Description" type="column" visible="true"/>
+		</item>
+	</report>
+	<report name="ReutersFieldsFormat" visible="true">
+		<item name="Summary Table" type="table" visible="true">
+			<item name="FID" type="column" visible="true"/>
+			<item name="Name" type="column" visible="true"/>
+			<item name="Type" type="column" visible="true"/>
+			<item name="Description" type="column" visible="true"/>
+		</item>
+		<item name="Details Table" type="table" visible="true">
+			<item name="Designer Name" type="column" visible="true"/>
+			<item name="Field ID" type="column" visible="true"/>
+			<item name="Acronym" type="column" visible="true"/>
+			<item name="Designer Type" type="column" visible="true"/>
+			<item name="Reuters Type" type="column" visible="true"/>
+			<item name="Default Value" type="column" visible="true"/>
+			<item name="Description" type="column" visible="true"/>
+			<item name="Enumeration Values" type="column" visible="true"/>
+		</item>
+	</report>
+	<report name="SIACCanonicalExternalMessage" visible="true">
+		<item name="Details Table" type="table" visible="true">
+			<item name="Name" type="column" visible="true"/>
+			<item name="Description" type="column" visible="true"/>
+			<item name="Standard" type="column" visible="true"/>
+			<item name="Version" type="column" visible="true"/>
+			<item name="Standard Name" type="column" visible="true"/>
+			<item name="Standard Version" type="column" visible="true"/>
+			<item name="Standard Detailed Name" type="column" visible="true"/>
+			<item name="Standard Category" type="column" visible="true"/>
+			<item name="Message Type" type="column" visible="true"/>
+		</item>
+	</report>
+	<report name="SIACCanonicalFieldsFormat" visible="true">
+		<item name="Summary Table" type="table" visible="true">
+			<item name="Tag" type="column" visible="true"/>
+			<item name="Name" type="column" visible="true"/>
+			<item name="Type" type="column" visible="true"/>
+			<item name="Description" type="column" visible="true"/>
+		</item>
+		<item name="Details Table" type="table" visible="true">
+			<item name="Name" type="column" visible="true"/>
+			<item name="Tag" type="column" visible="true"/>
+			<item name="Parent Section" type="column" visible="true"/>
+			<item name="SIAC Type" type="column" visible="true"/>
+			<item name="Alias" type="column" visible="true"/>
+			<item name="Type" type="column" visible="true"/>
+			<item name="Default Value" type="column" visible="true"/>
+			<item name="Max Length" type="column" visible="true"/>
+			<item name="Optional" type="column" visible="true"/>
+			<item name="Min Occurs" type="column" visible="true"/>
+			<item name="Max Occurs" type="column" visible="true"/>
+			<item name="Description" type="column" visible="true"/>
+			<item name="Format" type="column" visible="true"/>
+			<item name="Validations" type="column" visible="true"/>
+			<item name="User Defined" type="column" visible="true"/>
+			<item name="Valid Values" type="column" visible="true"/>
+			<item name="Submitter" type="column" visible="true"/>
+			<item name="Status" type="column" visible="true"/>
+			<item name="Maximum Size" type="column" visible="true"/>
+			<item name="Approved Field" type="column" visible="true"/>
+		</item>
+		<item name="Format Options" type="table" visible="true">
+			<item name="Ignore Unrecognized Fields" type="column" visible="true"/>
+			<item name="Add CheckSum" type="column" visible="true"/>
+		</item>
+	</report>
+	<report name="TervelaFieldsFormat" visible="true">
+		<item name="Summary Table" type="table" visible="true">
+			<item name="Name" type="column" visible="true"/>
+			<item name="Type" type="column" visible="true"/>
+			<item name="Tervela Name" type="column" visible="true"/>
+			<item name="Tervela Type" type="column" visible="true"/>
+			<item name="Description" type="column" visible="true"/>
+		</item>
+		<item name="Details Table" type="table" visible="true">
+			<item name="Name" type="column" visible="true"/>
+			<item name="Parent Section" type="column" visible="true"/>
+			<item name="Type" type="column" visible="true"/>
+			<item name="Tervela Name" type="column" visible="true"/>
+			<item name="Tervela Type" type="column" visible="true"/>
+			<item name="Optional" type="column" visible="true"/>
+			<item name="Description" type="column" visible="true"/>
+			<item name="Count Field" type="column" visible="true"/>
+		</item>
+		<item name="Format Options" type="table" visible="true"/>
+	</report>
+	<report name="UniversalFieldsFormat" visible="true">
+		<item name="Summary Table" type="table" visible="true">
+			<item name="Name" type="column" visible="true"/>
+			<item name="Type" type="column" visible="true"/>
+			<item name="Description" type="column" visible="true"/>
+			<item name="Fixed Field Length" type="column" visible="false"/>
+			<item name="Start Location" type="column" visible="false"/>
+		</item>
+		<item name="Details Table" type="table" visible="true">
+			<item name="Name" type="column" visible="true"/>
+			<item name="Parent Section" type="column" visible="true"/>
+			<item name="Alias" type="column" visible="true"/>
+			<item name="Type" type="column" visible="true"/>
+			<item name="Default Value" type="column" visible="true"/>
+			<item name="Max Length" type="column" visible="true"/>
+			<item name="Optional" type="column" visible="true"/>
+			<item name="Min Occurs" type="column" visible="true"/>
+			<item name="Max Occurs" type="column" visible="true"/>
+			<item name="Description" type="column" visible="true"/>
+			<item name="Format" type="column" visible="true"/>
+			<item name="Validations" type="column" visible="true"/>
+			<item name="Encoding" type="column" visible="true"/>
+			<item name="Field Type" type="column" visible="true"/>
+			<item name="Fixed Field Length" type="column" visible="true"/>
+			<item name="Length Field" type="column" visible="true"/>
+			<item name="Delimiter" type="column" visible="true"/>
+			<item name="Quote Char" type="column" visible="true"/>
+			<item name="Justification" type="column" visible="true"/>
+			<item name="Trim Option" type="column" visible="true"/>
+			<item name="Field Terminator" type="column" visible="true"/>
+			<item name="Padding" type="column" visible="true"/>
+			<item name="Decimal Point Option" type="column" visible="true"/>
+			<item name="Field Format" type="column" visible="true"/>
+			<item name="Exp Representation" type="column" visible="true"/>
+			<item name="True Value" type="column" visible="true"/>
+			<item name="False Value" type="column" visible="true"/>
+			<item name="Endian" type="column" visible="true"/>
+			<item name="Signed" type="column" visible="true"/>
+			<item name="Decimal Format" type="column" visible="true"/>
+			<item name="Count Field" type="column" visible="true"/>
+			<item name="Tag" type="column" visible="true"/>
+			<item name="Separator" type="column" visible="true"/>
+			<item name="Section Delimiter" type="column" visible="true"/>
+			<item name="Ignore Trailing Fields" type="column" visible="true"/>
+			<item name="Default Field Delimiter" type="column" visible="true"/>
+			<item name="Default Field Quote Character" type="column" visible="true"/>
+			<item name="Equal Length Padding" type="column" visible="true"/>
+		</item>
+		<item name="Format Options" type="table" visible="true">
+			<item name="Default Encoding (For Numerals)" type="column" visible="true"/>
+			<item name="Default Field Type" type="column" visible="true"/>
+			<item name="Endian" type="column" visible="true"/>
+			<item name="Text Encoding" type="column" visible="true"/>
+			<item name="Header Delimiter" type="column" visible="true"/>
+			<item name="Ignore Header Trailing Fields" type="column" visible="true"/>
+			<item name="Data Delimiter" type="column" visible="true"/>
+			<item name="Ignore Data Trailing Fields" type="column" visible="true"/>
+			<item name="Trailer Delimiter" type="column" visible="true"/>
+			<item name="Ignore Trailer Trailing Fields" type="column" visible="true"/>
+			<item name="Record Delimiter" type="column" visible="true"/>
+			<item name="Ignore Record Trailing Fields" type="column" visible="true"/>
+			<item name="Field Delimiter" type="column" visible="true"/>
+			<item name="Quote Character" type="column" visible="true"/>
+		</item>
+	</report>
+	<report name="UnstructuredFieldsFormat" visible="true">
+		<item name="Summary Table" type="table" visible="true">
+			<item name="Name" type="column" visible="true"/>
+			<item name="Type" type="column" visible="true"/>
+			<item name="location" type="column" visible="true"/>
+			<item name="Text Formula" type="column" visible="true"/>
+			<item name="Column" type="column" visible="true"/>
+			<item name="Description" type="column" visible="true"/>
+		</item>
+		<item name="Details Table" type="table" visible="true">
+			<item name="Name" type="column" visible="true"/>
+			<item name="Parent Section" type="column" visible="true"/>
+			<item name="Type" type="column" visible="true"/>
+			<item name="Optional" type="column" visible="true"/>
+			<item name="location" type="column" visible="true"/>
+			<item name="Text Formula" type="column" visible="true"/>
+			<item name="Column" type="column" visible="true"/>
+			<item name="Description" type="column" visible="true"/>
+		</item>
+		<item name="Format Options" type="table" visible="true"/>
+	</report>
+	<report name="ValidationRules" visible="true">
+		<item name="Summary Table" type="table" visible="true">
+			<item name="Name" type="column" visible="true"/>
+			<item name="Validation" type="column" visible="true"/>
+			<item name="Error Code" type="column" visible="true"/>
+			<item name="Action Message" type="column" visible="true"/>
+			<item name="Applies To" type="column" visible="true"/>
+		</item>
+		<item name="Details Table" type="table" visible="true">
+			<item name="Name" type="column" visible="true"/>
+			<item name="Error Code" type="column" visible="true"/>
+			<item name="Validation" type="column" visible="true"/>
+			<item name="Applies To" type="column" visible="true"/>
+			<item name="Action Message" type="column" visible="true"/>
+			<item name="Type" type="column" visible="true"/>
+			<item name="Enabled" type="column" visible="true"/>
+			<item name="Severity" type="column" visible="true"/>
+			<item name="Cascade Errors" type="column" visible="true"/>
+			<item name="Comment" type="column" visible="true"/>
+		</item>
+	</report>
+	<report name="WebForm UI" visible="true">
+		<item name="Summary Table" type="table" visible="true">
+			<item name="Name" type="column" visible="true"/>
+			<item name="Type" type="column" visible="true"/>
+		</item>
+		<item name="Details Table" type="table" visible="true">
+			<item name="Label" type="column" visible="true"/>
+			<item name="Default Value" type="column" visible="true"/>
+			<item name="Visible" type="column" visible="true"/>
+			<item name="Enabled" type="column" visible="true"/>
+			<item name="Label Style" type="column" visible="true"/>
+			<item name="Renderer Style" type="column" visible="true"/>
+			<item name="Label Position" type="column" visible="true"/>
+			<item name="Column Span" type="column" visible="true"/>
+			<item name="Row Span" type="column" visible="true"/>
+			<item name="Start In New Row" type="column" visible="true"/>
+			<item name="Renderer" type="column" visible="true"/>
+			<item name="Renderer Width" type="column" visible="true"/>
+			<item name="Read Only" type="column" visible="true"/>
+			<item name="Transform" type="column" visible="true"/>
+			<item name="Password" type="column" visible="true"/>
+			<item name="Custom LookUp Name" type="column" visible="true"/>
+			<item name="Rows" type="column" visible="true"/>
+			<item name="Choice Type" type="column" visible="true"/>
+			<item name="Height" type="column" visible="true"/>
+			<item name="Radio Button Alignment" type="column" visible="true"/>
+			<item name="Choice Values" type="column" visible="true"/>
+			<item name="Show Section Header" type="column" visible="true"/>
+			<item name="Section Header" type="column" visible="true"/>
+			<item name="Background Style" type="column" visible="true"/>
+			<item name="Indent Subfields" type="column" visible="true"/>
+			<item name="Custom Section Layout" type="column" visible="true"/>
+			<item name="Number Of Columns" type="column" visible="true"/>
+			<item name="Custom Layout" type="column" visible="true"/>
+			<item name="Page Title" type="column" visible="true"/>
+			<item name="Page Name" type="column" visible="true"/>
+			<item name="Custom Text" type="column" visible="true"/>
+		</item>
+	</report>
+	<report name="WebFormDesigner" visible="true">
+		<item name="Details Table" type="table" visible="true">
+			<item name="Name" type="column" visible="true"/>
+			<item name="Description" type="column" visible="true"/>
+		</item>
+	</report>
+	<report name="XML Fields" visible="true">
+		<item name="Summary Table" type="table" visible="true">
+			<item name="Name" type="column" visible="true"/>
+			<item name="Type" type="column" visible="true"/>
+			<item name="Description" type="column" visible="false"/>
+		</item>
+		<item name="Details Table" type="table" visible="true">
+			<item name="Name" type="column" visible="true"/>
+			<item name="Parent Section" type="column" visible="true"/>
+			<item name="Alias" type="column" visible="true"/>
+			<item name="Type" type="column" visible="true"/>
+			<item name="Default Value" type="column" visible="true"/>
+			<item name="Max Length" type="column" visible="true"/>
+			<item name="Optional" type="column" visible="true"/>
+			<item name="Min Occurs" type="column" visible="true"/>
+			<item name="Max Occurs" type="column" visible="true"/>
+			<item name="Description" type="column" visible="true"/>
+			<item name="Format" type="column" visible="true"/>
+			<item name="Validations" type="column" visible="true"/>
+			<item name="XML Attribute" type="column" visible="true"/>
+			<item name="XML Name" type="column" visible="true"/>
+			<item name="XML Type" type="column" visible="true"/>
+			<item name="Node Type" type="column" visible="true"/>
+			<item name="Enabled" type="column" visible="true"/>
+			<item name="Namespace" type="column" visible="true"/>
+			<item name="Compositor" type="column" visible="true"/>
+			<item name="Nillable" type="column" visible="true"/>
+			<item name="Fixed Value" type="column" visible="true"/>
+			<item name="Facets" type="column" visible="true"/>
+		</item>
+		<item name="Format Options" type="table" visible="true">
+			<item name="Mode Of Operation" type="column" visible="true"/>
+			<item name="Root Tag" type="column" visible="true"/>
+			<item name="Record Tag" type="column" visible="true"/>
+			<item name="Header Tag" type="column" visible="true"/>
+			<item name="Body Tag" type="column" visible="true"/>
+			<item name="Trailer Tag" type="column" visible="true"/>
+			<item name="Schema Location" type="column" visible="true"/>
+			<item name="No Namespace Schema Location" type="column" visible="true"/>
+			<item name="Preferred Namespace Prefixes" type="column" visible="true"/>
+			<item name="Doc Type Declaration" type="column" visible="true"/>
+			<item name="XML Declaration Attributes" type="column" visible="true"/>
+			<item name="Validate" type="column" visible="true"/>
+			<item name="Validate With Schema" type="column" visible="true"/>
+			<item name="Namespace aware" type="column" visible="true"/>
+			<item name="Entity References" type="column" visible="true"/>
+		</item>
+	</report>
+</reports>

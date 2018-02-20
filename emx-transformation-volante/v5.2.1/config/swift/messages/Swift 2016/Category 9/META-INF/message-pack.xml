@@ -1,0 +1,28 @@
+<message-pack xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <url>http://www.volantetech.com</url>
+
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.volantetech.volante</groupId>
+    <artifactId>volante-swift-category 9</artifactId>
+    <packaging>jar</packaging>
+    <version>SRG 2016</version>
+    <classifier>20160308</classifier>
+    <name>SWIFT - Category 9</name>
+    <description>
+<![CDATA[<b><i>S.W.I.F.T.</i></b> SCRL is the abbreviation for Society for Worldwide Interbank Financial Telecommunication, Societe Cooperative a Responsibilite Limited. SWIFT's purpose is to provide technology-based communication services across all financial markets through member banks so that they can profitably meet their own and their end-customers' needs.
+        
+        This pack includes Category 9 messages. Minimum dependency for this message pack is Swift Plugin 5.1.2.
+        
+        For additional information please refer Release notes/readme document.]]></description>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.volantetech.volante</groupId>
+            <artifactId>SWIFT</artifactId>
+            <version>5.1.2</version>
+        </dependency>
+    </dependencies>
+
+</message-pack>

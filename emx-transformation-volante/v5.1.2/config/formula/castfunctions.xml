@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<formulae> 
+		<formula name="ToInt">
+			<description>Converts or casts the given numeric value to integer.</description>
+			<signature>ToInt(numeric1)</signature>
+			<category>Conversion</category>
+	  		<Class>com.tplus.transform.design.formula.functions.CastOperatorFunction</Class>
+			<property name="castto" value="int" />
+    	</formula>
+		<formula name="ToLong">
+			<description>Converts or casts the given numeric value to integer.</description>
+			<signature>ToLong(numeric1)</signature>
+			<category>Conversion</category>
+	  		<Class>com.tplus.transform.design.formula.functions.CastOperatorFunction</Class>
+			<property name="castto" value="long" />
+    	</formula>
+		<formula name="ToDouble">
+			<description>Converts or casts the given numeric value to double.</description>
+			<signature>ToDouble(numeric1)</signature>
+			<category>Conversion</category>
+	  		<Class>com.tplus.transform.design.formula.functions.CastOperatorFunction</Class>
+			<property name="castto" value="double" />
+    	</formula>
+		<formula name="ToFloat">
+			<description>Converts or casts the given numeric value to float.</description>
+			<signature>ToFloat(numeric1)</signature>
+			<category>Conversion</category>
+	  		<Class>com.tplus.transform.design.formula.functions.CastOperatorFunction</Class>
+			<property name="castto" value="float" />
+    	</formula>
+		<formula name="ToBigInteger">
+			<description>Converts or casts the given numeric value to big integer.</description>
+			<signature>ToBigInteger(numeric1)</signature>
+			<category>Conversion</category>
+	  		<Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+			<property name="class" value="com.tplus.transform.runtime.formula.FormatFunctions" />
+			<property name="method" value="toBigInteger" />
+    	</formula>
+		<formula name="ToBigDecimal">
+			<description>Converts or casts the given numeric value to big decimal.</description>
+			<signature>ToBigDecimal(numeric1)</signature>
+			<category>Conversion</category>
+	  		<Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+			<property name="class" value="com.tplus.transform.runtime.formula.FormatFunctions" />
+			<property name="method" value="toBigDecimal" />
+    	</formula>
+    <formula name="ToScaledDecimal">
+        <description>Converts or casts the given numeric value to Scaled decimal.</description>
+        <signature>ToScaledDecimal(numeric1)</signature>
+        <category>Conversion</category>
+          <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.FormatFunctions" />
+        <property name="method" value="toScaledDecimal" />
+    </formula>
+		<formula name="ToChar">
+			<description>Converts or casts the given numeric value to character.</description>
+			<signature>ToChar(number)</signature>
+			<category>Conversion</category>
+	  		<Class>com.tplus.transform.design.formula.functions.CastOperatorFunction</Class>
+			<property name="castto" value="char" />
+    	</formula>
+
+</formulae> 

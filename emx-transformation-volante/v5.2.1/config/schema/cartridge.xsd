@@ -1,0 +1,174 @@
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="unqualified"
+            attributeFormDefault="unqualified">
+    <xsd:annotation>
+        <xsd:documentation xml:lang="en">
+            This schema is used to describe the structure of cartridge file (.car) of Volante's cartridges.
+        </xsd:documentation>
+    </xsd:annotation>
+    <!-- include constructs -->
+    <xsd:include schemaLocation="cartridge-include.xsd"/>
+    <xsd:include schemaLocation="cartridge-types.xsd"/>
+    <xsd:include schemaLocation="internalmsg.xsd"/>
+    <xsd:include schemaLocation="externalmsg.xsd"/>
+    <xsd:include schemaLocation="messagemapping.xsd"/>
+    <xsd:include schemaLocation="folder.xsd"/>
+    <!-- plugins include -->
+    <xsd:include schemaLocation="plugins-include.xsd"/>
+    <!-- End include -->
+    <xsd:element name="cartridge" type="CartridgeType"/>
+    <xsd:complexType name="CartridgeType">
+        <xsd:sequence>
+            <xsd:element name="description" type="xsd:string" minOccurs="0"/>
+            <xsd:element ref="version" minOccurs="0"/>
+            <xsd:element ref="private" minOccurs="0"/>
+            <xsd:element ref="references" minOccurs="0"/>
+            <xsd:element ref="ServiceElement" minOccurs="0" maxOccurs="unbounded"/>
+            <xsd:element name="message-validation" minOccurs="0" maxOccurs="unbounded">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element ref="version" minOccurs="0"/>
+                        <xsd:element name="description" type="xsd:string" minOccurs="0"/>
+                        <xsd:element name="message" type="xsd:string" minOccurs="0"/>
+                        <xsd:element ref="validationrules" minOccurs="0" maxOccurs="unbounded"/>
+                        <xsd:element ref="elementproperties"/>
+                    </xsd:sequence>
+                    <xsd:attribute name="name" type="xsd:string" use="required"/>
+                    <xsd:attribute name="type" type="xsd:string" use="required"/>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element ref="elementproperties"/>
+            <xsd:element name="change-log" minOccurs="0">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="log-entry" minOccurs="0" maxOccurs="unbounded">
+                            <xsd:complexType>
+                                <xsd:sequence>
+                                    <xsd:element name="author" type="xsd:string" minOccurs="0"/>
+                                    <xsd:element name="date" type="xsd:string" minOccurs="0"/>
+                                    <xsd:element name="status" type="xsd:string" minOccurs="0"/>
+                                    <xsd:element name="message" type="xsd:string" minOccurs="0"/>
+                                    <xsd:element name="location" type="xsd:string" minOccurs="0"/>
+                                </xsd:sequence>
+                            </xsd:complexType>
+                        </xsd:element>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element ref="workspace" minOccurs="0" maxOccurs="unbounded"/>
+        </xsd:sequence>
+        <xsd:attribute name="version" type="xsd:string"/>
+        <xsd:attribute name="name" type="xsd:string"/>
+        <xsd:attribute name="type" type="xsd:string" fixed="Cartridge"/>
+    </xsd:complexType>
+    <xsd:element name="workspace">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="selected-element" minOccurs="0">
+                    <xsd:complexType>
+                        <xsd:simpleContent>
+                            <xsd:extension base="xsd:string">
+                                <xsd:attribute name="root" type="xsd:string"/>
+                            </xsd:extension>
+                        </xsd:simpleContent>
+                    </xsd:complexType>
+                </xsd:element>
+                <xsd:element name="breakpoints" minOccurs="0">
+                    <xsd:complexType>
+                        <xsd:sequence>
+                            <xsd:element name="breakpoint" minOccurs="0" maxOccurs="unbounded">
+                                <xsd:complexType>
+                                    <xsd:sequence>
+                                        <xsd:element name="location">
+                                            <xsd:complexType>
+                                                <xsd:simpleContent>
+                                                    <xsd:extension base="xsd:string">
+                                                        <xsd:attribute name="root" type="xsd:string"/>
+                                                        <xsd:attribute name="position" type="xsd:string"/>
+                                                    </xsd:extension>
+                                                </xsd:simpleContent>
+                                            </xsd:complexType>
+                                        </xsd:element>
+                                    </xsd:sequence>
+                                </xsd:complexType>
+                            </xsd:element>
+                        </xsd:sequence>
+                    </xsd:complexType>
+                </xsd:element>
+                <xsd:element name="watches" minOccurs="0">
+                    <xsd:complexType>
+                        <xsd:sequence>
+                            <xsd:element name="watch" minOccurs="0" maxOccurs="unbounded">
+                                <xsd:complexType>
+                                    <xsd:sequence>
+                                        <xsd:element name="name" type="xsd:string"/>
+                                    </xsd:sequence>
+                                </xsd:complexType>
+                            </xsd:element>
+                        </xsd:sequence>
+                    </xsd:complexType>
+                </xsd:element>
+                <xsd:element name="open-files" minOccurs="0" maxOccurs="unbounded">
+                    <xsd:complexType>
+                        <xsd:sequence>
+                            <xsd:element name="file" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
+                        </xsd:sequence>
+                    </xsd:complexType>
+                </xsd:element>
+                <xsd:element name="recent-files" minOccurs="0" maxOccurs="unbounded">
+                    <xsd:complexType>
+                        <xsd:sequence>
+                            <xsd:element name="file" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
+                        </xsd:sequence>
+                    </xsd:complexType>
+                </xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="private">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="summary" minOccurs="0"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="summary">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="service" minOccurs="0" maxOccurs="unbounded">
+                    <xsd:complexType>
+                        <xsd:sequence>
+                            <xsd:element name="entry-point" type="xsd:boolean" minOccurs="0"/>
+                            <xsd:element name="description" type="xsd:string" minOccurs="0"/>
+                        </xsd:sequence>
+                        <xsd:attribute name="name" type="xsd:string"/>
+                        <xsd:attribute name="version" type="xsd:string"/>
+                        <xsd:attribute name="type" type="xsd:string"/>
+                    </xsd:complexType>
+                </xsd:element>
+                <xsd:element name="function" minOccurs="0" maxOccurs="unbounded">
+                    <xsd:complexType>
+                        <xsd:simpleContent>
+                            <xsd:extension base="xsd:string">
+                                <xsd:attribute name="name" type="xsd:string"/>
+                            </xsd:extension>
+                        </xsd:simpleContent>
+                    </xsd:complexType>
+                </xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="validationrules">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="hdrvalidationrules" type="hdr_data_tlr_validationrules"/>
+                <xsd:element name="datavalidationrules" type="hdr_data_tlr_validationrules"/>
+                <xsd:element name="tlrvalidationrules" type="hdr_data_tlr_validationrules"/>
+            </xsd:sequence>
+            <xsd:attribute name="name" type="xsd:string" use="required"/>
+        </xsd:complexType>
+    </xsd:element>
+
+</xsd:schema>

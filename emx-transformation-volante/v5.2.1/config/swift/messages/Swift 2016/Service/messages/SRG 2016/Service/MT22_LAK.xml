@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<SwiftMessageFormat name="MT22_LAK">
+	<standard-version><![CDATA[SRG 2016]]></standard-version>
+	<standard-release-qualifier>20160308</standard-release-qualifier>
+	<DescriptiveName><![CDATA[Login Positive Acknowledgement (LAK)]]></DescriptiveName>
+	<Category><![CDATA[Service]]></Category>
+	<Description><![CDATA[This message is a response to an 02 Login Request Message. It is sent by the system to acknowledge the Login Request.
+
+From: GPA                                                       To: User
+
+Notes:
+-------
+The Basic Header identifies the Login message which is being acknowledged.
+For the first session, when no previous session information is available, all of the data of the previous session information block is set to 0. After major system failures, some fields may also be set to 0. 
+Field tag 502 is mandatory in SWIFTNet Phase 1 and not allowed in SWIFTNet Phase 2.]]></Description>
+	<SwiftFields>
+		<customizable>false</customizable>
+		<modifiable>true</modifiable>
+		<SwiftMessageType>Service</SwiftMessageType>
+		<HeaderAndTrailerType>SWIFT_INPUT_HEADER</HeaderAndTrailerType>
+		<Header>
+		</Header>
+		<Data>
+			<Fields>
+				<SystemField Name="session-number">
+					<description><![CDATA[Session number allocated to the new General Purpose
+Application session..]]></description>
+					<datatype>String</datatype>
+					<required>true</required>
+					<SwiftSystemFieldDef Name="session-number" Tag="151">
+						<Format><![CDATA[4!n]]></Format>
+						<Specification><![CDATA[(session-number)]]></Specification>
+						<Description><![CDATA[Session Number allocated to the new session.]]></Description>
+					</SwiftSystemFieldDef>
+				</SystemField>
+				<SystemField Name="date-time">
+					<description><![CDATA[Date and time, local to the user, that the LOGIN was accepted.]]></description>
+					<datatype>String</datatype>
+					<required>true</required>
+					<SwiftSystemFieldDef Name="date-time" Tag="177">
+						<Format><![CDATA[(10!n)]]></Format>
+						<Specification><![CDATA[(date-time)]]></Specification>
+						<Additional-Format><![CDATA[YYMMDDHHMM]]></Additional-Format>
+						<Description><![CDATA[Date and time are always given as local, unless otherwise specified. Local time for the SWIFTNetwork is in GMT.]]></Description>
+						<Validations>
+							<Validation>
+								<formula>IsDate($value,"yyMMddHHmm")</formula>
+								<error-code>V05</error-code>
+								<actionmessage>"Invalid Date/Time '" + $value + "'"</actionmessage>
+							</Validation>
+						</Validations>
+					</SwiftSystemFieldDef>
+				</SystemField>
+				<SystemField Name="window-size">
+					<description><![CDATA[Maximum number of messages sent or received without waiting for or sending acknowledgement.Value is always 1 for General Purpose Application.]]></description>
+					<datatype>String</datatype>
+					<required>true</required>
+					<SwiftSystemFieldDef Name="window-size" Tag="110">
+						<Format><![CDATA[3!n]]></Format>
+						<Specification><![CDATA[(window-size)]]></Specification>
+						<Description><![CDATA[Maximum number of messages sent or received without waiting for or sending acknowledgement.]]></Description>
+					</SwiftSystemFieldDef>
+				</SystemField>
+				<SystemField Name="previous-session-info">
+					<description><![CDATA[Previous session information, including:
+
+a)  date last session opened
+
+b)  time last session opened
+
+c)  session number
+
+d)  date last session closed
+
+e)  time last session closed
+
+f)  reason for closure
+
+g)  last ISN received
+
+h)  last OSN sent]]></description>
+					<datatype>Section</datatype>
+					<minoccurs>0</minoccurs>
+					<maxoccurs>1</maxoccurs>
+					<SwiftSystemFieldDef Name="previous-session-info" Tag="333">
+						<Format><![CDATA[(6!n)(4!n)(4!n)(6!n)(4!n)(3!n)(6!n)(6!n)]]></Format>
+						<Specification><![CDATA[(last-session-opened-date)(last-session-opened-time)(session-number)(last-session-closed-date)(last-session-closed-time)(error-code)(isn)(osn)]]></Specification>
+						<Description><![CDATA[Previous session information, including:
+
+a)  date last session opened
+
+b)  time last session opened
+
+c)  session number
+
+d)  date last session closed
+
+e)  time last session closed
+
+f)  reason for closure
+
+g)  last ISN received
+
+h)  last OSN sent]]></Description>
+						<Validations>
+							<Validation>
+								<subfield>last-session-opened-date</subfield>
+								<formula>IsDate($value,"yyMMdd")</formula>
+								<error-code>V04</error-code>
+								<actionmessage>"Invalid Last-Session-Opened-Date '" + $value + "'. last-session-opened-date should be in the format yyMMdd"</actionmessage>
+							</Validation>
+							<Validation>
+								<subfield>last-session-opened-time</subfield>
+								<formula>IsDate($value,"HHmm")</formula>
+								<error-code>V05</error-code>
+								<actionmessage>"Invalid Last-Session-Opened-Time '" + $value + "'. last-session-opened-time should be in the format HHmm"</actionmessage>
+							</Validation>
+							<Validation>
+								<subfield>last-session-closed-date</subfield>
+								<formula>IsDate($value,"yyMMdd")</formula>
+								<error-code>V04</error-code>
+								<actionmessage>"Invalid Last-Session-Closed-Date '" + $value + "'. last-session-closed-date should be in the format yyMMdd"</actionmessage>
+							</Validation>
+							<Validation>
+								<subfield>last-session-closed-time</subfield>
+								<formula>IsDate($value,"HHmm")</formula>
+								<error-code>V05</error-code>
+								<actionmessage>"Invalid Last-Session-Closed-Time '" + $value + "'. last-session-closed-time should be in the format HHmm"</actionmessage>
+							</Validation>
+						</Validations>
+					</SwiftSystemFieldDef>
+				</SystemField>
+				<SystemField Name="current-session-info">
+					<description><![CDATA[Current session information. For example: 00250000450000440000500000501 where:
+
+a)  session-number = 025
+
+b)  isn = 000045
+
+c)  isnnak = 000044
+
+d)  osn = 000050
+
+e)  osnnak = 000050
+
+f)  ack-replay-indicator = 1]]></description>
+					<datatype>Section</datatype>
+					<minoccurs>0</minoccurs>
+					<maxoccurs>1</maxoccurs>
+					<SwiftSystemFieldDef Name="current-session-info" Tag="330">
+						<Format><![CDATA[(4!n)(6!n)(6!n)(6!n)(6!n)(1!n)]]></Format>
+						<Specification><![CDATA[(session-number)(isn)(isnnak)(osn)(osnnak)(ack-replay-indicator)]]></Specification>
+						<Description><![CDATA[Current session information. For example: 00250000450000440000500000501 where:
+
+a)  session-number = 025
+
+b)  isn = 000045
+
+c)  isnnak = 000044
+
+d)  osn = 000050
+
+e)  osnnak = 000050
+
+f)  ack-replay-indicator = 1]]></Description>
+					</SwiftSystemFieldDef>
+				</SystemField>
+			</Fields>
+		</Data>
+		<Trailer>
+		</Trailer>
+	</SwiftFields>
+	<validationrules name="Default">
+		<hdrvalidationrules>
+			<fieldvalidations>
+			</fieldvalidations>
+		</hdrvalidationrules>
+		<datavalidationrules>
+			<fieldvalidations>
+				<fieldvalidation>
+					<name>E1</name>
+					<comment><![CDATA[Only ONE of the fields should be present.]]></comment>
+					<formula><![CDATA[(previous_session_info.$size+current_session_info.$size)==1]]></formula>
+					<severity>error</severity>
+					<cascade>true</cascade>
+					<error-code>V07</error-code>
+					<actionmessage><![CDATA["Only one of the fields 'previous-session-info' or 'current-session-info' should be present."]]></actionmessage>
+				</fieldvalidation>
+			</fieldvalidations>
+		</datavalidationrules>
+		<tlrvalidationrules>
+			<fieldvalidations>
+			</fieldvalidations>
+		</tlrvalidationrules>
+	</validationrules>
+</SwiftMessageFormat>
+

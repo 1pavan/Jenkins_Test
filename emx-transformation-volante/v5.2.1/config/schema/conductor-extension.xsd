@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.volantetech.com/schema/conductor-extension" elementFormDefault="qualified"
+            attributeFormDefault="unqualified" targetNamespace="http://www.volantetech.com/schema/conductor-extension">
+	<xs:complexType name="PropertyContainer">
+		<xs:choice minOccurs="0" maxOccurs="unbounded">
+			<xs:element name="property" type="Property"/>
+			<xs:element name="panel" type="Panel"/>
+		</xs:choice>
+	</xs:complexType>
+	<xs:complexType name="Input">
+		<xs:complexContent>
+			<xs:extension base="PropertyContainer"/>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="Output">
+		<xs:sequence>
+			<xs:element name="property" type="Property" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="Panel">
+		<xs:complexContent>
+			<xs:extension base="PropertyContainer">
+				<xs:attribute name="name" type="xs:string"/>
+				<xs:attribute name="label" type="xs:string"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="Activity">
+		<xs:sequence>
+			<xs:element name="type" type="xs:string" minOccurs="1"/>
+			<xs:element name="name" type="xs:string" minOccurs="0"/>
+			<xs:element name="description" type="xs:string" minOccurs="0"/>
+			<xs:element name="image" type="xs:string" minOccurs="0"/>
+			<xs:element name="category" type="xs:string" minOccurs="1"/>
+			<xs:element name="class" type="xs:string" minOccurs="1"/>
+			<xs:element name="input" type="Input" minOccurs="1"/>
+			<xs:element name="output" type="Output" minOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="Property">
+		<xs:attribute name="name" type="xs:string" use="required"/>
+		<xs:attribute name="label" type="xs:string" use="required"/>
+		<xs:attribute name="default" type="xs:string" use="optional"/>
+		<xs:attribute name="enabled" type="xs:boolean" use="optional"/>
+		<xs:attribute name="required" type="xs:boolean"/>
+		<xs:attribute name="values" type="xs:string"/>
+		<xs:attribute name="columns" type="xs:int" use="optional"/>
+		<xs:attribute name="rows" type="xs:int" use="optional"/>
+		<xs:attribute name="type">
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="Boolean"/>
+					<xs:enumeration value="Integer"/>
+					<xs:enumeration value="Long"/>
+					<xs:enumeration value="Double"/>
+					<xs:enumeration value="Float"/>
+					<xs:enumeration value="Character"/>
+					<xs:enumeration value="ScaledDecimal"/>
+					<xs:enumeration value="Binary"/>
+					<xs:enumeration value="BigInteger"/>
+					<xs:enumeration value="BigDecimal"/>
+					<xs:enumeration value="String"/>
+					<xs:enumeration value="DateOnly"/>
+					<xs:enumeration value="TimeOnly"/>
+					<xs:enumeration value="DateTime"/>
+					<xs:enumeration value="ISODate"/>
+					<xs:enumeration value="ISOTime"/>
+					<xs:enumeration value="Binary"/>
+					<xs:enumeration value="RawMessage"/>
+					<xs:enumeration value="DataObject"/>
+					<xs:enumeration value="Section"/>
+					<xs:enumeration value="BooleanList"/>
+					<xs:enumeration value="IntegerList"/>
+					<xs:enumeration value="LongList"/>
+					<xs:enumeration value="DoubleList"/>
+					<xs:enumeration value="FloatList"/>
+					<xs:enumeration value="CharacterList"/>
+					<xs:enumeration value="ScaledDecimalList"/>
+					<xs:enumeration value="BinaryList"/>
+					<xs:enumeration value="BigIntegerList"/>
+					<xs:enumeration value="BigDecimalList"/>
+					<xs:enumeration value="StringList"/>
+					<xs:enumeration value="DateOnlyList"/>
+					<xs:enumeration value="TimeOnlyList"/>
+					<xs:enumeration value="DateTimeList"/>
+					<xs:enumeration value="ISODateList"/>
+					<xs:enumeration value="ISOTimeList"/>
+					<xs:enumeration value="BinaryList"/>
+					<xs:enumeration value="RawMessageList"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+		<xs:attribute name="component">
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="formula"/>
+					<xs:enumeration value="text"/>
+					<xs:enumeration value="checkbox"/>
+					<xs:enumeration value="combobox"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:element name="activities">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="activity"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="activity" type="Activity"/>
+</xs:schema>

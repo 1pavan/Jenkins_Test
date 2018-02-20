@@ -1,0 +1,63 @@
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="unqualified" attributeFormDefault="unqualified">
+	<!-- include constructs -->
+	<xsd:include schemaLocation="externalmsg.xsd"/>
+	<xsd:include schemaLocation="xml-data.xsd"/>
+	<xsd:complexType name="XMLFormat">
+		<xsd:complexContent>
+			<xsd:extension base="ExternalMessageType"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:element name="xmlfields" substitutionGroup="ExternalMessageFields">
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="ExternalMessageFieldsType">
+					<xsd:sequence>
+						<xsd:element ref="xml-options"/>
+						<xsd:element name="entity-references">
+							<xsd:complexType>
+								<xsd:sequence>
+									<xsd:element name="entity-reference" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
+								</xsd:sequence>
+							</xsd:complexType>
+						</xsd:element>
+						<xsd:element name="doc-type-decl" type="xsd:string"/>
+						<xsd:element name="xml-attributes">
+							<xsd:complexType>
+								<xsd:sequence>
+									<xsd:element name="xml-attribute" minOccurs="0" maxOccurs="unbounded">
+										<xsd:complexType>
+											<xsd:attribute name="name" type="xsd:string" use="required"/>
+											<xsd:attribute name="value" type="xsd:string" use="required"/>
+										</xsd:complexType>
+									</xsd:element>
+								</xsd:sequence>
+							</xsd:complexType>
+						</xsd:element>
+						<xsd:element name="schemaLocation" type="xsd:string" minOccurs="0"/>
+						<xsd:element name="noNamespaceSchemaLocation" type="xsd:string" minOccurs="0"/>
+						<xsd:element name="namespaces" minOccurs="0">
+							<xsd:complexType>
+								<xsd:sequence>
+									<xsd:element name="namespace" minOccurs="0" maxOccurs="unbounded">
+										<xsd:complexType>
+											<xsd:attribute name="prefix" type="xsd:string"/>
+											<xsd:attribute name="value" type="xsd:string"/>
+											<xsd:attribute name="root" type="xsd:boolean"/>
+										</xsd:complexType>
+									</xsd:element>
+								</xsd:sequence>
+							</xsd:complexType>
+						</xsd:element>
+						<xsd:element ref="target-namespace" minOccurs="0"/>
+						<xsd:element ref="xpath-namespaces" minOccurs="0"/>
+						<xsd:element ref="platforminfo" minOccurs="0"/>
+						<xsd:element ref="field-attributes" minOccurs="0"/>
+						<xsd:element name="headerfields" type="XMLFieldStruct"/>
+						<xsd:element name="datafields" type="XMLFieldStruct"/>
+						<xsd:element name="trailerfields" type="XMLFieldStruct"/>
+					</xsd:sequence>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+</xsd:schema>

@@ -1,0 +1,105 @@
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="unqualified" attributeFormDefault="unqualified">
+	<!-- include constructs -->
+	<xsd:include schemaLocation="xml-data.xsd"/>
+	<!-- Dependency on xml plugin -->
+	<xsd:include schemaLocation="messageflow.xsd"/>
+	<!-- for extending conductor -->
+	<!-- WebServiceClient -->
+	<xsd:element name="WebServiceClient" type="WebServiceClient" substitutionGroup="ServiceElement"/>
+	<xsd:complexType name="WebServiceClient">
+		<xsd:complexContent>
+			<xsd:extension base="ServiceElementType">
+				<xsd:sequence>
+					<xsd:element name="wsdl-location" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="description" type="xsd:string" minOccurs="0"/>
+					<xsd:element name="WebService">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="portName" type="xsd:string"/>
+								<xsd:element name="targetNamespace" type="xsd:string"/>
+								<xsd:element name="url-pattern" type="xsd:string"/>
+								<xsd:element name="binding-parameter-style" type="xsd:string"/>
+								<xsd:element name="binding-style" type="xsd:string"/>
+								<xsd:element name="binding-use" type="xsd:string"/>
+								<xsd:element name="operation" minOccurs="0" maxOccurs="unbounded">
+									<xsd:complexType>
+										<xsd:sequence>
+											<xsd:element name="description" type="xsd:string" minOccurs="0"/>
+											<xsd:element name="binding-style" type="xsd:string" minOccurs="0"/>
+											<xsd:element name="soapAction" type="xsd:string" minOccurs="0"/>
+											<xsd:element name="request" type="WebServiceParamType"/>
+											<xsd:element name="response" type="WebServiceParamType"/>
+										</xsd:sequence>
+										<xsd:attribute name="name" type="xsd:string"/>
+									</xsd:complexType>
+								</xsd:element>
+							</xsd:sequence>
+							<xsd:attribute name="name" type="xsd:string"/>
+						</xsd:complexType>
+					</xsd:element>
+				</xsd:sequence>
+				<xsd:attribute name="name" type="xsd:string"/>
+				<xsd:attribute name="type" type="xsd:string"/>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="WebServiceParamType">
+		<xsd:sequence>
+			<xsd:element name="name" type="xsd:string"/>
+			<xsd:element name="namespace" type="xsd:string"/>
+			<xsd:element name="soap-body-namespace" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="soap-body-use" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="part" type="PartType" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="PartType">
+		<xsd:sequence>
+			<xsd:element name="field" type="XMLAbstractFieldType"/>
+		</xsd:sequence>
+		<xsd:attribute name="name" type="xsd:string"/>
+	</xsd:complexType>
+	<!-- End WebServiceClient -->
+	<!-- WebService Flow Element -->
+	<xsd:complexType name="WebService">
+		<xsd:complexContent>
+			<xsd:extension base="FlowElementType">
+				<xsd:sequence>
+					<xsd:element name="source-mapping">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="custom-mapping" type="xsd:string" minOccurs="0"/>
+								<xsd:element name="mapping" type="webServiceMapping" minOccurs="0" maxOccurs="unbounded"/>
+							</xsd:sequence>
+						</xsd:complexType>
+					</xsd:element>
+					<xsd:element name="destination-mapping">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="custom-mapping" type="xsd:string" minOccurs="0"/>
+								<xsd:element name="mapping" type="webServiceMapping" minOccurs="0" maxOccurs="unbounded"/>
+							</xsd:sequence>
+						</xsd:complexType>
+					</xsd:element>
+					<xsd:element name="webservice" type="xsd:string"/>
+					<xsd:element name="WebServiceDef" type="xsd:string"/>
+					<xsd:element name="Operation" type="xsd:string"/>
+					<xsd:element name="visual" type="FlowVisualType"/>
+					<xsd:element name="property" minOccurs="0">
+						<xsd:complexType>
+							<xsd:attribute name="name" type="xsd:string" use="required"/>
+							<xsd:attribute name="value" type="xsd:string" use="required"/>
+						</xsd:complexType>
+					</xsd:element>
+				</xsd:sequence>
+				<xsd:attribute name="type" type="xsd:string" use="required" fixed="WebService"/>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="webServiceMapping">
+		<xsd:sequence>
+			<xsd:element name="source-field" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="destination-field" type="xsd:string"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<!-- End WebService Flow Element -->
+</xsd:schema>

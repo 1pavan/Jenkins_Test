@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<formulae> 
+		<formula name="SecSumDouble">
+			<description>Returns the sum of the given field in all elements of the given section. The return type is double.</description>
+			<signature>SecSumDouble(section, fieldName)</signature>
+			<category>Aggregate</category>
+	  		<Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+			<property name="class" value="com.tplus.transform.runtime.formula.AggregateFunctions" />
+			<property name="method" value="secSumDouble" />
+    	</formula>
+    <formula name="SecSumBigDecimal">
+  			<description>Returns the sum of the given field in all elements of the given section. The return type is BigDecimal.</description>
+  			<signature>SecSumBigDecimal(section, fieldName)</signature>
+  			<category>Aggregate</category>
+  	  		<Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+  			<property name="class" value="com.tplus.transform.runtime.formula.AggregateFunctions" />
+  			<property name="method" value="secSumBigDecimal" />
+      	</formula>
+
+		<formula name="SecMaxDouble">
+			<description>Returns the maximum value found for the given field in all elements of the given section. The return type is double.</description>
+			<signature>SecMaxDouble(section, fieldName)</signature>
+			<category>Aggregate</category>
+	  		<Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+			<property name="class" value="com.tplus.transform.runtime.formula.AggregateFunctions" />
+			<property name="method" value="secMaxDouble" />
+    	</formula>
+
+		<formula name="SecMinDouble">
+			<description>Returns the minimum value found for the given field in all elements of the given section. The return type is double.</description>
+			<signature>SecMinDouble(section, fieldName)</signature>
+			<category>Aggregate</category>
+	  		<Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+			<property name="class" value="com.tplus.transform.runtime.formula.AggregateFunctions" />
+			<property name="method" value="secMinDouble" />
+    	</formula>
+
+		<formula name="SecSum">
+			<description>Returns the sum of the given field in all elements of the given section. The return type is integer.</description>
+			<signature>SecSum(section, fieldName)</signature>
+			<category>Aggregate</category>
+	  		<Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+			<property name="class" value="com.tplus.transform.runtime.formula.AggregateFunctions" />
+			<property name="method" value="secSum" />
+    	</formula>
+
+		<formula name="SecMax">
+			<description>Returns the maximum value found for the given field in all elements of the given section. The return type is integer.</description>
+			<signature>SecMax(section, fieldName)</signature>
+			<category>Aggregate</category>
+	  		<Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+			<property name="class" value="com.tplus.transform.runtime.formula.AggregateFunctions" />
+			<property name="method" value="secMax" />
+    	</formula>
+
+		<formula name="SecMin">
+			<description>Returns the minimum value found for the given field in all elements of the given section. The return type is integer.</description>
+			<signature>SecMin(section, fieldName)</signature>
+			<category>Aggregate</category>
+	  		<Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+			<property name="class" value="com.tplus.transform.runtime.formula.AggregateFunctions" />
+			<property name="method" value="secMin" />
+    	</formula>
+
+		<formula name="SecAvg">
+			<description>Returns the average of the given field in all elements of the given section. The return type is always double.</description>
+			<signature>SecAvg(section, fieldName)</signature>
+			<category>Aggregate</category>
+	  		<Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+			<property name="class" value="com.tplus.transform.runtime.formula.AggregateFunctions" />
+			<property name="method" value="secAvg" />
+    	</formula>
+
+		<formula name="SecCount">
+			<description>Returns the number of elements in the given section. If the second argument is present, the number of elements in the nested section represented by 'secNameOpt' is returned.</description>
+			<signature>SecCount(sec, secNameOpt)</signature>
+			<category>Aggregate</category>
+	  		<Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+			<property name="class" value="com.tplus.transform.runtime.formula.AggregateFunctions" />
+			<property name="method" value="secCount" />
+    	</formula>
+
+		<formula name="Length">
+			<description>Returns the number of elements in the given section.</description>
+			<signature>Length(sec)</signature>
+			<category>Aggregate</category>
+	  		<Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+			<property name="class" value="com.tplus.transform.runtime.formula.AggregateFunctions" />
+			<property name="method" value="secCount" />
+    	</formula>
+
+		<formula name="SecExistsInOne">
+			<description>This method returns 'true' if the section count of the given section is exactly one. </description>
+			<signature>SecExistsInOne(sec, secName)</signature>
+			<category>Aggregate</category>
+	  		<Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+			<property name="class" value="com.tplus.transform.runtime.formula.AggregateFunctions" />
+			<property name="method" value="secExistsInOne" />
+    	</formula>
+
+		<formula name="SecExistsInAtMostOne">
+			<description>This method returns 'true' if the section count of the given section is not greater than one (i.e., the section count of the given section is less than or equal to one). </description>
+			<signature>SecExistsInAtMostOne(sec, secName)</signature>
+			<category>Aggregate</category>
+	  		<Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+			<property name="class" value="com.tplus.transform.runtime.formula.AggregateFunctions" />
+			<property name="method" value="secExistsInAtMostOne" />
+    	</formula>
+<!--
+		<formula name="SecExistsInAtLeastOne" alias="SecExists">
+			<description>This method returns 'true' if the section count of the given section is not less than one (i.e., the section count of the given section is greater than or equal to one). Same as SecExists</description>
+			<signature>SecExistsInAtLeastOne(sec, secName)</signature>
+			<category>Aggregate</category>
+	  		<Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+			<property name="class" value="com.tplus.transform.runtime.formula.AggregateFunctions" />
+			<property name="method" value="secExistsInAtLeastOne" />
+    	</formula>
+-->
+		<formula name="SecExists" alias="SecExistsInAtLeastOne">
+			<description>This method returns 'true' if the section count of the given section is not less than one (i.e., the section count of the given section is greater than or equal to one). Same as SecExistsInAtLeastOne</description>
+			<signature>SecExists(sec, secName)</signature>
+			<category>Aggregate</category>
+	  		<Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+			<property name="class" value="com.tplus.transform.runtime.formula.AggregateFunctions" />
+			<property name="method" value="secExistsInAtLeastOne" />
+    	</formula>
+
+      <formula name="SecExistsInAll">
+			<description>Returns 'true' if the section represented by 'secName' occurs in every element of the section represented by 'sec'. If the third argument is present, the check is done for the presence of the section represented by 'secName' in every element of the nested section represented by 'inSecNameOpt'. </description>
+			<signature>SecExistsInAll(sec, secName, inSecNameOpt)</signature>
+			<category>Aggregate</category>
+	  		<Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+			<property name="class" value="com.tplus.transform.runtime.formula.AggregateFunctions" />
+			<property name="method" value="secExistsInAll" />
+    	</formula>
+
+		<formula name="SecElm">
+			<description>Returns the element at the specified index of the given section. If the index exceeds the number of elements in the section, an exception is thrown. To be safe, you can use it in conjunction with SecCount function. To access the fields in the element returned, use the GetXXX functions defined below.</description>
+			<signature>SecElm(section, index)</signature>
+			<category>Aggregate</category>
+	  		<Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+			<property name="class" value="com.tplus.transform.runtime.formula.AggregateFunctions" />
+			<property name="method" value="secElm" />
+    	</formula>
+
+
+		<formula name="FieldCount">
+			<description>Returns the number of occurrences of the given field in all occurrences of the given section. Note that the null values are not accounted for this operation.</description>
+			<signature>FieldCount(sec, fieldName)</signature>
+			<category>Aggregate</category>
+	  		<Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+			<property name="class" value="com.tplus.transform.runtime.formula.AggregateFunctions" />
+			<property name="method" value="fieldCount" />
+    	</formula>
+
+		<formula name="FieldExistsInOne">
+			<description>This method returns 'true' if the field count of the given field is exactly one. </description>
+			<signature>FieldExistsInOne(sec, fieldName)</signature>
+			<category>Aggregate</category>
+	  		<Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+			<property name="class" value="com.tplus.transform.runtime.formula.AggregateFunctions" />
+			<property name="method" value="fieldExistsInOne" />
+    	</formula>
+
+		<formula name="FieldExistsInAtMostOne">
+			<description>This method returns 'true' if the field count of the given field is not greater than one (i.e., the field count of the given field is less than or equal to one). </description>
+			<signature>FieldExistsInAtMostOne(sec, fieldName)</signature>
+			<category>Aggregate</category>
+	  		<Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+			<property name="class" value="com.tplus.transform.runtime.formula.AggregateFunctions" />
+			<property name="method" value="fieldExistsInAtMostOne" />
+    	</formula>
+
+		<formula name="FieldExists" alias="FieldExistsInAtLeastOne">
+			<description>This method returns 'true' if the field count of the given field is not less than one (i.e., the field count of the given field is greater than or equal to one). Same as FieldExistsInAtLeastOne</description>
+			<signature>FieldExists(sec, fieldName)</signature>
+			<category>Aggregate</category>
+	  		<Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+			<property name="class" value="com.tplus.transform.runtime.formula.AggregateFunctions" />
+			<property name="method" value="fieldExistsInAtLeastOne" />
+    	</formula>
+
+      <formula name="FieldExistsInAll">
+			<description>Returns 'true' if the field represented by 'fieldName' occurs in every element of the section represented by 'sec'. If the third argument is present, the check is done for the presence of the field represented by 'fieldName' in every element of the nested section 'inSecNameOpt'. </description>
+			<signature>FieldExistsInAll(sec, fieldName, inSecNameOpt)</signature>
+			<category>Aggregate</category>
+	  		<Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+			<property name="class" value="com.tplus.transform.runtime.formula.AggregateFunctions" />
+			<property name="method" value="fieldExistsInAll" />
+    	</formula>
+<!--
+		<formula name="FieldValueExistsInAtLeastOne" alias="FieldValueExists">
+			<description>This method returns 'true' if the count of the given field with given value is not less than one (greater than or equal to one). Same as FieldValueExists</description>
+			<signature>FieldValueExistsInAtLeastOne(sec, fieldName, fieldValue)</signature>
+			<category>Aggregate</category>
+			<Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+			<property name="class" value="com.tplus.transform.runtime.formula.AggregateFunctions" />
+			<property name="method" value="fieldValueExistsInAtLeastOne" />
+    	</formula>
+    -->
+
+		<formula name="FieldValueExists" alias="FieldValueExistsInAtLeastOne">
+			<description>This method returns 'true' if the count of the given field with given value is not less than one (greater than or equal to one). Same as FieldValueExistsInAtLeastOne</description>
+			<signature>FieldValueExists(sec, fieldName, fieldValue)</signature>
+			<category>Aggregate</category>
+			<Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+			<property name="class" value="com.tplus.transform.runtime.formula.AggregateFunctions" />
+			<property name="method" value="fieldValueExistsInAtLeastOne" />
+    	</formula>
+
+
+      	<formula name="FieldValueExistsInAll">
+			<description>Returns 'true' if the given field with the given value occurs in every element of the section represented by 'sec'.</description>
+			<signature>FieldValueExistsInAll(sec, fieldName, fieldValue)</signature>
+			<category>Aggregate</category>
+	  		<Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+			<property name="class" value="com.tplus.transform.runtime.formula.AggregateFunctions" />
+			<property name="method" value="fieldValueExistsInAll" />
+    	</formula>
+
+
+		<formula name="SecJoin">
+			<description>Joins two sections.</description>
+			<signature>SecJoin(section1, section2)</signature>
+			<category>Aggregate</category>
+	  		<Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+			<property name="class" value="com.tplus.transform.runtime.formula.AggregateFunctions" />
+			<property name="method" value="secJoin" />
+    	</formula>
+
+
+
+</formulae> 

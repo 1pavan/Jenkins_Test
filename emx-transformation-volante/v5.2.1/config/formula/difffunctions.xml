@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<formulae> 
+		<formula name="Diff">
+			<description>Compare the two objects.</description>
+			<signature>Diff(obj1, obj2, optionsOpt)</signature>
+			<category>Diff</category>
+	  		<Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+			<property name="class" value="com.tplus.transform.runtime.diff.MessageDiffer" />
+			<property name="method" value="diff" />
+    	</formula>
+</formulae> 

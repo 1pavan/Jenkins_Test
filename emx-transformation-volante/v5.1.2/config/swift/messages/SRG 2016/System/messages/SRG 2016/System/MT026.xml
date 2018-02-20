@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<SwiftMessageFormat name="MT026">
+	<standard-version><![CDATA[SRG 2016]]></standard-version>
+	<standard-release-qualifier>20160308</standard-release-qualifier>
+	<DescriptiveName><![CDATA[FINCopy Bulk Retrieval Request]]></DescriptiveName>
+	<Category><![CDATA[System]]></Category>
+	<Description>This message is used within the context of high volume FINCopy services (&gt; 300,000 copies/day) disaster recovery. The MT 026 will retrieve a copy of all FIN messages "sent by" and "received by" all logical terminals belonging to the requesting BIC during the specified time frame.
+
+From: User              To: FIN</Description>
+	<SwiftFields>
+		<customizable>true</customizable>
+		<modifiable>true</modifiable>
+		<SwiftMessageType>System</SwiftMessageType>
+		<HeaderAndTrailerType>SWIFT_INPUT_HEADER</HeaderAndTrailerType>
+		<Header>
+		</Header>
+		<Data>
+			<Fields>
+				<SystemField Name="Retrieval-identifier">
+					<description><![CDATA[User's retrieval identifier.]]></description>
+					<datatype>String</datatype>
+					<required>true</required>
+					<SwiftSystemFieldDef Name="retrieval-identifier" Tag="140">
+						<Format><![CDATA[15!n]]></Format>
+						<Specification><![CDATA[(retrieval-identifier)]]></Specification>
+						<Description><![CDATA[User's retrieval identifier..]]></Description>
+					</SwiftSystemFieldDef>
+				</SystemField>
+				<SystemField Name="Encryption-key">
+					<description><![CDATA[User's encryption key]]></description>
+					<datatype>String</datatype>
+					<required>true</required>
+					<SwiftSystemFieldDef Name="encryption-key" Tag="141">
+						<Format><![CDATA[64!h]]></Format>
+						<Specification><![CDATA[(Encryption-key)]]></Specification>
+						<Description><![CDATA[User's encryption key]]></Description>
+					</SwiftSystemFieldDef>
+				</SystemField>
+				<SystemField Name="Start-date-time">
+					<description><![CDATA[Starting date and time (GMT) of time range for retrieval, in YYYYMMDDHHMM format.]]></description>
+					<datatype>String</datatype>
+					<required>true</required>
+					<SwiftSystemFieldDef Name="start-date-time" Tag="142">
+						<Format><![CDATA[12!n]]></Format>
+						<Specification><![CDATA[(start-date-time)]]></Specification>
+						<Additional-Format><![CDATA[YYYYMMDDHHMM]]></Additional-Format>
+						<Description><![CDATA[Starting date and time (GMT) of time range for retrieval, in YYYYMMDDHHMM format.]]></Description>
+						<Validations>
+							<Validation>
+								<formula>IsDate($value,"yyyyMMddHHmm")</formula>
+								<error-code>V05</error-code>
+								<actionmessage>"Invalid start-date-time '" + $value + "'"</actionmessage>
+							</Validation>
+						</Validations>
+					</SwiftSystemFieldDef>
+				</SystemField>
+				<SystemField Name="End-date-time">
+					<description><![CDATA[Ending date and time (GMT) of time range for retrieval, in YYYYMMDDHHMM format.]]></description>
+					<datatype>String</datatype>
+					<required>true</required>
+					<SwiftSystemFieldDef Name="end-date-time" Tag="143">
+						<Format><![CDATA[12!n]]></Format>
+						<Specification><![CDATA[(end-date-time)]]></Specification>
+						<Additional-Format><![CDATA[YYYYMMDDHHMM]]></Additional-Format>
+						<Description><![CDATA[Ending date and time (GMT) of time range for retrieval, in YYYYMMDDHHMM format.]]></Description>
+						<Validations>
+							<Validation>
+								<formula>IsDate($value,"yyyyMMddHHmm")</formula>
+								<error-code>V05</error-code>
+								<actionmessage>"Invalid end-date-time '" + $value + "'"</actionmessage>
+							</Validation>
+						</Validations>
+					</SwiftSystemFieldDef>
+				</SystemField>
+			</Fields>
+		</Data>
+		<Trailer>
+		</Trailer>
+	</SwiftFields>
+	<validationrules name="Default">
+		<hdrvalidationrules>
+			<fieldvalidations>
+			</fieldvalidations>
+		</hdrvalidationrules>
+		<datavalidationrules>
+			<fieldvalidations>
+				<fieldvalidation>
+					<name>E1</name>
+					<formula><![CDATA[def sdt = ParseDate(Start_date_time, "yyyyMMddHHmm");
+def edt = ParseDate(End_date_time, "yyyyMMddHHmm");
+def stm = TimePart(sdt);
+def etm = TimePart(edt);
+def smin = (Hour(stm) * 60) + Minute(sdt);
+def emin = (Hour(etm) * 60) + Minute(edt);
+def diff = (emin - smin);
+//diff must be 59min since the end time is calculated as 59 sec. so if there is 60min diff
+//it will be 60min 59 sec which is over one hr. So if diff is 59min diff will be 59min 59sec
+if(DaysBetween(edt, sdt) != 0 || diff > 59)
+    return false;
+
+return true;
+]]></formula>
+					<severity>error</severity>
+					<cascade>true</cascade>
+					<error-code>V41</error-code>
+					<actionmessage><![CDATA["The retrieval time range (that is, the difference between <start- and <end-date-time>) must not exceed 1 hour."]]></actionmessage>
+				</fieldvalidation>
+			</fieldvalidations>
+		</datavalidationrules>
+		<tlrvalidationrules>
+			<fieldvalidations>
+			</fieldvalidations>
+		</tlrvalidationrules>
+	</validationrules>
+</SwiftMessageFormat>
+

@@ -1,0 +1,449 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<SwiftMessageFormat name="MT950">
+	<standard-version><![CDATA[SRG 2014]]></standard-version>
+	<standard-release-qualifier>20140520</standard-release-qualifier>
+	<DescriptiveName><![CDATA[Statement Message]]></DescriptiveName>
+	<Category><![CDATA[Cash Management & Customer Status]]></Category>
+	<Description><![CDATA[This message type is sent by an account servicing institution to an account owner. 
+
+It is used to transmit detailed information about all entries, whether or not caused by a S.W.I.F.T. message, booked to the account.
+
+NOTE:
+Please do not disable the validation 'DC-FIX'. It provides fix for the parsing problem in field 61.]]></Description>
+	<SwiftFields>
+		<customizable>true</customizable>
+		<modifiable>true</modifiable>
+		<SwiftMessageType>User</SwiftMessageType>
+		<max-length>2000</max-length>
+		<HeaderAndTrailerType>SWIFT_OUTPUT_HEADER</HeaderAndTrailerType>
+		<Header>
+		</Header>
+		<Data>
+			<Fields>
+				<SwiftField Name="20">
+					<SwiftFieldDef Name="20">
+						<Generic>false</Generic>
+						<Description><![CDATA[Reference]]></Description>
+						<Option Name="">
+							<Format><![CDATA[16x]]></Format>
+							<Specification><![CDATA[(Reference)]]></Specification>
+							<Description><![CDATA[Transaction Reference Number (TRN)]]></Description>
+						</Option>
+					</SwiftFieldDef>
+					<Repeating>false</Repeating>
+					<Presence>M</Presence>
+					<Options> </Options>
+					<Validations>
+						<SubField Name="Reference">
+							<Validation>
+								<Options> </Options>
+								<ErrorCode>T26</ErrorCode>
+								<Comment><![CDATA[This field must not start or end with a slash '/' and must not contain two consecutive  slashes '//' (Error code(s): T26).]]></Comment>
+								<ValidationPattern Type="T26">
+								</ValidationPattern>
+							</Validation>
+						</SubField>
+					</Validations>
+				</SwiftField>
+				<SwiftField Name="25">
+					<SwiftFieldDef Name="25">
+						<Generic>false</Generic>
+						<Description><![CDATA[Status]]></Description>
+						<Option Name="">
+							<Format><![CDATA[35x]]></Format>
+							<Specification><![CDATA[(Account)]]></Specification>
+							<Description><![CDATA[Account Identification]]></Description>
+						</Option>
+					</SwiftFieldDef>
+					<Repeating>false</Repeating>
+					<Presence>M</Presence>
+					<Options> </Options>
+				</SwiftField>
+				<SwiftField Name="28C">
+					<SwiftFieldDef Name="28">
+						<Generic>false</Generic>
+						<Option Name="C">
+							<Format><![CDATA[5n[/5n]]]></Format>
+							<Specification><![CDATA[(Statement Number) (Sequence Number)]]></Specification>
+							<Description><![CDATA[Statement Number/Sequence Number]]></Description>
+						</Option>
+					</SwiftFieldDef>
+					<Repeating>false</Repeating>
+					<Presence>M</Presence>
+					<Options>C</Options>
+				</SwiftField>
+				<SwiftField Name="60a">
+					<SwiftFieldDef Name="60">
+						<Generic>false</Generic>
+						<Option Name="F">
+							<Format><![CDATA[1!a6!n3!a15d]]></Format>
+							<Specification><![CDATA[ (D/C Mark) (Date) (Currency) (Amount)]]></Specification>
+							<Description><![CDATA[Opening Balance]]></Description>
+						</Option>
+						<Option Name="M">
+							<Format><![CDATA[1!a6!n3!a15d]]></Format>
+							<Specification><![CDATA[(D/C Mark) (Date) (Currency) (Amount)]]></Specification>
+							<Description><![CDATA[Opening Balance]]></Description>
+						</Option>
+					</SwiftFieldDef>
+					<Repeating>false</Repeating>
+					<Presence>M</Presence>
+					<Options>M, F</Options>
+					<Validations>
+						<SubField Name="Date">
+							<Validation>
+								<Options>F, M</Options>
+								<ErrorCode>T50</ErrorCode>
+								<Comment><![CDATA[Date must be a valid date expressed as YYMMDD (Error code(s): T50).]]></Comment>
+								<ValidationPattern Type="DATE">
+									<Format>yyMMdd</Format>
+								</ValidationPattern>
+							</Validation>
+						</SubField>
+						<SubField Name="D/C_Mark">
+							<Validation>
+								<Options>F, M</Options>
+								<ErrorCode>T51</ErrorCode>
+								<Comment><![CDATA[In option F, or M, D/C Mark must contain one of the following codes (Error code(s): T51):]]></Comment>
+								<ValidationPattern Type="CODE">
+									<Codes>
+										<Code Name="C">
+										        <DetailedName>Credit</DetailedName>  
+											<Description>The (intermediate) opening balance is a credit balance.</Description>
+										</Code>
+										<Code Name="D">
+										        <DetailedName>Debit</DetailedName>
+											<Description>The (intermediate) opening balance is a debit balance.</Description>
+										</Code>
+									</Codes>
+								</ValidationPattern>
+							</Validation>
+						</SubField>
+						<SubField Name="Currency">
+							<Validation>
+								<Options>F, M</Options>
+								<ErrorCode>T52</ErrorCode>
+								<Comment><![CDATA[Currency must be a valid ISO 4217 currency code (Error code(s): T52).]]></Comment>
+								<ValidationPattern Type="Currency Code">
+								</ValidationPattern>
+							</Validation>
+						</SubField>
+						<SubField Name="Amount">
+							<Validation>
+								<Options>F, M</Options>
+								<ErrorCode>C03</ErrorCode>
+								<Comment><![CDATA[The number of digits following the comma must not exceed the maximum number allowed for the specified currency (Error code(s): C03,T40,T43).]]></Comment>
+								<ValidationPattern Type="Decimal">
+									<currency-field>Currency</currency-field>
+								</ValidationPattern>
+							</Validation>
+						</SubField>
+					</Validations>
+				</SwiftField>
+				<SwiftField Name="61">
+					<SwiftFieldDef Name="61">
+						<Generic>false</Generic>
+						<Option Name="">
+							<Format><![CDATA[6!n[4!n]2a[1!a]15d(1!a3!c)16x[//16x][CRLF34x]]]></Format>
+							<Specification><![CDATA[(Value Date)(Entry Date)(Debit/Credit Mark)(Funds Code)(Amount)(Transaction Type Identification Code)(Reference for the Account Owner)(Account Servicing Institution's Reference)(Supplementary Details)]]></Specification>
+							<Description><![CDATA[Statement Line]]></Description>
+						</Option>
+					</SwiftFieldDef>
+					<Repeating>true</Repeating>
+					<Presence>O</Presence>
+					<Options> </Options>
+					<Validations>
+						<SubField Name="Debit/Credit_Mark">
+							<Validation>
+								<Options> </Options>
+								<ErrorCode>T51</ErrorCode>
+								<Comment><![CDATA[Subfield 3, Debit/Credit Mark, must contain one of the following codes (Error code(s): T51):]]></Comment>
+								<ValidationPattern Type="CODE">
+									<Codes>
+										<Code Name="D">
+											<Description>Debit</Description>
+										</Code>
+										<Code Name="C">
+											<Description>Credit</Description>
+										</Code>
+										<Code Name="RC">
+											<Description>Reversal of credit (debit entry)</Description>
+										</Code>
+										<Code Name="RD">
+											<Description>Reversal of debit (credit entry)</Description>
+										</Code>
+									</Codes>
+								</ValidationPattern>
+							</Validation>
+						</SubField>
+						<SubField Name="Value_Date">
+							<Validation>
+								<Options> </Options>
+								<ErrorCode>T50</ErrorCode>
+								<Comment><![CDATA[Subfield 1, Value Date, must be a valid date expressed as YYMMDD (Error code(s): T50).]]></Comment>
+								<ValidationPattern Type="DATE">
+									<Format>yyMMdd</Format>
+								</ValidationPattern>
+							</Validation>
+						</SubField>
+					</Validations>
+				</SwiftField>
+				<SwiftField Name="62a">
+					<SwiftFieldDef Name="62">
+						<Generic>false</Generic>
+						<Option Name="F">
+							<Format><![CDATA[1!a6!n3!a15d]]></Format>
+							<Specification><![CDATA[(D/C Mark) (Date) (Currency) (Amount)]]></Specification>
+							<Description><![CDATA[Closing Balance (Booked Funds)]]></Description>
+						</Option>
+						<Option Name="M">
+							<Format><![CDATA[1!a6!n3!a15d]]></Format>
+							<Specification><![CDATA[(D/C Mark) (Date) (Currency) (Amount)]]></Specification>
+							<Description><![CDATA[Closing Balance (Booked Funds)]]></Description>
+						</Option>
+					</SwiftFieldDef>
+					<Repeating>false</Repeating>
+					<Presence>M</Presence>
+					<Options>M, F</Options>
+					<Validations>
+						<SubField Name="Date">
+							<Validation>
+								<Options>F, M</Options>
+								<ErrorCode>T50</ErrorCode>
+								<Comment><![CDATA[Date must be a valid date expressed as YYMMDD (Error code(s): T50).]]></Comment>
+								<ValidationPattern Type="DATE">
+									<Format>yyMMdd</Format>
+								</ValidationPattern>
+							</Validation>
+						</SubField>
+						<SubField Name="Currency">
+							<Validation>
+								<Options>F, M</Options>
+								<ErrorCode>T52</ErrorCode>
+								<Comment><![CDATA[Currency must be a valid ISO 4217 currency code (Error code(s): T52).]]></Comment>
+								<ValidationPattern Type="Currency Code">
+								</ValidationPattern>
+							</Validation>
+						</SubField>
+						<SubField Name="D/C_Mark">
+							<Validation>
+								<Options>F, M</Options>
+								<ErrorCode>T51</ErrorCode>
+								<Comment><![CDATA[In option F, or M, D/C Mark must contain one of the following codes (Error code(s): T51):]]></Comment>
+								<ValidationPattern Type="CODE">
+									<Codes>
+										<Code Name="C">
+										        <DetailedName>Credit</DetailedName> 
+											<Description>The (intermediate) closing balance is a credit balance.</Description>
+										</Code>
+										<Code Name="D">
+										        <DetailedName>Debit</DetailedName>
+											<Description>The (intermediate) closing balance is a debit balance.</Description>
+										</Code>
+									</Codes>
+								</ValidationPattern>
+							</Validation>
+						</SubField>
+						<SubField Name="Amount">
+							<Validation>
+								<Options>F, M</Options>
+								<ErrorCode>C03</ErrorCode>
+								<Comment><![CDATA[The number of digits following the comma must not exceed the maximum number allowed for the specified currency (Error code(s): C03,T40,T43).]]></Comment>
+								<ValidationPattern Type="Decimal">
+									<currency-field>Currency</currency-field>
+								</ValidationPattern>
+							</Validation>
+						</SubField>
+					</Validations>
+				</SwiftField>
+				<SwiftField Name="64">
+					<SwiftFieldDef Name="64">
+						<Generic>false</Generic>
+						<Option Name="">
+							<Format><![CDATA[1!a6!n3!a15d]]></Format>
+							<Specification><![CDATA[(D/C Mark) (Date) (Currency) (Amount)]]></Specification>
+							<Description><![CDATA[Closing Available Balance (Available Funds)]]></Description>
+						</Option>
+					</SwiftFieldDef>
+					<Repeating>false</Repeating>
+					<Presence>O</Presence>
+					<Options> </Options>
+					<Validations>
+						<SubField Name="Date">
+							<Validation>
+								<Options> </Options>
+								<ErrorCode>T50</ErrorCode>
+								<Comment><![CDATA[Date must be a valid date expressed as YYMMDD (Error code(s): T50).]]></Comment>
+								<ValidationPattern Type="DATE">
+									<Format>yyMMdd</Format>
+								</ValidationPattern>
+							</Validation>
+						</SubField>
+						<SubField Name="Currency">
+							<Validation>
+								<Options> </Options>
+								<ErrorCode>T52</ErrorCode>
+								<Comment><![CDATA[Currency must be a valid ISO 4217 currency code (Error code(s): T52).]]></Comment>
+								<ValidationPattern Type="Currency Code">
+								</ValidationPattern>
+							</Validation>
+						</SubField>
+						<SubField Name="D/C_Mark">
+							<Validation>
+								<Options> </Options>
+								<ErrorCode>T51</ErrorCode>
+								<Comment><![CDATA[D/C Mark must contain one of the following codes (Error code(s): T51):]]></Comment>
+								<ValidationPattern Type="CODE">
+									<Codes>
+										<Code Name="C">
+										        <DetailedName>Credit</DetailedName>
+											<Description>The closing available balance is a credit balance.</Description>
+										</Code>
+										<Code Name="D">
+										        <DetailedName>Debit</DetailedName> 
+											<Description>The closing available balance is a debit balance.</Description>
+										</Code>
+									</Codes>
+								</ValidationPattern>
+							</Validation>
+						</SubField>
+						<SubField Name="Amount">
+							<Validation>
+								<Options> </Options>
+								<ErrorCode>C03</ErrorCode>
+								<Comment><![CDATA[The number of digits following the comma must not exceed the maximum number allowed for the specified currency(Error code(s): C03,T40,T43).]]></Comment>
+								<ValidationPattern Type="Decimal">
+									<currency-field>Currency</currency-field>
+								</ValidationPattern>
+							</Validation>
+						</SubField>
+					</Validations>
+				</SwiftField>
+			</Fields>
+		</Data>
+		<Trailer>
+		</Trailer>
+	</SwiftFields>
+	<validationrules name="Default">
+		<hdrvalidationrules>
+			<fieldvalidations>
+				<fieldvalidation>
+					<name>U09</name>
+					<formula><![CDATA[if($this.Header.GetFieldIndex("User_Header") != -1) {
+    def userHeader = $this.Header.GetSection("User_Header");
+    if(userHeader.$size > 0 && userHeader[0].IsNotNull("Validation_Flag")) {
+        return false;
+    }
+}
+return true;
+]]></formula>
+					<severity>error</severity>
+					<cascade>true</cascade>
+					<error-code>U09</error-code>
+					<actionmessage><![CDATA["User has used tag 119 in a message that is not a candidate for special processing"]]></actionmessage>
+				</fieldvalidation>
+			</fieldvalidations>
+		</hdrvalidationrules>
+		<datavalidationrules>
+			<fieldvalidations>
+				<fieldvalidation>
+					<name>C1-1</name>
+					<fieldname>62a.Currency</fieldname>
+					<comment><![CDATA["The first two characters of the three character currency code in fields 60a, 62a and 64 must be the same."]]></comment>
+					<formula><![CDATA[StartsWith($value, Left(F60a[0].Currency, 2))]]></formula>
+					<severity>error</severity>
+					<cascade>true</cascade>
+					<error-code>C27</error-code>
+					<actionmessage><![CDATA["The first two characters of the three character currency code in fields 60a, 62a and 64 must be the same."]]></actionmessage>
+				</fieldvalidation>
+				<fieldvalidation>
+					<name>C1-2</name>
+					<fieldname>64.Currency</fieldname>
+					<comment><![CDATA["The first two characters of the three character currency code in fields 60a, 62a and 64 must be the same."]]></comment>
+					<formula><![CDATA[StartsWith($value, Left(F60a[0].Currency, 2))]]></formula>
+					<severity>error</severity>
+					<cascade>true</cascade>
+					<error-code>C27</error-code>
+					<actionmessage><![CDATA["The first two characters of the three character currency code in fields 60a, 62a and 64 must be the same."]]></actionmessage>
+				</fieldvalidation>
+				<fieldvalidation>
+					<name>F61-A</name>
+					<fieldname>61.Transaction_Type_Identification_Code</fieldname>
+					<comment><![CDATA["When the first character of subfield 6, Transaction Type Identification Code, is an 'S', the remaining characters must be in the range 100-999."]]></comment>
+					<formula><![CDATA[$code = F61.Transaction_Type_Identification_Code;
+If(StartsWith($code, "S"), 
+   If(IsInt(Right($code, 3)), 
+      Between(ToInt(Right($code, 3)), 100, 999), 
+      false), 
+   true);
+]]></formula>
+					<severity>error</severity>
+					<cascade>true</cascade>
+					<error-code>T18</error-code>
+					<actionmessage><![CDATA["When the first character of subfield 6, Transaction Type Identification Code, is an 'S', the remaining characters must be in the range 100-999."]]></actionmessage>
+				</fieldvalidation>
+				<fieldvalidation>
+					<name>F61-B</name>
+					<fieldname>61.Transaction_Type_Identification_Code</fieldname>
+					<comment><![CDATA["Subfield 6, Transaction Type Identification Code, should start with S, N or F."]]></comment>
+					<formula><![CDATA[In(CharAt(F61.Transaction_Type_Identification_Code, 0), 'S', 
+   'N', 'F')]]></formula>
+					<severity>error</severity>
+					<cascade>true</cascade>
+					<error-code>T53</error-code>
+					<actionmessage><![CDATA["Subfield 6, Transaction Type Identification Code, should start with S, N or F."]]></actionmessage>
+				</fieldvalidation>
+				<fieldvalidation>
+					<name>F61-C</name>
+					<fieldname>61.Transaction_Type_Identification_Code</fieldname>
+					<comment><![CDATA["When formats N3!c or F3!c are used, the last three characters, ie, 3!c, may contain one of the following codes: BOE, BRF, CHG, CHK, CLR, CMI, CMN, CMS, CMT, CMZ, COL, COM, DCR, DDT, DIV, ECK, EQA, FEX, INT, LBX, LDP, MSC, RTI, SEC, STO, TCK, TRF, VDA."]]></comment>
+					<formula><![CDATA[If(StartsWith(F61.Transaction_Type_Identification_Code, "N") || 
+     StartsWith(F61.Transaction_Type_Identification_Code, 
+                "F"), 
+   In(Right(F61.Transaction_Type_Identification_Code, 3), 
+      "BOE", "BRF", "CHG", "CHK", "CLR", "CMI", "CMN", "CMS", 
+      "CMT", "CMZ", "COL", "COM", "DCR", "DDT", "DIV", "ECK", 
+      "EQA", "FEX", "INT", "LBX", "LDP", "MSC", "RTI", "SEC", 
+      "STO", "TCK", "TRF", "VDA"), 
+   true)]]></formula>
+					<enabled>false</enabled>
+					<severity>error</severity>
+					<cascade>true</cascade>
+					<error-code>T53</error-code>
+					<actionmessage><![CDATA["When formats N3!c or F3!c are used, the last three characters, ie, 3!c, may contain one of the following codes: BOE, BRF, CHG, CHK, CLR, CMI, CMN, CMS, CMT, CMZ, COL, COM, DCR, DDT, DIV, ECK, EQA, FEX, INT, LBX, LDP, MSC, RTI, SEC, STO, TCK, TRF, VDA."]]></actionmessage>
+				</fieldvalidation>
+				<fieldvalidation>
+					<name>F61-D</name>
+					<fieldname>61.Entry_Date</fieldname>
+					<comment><![CDATA[The SWIFT System validates subfield 2, Entry Date (Date in reduced ISO form), using current System Year (Error code(s): T50).]]></comment>
+					<formula><![CDATA[IsDate(FormatDate(Today(), "yy") + F61.Entry_Date, "yyMMdd")]]></formula>
+					<severity>error</severity>
+					<cascade>true</cascade>
+					<error-code>T50</error-code>
+					<actionmessage><![CDATA[$value + " is not valid."]]></actionmessage>
+				</fieldvalidation>
+				<fieldvalidation>
+					<name>DC-FIX</name>
+					<fieldname>61</fieldname>
+					<comment><![CDATA[db2admin:
+This validation should not be disabled. This provides fix for the parsing problem in field 61.]]></comment>
+					<formula><![CDATA[$dc = F61.Debit_Credit_Mark;
+$shouldFix = Length($dc) == 2 && !In($dc, "RD", "RC") && 
+               IsNull(F61.Funds_Code);
+If($shouldFix, Set(F61.Funds_Code, Right($dc, 1)));
+If($shouldFix, Set(F61.Debit_Credit_Mark, Left($dc, 1)));
+true;
+]]></formula>
+					<severity>error</severity>
+					<cascade>true</cascade>
+					<error-code>DC-FIX</error-code>
+				</fieldvalidation>
+			</fieldvalidations>
+		</datavalidationrules>
+		<tlrvalidationrules>
+			<fieldvalidations>
+			</fieldvalidations>
+		</tlrvalidationrules>
+	</validationrules>
+</SwiftMessageFormat>
+

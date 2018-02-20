@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<formulae>
+    <formula name="getCache">
+        <description>Gets the cache by name. Cache should have been configured as recommended by the cache provider</description>
+        <signature>getCache(name)</signature>
+        <category>Cache</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.cache.jsrcache.CacheFunctions"/>
+        <property name="method" value="getCache"/>
+        <property name="args" value="1"/>
+        <property name="arg1" value="java.lang.String"/>
+        <property name="returns" value="com.tplus.transform.runtime.cache.Map"/>
+        <property name="lib" value="cache-api-1.0.0"/>
+    </formula>
+
+    <formula name="getOrCreateCache">
+        <description>Gets the cache by name or creates one if one is not defined.</description>
+        <signature>getOrCreateCache(name)</signature>
+        <category>Cache</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.cache.jsrcache.CacheFunctions"/>
+        <property name="method" value="getOrCreateCache"/>
+        <property name="args" value="1"/>
+        <property name="arg1" value="java.lang.String"/>
+        <property name="returns" value="com.tplus.transform.runtime.cache.Map"/>
+        <property name="lib" value="cache-api-1.0.0"/>
+    </formula>
+</formulae>

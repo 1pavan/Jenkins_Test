@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<SwiftMessageFormat name="MT14">
+	<standard-version><![CDATA[SRG 2014]]></standard-version>
+	<standard-release-qualifier>20140520</standard-release-qualifier>
+	<DescriptiveName><![CDATA[System Request to Remove LT]]></DescriptiveName>
+	<Category><![CDATA[Service]]></Category>
+	<Description><![CDATA[This message is sent by the system to notify the user that it has aborted both the GPA session belonging to the LT identified in the Basic Header, and the open FIN session controlled by the aborted GPA. The FIN interface is requested to do likewise and is not expected to confirm termination of the GPA and the associated applications.
+
+From: GPA To: User]]></Description>
+	<SwiftFields>
+		<customizable>true</customizable>
+		<modifiable>true</modifiable>
+		<SwiftMessageType>Service</SwiftMessageType>
+		<HeaderAndTrailerType>SWIFT_INPUT_HEADER</HeaderAndTrailerType>
+		<Header>
+		</Header>
+		<Data>
+			<Fields>
+				<SystemField Name="system-abort-code">
+					<description><![CDATA[Reason for system abort. See SWIFTNet FIN Error Codes module for the full set of abort codes.]]></description>
+					<datatype>String</datatype>
+					<required>true</required>
+					<SwiftSystemFieldDef Name="system-abort-code" Tag="443">
+						<Format><![CDATA[3!c]]></Format>
+						<Specification><![CDATA[(system-abort-code)]]></Specification>
+						<Description><![CDATA[Reason for system abort. See FIN Error Codes for the full set of abort codes]]></Description>
+					</SwiftSystemFieldDef>
+				</SystemField>
+			</Fields>
+		</Data>
+		<Trailer>
+		</Trailer>
+	</SwiftFields>
+	<validationrules name="Default">
+		<hdrvalidationrules>
+			<fieldvalidations>
+			</fieldvalidations>
+		</hdrvalidationrules>
+		<datavalidationrules>
+			<fieldvalidations>
+			</fieldvalidations>
+		</datavalidationrules>
+		<tlrvalidationrules>
+			<fieldvalidations>
+			</fieldvalidations>
+		</tlrvalidationrules>
+	</validationrules>
+</SwiftMessageFormat>
+

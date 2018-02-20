@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<formulae>
+		<formula name="Between">
+			<description>Returns 'true' if 'value' is between 'fromValue' and 'toValue' inclusive. Note that 'fromValue' and 'toValue' can be given in any order (the 'fromValue' can be greater than the 'toValue'). This function supports int, float, double, long and Date data types.</description>
+			<signature>Between(value, fromValue, toValue)</signature>
+			<category>General</category>
+			<Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+			<property name="class" value="com.tplus.transform.runtime.formula.ValidationFunctions" />
+			<property name="method" value="between" />
+		</formula>
+
+		<formula name="In">
+			<description>Returns 'true' if the given value is one of the allowed values. This function supports String, char, int, float, double, long and Date data types.</description>
+			<signature>In(value, allowedValue1, allowedValue2, ...) </signature>
+			<category>General</category>
+			<Class>com.tplus.transform.design.formula.functions.InFunction</Class>
+		</formula>
+
+		<formula name="IsDouble">
+			<description>Returns 'true' if the given string value can be converted to a double value.</description>
+			<signature>IsDouble(str)</signature>
+			<category>General</category>
+	  		<Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+			<property name="class" value="com.tplus.transform.runtime.formula.FormatFunctions" />
+			<property name="method" value="isDouble" />
+    	</formula>
+
+
+		<formula name="IsFloat">
+			<description>Returns 'true' if the given string value can be converted to a float value.</description>
+			<signature>IsFloat(str)</signature>
+			<category>General</category>
+	  		<Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+			<property name="class" value="com.tplus.transform.runtime.formula.FormatFunctions" />
+			<property name="method" value="isFloat" />
+    	</formula>
+
+		<formula name="IsInt">
+			<description>Returns 'true' if the given string value can be converted to an integer.</description>
+			<signature>IsInt(str)</signature>
+			<category>General</category>
+	  		<Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+			<property name="class" value="com.tplus.transform.runtime.formula.FormatFunctions" />
+			<property name="method" value="isInt" />
+    	</formula>
+		<formula name="IsLong">
+			<description>Returns 'true' if the given string value can be converted to an long.</description>
+			<signature>IsLong(str)</signature>
+			<category>General</category>
+	  		<Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+			<property name="class" value="com.tplus.transform.runtime.formula.FormatFunctions" />
+			<property name="method" value="isLong" />
+    	</formula>
+        <formula name="IsBigDecimal">
+            <description>Returns 'true' if the given string value can be converted to an BigDecimal.</description>
+            <signature>IsBigDecimal(str)</signature>
+            <category>General</category>
+              <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+            <property name="class" value="com.tplus.transform.runtime.formula.FormatFunctions" />
+            <property name="method" value="isBigDecimal" />
+        </formula>
+        <formula name="IsBigInteger">
+            <description>Returns 'true' if the given string value can be converted to an BigInteger.</description>
+            <signature>IsBigInteger(str)</signature>
+            <category>General</category>
+              <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+            <property name="class" value="com.tplus.transform.runtime.formula.FormatFunctions" />
+            <property name="method" value="isBigInteger" />
+        </formula>
+
+		<formula name="IsDate">
+			<description>Returns 'true' if the given string value can be converted to date with specified format.</description>
+			<signature>IsDate(str, format)</signature>
+			<category>General</category>
+	  		<Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+			<property name="class" value="com.tplus.transform.runtime.formula.FormatFunctions" />
+			<property name="method" value="isDate" />
+			<property name="args" value="2" />
+			<property name="arg1" value="java.lang.String" />
+			<property name="arg2" value="java.lang.String" />
+			<property name="returns" value="boolean" />
+    	</formula>
+
+		<formula name="Val">
+			<description>Returns value of the field, ignoring null checks. If the field is of primitive type and has a null value zero is returned. Warning: If the field has a null value, for strings and Date it returns null in Java and an empty date/string in case of CPP. Avoid using it these cases, if you want it to be portable.</description>
+			<signature>Val(field)</signature>
+			<category>General</category>
+	  		<Class>com.tplus.transform.design.formula.functions.ValFunction</Class>
+    	</formula>
+    <formula name="Var">
+        <description>Returns value of the field as a variant.</description>
+        <signature>Var(field)</signature>
+        <category>General</category>
+          <Class>com.tplus.transform.design.formula.functions.VariantFunction</Class>
+    </formula>
+		<formula name="QName">
+			<description>Returns the qualified name of the field</description>
+			<signature>QName(field)</signature>
+			<category>General</category>
+	  		<Class>com.tplus.transform.design.formula.functions.QNameFunction</Class>
+    	</formula>
+
+		<formula name="IsNull">
+			<description>Returns 'true' if the given field has null value.</description>
+			<signature>IsNull(field)</signature>
+			<category>General</category>
+	  		<Class>com.tplus.transform.design.formula.functions.IsNullFunction</Class>
+    	</formula>
+
+		<formula name="IsNotNull">
+			<description>Returns 'true' if the given field has a non-null value.</description>
+			<signature>IsNotNull(field)</signature>
+			<category>General</category>
+	  		<Class>com.tplus.transform.design.formula.functions.IsNotNullFunction</Class>
+    	</formula>
+		<formula name="Exists">
+			<description>Returns 'true' if the given field exists.</description>
+			<signature>Exists(field)</signature>
+			<category>General</category>
+	  		<Class>com.tplus.transform.design.formula.functions.ExistsFunction</Class>
+    	</formula>
+
+		<formula name="Set">
+			<description>Sets the value of a field. You can omit the field name and use Set(Value) syntax in places where you are using the formula to set a value to the current field (for instance, in case of mapping).</description>
+	  		<Class>com.tplus.transform.design.formula.functions.SetOperatorFunction</Class>
+			<signature>Set(fieldOpt, value)</signature>
+			<category>General</category>
+    	</formula>
+
+		<formula name="PlusEqual">
+			<description>Increments the current value of a field by the specified value. You can omit the field name and use PlusEqual(value) syntax in places where you are using the formula to increment the current field value (for instance, in case of mapping).</description>
+	  		<Class>com.tplus.transform.design.formula.functions.SetOperatorFunction</Class>
+			<signature>PlusEqual(fieldOpt, value)</signature>
+			<category>General</category>
+			<property name="operator" value="+=" />
+    	</formula>
+
+		<formula name="MinusEqual">
+			<description>Decrements the current value of a field by the specified value. You can omit the field name and use MinusEqual(value) syntax in places where you are using the formula to decrement the current field value (for instance, in case of mapping).</description>
+	  		<Class>com.tplus.transform.design.formula.functions.SetOperatorFunction</Class>
+			<signature>MinusEqual(fieldOpt, value)</signature>
+			<category>General</category>
+			<property name="operator" value="-=" />
+    	</formula>
+		<formula name="MultiplyEqual">
+			<description>Sets the value of field with the resultant value of multiplying the current field value by the specified value. You can omit the field name and use MultiplyEqual(value) syntax in places where you are using the formula to set a value to the current field (for instance, in case of mapping).</description>
+	  		<Class>com.tplus.transform.design.formula.functions.SetOperatorFunction</Class>
+			<signature>MultiplyEqual(fieldOpt, value)</signature>
+			<category>General</category>
+			<property name="operator" value="*=" />
+    	</formula>
+
+		<formula name="DivideEqual">
+			<description>Sets the value of field with the resultant value of dividing the current field value by the specified value. You can omit the field name and use DivideEqual(value) syntax in places where you are using the formula to set a value to the current field (for instance, in case of mapping).</description>
+	  		<Class>com.tplus.transform.design.formula.functions.SetOperatorFunction</Class>
+			<signature>DivideEqual(fieldOpt, value)</signature>
+			<category>General</category>
+			<property name="operator" value="/=" />
+    	</formula>
+
+		<formula name="ModulaEqual">
+			<description>Sets the value of field with the remainder returned when dividing the current field value by the specified value. You can omit the field name and use ModulaEqual(value) syntax in places where you are using the formula to set a value to the current field (for instance, in case of mapping).</description>
+	  		<Class>com.tplus.transform.design.formula.functions.SetOperatorFunction</Class>
+			<signature>ModulaEqual(fieldOpt, value)</signature>
+			<category>General</category>
+			<property name="operator" value="%=" />
+    	</formula>
+
+		<formula name="SetNull">
+			<description>Sets the value of a field to 'null'. You can omit the field and use SetNull() syntax in places where you are using the formula to set 'null' to the current field (for instance, in case of mapping).</description>
+			<signature>SetNull(fieldOpt)</signature>
+			<category>General</category>
+	  		<Class>com.tplus.transform.design.formula.functions.SetNullFunction</Class>
+    	</formula>
+
+		<formula name="UnaryPlus">
+			<description>Unary plus operator</description>
+			<signature>UnaryPlus(value)</signature>
+			<category>General</category>
+	  		<Class>com.tplus.transform.design.formula.functions.UnaryOperatorFunction</Class>
+			<property name="operator" value="+" />
+			<property name="typecheck" value="numeric" />
+    	</formula>
+		<formula name="UnaryMinus">
+			<description>Unary minus operator</description>
+			<signature>UnaryMinus(value)</signature>
+			<category>General</category>
+	  		<Class>com.tplus.transform.design.formula.functions.UnaryOperatorFunction</Class>
+			<property name="operator" value="-" />
+			<property name="typecheck" value="numeric" />
+    	</formula>
+
+		<!-- for big decimal and big integers -->
+		<formula name="UnaryMinus">
+			<description>Unary minus operator</description>
+			<signature>UnaryMinus(value)</signature>
+			<category>General</category>
+	  		<Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+			<property name="class" value="com.tplus.transform.runtime.formula.MathFunctions" />
+			<property name="method" value="negate" />
+    	</formula>
+
+		<formula name="Not">
+			<description>Negation operator</description>
+			<signature>Not(value)</signature>
+			<category>General</category>
+	  		<Class>com.tplus.transform.design.formula.functions.UnaryOperatorFunction</Class>
+			<property name="operator" value="!" />
+			<property name="typecheck" value="boolean" />
+    	</formula>
+
+		<formula name="Clone">
+			<description>Clones the specified section or object.</description>
+			<signature>Clone(section)</signature>
+			<category>General</category>
+	  		<Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+			<property name="class" value="com.tplus.transform.runtime.formula.UtilFunctions" />
+			<property name="method" value="makeCopy" />
+			<property name="designclass" value="com.tplus.transform.design.formula.functions.SectionFunctions" />
+			<property name="designmethod" value="cloneValue" />
+    	</formula>
+        <formula name="Copy">
+            <description>Copies the specified section or object to another. Set lenient as true if the destination object structure is different from the source(type, layout differences)</description>
+            <signature>Copy(srcObj, destObj, lenientOpt)</signature>
+            <category>General</category>
+              <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+            <property name="class" value="com.tplus.transform.runtime.formula.UtilFunctions" />
+            <property name="method" value="copy" />
+        </formula>
+
+        <formula name="Close" alias="Dispose" >
+            <description>Disposes the DataObject/Section by setting all fields to null and shredding the data structure. This function can be used to immediately free up memory used by the object. Any operation on Object or its children after invoking close can fail fatally</description>
+            <signature>Close(object)</signature>
+            <category>General</category>
+              <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+            <property name="class" value="com.tplus.transform.runtime.formula.UtilFunctions" />
+            <property name="method" value="dispose" />
+        </formula>
+
+    	<formula name="call">
+			<description>Calls a closure block</description>
+			<signature>call(closure, ... argsopt)</signature>
+			<category>General</category>
+			<Class>com.tplus.transform.design.formula.functions.ClosureCallFunction</Class>
+		</formula>
+
+		<formula name="typeof">
+			<description>Returns the typeof the expression. This is a design time function</description>
+			<signature>typeof(expr)</signature>
+			<category>General</category>
+			<Class>com.tplus.transform.design.formula.functions.TypeOfFunction</Class>
+		</formula>
+
+        <formula name="Attribute">
+  			<description>Returns the specified attribute of the field. This is a design time function</description>
+  			<signature>Attribute(field, attribName)</signature>
+  			<category>General</category>
+  			<Class>com.tplus.transform.design.formula.functions.AttributeFunction</Class>
+  		</formula>
+
+    <formula name="NodeAttribute">
+        <description>Returns the specified attribute of the node. This is a design time function</description>
+        <signature>NodeAttribute(nodePath, attribName)</signature>
+        <category>General</category>
+	<Class>com.tplus.transform.design.formula.functions.NodeAttributeFunction</Class>
+</formula>
+</formulae>

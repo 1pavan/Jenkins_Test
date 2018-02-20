@@ -1,0 +1,637 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<SwiftMessageFormat name="MT644">
+	<standard-version><![CDATA[SRG 2013]]></standard-version>
+	<DescriptiveName><![CDATA[Advice of Rate and Amount Fixing]]></DescriptiveName>
+	<Category><![CDATA[Treasury Markets Syndications]]></Category>
+	<Description><![CDATA[This message type is sent by the agent of the facility to the providers of funds.
+
+It specifies the interest rate applicable for a drawdown/renewal for a specified interest period, whether the end date of that period is set or not. When applicable, this message type will also set the exchange rate.]]></Description>
+	<SwiftFields>
+		<customizable>true</customizable>
+		<modifiable>true</modifiable>
+		<SwiftMessageType>User</SwiftMessageType>
+		<max-length>2000</max-length>
+		<HeaderAndTrailerType>SWIFT_INPUT_OUTPUT_HEADER</HeaderAndTrailerType>
+		<Header>
+		</Header>
+		<Data>
+			<Fields>
+				<SwiftSequence Name="A">
+					<Name>A</Name>
+					<Description><![CDATA[Identification of the Facility]]></Description>
+					<Mandatory>true</Mandatory>
+					<Repeating>false</Repeating>
+					<Fields>
+						<SwiftField Name="20">
+							<SwiftFieldDef Name="20">
+								<Generic>false</Generic>
+								<Description><![CDATA[Transaction Reference Number]]></Description>
+								<Option Name="">
+									<Format><![CDATA[16x]]></Format>
+									<Specification><![CDATA[(Reference)]]></Specification>
+									<Description><![CDATA[Transaction Reference Number]]></Description>
+								</Option>
+							</SwiftFieldDef>
+							<Repeating>false</Repeating>
+							<Presence>M</Presence>
+							<Options> </Options>
+							<Validations>
+								<SubField Name="Reference">
+									<Validation>
+										<Options> </Options>
+										<ErrorCode>T26</ErrorCode>
+										<Comment><![CDATA[This field must not start or end with a slash '/' and must not contain two consecutive slashes '//' (Error code(s): T26) .]]></Comment>
+										<ValidationPattern Type="T26">
+										</ValidationPattern>
+									</Validation>
+								</SubField>
+							</Validations>
+						</SwiftField>
+						<SwiftField Name="21">
+							<SwiftFieldDef Name="21">
+								<Generic>false</Generic>
+								<Description><![CDATA[Related Reference]]></Description>
+								<Option Name="">
+									<Format><![CDATA[16x]]></Format>
+									<Specification><![CDATA[(Reference)]]></Specification>
+									<Description><![CDATA[Related Reference]]></Description>
+								</Option>
+							</SwiftFieldDef>
+							<Repeating>false</Repeating>
+							<Presence>O</Presence>
+							<Options> </Options>
+							<Validations>
+								<SubField Name="Reference">
+									<Validation>
+										<Options> </Options>
+										<ErrorCode>T26</ErrorCode>
+										<Comment><![CDATA[This field must not start or end with a slash '/' and must not contain two consecutive slashes '//' (Error code(s): T26) .]]></Comment>
+										<ValidationPattern Type="T26">
+										</ValidationPattern>
+									</Validation>
+								</SubField>
+							</Validations>
+						</SwiftField>
+						<SwiftField Name="27">
+							<SwiftFieldDef Name="27">
+								<Generic>false</Generic>
+								<Description><![CDATA[Sequence of Total]]></Description>
+								<Option Name="">
+									<Format><![CDATA[1!n/1!n]]></Format>
+									<Specification><![CDATA[(Number) (Total)]]></Specification>
+									<Description><![CDATA[Sequence of Total]]></Description>
+								</Option>
+							</SwiftFieldDef>
+							<Repeating>false</Repeating>
+							<Presence>O</Presence>
+							<Options> </Options>
+						</SwiftField>
+						<SwiftField Name="29A">
+							<SwiftFieldDef Name="29">
+								<Generic>false</Generic>
+								<Description><![CDATA[From]]></Description>
+								<Option Name="A">
+									<Format><![CDATA[4*35x]]></Format>
+									<Specification><![CDATA[(Narrative)]]></Specification>
+									<Description><![CDATA[From]]></Description>
+								</Option>
+							</SwiftFieldDef>
+							<Repeating>false</Repeating>
+							<Presence>O</Presence>
+							<Options>A</Options>
+						</SwiftField>
+						<SwiftField Name="29B">
+							<SwiftFieldDef Name="29">
+								<Generic>false</Generic>
+								<Description><![CDATA[To the Attention of]]></Description>
+								<Option Name="B">
+									<Format><![CDATA[4*35x]]></Format>
+									<Specification><![CDATA[(Narrative)]]></Specification>
+									<Description><![CDATA[To the Attention of]]></Description>
+								</Option>
+							</SwiftFieldDef>
+							<Repeating>false</Repeating>
+							<Presence>O</Presence>
+							<Options>B</Options>
+						</SwiftField>
+						<SwiftField Name="88D">
+							<SwiftFieldDef Name="88">
+								<Generic>false</Generic>
+								<Description><![CDATA[Borrower(s)]]></Description>
+								<Option Name="D">
+									<Format><![CDATA[/1!a([/34x])(CRLF4*35x) | ([/34xCRLF])(4*35x)]]></Format>
+									<Specification><![CDATA[(CreditDebit)(Party Identifier)(Name & Address)|(Party Identifier)(Name & Address)]]></Specification>
+									<Description><![CDATA[Borrower(s)]]></Description>
+								</Option>
+							</SwiftFieldDef>
+							<Repeating>false</Repeating>
+							<Presence>M</Presence>
+							<Options>D</Options>
+						</SwiftField>
+						<SwiftField Name="32A">
+							<SwiftFieldDef Name="32">
+								<Generic>false</Generic>
+								<Description><![CDATA[Original Facility Amount]]></Description>
+								<Option Name="A">
+									<Format><![CDATA[6!n3!a15d]]></Format>
+									<Specification><![CDATA[(Date) (Currency) (Amount)]]></Specification>
+									<Description><![CDATA[Original Facility Amount]]></Description>
+								</Option>
+							</SwiftFieldDef>
+							<Repeating>false</Repeating>
+							<Presence>M</Presence>
+							<Options>A</Options>
+							<Validations>
+								<SubField Name="Amount">
+									<Validation>
+										<Options>A</Options>
+										<ErrorCode>C03</ErrorCode>
+										<Comment><![CDATA[The number of digits following the comma must not exceed the maximum number allowed for that specific currency as specified in ISO 4217 (Error code(s): C03,T40,T43) .]]></Comment>
+										<ValidationPattern Type="Decimal">
+											<currency-field>Currency</currency-field>
+										</ValidationPattern>
+									</Validation>
+								</SubField>
+								<SubField Name="Currency">
+									<Validation>
+										<Options>A</Options>
+										<ErrorCode>T52</ErrorCode>
+										<Comment><![CDATA[Currency must be a valid ISO 4217 currency code (Error code(s): T52) .]]></Comment>
+										<ValidationPattern Type="Currency Code">
+										</ValidationPattern>
+									</Validation>
+								</SubField>
+								<SubField Name="Date">
+									<Validation>
+										<Options>A</Options>
+										<ErrorCode>T50</ErrorCode>
+										<Comment><![CDATA[Date must be a valid date expressed as YYMMDD (Error code(s): T50) .]]></Comment>
+										<ValidationPattern Type="DATE">
+											<Format>yyMMdd</Format>
+										</ValidationPattern>
+									</Validation>
+								</SubField>
+							</Validations>
+						</SwiftField>
+					</Fields>
+				</SwiftSequence>
+				<SwiftSequence Name="B">
+					<Name>B</Name>
+					<Description><![CDATA[Specification of the Drawing and Related Data]]></Description>
+					<Mandatory>true</Mandatory>
+					<Repeating>true</Repeating>
+					<Fields>
+						<SwiftField Name="26a">
+							<SwiftFieldDef Name="26">
+								<Generic>false</Generic>
+								<Description><![CDATA[Drawing Identification]]></Description>
+								<Option Name="N">
+									<Format><![CDATA[3!a/4x]]></Format>
+									<Specification><![CDATA[(Currency) (Identification)]]></Specification>
+									<Description><![CDATA[Drawing Identification]]></Description>
+								</Option>
+								<Option Name="P">
+									<Format><![CDATA[3!a/4x]]></Format>
+									<Specification><![CDATA[(Currency) (Identification)]]></Specification>
+									<Description><![CDATA[Drawing Identification]]></Description>
+								</Option>
+							</SwiftFieldDef>
+							<Repeating>false</Repeating>
+							<Presence>M</Presence>
+							<Options>N, P</Options>
+							<Validations>
+								<SubField Name="Currency">
+									<Validation>
+										<Options>N, P</Options>
+										<ErrorCode>T52</ErrorCode>
+										<Comment><![CDATA[Currency must be a valid ISO 4217 currency code (Error code(s): T52) .]]></Comment>
+										<ValidationPattern Type="Currency Code">
+										</ValidationPattern>
+									</Validation>
+								</SubField>
+							</Validations>
+						</SwiftField>
+						<SwiftField Name="31F">
+							<SwiftFieldDef Name="31">
+								<Generic>false</Generic>
+								<Description><![CDATA[Interest Period]]></Description>
+								<Option Name="F">
+									<Format><![CDATA[6!n[/6!n][//35x]]]></Format>
+									<Specification><![CDATA[(Start Date) (End Date) (Origin)]]></Specification>
+									<Description><![CDATA[Interest Period]]></Description>
+								</Option>
+							</SwiftFieldDef>
+							<Repeating>false</Repeating>
+							<Presence>M</Presence>
+							<Options>F</Options>
+							<Validations>
+								<SubField Name="End_Date">
+									<Validation>
+										<Options>F</Options>
+										<ErrorCode>T50</ErrorCode>
+										<Comment><![CDATA[End Date must be valid dates expressed as YYMMDD (Error code(s): T50) .]]></Comment>
+										<ValidationPattern Type="DATE">
+											<Format>yyMMdd</Format>
+										</ValidationPattern>
+									</Validation>
+								</SubField>
+								<SubField Name="Start_Date">
+									<Validation>
+										<Options>F</Options>
+										<ErrorCode>T50</ErrorCode>
+										<Comment><![CDATA[Start Date must be valid dates expressed as YYMMDD (Error code(s): T50) .]]></Comment>
+										<ValidationPattern Type="DATE">
+											<Format>yyMMdd</Format>
+										</ValidationPattern>
+									</Validation>
+								</SubField>
+							</Validations>
+						</SwiftField>
+						<SwiftField Name="33B">
+							<SwiftFieldDef Name="33">
+								<Generic>false</Generic>
+								<Description><![CDATA[Receiver's Participation]]></Description>
+								<Option Name="B">
+									<Format><![CDATA[3!a15d]]></Format>
+									<Specification><![CDATA[(Currency) (Amount)]]></Specification>
+									<Description><![CDATA[Receiver's Participation]]></Description>
+								</Option>
+							</SwiftFieldDef>
+							<Repeating>false</Repeating>
+							<Presence>O</Presence>
+							<Options>B</Options>
+							<Validations>
+								<SubField Name="Amount">
+									<Validation>
+										<Options>B</Options>
+										<ErrorCode>C03</ErrorCode>
+										<Comment><![CDATA[The number of digits following the comma must not exceed the maximum number allowed for that specific currency as specified in ISO 4217 (Error code(s): C03,T40,T43) .]]></Comment>
+										<ValidationPattern Type="Decimal">
+											<currency-field>Currency</currency-field>
+										</ValidationPattern>
+									</Validation>
+								</SubField>
+								<SubField Name="Currency">
+									<Validation>
+										<Options>B</Options>
+										<ErrorCode>T52</ErrorCode>
+										<Comment><![CDATA[Currency must be a valid ISO 4217 currency code (Error code(s): T52) .]]></Comment>
+										<ValidationPattern Type="Currency Code">
+										</ValidationPattern>
+									</Validation>
+								</SubField>
+							</Validations>
+						</SwiftField>
+						<SwiftField Name="36">
+							<SwiftFieldDef Name="36">
+								<Generic>false</Generic>
+								<Description><![CDATA[Exchange Rate]]></Description>
+								<Option Name="">
+									<Format><![CDATA[12d]]></Format>
+									<Specification><![CDATA[(Rate)]]></Specification>
+									<Description><![CDATA[Exchange Rate]]></Description>
+								</Option>
+							</SwiftFieldDef>
+							<Repeating>false</Repeating>
+							<Presence>O</Presence>
+							<Options> </Options>
+						</SwiftField>
+						<SwiftField Name="37G">
+							<SwiftFieldDef Name="37">
+								<Generic>false</Generic>
+								<Description><![CDATA[Basis Rate]]></Description>
+								<Option Name="G">
+									<Format><![CDATA[[N]12d]]></Format>
+									<Specification><![CDATA[(Sign) (Rate)]]></Specification>
+									<Description><![CDATA[Basis Rate]]></Description>
+								</Option>
+							</SwiftFieldDef>
+							<Repeating>false</Repeating>
+							<Presence>M</Presence>
+							<Options>G</Options>
+							<Validations>
+								<SubField Name="Rate">
+									<Validation>
+										<Options>G</Options>
+										<ErrorCode>T14</ErrorCode>
+										<Comment><![CDATA[Sign must not be present when Rate is zero, ie, 0 , (Error code(s): T14) .]]></Comment>
+										<ValidationPattern Type="T14">
+											<sign-field>Sign</sign-field>
+										</ValidationPattern>
+									</Validation>
+								</SubField>
+							</Validations>
+						</SwiftField>
+						<SwiftField Name="37M">
+							<SwiftFieldDef Name="37">
+								<Generic>false</Generic>
+								<Description><![CDATA[Interest Margin]]></Description>
+								<Option Name="M">
+									<Format><![CDATA[[N]12d]]></Format>
+									<Specification><![CDATA[(Sign) (Margin)]]></Specification>
+									<Description><![CDATA[Interest Margin]]></Description>
+								</Option>
+							</SwiftFieldDef>
+							<Repeating>false</Repeating>
+							<Presence>O</Presence>
+							<Options>M</Options>
+							<Validations>
+								<SubField Name="Margin">
+									<Validation>
+										<Options>M</Options>
+										<ErrorCode>T14</ErrorCode>
+										<Comment><![CDATA[Sign must not be present when Margin is zero, ie, 0 , (Error code(s): T14) .]]></Comment>
+										<ValidationPattern Type="T14">
+											<sign-field>Sign</sign-field>
+										</ValidationPattern>
+									</Validation>
+								</SubField>
+							</Validations>
+						</SwiftField>
+						<SwiftField Name="37R">
+							<SwiftFieldDef Name="37">
+								<Generic>false</Generic>
+								<Description><![CDATA[Reserve Interest]]></Description>
+								<Option Name="R">
+									<Format><![CDATA[[N]12d]]></Format>
+									<Specification><![CDATA[(Sign) (Interest)]]></Specification>
+									<Description><![CDATA[Reserve Interest]]></Description>
+								</Option>
+							</SwiftFieldDef>
+							<Repeating>false</Repeating>
+							<Presence>O</Presence>
+							<Options>R</Options>
+							<Validations>
+								<SubField Name="Interest">
+									<Validation>
+										<Options>R</Options>
+										<ErrorCode>T14</ErrorCode>
+										<Comment><![CDATA[Sign must not be present when Interest is zero, ie, 0 , (Error code(s): T14) .]]></Comment>
+										<ValidationPattern Type="T14">
+											<sign-field>Sign</sign-field>
+										</ValidationPattern>
+									</Validation>
+								</SubField>
+							</Validations>
+						</SwiftField>
+						<SwiftField Name="37a">
+							<SwiftFieldDef Name="37">
+								<Generic>false</Generic>
+								<Description><![CDATA[Total Interest Rate]]></Description>
+								<Option Name="A">
+									<Format><![CDATA[12d[//(6!n)(1!a)(3n)][/16x]]]></Format>
+									<Specification><![CDATA[( Rate) (End Date) (Period) (Number) (Information)]]></Specification>
+									<Description><![CDATA[Total Interest Rate]]></Description>
+								</Option>
+								<Option Name="B">
+									<Format><![CDATA[12d[//(6!n)(1!a)(3n)][/16x]]]></Format>
+									<Specification><![CDATA[( Rate) (End Date) (Period) (Number) (Information)]]></Specification>
+									<Description><![CDATA[Total Interest Rate]]></Description>
+								</Option>
+								<Option Name="C">
+									<Format><![CDATA[12d[//(6!n)(1!a)(3n)][/16x]]]></Format>
+									<Specification><![CDATA[( Rate) (End Date) (Period) (Number) (Information)]]></Specification>
+									<Description><![CDATA[Total Interest Rate]]></Description>
+								</Option>
+								<Option Name="D">
+									<Format><![CDATA[12d[//(6!n)(1!a)(3n)][/16x]]]></Format>
+									<Specification><![CDATA[( Rate) (End Date) (Period) (Number) (Information)]]></Specification>
+									<Description><![CDATA[Total Interest Rate]]></Description>
+								</Option>
+								<Option Name="E">
+									<Format><![CDATA[12d[//(6!n)(1!a)(3n)][/16x]]]></Format>
+									<Specification><![CDATA[( Rate) (End Date) (Period) (Number) (Information)]]></Specification>
+									<Description><![CDATA[Total Interest Rate]]></Description>
+								</Option>
+								<Option Name="F">
+									<Format><![CDATA[12d[//(6!n)(1!a)(3n)][/16x]]]></Format>
+									<Specification><![CDATA[( Rate) (End Date) (Period) (Number) (Information)]]></Specification>
+									<Description><![CDATA[Total Interest Rate]]></Description>
+								</Option>
+							</SwiftFieldDef>
+							<Repeating>false</Repeating>
+							<Presence>O</Presence>
+							<Options>A, B, C, D, E, F</Options>
+							<Validations>
+								<SubField Name="End_Date">
+									<Validation>
+										<Options>A, B, C, D, E, F</Options>
+										<ErrorCode>T50</ErrorCode>
+										<Comment><![CDATA[End Date must be a valid date expressed as YYMMDD (Error code(s): T50) .]]></Comment>
+										<ValidationPattern Type="DATE">
+											<Format>yyMMdd</Format>
+										</ValidationPattern>
+									</Validation>
+								</SubField>
+								<SubField Name="Period">
+									<Validation>
+										<Options>A, B, C, D, E, F</Options>
+										<ErrorCode>T61</ErrorCode>
+										<Comment><![CDATA[When present, Period specifies the period between interest payments, using one of the following codes (Error code(s): T61) :]]></Comment>
+										<ValidationPattern Type="CODE">
+											<Codes>
+												<Code Name="D">
+													<DetailedName>Number of days.</DetailedName>
+												</Code>
+												<Code Name="M">
+													<DetailedName>Number of months.</DetailedName>
+												</Code>
+											</Codes>
+										</ValidationPattern>
+									</Validation>
+								</SubField>
+							</Validations>
+						</SwiftField>
+						<SwiftField Name="34a">
+							<SwiftFieldDef Name="34">
+								<Generic>false</Generic>
+								<Description><![CDATA[Differential Amount]]></Description>
+								<Option Name="P">
+									<Format><![CDATA[6!n3!a15d]]></Format>
+									<Specification><![CDATA[(Date) (Currency) (Amount)]]></Specification>
+									<Description><![CDATA[Differential Amount]]></Description>
+								</Option>
+								<Option Name="R">
+									<Format><![CDATA[6!n3!a15d]]></Format>
+									<Specification><![CDATA[(Date) (Currency) (Amount)]]></Specification>
+									<Description><![CDATA[Differential Amount]]></Description>
+								</Option>
+							</SwiftFieldDef>
+							<Repeating>false</Repeating>
+							<Presence>O</Presence>
+							<Options>P, R</Options>
+							<Validations>
+								<SubField Name="Amount">
+									<Validation>
+										<Options>P, R</Options>
+										<ErrorCode>C03</ErrorCode>
+										<Comment><![CDATA[The number of digits following the comma must not exceed the maximum number allowed for that specific currency as specified in ISO 4217 (Error code(s): C03,T40,T43) .]]></Comment>
+										<ValidationPattern Type="Decimal">
+											<currency-field>Currency</currency-field>
+										</ValidationPattern>
+									</Validation>
+								</SubField>
+								<SubField Name="Currency">
+									<Validation>
+										<Options>P, R</Options>
+										<ErrorCode>T52</ErrorCode>
+										<Comment><![CDATA[Currency must be a valid ISO 4217 currency code (Error code(s): T52) .]]></Comment>
+										<ValidationPattern Type="Currency Code">
+										</ValidationPattern>
+									</Validation>
+								</SubField>
+								<SubField Name="Date">
+									<Validation>
+										<Options>P, R</Options>
+										<ErrorCode>T50</ErrorCode>
+										<Comment><![CDATA[Date must be a valid date expressed as YYMMDD (Error code(s): T50) .]]></Comment>
+										<ValidationPattern Type="DATE">
+											<Format>yyMMdd</Format>
+										</ValidationPattern>
+									</Validation>
+								</SubField>
+							</Validations>
+						</SwiftField>
+						<SwiftField Name="57a">
+							<SwiftFieldDef Name="57">
+								<Generic>false</Generic>
+								<Description><![CDATA[Account With Institution]]></Description>
+								<Option Name="A">
+									<Format><![CDATA[/1!a([/34x])(CRLF4!a2!a2!c[3!c]) | [/34xCRLF](4!a2!a2!c[3!c])]]></Format>
+									<Specification><![CDATA[(CreditDebit)(Party Identifier)(Identifier Code) | (Party Identifier)(Identifier Code)]]></Specification>
+									<Description><![CDATA[Account With Institution]]></Description>
+								</Option>
+								<Option Name="B">
+									<Format><![CDATA[/1!a[/34x](CRLF35x) | /1!a[/34x] | [/34xCRLF]35x | /34x]]></Format>
+									<Specification><![CDATA[(CreditDebit) (Party Identifier) (Location) | (CreditDebit)(Party Identifier) |(Party Identifier) (Location) | (Party Identifier)]]></Specification>
+									<Description><![CDATA[Account With Institution]]></Description>
+								</Option>
+								<Option Name="D">
+									<Format><![CDATA[/1!a([/34x])(CRLF4*35x) | ([/34xCRLF])(4*35x)]]></Format>
+									<Specification><![CDATA[(CreditDebit)(Party Identifier)(Name & Address)|(Party Identifier)(Name & Address)]]></Specification>
+									<Description><![CDATA[Account With Institution]]></Description>
+								</Option>
+							</SwiftFieldDef>
+							<Repeating>false</Repeating>
+							<Presence>O</Presence>
+							<Options>A, B, D</Options>
+							<Validations>
+								<SubField Name="Identifier_Code">
+									<Validation>
+										<Options>A</Options>
+										<ErrorCode>T27,T28,T29,T45</ErrorCode>
+										<Comment><![CDATA[Identifier Code must be a registered BIC or BEI (Error code(s): T27,T28,T29,T45)]]></Comment>
+										<ValidationPattern Type="BIC">
+										</ValidationPattern>
+									</Validation>
+									<Validation>
+										<Options>A</Options>
+										<ErrorCode>C05</ErrorCode>
+										<Comment><![CDATA[Identifier Code must not be a BEI. Please refer to the latest version of the BIC Directory - Corporations for more information about BEIs. This error code applies to all types of BICs referenced in a FIN message including SWIFT BICs, non-SWIFT BICs, Masters, Synonyms, Live destinations and Test & Training destinations . (Error code(s): C05) .]]></Comment>
+										<ValidationPattern Type="C05">
+										</ValidationPattern>
+									</Validation>
+								</SubField>
+							</Validations>
+						</SwiftField>
+						<SwiftField Name="72">
+							<SwiftFieldDef Name="72">
+								<Generic>false</Generic>
+								<Description><![CDATA[Sender to Receiver Information]]></Description>
+								<Option Name="">
+									<Format><![CDATA[6*35x]]></Format>
+									<Specification><![CDATA[(Narrative)]]></Specification>
+									<Description><![CDATA[Sender to Receiver Information]]></Description>
+								</Option>
+							</SwiftFieldDef>
+							<Repeating>false</Repeating>
+							<Presence>O</Presence>
+							<Options> </Options>
+						</SwiftField>
+					</Fields>
+				</SwiftSequence>
+			</Fields>
+		</Data>
+		<Trailer>
+		</Trailer>
+	</SwiftFields>
+	<validationrules name="Default">
+		<hdrvalidationrules>
+			<fieldvalidations>
+				<fieldvalidation>
+					<name>U09</name>
+					<formula><![CDATA[if($this.Header.GetFieldIndex("User_Header") != -1) {
+    def userHeader = $this.Header.GetSection("User_Header");
+    if(userHeader.$size > 0 && userHeader[0].IsNotNull("Validation_Flag")) {
+        return false;
+    }
+}
+return true;
+]]></formula>
+					<severity>error</severity>
+					<cascade>true</cascade>
+					<error-code>U09</error-code>
+					<actionmessage><![CDATA["User has used tag 119 in a message that is not a candidate for special processing"]]></actionmessage>
+				</fieldvalidation>
+			</fieldvalidations>
+		</hdrvalidationrules>
+		<datavalidationrules>
+			<fieldvalidations>
+				<fieldvalidation>
+					<name>C1</name>
+					<comment><![CDATA[C1
+At least one of fields 21 or 29B must be present (Error code(s): C35) 
+]]></comment>
+					<formula><![CDATA[A[0].F21.$size > 0 || A[0].F29B.$size >0]]></formula>
+					<severity>error</severity>
+					<cascade>true</cascade>
+					<error-code>C35</error-code>
+					<actionmessage><![CDATA["At least one of fields 21 or 29B must be present"]]></actionmessage>
+				</fieldvalidation>
+				<fieldvalidation>
+					<name>C2</name>
+					<fieldname>B</fieldname>
+					<comment><![CDATA[C2
+At least one of fields 36 or 37 (A-F) must be present in each sequence B within the message (Error code(s): C54) 
+
+
+]]></comment>
+					<formula><![CDATA[$value.F36.$size > 0 || $value.F37a.$size >0
+
+]]></formula>
+					<severity>error</severity>
+					<cascade>true</cascade>
+					<error-code>C54</error-code>
+					<actionmessage><![CDATA["At least one of fields 36 or 37 (A-F) must be present in each sequence B within the message"]]></actionmessage>
+				</fieldvalidation>
+				<fieldvalidation>
+					<name>C3</name>
+					<fieldname>B.33B.Currency</fieldname>
+					<comment><![CDATA[C3
+In any sequence B, the currency code in fields 33B and 34a must be the same (Error code(s): C55) 
+
+]]></comment>
+					<formula><![CDATA[Implies(B.F34a.$size > 0, B.F34a.Currency == $value)]]></formula>
+					<severity>error</severity>
+					<cascade>true</cascade>
+					<error-code>C55</error-code>
+					<actionmessage><![CDATA["In any sequence B, the currency code in fields 33B and 34a must be the same"]]></actionmessage>
+				</fieldvalidation>
+				<fieldvalidation>
+						<name>ERI</name>
+						<fieldname>B.72.Narrative</fieldname>
+						<formula><![CDATA[ApplyERICodeValidationStructured($value);]]></formula>
+						<severity>error</severity>
+						<cascade>true</cascade>
+						<error-code>T47</error-code>
+						<actionmessage><![CDATA["In an ERI field (i.e. fields 61, 72, 77A, 79, 86) the data part of a code word /OCMT/, or /CHGS/, is being validated, but the ending separator (i.e. third slash) is missing or the code words are duplicated."]]></actionmessage>
+					</fieldvalidation>
+			</fieldvalidations>
+		</datavalidationrules>
+		<tlrvalidationrules>
+			<fieldvalidations>
+			</fieldvalidations>
+		</tlrvalidationrules>
+	</validationrules>
+</SwiftMessageFormat>
+

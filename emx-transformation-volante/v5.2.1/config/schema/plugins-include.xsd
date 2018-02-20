@@ -1,0 +1,36 @@
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="unqualified"
+            attributeFormDefault="unqualified">
+    <!-- include constructs -->
+    <xsd:include schemaLocation="messageflow.xsd"/>
+    <xsd:include schemaLocation="reports.xsd"/>
+    <xsd:include schemaLocation="web-service.xsd"/>
+    <xsd:include schemaLocation="webforms.xsd"/>
+    <!-- ====================================== -->
+    <xsd:include schemaLocation="universal-plugin.xsd"/>
+    <xsd:include schemaLocation="xml-plugin.xsd"/>
+    <xsd:include schemaLocation="swift-plugin.xsd"/>
+    <xsd:include schemaLocation="asciidelimited-plugin.xsd"/>
+    <xsd:include schemaLocation="asciifixed-plugin.xsd"/>
+    <xsd:include schemaLocation="fix-plugin.xsd"/>
+    <xsd:include schemaLocation="fast-plugin.xsd"/>
+    <xsd:include schemaLocation="real-plugin.xsd"/>
+    <xsd:include schemaLocation="siaccanonical-plugin.xsd"/>
+    <xsd:include schemaLocation="fcs-plugin.xsd"/>
+    <xsd:include schemaLocation="bloomberg-plugin.xsd"/>
+    <xsd:include schemaLocation="edi-plugin.xsd"/>
+    <xsd:include schemaLocation="tervela-plugin.xsd"/>
+    <xsd:include schemaLocation="reuters-plugin.xsd"/>
+    <xsd:include schemaLocation="excel-plugin.xsd"/>
+    <xsd:include schemaLocation="pojo-plugin.xsd"/>
+    <xsd:include schemaLocation="iso8583-plugin.xsd"/>
+    <xsd:include schemaLocation="bai-plugin.xsd"/>
+    <xsd:include schemaLocation="swiftmx-plugin.xsd"/>
+    <xsd:include schemaLocation="document-plugin.xsd"/>
+    <xsd:include schemaLocation="cfc-plugin.xsd"/>
+    <xsd:include schemaLocation="idoc-plugin.xsd"/>
+    <xsd:include schemaLocation="fpml-plugin.xsd"/>
+    <xsd:include schemaLocation="ccb-plugin.xsd"/>
+    <xsd:include schemaLocation="idocxml-plugin.xsd"/>
+
+    <xsd:include schemaLocation="rest-service.xsd"/>
+</xsd:schema>

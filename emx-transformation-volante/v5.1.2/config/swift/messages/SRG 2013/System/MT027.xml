@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<SwiftMessageFormat name="MT027">
+	<standard-version><![CDATA[SRG 2012]]></standard-version>
+	<DescriptiveName><![CDATA[FINCopy Bulk Retrieval Response]]></DescriptiveName>
+	<Category><![CDATA[System]]></Category>
+	<Description>The MT 027 does not contain the retrieved messages, it is a positive (or negative) response indicating that the retrieval request has been processed.
+
+From: FIN             To: User</Description>
+	<SwiftFields>
+		<customizable>true</customizable>
+		<modifiable>true</modifiable>
+		<SwiftMessageType>System</SwiftMessageType>
+		<HeaderAndTrailerType>SWIFT_INPUT_HEADER</HeaderAndTrailerType>
+		<Header>
+		</Header>
+		<Data>
+			<Fields>
+				<SystemField Name="Retrieval-identifier">
+					<description><![CDATA[Corresponding MT 026 retrieval identifier.]]></description>
+					<datatype>String</datatype>
+					<required>true</required>
+					<SwiftSystemFieldDef Name="retrieval-identifier" Tag="140">
+						<Format><![CDATA[15!n]]></Format>
+						<Specification><![CDATA[(retrieval-identifier)]]></Specification>
+						<Description><![CDATA[User's retrieval identifier..]]></Description>
+					</SwiftSystemFieldDef>
+				</SystemField>
+				<SystemField Name="status">
+					<description><![CDATA[Retrieval status.]]></description>
+					<datatype>String</datatype>
+					<required>true</required>
+					<SwiftSystemFieldDef Name="status" Tag="144">
+						<Format><![CDATA[2!n]]></Format>
+						<Specification><![CDATA[(status)]]></Specification>
+						<Description><![CDATA[Retrieval status.]]></Description>
+						<Validations>
+							<Validation>
+								<formula>In($value, "00", "01", "02", "03", "06", "07", "08", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19")</formula>
+								<error-code>V08</error-code>
+								<actionmessage>"Invalid status '" + $value + "'. Valid status  are 00, 01, 02, 03, 06, 07, 08 , 10 , 11 , 12 , 13 , 14, 15 , 16 , 17 , 18 and 19."</actionmessage>
+							</Validation>
+						</Validations>
+					</SwiftSystemFieldDef>
+				</SystemField>
+			</Fields>
+		</Data>
+		<Trailer>
+		</Trailer>
+	</SwiftFields>
+	<validationrules name="Default">
+		<hdrvalidationrules>
+			<fieldvalidations>
+			</fieldvalidations>
+		</hdrvalidationrules>
+		<datavalidationrules>
+			<fieldvalidations>
+			</fieldvalidations>
+		</datavalidationrules>
+		<tlrvalidationrules>
+			<fieldvalidations>
+			</fieldvalidations>
+		</tlrvalidationrules>
+	</validationrules>
+</SwiftMessageFormat>
+

@@ -1,0 +1,444 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<messageflowtemplate name="Web Form">
+	<descriptiveName><![CDATA[Web Form]]></descriptiveName>
+	<category><![CDATA[General]]></category>
+	<serviceelements>
+		<serviceelement>
+			<reference-value>PurchaseOrder</reference-value>
+			<prompt>Internal Message</prompt>
+			<type>Internal Message</type>
+		</serviceelement>
+		<serviceelement>
+			<reference-value>PurchaseOrderToPurchaseOrderXML</reference-value>
+			<prompt>Internal To External Mapping</prompt>
+			<type>Mapping</type>
+		</serviceelement>
+		<serviceelement>
+			<reference-value>PurchaseOrderXML</reference-value>
+			<prompt>External Message</prompt>
+			<type>External Message</type>
+		</serviceelement>
+		<serviceelement>
+			<reference-value>TransformException</reference-value>
+			<template-value>TransformException</template-value>
+			<type>Internal Message</type>
+		</serviceelement>
+	</serviceelements>
+	<variables>
+		<variable>
+			<reference-value>poIn</reference-value>
+			<template-value>poin</template-value>
+			<type>Internal Format</type>
+		</variable>
+		<variable>
+			<reference-value>task</reference-value>
+			<template-value>task</template-value>
+			<type>String</type>
+		</variable>
+		<variable>
+			<reference-value>poXMLObj</reference-value>
+			<template-value>externalObj</template-value>
+			<type>PurchaseOrderXML</type>
+		</variable>
+		<variable>
+			<reference-value>poXMLOut</reference-value>
+			<template-value>externalOut</template-value>
+			<type>Binary</type>
+		</variable>
+		<variable>
+			<reference-value>ex</reference-value>
+			<template-value>ex</template-value>
+			<type>TransformException</type>
+		</variable>
+		<variable>
+			<reference-value>normalizedEx</reference-value>
+			<template-value>normalizedEx</template-value>
+			<type>TransformException</type>
+		</variable>
+	</variables>
+	<originalmessageflow>
+		<messageflow name="PurchaseOrderWebFlow" type="MessageFlow">
+			<version>1.0</version>
+			<description></description>
+			<transaction>Required</transaction>
+			<message-flow-ports>
+				<port name="poPort">
+					<protocol>rmi</protocol>
+					<device>po.device</device>
+				</port>
+			</message-flow-ports>
+			<variables>
+				<fields>
+					<field>
+						<name>poIn</name>
+						<type>Message</type>
+						<minoccurs>0</minoccurs>
+						<maxoccurs>1</maxoccurs>
+						<variabletype>INPUT</variabletype>
+						<message>PurchaseOrder</message>
+						<fields>
+						</fields>
+					</field>
+					<field>
+						<name>task</name>
+						<type>String</type>
+						<length>100</length>
+						<variabletype>INPUT</variabletype>
+					</field>
+					<field>
+						<name>poXMLObj</name>
+						<type>Message</type>
+						<minoccurs>0</minoccurs>
+						<maxoccurs>1</maxoccurs>
+						<variabletype>LOCAL</variabletype>
+						<message>PurchaseOrderXML</message>
+						<fields>
+						</fields>
+					</field>
+					<field>
+						<name>poXMLOut</name>
+						<type>Binary</type>
+						<variabletype>OUTPUT</variabletype>
+					</field>
+					<field>
+						<name>ex</name>
+						<type>Message</type>
+						<minoccurs>0</minoccurs>
+						<maxoccurs>1</maxoccurs>
+						<variabletype>LOCAL</variabletype>
+						<message>TransformException</message>
+						<fields>
+						</fields>
+					</field>
+					<field>
+						<name>normalizedEx</name>
+						<type>Message</type>
+						<minoccurs>0</minoccurs>
+						<maxoccurs>1</maxoccurs>
+						<variabletype>LOCAL</variabletype>
+						<message>TransformException</message>
+						<fields>
+						</fields>
+					</field>
+				</fields>
+			</variables>
+			<flowelement name="Start1" uid="a5a2519a-8b4e-40fd-8280-80951929051a" type="Start" >
+				<label>Start</label>
+				<visual>
+					<position x="261" y="42"/>
+					<line-color>#008000</line-color>
+					<text-color>#000000</text-color>
+					<fill-color>#F0F0FF</fill-color>
+				</visual>
+			</flowelement>
+			<flowelement name="Validate2" uid="10dd71e7-87d7-404a-93c4-c1bef60503b1" type="Validate" >
+				<label>Validate</label>
+				<in>poIn</in>
+				<message>PurchaseOrder</message>
+				<visual>
+					<position x="261" y="107"/>
+					<line-color>#008000</line-color>
+					<text-color>#000000</text-color>
+					<fill-color>#FFFFE1</fill-color>
+				</visual>
+			</flowelement>
+			<flowelement name="Mapping1" uid="04ca4260-7b82-4894-8e48-f007190d3be5" type="Mapping" >
+				<label>Mapping</label>
+				<in>poIn</in>
+				<out>poXMLObj</out>
+				<messagemapping>PurchaseOrderToPurchaseOrderXML</messagemapping>
+				<visual>
+					<position x="260" y="257"/>
+					<line-color>#FFA200</line-color>
+					<text-color>#000000</text-color>
+					<fill-color>#FFFFCC</fill-color>
+				</visual>
+			</flowelement>
+			<flowelement name="Serialize1" uid="80970699-e9ec-468f-9afc-07b8269480d9" type="Serialize" >
+				<label>Serialize</label>
+				<in>poXMLObj</in>
+				<out>poXMLOut</out>
+				<message>PurchaseOrderXML</message>
+				<visual>
+					<position x="259" y="408"/>
+					<line-color>#008000</line-color>
+					<text-color>#000000</text-color>
+					<fill-color>#FFFFE1</fill-color>
+				</visual>
+			</flowelement>
+			<flowelement name="Persist1" uid="927f9979-82b1-433a-beba-bde0a776b310" type="Persist" >
+				<label>Persist</label>
+				<in>poIn</in>
+				<message>PurchaseOrder</message>
+				<visual>
+					<position x="261" y="181"/>
+					<line-color>#008000</line-color>
+					<text-color>#000000</text-color>
+					<fill-color>#FFFFE1</fill-color>
+				</visual>
+			</flowelement>
+			<flowelement name="TransformException1" uid="7e7030f9-491f-4f24-b4a7-22e4e71b4c6b" type="TransformException" >
+				<label>Map Exception</label>
+				<in>ex</in>
+				<out>normalizedEx</out>
+				<messagemapping>PurchaseOrderToPurchaseOrderXML</messagemapping>
+				<source-to-destination>false</source-to-destination>
+				<cascade-exceptions>true</cascade-exceptions>
+				<visual>
+					<position x="493" y="407"/>
+					<line-color>#FFA200</line-color>
+					<text-color>#000000</text-color>
+					<fill-color>#FFFFCC</fill-color>
+				</visual>
+			</flowelement>
+			<flowelement name="Throw1" uid="fd8769c7-9f59-4516-b9e0-083c2ef861e2" type="Throw" >
+				<label>Throw</label>
+				<in>normalizedEx</in>
+				<visual>
+					<position x="477" y="621"/>
+					<line-color>#008000</line-color>
+					<text-color>#000000</text-color>
+					<fill-color>#FFFFE1</fill-color>
+				</visual>
+			</flowelement>
+			<flowelement name="If2" uid="b2d78fe4-fd0d-47d6-aa10-2d9e8e681fb7" type="If" >
+				<label>Save and Release?</label>
+				<condition><![CDATA[task == "saveAndRelease"]]></condition>
+				<visual>
+					<position x="199" y="596"/>
+					<line-color>#008000</line-color>
+					<text-color>#000000</text-color>
+					<fill-color>#F0F0FF</fill-color>
+				</visual>
+			</flowelement>
+			<flowelement name="Stop3" uid="f1c34ac9-5fea-4232-8c04-5ad782ceb2b7" type="Stop" >
+				<label>Stop</label>
+				<visual>
+					<position x="199" y="749"/>
+					<line-color>#008000</line-color>
+					<text-color>#000000</text-color>
+					<fill-color>#F0F0FF</fill-color>
+				</visual>
+			</flowelement>
+			<flowelement name="Send1" uid="5b5a3f63-92c2-4c64-9653-347dded88b45" type="Send" >
+				<label>Send</label>
+				<in>poXMLOut</in>
+				<port name="poPort"/>
+				<visual>
+					<position x="109" y="680"/>
+					<line-color>#008000</line-color>
+					<text-color>#000000</text-color>
+					<fill-color>#FFFFE1</fill-color>
+				</visual>
+			</flowelement>
+			<flowelement name="If1" uid="f19e11f4-5d2b-4126-9f21-662cf68a37ad" type="If" >
+				<label>No Exceptions?</label>
+				<condition><![CDATA[isNull(normalizedEx)]]></condition>
+				<visual>
+					<position x="258" y="495"/>
+					<line-color>#008000</line-color>
+					<text-color>#000000</text-color>
+					<fill-color>#F0F0FF</fill-color>
+				</visual>
+			</flowelement>
+			<flowelement name="Validate1" uid="24cdc9ff-0b8b-4109-bf4c-3c8ee61f0a9e" type="Validate" >
+				<label>Validate</label>
+				<in>poXMLObj</in>
+				<message>PurchaseOrderXML</message>
+				<visual>
+					<position x="260" y="333"/>
+					<line-color>#008000</line-color>
+					<text-color>#000000</text-color>
+					<fill-color>#FFFFE1</fill-color>
+				</visual>
+			</flowelement>
+			<flowelement name="TransformException2" uid="24aa925f-1efe-4903-82c5-48f432965e97" type="TransformException" >
+				<label>Map Exception</label>
+				<in>ex</in>
+				<out>normalizedEx</out>
+				<messagemapping>PurchaseOrderToPurchaseOrderXML</messagemapping>
+				<source-to-destination>false</source-to-destination>
+				<cascade-exceptions>true</cascade-exceptions>
+				<visual>
+					<position x="367" y="331"/>
+					<line-color>#FFA200</line-color>
+					<text-color>#000000</text-color>
+					<fill-color>#FFFFCC</fill-color>
+				</visual>
+			</flowelement>
+			<link type="Default">
+				<controlflow>true</controlflow>
+				<dataflow>false</dataflow>
+				<outputport uid="a5a2519a-8b4e-40fd-8280-80951929051a" portindex="0"/>
+				<inputport uid="10dd71e7-87d7-404a-93c4-c1bef60503b1" portindex="0"/>
+				<edge-type>DIRECT</edge-type>
+				<note>
+					<value>poIn</value>
+					<visual>
+						<location x="18" y="-1"/>
+					</visual>
+				</note>
+			</link>
+			<link type="Default">
+				<controlflow>true</controlflow>
+				<dataflow>false</dataflow>
+				<outputport uid="10dd71e7-87d7-404a-93c4-c1bef60503b1" portindex="1"/>
+				<inputport uid="927f9979-82b1-433a-beba-bde0a776b310" portindex="0"/>
+				<edge-type>DIRECT</edge-type>
+				<note>
+					<value>poIn</value>
+					<visual>
+						<location x="-20" y="-3"/>
+					</visual>
+				</note>
+			</link>
+			<link type="Exception">
+				<controlflow>true</controlflow>
+				<dataflow>false</dataflow>
+				<message>TransformException</message>
+				<out>ex</out>
+				<cascade-exceptions>false</cascade-exceptions>
+				<outputport uid="80970699-e9ec-468f-9afc-07b8269480d9" portindex="2"/>
+				<inputport uid="7e7030f9-491f-4f24-b4a7-22e4e71b4c6b" portindex="0"/>
+				<edge-type>DIRECT</edge-type>
+				<note>
+					<value>ex</value>
+					<visual>
+						<location x="-4" y="-8"/>
+					</visual>
+				</note>
+			</link>
+			<link type="Default">
+				<controlflow>true</controlflow>
+				<dataflow>false</dataflow>
+				<outputport uid="b2d78fe4-fd0d-47d6-aa10-2d9e8e681fb7" portindex="2"/>
+				<inputport uid="f1c34ac9-5fea-4232-8c04-5ad782ceb2b7" portindex="0"/>
+				<edge-type>ELBOW</edge-type>
+			</link>
+			<link type="Default">
+				<controlflow>true</controlflow>
+				<dataflow>false</dataflow>
+				<outputport uid="b2d78fe4-fd0d-47d6-aa10-2d9e8e681fb7" portindex="1"/>
+				<inputport uid="5b5a3f63-92c2-4c64-9653-347dded88b45" portindex="0"/>
+				<edge-type>ELBOW</edge-type>
+			</link>
+			<link type="Default">
+				<controlflow>true</controlflow>
+				<dataflow>false</dataflow>
+				<outputport uid="927f9979-82b1-433a-beba-bde0a776b310" portindex="1"/>
+				<inputport uid="04ca4260-7b82-4894-8e48-f007190d3be5" portindex="0"/>
+				<edge-type>DIRECT</edge-type>
+			</link>
+			<link type="Default">
+				<controlflow>true</controlflow>
+				<dataflow>false</dataflow>
+				<outputport uid="5b5a3f63-92c2-4c64-9653-347dded88b45" portindex="1"/>
+				<inputport uid="f1c34ac9-5fea-4232-8c04-5ad782ceb2b7" portindex="0"/>
+				<edge-type>ELBOW</edge-type>
+			</link>
+			<link type="Exception">
+				<controlflow>true</controlflow>
+				<dataflow>false</dataflow>
+				<message>TransformException</message>
+				<out>normalizedEx</out>
+				<cascade-exceptions>true</cascade-exceptions>
+				<outputport uid="10dd71e7-87d7-404a-93c4-c1bef60503b1" portindex="2"/>
+				<inputport uid="927f9979-82b1-433a-beba-bde0a776b310" portindex="0"/>
+				<edge-type>DIRECT</edge-type>
+				<note>
+					<value>normalizedEx</value>
+					<visual>
+						<location x="35" y="5"/>
+					</visual>
+				</note>
+			</link>
+			<link type="Default">
+				<controlflow>true</controlflow>
+				<dataflow>false</dataflow>
+				<outputport uid="80970699-e9ec-468f-9afc-07b8269480d9" portindex="1"/>
+				<inputport uid="f19e11f4-5d2b-4126-9f21-662cf68a37ad" portindex="0"/>
+				<edge-type>DIRECT</edge-type>
+			</link>
+			<link type="Default">
+				<controlflow>true</controlflow>
+				<dataflow>false</dataflow>
+				<outputport uid="f19e11f4-5d2b-4126-9f21-662cf68a37ad" portindex="1"/>
+				<inputport uid="b2d78fe4-fd0d-47d6-aa10-2d9e8e681fb7" portindex="0"/>
+				<edge-type>ELBOW</edge-type>
+			</link>
+			<link type="Default">
+				<controlflow>true</controlflow>
+				<dataflow>false</dataflow>
+				<outputport uid="f19e11f4-5d2b-4126-9f21-662cf68a37ad" portindex="2"/>
+				<inputport uid="fd8769c7-9f59-4516-b9e0-083c2ef861e2" portindex="0"/>
+				<edge-type>ELBOW</edge-type>
+			</link>
+			<link type="Default">
+				<controlflow>true</controlflow>
+				<dataflow>false</dataflow>
+				<outputport uid="04ca4260-7b82-4894-8e48-f007190d3be5" portindex="1"/>
+				<inputport uid="24cdc9ff-0b8b-4109-bf4c-3c8ee61f0a9e" portindex="0"/>
+				<edge-type>DIRECT</edge-type>
+				<note>
+					<value>poXMLObj</value>
+					<visual>
+						<location x="-28" y="1"/>
+					</visual>
+				</note>
+			</link>
+			<link type="Default">
+				<controlflow>true</controlflow>
+				<dataflow>false</dataflow>
+				<outputport uid="24cdc9ff-0b8b-4109-bf4c-3c8ee61f0a9e" portindex="1"/>
+				<inputport uid="80970699-e9ec-468f-9afc-07b8269480d9" portindex="0"/>
+				<edge-type>DIRECT</edge-type>
+				<note>
+					<value>poXMLObj</value>
+					<visual>
+						<location x="-31" y="-1"/>
+					</visual>
+				</note>
+			</link>
+			<link type="Exception">
+				<controlflow>true</controlflow>
+				<dataflow>false</dataflow>
+				<message>TransformException</message>
+				<out>ex</out>
+				<cascade-exceptions>false</cascade-exceptions>
+				<outputport uid="24cdc9ff-0b8b-4109-bf4c-3c8ee61f0a9e" portindex="2"/>
+				<inputport uid="24aa925f-1efe-4903-82c5-48f432965e97" portindex="0"/>
+				<edge-type>DIRECT</edge-type>
+				<note>
+					<value>ex</value>
+					<visual>
+						<location x="1" y="-7"/>
+					</visual>
+				</note>
+			</link>
+			<link type="Default">
+				<controlflow>true</controlflow>
+				<dataflow>false</dataflow>
+				<outputport uid="24aa925f-1efe-4903-82c5-48f432965e97" portindex="1"/>
+				<inputport uid="80970699-e9ec-468f-9afc-07b8269480d9" portindex="0"/>
+				<edge-type>ELBOW</edge-type>
+			</link>
+			<link type="Default">
+				<controlflow>true</controlflow>
+				<dataflow>false</dataflow>
+				<outputport uid="7e7030f9-491f-4f24-b4a7-22e4e71b4c6b" portindex="1"/>
+				<inputport uid="f19e11f4-5d2b-4126-9f21-662cf68a37ad" portindex="0"/>
+				<edge-type>DIRECT</edge-type>
+				<note>
+					<value>normalizedEx</value>
+					<visual>
+						<location x="23" y="8"/>
+					</visual>
+				</note>
+			</link>
+			<visual>
+				<bounds x="92" y="30" width="447" height="732"/>
+			</visual>
+		</messageflow>
+	</originalmessageflow>
+</messageflowtemplate>
+

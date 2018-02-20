@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<simulator>
+	<server port="0" datasources="${designer.user.home}/config/database/data-sources.xml" />
+	<launch application="${java.home}/bin/java" wait="false" shutdown="true">
+		<arg value="-classpath" />
+		<arg value="${designer.home}/lib/ext/hsqldb.jar" />
+		<arg value="org.hsqldb.Server" />
+		<arg value="-port" />
+		<arg value="1608" />
+		<arg value="-database" />
+		<arg value="${designer.user.home}/config/simulator/database/volantedb" />
+	</launch>
+</simulator>
+   

@@ -1,0 +1,703 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<cartridge xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="5.2.1" name="TransformationFlow" type="Cartridge">
+	<description><![CDATA[Change summary:
+CreateTAG108 added by Krishnaraj on 08Jun2017]]></description>
+	<version>1.0</version>
+	<private>
+		<summary>
+			<service name="FNITransformationFlow" version="1.0" type="Message Flow">
+			</service>
+			<function name="BNYM_EndOfTag"/>
+			<function name="BNYM_EndOfLine"/>
+			<function name="BNYM_ParseMultiLineFormat"/>
+			<function name="BNYM_ParseMultiLineFormat"/>
+			<function name="BNYM_SerializeMultiLineFormat"/>
+			<function name="BNYM_PrepareLine"/>
+			<function name="BNYM_GetEmptyStrIfAllSpaces"/>
+			<function name="ParseSwiftGeneric"/>
+			<function name="ParseSwiftGeneric"/>
+			<function name="SerializeSwiftGeneric"/>
+			<function name="SerializeSwiftGeneric"/>
+			<function name="Get_NoOfLines"/>
+			<function name="Get_sending_Bank"/>
+			<function name="Get_Sending_TID"/>
+			<function name="Get_Tag_Description"/>
+			<function name="serialiseMultiLineValue"/>
+			<function name="Get_BIC"/>
+			<function name="BNYM_GetSenderDetails"/>
+			<function name="BNYM_GetBICCode"/>
+			<function name="getMsTypeDescription"/>
+			<function name="BNYM_EndOfTag_WithRecLen"/>
+			<function name="BNYM_EndOfLine_WithRecLen"/>
+			<function name="BNYM_ParseMultiLineFormat_WithRecLen"/>
+			<function name="BNYM_ParseMultiLineFormat_WithRecLen"/>
+			<function name="BNYM_SerializeMultiLineFormat_WithRecLen"/>
+			<function name="BNYM_PrepareLine_WithRecLen"/>
+			<function name="BNYM_CreditDebit_Length"/>
+			<function name="BNYM_Slash1_Length"/>
+			<function name="BNYM_PartyIdentifier_Length"/>
+			<function name="BNYM_SerializeFields"/>
+			<function name="IsSwiftSequenceEmpty"/>
+			<function name="IsSwiftSequenceEmpty"/>
+			<function name="IsSwiftSequenceEmpty"/>
+			<function name="IsSwiftSequenceEmpty"/>
+			<function name="IsSwiftSequenceEmpty"/>
+			<function name="IsSwiftSequenceEmpty"/>
+			<function name="IsSwiftSequenceEmpty"/>
+			<function name="IsSwiftSequenceEmpty"/>
+			<function name="IsSwiftSequenceEmpty"/>
+			<function name="IsSwiftSequenceEmpty"/>
+			<function name="IsSwiftSequenceEmpty"/>
+			<function name="IsSwiftSequenceEmpty"/>
+			<function name="IsSwiftSequenceEmpty"/>
+			<function name="IsSwiftSequenceEmpty"/>
+			<function name="IsSwiftSequenceEmpty"/>
+			<function name="IsSwiftSequenceEmpty"/>
+			<function name="IsSwiftSequenceEmpty"/>
+			<function name="IsSwiftSequenceEmpty"/>
+			<function name="IsSwiftSequenceEmpty"/>
+			<function name="IsSwiftSequenceEmpty"/>
+			<function name="IsSwiftSequenceEmpty"/>
+			<function name="IsSwiftSequenceEmpty"/>
+			<function name="IsSwiftSequenceEmpty"/>
+			<function name="IsSwiftSequenceEmpty"/>
+			<function name="IsSwiftSequenceEmpty"/>
+			<function name="IsSwiftSequenceEmpty"/>
+			<function name="IsSwiftSequenceEmpty"/>
+			<function name="IsSwiftSequenceEmpty"/>
+			<function name="IsSwiftSequenceEmpty"/>
+			<function name="IsSwiftSequenceEmpty"/>
+			<function name="IsSwiftSequenceEmpty"/>
+			<function name="IsSwiftSequenceEmpty"/>
+			<function name="Swift_Replace_SplChars_onExcep"/>
+			<function name="Swift_Replace_SplChars_onExcep_bk"/>
+			<function name="replaceInvalidChars_Tag20and21"/>
+			<function name="replace_ColonOrHyphenAtStart"/>
+			<function name="replaceInvalidChars"/>
+			<function name="getReplaceChar"/>
+			<function name="set_ExceptionCode"/>
+			<function name="constructMTn98Msg"/>
+			<function name="setTag20Value"/>
+			<function name="SwiftTagProcessing"/>
+			<function name="set_ExceptionCodeList"/>
+			<function name="Get_Header"/>
+			<function name="Get_Trailer"/>
+			<function name="ParseOutputDate"/>
+			<function name="ParseMonth"/>
+			<function name="ParseOutputTime"/>
+			<function name="Get_Block3_Header"/>
+			<function name="SerializeMultiLines"/>
+			<function name="strstr"/>
+			<function name="secAddorGetElement"/>
+			<function name="messageFormat"/>
+			<function name="getCorrelationData"/>
+			<function name="getAsntrnPA"/>
+			<function name="posSeek"/>
+			<function name="getAsncidFromPA"/>
+			<function name="setOFACState"/>
+			<function name="getMtstrn"/>
+			<function name="getOutputMoudleIndex"/>
+			<function name="initBMDef"/>
+			<function name="getNewBic8"/>
+			<function name="findEndBlock4"/>
+			<function name="replaceBic"/>
+			<function name="setupTEO"/>
+			<function name="checkOutSrc"/>
+			<function name="createHeader"/>
+			<function name="bmProcess"/>
+			<function name="bmProcessConvertBIC"/>
+			<function name="addSBlock"/>
+			<function name="switchToIBR"/>
+			<function name="setupNameKey"/>
+			<function name="transformInternalToSwift"/>
+			<function name="getAckType"/>
+			<function name="initBMDEF"/>
+			<function name="bmProcessACK"/>
+			<function name="createFinOrGpaAckOnDemand"/>
+			<function name="getDataFeedHeaders"/>
+			<function name="setupOnDemand"/>
+			<function name="createFinOrGpaNFeackOnDemand"/>
+			<function name="addHeaderAndHistory"/>
+		</summary>
+	</private>
+	<references type="References">
+		<reference>
+			<type>Cartridge</type>
+			<relative-path>..\Transformation_Flows\BNYInternal\BNYToSwift.car</relative-path>
+			<absolute-path>C:\Users\sys\Desktop\Source_Maven\Transformation_Flows\BNYInternal\BNYToSwift.car</absolute-path>
+		</reference>
+		<reference>
+			<type>Cartridge</type>
+			<relative-path>..\Transformation_Flows\BNYInternal\BNYToSwiftFunctions.car</relative-path>
+			<absolute-path>C:\Users\sys\Desktop\Source_Maven\Transformation_Flows\BNYInternal\BNYToSwiftFunctions.car</absolute-path>
+		</reference>
+		<reference>
+			<type>Cartridge</type>
+			<relative-path>..\Transformation_Flows\flow\Transformation Flows.car</relative-path>
+			<absolute-path>C:\Users\sys\Desktop\Source_Maven\Transformation_Flows\flow\Transformation Flows.car</absolute-path>
+		</reference>
+		<reference>
+			<type>Cartridge</type>
+			<relative-path>..\BusinessModules\fniGwyXFormAppIsn\fniGwyXFormAppIsn.car</relative-path>
+			<absolute-path>C:\Users\sys\Desktop\Source_Maven\BusinessModules\fniGwyXFormAppIsn\fniGwyXFormAppIsn.car</absolute-path>
+		</reference>
+		<reference>
+			<type>Cartridge</type>
+			<relative-path>..\BusinessModules\fniGwyXFormAppAck\fniGwyXFormAppAck.car</relative-path>
+			<absolute-path>C:\Users\sys\Desktop\Source_Maven\BusinessModules\fniGwyXFormAppAck\fniGwyXFormAppAck.car</absolute-path>
+		</reference>
+	</references>
+	<folder name="Function Definitions" type="FunctionDefFolder">
+		<elementproperties>
+			<propertymap>
+			</propertymap>
+		</elementproperties>
+	</folder>
+	<messageflow name="FNITransformationFlow" type="MessageFlow">
+		<version>1.0</version>
+		<transaction>NotRequired</transaction>
+		<variables>
+			<xpath-namespaces>
+				<namespace value="http://www.w3.org/2005/xpath-functions" prefix="fn"/>
+				<namespace value="http://www.w3.org/2001/XMLSchema" prefix="xs"/>
+				<namespace value="java:com.tplus.transform.runtime.swift.SwiftXPathFunctions" prefix="swift"/>
+			</xpath-namespaces>
+			<fields>
+				<field>
+					<name>rawIn</name>
+					<type>RawMessage</type>
+					<notnull>true</notnull>
+					<variabletype>INPUT</variabletype>
+				</field>
+				<field>
+					<name>configXML</name>
+					<type>RawMessage</type>
+					<notnull>true</notnull>
+					<variabletype>INPUT</variabletype>
+				</field>
+				<field>
+					<name>nameKeyTable</name>
+					<type>RawMessage</type>
+					<notnull>true</notnull>
+					<variabletype>INPUT</variabletype>
+				</field>
+				<field>
+					<name>configIsn</name>
+					<type>DataObject</type>
+					<minoccurs>0</minoccurs>
+					<maxoccurs>1</maxoccurs>
+					<variabletype>LOCAL</variabletype>
+					<message>fniGwyXFormAppIsnConfig</message>
+					<fields>
+					</fields>
+				</field>
+				<field>
+					<name>configAck</name>
+					<type>DataObject</type>
+					<minoccurs>0</minoccurs>
+					<maxoccurs>1</maxoccurs>
+					<variabletype>LOCAL</variabletype>
+					<message>fniGwyXFormAppAckConfig</message>
+					<fields>
+					</fields>
+				</field>
+				<field>
+					<name>transformFlowExe</name>
+					<type>DataObject</type>
+					<minoccurs>0</minoccurs>
+					<maxoccurs>1</maxoccurs>
+					<variabletype>LOCAL</variabletype>
+					<message>TransformException</message>
+					<fields>
+					</fields>
+				</field>
+				<field>
+					<name>businessModuleName</name>
+					<type>String</type>
+					<notnull>false</notnull>
+					<length>-1</length>
+					<variabletype>LOCAL</variabletype>
+				</field>
+				<field>
+					<name>rawOut</name>
+					<type>RawMessage</type>
+					<notnull>false</notnull>
+					<variabletype>OUTPUT</variabletype>
+				</field>
+				<field>
+					<name>status</name>
+					<type>String</type>
+					<notnull>false</notnull>
+					<length>-1</length>
+					<variabletype>OUTPUT</variabletype>
+				</field>
+				<field>
+					<name>exception</name>
+					<type>String</type>
+					<notnull>false</notnull>
+					<length>-1</length>
+					<variabletype>OUTPUT</variabletype>
+				</field>
+				<field>
+					<name>sblockvalue</name>
+					<type>String</type>
+					<notnull>false</notnull>
+					<length>-1</length>
+					<variabletype>OUTPUT</variabletype>
+				</field>
+			</fields>
+		</variables>
+		<additional-properties>
+			<property name="main-flow" value="false"/>
+		</additional-properties>
+		<flowelement name="Start1" uid="2d216974-d58e-4fe3-ac93-049d824a2aef" type="Start" xsi:type="Start" >
+			<label>Start</label>
+			<description><![CDATA[]]></description>
+			<visual>
+				<position x="421" y="46"/>
+			</visual>
+		</flowelement>
+		<flowelement name="Stop1" uid="5651e43b-44f2-422f-94db-148acdb4f77d" type="Stop" xsi:type="Stop" >
+			<label>Stop</label>
+			<description><![CDATA[]]></description>
+			<visual>
+				<position x="440" y="543"/>
+			</visual>
+		</flowelement>
+		<flowelement name="Parse1" uid="a8ae8775-1a74-4946-aae5-b0702660ce04" type="Parse" xsi:type="Parse" >
+			<label>%a %n</label>
+			<description><![CDATA[]]></description>
+			<in>configXML</in>
+			<out>configIsn</out>
+			<message>fniGwyXFormAppIsnConfig</message>
+			<cascade-exceptions>false</cascade-exceptions>
+			<visual>
+				<position x="279" y="226"/>
+			</visual>
+		</flowelement>
+		<flowelement name="Custom1" uid="dad59a7e-3533-4755-8443-4eb630be7e3d" type="Custom" xsi:type="Custom" >
+			<label>Get BusinessModule</label>
+			<description><![CDATA[]]></description>
+			<code><![CDATA[def configXMLTxt = configXML.toText();
+def BusinessModulestart = configXMLTxt.FindFirst("<BusinessModule>");
+def BusinessModuleend = configXMLTxt.FindFirst("</BusinessModule>");
+def restxtinter;
+def restxt;
+ businessModuleName = configXMLTxt.rightstr("<BusinessModuleName>").leftstr("</BusinessModuleName>");
+if(BusinessModulestart != -1 && BusinessModuleend != -1 && 
+     configXMLTxt.FindFirst("<BusinessModule>") != -1) {
+     restxtinter=configXMLTxt.rightstr("<BusinessModule>").leftstr("</BusinessModule>");
+     if(businessModuleName=="fniGwyXFormAppIsn")
+     {
+     restxt="<fniGwyXFormAppIsnConfig>"+restxtinter+"</fniGwyXFormAppIsnConfig>";
+     }
+     else if(businessModuleName=="fniGwyXFormAppAck")
+     {
+     restxt="<fniGwyXFormAppAckConfig>"+restxtinter+"</fniGwyXFormAppAckConfig>";
+     }
+
+}
+if(restxtinter.IsNotNull() && restxtinter.Length() > 0) {
+    configXML = restxt.ToRawMessage();
+}]]></code>
+			<visual>
+				<position x="422" y="109"/>
+			</visual>
+		</flowelement>
+		<flowelement name="If1" uid="e2526117-694e-4079-b3ee-fd17ddf8ae41" type="If" xsi:type="If" >
+			<label>DEVISN?</label>
+			<description><![CDATA[]]></description>
+			<condition><![CDATA[businessModuleName == "fniGwyXFormAppIsn"]]></condition>
+			<visual>
+				<position x="422" y="172"/>
+			</visual>
+		</flowelement>
+		<flowelement name="Custom2" uid="28e6f43b-c614-4f83-adbe-12dda354a173" type="Custom" xsi:type="Custom" >
+			<label>CheckVersion</label>
+			<description><![CDATA[]]></description>
+			<code><![CDATA[rawOut = "In this version Only MPOUatIsn,MSOUatIsn,MPSOuatIsn,MFSOUatIsn,OPFDevIsn,EDiDevIsn,OPFDevAck,FTSDevack and BDSDevAck Gateways are supported".ToRawMessage();
+status="FAILURE";]]></code>
+			<visual>
+				<position x="635" y="313"/>
+			</visual>
+		</flowelement>
+		<flowelement name="If2" uid="d6a9c3db-88ad-4b2a-9ca8-7c146f19f770" type="If" xsi:type="If" >
+			<label>DEVACK?</label>
+			<description><![CDATA[]]></description>
+			<condition><![CDATA[businessModuleName == "fniGwyXFormAppAck"]]></condition>
+			<visual>
+				<position x="514" y="218"/>
+			</visual>
+		</flowelement>
+		<flowelement name="Invoke2" uid="89b3bdf8-e085-4a97-92d7-8a833575cf3b" type="Invoke" xsi:type="Invoke" >
+			<label>%a %n</label>
+			<description><![CDATA[]]></description>
+			<name>fniGwyXFormAppAckFlow</name>
+			<cascade-exceptions>false</cascade-exceptions>
+			<input>
+				<field>
+					<name>rawIn</name>
+					<type>RawMessage</type>
+					<value><![CDATA[rawIn]]></value>
+					<notnull>true</notnull>
+				</field>
+				<field>
+					<name>fniGwyXFormSwfOsnConfig</name>
+					<type>DataObject</type>
+					<value><![CDATA[configAck]]></value>
+					<notnull>true</notnull>
+				</field>
+			</input>
+			<output>
+				<field>
+					<name>rawOut</name>
+					<type>RawMessage</type>
+					<value><![CDATA[rawOut]]></value>
+					<notnull>false</notnull>
+				</field>
+			</output>
+			<visual>
+				<position x="438" y="393"/>
+			</visual>
+		</flowelement>
+		<flowelement name="Parse3" uid="9ae58e53-4a28-4c48-93bb-15900c3e5632" type="Parse" xsi:type="Parse" >
+			<label>%a %n</label>
+			<description><![CDATA[]]></description>
+			<in>configXML</in>
+			<out>configAck</out>
+			<message>fniGwyXFormAppAckConfig</message>
+			<cascade-exceptions>false</cascade-exceptions>
+			<visual>
+				<position x="438" y="305"/>
+			</visual>
+		</flowelement>
+		<flowelement name="Custom3" uid="e6e83654-5f0a-4586-aaa1-e909af0f9e46" type="Custom" xsi:type="Custom" >
+			<label>ExtractingSBlock</label>
+			<description><![CDATA[]]></description>
+			<code><![CDATA[if(rawOut.isnotnull())
+{
+if(rawOut.totext().FindFirst("{5:}{S:")>0)
+{
+ sblockvalue = rawOut.totext().rightstr("{S:");
+}
+}]]></code>
+			<visual>
+				<position x="281" y="417"/>
+			</visual>
+		</flowelement>
+		<flowelement name="Custom4" uid="8238e100-c086-4f09-8eb7-b8893c48abe6" type="Custom" xsi:type="Custom" >
+			<label>setSuccess</label>
+			<description><![CDATA[]]></description>
+			<code><![CDATA[if(status.isnull())
+{
+status="SUCCESS";
+}]]></code>
+			<visual>
+				<position x="439" y="473"/>
+			</visual>
+		</flowelement>
+		<flowelement name="Custom6" uid="ef2b9f58-8538-40e6-9b33-a845c1ae1766" type="Custom" xsi:type="Custom" >
+			<label>setException</label>
+			<description><![CDATA[]]></description>
+			<code><![CDATA[if(transformFlowExe.isnotnull())
+exception = transformFlowExe.totext();
+status="FAILURE";
+]]></code>
+			<visual>
+				<position x="798" y="414"/>
+			</visual>
+		</flowelement>
+		<flowelement name="Invoke1" uid="93560586-e5f3-4758-9e2e-03b124a51b29" type="Invoke" xsi:type="Invoke" >
+			<label>%a %n</label>
+			<description><![CDATA[]]></description>
+			<name>fniGwyXFormAppIsnFlow</name>
+			<cascade-exceptions>false</cascade-exceptions>
+			<input>
+				<field>
+					<name>rawIn</name>
+					<type>RawMessage</type>
+					<value><![CDATA[rawIn]]></value>
+					<notnull>true</notnull>
+				</field>
+				<field>
+					<name>namekeyTableInput</name>
+					<type>RawMessage</type>
+					<value><![CDATA[nameKeyTable]]></value>
+					<notnull>true</notnull>
+				</field>
+				<field>
+					<name>fniGwyXFormAppIsnConfig</name>
+					<type>DataObject</type>
+					<value><![CDATA[configIsn]]></value>
+					<notnull>true</notnull>
+				</field>
+			</input>
+			<output>
+				<field>
+					<name>rawOut</name>
+					<type>RawMessage</type>
+					<value><![CDATA[rawOut]]></value>
+					<notnull>false</notnull>
+				</field>
+				<field>
+					<name>isnExceptionOutput</name>
+					<type>String</type>
+					<value><![CDATA[exception]]></value>
+					<notnull>false</notnull>
+				</field>
+				<field>
+					<name>status</name>
+					<type>String</type>
+					<value><![CDATA[status]]></value>
+					<notnull>false</notnull>
+				</field>
+			</output>
+			<visual>
+				<position x="281" y="312"/>
+			</visual>
+		</flowelement>
+		<link type="Default" xsi:type="Default">
+			<outputport uid="2d216974-d58e-4fe3-ac93-049d824a2aef" portindex="0"/>
+			<inputport uid="dad59a7e-3533-4755-8443-4eb630be7e3d" portindex="0"/>
+			<edge-type>DIRECT</edge-type>
+		</link>
+		<link type="Default" xsi:type="Default">
+			<outputport uid="e2526117-694e-4079-b3ee-fd17ddf8ae41" portindex="2"/>
+			<inputport uid="d6a9c3db-88ad-4b2a-9ca8-7c146f19f770" portindex="0"/>
+			<edge-type>ELBOW</edge-type>
+		</link>
+		<link type="Default" xsi:type="Default">
+			<outputport uid="d6a9c3db-88ad-4b2a-9ca8-7c146f19f770" portindex="2"/>
+			<inputport uid="28e6f43b-c614-4f83-adbe-12dda354a173" portindex="0"/>
+			<edge-type>ELBOW</edge-type>
+		</link>
+		<link type="Default" xsi:type="Default">
+			<outputport uid="e2526117-694e-4079-b3ee-fd17ddf8ae41" portindex="1"/>
+			<inputport uid="a8ae8775-1a74-4946-aae5-b0702660ce04" portindex="0"/>
+			<edge-type>ELBOW</edge-type>
+		</link>
+		<link type="Default" xsi:type="Default">
+			<outputport uid="d6a9c3db-88ad-4b2a-9ca8-7c146f19f770" portindex="1"/>
+			<inputport uid="9ae58e53-4a28-4c48-93bb-15900c3e5632" portindex="0"/>
+			<edge-type>ELBOW</edge-type>
+		</link>
+		<link type="Default" xsi:type="Default">
+			<outputport uid="89b3bdf8-e085-4a97-92d7-8a833575cf3b" portindex="1"/>
+			<inputport uid="8238e100-c086-4f09-8eb7-b8893c48abe6" portindex="0"/>
+			<edge-type>DIRECT</edge-type>
+		</link>
+		<link type="Default" xsi:type="Default">
+			<outputport uid="8238e100-c086-4f09-8eb7-b8893c48abe6" portindex="1"/>
+			<inputport uid="5651e43b-44f2-422f-94db-148acdb4f77d" portindex="0"/>
+			<edge-type>DIRECT</edge-type>
+		</link>
+		<link type="Default" xsi:type="Default">
+			<outputport uid="e6e83654-5f0a-4586-aaa1-e909af0f9e46" portindex="1"/>
+			<inputport uid="8238e100-c086-4f09-8eb7-b8893c48abe6" portindex="0"/>
+			<edge-type>DIRECT</edge-type>
+		</link>
+		<link type="Default" xsi:type="Default">
+			<outputport uid="28e6f43b-c614-4f83-adbe-12dda354a173" portindex="1"/>
+			<inputport uid="8238e100-c086-4f09-8eb7-b8893c48abe6" portindex="0"/>
+			<edge-type>DIRECT</edge-type>
+		</link>
+		<link type="Exception" xsi:type="Exception">
+			<message>TransformException</message>
+			<out>transformFlowExe</out>
+			<cascade-exceptions>true</cascade-exceptions>
+			<runtime-exceptions>true</runtime-exceptions>
+			<outputport uid="a8ae8775-1a74-4946-aae5-b0702660ce04" portindex="2"/>
+			<inputport uid="ef2b9f58-8538-40e6-9b33-a845c1ae1766" portindex="0"/>
+			<edge-type>ELBOW</edge-type>
+		</link>
+		<link type="Default" xsi:type="Default">
+			<outputport uid="93560586-e5f3-4758-9e2e-03b124a51b29" portindex="1"/>
+			<inputport uid="e6e83654-5f0a-4586-aaa1-e909af0f9e46" portindex="0"/>
+			<edge-type>DIRECT</edge-type>
+		</link>
+		<link type="Default" xsi:type="Default">
+			<outputport uid="dad59a7e-3533-4755-8443-4eb630be7e3d" portindex="1"/>
+			<inputport uid="e2526117-694e-4079-b3ee-fd17ddf8ae41" portindex="0"/>
+			<edge-type>DIRECT</edge-type>
+		</link>
+		<link type="Exception" xsi:type="Exception">
+			<message>TransformException</message>
+			<out>transformFlowExe</out>
+			<cascade-exceptions>true</cascade-exceptions>
+			<runtime-exceptions>true</runtime-exceptions>
+			<outputport uid="9ae58e53-4a28-4c48-93bb-15900c3e5632" portindex="2"/>
+			<inputport uid="ef2b9f58-8538-40e6-9b33-a845c1ae1766" portindex="0"/>
+			<edge-type>ELBOW</edge-type>
+		</link>
+		<link type="Exception" xsi:type="Exception">
+			<message>TransformException</message>
+			<out>transformFlowExe</out>
+			<cascade-exceptions>true</cascade-exceptions>
+			<runtime-exceptions>true</runtime-exceptions>
+			<outputport uid="93560586-e5f3-4758-9e2e-03b124a51b29" portindex="2"/>
+			<inputport uid="ef2b9f58-8538-40e6-9b33-a845c1ae1766" portindex="0"/>
+			<edge-type>ELBOW</edge-type>
+		</link>
+		<link type="Default" xsi:type="Default">
+			<outputport uid="a8ae8775-1a74-4946-aae5-b0702660ce04" portindex="1"/>
+			<inputport uid="93560586-e5f3-4758-9e2e-03b124a51b29" portindex="0"/>
+			<edge-type>DIRECT</edge-type>
+		</link>
+		<link type="Exception" xsi:type="Exception">
+			<message>TransformException</message>
+			<out>transformFlowExe</out>
+			<cascade-exceptions>true</cascade-exceptions>
+			<runtime-exceptions>true</runtime-exceptions>
+			<outputport uid="89b3bdf8-e085-4a97-92d7-8a833575cf3b" portindex="2"/>
+			<inputport uid="ef2b9f58-8538-40e6-9b33-a845c1ae1766" portindex="0"/>
+			<edge-type>ELBOW</edge-type>
+		</link>
+		<link type="Exception" xsi:type="Exception">
+			<message>TransformException</message>
+			<out>transformFlowExe</out>
+			<cascade-exceptions>true</cascade-exceptions>
+			<runtime-exceptions>true</runtime-exceptions>
+			<outputport uid="dad59a7e-3533-4755-8443-4eb630be7e3d" portindex="2"/>
+			<inputport uid="ef2b9f58-8538-40e6-9b33-a845c1ae1766" portindex="0"/>
+			<edge-type>ELBOW</edge-type>
+		</link>
+		<link type="Default" xsi:type="Default">
+			<outputport uid="9ae58e53-4a28-4c48-93bb-15900c3e5632" portindex="1"/>
+			<inputport uid="89b3bdf8-e085-4a97-92d7-8a833575cf3b" portindex="0"/>
+			<edge-type>DIRECT</edge-type>
+		</link>
+		<link type="Default" xsi:type="Default">
+			<outputport uid="ef2b9f58-8538-40e6-9b33-a845c1ae1766" portindex="1"/>
+			<inputport uid="5651e43b-44f2-422f-94db-148acdb4f77d" portindex="0"/>
+			<edge-type>DIRECT</edge-type>
+		</link>
+		<visual>
+			<bounds x="233" y="33" width="607" height="524"/>
+		</visual>
+		<elementproperties>
+			<propertymap>
+				<property name="codegen.java.properties">
+					<value>
+						<propertymap type="com.tplus.transform.design.PropertiesDef">
+							<property name="Java Package Name" value="com.transform.flow.%e"/>
+							<property name="Jar Name" value="%c.jar"/>
+							<property name="Manifest Entries" value="transformrt.jar"/>
+							<property name="Data Source" value=""/>
+							<property name="Generate MDB" value="false"/>
+						</propertymap>
+					</value>
+				</property>
+			</propertymap>
+		</elementproperties>
+	</messageflow>
+	<elementproperties>
+		<propertymap>
+			<property name="DOCUMENT_PROPERTIES">
+				<value>
+					<propertymap>
+						<property name="Creation Time" value="Wed Apr 12 11:04:53 IST 2017"/>
+						<property name="Author" value="krishnan"/>
+						<property name="Title" value="fniGwyXFormAppIsn"/>
+						<property name="Client Id" value="venkat_hyd@volantetech.com"/>
+						<property name="Last Author" value="sys"/>
+						<property name="Last Save Time" value="Tue Feb 20 09:54:07 IST 2018"/>
+						<property name="Designer Build" value="1629"/>
+						<property name="Revision Number" value="858"/>
+					</propertymap>
+				</value>
+			</property>
+			<property name="CARTRIDGE_INFO">
+				<value>
+					<propertymap type="com.tplus.transform.design.CartridgeInfo">
+						<property name="GeneratedFiles">
+							<value>
+								<propertymap>
+								</propertymap>
+							</value>
+						</property>
+						<property name="cartridgefilename" value="C:\Users\sys\Desktop\Source_Maven\FNITransformationFlow\TransformationFlow.car"/>
+					</propertymap>
+				</value>
+			</property>
+			<property name="codegen.java.options">
+				<value>
+					<propertymap type="com.tplus.transform.design.codegen.java.JavaCodeGeneratorOptions">
+						<property name="isJBoss" value="true"/>
+						<property name="resource-references">
+							<value>
+								<propertylist>
+								</propertylist>
+							</value>
+						</property>
+						<property name="isWAR" value="false"/>
+						<property name="isOSGI" value="true"/>
+						<property name="isGenerateALSB" value="false"/>
+						<property name="isEJB" value="true"/>
+						<property name="osgi-options">
+							<value>
+								<propertymap>
+									<property name="include-dependencies" value="false"/>
+								</propertymap>
+							</value>
+						</property>
+						<property name="isOrion" value="true"/>
+						<property name="isWebSphere" value="true"/>
+						<property name="isVolante" value="true"/>
+						<property name="isRemote" value="true"/>
+						<property name="isLocal" value="true"/>
+						<property name="isWebLogic" value="true"/>
+						<property name="isGeronimo" value="true"/>
+						<property name="isGenerateJNDILinks" value="true"/>
+						<property name="isWLEVS" value="false"/>
+						<property name="ejb-jndi-prefix" value=""/>
+						<property name="isGenerateEAR" value="false"/>
+					</propertymap>
+				</value>
+			</property>
+			<property name="codegen.java.properties">
+				<value>
+					<propertymap type="com.tplus.transform.design.PropertiesDef">
+						<property name="Java Package Name" value="com.transform.cartridge.%c"/>
+						<property name="Max Class Length" value="150"/>
+					</propertymap>
+				</value>
+			</property>
+			<property name="testsuites">
+				<value>
+					<propertylist>
+					</propertylist>
+				</value>
+			</property>
+			<property name="WebServiceDefs">
+				<value>
+					<propertymap>
+						<property name="webservices">
+							<value>
+								<propertylist>
+								</propertylist>
+							</value>
+						</property>
+					</propertymap>
+				</value>
+			</property>
+			<property name="codegen.java.bindings">
+				<value>
+					<propertymap type="com.tplus.transform.design.codegen.DefaultLanguageMapping">
+					</propertymap>
+				</value>
+			</property>
+			<property name="codegen.java.general">
+				<value>
+					<propertymap>
+						<property name="additionalClasspath" value=""/>
+						<property name="debugInfo" value="false"/>
+					</propertymap>
+				</value>
+			</property>
+		</propertymap>
+	</elementproperties>
+	<workspace>
+		<selected-element root="C:\Users\sys\Desktop\Source_Maven\FNITransformationFlow\TransformationFlow.car">TransformationFlow</selected-element>
+	</workspace>
+</cartridge>
+

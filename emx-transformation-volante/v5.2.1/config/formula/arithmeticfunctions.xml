@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<formulae> 
+		<formula name="Plus">
+			<description>Returns the sum of all the arguments. You can also use the + operator instead.</description>
+			<signature>Plus(numeric1, numeric2, ...opt)</signature>
+			<category>Arithmetic</category>
+	  		<Class>com.tplus.transform.design.formula.functions.BinaryOperatorFunction</Class>
+			<property name="operator" value="+" />
+    	</formula>
+		<formula name="Minus">
+			<description>Returns the difference of all the arguments. You can also use the - operator instead.</description>
+			<signature>Minus(numeric1, numeric2, ...opt)</signature>
+			<category>Arithmetic</category>
+	  		<Class>com.tplus.transform.design.formula.functions.BinaryOperatorFunction</Class>
+			<!--property name="args" value="2" /-->
+			<property name="operator" value="-" />
+    	</formula>
+		<formula name="Divide">
+			<description>Returns the division result of all the arguments.</description>
+			<signature>Divide(numeric1, numeric2, ...opt)</signature>
+			<category>Arithmetic</category>
+	  		<Class>com.tplus.transform.design.formula.functions.BinaryOperatorFunction</Class>
+			<!--property name="args" value="2" /-->
+			<property name="operator" value="/" />
+    	</formula>
+		<formula name="Multiply">
+			<description>Returns the product of all the arguments. You can also use the * operator instead.</description>
+			<signature>Multiply(numeric1, numeric2, ...opt)</signature>
+			<category>Arithmetic</category>
+	  		<Class>com.tplus.transform.design.formula.functions.BinaryOperatorFunction</Class>
+			<property name="operator" value="*" />
+    	</formula>
+		<formula name="Remainder">
+			<description>Returns the remainder ((n1%n2)%n3)... of arguments. The "%" operator can be used instead.</description>
+			<signature>Remainder(numeric1, numeric2, ...opt)</signature>
+			<category>Arithmetic</category>
+	  		<Class>com.tplus.transform.design.formula.functions.BinaryOperatorFunction</Class>
+			<!--property name="args" value="2" /-->
+			<property name="operator" value="%" />
+    	</formula>
+
+		<formula name="Plus">
+			<description>Returns the sum of the arguments. You can also use the + operator instead.</description>
+			<signature>Plus(numeric1, numeric2)</signature>
+			<category>Arithmetic</category>
+	  		<Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+			<property name="class" value="com.tplus.transform.runtime.formula.BigTypeFunctions" />
+			<property name="method" value="plus" />
+   	</formula>
+		<formula name="Minus">
+			<description>Returns the difference between the two arguments (numeric1 - numeric2). You can also use the - operator instead.</description>
+			<signature>Minus(numeric1, numeric2)</signature>
+			<category>Arithmetic</category>
+	  		<Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+			<property name="class" value="com.tplus.transform.runtime.formula.BigTypeFunctions" />
+			<property name="method" value="minus" />
+    	</formula>
+		<formula name="Divide">
+			<description>Divides numeric1 by numeric2 (n1/n2). You can also use the / operator instead.</description>
+			<signature>Divide(numeric1, numeric2)</signature>
+			<category>Arithmetic</category>
+	  		<Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+			<property name="class" value="com.tplus.transform.runtime.formula.BigTypeFunctions" />
+			<property name="method" value="divide" />
+    	</formula>
+		<formula name="Divide">
+			<description>Divides numeric1 by numeric2 (n1/n2). You can also use the / operator instead.</description>
+			<signature>Divide(numeric1, numeric2)</signature>
+			<category>Arithmetic</category>
+	  		<Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+			<property name="class" value="com.tplus.transform.runtime.formula.BigTypeFunctions" />
+			<property name="method" value="divideInteger" />
+    	</formula>
+		<formula name="Multiply">
+			<description>Returns the product of numeric1 and numeric2. You can also use the * operator instead.</description>
+			<signature>Multiply(numeric1, numeric2)</signature>
+			<category>Arithmetic</category>
+	  		<Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+			<property name="class" value="com.tplus.transform.runtime.formula.BigTypeFunctions" />
+			<property name="method" value="multiply" />
+    	</formula>
+		<formula name="Remainder">
+			<description>This function divides numeric1 by numeric2 and returns the remainder (n1%n2). The "%" operator can be used instead.</description>
+			<signature>Remainder(numeric1, numeric2)</signature>
+			<category>Arithmetic</category>
+	  		<Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+			<property name="class" value="com.tplus.transform.runtime.formula.BigTypeFunctions" />
+			<property name="method" value="remainder" />
+    	</formula>
+
+		<formula name="Incr">
+			<description>Increments the value of the variable.</description>
+			<signature>Incr(variable)</signature>
+			<category>Arithmetic</category>
+	  		<Class>com.tplus.transform.design.formula.functions.IncrDecrOperatorFunction</Class>
+			<property name="operator" value="++" />
+    	</formula>
+		<formula name="Decr">
+			<description>Decrements the value of the variable.</description>
+			<signature>Decr(variable)</signature>
+			<category>Arithmetic</category>
+	  		<Class>com.tplus.transform.design.formula.functions.IncrDecrOperatorFunction</Class>
+			<property name="operator" value="--" />
+    	</formula>
+
+</formulae> 

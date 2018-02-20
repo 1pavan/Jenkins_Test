@@ -1,0 +1,309 @@
+BODY {
+	FONT-FAMILY: verdana, geneva, lucida, 'lucida grande', arial, helvetica, sans-serif; 
+}
+
+h1 {
+	FONT-SIZE: 18px;
+	FONT-WEIGHT: bold;
+	COLOR: #365F91;
+}
+h2 {
+	FONT-SIZE: 16px;
+	FONT-WEIGHT: bold;
+	COLOR: #365F91;
+}
+p.paratext {
+	FONT-SIZE: 12px;
+
+}
+
+tr.tableRowHeader {
+	COLOR: white;
+	BACKGROUND-COLOR: #4b6ca6;
+	FONT-FAMILY: verdana, geneva, lucida, 'lucida grande', arial, helvetica, sans-serif; 
+	FONT-SIZE: 11px; 
+	FONT-WEIGHT: bold; 
+	TEXT-ALIGN: center; 
+	PADDING-RIGHT: 6px; 
+	PADDING-LEFT: 6px; 
+	PADDING-BOTTOM: 6px; 
+	PADDING-TOP: 6px;
+	BORDER: white 1px solid;
+}
+
+td.tableCell {
+  padding-left: .5em;
+  padding-right: .5em;
+  padding-top: .3em;
+  padding-bottom: .3em;
+}
+
+td.tableCellAction {
+  padding-left: .1em; padding-right: .1em; padding-top: .1em; padding-bottom: .1em;
+  background-color: #EDEDEE; 
+  color: #000000;
+  font-family: verdana, geneva, lucida, 'lucida grande', arial, helvetica, sans-serif;  
+  font-size:80.0%;
+}
+
+tr.tableRowOdd {
+  padding: .5em;
+  font-family: verdana, geneva, lucida, 'lucida grande', arial, helvetica, sans-serif; 
+  font-size:11px;
+  background-color: white;
+  BORDER: #dddddd 1px solid;
+}
+tr.tableRowEven {
+  padding: .5em;
+  font-family: verdana, geneva, lucida, 'lucida grande', arial, helvetica, sans-serif; 
+  font-size:11px;;
+  background-color: white;
+  BORDER: #dddddd 1px solid;
+}
+
+td.tableColOdd {
+	COLOR: #000000; 
+  BORDER: #dddddd 1px solid;
+}
+td.tableColEven {
+	COLOR: #000000; 
+  BORDER: #dddddd 1px solid;
+}
+
+
+table.summaryTable {
+	BORDER: #eeeeee 1px solid;
+	BACKGROUND: #d1d1e1;
+	PADDING: 1px;
+	MARGIN-TOP: 14px;
+	MARGIN-BOTTOM: 14px;
+	MARGIN-LEFT: 6px;
+	MARGIN-RIGHT: 6px;
+	width : 95%;
+	border-collapse:collapse;
+}
+tr.summaryTableHeader {
+	COLOR: white;
+	BACKGROUND-COLOR: #aaaaaa;
+	FONT-FAMILY: verdana, geneva, lucida, 'lucida grande', arial, helvetica, sans-serif;
+	FONT-SIZE: 11px;
+	FONT-WEIGHT: bold;
+	TEXT-ALIGN: center;
+	PADDING-RIGHT: 6px;
+	PADDING-LEFT: 6px;
+	PADDING-BOTTOM: 6px;
+	PADDING-TOP: 6px;
+	BORDER: white 1px solid;
+}
+td.summaryTableHeader {
+	COLOR: white;
+	BACKGROUND-COLOR: #aaaaaa;
+	FONT-FAMILY: verdana, geneva, lucida, 'lucida grande', arial, helvetica, sans-serif;
+	FONT-SIZE: 11px;
+	FONT-WEIGHT: bold;
+	TEXT-ALIGN: left;
+	PADDING: 6px;
+	BORDER: white 1px solid;
+}
+
+tr.summaryTableTitle {
+	BACKGROUND:  #869bbf repeat-x left top;
+	FONT-FAMILY: verdana, geneva, lucida, 'lucida grande', arial, helvetica, sans-serif;
+	FONT-SIZE: 12px;
+	FONT-WEIGHT: bold;
+	COLOR: #ffffff
+}
+
+td.summaryTableTitle {
+	BACKGROUND:  #869bbf repeat-x left top;
+	FONT-FAMILY: verdana, geneva, lucida, 'lucida grande', arial, helvetica, sans-serif;
+	FONT-SIZE: 11px;
+	FONT-WEIGHT: bold;
+	COLOR: #ffffff
+}
+
+table.detailTable{
+    border-collapse: collapse;
+	BORDER: 1px solid #A6B3C6;
+	BACKGROUND: white;
+	PADDING: 1px;
+	MARGIN-TOP: 14px;
+	MARGIN-BOTTOM: 14px;
+	MARGIN-LEFT: 6px;
+	MARGIN-RIGHT: 6px;
+	width : 95%
+}
+
+tr.detailTableHeader {
+	COLOR: black;
+	BACKGROUND-COLOR: #ECE9D8;
+	FONT-FAMILY: verdana, geneva, lucida, 'lucida grande', arial, helvetica, sans-serif;
+	FONT-SIZE: 15px;
+	FONT-WEIGHT: bold;
+	TEXT-ALIGN: left;
+	PADDING: 6px;
+	BORDER: 1px solid #A6B3C6;
+}
+td.detailTableHeader {
+	COLOR: black;
+	BACKGROUND-COLOR: #ECE9D8;
+	FONT-FAMILY: verdana, geneva, lucida, 'lucida grande', arial, helvetica, sans-serif;
+	FONT-SIZE: 15px;
+	FONT-WEIGHT: bold;
+	TEXT-ALIGN: left;
+	PADDING: 6px;
+	BORDER: 1px solid #A6B3C6;
+}
+
+tr.detailTableTitle {
+	BACKGROUND:  #869bbf repeat-x left top;
+	FONT-FAMILY: verdana, geneva, lucida, 'lucida grande', arial, helvetica, sans-serif;
+	FONT-SIZE: 12px;
+	FONT-WEIGHT: bold;
+	COLOR: black
+}
+
+td.detailTableTitle {
+	BACKGROUND:  #869bbf repeat-x left top;
+	FONT-FAMILY: verdana, geneva, lucida, 'lucida grande', arial, helvetica, sans-serif;
+	FONT-SIZE: 11px;
+	FONT-WEIGHT: bold;
+	COLOR: black
+}
+
+td.detailTableName  {
+   	WIDTH: 100px;
+	VERTICAL-ALIGN: top;
+	FONT-WEIGHT: bold;
+	TEXT-ALIGN: right;
+	COLOR: #333333;
+	FONT-FAMILY: verdana, geneva, lucida, 'lucida grande', arial, helvetica, sans-serif;
+	FONT-SIZE: 11px;
+	BACKGROUND-COLOR: white;
+	PADDING: 6px;
+}
+
+
+td.detailTableColon {
+   	WIDTH: 5px;
+	VERTICAL-ALIGN: top;
+	FONT-WEIGHT: bold;
+   	TEXT-ALIGN: left;
+   	COLOR: #000000;
+	FONT-FAMILY: verdana, geneva, lucida, 'lucida grande', arial, helvetica, sans-serif;
+	FONT-SIZE: 10px;
+	BACKGROUND-COLOR: white;
+	PADDING-BOTTOM: 6px;
+	PADDING-TOP: 6px;
+}
+
+td.detailTableValue {
+	VERTICAL-ALIGN: top;
+	FONT-FAMILY: verdana, geneva, lucida, 'lucida grande', arial, helvetica, sans-serif;
+	FONT-SIZE: 11px;
+	BACKGROUND-COLOR: white;
+	PADDING-RIGHT: 6px;
+	PADDING-LEFT: 6px;
+	PADDING-BOTTOM: 6px;
+	PADDING-TOP: 6px;
+	BORDER-BOTTOM: #d3d3d3 1px solid;
+}
+
+table.subTable{
+	BORDER: #d3d3d3 1px solid;
+	PADDING-RIGHT: 1px;
+	PADDING-LEFT: 1px;
+	PADDING-BOTTOM: 1px;
+	PADDING-TOP: 1px;
+	MARGIN-TOP: 14px;
+	MARGIN-BOTTOM: 14px;
+	MARGIN-LEFT: 6px;
+	MARGIN-RIGHT: 6px;
+	width : 95%;
+	border-collapse:collapse
+}
+
+tr.subTableHeader {
+	COLOR: white;
+	BACKGROUND-COLOR: #4b6ca6;
+	FONT-FAMILY: verdana, geneva, lucida, 'lucida grande', arial, helvetica, sans-serif;
+	FONT-SIZE: 11px;
+	FONT-WEIGHT: bold;
+	TEXT-ALIGN: left;
+	PADDING-RIGHT: 6px;
+	PADDING-LEFT: 6px;
+	PADDING-BOTTOM: 6px;
+	PADDING-TOP: 6px;
+	BORDER: #d3d3d3 1px solid;
+}
+th.subTableHeader {
+	COLOR: black;
+	BACKGROUND-COLOR: white;
+	FONT-FAMILY: verdana, geneva, lucida, 'lucida grande', arial, helvetica, sans-serif;
+	FONT-SIZE: 11px;
+	FONT-WEIGHT: bold;
+	TEXT-ALIGN: left;
+	PADDING-RIGHT: 6px;
+	PADDING-LEFT: 6px;
+	PADDING-BOTTOM: 6px;
+	PADDING-TOP: 6px;
+	BORDER: #d3d3d3 1px solid;
+}
+
+tr.subTableTitle {
+	BACKGROUND:  #869bbf repeat-x left top;
+	FONT-FAMILY: verdana, geneva, lucida, 'lucida grande', arial, helvetica, sans-serif;
+	FONT-SIZE: 12px;
+	FONT-WEIGHT: bold;
+	COLOR: #ffffff
+}
+
+td.subTableTitle {
+	BACKGROUND:  #869bbf repeat-x left top;
+	FONT-FAMILY: verdana, geneva, lucida, 'lucida grande', arial, helvetica, sans-serif;
+	FONT-SIZE: 11px;
+	FONT-WEIGHT: bold;
+	COLOR: #ffffff
+}
+
+
+
+
+
+A.formulalink  {
+	COLOR: #000000; TEXT-DECORATION: none
+}
+A.formulalink:hover {
+	color: #ddaa00; TEXT-DECORATION: underline
+}
+
+
+A.tableCellHeader {
+	COLOR: white;
+	BACKGROUND-COLOR:#4b6ca6;
+	FONT-FAMILY: verdana, geneva, lucida, 'lucida grande', arial, helvetica, sans-serif; 
+	FONT-SIZE: 11px; 
+	FONT-WEIGHT: bold; 
+	TEXT-ALIGN: left; 
+}
+p.title1 {
+	FONT-FAMILY: verdana, geneva, lucida, 'lucida grande', arial, helvetica, sans-serif;
+	FONT-SIZE: 20px;
+	FONT-WEIGHT: bold;
+	TEXT-ALIGN: center;
+}
+p.title2 {
+	FONT-FAMILY: verdana, geneva, lucida, 'lucida grande', arial, helvetica, sans-serif;
+	FONT-SIZE: 16px;
+	FONT-WEIGHT: bold;
+	TEXT-ALIGN: center;
+}
+
+
+.sbttn {
+	BORDER-RIGHT: #104a7b 1px solid; BORDER-TOP: #afc4d5 1px solid; BACKGROUND: #d6e7ef; BORDER-LEFT: #afc4d5 1px solid; CURSOR: hand; COLOR: #000066; BORDER-BOTTOM: #104a7b 1px solid; HEIGHT: 19px; TEXT-DECORATION: none; FONT-SIZE: 11px; FONT-FAMILY: tahoma,sans-serif
+}
+.labelStyle {    
+	FONT-SIZE: 11px;
+    FONT-FAMILY: Verdana;
+}

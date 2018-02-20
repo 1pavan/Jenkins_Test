@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<SwiftMessageFormat name="MT042">
+	<standard-version><![CDATA[SRG 2017]]></standard-version>
+	<standard-release-qualifier>20170918</standard-release-qualifier>
+	<DescriptiveName><![CDATA[Cut-off Times List Request]]></DescriptiveName>
+	<Category><![CDATA[System]]></Category>
+	<Description><![CDATA[This message requests the system to generate a list of the cut-off times in a specific SWIFT region, or in all SWIFT regions. The response to this message is an MT 062 Cut-off Time List Report.
+
+From: User To: GPA]]></Description>
+	<SwiftFields>
+		<customizable>true</customizable>
+		<modifiable>true</modifiable>
+		<SwiftMessageType>System</SwiftMessageType>
+		<HeaderAndTrailerType>SWIFT_INPUT_HEADER</HeaderAndTrailerType>
+		<Header>
+		</Header>
+		<Data>
+			<Fields>
+				<SystemField Name="region">
+					<description><![CDATA[Region identified by the country code followed by the region code.
+
+If the region code is defined as X, then all regions of the country are identified.
+
+ALL = all regions.]]></description>
+					<datatype>String</datatype>
+					<required>true</required>
+					<SwiftSystemFieldDef Name="region" Tag="304">
+						<Format><![CDATA[3!c]]></Format>
+						<Specification><![CDATA[(region)]]></Specification>
+						<Additional-Format><![CDATA["ALL"OR<CC>"X"3!c]]></Additional-Format>
+						<Description><![CDATA[Region identified by the country code followed by the region code.
+
+If the region code is defined as X, then all regions of the country are identified.
+
+ALL = all regions.
+
+Tag 304 may be repeated.]]></Description>
+					</SwiftSystemFieldDef>
+				</SystemField>
+			</Fields>
+		</Data>
+		<Trailer>
+		</Trailer>
+	</SwiftFields>
+	<validationrules name="Default">
+		<hdrvalidationrules>
+			<fieldvalidations>
+			</fieldvalidations>
+		</hdrvalidationrules>
+		<datavalidationrules>
+			<fieldvalidations>
+				<fieldvalidation>
+					<name>E1</name>
+					<fieldname>region</fieldname>
+					<comment><![CDATA[Region value should be 'ALL' or 'CC'X.]]></comment>
+					<formula><![CDATA[($value == "ALL") || 
+  (GetCountryName(Left($value, 2)) != "" ) && (Right($value, 1) == "X");
+]]></formula>
+					<severity>error</severity>
+					<cascade>true</cascade>
+					<error-code>V08</error-code>
+					<actionmessage><![CDATA["Region value should be 'ALL' or 'CC'X."]]></actionmessage>
+				</fieldvalidation>
+			</fieldvalidations>
+		</datavalidationrules>
+		<tlrvalidationrules>
+			<fieldvalidations>
+			</fieldvalidations>
+		</tlrvalidationrules>
+	</validationrules>
+</SwiftMessageFormat>
+

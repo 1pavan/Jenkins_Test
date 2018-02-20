@@ -1,0 +1,375 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<SwiftMessageFormat name="MT577">
+	<standard-version><![CDATA[SRG 2013]]></standard-version>
+	<DescriptiveName><![CDATA[Statement of Numbers]]></DescriptiveName>
+	<Category><![CDATA[Securities Markets]]></Category>
+	<Description><![CDATA[This message type is sent by a custodian to a financial institution for which it holds securities.
+
+It is used to provide certificate numbers of securities.
+
+This is a stand-alone message and does not supplement any other message.]]></Description>
+	<SwiftFields>
+		<customizable>true</customizable>
+		<modifiable>true</modifiable>
+		<SwiftMessageType>User</SwiftMessageType>
+		<max-length>10000</max-length>
+		<HeaderAndTrailerType>SWIFT_INPUT_OUTPUT_HEADER</HeaderAndTrailerType>
+		<Header>
+		</Header>
+		<Data>
+			<Fields>
+				<SwiftField Name="28">
+					<SwiftFieldDef Name="28">
+						<Generic>false</Generic>
+						<Description><![CDATA[Page Number/Continuation Indicator]]></Description>
+						<Option Name="">
+							<Format><![CDATA[5n[/2n]]]></Format>
+							<Specification><![CDATA[(Page Number)(Indicator)]]></Specification>
+							<Description><![CDATA[Page Number/Continuation Indicator]]></Description>
+						</Option>
+					</SwiftFieldDef>
+					<Repeating>false</Repeating>
+					<Presence>M</Presence>
+					<Options> </Options>
+					<Validations>
+						<SubField Name="Indicator">
+							<Validation>
+								<Enabled>false</Enabled>
+								<Options> </Options>
+								<ErrorCode>T12</ErrorCode>
+								<Comment><![CDATA[Indicator must contain one of the following codes: (This is not a NVR)]]></Comment>
+								<ValidationPattern Type="CODE">
+									<Codes>
+										<Code Name="0">
+											<Description>The statement is to continue.</Description>
+										</Code>
+										<Code Name="00">
+											<Description>The statement is to continue.</Description>
+										</Code>
+										<Code Name="99">
+											<Description>This is the last page of the statement.</Description>
+										</Code>
+									</Codes>
+								</ValidationPattern>
+							</Validation>
+						</SubField>
+					</Validations>
+				</SwiftField>
+				<SwiftField Name="20">
+					<SwiftFieldDef Name="20">
+						<Generic>false</Generic>
+						<Description><![CDATA[Transaction Reference Number]]></Description>
+						<Option Name="">
+							<Format><![CDATA[16x]]></Format>
+							<Specification><![CDATA[(Reference)]]></Specification>
+							<Description><![CDATA[Transaction Reference Number]]></Description>
+						</Option>
+					</SwiftFieldDef>
+					<Repeating>false</Repeating>
+					<Presence>M</Presence>
+					<Options> </Options>
+					<Validations>
+						<SubField Name="Reference">
+							<Validation>
+								<Options> </Options>
+								<ErrorCode>T26</ErrorCode>
+								<Comment><![CDATA[This field must not start or end with a slash '/' and must not contain two consecutive slashes '//' (Error code(s): T26) .]]></Comment>
+								<ValidationPattern Type="T26">
+								</ValidationPattern>
+							</Validation>
+						</SubField>
+					</Validations>
+				</SwiftField>
+				<SwiftField Name="21">
+					<SwiftFieldDef Name="21">
+						<Generic>false</Generic>
+						<Description><![CDATA[Related Reference]]></Description>
+						<Option Name="">
+							<Format><![CDATA[16x]]></Format>
+							<Specification><![CDATA[(Reference)]]></Specification>
+							<Description><![CDATA[Related Reference]]></Description>
+						</Option>
+					</SwiftFieldDef>
+					<Repeating>false</Repeating>
+					<Presence>O</Presence>
+					<Options> </Options>
+					<Validations>
+						<SubField Name="Reference">
+							<Validation>
+								<Options> </Options>
+								<ErrorCode>T26</ErrorCode>
+								<Comment><![CDATA[This field must not start or end with a slash '/' and must not contain two consecutive slashes '//' (Error code(s): T26) .]]></Comment>
+								<ValidationPattern Type="T26">
+								</ValidationPattern>
+							</Validation>
+						</SubField>
+					</Validations>
+				</SwiftField>
+				<SwiftField Name="83a">
+					<SwiftFieldDef Name="83">
+						<Generic>false</Generic>
+						<Description><![CDATA[Safekeeping Account]]></Description>
+						<Option Name="A">
+							<Format><![CDATA[/1!a([/34x])(CRLF4!a2!a2!c[3!c]) | [/34xCRLF](4!a2!a2!c[3!c])]]></Format>
+							<Specification><![CDATA[(CreditDebit)(Party Identifier)(Identifier Code) | (Party Identifier)(Identifier Code)]]></Specification>
+							<Description><![CDATA[Safekeeping Account]]></Description>
+						</Option>
+						<Option Name="C">
+							<Format><![CDATA[/34x]]></Format>
+							<Specification><![CDATA[(Account)]]></Specification>
+							<Description><![CDATA[Safekeeping Account]]></Description>
+						</Option>
+						<Option Name="D">
+							<Format><![CDATA[/1!a([/34x])(CRLF4*35x) | ([/34xCRLF])(4*35x)]]></Format>
+							<Specification><![CDATA[(CreditDebit)(Party Identifier)(Name & Address)|(Party Identifier)(Name & Address)]]></Specification>
+							<Description><![CDATA[Safekeeping Account]]></Description>
+						</Option>
+					</SwiftFieldDef>
+					<Repeating>false</Repeating>
+					<Presence>O</Presence>
+					<Options>A, C, D</Options>
+					<Validations>
+						<SubField Name="Identifier_Code">
+							<Validation>
+								<Options>A</Options>
+								<ErrorCode>T27, T28, T29, T45</ErrorCode>
+								<Comment><![CDATA[Identifier Code must be a registered BIC or BEI (Error code(s): T27,T28,T29,T45)]]></Comment>
+								<ValidationPattern Type="BIC">
+								</ValidationPattern>
+							</Validation>
+						</SubField>
+					</Validations>
+				</SwiftField>
+				<SwiftField Name="67A">
+					<SwiftFieldDef Name="67">
+						<Generic>false</Generic>
+						<Description><![CDATA[Statement Period]]></Description>
+						<Option Name="A">
+							<Format><![CDATA[6!n[/6!n]]]></Format>
+							<Specification><![CDATA[(Date 1)(Date 2)]]></Specification>
+							<Description><![CDATA[Statement Period]]></Description>
+						</Option>
+					</SwiftFieldDef>
+					<Repeating>false</Repeating>
+					<Presence>M</Presence>
+					<Options>A</Options>
+					<Validations>
+						<SubField Name="Date_1">
+							<Validation>
+								<Options>A</Options>
+								<ErrorCode>T50</ErrorCode>
+								<Comment><![CDATA[Date 1 must be a valid date expressed as YYMMDD (Error code(s): T50) .]]></Comment>
+								<ValidationPattern Type="DATE">
+									<Format>yyMMdd</Format>
+								</ValidationPattern>
+							</Validation>
+						</SubField>
+					</Validations>
+				</SwiftField>
+				<SwiftField Name="35A">
+					<SwiftFieldDef Name="35">
+						<Generic>false</Generic>
+						<Description><![CDATA[Quantity of Securities]]></Description>
+						<Option Name="A">
+							<Format><![CDATA[3!a15d]]></Format>
+							<Specification><![CDATA[(Type)(Quantity)]]></Specification>
+							<Description><![CDATA[Quantity of Securities]]></Description>
+						</Option>
+					</SwiftFieldDef>
+					<Repeating>false</Repeating>
+					<Presence>O</Presence>
+					<Options>A</Options>
+					<Validations>
+						<SubField Name="Type">
+							<Validation>
+								<Options>A</Options>
+								<ErrorCode>T58</ErrorCode>
+								<Comment><![CDATA[Type must contain one of the following codes (Error code(s): T58) :]]></Comment>
+								<ValidationPattern Type="CODE">
+									<Codes>
+										<Code Name="BON">
+											<Description>Bonds (when not traded by face amount)</Description>
+										</Code>
+										<Code Name="CER">
+											<Description>Representative certificates</Description>
+										</Code>
+										<Code Name="CPN">
+											<Description>Coupons</Description>
+										</Code>
+										<Code Name="FMT">
+											<Description>Face or principal or nominal amount</Description>
+										</Code>
+										<Code Name="MSC">
+											<Description>Miscellaneous</Description>
+										</Code>
+										<Code Name="OPC">
+											<Description>Option contracts</Description>
+										</Code>
+										<Code Name="OPS">
+											<Description>Option shares</Description>
+										</Code>
+										<Code Name="PRC">
+											<Description>Premium contracts</Description>
+										</Code>
+										<Code Name="PRS">
+											<Description>Premium shares</Description>
+										</Code>
+										<Code Name="RTE">
+											<Description>Rentes</Description>
+										</Code>
+										<Code Name="RTS">
+											<Description>Rights</Description>
+										</Code>
+										<Code Name="SHS">
+											<Description>Shares</Description>
+										</Code>
+										<Code Name="UNT">
+											<Description>Units, eg, consisting of a bond and a warrant</Description>
+										</Code>
+										<Code Name="WTS">
+											<Description>Warrants</Description>
+										</Code>
+									</Codes>
+								</ValidationPattern>
+							</Validation>
+						</SubField>
+					</Validations>
+				</SwiftField>
+				<SwiftField Name="35B">
+					<SwiftFieldDef Name="35">
+						<Generic>false</Generic>
+						<Description><![CDATA[Identification of Securities]]></Description>
+						<Option Name="B">
+							<Format><![CDATA[(ISIN1!e12!c)([CRLF4*35x]) | 4*35x]]></Format>
+							<Specification><![CDATA[(Identification Of Security)(Description Of Security) |(Description Of Security)]]></Specification>
+							<Description><![CDATA[Identification of Securities]]></Description>
+						</Option>
+					</SwiftFieldDef>
+					<Repeating>false</Repeating>
+					<Presence>M</Presence>
+					<Options>B</Options>
+				</SwiftField>
+				<SwiftField Name="35F">
+					<SwiftFieldDef Name="35">
+						<Generic>false</Generic>
+						<Description><![CDATA[Certificate Number(s)]]></Description>
+						<Option Name="F">
+							<Format><![CDATA[35*50x]]></Format>
+							<Specification><![CDATA[(Narrative)]]></Specification>
+							<Description><![CDATA[Certificate Number(s)]]></Description>
+						</Option>
+					</SwiftFieldDef>
+					<Repeating>false</Repeating>
+					<Presence>M</Presence>
+					<Options>F</Options>
+				</SwiftField>
+				<SwiftField Name="72">
+					<SwiftFieldDef Name="72">
+						<Generic>false</Generic>
+						<Description><![CDATA[Sender to Receiver Information]]></Description>
+						<Option Name="">
+							<Format><![CDATA[6*35x]]></Format>
+							<Specification><![CDATA[(Narrative)]]></Specification>
+							<Description><![CDATA[Sender to Receiver Information]]></Description>
+						</Option>
+					</SwiftFieldDef>
+					<Repeating>false</Repeating>
+					<Presence>O</Presence>
+					<Options> </Options>
+				</SwiftField>
+			</Fields>
+		</Data>
+		<Trailer>
+		</Trailer>
+	</SwiftFields>
+	<validationrules name="Default">
+		<hdrvalidationrules>
+			<fieldvalidations>
+				<fieldvalidation>
+					<name>U09</name>
+					<formula><![CDATA[if($this.Header.GetFieldIndex("User_Header") != -1) {
+    def userHeader = $this.Header.GetSection("User_Header");
+    if(userHeader.$size > 0 && userHeader[0].IsNotNull("Validation_Flag")) {
+        return false;
+    }
+}
+return true;
+]]></formula>
+					<severity>error</severity>
+					<cascade>true</cascade>
+					<error-code>U09</error-code>
+					<actionmessage><![CDATA["User has used tag 119 in a message that is not a candidate for special processing"]]></actionmessage>
+				</fieldvalidation>
+			</fieldvalidations>
+		</hdrvalidationrules>
+		<datavalidationrules>
+			<fieldvalidations>
+				<fieldvalidation>
+					<name>F-67A-A</name>
+					<fieldname>67A.Date_2</fieldname>
+					<comment><![CDATA[F-67A-A
+Date 2 must not appear in this message (Error code(s): C37).]]></comment>
+					<formula><![CDATA[false]]></formula>
+					<severity>error</severity>
+					<cascade>true</cascade>
+					<error-code>C37</error-code>
+					<actionmessage><![CDATA["Date 2 must not appear in this message."]]></actionmessage>
+				</fieldvalidation>
+				<fieldvalidation>
+					<name>F-35B-A</name>
+					<fieldname>35B.Identification_Of_Security</fieldname>
+					<comment><![CDATA[F-35B-A 
+ISIN is used at the beginning of Identification of Security (Subfield 1) and must be composed of uppercase letters only (Error code(s): T12).]]></comment>
+					<formula><![CDATA[Equal(Left($value, 5), "ISIN ") && 
+  VerifyFormat(RightStr($value, "ISIN "), "12!c")]]></formula>
+					<severity>error</severity>
+					<cascade>true</cascade>
+					<error-code>T12</error-code>
+					<actionmessage><![CDATA[$value + 
+  " is not a valid Security Identification. Required format is ISIN1!e12!c"]]></actionmessage>
+				</fieldvalidation>
+    <fieldvalidation>
+						<name>F-35B-B</name>
+						<fieldname>35B</fieldname>
+						<formula><![CDATA[if(!IsNull($value.Description_Of_Security)) {
+    def lines = Split("\r\n", $value.Description_Of_Security);
+    if(IsNull($value.Identification_Of_Security)) {
+        if(lines.Length() > 1) {
+            if(lines[0].Length() == 17 && 
+                 VerifyFormat(Substring(lines[0], 5), "12!c"))
+                return (Equal(Left(lines[0], 5), "ISIN "));
+
+        }
+        if(lines.Length() == 1) {
+            if(lines[0].Length() == 17 && 
+                 VerifyFormat(Substring($value.Description_Of_Security, 5), 
+                              "12!c"))
+                return (Equal(Left(lines[0], 5), "ISIN "));
+
+        }
+    }
+}
+return true;]]></formula>
+						<severity>error</severity>
+						<cascade>true</cascade>
+						<error-code>T12</error-code>
+						<actionmessage><![CDATA[Split("\r\n", $value.Description_Of_Security)[0] + " is not a valid Security Identification. Required format is ISIN1!e12!c";]]></actionmessage>
+					</fieldvalidation> 
+				<fieldvalidation>
+						<name>ERI</name>
+						<fieldname>72.Narrative</fieldname>
+						<formula><![CDATA[ApplyERICodeValidationStructured($value);]]></formula>
+						<severity>error</severity>
+						<cascade>true</cascade>
+						<error-code>T47</error-code>
+						<actionmessage><![CDATA["In an ERI field (i.e. fields 61, 72, 77A, 79, 86) the data part of a code word /OCMT/, or /CHGS/, is being validated, but the ending separator (i.e. third slash) is missing or the code words are duplicated."]]></actionmessage>
+					</fieldvalidation>
+			</fieldvalidations>
+		</datavalidationrules>
+		<tlrvalidationrules>
+			<fieldvalidations>
+			</fieldvalidations>
+		</tlrvalidationrules>
+	</validationrules>
+</SwiftMessageFormat>
+

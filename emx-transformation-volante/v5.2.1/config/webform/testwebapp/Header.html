@@ -1,0 +1,49 @@
+<link rel="stylesheet" type="text/css" href="webform.css"/>
+<table class="banner" border="0" cellspacing="0" cellpadding="0" width="100%">
+    <tr>
+        <td align="center">
+            <span style="font-size:32pt;font-family:Garamond,sans-serif,Arial;color:white;">Web Simulator</span>
+        </td>
+    </tr>
+</table>
+
+<table width=100% class="toolbar" cellpadding=0 cellspacing=0 border=0>
+    <tr>
+        <td class="toplinksbold" nowrap width="100%"></td>
+        <td class="toplinks" nowrap>&nbsp;</td>
+        <td class="toplinksdivide" align="right" nowrap></td>
+        <td class="toplinks2" align=right valign="middle" nowrap>
+                <span class="linktop">&nbsp;&nbsp;
+                    <a href="testmessageflow.jsp" target="_top" class="linktop" title="Test Message Flows">
+                    &nbsp;Message Flows</a>
+                    <a href="TestNewRawMessage.jsp" target="_top" class="linktop" title="Submit a new message (for testing purposes only)">Web Form</a>
+                    <img src="images/spacer.gif" width="10" alt="">&nbsp;&nbsp;
+                </span>
+        </td>
+    </tr>
+</table>
+        
+<% if(session.getAttribute("userName") != null) { %>
+<!-- no menus if the user is not logged in -->
+<table width=100% class="toolbar" cellpadding=0 cellspacing=0 border=0>
+    <tr>
+        <td class="toplinksbold" nowrap width="100%"></td>
+        <td class="toplinks" nowrap>&nbsp;</td>
+        <td class="toplinksdivide" align="right" nowrap></td>
+        <td class="toplinks2" align=right valign="middle" nowrap>
+                <span class="linktop">&nbsp;&nbsp;
+                    <a href="MessagesSearchForm.jsp" class="linktop" title="Captial Group SWIFT Reader Home">
+                        <img src="images/icon-home.gif" align="absbottom" border="0"
+                             alt="Console Home">&nbsp;Home</a>
+                    <a href="NewRawMessage.jsp" class="linktop" title="Validate a new message">New Message</a>
+                    <!-- to be removed -->
+                    <a href="TestNewRawMessage.jsp" class="linktop" title="Submit a new message (for testing purposes only)">Test</a>
+                    <!--  -->
+                    <a href="LoginForm.jsp" class="linktop">Log Out</a>
+                    <img src="images/spacer.gif" width="10" alt="">&nbsp;&nbsp;
+                </span>
+        </td>
+    </tr>
+</table>
+
+<% } %>

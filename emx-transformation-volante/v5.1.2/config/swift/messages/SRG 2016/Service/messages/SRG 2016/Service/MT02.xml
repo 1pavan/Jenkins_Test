@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<SwiftMessageFormat name="MT02">
+	<standard-version><![CDATA[SRG 2016]]></standard-version>
+	<standard-release-qualifier>20160308</standard-release-qualifier>
+	<DescriptiveName><![CDATA[Login Request Message]]></DescriptiveName>
+	<Category><![CDATA[Service]]></Category>
+	<Description><![CDATA[This message allows the system to verify whether the sending LT is an authorised system user.
+This message cannot be issued by a synonym.
+
+From: User To: GPA
+
+Notes
+
+Any user who does not get a response from the system to a Login Request Message should contact the Customer Service Centre.
+
+The default branch code XXX must be used in this message.
+
+If field 329 of the login request is Y, then field 330 is mandatory.
+
+Field tag 501 is mandatory in SWIFTNet Phase 1 and not allowed in SWIFTNet Phase 2.
+]]></Description>
+	<SwiftFields>
+		<customizable>false</customizable>
+		<modifiable>true</modifiable>
+		<SwiftMessageType>Service</SwiftMessageType>
+		<HeaderAndTrailerType>SWIFT_INPUT_HEADER</HeaderAndTrailerType>
+		<Header>
+		</Header>
+		<Data>
+			<Fields>
+				<SystemField Name="window-size">
+					<description><![CDATA[Maximum number of messages sent or received without waiting for or sending acknowledgement.]]></description>
+					<datatype>String</datatype>
+					<required>true</required>
+					<SwiftSystemFieldDef Name="window-size" Tag="110">
+						<Format><![CDATA[3!n]]></Format>
+						<Specification><![CDATA[(window-size)]]></Specification>
+						<Description><![CDATA[Maximum number of messages sent or received without waiting for or sending acknowledgement.]]></Description>
+					</SwiftSystemFieldDef>
+				</SystemField>
+				<SystemField Name="reconnect-allowed">
+					<description><![CDATA[Reconnect allowed option, where:
+
+a)  Y = yes. Reconnect allowed
+
+b)  N(or any character other than Y) = no. No reconnect allowed]]></description>
+						<datatype>String</datatype>
+						<required>false</required>
+						<SwiftSystemFieldDef Name="reconnect-allowed" Tag="329">
+							<Format><![CDATA[1!a]]></Format>
+							<Specification><![CDATA[(reconnect-allowed)]]></Specification>
+							<Description><![CDATA[Reconnect allowed option, where:
+
+a)  Y = yes. Reconnect allowed
+
+b)  N(or any character other than Y) = no. No reconnect allowed]]></Description>
+						</SwiftSystemFieldDef>
+					</SystemField>
+					<SystemField Name="current-session-info">
+						<description><![CDATA[Current session information. For example: 00250000450000440000500000501 where:
+
+a)  session-number = 0025
+
+b)  isn = 000045
+
+c)  isnnak = 000044
+
+d)  osn = 000050
+
+e)  osnnak = 000050
+
+f)  ack-replay-indicator = 1]]></description>
+					<datatype>Section</datatype>
+					<minoccurs>0</minoccurs>
+					<maxoccurs>1</maxoccurs>
+					<SwiftSystemFieldDef Name="current-session-info" Tag="330">
+						<Format><![CDATA[(4!n)(6!n)(6!n)(6!n)(6!n)(1!n)]]></Format>
+						<Specification><![CDATA[(session-number)(isn)(isnnak)(osn)(osnnak)(ack-replay-indicator)]]></Specification>
+						<Description><![CDATA[Current session information. For example: 00250000450000440000500000501 where:
+
+a)  session-number = 0025
+
+b)  isn = 000045
+
+c)  isnnak = 000044
+
+d)  osn = 000050
+
+e)  osnnak = 000050
+
+f)  ack-replay-indicator = 1]]></Description>
+					</SwiftSystemFieldDef>
+				</SystemField>
+			</Fields>
+		</Data>
+		<Trailer>
+		</Trailer>
+	</SwiftFields>
+	<validationrules name="Default">
+		<hdrvalidationrules>
+			<fieldvalidations>
+			</fieldvalidations>
+		</hdrvalidationrules>
+		<datavalidationrules>
+			<fieldvalidations>
+			   <fieldvalidation>
+					<name>E1</name>
+					<formula><![CDATA[def header = $this.Header;
+def BranchCode = Mid(header.Basic_Header[0].LT_Identifier, 9, 3);
+if(BranchCode != "XXX")
+    return false;
+
+return true;
+]]></formula>
+					<severity>error</severity>
+					<cascade>true</cascade>
+					<error-code>H21</error-code>
+					<actionmessage><![CDATA["The default branch code XXX must be used in this message."]]></actionmessage>
+			</fieldvalidation>
+			</fieldvalidations>
+		</datavalidationrules>
+		<tlrvalidationrules>
+			<fieldvalidations>
+			</fieldvalidations>
+		</tlrvalidationrules>
+	</validationrules>
+</SwiftMessageFormat>
+

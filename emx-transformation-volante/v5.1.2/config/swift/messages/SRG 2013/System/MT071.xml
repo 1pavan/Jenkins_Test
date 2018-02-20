@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<SwiftMessageFormat name="MT071">
+	<standard-version><![CDATA[SRG 2012]]></standard-version>
+	<DescriptiveName><![CDATA[Undelivered SSI Update Notification Report]]></DescriptiveName>
+	<Category><![CDATA[System]]></Category>
+	<Description><![CDATA[This message is the response to an MT 070 Undelivered SSI Update Notification Report Request. It contains information about undelivered MT 671 SSI Update Notification messages as requested in the MT 070 request message. 
+
+From: FIN      To: User
+
+Format
+The format of this message can be broken down logically into two groups of fields as follows:
+•  Report details
+•  Information on undelivered MT 671 messages (repeatable)
+•  Count of undelivered MT 671 messages]]></Description>
+	<SwiftFields>
+		<customizable>true</customizable>
+		<modifiable>true</modifiable>
+		<SwiftMessageType>System</SwiftMessageType>
+		<HeaderAndTrailerType>SWIFT_INPUT_HEADER</HeaderAndTrailerType>
+		<Header>
+		</Header>
+		<Data>
+			<Fields>
+				<SystemField Name="section-number">
+					<description><![CDATA[Sequential section number, beginning with 0001, to identify the position of an individual message in a multiple-section message.]]></description>
+					<datatype>String</datatype>
+					<required>true</required>
+					<SwiftSystemFieldDef Name="section-number" Tag="202">
+						<Format><![CDATA[4!n]]></Format>
+						<Specification><![CDATA[(section-number)]]></Specification>
+						<Description><![CDATA[Sequential section number, beginning with 0001, to identify the position of an individual message in a multiple-section message.]]></Description>
+						<Validations>
+							<Validation>
+								<formula>(ToInt($value) &gt; 0)</formula>
+								<error-code>V07</error-code>
+								<actionmessage>"Invalid Section Number '" + $value + "'"</actionmessage>
+							</Validation>
+						</Validations>
+					</SwiftSystemFieldDef>
+				</SystemField>
+				<SystemField Name="total-sections">
+					<description><![CDATA[Total number of sections in a multi-section message.]]></description>
+					<datatype>String</datatype>
+					<required>true</required>
+					<SwiftSystemFieldDef Name="total-sections" Tag="203">
+						<Format><![CDATA[4!n]]></Format>
+						<Specification><![CDATA[(total-sections)]]></Specification>
+						<Description><![CDATA[Total number of sections in a multi-section message.]]></Description>
+					</SwiftSystemFieldDef>
+				</SystemField>
+				<SystemField Name="date">
+					<description><![CDATA[Date, in GMT, of report generation]]></description>
+					<datatype>String</datatype>
+					<required>true</required>
+					<SwiftSystemFieldDef Name="date" Tag="171">
+						<Format><![CDATA[6!n]]></Format>
+						<Specification><![CDATA[(date)]]></Specification>
+						<Additional-Format><![CDATA[YYMMDD]]></Additional-Format>
+						<Description><![CDATA[Date and time are always given as local, unless otherwise specified. Local time for the SWIFTNetwork is in GMT.]]></Description>
+						<Validations>
+							<Validation>
+								<formula>IsDate($value,"yyMMdd")</formula>
+								<error-code>V04</error-code>
+								<actionmessage>"Invalid Date '" + $value + "'"</actionmessage>
+							</Validation>
+						</Validations>
+					</SwiftSystemFieldDef>
+				</SystemField>
+				<SystemField Name="time">
+					<description><![CDATA[Time, in GMT, of report generation]]></description>
+					<datatype>String</datatype>
+					<required>true</required>
+					<SwiftSystemFieldDef Name="time" Tag="175">
+						<Format><![CDATA[4!n]]></Format>
+						<Specification><![CDATA[(time)]]></Specification>
+						<Additional-Format><![CDATA[HHMM]]></Additional-Format>
+						<Description><![CDATA[Date and time are always given as local, unless otherwise specified. Local time for the SWIFTNetwork is in GMT.]]></Description>
+						<Validations>
+							<Validation>
+								<formula>IsDate($value,"HHmm")</formula>
+								<error-code>V05</error-code>
+								<actionmessage>"Invalid Time '" + $value + "'"</actionmessage>
+							</Validation>
+						</Validations>
+					</SwiftSystemFieldDef>
+				</SystemField>
+				<SystemField Name="mir">
+					<description><![CDATA[Message input reference of the MT 670 SSI Update Notification
+Request that corresponds to this report.]]></description>
+					<datatype>Section</datatype>
+					<minoccurs>1</minoccurs>
+					<maxoccurs>1</maxoccurs>
+					<SwiftSystemFieldDef Name="mir" Tag="251">
+						<Format><![CDATA[(6!n)(4!a2!a2!c1!c)(3!a)(4!n)(6!n)]]></Format>
+						<Specification><![CDATA[(date)(lt-identifier)(branch-code)(session-number)(isn)]]></Specification>
+						<Description><![CDATA[Message input reference of the MT 670 SSI Update Notification Request that corresponds to this report.]]></Description>
+						<Validations>
+							<Validation>
+								<subfield>date</subfield>
+								<formula>IsDate($value,"yyMMdd")</formula>
+								<error-code>V04</error-code>
+								<actionmessage>"Invalid Input Date '" + $value + "'"</actionmessage>
+							</Validation>
+						</Validations>
+					</SwiftSystemFieldDef>
+				</SystemField>
+				<SystemField Name="required-info">
+					<description><![CDATA[Type of information to be requested, where:
+		
+        1 = count and individual message status
+        2 = count only]]></description>
+					<datatype>String</datatype>
+					<required>true</required>
+					<SwiftSystemFieldDef Name="required-info" Tag="209">
+						<Format><![CDATA[1!n]]></Format>
+						<Specification><![CDATA[(required-info)]]></Specification>
+						<Additional-Format><![CDATA[Y/N]]></Additional-Format>
+						<Description><![CDATA[Type of information to be requested, where:
+		
+        1 = count and individual message status
+        2 = count only]]></Description>
+						<Validations>
+							<Validation>
+								<formula>In($value, "1", "2")</formula>
+								<error-code>V08</error-code>
+								<actionmessage>"Invalid required-info '" + $value + "'. Valid required-info values are : 1, 2"</actionmessage>
+							</Validation>
+						</Validations>
+					</SwiftSystemFieldDef>
+				</SystemField>
+				<SystemGroup Name="UndeliveredMessagesGroup">
+					<datatype>Section</datatype>
+					<minoccurs>0</minoccurs>
+					<maxoccurs>-1</maxoccurs>
+					<Fields>
+						<SystemField Name="swift-address">
+							<description><![CDATA[SWIFT address of MT 671 recipient]]></description>
+							<datatype>String</datatype>
+							<required>true</required>
+							<SwiftSystemFieldDef Name="swift-address" Tag="102">
+								<Format><![CDATA[(4!a2!a2!c1!c3!c)]]></Format>
+								<Specification><![CDATA[(swift-address)]]></Specification>
+								<Description><![CDATA[Complete 12-character address, including LT code and branch code, or default branch code XXX.]]></Description>
+							</SwiftSystemFieldDef>
+						</SystemField>
+						<SystemField Name="msg-status">
+							<description><![CDATA[Message status (for example, whether rejected, aborted, no delivery attempt, and so on). See the FIN Error Codes for the full set of status codes]]></description>
+							<datatype>String</datatype>
+							<required>true</required>
+							<SwiftSystemFieldDef Name="msg-status" Tag="431">
+								<Format><![CDATA[2!n]]></Format>
+								<Specification><![CDATA[(msg-status)]]></Specification>
+								<Description><![CDATA[Message status (for example, whether delivered or aborted). See the SWIFTNet FIN Error Codes module for the full set of error codes.]]></Description>
+							</SwiftSystemFieldDef>
+						</SystemField>
+						<SystemField Name="delivery-history">
+							<description><![CDATA[Message delivery history, that reports on each delivery attempt.
+For each attempt, it contains:
+• Output time of MT 671 message
+• Message output reference
+• Accepted or rejected (Y or N)
+• An error code if rejected by the receiver
+Time in message output reference is local to the receiver.]]></description>
+							<datatype>Section</datatype>
+							<minoccurs>0</minoccurs>
+							<maxoccurs>-1</maxoccurs>
+							<SwiftSystemFieldDef Name="delivery-history" Tag="281">
+								<Format><![CDATA[(4!n)(28!c)(1!a)([3!c])]]></Format>
+								<Specification><![CDATA[(time)(mor)(delivery-result)(error-code)]]></Specification>
+								<Description><![CDATA[Message delivery history, that reports on each delivery attempt.
+For each attempt, it contains:
+• Output time of MT 671 message
+• Message output reference
+• Accepted or rejected (Y or N)
+• An error code if rejected by the receiver
+Time in message output reference is local to the receiver.]]></Description>
+							</SwiftSystemFieldDef>
+						</SystemField>
+					</Fields>
+				</SystemGroup>
+				<SystemField Name="msg-count">
+						<description><![CDATA[Count of messages]]></description>
+						<datatype>String</datatype>
+						<required>false</required>
+						<SwiftSystemFieldDef Name="msg-count" Tag="313">
+							<Format><![CDATA[(5!n)]]></Format>
+							<Specification><![CDATA[(msg-count)]]></Specification>
+							<Description><![CDATA[Count of messages]]></Description>
+						</SwiftSystemFieldDef>
+					</SystemField>
+					<SystemField Name="report-code">
+						<description><![CDATA[Report error code. See the FIN Error Codes module for the full set of error codes.]]></description>
+						<datatype>String</datatype>
+						<required>false</required>
+						<SwiftSystemFieldDef Name="report-code" Tag="461">
+							<Format><![CDATA[3!c]]></Format>
+							<Specification><![CDATA[(report-code)]]></Specification>
+							<Description><![CDATA[Report error code. See the FIN Error Codes module for the full set of error codes.]]></Description>
+						</SwiftSystemFieldDef>
+					</SystemField>
+				</Fields>
+			</Data>
+		<Trailer>
+		</Trailer>
+	</SwiftFields>
+	<validationrules name="Default">
+		<hdrvalidationrules>
+			<fieldvalidations>
+			</fieldvalidations>
+		</hdrvalidationrules>
+		<datavalidationrules>
+			<fieldvalidations>
+                             <fieldvalidation>
+				<name>E1</name>
+				<formula><![CDATA[!(!IsNull(msg_count) && !IsNull(report_code))]]></formula>
+				<severity>error</severity>
+				<cascade>true</cascade>
+				<error-code>V03</error-code>
+				<actionmessage><![CDATA["Only one of the fields msg-count or report-code may be present."]]></actionmessage>
+			     </fieldvalidation>
+			</fieldvalidations>
+		</datavalidationrules>
+		<tlrvalidationrules>
+			<fieldvalidations>
+			</fieldvalidations>
+		</tlrvalidationrules>
+	</validationrules>
+</SwiftMessageFormat>
+

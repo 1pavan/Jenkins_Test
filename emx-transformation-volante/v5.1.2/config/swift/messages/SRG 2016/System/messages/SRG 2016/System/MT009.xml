@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<SwiftMessageFormat name="MT009">
+	<standard-version><![CDATA[SRG 2016]]></standard-version>
+	<standard-release-qualifier>20160308</standard-release-qualifier>
+	<DescriptiveName><![CDATA[System Request to Logout]]></DescriptiveName>
+	<Category><![CDATA[System]]></Category>
+	<Description><![CDATA[This message is sent from SWIFT to a LT when SWIFT wishes the LT to logout. The message is only a request. However, if the request is not acted upon by the addressed LT, the system sends an abort message.
+
+From: GPA   To: User]]></Description>
+	<SwiftFields>
+		<customizable>true</customizable>
+		<modifiable>true</modifiable>
+		<SwiftMessageType>System</SwiftMessageType>
+		<HeaderAndTrailerType>SWIFT_INPUT_HEADER</HeaderAndTrailerType>
+		<Header>
+		</Header>
+		<Data>
+			<Fields>
+				<SystemField Name="day-time">
+					<description><![CDATA[Day and time, local to the user, when the system will initiate an abort if the
+LT does not logout.]]></description>
+					<datatype>String</datatype>
+					<required>true</required>
+					<SwiftSystemFieldDef Name="day-time" Tag="173">
+						<Format><![CDATA[6!n]]></Format>
+						<Specification><![CDATA[(day-time)]]></Specification>
+						<Additional-Format><![CDATA[DDHHMM]]></Additional-Format>
+						<Description><![CDATA[Date and time are always given as local, unless otherwise specified. Local time for the SWIFTNetwork is in GMT.]]></Description>
+						<Validations>
+							<Validation>
+								<subfield>day-time</subfield>
+								<formula>IsDate($value,"ddHHmm")</formula>
+								<error-code>V05</error-code>
+								<actionmessage>"Invalid day-time '" + $value + "'. day-time should be in format ddHHmm."</actionmessage>
+							</Validation>
+						</Validations>
+					</SwiftSystemFieldDef>
+				</SystemField>
+			</Fields>
+		</Data>
+		<Trailer>
+		</Trailer>
+	</SwiftFields>
+	<validationrules name="Default">
+		<hdrvalidationrules>
+			<fieldvalidations>
+			</fieldvalidations>
+		</hdrvalidationrules>
+		<datavalidationrules>
+			<fieldvalidations>
+			</fieldvalidations>
+		</datavalidationrules>
+		<tlrvalidationrules>
+			<fieldvalidations>
+			</fieldvalidations>
+		</tlrvalidationrules>
+	</validationrules>
+</SwiftMessageFormat>
+

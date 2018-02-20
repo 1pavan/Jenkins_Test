@@ -1,0 +1,188 @@
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="unqualified"
+            attributeFormDefault="unqualified">
+    <xsd:element name="version" type="xsd:string"/>
+    <xsd:element name="target-namespace" type="xsd:string"/>
+    <xsd:element name="xpath-namespaces">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="namespace" maxOccurs="unbounded">
+                    <xsd:complexType>
+                        <xsd:attribute name="value" type="xsd:string"/>
+                        <xsd:attribute name="prefix" type="xsd:string"/>
+                    </xsd:complexType>
+                </xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <!-- Element properties -->
+    <xsd:element name="elementproperties">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:choice>
+                    <xsd:element ref="propertylist"/>
+                    <xsd:element ref="propertymap"/>
+                </xsd:choice>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="propertymap">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="property" minOccurs="0" maxOccurs="unbounded"/>
+            </xsd:sequence>
+            <xsd:attribute name="type" type="xsd:string"/>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="propertylist">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="value" minOccurs="0" maxOccurs="unbounded">
+                    <xsd:complexType>
+                        <xsd:choice>
+                            <xsd:element ref="propertymap"/>
+                            <xsd:element ref="propertylist"/>
+                        </xsd:choice>
+                    </xsd:complexType>
+                </xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="property">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="value" minOccurs="0">
+                    <xsd:complexType mixed="true">
+                        <xsd:choice minOccurs="0">
+                            <xsd:element ref="propertymap"/>
+                            <xsd:element ref="propertylist"/>
+                        </xsd:choice>
+                    </xsd:complexType>
+                </xsd:element>
+            </xsd:sequence>
+            <xsd:attribute name="name" type="xsd:string" use="required"/>
+            <xsd:attribute name="value" type="xsd:string"/>
+        </xsd:complexType>
+    </xsd:element>
+    <!-- END - Element properties -->
+    <!-- Validation Rules -->
+    <xsd:element name="fieldvalidation">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="name" type="xsd:string"/>
+                <xsd:element name="fieldname" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="comment" type="xsd:string" minOccurs="0"/>
+                <xsd:choice>
+                    <xsd:element name="formula" type="xsd:string"/>
+                    <xsd:element name="class" type="xsd:string"/>
+                    <xsd:element name="xpath" type="xsd:string"/>
+                    <xsd:element ref="rule"/>
+                </xsd:choice>
+                <xsd:element name="enabled" type="xsd:boolean" minOccurs="0"/>
+                <xsd:element name="severity">
+                    <xsd:simpleType>
+                        <xsd:restriction base="xsd:string">
+                            <xsd:enumeration value="error"/>
+                            <xsd:enumeration value="warn"/>
+                            <xsd:enumeration value="fatal"/>
+                        </xsd:restriction>
+                    </xsd:simpleType>
+                </xsd:element>
+                <xsd:element name="cascade" type="xsd:boolean" minOccurs="0"/>
+                <xsd:element name="error-code" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="actionmessage" type="xsd:string" minOccurs="0"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <!-- END Validation Rules -->
+    <xsd:element name="properties">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="property" minOccurs="0" maxOccurs="unbounded">
+                    <xsd:complexType>
+                        <xsd:sequence>
+                            <xsd:element name="name" type="xsd:string"/>
+                            <xsd:element name="value" type="xsd:string" minOccurs="0"/>
+                            <xsd:element name="description" type="xsd:string" minOccurs="0"/>
+                        </xsd:sequence>
+                    </xsd:complexType>
+                </xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="field-attributes">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="field-attribute" minOccurs="0" maxOccurs="unbounded">
+                    <xsd:complexType>
+                        <xsd:simpleContent>
+                            <xsd:extension base="xsd:string">
+                                <xsd:attribute name="name" type="xsd:string"/>
+                                <xsd:attribute name="runtime" type="xsd:boolean"/>
+                            </xsd:extension>
+                        </xsd:simpleContent>
+                    </xsd:complexType>
+                </xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="platforminfo">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="platform" minOccurs="0" maxOccurs="unbounded">
+                    <xsd:complexType>
+                        <xsd:sequence>
+                            <xsd:element name="property" minOccurs="0" maxOccurs="unbounded">
+                                <xsd:complexType>
+                                    <xsd:attribute name="name" type="xsd:string"/>
+                                    <xsd:attribute name="value" type="xsd:string"/>
+                                </xsd:complexType>
+                            </xsd:element>
+                        </xsd:sequence>
+                        <xsd:attribute name="name" type="xsd:string"/>
+                    </xsd:complexType>
+                </xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:complexType name="ServiceElementType"/>
+    <xsd:element name="ServiceElement" type="ServiceElementType"/>
+
+    <xsd:element name="rule" xml:base="xsd:string">
+        <xsd:complexType>
+            <xsd:simpleContent>
+                <xsd:extension base="xsd:string">
+                    <xsd:attribute name="type">
+                        <xsd:simpleType>
+                            <xsd:restriction base="xsd:string">
+                                <xsd:enumeration value="Mandatory"/>
+                                <xsd:enumeration value="NotAllowed"/>
+                                <xsd:enumeration value="Pattern"/>
+                                <xsd:enumeration value="Enumeration"/>
+                                <xsd:enumeration value="Length"/>
+                                <xsd:enumeration value="MinLength"/>
+                                <xsd:enumeration value="MaxLength"/>
+                                <xsd:enumeration value="MaxExclusive"/>
+                                <xsd:enumeration value="MaxInclusive"/>
+                                <xsd:enumeration value="MinExclusive"/>
+                                <xsd:enumeration value="MinInclusive"/>
+                                <xsd:enumeration value="MinOccurs"/>
+                                <xsd:enumeration value="MaxOccurs"/>
+                                <xsd:enumeration value="NotUsed"/>
+                                <xsd:enumeration value="Bilaterally Determined"/>
+                                <xsd:enumeration value="Guideline"/>
+                            </xsd:restriction>
+                        </xsd:simpleType>
+                    </xsd:attribute>
+                </xsd:extension>
+            </xsd:simpleContent>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="additional-properties">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="property" minOccurs="0" maxOccurs="unbounded"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+</xsd:schema>

@@ -1,0 +1,1263 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<SwiftMessageFormat name="MT608">
+	<standard>SWIFT</standard>
+	<standard-name>MT608</standard-name>
+	<standard-version>SRG 2016</standard-version>
+	<standard-release-qualifier>20160308</standard-release-qualifier>
+	<DescriptiveName><![CDATA[Statement of a Commodity Account]]></DescriptiveName>
+	<Category>Treasury Markets Commodities</Category>
+	<Description>This message is sent by a Commodity account servicing institution to the Commodity account owner or its authorised agent.
+
+It is used to advise the Receiver of transactions booked to a Commodity account.
+
+This statement message contains all bookings present in the account, whether caused by a message received via SWIFT or by some other means.</Description>
+	<SwiftFields>
+		<customizable>true</customizable>
+		<modifiable>true</modifiable>
+		<SwiftMessageType>User</SwiftMessageType>
+		<max-length>2000</max-length>
+		<HeaderAndTrailerType>SWIFT_INPUT_OUTPUT_HEADER</HeaderAndTrailerType>
+		<Header>
+		</Header>
+		<Data>
+			<Fields>
+				<SwiftField Name="20">
+					<SwiftFieldDef Name="20">
+						<Generic>false</Generic>
+						<Description><![CDATA[Transaction Reference Number]]></Description>
+						<Option Name="">
+							<Format><![CDATA[16x]]></Format>
+							<Specification><![CDATA[(Reference)]]></Specification>
+							<Description><![CDATA[Transaction Reference Number]]></Description>
+						</Option>
+					</SwiftFieldDef>
+					<Repeating>false</Repeating>
+					<Presence>M</Presence>
+					<Options> </Options>
+					<Validations>
+						<SubField Name="Reference">
+							<Validation>
+								<Options> </Options>
+								<ErrorCode>T26</ErrorCode>
+								<Comment><![CDATA[This field must not start or end with a slash '/' and must not contain two consecutive slashes '//' (Error code(s): T26) .]]></Comment>
+								<ValidationPattern xsi:type="T26" Type="T26">
+									<Type>T26</Type>
+								</ValidationPattern>
+							</Validation>
+						</SubField>
+					</Validations>
+				</SwiftField>
+				<SwiftField Name="26C">
+					<SwiftFieldDef Name="26">
+						<Generic>false</Generic>
+						<Description><![CDATA[Identification of the Commodity and the Commodity Account]]></Description>
+						<Option Name="C">
+							<Format><![CDATA[[3!a]/15x/5!a4!a[4x][//8x]]]></Format>
+							<Specification><![CDATA[(Delivery Details)(Delivery Location)(Allocation)(Type)(Denomination)(Form)]]></Specification>
+							<Description><![CDATA[Identification of the Commodity and the Commodity Account]]></Description>
+						</Option>
+					</SwiftFieldDef>
+					<Repeating>false</Repeating>
+					<Presence>M</Presence>
+					<Options>C</Options>
+					<Validations>
+						<SubField Name="Type">
+							<Validation>
+								<Options>C</Options>
+								<ErrorCode>T04</ErrorCode>
+								<Comment><![CDATA[Type identifies the Commodity  or coin. When identifying a Commodity , one of the following codes must be used (Error code(s): T04) :]]></Comment>
+								<ValidationPattern xsi:type="CODE" Type="CODE">
+									<Type>CODE</Type>
+									<Codes>
+										<Code Name="ALUM">
+											<DetailedName>Aluminium</DetailedName>
+										</Code>
+										<Code Name="COPP">
+											<DetailedName>Copper</DetailedName>
+										</Code>
+										<Code Name="GOLD">
+											<DetailedName>Gold</DetailedName>
+										</Code>
+										<Code Name="IRID">
+											<DetailedName>Iridium</DetailedName>
+										</Code>
+										<Code Name="LEAD">
+											<DetailedName>Lead</DetailedName>
+										</Code>
+										<Code Name="NICK">
+											<DetailedName>Nickel</DetailedName>
+										</Code>
+										<Code Name="OSMI">
+											<DetailedName>Osmium</DetailedName>
+										</Code>
+										<Code Name="OTHR">
+											<DetailedName>Other </DetailedName>
+										</Code>
+										<Code Name="PALL">
+											<DetailedName>Palladium</DetailedName>
+										</Code>
+										<Code Name="PLAT">
+											<DetailedName>Platinum</DetailedName>
+										</Code>
+										<Code Name="POIL">
+											<DetailedName>Palm Oil </DetailedName>
+										</Code>
+										<Code Name="RHOD">
+											<DetailedName>Rhodium</DetailedName>
+										</Code>
+										<Code Name="RUTH">
+											<DetailedName>Ruthenium</DetailedName>
+										</Code>
+										<Code Name="SILV">
+											<DetailedName>Silver</DetailedName>
+										</Code>
+										<Code Name="STEE">
+											<DetailedName>Steel </DetailedName>
+										</Code>
+										<Code Name="TINA">
+											<DetailedName>Tin</DetailedName>
+										</Code>
+										<Code Name="TITA">
+											<DetailedName>Titanium </DetailedName>
+										</Code>
+										<Code Name="ZINC">
+											<DetailedName>Zinc</DetailedName>
+										</Code>
+										<Code Name="AMEG">
+											<DetailedName>AMERICAN EAGLE</DetailedName>
+										</Code>
+										<Code Name="ANUG">
+											<DetailedName>AUSTRALIAN NUGGET</DetailedName>
+										</Code>
+										<Code Name="BRIT">
+											<DetailedName>BRITANNIA</DetailedName>
+										</Code>
+										<Code Name="COIN">
+											<DetailedName>OTHER COINS</DetailedName>
+										</Code>
+										<Code Name="CORO">
+											<DetailedName>AUSTRIAN CORONA</DetailedName>
+										</Code>
+										<Code Name="DUCA">
+											<DetailedName>DUCAT FOURFOLD SINGLE</DetailedName>
+										</Code>
+										<Code Name="FRFR">
+											<DetailedName>FRENCH FRANCS</DetailedName>
+										</Code>
+										<Code Name="GECU">
+											<DetailedName>GOLDEN ECU</DetailedName>
+										</Code>
+										<Code Name="KRUG">
+											<DetailedName>KRUGER RAND</DetailedName>
+										</Code>
+										<Code Name="LBTY">
+											<DetailedName>LIBERTY DOLLAR</DetailedName>
+										</Code>
+										<Code Name="MAPL">
+											<DetailedName>MAPLE</DetailedName>
+										</Code>
+										<Code Name="MEXP">
+											<DetailedName>MEXICAN PESO</DetailedName>
+										</Code>
+										<Code Name="NBUF">
+											<DetailedName>NEW BUFFALO </DetailedName>
+										</Code>
+										<Code Name="NOBL">
+											<DetailedName>NOBLE</DetailedName>
+										</Code>
+										<Code Name="NSOV">
+											<DetailedName>NEW SOVEREIGN</DetailedName>
+										</Code>
+										<Code Name="OSOV">
+											<DetailedName>OLD SOVEREIGN</DetailedName>
+										</Code>
+										<Code Name="SAEG">
+											<DetailedName>SILVER AMERICAN EAGLE</DetailedName>
+										</Code>
+										<Code Name="SECU">
+											<DetailedName>SILVER ECU</DetailedName>
+										</Code>
+										<Code Name="STAT">
+											<DetailedName>STATUE</DetailedName>
+										</Code>
+										<Code Name="VREN">
+											<DetailedName>VRENELI</DetailedName>
+										</Code>
+									</Codes>
+								</ValidationPattern>
+							</Validation>
+						</SubField>
+						<SubField Name="Delivery_Details">
+							<Validation>
+								<Options>C</Options>
+								<ErrorCode>T35</ErrorCode>
+								<Comment><![CDATA[Delivery Details must contain one of the following codes (Error code(s): T35):]]></Comment>
+								<ValidationPattern xsi:type="CODE" Type="CODE">
+									<Type>CODE</Type>
+									<Codes>
+										<Code Name="CFR">
+											<DetailedName>Cost and Freight</DetailedName>
+										</Code>
+										<Code Name="CIF">
+											<DetailedName>Cost, Insurance, and Freight</DetailedName>
+										</Code>
+										<Code Name="CIP">
+											<DetailedName>Carriage and Insurance Paid</DetailedName>
+										</Code>
+										<Code Name="CPT">
+											<DetailedName>Carriage Paid To</DetailedName>
+										</Code>
+										<Code Name="DAF">
+											<DetailedName>Delivered At Frontier</DetailedName>
+										</Code>
+										<Code Name="DDP">
+											<DetailedName>Delivered Duty Paid</DetailedName>
+										</Code>
+										<Code Name="DDU">
+											<DetailedName>Delivered Duty Unpaid</DetailedName>
+										</Code>
+										<Code Name="DEQ">
+											<DetailedName>Delivered Ex Quay</DetailedName>
+										</Code>
+										<Code Name="DES">
+											<DetailedName>Delivered Ex Ship</DetailedName>
+										</Code>
+										<Code Name="DTD">
+											<DetailedName>Door To Door</DetailedName>
+										</Code>
+										<Code Name="EXW">
+											<DetailedName>EX Works</DetailedName>
+										</Code>
+										<Code Name="FAS">
+											<DetailedName>Free Alongside Ship</DetailedName>
+										</Code>
+										<Code Name="FCA">
+											<DetailedName>Free Carrier</DetailedName>
+										</Code>
+										<Code Name="FOB">
+											<DetailedName>Free On Board</DetailedName>
+										</Code>
+										<Code Name="LOC">
+											<DetailedName>LOCO London</DetailedName>
+										</Code>
+										<Code Name="OTH">
+											<DetailedName>Other</DetailedName>
+										</Code>
+									</Codes>
+								</ValidationPattern>
+							</Validation>
+						</SubField>
+						<SubField Name="Allocation">
+							<Validation>
+								<Options>C</Options>
+								<ErrorCode>T03</ErrorCode>
+								<Comment><![CDATA[Allocation must contain one of the following codes (Error code(s): T03) :]]></Comment>
+								<ValidationPattern xsi:type="CODE" Type="CODE">
+									<Type>CODE</Type>
+									<Codes>
+										<Code Name="ALLOC">
+											<Description>Specifies the commodity  is allocated</Description>
+										</Code>
+										<Code Name="UNALL">
+											<Description>Specifies the commodity  is unallocated</Description>
+										</Code>
+									</Codes>
+								</ValidationPattern>
+							</Validation>
+						</SubField>
+					</Validations>
+				</SwiftField>
+				<SwiftField Name="25">
+					<SwiftFieldDef Name="25">
+						<Generic>false</Generic>
+						<Description><![CDATA[Further Account Identification]]></Description>
+						<Option Name="">
+							<Format><![CDATA[35x]]></Format>
+							<Specification><![CDATA[(Account)]]></Specification>
+							<Description><![CDATA[Further Account Identification]]></Description>
+						</Option>
+					</SwiftFieldDef>
+					<Repeating>false</Repeating>
+					<Presence>O</Presence>
+					<Options> </Options>
+				</SwiftField>
+				<SwiftField Name="28">
+					<SwiftFieldDef Name="28">
+						<Generic>false</Generic>
+						<Description><![CDATA[Statement Number/Sequence Number]]></Description>
+						<Option Name="">
+							<Format><![CDATA[5n[/2n]]]></Format>
+							<Specification><![CDATA[(Statement Number) (Sequence Number)]]></Specification>
+							<Description><![CDATA[Statement Number/Sequence Number]]></Description>
+						</Option>
+					</SwiftFieldDef>
+					<Repeating>false</Repeating>
+					<Presence>M</Presence>
+					<Options> </Options>
+				</SwiftField>
+				<SwiftField Name="60a">
+					<SwiftFieldDef Name="60">
+						<Generic>false</Generic>
+						<Description><![CDATA[Opening Balance]]></Description>
+						<Option Name="F">
+							<Format><![CDATA[1!a6!n3!a15d]]></Format>
+							<Specification><![CDATA[(D/C Mark) (Date) (Unit) (Amount)]]></Specification>
+							<Description><![CDATA[Opening Balance]]></Description>
+						</Option>
+						<Option Name="M">
+							<Format><![CDATA[1!a6!n3!a15d]]></Format>
+							<Specification><![CDATA[(D/C Mark) (Date) (Unit) (Amount)]]></Specification>
+							<Description><![CDATA[Opening Balance]]></Description>
+						</Option>
+					</SwiftFieldDef>
+					<Repeating>false</Repeating>
+					<Presence>M</Presence>
+					<Options>F, M</Options>
+					<Validations>
+						<SubField Name="Date">
+							<Validation>
+								<Options>F, M</Options>
+								<ErrorCode>T50</ErrorCode>
+								<Comment><![CDATA[Date must be a valid date expressed as YYMMDD (Error code(s): T50) .]]></Comment>
+								<ValidationPattern xsi:type="DATE" Type="DATE">
+									<Type>DATE</Type>
+									<Format>yyMMdd</Format>
+								</ValidationPattern>
+							</Validation>
+						</SubField>
+						<SubField Name="D/C_Mark">
+							<Validation>
+								<Options>F, M</Options>
+								<ErrorCode>T51</ErrorCode>
+								<Comment><![CDATA[In option F, or M, D/C Mark must contain one of the following codes (Error code(s): T51):]]></Comment>
+								<ValidationPattern xsi:type="CODE" Type="CODE">
+									<Type>CODE</Type>
+									<Codes>
+										<Code Name="C">
+											<Description>The (intermediate) opening balance is a credit balance.</Description>
+										</Code>
+										<Code Name="D">
+											<Description>The (intermediate) opening balance is a debit balance.</Description>
+										</Code>
+									</Codes>
+								</ValidationPattern>
+							</Validation>
+						</SubField>
+						<SubField Name="Unit">
+							<Validation>
+								<Options>F, M</Options>
+								<ErrorCode>T06</ErrorCode>
+								<Comment><![CDATA[In option F, or M, Unit must contain one of the following codes (Error code(s): T06):]]></Comment>
+								<ValidationPattern xsi:type="CODE" Type="CODE">
+									<Type>CODE</Type>
+									<Codes>
+										<Code Name="FOZ">
+											<DetailedName>Fine Troy Ounce</DetailedName>
+										</Code>
+										<Code Name="GOZ">
+											<DetailedName>Gross Ounce</DetailedName>
+										</Code>
+										<Code Name="GRM">
+											<DetailedName>Gramme</DetailedName>
+										</Code>
+										<Code Name="KLO">
+											<DetailedName>Kilo</DetailedName>
+										</Code>
+										<Code Name="LIT">
+											<DetailedName>Litre</DetailedName>
+										</Code>
+										<Code Name="LOT">
+											<DetailedName>Lot</DetailedName>
+										</Code>
+										<Code Name="OTH">
+											<DetailedName>Other</DetailedName>
+										</Code>
+										<Code Name="PND">
+											<DetailedName>Pound</DetailedName>
+										</Code>
+										<Code Name="TAL">
+											<DetailedName>Tael</DetailedName>
+										</Code>
+										<Code Name="TOL">
+											<DetailedName>Tola</DetailedName>
+										</Code>
+										<Code Name="TON">
+											<DetailedName>Metric Tonne</DetailedName>
+										</Code>
+										<Code Name="TOZ">
+											<DetailedName>Troy Ounce</DetailedName>
+										</Code>
+										<Code Name="UNT">
+											<DetailedName>Unit</DetailedName>
+										</Code>
+									</Codes>
+								</ValidationPattern>
+							</Validation>
+						</SubField>
+					</Validations>
+				</SwiftField>
+				<SwiftField Name="61">
+					<SwiftFieldDef Name="61">
+						<Generic>false</Generic>
+						<Description><![CDATA[Statement Line]]></Description>
+						<Option Name="">
+							<Format><![CDATA[6!n[4!n]2a[1!a]15d(1!a)(3!c)16x[//16x][CRLF34x]]]></Format>
+							<Specification><![CDATA[(Date)(Entry Date)(Debit/Credit Mark)(Funds Code)(Amount)(Transaction Type)(Identification Code)(Reference for the Account Owner)(Account Servicing Institution's Reference)(Supplementary Details)]]></Specification>
+							<Description><![CDATA[Statement Line]]></Description>
+						</Option>
+					</SwiftFieldDef>
+					<Repeating>true</Repeating>
+					<Presence>O</Presence>
+					<Options> </Options>
+					<Validations>
+						<SubField Name="Date">
+							<Validation>
+								<Options> </Options>
+								<ErrorCode>T50</ErrorCode>
+								<Comment><![CDATA[Date, must be a valid date expressed as YYMMDD (Error code(s): T50).]]></Comment>
+								<ValidationPattern xsi:type="DATE" Type="DATE">
+									<Type>DATE</Type>
+									<Format>yyMMdd</Format>
+								</ValidationPattern>
+							</Validation>
+						</SubField>
+						<SubField Name="Debit/Credit_Mark">
+							<Validation>
+								<Options> </Options>
+								<ErrorCode>T51</ErrorCode>
+								<Comment><![CDATA[Debit/Credit Mark, must contain one of the following codes (Error code(s): T51):]]></Comment>
+								<ValidationPattern xsi:type="CODE" Type="CODE">
+									<Type>CODE</Type>
+									<Codes>
+										<Code Name="C">
+											<DetailedName>Credit</DetailedName>
+										</Code>
+										<Code Name="D">
+											<DetailedName>Debit</DetailedName>
+										</Code>
+									</Codes>
+								</ValidationPattern>
+							</Validation>
+						</SubField>
+						<SubField Name="Entry_Date">
+							<Validation>
+								<Options> </Options>
+								<ErrorCode>T50</ErrorCode>
+								<Comment><![CDATA[The SWIFT System validates subfield 2 ,Entry Date (Date in reduced ISO form), using current System Year (Error code(s): T50).]]></Comment>
+								<ValidationPattern xsi:type="DATE" Type="DATE">
+									<Type>DATE</Type>
+									<Format>MMdd</Format>
+								</ValidationPattern>
+							</Validation>
+						</SubField>
+						<SubField Name="Transaction_Type">
+							<Validation>
+								<Options> </Options>
+								<ErrorCode>T53</ErrorCode>
+								<Comment><![CDATA[In subfield 6, Transaction Type must contain one of the following codes (Error code(s): T53)]]></Comment>
+								<ValidationPattern xsi:type="CODE" Type="CODE">
+									<Type>CODE</Type>
+									<Codes>
+										<Code Name="S">
+											<DetailedName>SWIFT transfer</DetailedName>
+											<Description>For entries related to SWIFT transfer instructions and subsequent charge messages . The last three characters will indicate the message type of the SWIFT message causing the entry (for debit entries) or the message type of the SWIFT message used to advise the account owner (for credit entries).</Description>
+										</Code>
+										<Code Name="N">
+											<DetailedName>Non-SWIFT transfer</DetailedName>
+											<Description>For entries related to payment and transfer instructions, including related charges messages, not sent through SWIFT or where an alpha description is preferred. The last three characters, ie, 3!c, may contain a code.</Description>
+										</Code>
+										<Code Name="F">
+											<DetailedName>First advice</DetailedName>
+											<Description>For entries being first advised by the statement (items originated by the account servicing institution). The last three characters, ie, 3!c, may contain a code.</Description>
+										</Code>
+									</Codes>
+								</ValidationPattern>
+							</Validation>
+						</SubField>
+					</Validations>
+				</SwiftField>
+				<SwiftField Name="62a">
+					<SwiftFieldDef Name="62">
+						<Generic>false</Generic>
+						<Description><![CDATA[Closing Balance]]></Description>
+						<Option Name="F">
+							<Format><![CDATA[1!a6!n3!a15d]]></Format>
+							<Specification><![CDATA[(D/C Mark) (Date) (Unit) (Amount)]]></Specification>
+							<Description><![CDATA[Closing Balance]]></Description>
+						</Option>
+						<Option Name="M">
+							<Format><![CDATA[1!a6!n3!a15d]]></Format>
+							<Specification><![CDATA[(D/C Mark) (Date) (Unit) (Amount)]]></Specification>
+							<Description><![CDATA[Closing Balance]]></Description>
+						</Option>
+					</SwiftFieldDef>
+					<Repeating>false</Repeating>
+					<Presence>M</Presence>
+					<Options>F, M</Options>
+					<Validations>
+						<SubField Name="D/C_Mark">
+							<Validation>
+								<Options>F, M</Options>
+								<ErrorCode>T51</ErrorCode>
+								<Comment><![CDATA[In option F, or M, D/C Mark must contain one of the following codes (Error code(s): T51):]]></Comment>
+								<ValidationPattern xsi:type="CODE" Type="CODE">
+									<Type>CODE</Type>
+									<Codes>
+										<Code Name="C">
+											<Description>The (intermediate) closing balance is a credit balance.</Description>
+										</Code>
+										<Code Name="D">
+											<Description>The (intermediate) closing balance is a debit balance.</Description>
+										</Code>
+									</Codes>
+								</ValidationPattern>
+							</Validation>
+						</SubField>
+						<SubField Name="Date">
+							<Validation>
+								<Options>F, M</Options>
+								<ErrorCode>T50</ErrorCode>
+								<Comment><![CDATA[Date must be a valid date expressed as YYMMDD (Error code(s): T50) .]]></Comment>
+								<ValidationPattern xsi:type="DATE" Type="DATE">
+									<Type>DATE</Type>
+									<Format>yyMMdd</Format>
+								</ValidationPattern>
+							</Validation>
+						</SubField>
+						<SubField Name="Unit">
+							<Validation>
+								<Options>F, M</Options>
+								<ErrorCode>T06</ErrorCode>
+								<Comment><![CDATA[In option F, or M, Unit must contain one of the following codes (Error code(s): T06):]]></Comment>
+								<ValidationPattern xsi:type="CODE" Type="CODE">
+									<Type>CODE</Type>
+									<Codes>
+										<Code Name="FOZ">
+											<DetailedName>Fine Troy Ounce</DetailedName>
+										</Code>
+										<Code Name="GOZ">
+											<DetailedName>Gross Ounce</DetailedName>
+										</Code>
+										<Code Name="GRM">
+											<DetailedName>Gramme</DetailedName>
+										</Code>
+										<Code Name="KLO">
+											<DetailedName>Kilo</DetailedName>
+										</Code>
+										<Code Name="LIT">
+											<DetailedName>Litre</DetailedName>
+										</Code>
+										<Code Name="LOT">
+											<DetailedName>Lot</DetailedName>
+										</Code>
+										<Code Name="OTH">
+											<DetailedName>Other</DetailedName>
+										</Code>
+										<Code Name="PND">
+											<DetailedName>Pound</DetailedName>
+										</Code>
+										<Code Name="TAL">
+											<DetailedName>Tael</DetailedName>
+										</Code>
+										<Code Name="TOL">
+											<DetailedName>Tola</DetailedName>
+										</Code>
+										<Code Name="TON">
+											<DetailedName>Metric Tonne</DetailedName>
+										</Code>
+										<Code Name="TOZ">
+											<DetailedName>Troy Ounce</DetailedName>
+										</Code>
+										<Code Name="UNT">
+											<DetailedName>Unit</DetailedName>
+										</Code>
+									</Codes>
+								</ValidationPattern>
+							</Validation>
+						</SubField>
+					</Validations>
+				</SwiftField>
+				<SwiftField Name="64">
+					<SwiftFieldDef Name="64">
+						<Generic>false</Generic>
+						<Description><![CDATA[Closing Available Balance]]></Description>
+						<Option Name="">
+							<Format><![CDATA[1!a6!n3!a15d]]></Format>
+							<Specification><![CDATA[(D/C Mark) (Date) (Unit) (Amount)]]></Specification>
+							<Description><![CDATA[Closing Available Balance]]></Description>
+						</Option>
+					</SwiftFieldDef>
+					<Repeating>false</Repeating>
+					<Presence>O</Presence>
+					<Options> </Options>
+					<Validations>
+						<SubField Name="D/C_Mark">
+							<Validation>
+								<Options> </Options>
+								<ErrorCode>T51</ErrorCode>
+								<Comment><![CDATA[D/C Mark must contain one of the following codes (Error code(s): T51) :]]></Comment>
+								<ValidationPattern xsi:type="CODE" Type="CODE">
+									<Type>CODE</Type>
+									<Codes>
+										<Code Name="C">
+											<Description>The available closing balance is a credit balance.</Description>
+										</Code>
+										<Code Name="D">
+											<Description>The available closing balance is a debit balance.</Description>
+										</Code>
+									</Codes>
+								</ValidationPattern>
+							</Validation>
+						</SubField>
+						<SubField Name="Date">
+							<Validation>
+								<Options> </Options>
+								<ErrorCode>T50</ErrorCode>
+								<Comment><![CDATA[Date must be a valid date expressed as YYMMDD (Error code(s): T50) .]]></Comment>
+								<ValidationPattern xsi:type="DATE" Type="DATE">
+									<Type>DATE</Type>
+									<Format>yyMMdd</Format>
+								</ValidationPattern>
+							</Validation>
+						</SubField>
+						<SubField Name="Unit">
+							<Validation>
+								<Options> </Options>
+								<ErrorCode>T06</ErrorCode>
+								<Comment><![CDATA[Unit must contain one of the following codes (Error code(s): T06) :]]></Comment>
+								<ValidationPattern xsi:type="CODE" Type="CODE">
+									<Type>CODE</Type>
+									<Codes>
+										<Code Name="FOZ">
+											<DetailedName>Fine Troy Ounce</DetailedName>
+										</Code>
+										<Code Name="GOZ">
+											<DetailedName>Gross Ounce</DetailedName>
+										</Code>
+										<Code Name="GRM">
+											<DetailedName>Gramme</DetailedName>
+										</Code>
+										<Code Name="KLO">
+											<DetailedName>Kilo</DetailedName>
+										</Code>
+										<Code Name="LIT">
+											<DetailedName>Litre</DetailedName>
+										</Code>
+										<Code Name="LOT">
+											<DetailedName>Lot</DetailedName>
+										</Code>
+										<Code Name="OTH">
+											<DetailedName>Other</DetailedName>
+										</Code>
+										<Code Name="PND">
+											<DetailedName>Pound</DetailedName>
+										</Code>
+										<Code Name="TAL">
+											<DetailedName>Tael</DetailedName>
+										</Code>
+										<Code Name="TOL">
+											<DetailedName>Tola</DetailedName>
+										</Code>
+										<Code Name="TON">
+											<DetailedName>Metric Tonne</DetailedName>
+										</Code>
+										<Code Name="TOZ">
+											<DetailedName>Troy Ounce</DetailedName>
+										</Code>
+										<Code Name="UNT">
+											<DetailedName>Unit</DetailedName>
+										</Code>
+									</Codes>
+								</ValidationPattern>
+							</Validation>
+						</SubField>
+					</Validations>
+				</SwiftField>
+				<SwiftField Name="65">
+					<SwiftFieldDef Name="65">
+						<Generic>false</Generic>
+						<Description><![CDATA[Forward Available Balance]]></Description>
+						<Option Name="">
+							<Format><![CDATA[1!a6!n3!a15d]]></Format>
+							<Specification><![CDATA[(D/C Mark) (Date) (Unit) (Amount)]]></Specification>
+							<Description><![CDATA[Forward Available Balance]]></Description>
+						</Option>
+					</SwiftFieldDef>
+					<Repeating>true</Repeating>
+					<Presence>O</Presence>
+					<Options> </Options>
+					<Validations>
+						<SubField Name="D/C_Mark">
+							<Validation>
+								<Options> </Options>
+								<ErrorCode>T51</ErrorCode>
+								<Comment><![CDATA[D/C Mark must contain one of the following codes (Error code(s): T51) :]]></Comment>
+								<ValidationPattern xsi:type="CODE" Type="CODE">
+									<Type>CODE</Type>
+									<Codes>
+										<Code Name="C">
+											<Description>The forward available balance is a credit balance.</Description>
+										</Code>
+										<Code Name="D">
+											<Description>The forward available balance is a debit balance.</Description>
+										</Code>
+									</Codes>
+								</ValidationPattern>
+							</Validation>
+						</SubField>
+						<SubField Name="Date">
+							<Validation>
+								<Options> </Options>
+								<ErrorCode>T50</ErrorCode>
+								<Comment><![CDATA[Date must be a valid date expressed as YYMMDD (Error code(s): T50) .]]></Comment>
+								<ValidationPattern xsi:type="DATE" Type="DATE">
+									<Type>DATE</Type>
+									<Format>yyMMdd</Format>
+								</ValidationPattern>
+							</Validation>
+						</SubField>
+						<SubField Name="Unit">
+							<Validation>
+								<Options> </Options>
+								<ErrorCode>T06</ErrorCode>
+								<Comment><![CDATA[Unit must contain one of the following codes (Error code(s): T06) :]]></Comment>
+								<ValidationPattern xsi:type="CODE" Type="CODE">
+									<Type>CODE</Type>
+									<Codes>
+										<Code Name="FOZ">
+											<DetailedName>Fine Troy Ounce</DetailedName>
+										</Code>
+										<Code Name="GOZ">
+											<DetailedName>Gross Ounce</DetailedName>
+										</Code>
+										<Code Name="GRM">
+											<DetailedName>Gramme</DetailedName>
+										</Code>
+										<Code Name="KLO">
+											<DetailedName>Kilo</DetailedName>
+										</Code>
+										<Code Name="LIT">
+											<DetailedName>Litre</DetailedName>
+										</Code>
+										<Code Name="LOT">
+											<DetailedName>Lot</DetailedName>
+										</Code>
+										<Code Name="OTH">
+											<DetailedName>Other</DetailedName>
+										</Code>
+										<Code Name="PND">
+											<DetailedName>Pound</DetailedName>
+										</Code>
+										<Code Name="TAL">
+											<DetailedName>Tael</DetailedName>
+										</Code>
+										<Code Name="TOL">
+											<DetailedName>Tola</DetailedName>
+										</Code>
+										<Code Name="TON">
+											<DetailedName>Metric Tonne</DetailedName>
+										</Code>
+										<Code Name="TOZ">
+											<DetailedName>Troy Ounce</DetailedName>
+										</Code>
+										<Code Name="UNT">
+											<DetailedName>Unit</DetailedName>
+										</Code>
+									</Codes>
+								</ValidationPattern>
+							</Validation>
+						</SubField>
+					</Validations>
+				</SwiftField>
+			</Fields>
+		</Data>
+		<Trailer>
+		</Trailer>
+	</SwiftFields>
+	<validationrules name="Default">
+		<hdrvalidationrules>
+			<fieldvalidations>
+				<fieldvalidation>
+					<name>U09</name>
+					<formula><![CDATA[if($this.Header.GetFieldIndex("User_Header") != -1) {
+    def userHeader = $this.Header.GetSection("User_Header");
+    if(userHeader.$size > 0 && userHeader[0].IsNotNull("Validation_Flag")) {
+        return false;
+    }
+}
+return true;
+]]></formula>
+					<severity>error</severity>
+					<cascade>true</cascade>
+					<error-code>U09</error-code>
+					<actionmessage><![CDATA["User has used tag 119 in a message that is not a candidate for special processing"]]></actionmessage>
+				</fieldvalidation>
+	<fieldvalidation>
+		<name>U03</name>
+		<fieldname>User Header</fieldname>
+		<formula><![CDATA[Iff(IsNotNull(User_Header.Service_Type_Identifier), 
+    IsNotNull(User_Header.Unique_End_To_End_Transaction_Reference))]]></formula>
+		<severity>error</severity>
+		<cascade>true</cascade>
+		<error-code>U03</error-code>
+		<actionmessage><![CDATA["When populating an end-to-end reference, both fields 111 and 121 must be populated: a message that contains only one of these two fields will not be accepted by FIN."]]></actionmessage>
+	</fieldvalidation>
+			</fieldvalidations>
+		</hdrvalidationrules>
+		<datavalidationrules>
+			<fieldvalidations>
+				<fieldvalidation>
+					<name>C1-1</name>
+					<fieldname>62a.Unit</fieldname>
+					<comment><![CDATA[C1-1
+The commodity code must be the same for fields 60a, 62a (Error code(s): C80).]]></comment>
+					<formula><![CDATA[$value==F60a[0].Unit]]></formula>
+					<severity>error</severity>
+					<cascade>true</cascade>
+					<error-code>C80</error-code>
+					<actionmessage><![CDATA["The commodity code must be the same for fields 60a, 62a."]]></actionmessage>
+				</fieldvalidation>
+				<fieldvalidation>
+					<name>C1-2</name>
+					<fieldname>64.Unit</fieldname>
+					<comment><![CDATA[C1-2
+The commodity code must be the same for fields 60a, 64 (Error code(s): C80).]]></comment>
+					<formula><![CDATA[$value==F60a[0].Unit]]></formula>
+					<severity>error</severity>
+					<cascade>true</cascade>
+					<error-code>C80</error-code>
+					<actionmessage><![CDATA["The commodity code must be the same for fields 60a, 64."]]></actionmessage>
+				</fieldvalidation>
+				<fieldvalidation>
+					<name>C1-3</name>
+					<fieldname>65.Unit</fieldname>
+					<comment><![CDATA[C1-3
+The commodity code must be the same for all occurrences of fields 60a, 65 (Error code(s): C80).]]></comment>
+					<formula><![CDATA[$value==F60a[0].Unit]]></formula>
+					<severity>error</severity>
+					<cascade>true</cascade>
+					<error-code>C80</error-code>
+					<actionmessage><![CDATA["The commodity code must be the same for all occurrences of fields 60a, 65."]]></actionmessage>
+				</fieldvalidation>
+				<fieldvalidation>
+					<name>C2-1</name>
+					<fieldname>60a.Unit</fieldname>
+					<formula><![CDATA[If(F26C.Type == "GOLD", 
+   !In($value, "GOZ", "TOZ"), 
+   Implies(In(F26C.Type, "PALL", "PLAT", "SILV"), !In($value, "FOZ", "TOZ")))]]></formula>
+					<severity>error</severity>
+					<cascade>true</cascade>
+					<error-code>D07</error-code>
+					<actionmessage><![CDATA["When GOLD is defined in subfield 4 (Type) of field 26C, then field unit under 60a Opening Balance (Option F and M) must not be GOZ nor TOZ. If 26C is one of PALL or PLAT or SILV, then value must not be FOZ nor TOZ."]]></actionmessage>
+				</fieldvalidation>
+				<fieldvalidation>
+					<name>C2-2</name>
+					<fieldname>62a.Unit</fieldname>
+					<formula><![CDATA[If(F26C.Type == "GOLD", 
+   !In($value, "GOZ", "TOZ"), 
+   Implies(In(F26C.Type, "PALL", "PLAT", "SILV"), !In($value, "FOZ", "TOZ")))]]></formula>
+					<severity>error</severity>
+					<cascade>true</cascade>
+					<error-code>D07</error-code>
+					<actionmessage><![CDATA["When GOLD is defined in subfield 4 (Type) of field 26C, then the Unit in field 62a Closing Balance (Option F and M) must not be GOZ nor TOZ. If 26C is one of PALL or PLAT or SILV, then value must not be FOZ nor TOZ."]]></actionmessage>
+				</fieldvalidation>
+				<fieldvalidation>
+					<name>C2-3</name>
+					<fieldname>64.Unit</fieldname>
+					<formula><![CDATA[If(F26C.Type == "GOLD", 
+   !In($value, "GOZ", "TOZ"), 
+   Implies(In(F26C.Type, "PALL", "PLAT", "SILV"), !In($value, "FOZ", "TOZ")))]]></formula>
+					<severity>error</severity>
+					<cascade>true</cascade>
+					<error-code>D07</error-code>
+					<actionmessage><![CDATA["When GOLD is defined in subfield 4 (Type) of field 26C, then the Unit in field 64 must not be FOZ nor TOZ. If 26C is one of PALL or PLAT or SILV, then value must not be FOZ nor TOZ."]]></actionmessage>
+				</fieldvalidation>
+				<fieldvalidation>
+					<name>C2-4</name>
+					<fieldname>65.Unit</fieldname>
+					<formula><![CDATA[If(F26C.Type == "GOLD", 
+   !In($value, "GOZ", "TOZ"), 
+   Implies(In(F26C.Type, "PALL", "PLAT", "SILV"), !In($value, "FOZ", "TOZ")))]]></formula>
+					<severity>error</severity>
+					<cascade>true</cascade>
+					<error-code>D07</error-code>
+					<actionmessage><![CDATA["When GOLD is defined in subfield 4 (Type) of field 26C, then the Unit in field 65 must not be FOZ nor TOZ. If 26C is one of PALL or PLAT or SILV, then value must not be FOZ nor TOZ."]]></actionmessage>
+				</fieldvalidation>
+				<fieldvalidation>
+					<name>F-26C-A1</name>
+					<fieldname>26C</fieldname>
+					<comment><![CDATA[F-26C-A1
+When Type is AMEG, Denomination must be one of the following: 50, 25, 10, 5.
+
+]]></comment>
+					<formula><![CDATA[If(F26C.Type == "AMEG", 
+   IsNotNull(F26C.Denomination) && 
+     In(F26C.Denomination, "50", "25", "10", "5"), 
+   true)]]></formula>
+					<severity>error</severity>
+					<cascade>true</cascade>
+					<error-code>T04</error-code>
+					<actionmessage><![CDATA["When Type is AMEG, Denomination must be one of the following: 50, 25, 10, 5."]]></actionmessage>
+				</fieldvalidation>
+				<fieldvalidation>
+					<name>F-26C-A2</name>
+					<fieldname>26C</fieldname>
+					<comment><![CDATA[F-26C-A2
+When Type is ANUG, Denomination must be one of the following: 1/1, 1/2, 1/4, 1/10.]]></comment>
+					<formula><![CDATA[If(F26C.Type == "ANUG", 
+  IsNotNull(F26C.Denomination) && 
+    In(F26C.Denomination, "1/1", "1/2", "1/4", "1/10"), 
+  true)]]></formula>
+					<severity>error</severity>
+					<cascade>true</cascade>
+					<error-code>T04</error-code>
+					<actionmessage><![CDATA["When Type is ANUG, Denomination must be one of the following: 1/1, 1/2, 1/4, 1/10."]]></actionmessage>
+				</fieldvalidation>
+				<fieldvalidation>
+					<name>F-26C-A3</name>
+					<fieldname>26C</fieldname>
+					<comment><![CDATA[F-26C-A3
+When Type is BRIT, Denomination must be one of the following: 1/1, 1/2, 1/4, 1/10.]]></comment>
+					<formula><![CDATA[If(F26C.Type == "BRIT", 
+   IsNotNull(F26C.Denomination) && 
+     In(F26C.Denomination, "1/1", "1/2", "1/4", "1/10"), 
+   true)]]></formula>
+					<severity>error</severity>
+					<cascade>true</cascade>
+					<error-code>T04</error-code>
+					<actionmessage><![CDATA["When Type is BRIT, Denomination must be one of the following: 1/1, 1/2, 1/4, 1/10."]]></actionmessage>
+				</fieldvalidation>
+				<fieldvalidation>
+					<name>F-26C-A4</name>
+					<fieldname>26C</fieldname>
+					<comment><![CDATA[F-26C-A4
+When Type is CORO, Denomination must be one of the following: 100, 20, 10.]]></comment>
+					<formula><![CDATA[If(F26C.Type == "CORO", 
+   IsNotNull(F26C.Denomination) && In(F26C.Denomination, "100", "20", "10"), 
+   true)]]></formula>
+					<severity>error</severity>
+					<cascade>true</cascade>
+					<error-code>T04</error-code>
+					<actionmessage><![CDATA["When Type is CORO, Denomination must be one of the following: 100, 20, 10."]]></actionmessage>
+				</fieldvalidation>
+				<fieldvalidation>
+					<name>F-26C-A5</name>
+					<fieldname>26C</fieldname>
+					<comment><![CDATA[F-26C-A5
+When Type is DUCA, Denomination must be one of the following: 4, 1.
+]]></comment>
+					<formula><![CDATA[If(F26C.Type == "DUCA", 
+   IsNotNull(F26C.Denomination) && In(F26C.Denomination, "4", "1"), 
+   true)]]></formula>
+					<severity>error</severity>
+					<cascade>true</cascade>
+					<error-code>T04</error-code>
+					<actionmessage><![CDATA["When Type is DUCA, Denomination must be one of the following: 4, 1."]]></actionmessage>
+				</fieldvalidation>
+				<fieldvalidation>
+					<name>F-26C-A6</name>
+					<fieldname>26C</fieldname>
+					<comment><![CDATA[F-26C-A6
+When Type is FRFR, Denomination must be one of the following: 20.]]></comment>
+					<formula><![CDATA[If(F26C.Type == "FRFR", 
+   IsNotNull(F26C.Denomination) && In(F26C.Denomination, "20"), 
+   true)]]></formula>
+					<severity>error</severity>
+					<cascade>true</cascade>
+					<error-code>T04</error-code>
+					<actionmessage><![CDATA["When Type is FRFR, Denomination must be one of the following: 20."]]></actionmessage>
+				</fieldvalidation>
+				<fieldvalidation>
+					<name>F-26C-A7</name>
+					<fieldname>26C</fieldname>
+					<comment><![CDATA[F-26C-A7
+When Type is GECU, Denomination must be one of the following: 50.]]></comment>
+					<formula><![CDATA[If(F26C.Type == "GECU", 
+   IsNotNull(F26C.Denomination) && In(F26C.Denomination, "50"), 
+   true)]]></formula>
+					<severity>error</severity>
+					<cascade>true</cascade>
+					<error-code>T04</error-code>
+					<actionmessage><![CDATA["When Type is GECU, Denomination must be one of the following: 50."]]></actionmessage>
+				</fieldvalidation>
+				<fieldvalidation>
+					<name>F-26C-A8</name>
+					<fieldname>26C</fieldname>
+					<comment><![CDATA[F-26C-A8
+When Type is KRUG, Denomination must be one of the following: 1/1, 1/2, 1/4, 1/10.]]></comment>
+					<formula><![CDATA[If(F26C.Type == "KRUG", 
+   IsNotNull(F26C.Denomination) && 
+     In(F26C.Denomination, "1/1", "1/2", "1/4", "1/10"), 
+   true)]]></formula>
+					<severity>error</severity>
+					<cascade>true</cascade>
+					<error-code>T04</error-code>
+					<actionmessage><![CDATA["When Type is KRUG, Denomination must be one of the following: 1/1, 1/2, 1/4, 1/10."]]></actionmessage>
+				</fieldvalidation>
+				<fieldvalidation>
+					<name>F-26C-A9</name>
+					<fieldname>26C</fieldname>
+					<comment><![CDATA[F-26C-A9
+When Type is LBTY, Denomination must be one of the following: 20, 10, 5.]]></comment>
+					<formula><![CDATA[If(F26C.Type == "LBTY", 
+   IsNotNull(F26C.Denomination) && 
+     In(F26C.Denomination, "20", "10", "5"), 
+   true)]]></formula>
+					<severity>error</severity>
+					<cascade>true</cascade>
+					<error-code>T04</error-code>
+					<actionmessage><![CDATA["When Type is LBTY, Denomination must be one of the following: 20, 10, 5."]]></actionmessage>
+				</fieldvalidation>
+				<fieldvalidation>
+					<name>F-26C-A10</name>
+					<fieldname>26C</fieldname>
+					<comment><![CDATA[F-26C-A10
+When Type is MAPL, Denomination must be one of the following: 1/1, 1/2, 1/4, 1/10.]]></comment>
+					<formula><![CDATA[If(F26C.Type == "MAPL", 
+   IsNotNull(F26C.Denomination) && 
+     In(F26C.Denomination, "1/1", "1/2", "1/4", "1/10"), 
+   true)]]></formula>
+					<severity>error</severity>
+					<cascade>true</cascade>
+					<error-code>T04</error-code>
+					<actionmessage><![CDATA["When Type is MAPL, Denomination must be one of the following: 1/1, 1/2, 1/4, 1/10."]]></actionmessage>
+				</fieldvalidation>
+				<fieldvalidation>
+					<name>F-26C-A11</name>
+					<fieldname>26C</fieldname>
+					<comment><![CDATA[F-26C-A11
+When Type is MEXP, Denomination must be one of the following: 50, 20, 10, 5.
+]]></comment>
+					<formula><![CDATA[If(F26C.Type == "MEXP", 
+   IsNotNull(F26C.Denomination) && 
+     In(F26C.Denomination, "50", "20", "10", "5"), 
+   true)]]></formula>
+					<severity>error</severity>
+					<cascade>true</cascade>
+					<error-code>T04</error-code>
+					<actionmessage><![CDATA["When Type is MEXP, Denomination must be one of the following: 50, 20, 10, 5."]]></actionmessage>
+				</fieldvalidation>
+				<fieldvalidation>
+					<name>F-26C-A12</name>
+					<fieldname>26C</fieldname>
+					<comment><![CDATA[F-26C-A12
+When Type is NOBL, Denomination must be one of the following: 1/1.]]></comment>
+					<formula><![CDATA[If(F26C.Type == "NOBL", 
+   IsNotNull(F26C.Denomination) && 
+     In(F26C.Denomination, "1/1"), 
+   true)]]></formula>
+					<severity>error</severity>
+					<cascade>true</cascade>
+					<error-code>T04</error-code>
+					<actionmessage><![CDATA["When Type is NOBL, Denomination must be one of the following: 1/1."]]></actionmessage>
+				</fieldvalidation>
+				<fieldvalidation>
+					<name>F-26C-A13</name>
+					<fieldname>26C</fieldname>
+					<comment><![CDATA[F-26C-A13
+When Type is NSOV, Denomination must be one of the following: 1/1, 1/2.]]></comment>
+					<formula><![CDATA[If(F26C.Type == "NSOV", 
+   IsNotNull(F26C.Denomination) && In(F26C.Denomination, "1/1", "1/2"), 
+   true)]]></formula>
+					<severity>error</severity>
+					<cascade>true</cascade>
+					<error-code>T04</error-code>
+					<actionmessage><![CDATA["When Type is NSOV, Denomination must be one of the following: 1/1, 1/2."]]></actionmessage>
+				</fieldvalidation>
+				<fieldvalidation>
+					<name>F-26C-A14</name>
+					<fieldname>26C</fieldname>
+					<comment><![CDATA[F-26C-A14
+When Type is OSOV, Denomination must be one of the following: 1/1, 1/2.]]></comment>
+					<formula><![CDATA[If(F26C.Type == "OSOV", 
+   IsNotNull(F26C.Denomination) && In(F26C.Denomination, "1/1", "1/2"), 
+   true)]]></formula>
+					<severity>error</severity>
+					<cascade>true</cascade>
+					<error-code>T04</error-code>
+					<actionmessage><![CDATA["When Type is OSOV, Denomination must be one of the following: 1/1, 1/2."]]></actionmessage>
+				</fieldvalidation>
+				<fieldvalidation>
+					<name>F-26C-A15</name>
+					<fieldname>26C</fieldname>
+					<comment><![CDATA[F-26C-A15
+When Type is SAEG, Denomination must be one of the following: 1/1.]]></comment>
+					<formula><![CDATA[If(F26C.Type == "SAEG", 
+   IsNotNull(F26C.Denomination) && 
+     In(F26C.Denomination, "1/1"), 
+   true)]]></formula>
+					<severity>error</severity>
+					<cascade>true</cascade>
+					<error-code>T04</error-code>
+					<actionmessage><![CDATA["When Type is SAEG, Denomination must be one of the following: 1/1."]]></actionmessage>
+				</fieldvalidation>
+				<fieldvalidation>
+					<name>F-26C-A16</name>
+					<fieldname>26C</fieldname>
+					<comment><![CDATA[F-26C-A16
+When Type is SECU, Denomination must be one of the following: 5.]]></comment>
+					<formula><![CDATA[If(F26C.Type == "SECU", 
+   IsNotNull(F26C.Denomination) && 
+     In(F26C.Denomination, "5"), 
+   true)]]></formula>
+					<severity>error</severity>
+					<cascade>true</cascade>
+					<error-code>T04</error-code>
+					<actionmessage><![CDATA["When Type is SECU, Denomination must be one of the following: 5."]]></actionmessage>
+				</fieldvalidation>
+				<fieldvalidation>
+					<name>F-26C-A17</name>
+					<fieldname>26C</fieldname>
+					<comment><![CDATA[F-26C-A17
+When Type is STAT, Denomination must be one of the following: 20, 10, 5.]]></comment>
+					<formula><![CDATA[If(F26C.Type == "STAT", 
+   IsNotNull(F26C.Denomination) && 
+     In(F26C.Denomination, "20", "10", "5"), 
+   true)]]></formula>
+					<severity>error</severity>
+					<cascade>true</cascade>
+					<error-code>T04</error-code>
+					<actionmessage><![CDATA["When Type is STAT, Denomination must be one of the following: 20, 10, 5."]]></actionmessage>
+				</fieldvalidation>
+				<fieldvalidation>
+					<name>F-26C-A18</name>
+					<fieldname>26C</fieldname>
+					<comment><![CDATA[F-26C-A18
+When Type is VREN, Denomination must be one of the following: 20, 10.]]></comment>
+					<formula><![CDATA[If(F26C.Type == "VREN", 
+   IsNotNull(F26C.Denomination) && 
+     In(F26C.Denomination, "20", "10"), 
+   true)]]></formula>
+					<severity>error</severity>
+					<cascade>true</cascade>
+					<error-code>T04</error-code>
+					<actionmessage><![CDATA["When Type is VREN, Denomination must be one of the following: 20, 10."]]></actionmessage>
+				</fieldvalidation>
+				<fieldvalidation>
+					<name>F-26C-A19</name>
+					<fieldname>26C</fieldname>
+					<comment><![CDATA["When Type is NBUF , Denomination must be one of the following: 50."
+]]></comment>
+					<formula><![CDATA[If(F26C.Type == "NBUF", 
+   IsNotNull(F26C.Denomination) && In(F26C.Denomination, "50"), 
+   true)]]></formula>
+					<severity>error</severity>
+					<cascade>true</cascade>
+					<error-code>T04</error-code>
+					<actionmessage><![CDATA["When Type is NBUF , Denomination must be one of the following: 50."]]></actionmessage>
+				</fieldvalidation>
+				<fieldvalidation>
+					<name>F-60a-1</name>
+					<fieldname>60a.Amount</fieldname>
+					<comment><![CDATA[F60a-1
+Amount must not contain more than six digits following the decimal comma.]]></comment>
+					<formula><![CDATA[if(FindFirst(toText($value), ".") != -1 && Length(RightStr(toText($value), ".")) > 6)
+    return false;
+
+return true;]]></formula>
+					<severity>error</severity>
+					<cascade>true</cascade>
+					<error-code>C89</error-code>
+					<actionmessage><![CDATA["Amount must not contain more than six digits following the decimal comma."]]></actionmessage>
+				</fieldvalidation>
+				<fieldvalidation>
+					<name>F-61-1</name>
+					<fieldname>61.Amount</fieldname>
+					<comment><![CDATA[F-61-1
+Amount must not contain more than six digits following the decimal comma.]]></comment>
+					<formula><![CDATA[if(FindFirst(toText($value), ".") != -1 && Length(RightStr(toText($value), ".")) > 6)
+    return false;
+
+return true;]]></formula>
+					<severity>error</severity>
+					<cascade>true</cascade>
+					<error-code>C89</error-code>
+					<actionmessage><![CDATA["Amount must not contain more than six digits following the decimal comma."]]></actionmessage>
+				</fieldvalidation>
+				<fieldvalidation>
+					<name>DC-FIX</name>
+					<fieldname>61</fieldname>
+					<comment><![CDATA[This validation should not be disabled. This provides fix for the parsing problem in field 61.
+
+]]></comment>
+					<formula><![CDATA[$dc = F61.Debit_Credit_Mark;
+$shouldFix = Length($dc) == 2 &&  IsNull(F61.Funds_Code);
+If($shouldFix, Set(F61.Funds_Code, Right($dc, 1)));
+If($shouldFix, Set(F61.Debit_Credit_Mark, Left($dc, 1)));
+true;
+]]></formula>
+					<severity>error</severity>
+					<cascade>true</cascade>
+					<error-code>DC-FIX</error-code>
+				</fieldvalidation>
+				<fieldvalidation>
+					<name>F-61-2</name>
+					<fieldname>61.Funds_Code</fieldname>
+					<comment><![CDATA[F-61-2
+Subfield 4, Funds Code, must not be used in this message (Error code(s): C91).]]></comment>
+					<formula><![CDATA[false]]></formula>
+					<severity>error</severity>
+					<cascade>true</cascade>
+					<error-code>C91</error-code>
+					<actionmessage><![CDATA["Subfield 4 ,Funds Code, must not be used in this message."]]></actionmessage>
+				</fieldvalidation>
+				<fieldvalidation>
+					<name>F-61-3</name>
+					<fieldname>61.Transaction_Type</fieldname>
+					<formula><![CDATA[Implies($value == "S", Between(ToInt(F61.Identification_Code), 100, 999))]]></formula>
+					<severity>error</severity>
+					<cascade>true</cascade>
+					<error-code>T18</error-code>
+					<actionmessage><![CDATA["In field 61, if subfield 6, Transaction Type, is 'S', then Identification_Code must be in the range 100-999."]]></actionmessage>
+				</fieldvalidation>
+				<fieldvalidation>
+					<name>F-62a-1</name>
+					<fieldname>62a.Amount</fieldname>
+					<comment><![CDATA[F-62a-1
+Amount must not contain more than six digits following the decimal comma.]]></comment>
+					<formula><![CDATA[if(FindFirst(toText($value), ".") != -1 && Length(RightStr(toText($value), ".")) > 6)
+    return false;
+
+return true;]]></formula>
+					<severity>error</severity>
+					<cascade>true</cascade>
+					<error-code>C89</error-code>
+					<actionmessage><![CDATA["Amount must not contain more than six digits following the decimal comma."]]></actionmessage>
+				</fieldvalidation>
+				<fieldvalidation>
+					<name>F-64-1</name>
+					<fieldname>64.Amount</fieldname>
+					<comment><![CDATA[F-64-1
+Amount must not contain more than six digits following the decimal comma.]]></comment>
+					<formula><![CDATA[if(FindFirst(toText($value), ".") != -1 && Length(RightStr(toText($value), ".")) > 6)
+    return false;
+
+return true;]]></formula>
+					<severity>error</severity>
+					<cascade>true</cascade>
+					<error-code>C89</error-code>
+					<actionmessage><![CDATA["Amount must not contain more than six digits following the decimal comma."]]></actionmessage>
+				</fieldvalidation>
+				<fieldvalidation>
+					<name>F-65-1</name>
+					<fieldname>65.Amount</fieldname>
+					<comment><![CDATA[F-65-1
+Amount must not contain more than six digits following the decimal comma.]]></comment>
+					<formula><![CDATA[if(FindFirst(toText($value), ".") != -1 && Length(RightStr(toText($value), ".")) > 6)
+    return false;
+
+return true;]]></formula>
+					<severity>error</severity>
+					<cascade>true</cascade>
+					<error-code>C89</error-code>
+					<actionmessage><![CDATA["Amount must not contain more than six digits following the decimal comma."]]></actionmessage>
+				</fieldvalidation>
+			</fieldvalidations>
+		</datavalidationrules>
+		<tlrvalidationrules>
+			<fieldvalidations>
+			</fieldvalidations>
+		</tlrvalidationrules>
+	</validationrules>
+</SwiftMessageFormat>
+

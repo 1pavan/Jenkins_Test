@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<formulae>
+    <formula name="ToVariant">
+        <description>Returns the variant representation of the value. The value can be of type int, long, double, float, boolean, date and char etc</description>
+        <signature>ToVariant(value)</signature>
+        <category>Format</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.FormatFunctions"/>
+        <property name="method" value="toVariant"/>
+    </formula>
+
+    <formula name="ToDataObject">
+        <description>Converts Variant to DataObject. Applicable only if the variant was created from DataObject.</description>
+        <signature>ToDataObject(str)</signature>
+        <category>Format</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.FormatFunctions"/>
+        <property name="method" value="toDataObject"/>
+    </formula>
+    <formula name="ToSection">
+        <description>Converts Variant to Section. Applicable only if the variant was created from Section.</description>
+        <signature>ToSection(str)</signature>
+        <category>Format</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.FormatFunctions"/>
+        <property name="method" value="toSection"/>
+    </formula>
+
+    <formula name="ToText">
+        <description>Returns the string representation of the primitive value. The primitive can be of type int, long, double, float, boolean, date and char</description>
+        <signature>ToText(primitive_value)</signature>
+        <category>Format</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.FormatFunctions"/>
+        <property name="method" value="toText"/>
+    </formula>
+
+    <formula name="ToInt">
+        <description>Returns the integer representation of the given string. If the string is not parsable to an integer value, this function throws an exception.</description>
+        <signature>ToInt(str)</signature>
+        <category>Format</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.FormatFunctions"/>
+        <property name="method" value="toInt"/>
+    </formula>
+
+    <formula name="ToLong">
+        <description>Returns the long representation of the given string. If the string is not parsable to an long value, this function generates and propagates an exception.</description>
+        <signature>ToLong(str)</signature>
+        <category>Format</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.FormatFunctions"/>
+        <property name="method" value="toLong"/>
+    </formula>
+
+    <formula name="ToDouble">
+        <description>Returns the double representation of the given string. If the string is not parsable to a double value, this function generates and propagates an error to the client.</description>
+        <signature>ToDouble(str)</signature>
+        <category>Format</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.FormatFunctions"/>
+        <property name="method" value="toDouble"/>
+    </formula>
+
+    <formula name="ToFloat">
+        <description>Returns the float representation of the given string. If the string is not parsable to a float value, this function generates and propagates an error to the client.</description>
+        <signature>ToFloat(str)</signature>
+        <category>Format</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.FormatFunctions"/>
+        <property name="method" value="toFloat"/>
+    </formula>
+
+    <formula name="ToChar">
+        <description>Returns the character representation of the given string. If the length of the string is greater than 1, the first character of the string is returned.</description>
+        <signature>ToChar(str)</signature>
+        <category>Format</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.FormatFunctions"/>
+        <property name="method" value="toChar"/>
+    </formula>
+
+    <formula name="ToBoolean">
+        <description>Returns the boolean representation of the given string (true/false). It returns true if the string argument is is equal, ignoring case, to the string "true"</description>
+        <signature>ToBoolean(str)</signature>
+        <category>Format</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.FormatFunctions"/>
+        <property name="method" value="toBoolean"/>
+        <property name="nullable" value="true"/>
+    </formula>
+
+    <formula name="FormatDate">
+        <description>This function formats the given date based on the given pattern and returns the resultant string. When the pattern is not specified, the return string will be of form "Jan 25, 2002".</description>
+        <signature>FormatDate(date, patternStrOpt)</signature>
+        <category>Format</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.FormatFunctions"/>
+        <property name="method" value="formatDate"/>
+        <property name="validationclass" value="com.tplus.transform.design.formula.functions.DatePatternValidation"/>
+    </formula>
+
+    <formula name="FormatISODate">
+        <description>This function formats the given ISO date based on the given pattern and returns the resultant string. When the pattern is not specified, the return string will be of form
+            "2006-01-11T15:32:50.374+05:30".
+        </description>
+        <signature>FormatISODate(ISOdate, patternStrOpt)</signature>
+        <category>Format</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.FormatFunctions"/>
+        <property name="method" value="formatDate"/>
+        <property name="validationclass" value="com.tplus.transform.design.formula.functions.DatePatternValidation"/>
+    </formula>
+
+    <formula name="ParseDate">
+        <description>Returns the equivalent Date object for the given date string. The date string is converted to a Date object based on the given pattern. If the pattern is not specified, then the date string should be
+            in the form "Jan 25, 2002".
+        </description>
+        <signature>ParseDate(dateStr, patternStrOpt)</signature>
+        <category>Format</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.FormatFunctions"/>
+        <property name="method" value="parseDate"/>
+        <property name="validationclass" value="com.tplus.transform.design.formula.functions.DatePatternValidation"/>
+    </formula>
+
+    <formula name="ParseISODate">
+        <description>Returns the equivalent ISO date object for the given date string. The date string is converted to ISO date object based on the given pattern. The pattern should at least contain the day, month and
+            year to get proper results. The pattern should match the given date string exactly.
+        </description>
+        <signature>ParseISODate(dateStr, patternStr)</signature>
+        <category>Format</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.FormatFunctions"/>
+        <property name="method" value="parseISODate"/>
+        <property name="validationclass" value="com.tplus.transform.design.formula.functions.DatePatternValidation"/>
+    </formula>
+
+    <formula name="Format">
+        <description>This function produces formatted messages.</description>
+        <signature>Format(pattern, arg1Opt, ...arg2Opt,)</signature>
+        <category>Format</category>
+        <Class>com.tplus.transform.design.formula.functions.FormatFunction</Class>
+    </formula>
+</formulae> 

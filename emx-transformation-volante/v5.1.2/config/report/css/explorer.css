@@ -1,0 +1,91 @@
+tr.tableRowHeader {
+	COLOR: white;
+	BACKGROUND-COLOR: #4b6ca6;
+	FONT-FAMILY: tahoma, geneva, lucida, 'lucida grande', arial, helvetica, sans-serif; 
+	FONT-SIZE: 11px; 
+	FONT-WEIGHT: bold; 
+	TEXT-ALIGN: left; 
+	PADDING-RIGHT: 6px; 
+	PADDING-LEFT: 6px; 
+	PADDING-BOTTOM: 6px; 
+	PADDING-TOP: 6px;
+}
+td.tableCell {
+}
+td.tableCellAction {
+  padding-left: .1em; padding-right: .1em; 
+  background-color: #EDEDEE; 
+  color: #000000;
+  font-family: Arial,Helvetica, sans-serif; 
+  font-size:80.0%;
+}
+
+tr.tableRowOdd {
+  padding-left: .5em; padding-right: .5em; 
+  font-family: Verdana,Arial,Helvetica, sans-serif; 
+  font-size:70.0%;
+  BACKGROUND-COLOR: #f5f5ff;
+}
+tr.tableRowEven {
+  padding-left: .5em; padding-right: .5em; 
+  font-family: Verdana, Arial,Helvetica, sans-serif; 
+  font-size:70.0%;
+  BACKGROUND-COLOR: #f5f5ff;
+
+}
+p.tableDetailTitle
+{
+    FONT-WEIGHT: bold;
+    FONT-SIZE: 11pt;
+    FONT-FAMILY: Verdana;
+	valign : top
+}
+
+td.tableDetailName
+{
+    FONT-WEIGHT: bold;
+    FONT-SIZE: 10pt;
+    FONT-FAMILY: Verdana;
+	valign : top
+}
+td.tableDetailValue
+{
+    FONT-WEIGHT: normal;
+    FONT-SIZE: 10pt;
+    FONT-FAMILY: Verdana;
+	valign : top
+}
+pre.tableDetailValue
+{
+    FONT-WEIGHT: normal;
+    FONT-SIZE: 10pt;
+    FONT-FAMILY: Verdana;
+	valign : top
+}
+
+A {
+	COLOR: #000000; TEXT-DECORATION: none
+}
+A:hover {
+	color: #ddaa00; TEXT-DECORATION: underline
+}
+
+
+p.exploreritem
+{
+    FONT-FAMILY: verdana, geneva, lucida, 'lucida grande', arial, helvetica, sans-serif; 
+	font-size:11px;
+	valign : center
+}
+
+BODY {
+	FONT-FAMILY: verdana, geneva, lucida, 'lucida grande', arial, helvetica, sans-serif; 
+	FONT-SIZE: 10px;	
+    BACKGROUND-COLOR: #f5f5ff;
+}
+
+
+table.explorertable {
+	width : 100%;
+    valign: center
+}

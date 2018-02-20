@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!DOCTYPE web-app PUBLIC "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN" "http://java.sun.com/dtd/web-app_2_3.dtd">
+
+<web-app>
+	<display-name>TEST APPLICATION</display-name>
+	<description>TEST APPLICATION</description>
+	
+	<welcome-file-list>
+		<welcome-file>TestNewRawMessage.jsp</welcome-file>
+	</welcome-file-list>	
+
+
+   <taglib>
+      <taglib-uri>http://www.volantetech.com/taglibs/webforms</taglib-uri>
+      <taglib-location>/WEB-INF/webforms.tld</taglib-location>
+   </taglib> 
+
+</web-app>
+ 
+

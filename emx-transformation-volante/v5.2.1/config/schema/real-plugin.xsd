@@ -1,0 +1,105 @@
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="unqualified" attributeFormDefault="unqualified">
+	<!-- include constructs -->
+	<xsd:include schemaLocation="externalmsg.xsd"/>
+	<xsd:complexType name="RealFormat">
+		<xsd:complexContent>
+			<xsd:extension base="ExternalMessageType"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:element name="realfields" substitutionGroup="ExternalMessageFields">
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="ExternalMessageFieldsType">
+					<xsd:sequence>
+						<xsd:element name="options">
+							<xsd:complexType>
+								<xsd:sequence>
+									<xsd:element name="binaryformat" type="xsd:boolean"/>
+									<xsd:element name="xmlformat" type="xsd:boolean"/>
+								</xsd:sequence>
+							</xsd:complexType>
+						</xsd:element>
+						<xsd:element name="header">
+							<xsd:complexType>
+								<xsd:sequence>
+									<xsd:element ref="layer" minOccurs="0" maxOccurs="unbounded"/>
+								</xsd:sequence>
+							</xsd:complexType>
+						</xsd:element>
+						<xsd:element name="realmessage">
+							<xsd:complexType>
+								<xsd:sequence>
+									<xsd:element name="name" type="xsd:string"/>
+									<xsd:element name="description" type="xsd:string" minOccurs="0"/>
+									<xsd:element ref="datastream" minOccurs="0" maxOccurs="unbounded"/>
+								</xsd:sequence>
+								<xsd:attribute name="ID" type="xsd:string"/>
+							</xsd:complexType>
+						</xsd:element>
+						<xsd:element name="trailer">
+							<xsd:complexType>
+								<xsd:sequence>
+									<xsd:element ref="layer" minOccurs="0" maxOccurs="unbounded"/>
+								</xsd:sequence>
+							</xsd:complexType>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="datastream">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="mandatory" type="xsd:boolean"/>
+				<xsd:element name="repeating" type="xsd:boolean"/>
+				<xsd:element name="aliasname" type="xsd:string" minOccurs="0"/>
+				<xsd:element name="enabled" type="xsd:boolean"/>
+				<xsd:element name="name" type="xsd:string"/>
+				<xsd:element name="description" type="xsd:string" minOccurs="0"/>
+				<xsd:group ref="datastreamGroup" minOccurs="0" maxOccurs="unbounded"/>
+			</xsd:sequence>
+			<xsd:attribute name="ID" type="xsd:string"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:group name="datastreamGroup">
+		<xsd:choice>
+			<xsd:element ref="datastream"/>
+			<xsd:element name="field" type="realFieldType" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:choice>
+	</xsd:group>
+	<xsd:element name="layer">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="mandatory" type="xsd:boolean"/>
+				<xsd:element name="description" type="xsd:string" minOccurs="0"/>
+				<xsd:element name="field" minOccurs="0" maxOccurs="unbounded">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="mandatory" type="xsd:boolean"/>
+							<xsd:element name="description" type="xsd:string" minOccurs="0"/>
+							<xsd:element name="type" type="xsd:string"/>
+							<xsd:element name="length" type="xsd:integer"/>
+						</xsd:sequence>
+						<xsd:attribute name="name" type="xsd:string"/>
+						<xsd:attribute name="xmlname" type="xsd:string"/>
+					</xsd:complexType>
+				</xsd:element>
+			</xsd:sequence>
+			<xsd:attribute name="name" type="xsd:string"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:complexType name="realFieldType">
+		<xsd:sequence>
+			<xsd:element name="mandatory" type="xsd:boolean"/>
+			<xsd:element name="defaultvalue" type="xsd:string"/>
+			<xsd:element name="aliasname" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="enabled" type="xsd:boolean"/>
+			<xsd:element name="name" type="xsd:string"/>
+			<xsd:element name="description" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="type" type="xsd:string"/>
+			<xsd:element name="length" type="xsd:integer"/>
+		</xsd:sequence>
+		<xsd:attribute name="ID" type="xsd:string"/>
+	</xsd:complexType>
+</xsd:schema>

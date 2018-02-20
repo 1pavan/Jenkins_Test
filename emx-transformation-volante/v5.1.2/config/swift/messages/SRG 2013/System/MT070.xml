@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<SwiftMessageFormat name="MT070">
+	<standard-version>SRG 2012</standard-version>
+	<DescriptiveName><![CDATA[Undelivered SSI Update Notification Report Request]]></DescriptiveName>
+	<Category><![CDATA[System]]></Category>
+        <Description><![CDATA[This message is used to monitor the delivery status of MT 671 Standing Settlement Instruction (SSI) Update
+Notification messages. The response to this message is an MT 071 SSI Update Notification Status Report,
+which reports undelivered MT 671 messages.
+
+From: User To: FIN]]></Description>	
+	<SwiftFields>
+		<customizable>false</customizable>
+		<modifiable>true</modifiable>
+		<SwiftMessageType>System</SwiftMessageType>
+		<HeaderAndTrailerType>SWIFT_INPUT_HEADER</HeaderAndTrailerType>
+		<Header>
+		</Header>
+		<Data>
+			<Fields>
+				<SystemField Name="mir">
+					<description><![CDATA[Message input reference of the MT 670 SSI Update Notification Request for which the status of the corresponding MT 671 SSI Update Notification is requested. It consists of:
+a) Date of input of the MT 670 request message
+
+b) Sending logical terminal and branch code XXX (irrespective  of the branch code used in the original message)
+
+c)Session number
+
+d)Input sequence number]]></description>
+					<datatype>Section</datatype>
+					<minoccurs>1</minoccurs>
+					<maxoccurs>1</maxoccurs>
+					<SwiftSystemFieldDef Name="mir" Tag="251">
+						<Format><![CDATA[(6!n)(4!a2!a2!c1!c)(3!a)(4!n)(6!n)]]></Format>
+						<Specification><![CDATA[(date)(lt-identifier)(branch-code)(session-number)(isn)]]></Specification>
+						<Description><![CDATA[Message input reference of the MT 670 SSI Update Notification Request for which the status of the corresponding MT 671 SSI Update Notification is requested. It consists of:
+a) Date of input of the MT 670 request message
+
+b) Sending logical terminal and branch code XXX (irrespective  of the branch code used in the original message)
+
+c)Session number
+
+d)Input sequence number]]></Description>
+						<Validations>
+							<Validation>
+								<subfield>date</subfield>
+								<formula>IsDate($value,"yyMMdd")</formula>
+								<error-code>V04</error-code>
+								<actionmessage>"Invalid Input Date '" + $value + "'"</actionmessage>
+							</Validation>
+						</Validations>
+					</SwiftSystemFieldDef>
+				</SystemField>
+				<SystemField Name="required-info">
+					<description><![CDATA[Type of information to be reported, where:
+		
+        1 = count and individual message status
+        2 = count only]]></description>
+					<datatype>String</datatype>
+					<required>true</required>
+					<SwiftSystemFieldDef Name="required-info" Tag="209">
+						<Format><![CDATA[1!n]]></Format>
+						<Specification><![CDATA[(required-info)]]></Specification>
+						<Additional-Format><![CDATA[Y/N]]></Additional-Format>
+						<Description><![CDATA[Type of information to be reported, where:
+		
+        1 = count and individual message status
+        2 = count only]]></Description>
+						<Validations>
+							<Validation>
+								<formula>In($value, "1", "2")</formula>
+								<error-code>V08</error-code>
+								<actionmessage>"Invalid required-info '" + $value + "'. Valid required-info values are : 1, 2"</actionmessage>
+							</Validation>
+						</Validations>
+					</SwiftSystemFieldDef>
+				</SystemField>
+			</Fields>
+		</Data>
+		<Trailer>
+		</Trailer>
+	</SwiftFields>
+	<validationrules name="Default">
+		<hdrvalidationrules>
+			<fieldvalidations>
+			</fieldvalidations>
+		</hdrvalidationrules>
+		<datavalidationrules>
+			<fieldvalidations>
+			</fieldvalidations>
+		</datavalidationrules>
+		<tlrvalidationrules>
+			<fieldvalidations>
+			</fieldvalidations>
+		</tlrvalidationrules>
+	</validationrules>
+</SwiftMessageFormat>
+

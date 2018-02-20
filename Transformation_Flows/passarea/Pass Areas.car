@@ -1,0 +1,2389 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<cartridge xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="5.0.0" name="Pass Areas" type="Cartridge">
+	<version>1.0</version>
+	<externalmessage xsi:type="ASCIIFixedFormat" type="ASCIIFixedFormat" version="5.0.0" rulename="PA149In" formattype="ASCIIFixedFormat" >
+		<standard>ASCII Fixed</standard>
+		<version>1.0</version>
+		<ASCIIFixedfields>
+			<batchmode>false</batchmode>
+			<headerdelimiter>\r\n</headerdelimiter>
+			<datadelimiter>\r\n</datadelimiter>
+			<trailerdelimiter>\r\n</trailerdelimiter>
+			<fieldoptions>
+				<stringfieldoption>
+					<justification>1</justification>
+					<trimoption>2</trimoption>
+				</stringfieldoption>
+				<integerfieldoption>
+					<justification>2</justification>
+				</integerfieldoption>
+				<bigintegerfieldoption>
+					<justification>1</justification>
+				</bigintegerfieldoption>
+				<longfieldoption>
+					<justification>2</justification>
+				</longfieldoption>
+				<datefieldoption>
+					<justification>1</justification>
+				</datefieldoption>
+				<floatfieldoption>
+					<justification>2</justification>
+					<decimalpointoption>1</decimalpointoption>
+				</floatfieldoption>
+				<doublefieldoption>
+					<justification>2</justification>
+					<decimalpointoption>1</decimalpointoption>
+				</doublefieldoption>
+				<bigdecimalfieldoption>
+					<justification>2</justification>
+					<decimalpointoption>1</decimalpointoption>
+				</bigdecimalfieldoption>
+				<booleanfieldoption>
+					<truevalue>1</truevalue>
+					<falsevalue>0</falsevalue>
+				</booleanfieldoption>
+			</fieldoptions>
+			<headerfields>
+			</headerfields>
+			<datafields>
+				<field xsi:type="ASCIIFixedFieldType">
+					<name>asn_prefix</name>
+					<datatype>String</datatype>
+					<required>true</required>
+					<width>3</width>
+				</field>
+				<field xsi:type="ASCIIFixedFieldType">
+					<name>asn_sequence_number</name>
+					<datatype>String</datatype>
+					<required>true</required>
+					<width>5</width>
+				</field>
+				<field xsi:type="ASCIIFixedFieldType">
+					<name>asn_suffix</name>
+					<datatype>String</datatype>
+					<required>false</required>
+					<defaultvalue><![CDATA["00"]]></defaultvalue>
+					<width>2</width>
+				</field>
+				<field xsi:type="ASCIIFixedFieldType">
+					<name>BNY_transaction</name>
+					<datatype>String</datatype>
+					<required>true</required>
+					<width>16</width>
+				</field>
+				<field xsi:type="ASCIIFixedFieldType">
+					<name>sender_namekey</name>
+					<datatype>String</datatype>
+					<required>false</required>
+					<width>15</width>
+				</field>
+				<field xsi:type="ASCIIFixedFieldType">
+					<name>sender_name</name>
+					<datatype>String</datatype>
+					<required>false</required>
+					<width>35</width>
+				</field>
+				<field xsi:type="ASCIIFixedFieldType">
+					<name>message_type</name>
+					<datatype>String</datatype>
+					<description><![CDATA[SWIFT msg type]]></description>
+					<required>true</required>
+					<width>3</width>
+				</field>
+				<field xsi:type="ASCIIFixedFieldType">
+					<name>transmission_date</name>
+					<datatype>String</datatype>
+					<description><![CDATA[YYMMDD]]></description>
+					<required>true</required>
+					<width>6</width>
+				</field>
+				<field xsi:type="ASCIIFixedFieldType">
+					<name>receive_date</name>
+					<datatype>String</datatype>
+					<description><![CDATA[YYMMDD]]></description>
+					<required>true</required>
+					<width>6</width>
+				</field>
+				<field xsi:type="ASCIIFixedFieldType">
+					<name>receive_time</name>
+					<datatype>String</datatype>
+					<description><![CDATA[HHMMSS]]></description>
+					<required>true</required>
+					<width>6</width>
+				</field>
+				<field xsi:type="ASCIIFixedFieldType">
+					<name>diraddr_type</name>
+					<datatype>String</datatype>
+					<description><![CDATA[S:SWIFT]]></description>
+					<required>false</required>
+					<width>1</width>
+				</field>
+				<field xsi:type="ASCIIFixedFieldType">
+					<name>diraddr</name>
+					<datatype>String</datatype>
+					<required>false</required>
+					<width>23</width>
+				</field>
+				<field xsi:type="ASCIIFixedFieldType">
+					<name>iso_err_flag</name>
+					<datatype>String</datatype>
+					<required>false</required>
+					<width>1</width>
+				</field>
+				<field xsi:type="ASCIIFixedFieldType">
+					<name>branch_code</name>
+					<datatype>String</datatype>
+					<required>false</required>
+					<width>5</width>
+				</field>
+				<field xsi:type="ASCIIFixedFieldType">
+					<name>number_of_lines</name>
+					<datatype>String</datatype>
+					<required>true</required>
+					<width>4</width>
+				</field>
+				<field xsi:type="ASCIIFixedFieldType">
+					<name>cid</name>
+					<datatype>String</datatype>
+					<required>false</required>
+					<width>10</width>
+				</field>
+				<field xsi:type="ASCIIFixedFieldType">
+					<name>filler</name>
+					<datatype>String</datatype>
+					<required>false</required>
+					<width>6</width>
+				</field>
+				<field xsi:type="ASCIIFixedFieldType">
+					<name>end_chars</name>
+					<datatype>String</datatype>
+					<required>false</required>
+					<defaultvalue><![CDATA[\r\n]]></defaultvalue>
+					<width>2</width>
+				</field>
+			</datafields>
+			<trailerfields>
+			</trailerfields>
+		</ASCIIFixedfields>
+		<validationrules name="Default">
+			<hdrvalidationrules>
+				<fieldvalidations>
+				</fieldvalidations>
+			</hdrvalidationrules>
+			<datavalidationrules>
+				<fieldvalidations>
+				</fieldvalidations>
+			</datavalidationrules>
+			<tlrvalidationrules>
+				<fieldvalidations>
+				</fieldvalidations>
+			</tlrvalidationrules>
+		</validationrules>
+		<elementproperties>
+			<propertymap>
+				<property name="codegen.java.properties">
+					<value>
+						<propertymap type="com.tplus.transform.design.PropertiesDef">
+							<property name="Java Package Name" value="com.transform.external.%e"/>
+							<property name="Jar Name" value="%c.jar"/>
+							<property name="Manifest Entries" value="transformrt.jar asciifixedrt.jar"/>
+							<property name="Data Source" value=""/>
+						</propertymap>
+					</value>
+				</property>
+			</propertymap>
+		</elementproperties>
+	</externalmessage>
+	<externalmessage xsi:type="ASCIIFixedFormat" type="ASCIIFixedFormat" version="5.0.0" rulename="PA1200" formattype="ASCIIFixedFormat" >
+		<standard>ASCII Fixed</standard>
+		<version>1.0</version>
+		<ASCIIFixedfields>
+			<batchmode>false</batchmode>
+			<headerdelimiter>\r\n</headerdelimiter>
+			<datadelimiter>\r\n</datadelimiter>
+			<trailerdelimiter>\r\n</trailerdelimiter>
+			<fieldoptions>
+				<stringfieldoption>
+					<justification>1</justification>
+					<trimoption>2</trimoption>
+				</stringfieldoption>
+				<integerfieldoption>
+					<justification>2</justification>
+				</integerfieldoption>
+				<bigintegerfieldoption>
+					<justification>1</justification>
+				</bigintegerfieldoption>
+				<longfieldoption>
+					<justification>2</justification>
+				</longfieldoption>
+				<datefieldoption>
+					<justification>1</justification>
+				</datefieldoption>
+				<floatfieldoption>
+					<justification>2</justification>
+					<decimalpointoption>1</decimalpointoption>
+				</floatfieldoption>
+				<doublefieldoption>
+					<justification>2</justification>
+					<decimalpointoption>1</decimalpointoption>
+				</doublefieldoption>
+				<bigdecimalfieldoption>
+					<justification>2</justification>
+					<decimalpointoption>1</decimalpointoption>
+				</bigdecimalfieldoption>
+				<booleanfieldoption>
+					<truevalue>1</truevalue>
+					<falsevalue>0</falsevalue>
+				</booleanfieldoption>
+			</fieldoptions>
+			<headerfields>
+			</headerfields>
+			<datafields>
+				<field xsi:type="ASCIIFixedFieldType">
+					<name>cntrl_length</name>
+					<datatype>String</datatype>
+					<description><![CDATA[Length of control area]]></description>
+					<required>false</required>
+					<defaultvalue><![CDATA[1200]]></defaultvalue>
+					<width>4</width>
+				</field>
+				<field xsi:type="ASCIIFixedFieldType">
+					<name>prfx</name>
+					<datatype>String</datatype>
+					<description><![CDATA[ASN prefix]]></description>
+					<required>true</required>
+					<width>4</width>
+				</field>
+				<field xsi:type="ASCIIFixedFieldType">
+					<name>seqno</name>
+					<datatype>String</datatype>
+					<description><![CDATA[ASN number]]></description>
+					<required>true</required>
+					<width>5</width>
+				</field>
+				<field xsi:type="ASCIIFixedFieldType">
+					<name>trn</name>
+					<datatype>String</datatype>
+					<description><![CDATA[TRN (XXXYYMMDDnnnnnmm)]]></description>
+					<required>true</required>
+					<width>16</width>
+				</field>
+				<field xsi:type="ASCIIFixedFieldType">
+					<name>n_a</name>
+					<datatype>String</datatype>
+					<description><![CDATA[message routing]]></description>
+					<required>false</required>
+					<width>1</width>
+				</field>
+				<field xsi:type="ASCIIFixedFieldType">
+					<name>orig_prfx</name>
+					<datatype>String</datatype>
+					<description><![CDATA[ASN prefix]]></description>
+					<required>false</required>
+					<width>3</width>
+				</field>
+				<field xsi:type="ASCIIFixedFieldType">
+					<name>orig_seqno</name>
+					<datatype>String</datatype>
+					<description><![CDATA[ASN number]]></description>
+					<required>false</required>
+					<width>5</width>
+				</field>
+				<field xsi:type="ASCIIFixedFieldType">
+					<name>orig_suffix</name>
+					<datatype>String</datatype>
+					<description><![CDATA[ASN suffix]]></description>
+					<required>false</required>
+					<width>2</width>
+				</field>
+				<field xsi:type="ASCIIFixedFieldType">
+					<name>text_line_lth</name>
+					<datatype>String</datatype>
+					<description><![CDATA[TLX Text line length, usually 69]]></description>
+					<required>false</required>
+					<width>2</width>
+				</field>
+				<field xsi:type="ASCIIFixedFieldType">
+					<name>stment_type</name>
+					<datatype>String</datatype>
+					<description><![CDATA["CAS/CAR Statement type, (Internal format msgs only)"]]></description>
+					<required>false</required>
+					<width>1</width>
+				</field>
+				<field xsi:type="ASCIIFixedFieldType">
+					<name>test_indicator</name>
+					<datatype>String</datatype>
+					<description><![CDATA["Y' - Yes, testing is required                            'N' - No, Testing is not required"]]></description>
+					<required>false</required>
+					<width>1</width>
+				</field>
+				<field xsi:type="ASCIIFixedFieldType">
+					<name>nmky_cid_indicator</name>
+					<datatype>String</datatype>
+					<description><![CDATA[Indicates what the next field is]]></description>
+					<required>false</required>
+					<width>1</width>
+				</field>
+				<field xsi:type="ASCIIFixedFieldType">
+					<name>namekey</name>
+					<datatype>String</datatype>
+					<description><![CDATA[Namekey (15) or CID (10)    (Can be NOTONCIF if cid indicator = C)]]></description>
+					<required>false</required>
+					<width>15</width>
+				</field>
+				<field xsi:type="ASCIIFixedFieldType">
+					<name>tag_32_amount</name>
+					<datatype>String</datatype>
+					<description><![CDATA[Amount to be tested (must be zero filled)]]></description>
+					<required>false</required>
+					<width>17</width>
+				</field>
+				<field xsi:type="ASCIIFixedFieldType">
+					<name>orig_dept</name>
+					<datatype>String</datatype>
+					<description><![CDATA[Name of department originating the message]]></description>
+					<required>false</required>
+					<width>20</width>
+				</field>
+				<field xsi:type="ASCIIFixedFieldType">
+					<name>orig_dept_exp_num</name>
+					<datatype>String</datatype>
+					<description><![CDATA[IOC number of department originating the message]]></description>
+					<required>false</required>
+					<width>7</width>
+				</field>
+				<field xsi:type="ASCIIFixedFieldType">
+					<name>account_num</name>
+					<datatype>String</datatype>
+					<description><![CDATA[Account number of recipient]]></description>
+					<required>false</required>
+					<width>10</width>
+				</field>
+				<field xsi:type="ASCIIFixedFieldType">
+					<name>si_indicator</name>
+					<datatype>String</datatype>
+					<description><![CDATA[Standing instructions indicator in the form  *** SEE SI ABOVE ***.       ]]></description>
+					<required>false</required>
+					<width>18</width>
+				</field>
+				<field xsi:type="ASCIIFixedFieldType">
+					<name>si_line_1</name>
+					<datatype>String</datatype>
+					<description><![CDATA[Up to 2 lines of Standing Instructions]]></description>
+					<required>false</required>
+					<width>40</width>
+				</field>
+				<field xsi:type="ASCIIFixedFieldType">
+					<name>si_line_2</name>
+					<datatype>String</datatype>
+					<required>false</required>
+					<width>40</width>
+				</field>
+				<field xsi:type="ASCIIFixedFieldType">
+					<name>block3_tag103</name>
+					<datatype>String</datatype>
+					<required>false</required>
+					<width>3</width>
+				</field>
+				<field xsi:type="ASCIIFixedFieldType">
+					<name>block3_tag113</name>
+					<datatype>String</datatype>
+					<description><![CDATA[These next 4 fields are used to build SWIFT block 3 if they are non-spaces.]]></description>
+					<required>false</required>
+					<width>4</width>
+				</field>
+				<field xsi:type="ASCIIFixedFieldType">
+					<name>block3_tag108</name>
+					<datatype>String</datatype>
+					<required>false</required>
+					<width>16</width>
+				</field>
+				<field xsi:type="ASCIIFixedFieldType">
+					<name>block3_tag119</name>
+					<datatype>String</datatype>
+					<required>false</required>
+					<width>8</width>
+				</field>
+				<field xsi:type="ASCIIFixedFieldType">
+					<name>filler</name>
+					<datatype>String</datatype>
+					<required>false</required>
+					<width>9</width>
+				</field>
+				<field xsi:type="ASCIIFixedFieldType">
+					<name>group_id</name>
+					<datatype>String</datatype>
+					<description><![CDATA[BankFax 'user' look-up code]]></description>
+					<required>false</required>
+					<width>4</width>
+				</field>
+				<field xsi:type="ASCIIFixedFieldType">
+					<name>report_code</name>
+					<datatype>String</datatype>
+					<description><![CDATA[BankFax user-defined report type]]></description>
+					<required>false</required>
+					<width>3</width>
+				</field>
+				<field xsi:type="ASCIIFixedFieldType">
+					<name>n_a1</name>
+					<datatype>String</datatype>
+					<description><![CDATA[Used for RELDA messages]]></description>
+					<required>false</required>
+					<width>10</width>
+				</field>
+				<field xsi:type="ASCIIFixedFieldType">
+					<name>n_a2</name>
+					<datatype>String</datatype>
+					<required>false</required>
+					<width>8</width>
+				</field>
+				<field xsi:type="ASCIIFixedFieldType">
+					<name>cash_reg_extension</name>
+					<datatype>String</datatype>
+					<description><![CDATA[CIT to MBX messages only]]></description>
+					<required>false</required>
+					<width>10</width>
+				</field>
+				<field xsi:type="ASCIIFixedFieldType">
+					<name>n_a3</name>
+					<datatype>String</datatype>
+					<description><![CDATA[filler]]></description>
+					<required>false</required>
+					<width>5</width>
+				</field>
+				<field xsi:type="ASCIIFixedFieldType">
+					<name>recipient_addr_ln1</name>
+					<datatype>String</datatype>
+					<description><![CDATA[Up to 4 lines of name/address]]></description>
+					<required>false</required>
+					<width>35</width>
+				</field>
+				<field xsi:type="ASCIIFixedFieldType">
+					<name>recipient_addr_ln2</name>
+					<datatype>String</datatype>
+					<description><![CDATA[of recipient]]></description>
+					<required>false</required>
+					<width>35</width>
+				</field>
+				<field xsi:type="ASCIIFixedFieldType">
+					<name>recipient_addr_ln3</name>
+					<datatype>String</datatype>
+					<description><![CDATA[""""]]></description>
+					<required>false</required>
+					<width>35</width>
+				</field>
+				<field xsi:type="ASCIIFixedFieldType">
+					<name>recipient_addr_ln4</name>
+					<datatype>String</datatype>
+					<description><![CDATA[""""]]></description>
+					<required>false</required>
+					<width>35</width>
+				</field>
+				<field xsi:type="ASCIIFixedFieldType">
+					<name>customize_ind</name>
+					<datatype>String</datatype>
+					<description><![CDATA["b = Best Method B = Best Method Y = Directory address provided by application S = Send SWIFT T = Send Telex R = Send Cash Register (CIT to MBX) F = Send FAX If Best Method is used, the RTR application will retrieve appropriate SWIFT or Telex address from CIF, based on the CID or Namekey provided. Messages will only be sent FAX is explicitly stated (customize_ind = F). If Send SWIFT, fields 72-73 must be filled in. If Send Telex,  fields 36-39 must be filled in.  If Send Fax, fields 51-52 must be filled in. If Microcash, field 76 must be filled in." ]]></description>
+					<required>false</required>
+					<defaultvalue><![CDATA[b]]></defaultvalue>
+					<width>1</width>
+				</field>
+				<field xsi:type="ASCIIFixedFieldType">
+					<name>n_a4</name>
+					<datatype>String</datatype>
+					<description><![CDATA[no longer used]]></description>
+					<required>false</required>
+					<width>3</width>
+				</field>
+				<field xsi:type="ASCIIFixedFieldType">
+					<name>n_a5</name>
+					<datatype>String</datatype>
+					<description><![CDATA[no longer used]]></description>
+					<required>false</required>
+					<width>9</width>
+				</field>
+				<field xsi:type="ASCIIFixedFieldType">
+					<name>n_a6</name>
+					<datatype>String</datatype>
+					<description><![CDATA[no longer used]]></description>
+					<required>false</required>
+					<width>1</width>
+				</field>
+				<field xsi:type="ASCIIFixedFieldType">
+					<name>telex_addr_1</name>
+					<datatype>String</datatype>
+					<description><![CDATA[Maximum of two telex numbers and]]></description>
+					<required>false</required>
+					<width>20</width>
+				</field>
+				<field xsi:type="ASCIIFixedFieldType">
+					<name>telex_answbck_1</name>
+					<datatype>String</datatype>
+					<description><![CDATA[corresponding answerbacks]]></description>
+					<required>false</required>
+					<width>20</width>
+				</field>
+				<field xsi:type="ASCIIFixedFieldType">
+					<name>telex_addr_2</name>
+					<datatype>String</datatype>
+					<required>false</required>
+					<width>20</width>
+				</field>
+				<field xsi:type="ASCIIFixedFieldType">
+					<name>telex_answbck_2</name>
+					<datatype>String</datatype>
+					<required>false</required>
+					<width>20</width>
+				</field>
+				<field xsi:type="ASCIIFixedFieldType">
+					<name>n_a7</name>
+					<datatype>String</datatype>
+					<description><![CDATA[reference number supplied by outsource customer (CIBC only)]]></description>
+					<required>false</required>
+					<width>18</width>
+				</field>
+				<field xsi:type="ASCIIFixedFieldType">
+					<name>midys_msg_type</name>
+					<datatype>String</datatype>
+					<description><![CDATA[SWIFT outgoing msg type to convert to from ISO7775 to ISO15022 via Midys]]></description>
+					<required>false</required>
+					<width>3</width>
+				</field>
+				<field xsi:type="ASCIIFixedFieldType">
+					<name>n_a7a</name>
+					<datatype>String</datatype>
+					<description><![CDATA[filler]]></description>
+					<required>false</required>
+					<width>2</width>
+				</field>
+				<field xsi:type="ASCIIFixedFieldType">
+					<name>country_code</name>
+					<datatype>String</datatype>
+					<description><![CDATA[4 digit code from CIF]]></description>
+					<required>false</required>
+					<width>4</width>
+				</field>
+				<field xsi:type="ASCIIFixedFieldType">
+					<name>chrg_party_addr_ln1</name>
+					<datatype>String</datatype>
+					<description><![CDATA[4 lines of name/address of party to be ]]></description>
+					<required>false</required>
+					<width>35</width>
+				</field>
+				<field xsi:type="ASCIIFixedFieldType">
+					<name>chrg_party_addr_ln2</name>
+					<datatype>String</datatype>
+					<description><![CDATA[charged for the telecommunication cost.]]></description>
+					<required>false</required>
+					<width>35</width>
+				</field>
+				<field xsi:type="ASCIIFixedFieldType">
+					<name>chrg_party_addr_ln3</name>
+					<datatype>String</datatype>
+					<description><![CDATA[""""]]></description>
+					<required>false</required>
+					<width>35</width>
+				</field>
+				<field xsi:type="ASCIIFixedFieldType">
+					<name>chrg_party_addr_ln4</name>
+					<datatype>String</datatype>
+					<description><![CDATA[""""]]></description>
+					<required>false</required>
+					<width>35</width>
+				</field>
+				<field xsi:type="ASCIIFixedFieldType">
+					<name>chrg_account</name>
+					<datatype>String</datatype>
+					<description><![CDATA[Account number or department expence number to be charged for the telecommunication cost of the message.]]></description>
+					<required>false</required>
+					<width>10</width>
+				</field>
+				<field xsi:type="ASCIIFixedFieldType">
+					<name>debit_info_line_1</name>
+					<datatype>String</datatype>
+					<description><![CDATA["a) first 16  Customer Reference Number b) next 44 filler"]]></description>
+					<required>false</required>
+					<width>60</width>
+				</field>
+				<field xsi:type="ASCIIFixedFieldType">
+					<name>debit_info_line_2</name>
+					<datatype>String</datatype>
+					<description><![CDATA["a) first 34  various b) next 26 filler"]]></description>
+					<required>false</required>
+					<width>60</width>
+				</field>
+				<field xsi:type="ASCIIFixedFieldType">
+					<name>primary_fax_number</name>
+					<datatype>String</datatype>
+					<description><![CDATA[used only for FAX messages]]></description>
+					<required>false</required>
+					<width>20</width>
+				</field>
+				<field xsi:type="ASCIIFixedFieldType">
+					<name>secondary_fax_number</name>
+					<datatype>String</datatype>
+					<description><![CDATA[used only for FAX messages]]></description>
+					<required>false</required>
+					<width>20</width>
+				</field>
+				<field xsi:type="ASCIIFixedFieldType">
+					<name>text_format</name>
+					<datatype>String</datatype>
+					<description><![CDATA["I - BONY Internal format T - Transmission format (contains crlf) B - IBM report format S - SWIFT transmission format R - report format without crlf's"
+<field><required>U</required> <datatype>String</datatype><name>n_a</name><width>1</width><description><![CDATA[no longer used]]></description>
+					<required>true</required>
+					<width>1</width>
+				</field>
+				<field xsi:type="ASCIIFixedFieldType">
+					<name>n_a_missing</name>
+					<datatype>String</datatype>
+					<required>false</required>
+					<width>1</width>
+				</field>
+				<field xsi:type="ASCIIFixedFieldType">
+					<name>fax_cover_page</name>
+					<datatype>String</datatype>
+					<description><![CDATA[code used to designate particular FAX cover page]]></description>
+					<required>false</required>
+					<width>2</width>
+				</field>
+				<field xsi:type="ASCIIFixedFieldType">
+					<name>n_a8</name>
+					<datatype>String</datatype>
+					<description><![CDATA[internal Telex carrier table]]></description>
+					<required>false</required>
+					<width>5</width>
+				</field>
+				<field xsi:type="ASCIIFixedFieldType">
+					<name>priority_flag</name>
+					<datatype>String</datatype>
+					<description><![CDATA["BankFAX Timeout value E = 45 min D = 90 min 0 (or blank) = 2.5 hrs (Default)  F = 6 hrs   G = 12 hrs     H = 18 hrs   C = 24 hrs"]]></description>
+					<required>false</required>
+					<width>1</width>
+				</field>
+				<field xsi:type="ASCIIFixedFieldType">
+					<name>n_a9</name>
+					<datatype>String</datatype>
+					<description><![CDATA[not used by application]]></description>
+					<required>false</required>
+					<width>2</width>
+				</field>
+				<field xsi:type="ASCIIFixedFieldType">
+					<name>fax_portrait_landscape</name>
+					<datatype>String</datatype>
+					<description><![CDATA["Fax - P - Portrait   (default)  L - Landscape"]]></description>
+					<required>false</required>
+					<width>1</width>
+				</field>
+				<field xsi:type="ASCIIFixedFieldType">
+					<name>fax_compress</name>
+					<datatype>String</datatype>
+					<description><![CDATA["FAX - Y - Compress     N - Don't compress  (default)"]]></description>
+					<required>false</required>
+					<width>1</width>
+				</field>
+				<field xsi:type="ASCIIFixedFieldType">
+					<name>fax_senders_phone</name>
+					<datatype>String</datatype>
+					<description><![CDATA[FAX - sender's phone number]]></description>
+					<required>false</required>
+					<width>20</width>
+				</field>
+				<field xsi:type="ASCIIFixedFieldType">
+					<name>fax_nak_code</name>
+					<datatype>String</datatype>
+					<description><![CDATA["FAX - 3 character code to segregate FAX messages, used in on-line resend function."]]></description>
+					<required>false</required>
+					<width>3</width>
+				</field>
+				<field xsi:type="ASCIIFixedFieldType">
+					<name>fax_line_length</name>
+					<datatype>String</datatype>
+					<description><![CDATA[FAX - length of individual line]]></description>
+					<required>false</required>
+					<width>3</width>
+				</field>
+				<field xsi:type="ASCIIFixedFieldType">
+					<name>n_a10</name>
+					<datatype>String</datatype>
+					<description><![CDATA["CID is moved here from namekey field, and namekey is replaced in the namekey field"]]></description>
+					<required>false</required>
+					<width>10</width>
+				</field>
+				<field xsi:type="ASCIIFixedFieldType">
+					<name>n_a11</name>
+					<datatype>String</datatype>
+					<description><![CDATA[not used by application]]></description>
+					<required>false</required>
+					<width>20</width>
+				</field>
+				<field xsi:type="ASCIIFixedFieldType">
+					<name>n_a12</name>
+					<datatype>String</datatype>
+					<description><![CDATA[not used by application]]></description>
+					<required>false</required>
+					<width>3</width>
+				</field>
+				<field xsi:type="ASCIIFixedFieldType">
+					<name>n_a13</name>
+					<datatype>String</datatype>
+					<description><![CDATA[used in re-sends]]></description>
+					<required>false</required>
+					<width>1</width>
+				</field>
+				<field xsi:type="ASCIIFixedFieldType">
+					<name>n_a14</name>
+					<datatype>String</datatype>
+					<description><![CDATA[used by RELDA rejects]]></description>
+					<required>false</required>
+					<width>9</width>
+				</field>
+				<field xsi:type="ASCIIFixedFieldType">
+					<name>outsource_flag</name>
+					<datatype>String</datatype>
+					<description><![CDATA[blank or '001' for CIBC]]></description>
+					<required>false</required>
+					<width>3</width>
+				</field>
+				<field xsi:type="ASCIIFixedFieldType">
+					<name>format_spaces_ind</name>
+					<datatype>String</datatype>
+					<description><![CDATA[no longer used]]></description>
+					<required>false</required>
+					<width>1</width>
+				</field>
+				<field xsi:type="ASCIIFixedFieldType">
+					<name>msg_type</name>
+					<datatype>String</datatype>
+					<description><![CDATA[The 3 digit SWIFT message type]]></description>
+					<required>false</required>
+					<width>3</width>
+				</field>
+				<field xsi:type="ASCIIFixedFieldType">
+					<name>swf_address</name>
+					<datatype>String</datatype>
+					<description><![CDATA[SWIFT address of recipient.  Manditory if Customize_ind = S]]></description>
+					<required>false</required>
+					<width>8</width>
+				</field>
+				<field xsi:type="ASCIIFixedFieldType">
+					<name>recv_branch</name>
+					<datatype>String</datatype>
+					<description><![CDATA[SWIFT branch code of recipient]]></description>
+					<required>false</required>
+					<width>3</width>
+				</field>
+				<field xsi:type="ASCIIFixedFieldType">
+					<name>cip_indr</name>
+					<datatype>String</datatype>
+					<description><![CDATA[The sending application will use this field to indicate]]></description>
+					<required>false</required>
+					<width>1</width>
+				</field>
+				<field xsi:type="ASCIIFixedFieldType">
+					<name>n_a15</name>
+					<datatype>String</datatype>
+					<description><![CDATA[not used by application]]></description>
+					<required>false</required>
+					<width>1</width>
+				</field>
+				<field xsi:type="ASCIIFixedFieldType">
+					<name>cash_reg_cust_id</name>
+					<datatype>String</datatype>
+					<description><![CDATA[used for msgs going to MBX]]></description>
+					<required>false</required>
+					<width>5</width>
+				</field>
+				<field xsi:type="ASCIIFixedFieldType">
+					<name>cash_reg_nabk_code</name>
+					<datatype>String</datatype>
+					<description><![CDATA[used for msgs going to MBX]]></description>
+					<required>false</required>
+					<width>1</width>
+				</field>
+				<field xsi:type="ASCIIFixedFieldType">
+					<name>n_a16</name>
+					<datatype>String</datatype>
+					<description><![CDATA[confirmed answerback]]></description>
+					<required>false</required>
+					<width>20</width>
+				</field>
+				<field xsi:type="ASCIIFixedFieldType">
+					<name>n_a17</name>
+					<datatype>String</datatype>
+					<description><![CDATA[not used by application]]></description>
+					<required>false</required>
+					<width>6</width>
+				</field>
+				<field xsi:type="ASCIIFixedFieldType">
+					<name>n_a18</name>
+					<datatype>String</datatype>
+					<description><![CDATA[not used by application]]></description>
+					<required>false</required>
+					<width>3</width>
+				</field>
+				<field xsi:type="ASCIIFixedFieldType">
+					<name>end_of_batch_flag</name>
+					<datatype>String</datatype>
+					<description><![CDATA[used to indicate end-of-batch (ISITC only)]]></description>
+					<required>false</required>
+					<width>1</width>
+				</field>
+				<field xsi:type="ASCIIFixedFieldType">
+					<name>n_a19</name>
+					<datatype>String</datatype>
+					<description><![CDATA[not used by application]]></description>
+					<required>false</required>
+					<width>1</width>
+				</field>
+				<field xsi:type="ASCIIFixedFieldType">
+					<name>n_a20</name>
+					<datatype>String</datatype>
+					<description><![CDATA[not used by application]]></description>
+					<required>false</required>
+					<width>5</width>
+				</field>
+				<field xsi:type="ASCIIFixedFieldType">
+					<name>n_a21</name>
+					<datatype>String</datatype>
+					<description><![CDATA[not used by application]]></description>
+					<required>false</required>
+					<width>1</width>
+				</field>
+				<field xsi:type="ASCIIFixedFieldType">
+					<name>n_a22</name>
+					<datatype>String</datatype>
+					<description><![CDATA[not used by application]]></description>
+					<required>false</required>
+					<width>1</width>
+				</field>
+				<field xsi:type="ASCIIFixedFieldType">
+					<name>n_a23</name>
+					<datatype>String</datatype>
+					<description><![CDATA[not used by application]]></description>
+					<required>false</required>
+					<width>1</width>
+				</field>
+				<field xsi:type="ASCIIFixedFieldType">
+					<name>n_a24</name>
+					<datatype>String</datatype>
+					<description><![CDATA[not used by application]]></description>
+					<required>false</required>
+					<width>2</width>
+				</field>
+				<field xsi:type="ASCIIFixedFieldType">
+					<name>n_a25</name>
+					<datatype>String</datatype>
+					<description><![CDATA[not used by application]]></description>
+					<required>false</required>
+					<width>2</width>
+				</field>
+				<field xsi:type="ASCIIFixedFieldType">
+					<name>n_a26</name>
+					<datatype>String</datatype>
+					<description><![CDATA[not used by application]]></description>
+					<required>false</required>
+					<width>2</width>
+				</field>
+				<field xsi:type="ASCIIFixedFieldType">
+					<name>n_a27</name>
+					<datatype>String</datatype>
+					<description><![CDATA[not used by application]]></description>
+					<required>false</required>
+					<width>3</width>
+				</field>
+				<field xsi:type="ASCIIFixedFieldType">
+					<name>n_a28</name>
+					<datatype>String</datatype>
+					<description><![CDATA[not used by application]]></description>
+					<required>false</required>
+					<width>1</width>
+				</field>
+				<field xsi:type="ASCIIFixedFieldType">
+					<name>n_a29</name>
+					<datatype>String</datatype>
+					<description><![CDATA[not used by application]]></description>
+					<required>false</required>
+					<width>1</width>
+				</field>
+				<field xsi:type="ASCIIFixedFieldType">
+					<name>n_a30</name>
+					<datatype>String</datatype>
+					<description><![CDATA[not used by application]]></description>
+					<required>false</required>
+					<width>4</width>
+				</field>
+				<field xsi:type="ASCIIFixedFieldType">
+					<name>num_text_lines</name>
+					<datatype>String</datatype>
+					<description><![CDATA[Number of text lines in text table. Necessary only for messages in internal format (text_format = 'I')]]></description>
+					<required>false</required>
+					<width>4</width>
+				</field>
+				<field xsi:type="ASCIIFixedFieldType">
+					<name>n_a31</name>
+					<datatype>String</datatype>
+					<description><![CDATA[not used by application]]></description>
+					<required>false</required>
+					<width>1</width>
+				</field>
+				<field xsi:type="ASCIIFixedFieldType">
+					<name>n_a32</name>
+					<datatype>String</datatype>
+					<description><![CDATA[not used by application]]></description>
+					<required>false</required>
+					<width>1</width>
+				</field>
+				<field xsi:type="ASCIIFixedFieldType">
+					<name>n_a33</name>
+					<datatype>String</datatype>
+					<description><![CDATA[not used by application]]></description>
+					<required>false</required>
+					<width>1</width>
+				</field>
+				<field xsi:type="ASCIIFixedFieldType">
+					<name>n_a34</name>
+					<datatype>String</datatype>
+					<description><![CDATA[not used by application]]></description>
+					<required>false</required>
+					<width>1</width>
+				</field>
+				<field xsi:type="ASCIIFixedFieldType">
+					<name>snd_prio</name>
+					<datatype>String</datatype>
+					<description><![CDATA[no longer used]]></description>
+					<required>false</required>
+					<width>2</width>
+				</field>
+				<field xsi:type="ASCIIFixedFieldType">
+					<name>n_a35</name>
+					<datatype>String</datatype>
+					<description><![CDATA[not used by application]]></description>
+					<required>false</required>
+					<width>16</width>
+				</field>
+				<field xsi:type="ASCIIFixedFieldType">
+					<name>region_code</name>
+					<datatype>String</datatype>
+					<description><![CDATA["Region code of account BONY = 20  NCD = 22"]]></description>
+					<required>false</required>
+					<width>2</width>
+				</field>
+				<field xsi:type="ASCIIFixedFieldType">
+					<name>n_a36</name>
+					<datatype>String</datatype>
+					<description><![CDATA[not used by application]]></description>
+					<required>false</required>
+					<width>3</width>
+				</field>
+				<field xsi:type="ASCIIFixedFieldType">
+					<name>n_a37</name>
+					<datatype>String</datatype>
+					<description><![CDATA[not used by application]]></description>
+					<required>false</required>
+					<width>3</width>
+				</field>
+				<field xsi:type="ASCIIFixedFieldType">
+					<name>n_a38</name>
+					<datatype>String</datatype>
+					<description><![CDATA[not used by application]]></description>
+					<required>false</required>
+					<width>6</width>
+				</field>
+				<field xsi:type="ASCIIFixedFieldType">
+					<name>special_routing_flag</name>
+					<datatype>String</datatype>
+					<description><![CDATA["A - msg to be sent to ARBITER J - msg to be sent to CLS F - msg to be sent to CONFORM/SMART  E - msg to be sent EDI  I - msg to be sent to ISITC T - msg to be sent to MIDYS R - msg to be sent to MIDYS/RBI"]]></description>
+					<required>false</required>
+					<width>1</width>
+				</field>
+				<field xsi:type="ASCIIFixedFieldType">
+					<name>alternate_addr</name>
+					<datatype>String</datatype>
+					<description><![CDATA["ARBITER ID, or alternate sending directory address"]]></description>
+					<required>false</required>
+					<width>8</width>
+				</field>
+				<field xsi:type="ASCIIFixedFieldType">
+					<name>n_a39</name>
+					<datatype>String</datatype>
+					<description><![CDATA[not used by application]]></description>
+					<required>false</required>
+					<width>2</width>
+				</field>
+				<field xsi:type="ASCIIFixedFieldType">
+					<name>n_a40</name>
+					<datatype>String</datatype>
+					<description><![CDATA[not used by application]]></description>
+					<required>false</required>
+					<width>1</width>
+				</field>
+				<field xsi:type="ASCIIFixedFieldType">
+					<name>n_a41</name>
+					<datatype>String</datatype>
+					<description><![CDATA[not used by application]]></description>
+					<required>false</required>
+					<width>2</width>
+				</field>
+				<field xsi:type="ASCIIFixedFieldType">
+					<name>n_a42</name>
+					<datatype>String</datatype>
+					<description><![CDATA[not used by application]]></description>
+					<required>false</required>
+					<width>6</width>
+				</field>
+				<field xsi:type="ASCIIFixedFieldType">
+					<name>n_a43</name>
+					<datatype>String</datatype>
+					<description><![CDATA[not used by application]]></description>
+					<required>false</required>
+					<width>1</width>
+				</field>
+				<field xsi:type="ASCIIFixedFieldType">
+					<name>n_a44</name>
+					<datatype>String</datatype>
+					<description><![CDATA[not used by application]]></description>
+					<required>false</required>
+					<width>1</width>
+				</field>
+				<field xsi:type="ASCIIFixedFieldType">
+					<name>n_a45</name>
+					<datatype>String</datatype>
+					<description><![CDATA[not used by application]]></description>
+					<required>false</required>
+					<width>16</width>
+				</field>
+				<field xsi:type="ASCIIFixedFieldType">
+					<name>n_a46</name>
+					<datatype>String</datatype>
+					<description><![CDATA[not used by application]]></description>
+					<required>false</required>
+					<width>1</width>
+				</field>
+				<field xsi:type="ASCIIFixedFieldType">
+					<name>n_a47</name>
+					<datatype>String</datatype>
+					<description><![CDATA[not used by application]]></description>
+					<required>false</required>
+					<width>7</width>
+				</field>
+				<field xsi:type="ASCIIFixedFieldType">
+					<name>n_a48</name>
+					<datatype>String</datatype>
+					<description><![CDATA[not used by application]]></description>
+					<required>false</required>
+					<width>15</width>
+				</field>
+				<field xsi:type="ASCIIFixedFieldType">
+					<name>n_a49</name>
+					<datatype>String</datatype>
+					<description><![CDATA[not used by application]]></description>
+					<required>false</required>
+					<width>1</width>
+				</field>
+				<field xsi:type="ASCIIFixedFieldType">
+					<name>n_a50</name>
+					<datatype>String</datatype>
+					<description><![CDATA[not used by application]]></description>
+					<required>false</required>
+					<width>4</width>
+				</field>
+				<field xsi:type="ASCIIFixedFieldType">
+					<name>n_a51</name>
+					<datatype>String</datatype>
+					<description><![CDATA[not used by application]]></description>
+					<required>false</required>
+					<width>2</width>
+				</field>
+				<field xsi:type="ASCIIFixedFieldType">
+					<name>n_a52</name>
+					<datatype>String</datatype>
+					<description><![CDATA[not used by application]]></description>
+					<required>false</required>
+					<width>4</width>
+				</field>
+				<field xsi:type="ASCIIFixedFieldType">
+					<name>curr_code</name>
+					<datatype>String</datatype>
+					<description><![CDATA["Used by ACE, to test a Telex message D - US Dollars F - Same fgn currency as recipient Y - Shares (ie stock, bonds)  Different currency than recipient (D/F/Y/Z in 1st position when receiving from other then IBMRTR)"]]></description>
+					<required>false</required>
+					<width>3</width>
+				</field>
+				<field xsi:type="ASCIIFixedFieldType">
+					<name>n_a53</name>
+					<datatype>String</datatype>
+					<description><![CDATA[not used by application]]></description>
+					<required>false</required>
+					<width>8</width>
+				</field>
+				<field xsi:type="ASCIIFixedFieldType">
+					<name>n_a54</name>
+					<datatype>String</datatype>
+					<description><![CDATA[not used by application]]></description>
+					<required>false</required>
+					<width>6</width>
+				</field>
+				<field xsi:type="ASCIIFixedFieldType">
+					<name>n_a55</name>
+					<datatype>String</datatype>
+					<description><![CDATA[not used by application]]></description>
+					<required>false</required>
+					<width>6</width>
+				</field>
+				<field xsi:type="ASCIIFixedFieldType">
+					<name>migrated_act</name>
+					<datatype>String</datatype>
+					<required>false</required>
+					<width>10</width>
+				</field>
+				<field xsi:type="ASCIIFixedFieldType">
+					<name>migrated_act_type</name>
+					<datatype>String</datatype>
+					<description><![CDATA["This field must be filled in when chargin a customer's account, when Charge Accound field contains a customer's account number V - CAS D - CDD C - Custody Account T - CTD (Savings Account)"]]></description>
+					<required>false</required>
+					<width>1</width>
+				</field>
+				<field xsi:type="ASCIIFixedFieldType">
+					<name>sending_bank</name>
+					<datatype>String</datatype>
+					<description><![CDATA["blank - BONY/NYC BNYLON - BONY/ London BNYHKG - BONY / Hong Kong BNYBRX - BONY / Brussels OUT001 - CIBC OUT002 - Sovereign"]]></description>
+					<required>false</required>
+					<width>6</width>
+				</field>
+				<field xsi:type="ASCIIFixedFieldType">
+					<name>n_a56</name>
+					<datatype>String</datatype>
+					<description><![CDATA[not used by application]]></description>
+					<required>false</required>
+					<width>12</width>
+				</field>
+				<field xsi:type="ASCIIFixedFieldType">
+					<name>n_a57</name>
+					<datatype>String</datatype>
+					<description><![CDATA[not used by application]]></description>
+					<required>false</required>
+					<width>1</width>
+				</field>
+				<field xsi:type="ASCIIFixedFieldType">
+					<name>n_a58</name>
+					<datatype>String</datatype>
+					<description><![CDATA[not used by application]]></description>
+					<required>false</required>
+					<width>1</width>
+				</field>
+				<field xsi:type="ASCIIFixedFieldType">
+					<name>n_a59</name>
+					<datatype>String</datatype>
+					<description><![CDATA[not used by application]]></description>
+					<required>false</required>
+					<width>1</width>
+				</field>
+				<field xsi:type="ASCIIFixedFieldType">
+					<name>n_a60</name>
+					<datatype>String</datatype>
+					<description><![CDATA[not used by application]]></description>
+					<required>false</required>
+					<width>4</width>
+				</field>
+				<field xsi:type="ASCIIFixedFieldType">
+					<name>fax_sub_switch</name>
+					<datatype>String</datatype>
+					<description><![CDATA[Y - if FAX contains a substitution string (see below)]]></description>
+					<required>false</required>
+					<width>1</width>
+				</field>
+				<field xsi:type="ASCIIFixedFieldType">
+					<name>n_a61</name>
+					<datatype>String</datatype>
+					<description><![CDATA[not used by application]]></description>
+					<required>false</required>
+					<width>2</width>
+					<stringfieldoption>
+						<trimoption>1</trimoption>
+					</stringfieldoption>
+				</field>
+			</datafields>
+			<trailerfields>
+			</trailerfields>
+		</ASCIIFixedfields>
+		<validationrules name="Default">
+			<hdrvalidationrules>
+				<fieldvalidations>
+				</fieldvalidations>
+			</hdrvalidationrules>
+			<datavalidationrules>
+				<fieldvalidations>
+				</fieldvalidations>
+			</datavalidationrules>
+			<tlrvalidationrules>
+				<fieldvalidations>
+				</fieldvalidations>
+			</tlrvalidationrules>
+		</validationrules>
+		<elementproperties>
+			<propertymap>
+				<property name="codegen.java.properties">
+					<value>
+						<propertymap type="com.tplus.transform.design.PropertiesDef">
+							<property name="Java Package Name" value="com.transform.external.%e"/>
+							<property name="Jar Name" value="%c.jar"/>
+							<property name="Manifest Entries" value="transformrt.jar asciifixedrt.jar"/>
+							<property name="Data Source" value=""/>
+						</propertymap>
+					</value>
+				</property>
+			</propertymap>
+		</elementproperties>
+	</externalmessage>
+	<externalmessage xsi:type="UniversalFormat" type="UniversalFormat" version="5.0" rulename="PA1500" formattype="UniversalFormat" >
+		<description><![CDATA[It is 1500 bytes message header of IMMS]]></description>
+		<standard>Universal</standard>
+		<version>1.0</version>
+		<Universalfields>
+			<delimiters>
+				<named-delimiters>
+				</named-delimiters>
+				<header-delimiter ignoretrailingfields="false" />
+				<data-delimiter ignoretrailingfields="false" />
+				<trailer-delimiter ignoretrailingfields="false" />
+				<record-delimiter ignoretrailingfields="false" />
+				<field-delimiter value="" quotechar="" releasechar="" quote-option="Default"/>
+			</delimiters>
+			<defaultencoding>
+				<default>ASCII</default>
+				<defaultfieldtype>Fixed Length</defaultfieldtype>
+				<binaryencoding endian="Big Endian"/>
+				<text-encoding>US-ASCII</text-encoding>
+				<asciistringoption>
+					<justification>Left</justification>
+					<padding>Space</padding>
+					<trimoption>Trim Both Ends</trimoption>
+				</asciistringoption>
+				<asciicharoption>
+					<justification>Left</justification>
+					<padding>Space</padding>
+					<trimoption>Trim Both Ends</trimoption>
+				</asciicharoption>
+				<asciiintegeroption>
+					<justification>Right</justification>
+					<padding>Zeros</padding>
+					<sign>optional</sign>
+				</asciiintegeroption>
+				<asciilongoption>
+					<justification>Right</justification>
+					<padding>Zeros</padding>
+					<sign>optional</sign>
+				</asciilongoption>
+				<asciidateoption>
+					<justification>Left</justification>
+				</asciidateoption>
+				<asciifloatoption>
+					<justification>Right</justification>
+					<padding>Zeros</padding>
+					<decimalpointoption>Dot</decimalpointoption>
+					<sign>optional</sign>
+				</asciifloatoption>
+				<asciidoubleoption>
+					<justification>Right</justification>
+					<padding>Zeros</padding>
+					<decimalpointoption>Dot</decimalpointoption>
+					<sign>optional</sign>
+				</asciidoubleoption>
+				<asciibooleanoption>
+					<justification>Left</justification>
+					<padding>Space</padding>
+					<truevalue>1</truevalue>
+					<falsevalue>0</falsevalue>
+				</asciibooleanoption>
+				<asciidateonlyoption>
+					<justification>Left</justification>
+				</asciidateonlyoption>
+				<asciitimeonlyoption>
+					<justification>Left</justification>
+				</asciitimeonlyoption>
+				<asciibigintegeroption>
+					<justification>Right</justification>
+					<padding>Zeros</padding>
+					<sign>optional</sign>
+				</asciibigintegeroption>
+				<asciibigdecimaloption>
+					<justification>Right</justification>
+					<padding>Space</padding>
+					<decimalpointoption>Dot</decimalpointoption>
+					<sign>optional</sign>
+				</asciibigdecimaloption>
+				<asciiscaleddecimaloption>
+					<justification>Right</justification>
+					<padding>Space</padding>
+					<decimalpointoption>Dot</decimalpointoption>
+					<sign>optional</sign>
+				</asciiscaleddecimaloption>
+				<asciibinaryoption>
+					<format>Hex</format>
+					<justification>Left</justification>
+				</asciibinaryoption>
+			</defaultencoding>
+			<xpath-namespaces>
+				<namespace value="http://www.w3.org/2005/xpath-functions" prefix="fn"/>
+				<namespace value="http://www.w3.org/2001/XMLSchema" prefix="xs"/>
+				<namespace value="java:com.tplus.transform.runtime.swift.SwiftXPathFunctions" prefix="swift"/>
+			</xpath-namespaces>
+			<headerfields>
+			</headerfields>
+			<datafields>
+				<field xsi:type="UniversalFieldType">
+					<name>NS-TRANCODE</name>
+					<datatype>String</datatype>
+					<required>false</required>
+					<length type="fixed">
+						<value>8</value>
+					</length>
+					<encoding>ASCII</encoding>
+				</field>
+				<field xsi:type="UniversalFieldType">
+					<name>FILLER_1</name>
+					<datatype>String</datatype>
+					<required>false</required>
+					<length type="fixed">
+						<value>1</value>
+					</length>
+					<encoding>ASCII</encoding>
+				</field>
+				<field xsi:type="UniversalFieldType">
+					<name>NS-SEQ-PREFIX</name>
+					<datatype>String</datatype>
+					<description><![CDATA[application sequence prefix]]></description>
+					<required>false</required>
+					<length type="fixed">
+						<value>3</value>
+					</length>
+					<encoding>ASCII</encoding>
+				</field>
+				<field xsi:type="UniversalFieldType">
+					<name>NS-SEQ-NO</name>
+					<datatype>String</datatype>
+					<description><![CDATA[application sequence number]]></description>
+					<required>false</required>
+					<length type="fixed">
+						<value>5</value>
+					</length>
+					<encoding>ASCII</encoding>
+				</field>
+				<field xsi:type="UniversalFieldType">
+					<name>NS-SEQ-SUFFIX</name>
+					<datatype>String</datatype>
+					<description><![CDATA[ASN suffix]]></description>
+					<required>false</required>
+					<length type="fixed">
+						<value>2</value>
+					</length>
+					<encoding>ASCII</encoding>
+				</field>
+				<field xsi:type="UniversalFieldType">
+					<name>NS-SEG-LTH</name>
+					<datatype>String</datatype>
+					<required>false</required>
+					<length type="fixed">
+						<value>3</value>
+					</length>
+					<encoding>ASCII</encoding>
+				</field>
+				<field xsi:type="UniversalFieldType">
+					<name>FILLER_2</name>
+					<datatype>String</datatype>
+					<required>false</required>
+					<length type="fixed">
+						<value>9</value>
+					</length>
+					<encoding>ASCII</encoding>
+				</field>
+				<field xsi:type="UniversalFieldType">
+					<name>NS-TEXT-LINE-LTH</name>
+					<datatype>String</datatype>
+					<required>false</required>
+					<length type="fixed">
+						<value>2</value>
+					</length>
+					<encoding>ASCII</encoding>
+				</field>
+				<field xsi:type="UniversalFieldType">
+					<name>NS-MSG-TYPE</name>
+					<datatype>String</datatype>
+					<required>false</required>
+					<length type="fixed">
+						<value>1</value>
+					</length>
+					<encoding>ASCII</encoding>
+				</field>
+				<field xsi:type="UniversalFieldType">
+					<name>NS-TST-TEST-RELATION</name>
+					<datatype>String</datatype>
+					<required>false</required>
+					<length type="fixed">
+						<value>1</value>
+					</length>
+					<encoding>ASCII</encoding>
+				</field>
+				<field xsi:type="UniversalFieldType">
+					<name>NS-TST-NAMEKEY</name>
+					<datatype>String</datatype>
+					<required>false</required>
+					<length type="fixed">
+						<value>15</value>
+					</length>
+					<encoding>ASCII</encoding>
+				</field>
+				<field xsi:type="UniversalFieldType">
+					<name>NS-TST-DOLLAR-AMT</name>
+					<datatype>String</datatype>
+					<required>false</required>
+					<length type="fixed">
+						<value>8</value>
+					</length>
+					<encoding>ASCII</encoding>
+				</field>
+				<field xsi:type="UniversalFieldType">
+					<name>NS-TST-CURRENCY-CODE</name>
+					<datatype>String</datatype>
+					<required>false</required>
+					<length type="fixed">
+						<value>3</value>
+					</length>
+					<encoding>ASCII</encoding>
+				</field>
+				<field xsi:type="UniversalFieldType">
+					<name>FILLER_3</name>
+					<datatype>String</datatype>
+					<required>false</required>
+					<length type="fixed">
+						<value>64</value>
+					</length>
+					<encoding>ASCII</encoding>
+				</field>
+				<field xsi:type="UniversalFieldType">
+					<name>NS-HDR-TRN-NO</name>
+					<datatype>String</datatype>
+					<required>false</required>
+					<length type="fixed">
+						<value>16</value>
+					</length>
+					<encoding>ASCII</encoding>
+				</field>
+				<field xsi:type="UniversalFieldType">
+					<name>NS-HDR-TRN-DUP</name>
+					<datatype>String</datatype>
+					<required>false</required>
+					<length type="fixed">
+						<value>6</value>
+					</length>
+					<encoding>ASCII</encoding>
+				</field>
+				<field xsi:type="UniversalFieldType">
+					<name>NS-HDR-DATE</name>
+					<datatype>String</datatype>
+					<required>false</required>
+					<length type="fixed">
+						<value>18</value>
+					</length>
+					<encoding>ASCII</encoding>
+				</field>
+				<field xsi:type="UniversalFieldType">
+					<name>NS-HDR-TIME</name>
+					<datatype>String</datatype>
+					<required>false</required>
+					<length type="fixed">
+						<value>6</value>
+					</length>
+					<encoding>ASCII</encoding>
+				</field>
+				<field xsi:type="UniversalFieldType">
+					<name>NS-HDR-PRIORITY</name>
+					<datatype>String</datatype>
+					<required>false</required>
+					<length type="fixed">
+						<value>1</value>
+					</length>
+					<encoding>ASCII</encoding>
+				</field>
+				<field xsi:type="UniversalFieldType">
+					<name>NS-HDR-ORIG-DEPT</name>
+					<datatype>String</datatype>
+					<required>false</required>
+					<length type="fixed">
+						<value>20</value>
+					</length>
+					<encoding>ASCII</encoding>
+				</field>
+				<field xsi:type="UniversalFieldType">
+					<name>NS-HDR-DEPT-ID</name>
+					<datatype>String</datatype>
+					<required>false</required>
+					<length type="fixed">
+						<value>7</value>
+					</length>
+					<encoding>ASCII</encoding>
+				</field>
+				<field xsi:type="UniversalFieldType">
+					<name>FILLER_5</name>
+					<datatype>String</datatype>
+					<required>false</required>
+					<length type="fixed">
+						<value>20</value>
+					</length>
+					<encoding>ASCII</encoding>
+				</field>
+				<field xsi:type="UniversalFieldType">
+					<name>NS-HDR-ACCTNO</name>
+					<datatype>String</datatype>
+					<required>false</required>
+					<length type="fixed">
+						<value>10</value>
+					</length>
+					<encoding>ASCII</encoding>
+				</field>
+				<field xsi:type="UniversalFieldType">
+					<name>NS-HDR-MT-VALDATE</name>
+					<datatype>String</datatype>
+					<required>false</required>
+					<length type="fixed">
+						<value>14</value>
+					</length>
+					<encoding>ASCII</encoding>
+				</field>
+				<field xsi:type="UniversalFieldType">
+					<name>NS-HDR-SI-INDICATOR</name>
+					<datatype>String</datatype>
+					<required>false</required>
+					<length type="fixed">
+						<value>18</value>
+					</length>
+					<encoding>ASCII</encoding>
+				</field>
+				<field xsi:type="UniversalFieldType">
+					<name>NS-HDR-SI-LINE1</name>
+					<datatype>String</datatype>
+					<required>false</required>
+					<length type="fixed">
+						<value>40</value>
+					</length>
+					<encoding>ASCII</encoding>
+				</field>
+				<field xsi:type="UniversalFieldType">
+					<name>NS-HDR-SI-LINE2</name>
+					<datatype>String</datatype>
+					<required>false</required>
+					<length type="fixed">
+						<value>40</value>
+					</length>
+					<encoding>ASCII</encoding>
+				</field>
+				<field xsi:type="UniversalFieldType">
+					<name>NS-HDR-BLOCK3-TAG103</name>
+					<datatype>String</datatype>
+					<required>false</required>
+					<length type="fixed">
+						<value>3</value>
+					</length>
+					<encoding>ASCII</encoding>
+				</field>
+				<field xsi:type="UniversalFieldType">
+					<name>NS-HDR-BLOCK3-TAG113</name>
+					<datatype>String</datatype>
+					<required>false</required>
+					<length type="fixed">
+						<value>4</value>
+					</length>
+					<encoding>ASCII</encoding>
+				</field>
+				<field xsi:type="UniversalFieldType">
+					<name>NS-HDR-BLOCK3-TAG108</name>
+					<datatype>String</datatype>
+					<required>false</required>
+					<length type="fixed">
+						<value>16</value>
+					</length>
+					<encoding>ASCII</encoding>
+				</field>
+				<field xsi:type="UniversalFieldType">
+					<name>NS-HDR-BLOCK3-TAG119</name>
+					<datatype>String</datatype>
+					<required>false</required>
+					<length type="fixed">
+						<value>8</value>
+					</length>
+					<encoding>ASCII</encoding>
+				</field>
+				<field xsi:type="UniversalFieldType">
+					<name>FILLER_6</name>
+					<datatype>String</datatype>
+					<required>false</required>
+					<length type="fixed">
+						<value>9</value>
+					</length>
+					<encoding>ASCII</encoding>
+				</field>
+				<field xsi:type="UniversalFieldType">
+					<name>FILLER_7</name>
+					<datatype>String</datatype>
+					<required>false</required>
+					<length type="fixed">
+						<value>25</value>
+					</length>
+					<encoding>ASCII</encoding>
+				</field>
+				<field xsi:type="UniversalFieldType">
+					<name>NS-HDR-CASHREG-EXT</name>
+					<datatype>String</datatype>
+					<required>false</required>
+					<length type="fixed">
+						<value>10</value>
+					</length>
+					<encoding>ASCII</encoding>
+				</field>
+				<field xsi:type="UniversalFieldType">
+					<name>FILLER_8</name>
+					<datatype>String</datatype>
+					<required>false</required>
+					<length type="fixed">
+						<value>5</value>
+					</length>
+					<encoding>ASCII</encoding>
+				</field>
+				<field xsi:type="UniversalFieldType">
+					<name>NS-HDR-RECIPIENT1</name>
+					<datatype>String</datatype>
+					<required>false</required>
+					<length type="fixed">
+						<value>35</value>
+					</length>
+					<encoding>ASCII</encoding>
+				</field>
+				<field xsi:type="UniversalFieldType">
+					<name>NS-HDR-RECIPIENT2</name>
+					<datatype>String</datatype>
+					<required>false</required>
+					<length type="fixed">
+						<value>35</value>
+					</length>
+					<encoding>ASCII</encoding>
+				</field>
+				<field xsi:type="UniversalFieldType">
+					<name>NS-HDR-RECIPIENT3</name>
+					<datatype>String</datatype>
+					<required>false</required>
+					<length type="fixed">
+						<value>35</value>
+					</length>
+					<encoding>ASCII</encoding>
+				</field>
+				<field xsi:type="UniversalFieldType">
+					<name>NS-HDR-RECIPIENT4</name>
+					<datatype>String</datatype>
+					<required>false</required>
+					<length type="fixed">
+						<value>35</value>
+					</length>
+					<encoding>ASCII</encoding>
+				</field>
+				<field xsi:type="UniversalFieldType">
+					<name>NS-HDR-CUSTOMIZE-IND</name>
+					<datatype>String</datatype>
+					<required>false</required>
+					<length type="fixed">
+						<value>1</value>
+					</length>
+					<encoding>ASCII</encoding>
+				</field>
+				<field xsi:type="UniversalFieldType">
+					<name>NS-HDR-LEASE-LNE</name>
+					<datatype>String</datatype>
+					<required>false</required>
+					<length type="fixed">
+						<value>3</value>
+					</length>
+					<encoding>ASCII</encoding>
+				</field>
+				<field xsi:type="UniversalFieldType">
+					<name>NS-HDR-LEASE-DST</name>
+					<datatype>String</datatype>
+					<required>false</required>
+					<length type="fixed">
+						<value>9</value>
+					</length>
+					<encoding>ASCII</encoding>
+				</field>
+				<field xsi:type="UniversalFieldType">
+					<name>NS-HDR-DIRECT-DIAL-IND</name>
+					<datatype>String</datatype>
+					<required>false</required>
+					<length type="fixed">
+						<value>1</value>
+					</length>
+					<encoding>ASCII</encoding>
+				</field>
+				<field xsi:type="UniversalFieldType">
+					<name>NS-HDR-TELEX_1</name>
+					<datatype>String</datatype>
+					<required>false</required>
+					<length type="fixed">
+						<value>20</value>
+					</length>
+					<encoding>ASCII</encoding>
+				</field>
+				<field xsi:type="UniversalFieldType">
+					<name>NS-HDR-ANSWER_1</name>
+					<datatype>String</datatype>
+					<required>false</required>
+					<length type="fixed">
+						<value>20</value>
+					</length>
+					<encoding>ASCII</encoding>
+				</field>
+				<field xsi:type="UniversalFieldType">
+					<name>NS-HDR-TELEX_2</name>
+					<datatype>String</datatype>
+					<required>false</required>
+					<length type="fixed">
+						<value>20</value>
+					</length>
+					<encoding>ASCII</encoding>
+				</field>
+				<field xsi:type="UniversalFieldType">
+					<name>NS-HDR-ANSWER_2</name>
+					<datatype>String</datatype>
+					<required>false</required>
+					<length type="fixed">
+						<value>20</value>
+					</length>
+					<encoding>ASCII</encoding>
+				</field>
+				<field xsi:type="UniversalFieldType">
+					<name>FILLER_9</name>
+					<datatype>String</datatype>
+					<required>false</required>
+					<length type="fixed">
+						<value>130</value>
+					</length>
+					<encoding>ASCII</encoding>
+				</field>
+				<field xsi:type="UniversalFieldType">
+					<name>FILLER_10</name>
+					<datatype>String</datatype>
+					<required>false</required>
+					<length type="fixed">
+						<value>18</value>
+					</length>
+					<encoding>ASCII</encoding>
+				</field>
+				<field xsi:type="UniversalFieldType">
+					<name>NS-MIDYS-MSG-TYPE</name>
+					<datatype>String</datatype>
+					<required>false</required>
+					<length type="fixed">
+						<value>3</value>
+					</length>
+					<encoding>ASCII</encoding>
+				</field>
+				<field xsi:type="UniversalFieldType">
+					<name>FILLER_11</name>
+					<datatype>String</datatype>
+					<required>false</required>
+					<length type="fixed">
+						<value>2</value>
+					</length>
+					<encoding>ASCII</encoding>
+				</field>
+				<field xsi:type="UniversalFieldType">
+					<name>NS-HDR-COUNTRY-CODE</name>
+					<datatype>String</datatype>
+					<required>false</required>
+					<length type="fixed">
+						<value>4</value>
+					</length>
+					<encoding>ASCII</encoding>
+				</field>
+				<field xsi:type="UniversalFieldType">
+					<name>FILLER_12</name>
+					<datatype>String</datatype>
+					<required>false</required>
+					<length type="fixed">
+						<value>2</value>
+					</length>
+					<encoding>ASCII</encoding>
+				</field>
+				<field xsi:type="UniversalFieldType">
+					<name>NS-HDR-CHRG-PRTY1</name>
+					<datatype>String</datatype>
+					<required>false</required>
+					<length type="fixed">
+						<value>35</value>
+					</length>
+					<encoding>ASCII</encoding>
+				</field>
+				<field xsi:type="UniversalFieldType">
+					<name>NS-HDR-CHRG-PRTY2</name>
+					<datatype>String</datatype>
+					<required>false</required>
+					<length type="fixed">
+						<value>35</value>
+					</length>
+					<encoding>ASCII</encoding>
+				</field>
+				<field xsi:type="UniversalFieldType">
+					<name>NS-HDR-CHRG-PRTY3</name>
+					<datatype>String</datatype>
+					<required>false</required>
+					<length type="fixed">
+						<value>35</value>
+					</length>
+					<encoding>ASCII</encoding>
+				</field>
+				<field xsi:type="UniversalFieldType">
+					<name>NS-HDR-CHRG-PRTY4</name>
+					<datatype>String</datatype>
+					<required>false</required>
+					<length type="fixed">
+						<value>35</value>
+					</length>
+					<encoding>ASCII</encoding>
+				</field>
+				<field xsi:type="UniversalFieldType">
+					<name>NS-HDR-CHRG-ACCT</name>
+					<datatype>String</datatype>
+					<required>false</required>
+					<length type="fixed">
+						<value>10</value>
+					</length>
+					<encoding>ASCII</encoding>
+				</field>
+				<field xsi:type="UniversalFieldType">
+					<name>NS-HDR-CHRG-ACCT-IND</name>
+					<datatype>String</datatype>
+					<required>false</required>
+					<length type="fixed">
+						<value>1</value>
+					</length>
+					<encoding>ASCII</encoding>
+				</field>
+				<field xsi:type="UniversalFieldType">
+					<name>NS-HDR-BILL-CUST-IND</name>
+					<datatype>String</datatype>
+					<required>false</required>
+					<length type="fixed">
+						<value>1</value>
+					</length>
+					<encoding>ASCII</encoding>
+				</field>
+				<field xsi:type="UniversalFieldType">
+					<name>NS-HDR-DEBIT-LINE1</name>
+					<datatype>String</datatype>
+					<required>false</required>
+					<length type="fixed">
+						<value>60</value>
+					</length>
+					<encoding>ASCII</encoding>
+				</field>
+				<field xsi:type="UniversalFieldType">
+					<name>NS-HDR-DEBIT-LINE2</name>
+					<datatype>String</datatype>
+					<required>false</required>
+					<length type="fixed">
+						<value>60</value>
+					</length>
+					<encoding>ASCII</encoding>
+				</field>
+				<field xsi:type="UniversalFieldType">
+					<name>FILLER_14</name>
+					<datatype>String</datatype>
+					<required>false</required>
+					<length type="fixed">
+						<value>135</value>
+					</length>
+					<encoding>ASCII</encoding>
+				</field>
+				<field xsi:type="UniversalFieldType">
+					<name>NS-FAX-NUM-1</name>
+					<datatype>String</datatype>
+					<required>false</required>
+					<length type="fixed">
+						<value>20</value>
+					</length>
+					<encoding>ASCII</encoding>
+				</field>
+				<field xsi:type="UniversalFieldType">
+					<name>NS-FAX-NUM-2</name>
+					<datatype>String</datatype>
+					<required>false</required>
+					<length type="fixed">
+						<value>20</value>
+					</length>
+					<encoding>ASCII</encoding>
+				</field>
+				<field xsi:type="UniversalFieldType">
+					<name>NS-FAX-TEXT-FORMAT</name>
+					<datatype>String</datatype>
+					<required>false</required>
+					<length type="fixed">
+						<value>1</value>
+					</length>
+					<encoding>ASCII</encoding>
+				</field>
+				<field xsi:type="UniversalFieldType">
+					<name>NS-FAX-COVER-PG</name>
+					<datatype>String</datatype>
+					<required>false</required>
+					<length type="fixed">
+						<value>2</value>
+					</length>
+					<encoding>ASCII</encoding>
+				</field>
+				<field xsi:type="UniversalFieldType">
+					<name>NS-FAX-PORT-LAND</name>
+					<datatype>String</datatype>
+					<required>false</required>
+					<length type="fixed">
+						<value>1</value>
+					</length>
+					<encoding>ASCII</encoding>
+				</field>
+				<field xsi:type="UniversalFieldType">
+					<name>NS-FAX-COMPRESS</name>
+					<datatype>String</datatype>
+					<required>false</required>
+					<length type="fixed">
+						<value>1</value>
+					</length>
+					<encoding>ASCII</encoding>
+				</field>
+				<field xsi:type="UniversalFieldType">
+					<name>NS-FAX-PHONE-NUM</name>
+					<datatype>String</datatype>
+					<required>false</required>
+					<length type="fixed">
+						<value>20</value>
+					</length>
+					<encoding>ASCII</encoding>
+				</field>
+				<field xsi:type="UniversalFieldType">
+					<name>NS-FAX-NAK-LTERM-CD</name>
+					<datatype>String</datatype>
+					<required>false</required>
+					<length type="fixed">
+						<value>3</value>
+					</length>
+					<encoding>ASCII</encoding>
+				</field>
+				<field xsi:type="UniversalFieldType">
+					<name>NS-FAX-LINE-LENGTH</name>
+					<datatype>String</datatype>
+					<required>false</required>
+					<length type="fixed">
+						<value>3</value>
+					</length>
+					<encoding>ASCII</encoding>
+				</field>
+				<field xsi:type="UniversalFieldType">
+					<name>FILLER_16</name>
+					<datatype>String</datatype>
+					<required>false</required>
+					<length type="fixed">
+						<value>49</value>
+					</length>
+					<encoding>ASCII</encoding>
+				</field>
+				<field xsi:type="UniversalFieldType">
+					<name>FILLER-REDEF-PACKED-FLDS</name>
+					<datatype>String</datatype>
+					<required>false</required>
+					<length type="fixed">
+						<value>4</value>
+					</length>
+					<encoding>ASCII</encoding>
+				</field>
+				<field xsi:type="UniversalFieldType">
+					<name>NS-FORMAT-IND</name>
+					<datatype>String</datatype>
+					<required>false</required>
+					<length type="fixed">
+						<value>1</value>
+					</length>
+					<encoding>ASCII</encoding>
+				</field>
+				<field xsi:type="UniversalFieldType">
+					<name>FILLER-017</name>
+					<datatype>String</datatype>
+					<required>false</required>
+					<length type="fixed">
+						<value>2</value>
+					</length>
+					<encoding>ASCII</encoding>
+				</field>
+				<field xsi:type="UniversalFieldType">
+					<name>NS-PDP-LEASE-LINE-PRIORITY</name>
+					<datatype>String</datatype>
+					<required>false</required>
+					<length type="fixed">
+						<value>2</value>
+					</length>
+					<encoding>ASCII</encoding>
+				</field>
+				<field xsi:type="UniversalFieldType">
+					<name>FILLER_18</name>
+					<datatype>String</datatype>
+					<required>false</required>
+					<length type="fixed">
+						<value>4</value>
+					</length>
+					<encoding>ASCII</encoding>
+				</field>
+				<field xsi:type="UniversalFieldType">
+					<name>NS-AUTOMATED-SYSTEMS-INFO</name>
+					<datatype>String</datatype>
+					<required>false</required>
+					<length type="fixed">
+						<value>20</value>
+					</length>
+					<encoding>ASCII</encoding>
+				</field>
+				<field xsi:type="UniversalFieldType">
+					<name>FILLER_19</name>
+					<datatype>String</datatype>
+					<required>false</required>
+					<length type="fixed">
+						<value>1</value>
+					</length>
+					<encoding>ASCII</encoding>
+				</field>
+				<field xsi:type="UniversalFieldType">
+					<name>NS-ITC-MSG-TYPE</name>
+					<datatype>String</datatype>
+					<required>false</required>
+					<length type="fixed">
+						<value>3</value>
+					</length>
+					<encoding>ASCII</encoding>
+				</field>
+				<field xsi:type="UniversalFieldType">
+					<name>FILLER_20</name>
+					<datatype>String</datatype>
+					<required>false</required>
+					<length type="fixed">
+						<value>1</value>
+					</length>
+					<encoding>ASCII</encoding>
+				</field>
+				<field xsi:type="UniversalFieldType">
+					<name>NS-SWIFT-ADDRESS</name>
+					<datatype>String</datatype>
+					<required>false</required>
+					<length type="fixed">
+						<value>11</value>
+					</length>
+					<encoding>ASCII</encoding>
+				</field>
+				<field xsi:type="UniversalFieldType">
+					<name>NS-CIP-INDICATOR</name>
+					<datatype>String</datatype>
+					<required>false</required>
+					<length type="fixed">
+						<value>1</value>
+					</length>
+					<encoding>ASCII</encoding>
+				</field>
+				<field xsi:type="UniversalFieldType">
+					<name>FILLER_21</name>
+					<datatype>String</datatype>
+					<required>false</required>
+					<length type="fixed">
+						<value>2</value>
+					</length>
+					<encoding>ASCII</encoding>
+				</field>
+				<field xsi:type="UniversalFieldType">
+					<name>NS-REFERRAL-REASON</name>
+					<datatype>String</datatype>
+					<required>false</required>
+					<length type="fixed">
+						<value>1</value>
+					</length>
+					<encoding>ASCII</encoding>
+				</field>
+				<field xsi:type="UniversalFieldType">
+					<name>NS-ITC-MSG-TYPE-QUAL</name>
+					<datatype>String</datatype>
+					<required>false</required>
+					<length type="fixed">
+						<value>1</value>
+					</length>
+					<encoding>ASCII</encoding>
+				</field>
+				<field xsi:type="UniversalFieldType">
+					<name>FILLER_22</name>
+					<datatype>String</datatype>
+					<required>false</required>
+					<length type="fixed">
+						<value>1</value>
+					</length>
+					<encoding>ASCII</encoding>
+				</field>
+				<field xsi:type="UniversalFieldType">
+					<name>NS-CASH-REGISTER-CUST-ID</name>
+					<datatype>String</datatype>
+					<required>false</required>
+					<length type="fixed">
+						<value>5</value>
+					</length>
+					<encoding>ASCII</encoding>
+				</field>
+				<field xsi:type="UniversalFieldType">
+					<name>NS-BANK-CODE</name>
+					<datatype>String</datatype>
+					<required>false</required>
+					<length type="fixed">
+						<value>1</value>
+					</length>
+					<encoding>ASCII</encoding>
+				</field>
+				<field xsi:type="UniversalFieldType">
+					<name>NS-HDR-MACH-REGION-CD</name>
+					<datatype>String</datatype>
+					<required>false</required>
+					<length type="fixed">
+						<value>2</value>
+					</length>
+					<encoding>ASCII</encoding>
+				</field>
+				<field xsi:type="UniversalFieldType">
+					<name>NS-HDR-CHRG-ACCT-MIGRATED-TO</name>
+					<datatype>String</datatype>
+					<required>false</required>
+					<length type="fixed">
+						<value>10</value>
+					</length>
+					<encoding>ASCII</encoding>
+				</field>
+				<field xsi:type="UniversalFieldType">
+					<name>NS-HDR-CHRG-ACCT-TYPE</name>
+					<datatype>String</datatype>
+					<required>false</required>
+					<length type="fixed">
+						<value>1</value>
+					</length>
+					<encoding>ASCII</encoding>
+				</field>
+				<field xsi:type="UniversalFieldType">
+					<name>NS-HDR-REGION-NUMBER</name>
+					<datatype>String</datatype>
+					<required>false</required>
+					<length type="fixed">
+						<value>2</value>
+					</length>
+					<encoding>ASCII</encoding>
+				</field>
+				<field xsi:type="UniversalFieldType">
+					<name>NS-SNDR-CHRG-ACCT-METHOD</name>
+					<datatype>String</datatype>
+					<required>false</required>
+					<length type="fixed">
+						<value>1</value>
+					</length>
+					<encoding>ASCII</encoding>
+				</field>
+				<field xsi:type="UniversalFieldType">
+					<name>NS-RECV-ALT-ADDR-MAIN</name>
+					<datatype>String</datatype>
+					<required>false</required>
+					<length type="fixed">
+						<value>8</value>
+					</length>
+					<encoding>ASCII</encoding>
+				</field>
+				<field xsi:type="UniversalFieldType">
+					<name>NS-RECV-ALT-ADDR-BRANCH</name>
+					<datatype>String</datatype>
+					<required>false</required>
+					<length type="fixed">
+						<value>3</value>
+					</length>
+					<encoding>ASCII</encoding>
+				</field>
+				<field xsi:type="UniversalFieldType">
+					<name>NS-SNDR-END-OF-BATCH-FLAG</name>
+					<datatype>String</datatype>
+					<required>false</required>
+					<length type="fixed">
+						<value>1</value>
+					</length>
+					<encoding>ASCII</encoding>
+				</field>
+				<field xsi:type="UniversalFieldType">
+					<name>NS-SPECIAL-ROUTE-IND</name>
+					<datatype>String</datatype>
+					<required>false</required>
+					<length type="fixed">
+						<value>1</value>
+					</length>
+					<encoding>ASCII</encoding>
+				</field>
+				<field xsi:type="UniversalFieldType">
+					<name>NS-SENDING-BANK</name>
+					<datatype>String</datatype>
+					<required>false</required>
+					<length type="fixed">
+						<value>6</value>
+					</length>
+					<encoding>ASCII</encoding>
+				</field>
+				<field xsi:type="UniversalFieldType">
+					<name>FILLER_23</name>
+					<datatype>String</datatype>
+					<required>false</required>
+					<length type="fixed">
+						<value>2</value>
+					</length>
+					<encoding>ASCII</encoding>
+				</field>
+				<field xsi:type="UniversalFieldType">
+					<name>NS-SNDR-SWF-TYPE</name>
+					<datatype>String</datatype>
+					<required>false</required>
+					<length type="fixed">
+						<value>1</value>
+					</length>
+					<encoding>ASCII</encoding>
+				</field>
+				<field xsi:type="UniversalFieldType">
+					<name>FILLER_24</name>
+					<datatype>String</datatype>
+					<required>false</required>
+					<length type="fixed">
+						<value>56</value>
+					</length>
+					<encoding>ASCII</encoding>
+				</field>
+				<field xsi:type="UniversalFieldType">
+					<name>FILLER_25</name>
+					<datatype>String</datatype>
+					<required>false</required>
+					<length type="fixed">
+						<value>4</value>
+					</length>
+					<encoding>ASCII</encoding>
+				</field>
+			</datafields>
+			<trailerfields>
+			</trailerfields>
+		</Universalfields>
+		<validationrules name="Default">
+			<hdrvalidationrules>
+				<fieldvalidations>
+				</fieldvalidations>
+			</hdrvalidationrules>
+			<datavalidationrules>
+				<fieldvalidations>
+				</fieldvalidations>
+			</datavalidationrules>
+			<tlrvalidationrules>
+				<fieldvalidations>
+				</fieldvalidations>
+			</tlrvalidationrules>
+		</validationrules>
+		<elementproperties>
+			<propertymap>
+				<property name="codegen.java.properties">
+					<value>
+						<propertymap type="com.tplus.transform.design.PropertiesDef">
+							<property name="Java Package Name" value="com.transform.external.%e"/>
+							<property name="Jar Name" value="%c.jar"/>
+							<property name="Manifest Entries" value="transformrt.jar universalrt.jar"/>
+							<property name="Data Source" value=""/>
+						</propertymap>
+					</value>
+				</property>
+			</propertymap>
+		</elementproperties>
+	</externalmessage>
+	<elementproperties>
+		<propertymap>
+			<property name="CARTRIDGE_INFO">
+				<value>
+					<propertymap type="com.tplus.transform.design.CartridgeInfo">
+						<property name="GeneratedFiles">
+							<value>
+								<propertymap>
+								</propertymap>
+							</value>
+						</property>
+						<property name="cartridgefilename" value="C:\Users\xbbkqqv\Desktop\FMT\workspace\FMTCASFileProcessor\backup\volante\passarea\Pass Areas.car"/>
+					</propertymap>
+				</value>
+			</property>
+			<property name="DOCUMENT_PROPERTIES">
+				<value>
+					<propertymap>
+						<property name="Creation Time" value="Fri May 22 14:25:11 EDT 2009"/>
+						<property name="Author" value="MSPENCE"/>
+						<property name="Title" value="Pass Areas"/>
+						<property name="Client Id" value="arajasekaran@inautix.co.in"/>
+						<property name="Last Author" value="xbbkqqv"/>
+						<property name="Last Save Time" value="Wed Aug 26 13:48:10 IST 2015"/>
+						<property name="Designer Build" value="1400"/>
+						<property name="Revision Number" value="80"/>
+					</propertymap>
+				</value>
+			</property>
+			<property name="codegen.java.options">
+				<value>
+					<propertymap type="com.tplus.transform.design.codegen.java.JavaCodeGeneratorOptions">
+						<property name="isJBoss" value="false"/>
+						<property name="resource-references">
+							<value>
+								<propertylist>
+								</propertylist>
+							</value>
+						</property>
+						<property name="isOSGI" value="true"/>
+						<property name="isGenerateALSB" value="false"/>
+						<property name="isEJB" value="false"/>
+						<property name="isOrion" value="false"/>
+						<property name="isWebSphere" value="false"/>
+						<property name="isVolante" value="true"/>
+						<property name="isRemote" value="false"/>
+						<property name="isLocal" value="false"/>
+						<property name="isWebLogic" value="false"/>
+						<property name="isGeronimo" value="false"/>
+						<property name="isGenerateJNDILinks" value="false"/>
+						<property name="isWLEVS" value="false"/>
+						<property name="ejb-jndi-prefix" value=""/>
+						<property name="isGenerateEAR" value="false"/>
+					</propertymap>
+				</value>
+			</property>
+			<property name="codegen.java.properties">
+				<value>
+					<propertymap type="com.tplus.transform.design.PropertiesDef">
+						<property name="Java Package Name" value="com.transform.cartridge.%c"/>
+						<property name="Max Class Length" value="150"/>
+					</propertymap>
+				</value>
+			</property>
+			<property name="codegen.java.bindings">
+				<value>
+					<propertymap type="com.tplus.transform.design.codegen.DefaultLanguageMapping">
+					</propertymap>
+				</value>
+			</property>
+			<property name="codegen.java.general">
+				<value>
+					<propertymap>
+						<property name="additionalClasspath" value=""/>
+						<property name="debugInfo" value="false"/>
+					</propertymap>
+				</value>
+			</property>
+		</propertymap>
+	</elementproperties>
+	<workspace>
+		<selected-element>Pass Areas/PA1200</selected-element>
+	</workspace>
+</cartridge>
+

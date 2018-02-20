@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<SwiftMessageFormat name="MT579">
+	<standard-version><![CDATA[SRG 2015]]></standard-version>
+	<standard-release-qualifier>20150304</standard-release-qualifier>
+	<DescriptiveName><![CDATA[Certificate Numbers]]></DescriptiveName>
+	<Category><![CDATA[Securities Markets]]></Category>
+	<Description><![CDATA[This message type is sent by a custodian to a financial institution for which it holds securities.
+
+It is used only to replace or supplement the certificate numbers field (field 35E or 35F) in a primary message and therefore can be sent only on the same day as that primary message.]]></Description>
+	<SwiftFields>
+		<customizable>false</customizable>
+		<modifiable>true</modifiable>
+		<max-length>2000</max-length>
+		<Header>
+		</Header>
+		<Data>
+			<Fields>
+				<SwiftField Name="28">
+					<SwiftFieldDef Name="28">
+						<Generic>false</Generic>
+						<Description><![CDATA[Page Number/Continuation Indicator]]></Description>
+						<Option Name="">
+							<Format><![CDATA[5n[/2n]]]></Format>
+							<Specification><![CDATA[(Page Number) (Indicator)]]></Specification>
+							<Description><![CDATA[Page Number/Continuation Indicator]]></Description>
+						</Option>
+					</SwiftFieldDef>
+					<Description><![CDATA[]]></Description>
+					<Repeating>false</Repeating>
+					<Presence>M</Presence>
+					<Options></Options>
+					<Validations>
+						<SubField Name="Indicator">
+							<Validation>
+						                <Enabled>false</Enabled>
+								<Options></Options>
+								<ErrorCode>T12</ErrorCode>
+								<Comment><![CDATA[Indicator must contain one of the folowing codes: (This is not a NVR)]]></Comment>
+								<ValidationPattern Type="CODE">
+									<Codes>
+										<Code Name="0">
+											<Description>The statement is to continue.</Description>
+										</Code>
+										<Code Name="00">
+											<Description>The statement is to continue.</Description>
+										</Code>
+										<Code Name="99">
+											<Description>This is the last page of the statement.</Description>
+										</Code>
+									</Codes>
+								</ValidationPattern>
+							</Validation>
+						</SubField>
+					</Validations>
+				</SwiftField>
+				<SwiftField Name="20">
+					<SwiftFieldDef Name="20">
+						<Generic>false</Generic>
+						<Description><![CDATA[Transaction Reference Number]]></Description>
+						<Option Name="">
+							<Format><![CDATA[16x]]></Format>
+							<Specification><![CDATA[(Reference)]]></Specification>
+							<Description><![CDATA[Transaction Reference Number]]></Description>
+						</Option>
+					</SwiftFieldDef>
+					<Description><![CDATA[]]></Description>
+					<Repeating>false</Repeating>
+					<Presence>M</Presence>
+					<Options></Options>
+					<Validations>
+						<SubField Name="Reference">
+							<Validation>
+								<Options></Options>
+								<ErrorCode>T26</ErrorCode>
+								<Comment><![CDATA[This field must not start or end with a slash '/' and must not contain two consecutive slashes '//' (Error code(s): T26) .]]></Comment>
+								<ValidationPattern Type="T26">
+								</ValidationPattern>
+							</Validation>
+						</SubField>
+					</Validations>
+				</SwiftField>
+				<SwiftField Name="21">
+					<SwiftFieldDef Name="21">
+						<Generic>false</Generic>
+						<Description><![CDATA[Related Reference]]></Description>
+						<Option Name="">
+							<Format><![CDATA[16x]]></Format>
+							<Specification><![CDATA[(Reference)]]></Specification>
+							<Description><![CDATA[Related Reference]]></Description>
+						</Option>
+					</SwiftFieldDef>
+					<Description><![CDATA[]]></Description>
+					<Repeating>false</Repeating>
+					<Presence>M</Presence>
+					<Options></Options>
+					<Validations>
+						<SubField Name="Reference">
+							<Validation>
+								<Options></Options>
+								<ErrorCode>T26</ErrorCode>
+								<Comment><![CDATA[This field must not start or end with a slash '/' and must not contain two consecutive slashes '//' (Error code(s): T26) .]]></Comment>
+								<ValidationPattern Type="T26">
+								</ValidationPattern>
+							</Validation>
+						</SubField>
+					</Validations>
+				</SwiftField>
+				<SwiftField Name="35F">
+					<SwiftFieldDef Name="35">
+						<Generic>false</Generic>
+						<Description><![CDATA[Certificate Number(s)]]></Description>
+						<Option Name="F">
+							<Format><![CDATA[35*50x]]></Format>
+							<Specification><![CDATA[(Narrative)]]></Specification>
+							<Description><![CDATA[Certificate Number(s)]]></Description>
+						</Option>
+					</SwiftFieldDef>
+					<Description><![CDATA[]]></Description>
+					<Repeating>false</Repeating>
+					<Presence>M</Presence>
+					<Options>F</Options>
+				</SwiftField>
+			</Fields>
+		</Data>
+		<Trailer>
+		</Trailer>
+	</SwiftFields>
+	<validationrules>
+		<hdrvalidationrules>
+			<fieldvalidations>
+				<fieldvalidation>
+					<name>U09</name>
+					<formula><![CDATA[if($this.Header.GetFieldIndex("User_Header") != -1) {
+    def userHeader = $this.Header.GetSection("User_Header");
+    if(userHeader.$size > 0 && userHeader[0].IsNotNull("Validation_Flag")) {
+        return false;
+    }
+}
+return true;
+]]></formula>
+					<severity>error</severity>
+					<cascade>true</cascade>
+					<error-code>U09</error-code>
+					<actionmessage><![CDATA["User has used tag 119 in a message that is not a candidate for special processing"]]></actionmessage>
+				</fieldvalidation>
+			</fieldvalidations>
+		</hdrvalidationrules>
+		<datavalidationrules>
+			<fieldvalidations>
+			</fieldvalidations>
+		</datavalidationrules>
+		<tlrvalidationrules>
+			<fieldvalidations>
+			</fieldvalidations>
+		</tlrvalidationrules>
+	</validationrules>
+</SwiftMessageFormat>
+

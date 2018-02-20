@@ -1,0 +1,42 @@
+<?xml version="1.0" standalone="yes"?>
+
+<project basedir="." default="build">
+	<property name="designer.home" value="D:\VolanteDesigner\Volante5.2.1"/>
+	<property name="designer.runtime.lib" value="${designer.home}/lib/runtime"/>
+	<property name="entity.dir" value="."/>
+
+	<!-- =================================================================== -->
+	<!-- Define the code generator task                                      -->
+	<!-- =================================================================== -->
+	<taskdef name="cgtask" classname="com.volante.util.tasks.ant.CGTask" classpath="${designer.home}/lib/volante-tasks.jar" />
+    <taskdef name="testtask" classname="com.volante.util.tasks.ant.TestTask" classpath="${designer.home}/lib/volante-tasks.jar" />
+	<!-- =================================================================== -->
+	<!-- Builds the project/cartridge (using the task above)                        -->
+	<!-- =================================================================== -->
+	<target name="build" description="Compile cartridge/project">
+		<echo message="Building cartridge/project Transformation Flows ..."/>
+		<cgtask platform="java" home="${designer.home}"
+                        rebuild="false" stopOnFailure = "true" noDebug="true"
+                        cartridge="Transformation Flows.car"
+		/>    <!-- targetDir=".\target" includeDependencies="true" -->
+	</target>
+
+    <target name="test" depends="build" description="Test cartridge/project">
+   		<echo message="Testing cartridge/project Transformation Flows ..."/>
+   		<testtask platform="java" home="${designer.home}" stopOnFailure = "true"
+                              cartridge="Transformation Flows.car"
+      		>
+	   	<!--	<report type="junit" format="html" option="frames" toDir="./target/junitreport" ></report> -->
+   		</testtask>
+   	</target>
+
+
+	<!-- =================================================================== -->
+	<!-- Clean the generated java dir   -->
+	<!-- =================================================================== -->
+	<target name="clean" description="Deletes all the generated artifacts.">
+        <delete includeemptydirs="true">
+            <fileset dir="${entity.dir}" includes="**/java/"/>
+         </delete>
+	</target>
+</project>

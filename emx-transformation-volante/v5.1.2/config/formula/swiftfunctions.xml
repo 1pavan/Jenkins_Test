@@ -1,0 +1,1444 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<formulae>
+    <formula name="IsValidPartyIdentification">
+        <description>Returns "True" if the given field value contains the codes specified by the meta string and the code values conform to their respective formats.</description>
+        <signature>IsValidPartyIdentification(fieldValue, metaStr)</signature>
+        <category>Swift</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.swift.SwiftFunctions"/>
+        <property name="method" value="isValidPartyIdentification"/>
+        <property name="args" value="2"/>
+        <property name="arg1" value="java.lang.String"/>
+        <property name="arg2" value="java.lang.String"/>
+        <property name="returns" value="boolean"/>
+        <property name="lib" value="swiftrt"/>
+    </formula>
+    <formula name="IsValidBICInPartyIdentification">
+        <description>Returns "True" if the BIC value given in Party Identification is well formed and it exists in the BIC directory.</description>
+        <signature>IsValidBICInPartyIdentification(fieldValue)</signature>
+        <category>Swift</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.swift.SwiftFunctions"/>
+        <property name="method" value="isValidBICInPartyIdentification"/>
+        <property name="args" value="1"/>
+        <property name="arg1" value="java.lang.String"/>
+        <property name="returns" value="boolean"/>
+        <property name="lib" value="swiftrt"/>
+    </formula>
+
+    <formula name="IsBICNotBEIInPartyIdentification">
+        <description>Returns "True" if the given Party Identification value's BIC is not a BEI, ie must not be of subtype BEID, MCCO, TRCO ,SMDP or CORP .</description>
+        <signature>IsBICNotBEIInPartyIdentification(fieldValue)</signature>
+        <category>Swift</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.swift.SwiftFunctions"/>
+        <property name="method" value="isBICNotBEIInPartyIdentification"/>
+        <property name="args" value="1"/>
+        <property name="arg1" value="java.lang.String"/>
+        <property name="returns" value="boolean"/>
+        <property name="lib" value="swiftrt"/>
+    </formula>
+    <formula name="VerifyField72NarrativeText">
+        <description>Verifies Narrative subfield of Field 72.</description>
+        <signature>VerifyField72NarrativeText(fieldValue)</signature>
+        <category>Swift</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.swift.SwiftFunctions"/>
+        <property name="method" value="verifyField72NarrativeText"/>
+        <property name="args" value="1"/>
+        <property name="arg1" value="java.lang.String"/>
+        <property name="returns" value="boolean"/>
+        <property name="lib" value="swiftrt"/>
+    </formula>
+
+    <formula name="VerifyFormat">
+        <description>Verifies whether the value conforms to the swift format (requires swift plugin).</description>
+        <signature>VerifyFormat(value, format)</signature>
+        <category>Swift</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.swift.SwiftFormatVerifier"/>
+        <property name="method" value="verifyFormat"/>
+        <property name="args" value="2"/>
+        <property name="arg1" value="java.lang.String"/>
+        <property name="arg2" value="java.lang.String"/>
+        <property name="returns" value="boolean"/>
+        <property name="lib" value="swiftrt"/>
+    </formula>
+    <formula name="ParseFormat">
+        <description>Parses the value as per the format specified and returns a list (string) of values(requires swift plugin).</description>
+        <signature>ParseFormat(value, format)</signature>
+        <category>Swift</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.swift.SwiftFormatVerifier"/>
+        <property name="method" value="parseFormat"/>
+        <property name="args" value="2"/>
+        <property name="arg1" value="java.lang.String"/>
+        <property name="arg2" value="java.lang.String"/>
+        <property name="returns" value="com.tplus.transform.runtime.collection.StringList"/>
+        <property name="lib" value="swiftrt"/>
+    </formula>
+    <formula name="MatchFormat">
+        <description>Matches the value with to the swift format (requires swift plugin).</description>
+        <signature>MatchFormat(value, format)</signature>
+        <category>Swift</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.swift.SwiftFormatVerifier"/>
+        <property name="method" value="matchFormat"/>
+        <property name="args" value="2"/>
+        <property name="arg1" value="java.lang.String"/>
+        <property name="arg2" value="java.lang.String"/>
+        <property name="returns" value="int"/>
+        <property name="lib" value="swiftrt"/>
+    </formula>
+
+    <formula name="IsISOCurrencyCode">
+        <description>Returns "True" if the given string is a valid ISO currency code based on the ISO 4217 standard</description>
+        <signature>IsISOCurrencyCode(code)</signature>
+        <category>Swift</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.swift.SwiftFunctions"/>
+        <property name="method" value="isISOCurrencyCode"/>
+        <property name="args" value="1"/>
+        <property name="arg1" value="java.lang.String"/>
+        <property name="returns" value="boolean"/>
+        <property name="lib" value="swiftrt"/>
+    </formula>
+
+    <formula name="GetCurrencyCode">
+        <description>Returns ISO currency code given currency name. If invalid name is given then this function returns empty string.</description>
+        <signature>GetCurrencyCode(currencyName)</signature>
+        <category>Swift</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.swift.SwiftFunctions"/>
+        <property name="method" value="getCurrencyCode"/>
+        <property name="args" value="1"/>
+        <property name="arg1" value="java.lang.String"/>
+        <property name="returns" value="java.lang.String"/>
+        <property name="lib" value="swiftrt"/>
+    </formula>
+
+
+    <formula name="GetCurrencyName">
+        <description>Returns ISO currency name given currency code. If invalid code is given then this function returns empty string</description>
+        <signature>GetCurrencyName(currencyCode)</signature>
+        <category>Swift</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.swift.SwiftFunctions"/>
+        <property name="method" value="getCurrencyName"/>
+        <property name="args" value="1"/>
+        <property name="arg1" value="java.lang.String"/>
+        <property name="returns" value="java.lang.String"/>
+        <property name="lib" value="swiftrt"/>
+    </formula>
+
+    <formula name="GetCurrencyDecimals">
+        <description>Returns number of allowed decimal digits for ISO currency code. If invalid code is given then this function returns -1</description>
+        <signature>GetCurrencyDecimals(currencyCode)</signature>
+        <category>Swift</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.swift.SwiftFunctions"/>
+        <property name="method" value="getCurrencyDecimals"/>
+        <property name="args" value="1"/>
+        <property name="arg1" value="java.lang.String"/>
+        <property name="returns" value="int"/>
+        <property name="lib" value="swiftrt"/>
+    </formula>
+
+    <formula name="IsISOCountryCode">
+        <description>Returns "True" if the given string is a valid ISO country code element based on the ISO 3166 standard</description>
+        <signature>IsISOCountryCode(code)</signature>
+        <category>Swift</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.swift.SwiftFunctions"/>
+        <property name="method" value="isISOCountryCode"/>
+        <property name="args" value="1"/>
+        <property name="arg1" value="java.lang.String"/>
+        <property name="returns" value="boolean"/>
+        <property name="lib" value="swiftrt"/>
+    </formula>
+
+    <formula name="GetCountryCode">
+        <description>Returns country code if given the official short name. In case an invalid name is given this function returns empty string</description>
+        <signature>GetCountryCode(countryName)</signature>
+        <category>Swift</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.swift.SwiftFunctions"/>
+        <property name="method" value="getCountryCode"/>
+        <property name="args" value="1"/>
+        <property name="arg1" value="java.lang.String"/>
+        <property name="returns" value="java.lang.String"/>
+        <property name="lib" value="swiftrt"/>
+    </formula>
+
+    <formula name="IsValidDecimals">
+        <description>Returns true if the decimal length of the amount is less than or equal to the maximum allowed for the currency.</description>
+        <signature>IsValidDecimals(currencyCode, amount)</signature>
+        <category>Swift</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.swift.SwiftFunctions"/>
+        <property name="method" value="isValidDecimals"/>
+        <property name="args" value="2"/>
+        <property name="arg1" value="java.lang.String"/>
+        <property name="arg2" value="double"/>
+        <property name="returns" value="boolean"/>
+        <property name="lib" value="swiftrt"/>
+    </formula>
+    <formula name="IsValidDecimals">
+        <description>Returns true if the decimal length of the amount is less than or equal to the maximum allowed for the currency.</description>
+        <signature>IsValidDecimals(currencyCode, amount)</signature>
+        <category>Swift</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.swift.SwiftFunctions"/>
+        <property name="method" value="isValidDecimals"/>
+        <property name="args" value="2"/>
+        <property name="arg1" value="java.lang.String"/>
+        <property name="arg2" value="java.math.BigDecimal"/>
+        <property name="returns" value="boolean"/>
+        <property name="lib" value="swiftrt"/>
+    </formula>
+
+    <formula name="IsValidDecimals">
+        <description>Returns true if the decimal length of the amount is less than or equal to the maximum allowed for the currency.</description>
+        <signature>IsValidDecimals(currencyCode, amount)</signature>
+        <category>Swift</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.swift.SwiftFunctions"/>
+        <property name="method" value="isValidDecimals"/>
+        <property name="args" value="2"/>
+        <property name="arg1" value="java.lang.String"/>
+        <property name="arg2" value="java.lang.String"/>
+        <property name="returns" value="boolean"/>
+        <property name="lib" value="swiftrt"/>
+    </formula>
+
+    <formula name="IsSwiftCharSetN">
+        <description>Returns true if string conforms to SWIFT charset n.</description>
+        <signature>IsSwiftCharSetN(str)</signature>
+        <category>Swift</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.swift.SwiftFunctions"/>
+        <property name="method" value="isSwiftCharSetN"/>
+        <property name="args" value="1"/>
+        <property name="arg1" value="java.lang.String"/>
+        <property name="returns" value="boolean"/>
+        <property name="lib" value="swiftrt"/>
+    </formula>
+
+    <formula name="IsSwiftCharSetA">
+        <description>Returns true if string conforms to SWIFT charset a.</description>
+        <signature>IsSwiftCharSetA(str)</signature>
+        <category>Swift</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.swift.SwiftFunctions"/>
+        <property name="method" value="isSwiftCharSetA"/>
+        <property name="args" value="1"/>
+        <property name="arg1" value="java.lang.String"/>
+        <property name="returns" value="boolean"/>
+        <property name="lib" value="swiftrt"/>
+    </formula>
+    <formula name="IsSwiftCharSetC">
+        <description>Returns true if string conforms to SWIFT charset c.</description>
+        <signature>IsSwiftCharSetC(str)</signature>
+        <category>Swift</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.swift.SwiftFunctions"/>
+        <property name="method" value="isSwiftCharSetC"/>
+        <property name="args" value="1"/>
+        <property name="arg1" value="java.lang.String"/>
+        <property name="returns" value="boolean"/>
+        <property name="lib" value="swiftrt"/>
+    </formula>
+    <formula name="IsSwiftCharSetH">
+        <description>Returns true if string conforms to SWIFT charset h.</description>
+        <signature>IsSwiftCharSetH(str)</signature>
+        <category>Swift</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.swift.SwiftFunctions"/>
+        <property name="method" value="isSwiftCharSetH"/>
+        <property name="args" value="1"/>
+        <property name="arg1" value="java.lang.String"/>
+        <property name="returns" value="boolean"/>
+        <property name="lib" value="swiftrt"/>
+    </formula>
+    <formula name="IsSwiftCharSetX">
+        <description>Returns true if string conforms to SWIFT charset x.</description>
+        <signature>IsSwiftCharSetX(str)</signature>
+        <category>Swift</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.swift.SwiftFunctions"/>
+        <property name="method" value="isSwiftCharSetX"/>
+        <property name="args" value="1"/>
+        <property name="arg1" value="java.lang.String"/>
+        <property name="returns" value="boolean"/>
+        <property name="lib" value="swiftrt"/>
+    </formula>
+    <formula name="IsSwiftCharSetY">
+        <description>Returns true if string conforms to SWIFT charset y.</description>
+        <signature>IsSwiftCharSetY(str)</signature>
+        <category>Swift</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.swift.SwiftFunctions"/>
+        <property name="method" value="isSwiftCharSetY"/>
+        <property name="args" value="1"/>
+        <property name="arg1" value="java.lang.String"/>
+        <property name="returns" value="boolean"/>
+        <property name="lib" value="swiftrt"/>
+    </formula>
+    <formula name="IsSwiftCharSetZ">
+        <description>Returns true if string conforms to SWIFT charset z.</description>
+        <signature>IsSwiftCharSetY(str)</signature>
+        <category>Swift</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.swift.SwiftFunctions"/>
+        <property name="method" value="isSwiftCharSetZ"/>
+        <property name="args" value="1"/>
+        <property name="arg1" value="java.lang.String"/>
+        <property name="returns" value="boolean"/>
+        <property name="lib" value="swiftrt"/>
+    </formula>
+    <formula name="IsSwiftCharSet15D">
+        <description>Returns true if string conforms to SWIFT format 15d</description>
+        <signature>IsSwiftCharSet15D(str)</signature>
+        <category>Swift</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.swift.SwiftFunctions"/>
+        <property name="method" value="isSwiftCharSet15D"/>
+        <property name="args" value="1"/>
+        <property name="arg1" value="java.lang.String"/>
+        <property name="returns" value="boolean"/>
+        <property name="lib" value="swiftrt"/>
+    </formula>
+    <formula name="IsSwiftCharSet15D">
+        <description>Returns true if the value conforms to SWIFT format 15d</description>
+        <signature>IsSwiftCharSet15D(value)</signature>
+        <category>Swift</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.swift.SwiftFunctions"/>
+        <property name="method" value="isSwiftCharSet15D"/>
+        <property name="args" value="1"/>
+        <property name="arg1" value="double"/>
+        <property name="returns" value="boolean"/>
+        <property name="lib" value="swiftrt"/>
+    </formula>
+
+    <formula name="IsSwiftCharSet15D">
+        <description>Returns true if the value conforms to SWIFT format 15d</description>
+        <signature>IsSwiftCharSet15D(value)</signature>
+        <category>Swift</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.swift.SwiftFunctions"/>
+        <property name="method" value="isSwiftCharSet15D"/>
+        <property name="args" value="1"/>
+        <property name="arg1" value="java.math.BigDecimal"/>
+        <property name="returns" value="boolean"/>
+        <property name="lib" value="swiftrt"/>
+    </formula>
+
+    <formula name="GetCountryName">
+        <description>Returns official short name if a valid country code is given. In case country code is invalid this function returns empty string</description>
+        <signature>GetCountryName(countryCode)</signature>
+        <category>Swift</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.swift.SwiftFunctions"/>
+        <property name="method" value="getCountryName"/>
+        <property name="args" value="1"/>
+        <property name="arg1" value="java.lang.String"/>
+        <property name="returns" value="java.lang.String"/>
+        <property name="lib" value="swiftrt"/>
+    </formula>
+
+    <formula name="IsValidBIC">
+        <description>Returns true if the BIC is well formed and it exists in the BIC directory.</description>
+        <signature>IsValidBIC(bic)</signature>
+        <category>Swift</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.swift.SwiftFunctions"/>
+        <property name="method" value="isValidBIC"/>
+        <property name="args" value="1"/>
+        <property name="arg1" value="java.lang.String"/>
+        <property name="returns" value="boolean"/>
+        <property name="lib" value="swiftrt"/>
+    </formula>
+
+    <formula name="IsValidBEI">
+        <description>Returns true if the BIC is well formed and it is present in the BIC directory as a BEI.</description>
+        <signature>IsValidBEI(bic)</signature>
+        <category>Swift</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.swift.SwiftFunctions"/>
+        <property name="method" value="isValidBEI"/>
+        <property name="args" value="1"/>
+        <property name="arg1" value="java.lang.String"/>
+        <property name="returns" value="boolean"/>
+        <property name="lib" value="swiftrt"/>
+    </formula>
+
+    <formula name="GetBICName">
+        <description>Returns the name of specified BIC or empty string, if the BIC is invalid.</description>
+        <signature>GetBICName(bic)</signature>
+        <category>Swift</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.swift.SwiftFunctions"/>
+        <property name="method" value="getBICName"/>
+        <property name="args" value="1"/>
+        <property name="arg1" value="java.lang.String"/>
+        <property name="returns" value="java.lang.String"/>
+        <property name="lib" value="swiftrt"/>
+    </formula>
+
+    <formula name="GetBICAddress">
+        <description>Returns the address of specified BIC or empty string, if the BIC is invalid.</description>
+        <signature>GetBICAddress(bic)</signature>
+        <category>Swift</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.swift.SwiftFunctions"/>
+        <property name="method" value="getBICAddress"/>
+        <property name="args" value="1"/>
+        <property name="arg1" value="java.lang.String"/>
+        <property name="returns" value="java.lang.String"/>
+        <property name="lib" value="swiftrt"/>
+    </formula>
+
+    <formula name="GetBICInfos">
+        <description>[Deprecated]Returns all or subset of BIC Info objects. The category is an implementation dependent name which canbe used to select a subset of BICs</description>
+        <signature>GetBICInfos(category)</signature>
+        <category>Swift</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.swift.SwiftFunctions"/>
+        <property name="method" value="getBICInfos"/>
+        <property name="args" value="1"/>
+        <property name="arg1" value="java.lang.String"/>
+        <property name="returns" value="com.tplus.transform.runtime.DataObjectSection"/>
+        <property name="lib" value="swiftrt"/>
+    </formula>
+
+    <formula name="GetBICInfo">
+        <description>Returns the BIC Info object (or null) for the given BIC.</description>
+        <signature>GetBICInfo(bic)</signature>
+        <category>Swift</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.swift.SwiftFunctions"/>
+        <property name="method" value="getBICInfo"/>
+        <property name="args" value="1"/>
+        <property name="arg1" value="java.lang.String"/>
+        <property name="returns" value="com.tplus.transform.runtime.DataObject"/>
+        <property name="lib" value="swiftrt"/>
+    </formula>
+
+    <formula name="IsBICNotBEI">
+        <description>Returns true if the BIC is not a BEI , ie must not be of subtype BEID, MCCO, TRCO ,SMDP or CORP .</description>
+        <signature>IsBICNotBEI(str)</signature>
+        <category>Swift</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.swift.SwiftFunctions"/>
+        <property name="method" value="isBICNotBEI"/>
+        <property name="args" value="1"/>
+        <property name="arg1" value="java.lang.String"/>
+        <property name="returns" value="boolean"/>
+        <property name="lib" value="swiftrt"/>
+    </formula>
+    <formula name="IsTimeOffset">
+        <description>Returns true if timeOffset is expressed as 'HHMM', where the hour component, ie, 'HH', must be in the range of 00 through 13, and the minute component, ie, 'MM' must be in the range of 00 through 59.
+            Any 'HH' or 'MM' component outside of these range checks will be disallowed.
+        </description>
+        <signature>IsTimeOffset(timeOffset)</signature>
+        <category>Swift</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.swift.SwiftFunctions"/>
+        <property name="method" value="isTimeOffset"/>
+        <property name="args" value="1"/>
+        <property name="arg1" value="java.lang.String"/>
+        <property name="returns" value="boolean"/>
+        <property name="lib" value="swiftrt"/>
+    </formula>
+
+    <formula name="IsSwiftXString">
+        <description>Enforces the rule that the string (str) must not start or end with a slash '/' and not contain two consecutive slashes '//'. If the string has multiple lines, the rule applies for each line (Error
+            code(s): T26).
+        </description>
+        <signature>IsSwiftXString(str)</signature>
+        <category>Swift</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.swift.SwiftFunctions"/>
+        <property name="method" value="isSwiftXString"/>
+        <property name="args" value="1"/>
+        <property name="arg1" value="java.lang.String"/>
+        <property name="returns" value="boolean"/>
+        <property name="lib" value="swiftrt"/>
+    </formula>
+
+
+    <formula name="IsISOIBAN">
+        <description>Returns "True" if the given string is a valid IBAN based on the Europeon Committee for Banking Standards (ECBS) standard.</description>
+        <signature>IsISOIBAN(IBANStr)</signature>
+        <category>Swift</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.swift.SwiftFunctions"/>
+        <property name="method" value="isISOIBAN"/>
+        <property name="args" value="1"/>
+        <property name="arg1" value="java.lang.String"/>
+        <property name="returns" value="boolean"/>
+        <property name="lib" value="swiftrt"/>
+    </formula>
+
+
+    <formula name="IsIBANCountry">
+        <description>Returns "True" if country is in the IBAN country list.</description>
+        <signature>IsIBANCountry(countryCode)</signature>
+        <category>Swift</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.swift.SwiftFunctions"/>
+        <property name="method" value="isIBANCountry"/>
+        <property name="args" value="1"/>
+        <property name="arg1" value="java.lang.String"/>
+        <property name="returns" value="boolean"/>
+        <property name="lib" value="swiftrt"/>
+    </formula>
+
+
+    <formula name="GetIBAN">
+        <description>Returns IBAN based on given country code and BBAN. If invalid name is given then this function returns empty string.</description>
+        <signature>GetIBAN(CountryCode, BBAN)</signature>
+        <category>Swift</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.swift.SwiftFunctions"/>
+        <property name="method" value="getIBAN"/>
+        <property name="args" value="2"/>
+        <property name="arg1" value="java.lang.String"/>
+        <property name="arg2" value="java.lang.String"/>
+        <property name="returns" value="java.lang.String"/>
+        <property name="lib" value="swiftrt"/>
+    </formula>
+
+
+    <formula name="GetPaperIBAN">
+        <description>Returns paper form of the the given ElectronicIBAN.</description>
+        <signature>GetPaperIBAN(ElectronicIBAN)</signature>
+        <category>Swift</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.swift.SwiftFunctions"/>
+        <property name="method" value="getPaperIBAN"/>
+        <property name="args" value="1"/>
+        <property name="arg1" value="java.lang.String"/>
+        <property name="returns" value="java.lang.String"/>
+        <property name="lib" value="swiftrt"/>
+    </formula>
+
+
+    <formula name="GetElectronicIBAN">
+        <description>Returns electronic form of the the given PaperIBAN.</description>
+        <signature>GetElectronicIBAN(PaperIBAN)</signature>
+        <category>Swift</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.swift.SwiftFunctions"/>
+        <property name="method" value="getElectronicIBAN"/>
+        <property name="args" value="1"/>
+        <property name="arg1" value="java.lang.String"/>
+        <property name="returns" value="java.lang.String"/>
+        <property name="lib" value="swiftrt"/>
+    </formula>
+
+
+    <formula name="GetIBANCountryCode">
+        <description>Returns country code (first two characters) in specfied IBAN.</description>
+        <signature>GetIBANCountryCode(IBAN)</signature>
+        <category>Swift</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.swift.SwiftFunctions"/>
+        <property name="method" value="getIBANCountryCode"/>
+        <property name="args" value="1"/>
+        <property name="arg1" value="java.lang.String"/>
+        <property name="returns" value="java.lang.String"/>
+        <property name="lib" value="swiftrt"/>
+    </formula>
+
+
+    <formula name="GetBBANPart">
+        <description>Returns BBAN part in specified IBAN. The returned BBAN will not contain spaces or other non-aplha numeric characters in it.</description>
+        <signature>GetBBANPart(IBAN)</signature>
+        <category>Swift</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.swift.SwiftFunctions"/>
+        <property name="method" value="getBBANPart"/>
+        <property name="args" value="1"/>
+        <property name="arg1" value="java.lang.String"/>
+        <property name="returns" value="java.lang.String"/>
+        <property name="lib" value="swiftrt"/>
+    </formula>
+
+
+    <formula name="GetBICBankCode">
+        <description>Returns bank code part (4!a) in specified BIC, or empty string if the BIC is illformed..</description>
+        <signature>GetBICBankCode(BIC)</signature>
+        <category>Swift</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.swift.SwiftFunctions"/>
+        <property name="method" value="getBICBankCode"/>
+        <property name="args" value="1"/>
+        <property name="arg1" value="java.lang.String"/>
+        <property name="returns" value="java.lang.String"/>
+        <property name="lib" value="swiftrt"/>
+    </formula>
+
+    <formula name="GetBICCountryCode">
+        <description>Returns country code part (2!a) in specified BIC, or empty string if the BIC is illformed..</description>
+        <signature>GetBICCountryCode(BIC)</signature>
+        <category>Swift</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.swift.SwiftFunctions"/>
+        <property name="method" value="getBICCountryCode"/>
+        <property name="args" value="1"/>
+        <property name="arg1" value="java.lang.String"/>
+        <property name="returns" value="java.lang.String"/>
+        <property name="lib" value="swiftrt"/>
+    </formula>
+
+
+    <formula name="GetBICLocationCode">
+        <description>Returns location code part (2!c) in specified BIC, or empty string if the BIC is illformed.</description>
+        <signature>GetBICLocationCode(BIC)</signature>
+        <category>Swift</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.swift.SwiftFunctions"/>
+        <property name="method" value="getBICLocationCode"/>
+        <property name="args" value="1"/>
+        <property name="arg1" value="java.lang.String"/>
+        <property name="returns" value="java.lang.String"/>
+        <property name="lib" value="swiftrt"/>
+    </formula>
+
+
+    <formula name="GetBICBranchCode">
+        <description>Returns branch code part (3!c) in specified BIC, or empty string if branch is not available.</description>
+        <signature>GetBICBranchCode(BIC)</signature>
+        <category>Swift</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.swift.SwiftFunctions"/>
+        <property name="method" value="getBICBranchCode"/>
+        <property name="args" value="1"/>
+        <property name="arg1" value="java.lang.String"/>
+        <property name="returns" value="java.lang.String"/>
+        <property name="lib" value="swiftrt"/>
+    </formula>
+
+    <formula name="ExtractNonZeroDigits">
+        <description>Given a decimal value and the number of digits to be extracted (count), it returns the rightmost non-zero digit preceded by 'count'-1 digits to the left of it. If there are no digits to the left of
+            it, the space is zero filled. This function supports a maximum of 15 digits including both integer and fraction parts.
+        </description>
+        <signature>ExtractNonZeroDigits(num, count)</signature>
+        <category>Swift</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.swift.SwiftFunctions"/>
+        <property name="method" value="extractNonZeroDigits"/>
+        <property name="args" value="2"/>
+        <property name="arg1" value="double"/>
+        <property name="arg2" value="int"/>
+        <property name="returns" value="java.lang.String"/>
+        <property name="lib" value="swiftrt"/>
+    </formula>
+    <formula name="ExtractNonZeroDigits">
+        <description>Given a decimal value and the number of digits to be extracted (count), it returns the rightmost non-zero digit preceded by 'count'-1 digits to the left of it. If there are no digits to the left of
+            it, the space is zero filled. This function supports a maximum of 15 digits including both integer and fraction parts.
+        </description>
+        <signature>ExtractNonZeroDigits(num, count)</signature>
+        <category>Swift</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.swift.SwiftFunctions"/>
+        <property name="method" value="extractNonZeroDigits"/>
+        <property name="args" value="2"/>
+        <property name="arg1" value="java.math.BigDecimal"/>
+        <property name="arg2" value="int"/>
+        <property name="returns" value="java.lang.String"/>
+        <property name="lib" value="swiftrt"/>
+    </formula>
+
+    <formula name="VerifyCopyOfFieldsSyntax">
+        <description>Given the 'Copy of fields' value (fieldValue), it validates the syntax of the constituent fields.</description>
+        <signature>VerifyCopyOfFieldsSyntax(fieldValue)</signature>
+        <category>Swift</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.swift.SwiftFunctions"/>
+        <property name="method" value="verifyCopyOfFieldsSyntax"/>
+        <property name="args" value="1"/>
+        <property name="arg1" value="java.lang.String"/>
+        <property name="returns" value="boolean"/>
+        <property name="lib" value="swiftrt"/>
+    </formula>
+
+    <formula name="GetCodeValueSection">
+        <description>Returns a section named 'Codes'. Each of its elements has Code and Value fields corresponding to each code and its value pair in the given field value.</description>
+        <signature>GetCodeValueSection(fieldValue)</signature>
+        <category>Swift</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.swift.SwiftFunctions"/>
+        <property name="method" value="getCodeValueSection"/>
+        <property name="args" value="1"/>
+        <property name="arg1" value="java.lang.String"/>
+        <property name="returns" value="com.tplus.transform.runtime.DataObjectSection"/>
+        <property name="designclass" value="com.tplus.transform.design.formula.functions.SectionFunctions"/>
+        <property name="designmethod" value="getCodeValueSection"/>
+        <property name="lib" value="swiftrt"/>
+    </formula>
+
+    <formula name="IsSwiftDate">
+        <description>Returns 'true' if the given string value can be converted to date with specified format based on the Swift specification for dates.</description>
+        <signature>IsSwiftDate(dateStr, format)</signature>
+        <category>Swift</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.swift.SwiftFunctions"/>
+        <property name="method" value="isSwiftDate"/>
+        <property name="args" value="2"/>
+        <property name="arg1" value="java.lang.String"/>
+        <property name="arg2" value="java.lang.String"/>
+        <property name="returns" value="boolean"/>
+        <property name="lib" value="swiftrt"/>
+    </formula>
+    <formula name="IsSwiftDate">
+        <description>Returns 'true' if the given string value can be converted to date with specified format based on the Swift specification for dates.</description>
+        <signature>IsSwiftDate(dateStr, format, valueDateOpt)</signature>
+        <category>Swift</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.swift.SwiftFunctions"/>
+        <property name="method" value="isSwiftDate"/>
+        <property name="args" value="3"/>
+        <property name="arg1" value="java.lang.String"/>
+        <property name="arg2" value="java.lang.String"/>
+        <property name="arg3" value="boolean"/>
+        <property name="returns" value="boolean"/>
+        <property name="lib" value="swiftrt"/>
+    </formula>
+
+
+    <formula name="ParseSwiftDate">
+        <description>Returns the equivalent Date object for the given date string based on the Swift specification for dates. The date string is converted to a Date object based on the given pattern. If the pattern is
+            not specified, then the date string should be in the form "Jan 25, 2002".
+        </description>
+        <signature>ParseSwiftDate(dateStr, patternStrOpt)</signature>
+        <category>Swift</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.swift.SwiftFunctions"/>
+        <property name="method" value="parseSwiftDate"/>
+        <property name="args" value="2"/>
+        <property name="arg1" value="java.lang.String"/>
+        <property name="arg2" value="java.lang.String"/>
+        <property name="returns" value="java.util.Date"/>
+        <property name="lib" value="swiftrt"/>
+    </formula>
+
+    <formula name="FormatSwiftDate">
+        <description>Returns date string for the given date based on the Swift specification for dates. This function formats the given date based on the given pattern and returns the resultant string. When the pattern is not specified, the return string will be of form "Jan 25, 2002".</description>
+        <signature>FormatSwiftDate(date, patternStrOpt)</signature>
+        <category>Swift</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.swift.SwiftFunctions"/>
+        <property name="method" value="formatSwiftDate"/>
+        <property name="args" value="2"/>
+        <property name="arg1" value="java.util.Date"/>
+        <property name="arg2" value="java.lang.String"/>
+        <property name="returns" value="java.lang.String"/>
+        <property name="lib" value="swiftrt"/>
+    </formula>
+    <formula name="IdentifySWIFTMessage">
+        <description>Identifies a SWIFT message</description>
+        <signature>IdentifySWIFTMessage(message)</signature>
+        <category>Swift</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.swift.SwiftFunctions"/>
+        <property name="method" value="identifySWIFTMessage"/>
+        <property name="args" value="1"/>
+        <property name="arg1" value="byte[]"/>
+        <property name="returns" value="com.tplus.transform.runtime.DataObject"/>
+        <property name="lib" value="swiftrt"/>
+    </formula>
+    <formula name="IdentifySWIFTMessage">
+        <description>Identifies a SWIFT message</description>
+        <signature>IdentifySWIFTMessage(message)</signature>
+        <category>Swift</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.swift.SwiftFunctions"/>
+        <property name="method" value="identifySWIFTMessage"/>
+        <property name="args" value="1"/>
+        <property name="arg1" value="String"/>
+        <property name="returns" value="com.tplus.transform.runtime.DataObject"/>
+        <property name="lib" value="swiftrt"/>
+    </formula>
+    <formula name="IdentifySWIFTMessage">
+        <description>Identifies a SWIFT message</description>
+        <signature>IdentifySWIFTMessage(message)</signature>
+        <category>Swift</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.swift.SwiftFunctions"/>
+        <property name="method" value="identifySWIFTMessage"/>
+        <property name="args" value="1"/>
+        <property name="arg1" value="com.tplus.transform.runtime.RawMessage"/>
+        <property name="returns" value="com.tplus.transform.runtime.DataObject"/>
+        <property name="lib" value="swiftrt"/>
+    </formula>
+
+    <formula name="ApplyERIValidation">
+        <description>Returns false if the currency is a European currency and the date is after the ERI cut off date (31-12-2001). That is it ensures that European currency is not used after the ERI cutoff date.
+        </description>
+        <signature>ApplyERIValidation(valueDateObject, valueDateFieldName, currecyObject, currencyFieldName)</signature>
+        <category>Swift</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.swift.SwiftFunctions"/>
+        <property name="method" value="applyERIValidation"/>
+        <property name="args" value="4"/>
+        <property name="arg1" value="com.tplus.transform.runtime.DataObject"/>
+        <property name="arg2" value="String"/>
+        <property name="arg3" value="com.tplus.transform.runtime.DataObject"/>
+        <property name="arg4" value="String"/>
+        <property name="returns" value="boolean"/>
+        <property name="lib" value="swiftrt"/>
+    </formula>
+
+    <formula name="ApplyERICodeValidation">
+        <description>Checks whether ERI codes in narrative or structured fields is a per the ERI conventions. Specifically check is made to ensure tht values for /OCMT/ and /CHGS/ are as per ERI code recommendations
+        </description>
+        <signature>ApplyERICodeValidation(narrative)</signature>
+        <category>Swift</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.swift.SwiftFunctions"/>
+        <property name="method" value="applyERICodeValidation"/>
+        <property name="args" value="1"/>
+        <property name="arg1" value="String"/>
+        <property name="returns" value="boolean"/>
+        <property name="lib" value="swiftrt"/>
+    </formula>
+
+    <formula name="ApplyERICodeValidation">
+        <description>Checks whether ERI codes in narrative or structured fields is a per the ERI conventions. Specifically check is made to ensure tht values for /OCMT/ and /CHGS/ are as per ERI code recommendations
+        </description>
+        <signature>ApplyERICodeValidation(narrative)</signature>
+        <category>Swift</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.swift.SwiftFunctions"/>
+        <property name="method" value="applyERICodeValidation"/>
+        <property name="args" value="3"/>
+        <property name="arg1" value="String"/>
+        <property name="arg2" value="boolean"/>
+        <property name="arg3" value="boolean"/>
+        <property name="returns" value="boolean"/>
+        <property name="lib" value="swiftrt"/>
+    </formula>
+
+    <formula name="ApplyERICodeValidationStructured">
+        <description>Checks whether ERI codes in narrative or structured fields is a per the ERI conventions. Specifically check is made to ensure tht values for /OCMT/ and /CHGS/ are as per ERI code recommendations
+        </description>
+        <signature>ApplyERICodeValidationStructured(narrative)</signature>
+        <category>Swift</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.swift.SwiftFunctions"/>
+        <property name="method" value="applyERICodeValidationStructured"/>
+        <property name="args" value="1"/>
+        <property name="arg1" value="String"/>
+        <property name="returns" value="boolean"/>
+        <property name="lib" value="swiftrt"/>
+    </formula>
+
+    <formula name="ApplyERICodeValidationUnstructured">
+        <description>Checks whether ERI codes in narrative or structured fields is a per the ERI conventions. Specifically check is made to ensure tht values for /OCMT/ and /CHGS/ are as per ERI code recommendations
+        </description>
+        <signature>ApplyERICodeValidationUnstructured(narrative)</signature>
+        <category>Swift</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.swift.SwiftFunctions"/>
+        <property name="method" value="applyERICodeValidationUnstructured"/>
+        <property name="args" value="1"/>
+        <property name="arg1" value="String"/>
+        <property name="returns" value="boolean"/>
+        <property name="lib" value="swiftrt"/>
+    </formula>
+
+    
+    <!--  Bank Directory Plus validations  -->
+    <formula name="GetBankDirectoryPlusFromBIC">
+        <description>Returns the BankDirectoryPlus Info object (or null) for the given BIC. The parameter 'bic' must be 11 characters (bic code + branch code).</description>
+        <signature>GetBankDirectoryPlusFromBIC(bic)</signature>
+        <category>Swift</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.swift.SwiftFunctions"/>
+        <property name="method" value="getBankDirectoryPlusFromBIC"/>
+        <property name="args" value="1"/>
+        <property name="arg1" value="java.lang.String"/>
+        <property name="returns" value="com.tplus.transform.runtime.DataObject"/>
+        <property name="lib" value="swiftrt"/>
+    </formula>
+
+    <formula name="GetBankDirectoryPlusFromNationalId">
+        <description>Returns the BankDirectoryPlus for a given countryCode and uniqueNationalId.</description>
+        <signature>GetBankDirectoryPlusFromNationalId(isoCountryCode, uniqueNationalId)</signature>
+        <category>Swift</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.swift.SwiftFunctions"/>
+        <property name="method" value="getBankDirectoryPlusFromNationalId"/>
+        <property name="args" value="2"/>
+        <property name="arg1" value="java.lang.String"/>
+        <property name="arg2" value="java.lang.String"/>
+        <property name="returns" value="com.tplus.transform.runtime.DataObject"/>
+        <property name="lib" value="swiftrt"/>
+    </formula>
+    <formula name="GetBankDirectoryPlusEntriesFromNationalId">
+        <description>Returns the BankDirectoryPlus for a given countryCode and uniqueNationalId.</description>
+        <signature>GetBankDirectoryPlusEntriesFromNationalId(isoCountryCode, uniqueNationalId)</signature>
+        <category>Swift</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.swift.SwiftFunctions"/>
+        <property name="method" value="getBankDirectoryPlusEntriesFromNationalId"/>
+        <property name="args" value="2"/>
+        <property name="arg1" value="java.lang.String"/>
+        <property name="arg2" value="java.lang.String"/>
+        <property name="returns" value="com.tplus.transform.runtime.DataObjectSection"/>
+        <property name="lib" value="swiftrt"/>
+    </formula>
+    <formula name="GetBankDirectoryPlusFromChipsId">
+        <description>Returns the BankDirectoryPlus for a given chips id.</description>
+        <signature>GetBankDirectoryPlusFromChipsId(chipsId)</signature>
+        <category>Swift</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.swift.SwiftFunctions"/>
+        <property name="method" value="getBankDirectoryPlusFromChipsId"/>
+        <property name="args" value="1"/>
+        <property name="arg1" value="java.lang.String"/>
+        <property name="returns" value="com.tplus.transform.runtime.DataObject"/>
+        <property name="lib" value="swiftrt"/>
+    </formula>
+
+    <!-- Service Directory -->
+    <formula name="GetServiceDirectoryFromChipsId">
+        <description>Returns the ServiceDirectory Info object (or null) for the given ChipsId. </description>
+        <signature>GetServiceDirectoryFromChipsId(chipsId)</signature>
+        <category>Swift</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.swift.SwiftFunctions"/>
+        <property name="method" value="getServiceDirectoryFromChipsId"/>
+        <property name="args" value="1"/>
+        <property name="arg1" value="java.lang.String"/>
+        <property name="returns" value="com.tplus.transform.runtime.DataObjectSection"/>
+        <property name="lib" value="swiftrt"/>
+    </formula>
+    <formula name="GetServiceDirectoryFromBIC">
+        <description>Returns the ServiceDirectory Info object (or null) for the given BIC. The parameter 'bic' must be 11 characters (bic code + branch code).</description>
+        <signature>GetServiceDirectoryFromBIC(bic)</signature>
+        <category>Swift</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.swift.SwiftFunctions"/>
+        <property name="method" value="getServiceDirectoryFromBIC"/>
+        <property name="args" value="1"/>
+        <property name="arg1" value="java.lang.String"/>
+        <property name="returns" value="com.tplus.transform.runtime.DataObjectSection"/>
+        <property name="lib" value="swiftrt"/>
+    </formula>
+    <formula name="GetServiceDirectoryFromNationalId">
+        <description>Returns the Service Directory object for a given countryCode and uniqueNationalId.</description>
+        <signature>GetServiceDirectoryFromNationalId(isoCountryCode, uniqueNationalId)</signature>
+        <category>Swift</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.swift.SwiftFunctions"/>
+        <property name="method" value="getServiceDirectoryFromNationalId"/>
+        <property name="args" value="2"/>
+        <property name="arg1" value="java.lang.String"/>
+        <property name="arg2" value="java.lang.String"/>
+        <property name="returns" value="com.tplus.transform.runtime.DataObjectSection"/>
+        <property name="lib" value="swiftrt"/>
+    </formula>
+
+    <!-- Reach Plus -->
+    <formula name="GetReachPlusFromChipsId">
+        <description>Returns the REACH PLUS Info object (or null) for the given ChipsId. </description>
+        <signature>GetReachPlusFromChipsId(chipsId)</signature>
+        <category>Swift</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.swift.SwiftFunctions"/>
+        <property name="method" value="getReachPlusFromChipsId"/>
+        <property name="args" value="1"/>
+        <property name="arg1" value="java.lang.String"/>
+        <property name="returns" value="com.tplus.transform.runtime.DataObjectSection"/>
+        <property name="lib" value="swiftrt"/>
+    </formula>
+    <formula name="GetReachPlusFromBIC">
+        <description>Returns the REACH PLUS Info object (or null) for the given BIC. The parameter 'bic' must be 11 characters (bic code + branch code).</description>
+        <signature>GetReachPlusFromBIC(bic)</signature>
+        <category>Swift</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.swift.SwiftFunctions"/>
+        <property name="method" value="getReachPlusFromBIC"/>
+        <property name="args" value="1"/>
+        <property name="arg1" value="java.lang.String"/>
+        <property name="returns" value="com.tplus.transform.runtime.DataObjectSection"/>
+        <property name="lib" value="swiftrt"/>
+    </formula>
+    <formula name="GetReachPlusFromNationalId">
+        <description>Returns the REACH PLUS object for a given countryCode and uniqueNationalId.</description>
+        <signature>GetReachPlusFromNationalId(isoCountryCode, uniqueNationalId)</signature>
+        <category>Swift</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.swift.SwiftFunctions"/>
+        <property name="method" value="getReachPlusFromNationalId"/>
+        <property name="args" value="2"/>
+        <property name="arg1" value="java.lang.String"/>
+        <property name="arg2" value="java.lang.String"/>
+        <property name="returns" value="com.tplus.transform.runtime.DataObjectSection"/>
+        <property name="lib" value="swiftrt"/>
+    </formula>
+
+    
+    <!--  Holiday validations  -->
+    <formula name="GetHolidayInfo">
+	<description>Returns the Holiday object for a given countryCode and Date.</description>
+	<signature>GetHolidayInfo(countryCode, date)</signature>
+	<category>Swift</category>
+	<Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+	<property name="class" value="com.tplus.transform.runtime.swift.SwiftFunctions"/>
+	<property name="method" value="getHolidayInfo"/>
+	<property name="args" value="2"/>
+	<property name="arg1" value="java.lang.String"/>
+	<property name="arg2" value="java.util.Date"/>
+	<property name="returns" value="com.tplus.transform.runtime.DataObject"/>
+	<property name="lib" value="swiftrt"/>
+     </formula>
+     
+     
+    <formula name="IsCountryHoliday">
+	<description>Returns 1 if the given date for the country specified is a holiday else 0. If holiday directory is not present returns -1</description>
+	<signature>IsCountryHoliday(countryCode, date)</signature>
+	<category>Swift</category>
+	<Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+	<property name="class" value="com.tplus.transform.runtime.swift.SwiftFunctions"/>
+	<property name="method" value="isCountryHoliday"/>
+	<property name="args" value="2"/>
+	<property name="arg1" value="java.lang.String"/>
+	<property name="arg2" value="java.util.Date"/>
+	<property name="returns" value="int"/>
+	<property name="lib" value="swiftrt"/>
+     </formula>
+    
+    
+    <!--  HolidayServices validations  -->
+    <formula name="GetHolidayServicesInfo">
+	<description>Returns the HolidayService object for a given serviceCode and Date.</description>
+	<signature>GetHolidayServicesInfo(serviceCode, date)</signature>
+	<category>Swift</category>
+	<Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+	<property name="class" value="com.tplus.transform.runtime.swift.SwiftFunctions"/>
+	<property name="method" value="getHolidayServicesInfo"/>
+	<property name="args" value="2"/>
+	<property name="arg1" value="java.lang.String"/>
+	<property name="arg2" value="java.util.Date"/>
+	<property name="returns" value="com.tplus.transform.runtime.DataObject"/>
+	<property name="lib" value="swiftrt"/>
+     </formula>
+     
+     
+    <formula name="IsServiceHoliday">
+	<description>Returns 1 if the given date for the serviceCode specified is a holiday else 0. If directory is not available returns -1</description>
+	<signature>IsServiceHoliday(serviceCode, date)</signature>
+	<category>Swift</category>
+	<Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+	<property name="class" value="com.tplus.transform.runtime.swift.SwiftFunctions"/>
+	<property name="method" value="isServiceHoliday"/>
+	<property name="args" value="2"/>
+	<property name="arg1" value="java.lang.String"/>
+	<property name="arg2" value="java.util.Date"/>
+	<property name="returns" value="int"/>
+	<property name="lib" value="swiftrt"/>
+     </formula>
+    
+    
+    <!--  TimeZone validations  -->
+    <formula name="GetTimeZoneDifference">
+	<description>Retuns the time zone difference from GMT for a given countryCode, region code and Date.</description>
+	<signature>GetTimeZoneDifference(countryCode, regionCode, date)</signature>
+	<category>Swift</category>
+	<Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+	<property name="class" value="com.tplus.transform.runtime.swift.SwiftFunctions"/>
+	<property name="method" value="getTimeZoneDifference"/>
+	<property name="args" value="3"/>
+	<property name="arg1" value="java.lang.String"/>
+	<property name="arg2" value="java.lang.String"/>
+	<property name="arg3" value="java.util.Date"/>
+	<property name="returns" value="int"/>
+	<property name="lib" value="swiftrt"/>
+     </formula>
+     
+
+    <!--  BICPlusIBAN validations  -->
+    <formula name="GetBICPlusIBAN">
+        <description>Returns the BICPlusIBAN Info object (or null) for the given BIC.</description>
+        <signature>GetBICPlusIBAN(bic)</signature>
+        <category>Swift</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.swift.SwiftFunctions"/>
+        <property name="method" value="getBICPlusIBANFromBIC"/>
+        <property name="args" value="1"/>
+        <property name="arg1" value="java.lang.String"/>
+        <property name="returns" value="com.tplus.transform.runtime.DataObject"/>
+        <property name="lib" value="swiftrt"/>
+    </formula>
+
+    <formula name="DeriveBICFromIBAN">
+        <description>Returns BICPlusIBAN record for the given IBAN. The purpose is to derive the BIC from the IBAN. This can be useful in situations where the IBAN is present but the BIC is missing in a SEPA payment
+            instruction.
+        </description>
+        <signature>DeriveBICFromIBAN(iban)</signature>
+        <category>Swift</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.swift.SwiftFunctions"/>
+        <property name="method" value="deriveBICFromIBAN"/>
+        <property name="args" value="1"/>
+        <property name="arg1" value="java.lang.String"/>
+        <property name="returns" value="com.tplus.transform.runtime.DataObject"/>
+        <property name="lib" value="swiftrt"/>
+    </formula>
+
+    <formula name="IsValidBankID">
+        <description>The purpose is to validate that the Bank ID contained in an IBAN is a valid Bank ID. This can be useful in situations where the ordering customer has constructed the IBAN. However, the validation
+            does not guarantee that the IBAN itself is valid.
+        </description>
+        <signature>IsValidBankID(iban)</signature>
+        <category>Swift</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.swift.SwiftFunctions"/>
+        <property name="method" value="isValidBankID"/>
+        <property name="args" value="1"/>
+        <property name="arg1" value="java.lang.String"/>
+        <property name="returns" value="boolean"/>
+        <property name="lib" value="swiftrt"/>
+    </formula>
+
+
+    <formula name="IsValidBICIBAN">
+        <description>The purpose is to validate that the BIC and the IBAN belong to one and the same institution.</description>
+        <signature>IsValidBICIBAN(bic, iban)</signature>
+        <category>Swift</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.swift.SwiftFunctions"/>
+        <property name="method" value="isValidBICIBAN"/>
+        <property name="args" value="2"/>
+        <property name="arg1" value="java.lang.String"/>
+        <property name="arg2" value="java.lang.String"/>
+        <property name="returns" value="boolean"/>
+        <property name="lib" value="swiftrt"/>
+    </formula>
+
+    <formula name="IsSEPARoutingOperational">
+        <description>The purpose of validating a BIC's operational readiness is to ensure that a BIC is ready to receive SEPA payment instructions for a particular scheme. This can be useful to check the institution's
+            operational readiness for the SEPA schemes before accepting a SEPA credit transfer or SEPA direct debit payment instruction.
+        </description>
+        <signature>IsSEPARoutingOperational(bic, serviceLevel, schemeInstrument)</signature>
+        <category>Swift</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.swift.SEPARoutingFunctions"/>
+        <property name="method" value="isSEPARoutingOperational"/>
+        <property name="args" value="3"/>
+        <property name="arg1" value="java.lang.String"/>
+        <property name="arg2" value="java.lang.String"/>
+        <property name="arg3" value="java.lang.String"/>
+        <property name="returns" value="boolean"/>
+        <property name="lib" value="swiftrt"/>
+    </formula>
+
+    <formula name="IsBICAdherent">
+        <description>The purpose of validating a BIC's adherence status is to confirm that an institution has signed an adherence agreement for a particular scheme, and is published in the EPC Register of Participants
+            (that is, the adherence database). This validation can be useful for sending banks that want to have additional assurance that the counterpart bank is adherent to the scheme rulebooks.
+        </description>
+        <signature>IsBICAdherent(bic, serviceLevel, schemeInstrument)</signature>
+        <category>Swift</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.swift.SEPARoutingFunctions"/>
+        <property name="method" value="isBICAdherent"/>
+        <property name="args" value="3"/>
+        <property name="arg1" value="java.lang.String"/>
+        <property name="arg2" value="java.lang.String"/>
+        <property name="arg3" value="java.lang.String"/>
+        <property name="returns" value="boolean"/>
+        <property name="lib" value="swiftrt"/>
+    </formula>
+
+    <formula name="GetAvailablePaymentChannels">
+        <description>The purpose is to list the different payment channels through which an institution is directly or indirectly reachable. This will be useful when determining the different routing options and when
+            selecting the optimal channel for sending the payment instruction to the counterpart bank.
+        </description>
+        <signature>GetAvailablePaymentChannels(bic, serviceLevel, schemeInstrument)</signature>
+        <category>Swift</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.swift.SEPARoutingFunctions"/>
+        <property name="method" value="getAvailablePaymentChannels"/>
+        <property name="args" value="3"/>
+        <property name="arg1" value="java.lang.String"/>
+        <property name="arg2" value="java.lang.String"/>
+        <property name="arg3" value="java.lang.String"/>
+        <property name="returns" value="com.tplus.transform.runtime.collection.StringList"/>
+        <property name="lib" value="swiftrt"/>
+    </formula>
+
+    <formula name="GetPreferredChannel">
+        <description>The purpose is to determine whether the counterpart bank has specified a preferred payment channel for receiving payment instructions. This will be useful if there are multiple routing options
+            available to reach the counterpart bank, and the sending bank is willing to consider the routing preferences specified by the counterpart bank.
+        </description>
+        <signature>GetPreferredChannel(bic, serviceLevel, schemeInstrument)</signature>
+        <category>Swift</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.swift.SEPARoutingFunctions"/>
+        <property name="method" value="getPreferredChannel"/>
+        <property name="args" value="3"/>
+        <property name="arg1" value="java.lang.String"/>
+        <property name="arg2" value="java.lang.String"/>
+        <property name="arg3" value="java.lang.String"/>
+        <property name="returns" value="java.lang.String"/>
+        <property name="lib" value="swiftrt"/>
+    </formula>
+
+    <formula name="GetOtherPaymentChannels">
+        <description>The purpose is to identify the other payment channels of an intermediary institution used by the institution for reachability through a payment channel. This is useful if the sending bank has no
+            relationship with the payment channel through which the counterpart bank is indirectly reachable. It is also useful to determine alternative routing options if there is no matching payment channel in which
+            both the sending bank and the receiving bank are reachable.
+        </description>
+        <signature>GetOtherPaymentChannels(bic, serviceLevel, schemeInstrument)</signature>
+        <category>Swift</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.swift.SEPARoutingFunctions"/>
+        <property name="method" value="getOtherPaymentChannels"/>
+        <property name="args" value="3"/>
+        <property name="arg1" value="java.lang.String"/>
+        <property name="arg2" value="java.lang.String"/>
+        <property name="arg3" value="java.lang.String"/>
+        <property name="returns" value="com.tplus.transform.runtime.collection.StringList"/>
+        <property name="lib" value="swiftrt"/>
+    </formula>
+
+    <!--  Party Identifier validation  -->
+    <formula name="isValidUTCIndicatorSign">
+        <description></description>
+        <signature>isValidUTCIndicatorSign(text)</signature>
+        <category>Swift</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.swift.SwiftFunctions"/>
+        <property name="method" value="isValidUTCIndicatorSign"/>
+        <property name="args" value="1"/>
+        <property name="arg1" value="java.lang.String"/>
+        <property name="returns" value="boolean"/>
+        <property name="lib" value="swiftrt"/>
+    </formula>
+    <formula name="isValidUTCIndicatorTime">
+        <description></description>
+        <signature>isValidUTCIndicatorTime(text)</signature>
+        <category>Swift</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.swift.SwiftFunctions"/>
+        <property name="method" value="isValidUTCIndicatorTime"/>
+        <property name="args" value="1"/>
+        <property name="arg1" value="java.lang.String"/>
+        <property name="returns" value="boolean"/>
+        <property name="lib" value="swiftrt"/>
+    </formula>
+
+    <!--  Party Identifier validation  -->
+    <formula name="VerifyPartyIdentifier">
+        <description>Verifies that Party Identifier contains correct country code and format combination</description>
+        <signature>VerifyPartyIdentifier(partyId, option,isNZAvail, isZAAvail)</signature>
+        <category>Swift</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.swift.PartyIdentificationValidation"/>
+        <property name="method" value="VerifyPartyIdentifier"/>
+        <property name="args" value="4"/>
+        <property name="arg1" value="java.lang.String"/>
+        <property name="arg2" value="char"/>
+        <property name="arg3" value="boolean"/>
+        <property name="arg4" value="boolean"/>
+        <property name="returns" value="boolean"/>
+        <property name="lib" value="swiftrt"/>
+    </formula>
+
+    <formula name="VerifyPartyIdentifier">
+        <description>Verifies that Party Identifier contains correct country code and format combination</description>
+        <signature>VerifyPartyIdentifier(partyId, option)</signature>
+        <category>Swift</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.swift.PartyIdentificationValidation"/>
+        <property name="method" value="VerifyPartyIdentifier"/>
+        <property name="args" value="2"/>
+        <property name="arg1" value="java.lang.String"/>
+        <property name="arg2" value="char"/>
+        <property name="returns" value="boolean"/>
+        <property name="lib" value="swiftrt"/>
+    </formula>
+    <!--  50F validation  -->
+    <formula name="Verify50FPartyIdFormat">
+        <description>Checks Party Identifier is in format of /34x (Account) || 4!a/2!a/27x</description>
+        <signature>Verify50FPartyIdFormat(partyId)</signature>
+        <category>Swift</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.swift.Field50FValidation"/>
+        <property name="method" value="Verify50FPartyIdFormat"/>
+        <property name="args" value="1"/>
+        <property name="arg1" value="java.lang.String"/>
+        <property name="returns" value="boolean"/>
+        <property name="lib" value="swiftrt"/>
+    </formula>
+    <formula name="Verify50FPartyIdCode">
+        <description>Checks whether Party Identifier is used with following code ARNU, CCPT, CUST, DRLC, EMPL, NIDN, SOSE, TXID</description>
+        <signature>Verify50FPartyIdCode(partyId)</signature>
+        <category>Swift</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.swift.Field50FValidation"/>
+        <property name="method" value="Verify50FPartyIdCode"/>
+        <property name="args" value="1"/>
+        <property name="arg1" value="java.lang.String"/>
+        <property name="returns" value="boolean"/>
+        <property name="lib" value="swiftrt"/>
+    </formula>
+    <formula name="Verify50FNmandAdrFormat">
+        <description>To check whether Lines 2-5 (subfield Name Address) are in the format of "1!n/33x" (Number)(Details)</description>
+        <signature>Verify50FNmandAdrFormat(NmandAdr)</signature>
+        <category>Swift</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.swift.Field50FValidation"/>
+        <property name="method" value="Verify50FNmandAdrFormat"/>
+        <property name="args" value="1"/>
+        <property name="arg1" value="java.lang.String"/>
+        <property name="returns" value="boolean"/>
+        <property name="lib" value="swiftrt"/>
+    </formula>
+    <formula name="Verify50FNmAndAdrLines2">
+        <description>Returns true if the Name and Address satisfy the Line formatting rules specified in SWIFT spec</description>
+        <signature>Verify50FNmAndAdrLines2(NmandAdr, partyId)</signature>
+        <category>Swift</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.swift.Field50FValidation"/>
+        <property name="method" value="Verify50FNmandAdrLines2"/>
+        <property name="args" value="2"/>
+        <property name="arg1" value="java.lang.String"/>
+        <property name="arg2" value="java.lang.String"/>
+        <property name="returns" value="boolean"/>
+        <property name="lib" value="swiftrt"/>
+    </formula>
+    <formula name="Verify50FNmAndAdrLines">
+        <description>Returns true if the Name and Address satisfy the Line formatting rules specified in SWIFT spec</description>
+        <signature>Verify50FNmAndAdrLines(NmandAdr, partyId)</signature>
+        <category>Swift</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.swift.Field50FValidation"/>
+        <property name="method" value="Verify50FNmandAdrLines"/>
+        <property name="args" value="2"/>
+        <property name="arg1" value="java.lang.String"/>
+        <property name="arg2" value="java.lang.String"/>
+        <property name="returns" value="boolean"/>
+        <property name="lib" value="swiftrt"/>
+    </formula>
+    <formula name="Verify50FPartyIdCountryCode">
+        <description>Checks whether Country Code used with Party Identifier in the format (Code)(Country Code)(Identifier) is a valid ISO country code</description>
+        <signature>Verify50FPartyIdCountryCode(partyId)</signature>
+        <category>Swift</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.swift.Field50FValidation"/>
+        <property name="method" value="Verify50FPartyIdCountryCode"/>
+        <property name="args" value="1"/>
+        <property name="arg1" value="java.lang.String"/>
+        <property name="returns" value="boolean"/>
+        <property name="lib" value="swiftrt"/>
+    </formula>
+    <formula name="Verify50FNmAndAdrDate">
+        <description>Verifies if line /4 of NameAddress is followed by a valid date with format YYYYMMDD</description>
+        <signature>Verify50FNmAndAdrDate(NmAndAdr)</signature>
+        <category>Swift</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.swift.Field50FValidation"/>
+        <property name="method" value="Verify50FNmandAdrDate"/>
+        <property name="args" value="1"/>
+        <property name="arg1" value="java.lang.String"/>
+        <property name="returns" value="boolean"/>
+        <property name="lib" value="swiftrt"/>
+    </formula>
+    <formula name="Verify50FNmAndAdrCtryCode2">
+        <description>Verifies if NameAddress Number is starts with the number 3, 5, 6 and 7, then it must be followed by a valid ISO country code</description>
+        <signature>Verify50FNmAndAdrCtryCode2(NmAndAdr)</signature>
+        <category>Swift</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.swift.Field50FValidation"/>
+        <property name="method" value="Verify50FNmandAdrCtryCode2"/>
+        <property name="args" value="1"/>
+        <property name="arg1" value="java.lang.String"/>
+        <property name="returns" value="boolean"/>
+        <property name="lib" value="swiftrt"/>
+    </formula>
+    <formula name="Verify50FNmAndAdrCtryCode">
+        <description>Verifies if NameAddress Number is starts with the number 3, 5, 6 and 7, then it must be followed by a valid ISO country code</description>
+        <signature>Verify50FNmAndAdrCtryCode(NmAndAdr)</signature>
+        <category>Swift</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.swift.Field50FValidation"/>
+        <property name="method" value="Verify50FNmandAdrCtryCode"/>
+        <property name="args" value="1"/>
+        <property name="arg1" value="java.lang.String"/>
+        <property name="returns" value="boolean"/>
+        <property name="lib" value="swiftrt"/>
+    </formula>
+
+    <!--  59F validation  -->
+    <formula name="Verify59FNmAndAdrDtlFormat">
+        <description>To check whether Lines 2-5 (subfield Name And Address Details) are in the format of "1!n/33x" (Number)(Name and Address Details)</description>
+        <signature>Verify59FNmAndAdrDtlFormat(NmandAdrDtl)</signature>
+        <category>Swift</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.swift.Field59FValidation"/>
+        <property name="method" value="Verify59FNmandAdrDtlFormat"/>
+        <property name="args" value="1"/>
+        <property name="arg1" value="java.lang.String"/>
+        <property name="returns" value="boolean"/>
+        <property name="lib" value="swiftrt"/>
+    </formula>
+    <formula name="Verify59FNmAndAdrDtlLines">
+        <description>Returns true if the 'Name and Address Details' satisfy the Line formatting rules specified in SWIFT spec for field 59F</description>
+        <signature>Verify59FNmAndAdrDtlLines(NmandAdrDtl)</signature>
+        <category>Swift</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.swift.Field59FValidation"/>
+        <property name="method" value="Verify59FNmandAdrDtlLines"/>
+        <property name="args" value="1"/>
+        <property name="arg1" value="java.lang.String"/>
+        <property name="returns" value="boolean"/>
+        <property name="lib" value="swiftrt"/>
+    </formula>
+    <formula name="Verify59FNmAndAdrDtlCtryCode">
+        <description>Verifies if 'Name and Address Details' Number starts with the number 3. If so, then it must be followed by a valid ISO country code</description>
+        <signature>Verify59FNmAndAdrDtlCtryCode(NmandAdrDtl)</signature>
+        <category>Swift</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.swift.Field59FValidation"/>
+        <property name="method" value="Verify59FNmandAdrDtlCtryCode"/>
+        <property name="args" value="1"/>
+        <property name="arg1" value="java.lang.String"/>
+        <property name="returns" value="boolean"/>
+        <property name="lib" value="swiftrt"/>
+    </formula>
+
+    <formula name="parseDelimitedRecord">
+        <description>Parses tab separated record [for internal use]</description>
+        <signature>ParseDelimitedRecord(obj, str, IntegerList)</signature>
+        <category>Swift</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.swift.resource.ResourceProvider"/>
+        <property name="method" value="parseDelimitedRecord"/>
+        <property name="args" value="3"/>
+        <property name="arg1" value="com.tplus.transform.runtime.DataObject"/>
+        <property name="arg2" value="String"/>
+        <property name="arg3" value="com.tplus.transform.runtime.RawMessage"/>
+        <property name="returns" value="com.tplus.transform.runtime.DataObject"/>
+        <property name="lib" value="swiftrt"/>
+    </formula>
+
+    <formula name="parseDelimitedHeaderRecord">
+        <description>Parses tab separated header record [for internal use]</description>
+        <signature>ParseDelimitedHeaderRecord(obj, str)</signature>
+        <category>Swift</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.swift.resource.ResourceProvider"/>
+        <property name="method" value="parseDelimitedHeaderRecord"/>
+        <property name="args" value="2"/>
+        <property name="arg1" value="com.tplus.transform.runtime.DataObject"/>
+        <property name="arg2" value="String"/>
+        <property name="returns" value="com.tplus.transform.runtime.RawMessage"/>
+        <property name="lib" value="swiftrt"/>
+    </formula>
+</formulae>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<formulae>
+    <formula name="put">
+        <description>Puts a key value pair in the cache.</description>
+        <signature>put(key, value)</signature>
+        <category>Map</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.cache.MapFunctions"/>
+        <property name="method" value="put"/>
+    </formula>
+
+    <formula name="get">
+        <description>Gets the value for the specified key from the cache.</description>
+        <signature>get(key)</signature>
+        <category>Map</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.cache.MapFunctions"/>
+        <property name="method" value="get"/>
+    </formula>
+
+    <formula name="createMap">
+        <description>Creates a new map</description>
+        <signature>createMap()</signature>
+        <category>Map</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.cache.MapFunctions"/>
+        <property name="method" value="createMap"/>
+    </formula>
+</formulae>

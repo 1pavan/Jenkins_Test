@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<SwiftMessageFormat name="MT06">
+	<standard-version><![CDATA[SRG 2016]]></standard-version>
+	<standard-release-qualifier>20160308</standard-release-qualifier>
+	<DescriptiveName><![CDATA[Logout Command]]></DescriptiveName>
+	<Category><![CDATA[Service]]></Category>
+	<Description><![CDATA[This message is issued by the user to terminate the GPA session. This message cannot be issued by a synonym.
+
+From: User To: GPA
+
+Notes
+
+Field 173: <day-time> represents the day and the time before which another Login cannot be performed. The Logout message is positively acknowledged and contains error code 01 if this field represents a date which is more than seven days after the current date. See Service Message 26 Logout Acknowledgement.
+
+The Trailer Block is only present if the message is sent by a Test & Training LT and contains a TNG trailer.]]></Description>
+	<SwiftFields>
+		<customizable>false</customizable>
+		<modifiable>true</modifiable>
+		<SwiftMessageType>Service</SwiftMessageType>
+		<HeaderAndTrailerType>SWIFT_INPUT_HEADER</HeaderAndTrailerType>
+		<Header>
+		</Header>
+		<Data>
+			<Fields>
+				<SystemField Name="day-time">
+					<description><![CDATA[The date and time, local to the user, in the format DDHHMM.]]></description>
+					<datatype>String</datatype>
+					<required>false</required>
+					<SwiftSystemFieldDef Name="day-time" Tag="173">
+						<Format><![CDATA[6!n]]></Format>
+						<Specification><![CDATA[(day-time)]]></Specification>
+						<Additional-Format><![CDATA[DDHHMM]]></Additional-Format>
+						<Description><![CDATA[Date and time are always given as local, unless otherwise specified. Local time for the SWIFTNetwork is in GMT.]]></Description>
+						<Validations>
+							<Validation>
+								<subfield>day-time</subfield>
+								<formula>IsDate($value,"ddHHmm")</formula>
+								<error-code>V05</error-code>
+								<actionmessage>"Invalid day-time '" + $value + "'. day-time should be in format ddHHmm."</actionmessage>
+							</Validation>
+						</Validations>
+					</SwiftSystemFieldDef>
+				</SystemField>
+			</Fields>
+		</Data>
+		<Trailer>
+		</Trailer>
+	</SwiftFields>
+	<validationrules name="Default">
+		<hdrvalidationrules>
+			<fieldvalidations>
+			</fieldvalidations>
+		</hdrvalidationrules>
+		<datavalidationrules>
+			<fieldvalidations>
+			</fieldvalidations>
+		</datavalidationrules>
+		<tlrvalidationrules>
+			<fieldvalidations>
+			</fieldvalidations>
+		</tlrvalidationrules>
+	</validationrules>
+</SwiftMessageFormat>
+

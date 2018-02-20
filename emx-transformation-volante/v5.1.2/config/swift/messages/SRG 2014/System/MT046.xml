@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<SwiftMessageFormat name="MT046">
+	<standard-version><![CDATA[SRG 2014]]></standard-version>
+	<standard-release-qualifier>20140520</standard-release-qualifier>
+	<DescriptiveName><![CDATA[Undelivered Message Report Request]]></DescriptiveName>
+	<Category><![CDATA[System]]></Category>
+	<Description><![CDATA[This message causes the system to generate a list of all undelivered messages input by the sending LT, or
+by all LTs belonging to the requester's destination. The response to this message is an MT 066 Solicited
+Undelivered Message Report.
+
+From: User To: FIN]]></Description>
+	<SwiftFields>
+		<customizable>true</customizable>
+		<modifiable>true</modifiable>
+		<SwiftMessageType>System</SwiftMessageType>
+		<HeaderAndTrailerType>SWIFT_INPUT_HEADER</HeaderAndTrailerType>
+		<Header>
+
+		</Header>
+		<Data>
+			<Fields>
+				<SystemField Name="lt-code">
+					<description><![CDATA[9th character of BIC-12. The value X signifies details of all LTs belonging to the destination.]]></description>
+					<datatype>String</datatype>
+					<required>true</required>
+					<SwiftSystemFieldDef Name="lt-code" Tag="303">
+						<Format><![CDATA[1!c]]></Format>
+						<Specification><![CDATA[(lt-code)]]></Specification>
+						<Description><![CDATA[9th character of BIC-12. The value X signifies details of all LTs belonging to the destination.]]></Description>
+					</SwiftSystemFieldDef>
+				</SystemField>
+				<SystemField Name="reporting-options">
+					<description><![CDATA[Reporting Options, where:
+
+a)  RT = all undelivered at report time
+
+b)  nn = undelivered for more than nn hours (range: 00 < nn < 24)
+
+c)  VD = value-date-sensitive message undelivered after the Receiver's cut-off time on the value date.]]></description>
+					<datatype>String</datatype>
+					<required>true</required>
+					<SwiftSystemFieldDef Name="reporting-options" Tag="301">
+						<Format><![CDATA[2!c]]></Format>
+						<Specification><![CDATA[(reporting-options)]]></Specification>
+						<Description><![CDATA[Reporting Options, where:
+
+a)  RT = all undelivered at report time
+
+b)  nn = undelivered for more than nn hours (range: 00 < nn < 24)
+
+c)  VD = value-date-sensitive message undelivered after the Receiver's cut-off time on the value date.]]></Description>
+						<Validations>
+							<Validation>
+								<formula>If(IsInt($value), 
+	   						Between(ToInt($value), 0, 24), 
+	   						In($value, "RT", "VD","CS"))
+				</formula>
+								<error-code>V08</error-code>
+								<actionmessage>"Invalid Reporting Options '" + $value + "'"</actionmessage>
+							</Validation>
+						</Validations>
+					</SwiftSystemFieldDef>
+				</SystemField>
+			</Fields>
+		</Data>
+		<Trailer>
+		</Trailer>
+	</SwiftFields>
+	<validationrules name="Default">
+		<hdrvalidationrules>
+			<fieldvalidations>
+			</fieldvalidations>
+		</hdrvalidationrules>
+		<datavalidationrules>
+			<fieldvalidations>
+			</fieldvalidations>
+		</datavalidationrules>
+		<tlrvalidationrules>
+			<fieldvalidations>
+			</fieldvalidations>
+		</tlrvalidationrules>
+	</validationrules>
+</SwiftMessageFormat>
+

@@ -1,0 +1,460 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<formulae> 
+		<formula name="Length">
+			<description>Returns the length of sequence of characters in str. </description>
+			<signature>Length(str)</signature>
+			<category>Text</category>
+	  		<Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+			<property name="class" value="com.tplus.transform.runtime.formula.TextFunctions" />
+			<property name="method" value="length" />
+    	</formula>
+
+		<formula name="Left">
+			<description>Returns the leftmost, specified no.of characters from a text string</description>
+			<signature>Left(str, num_chars)</signature>
+			<category>Text</category>
+	  		<Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+			<property name="class" value="com.tplus.transform.runtime.formula.TextFunctions" />
+			<property name="method" value="left" />
+    	</formula>
+ 
+		<formula name="Right">
+			<description>Returns the rightmost, specified no.of characters from a string. </description>
+			<signature>Right(str, num_chars)</signature>
+			<category>Text</category>
+	  		<Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+			<property name="class" value="com.tplus.transform.runtime.formula.TextFunctions" />
+			<property name="method" value="right" />
+    	</formula>
+
+        <formula name="Mid" alias="Substring" >
+			<description>Returns a substring starting from the specified startIndex containing the specified no.of characters or till the end of string.</description>
+			<signature>Mid(str, start_index, num_charsOpt)</signature>
+			<category>Text</category>
+	  		<Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+			<property name="class" value="com.tplus.transform.runtime.formula.TextFunctions" />
+			<property name="method" value="mid" />
+    	</formula>
+
+		<formula name="Concat">
+			<description>Concatenates the given arguments and returns the resultant String.</description> 
+			<signature>Concat(arg1, arg2, ...opt)</signature>
+			<category>Text</category>
+			<Class>com.tplus.transform.design.formula.functions.ConcatenateFunction</Class>
+		 </formula>
+		<formula name="Plus">
+			<description>Concatenates argument1 and argument2 and returns the result String. One of the arguments should be a text string. The other argument can be one of - a text string, an integer, a float or a double value. </description> 
+			<signature>Plus(arg1, arg2)</signature>
+			<category>Text</category>
+	  		<Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+			<property name="class" value="com.tplus.transform.runtime.formula.TextFunctions" />
+			<property name="method" value="concat" />
+    	</formula>
+
+		<formula name="CharAt">
+			<description>Returns the character at the specified index in the string. </description> 
+			<signature>CharAt(str, index)</signature>
+			<category>Text</category>
+	  		<Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+			<property name="class" value="com.tplus.transform.runtime.formula.TextFunctions" />
+			<property name="method" value="charAt" />
+    	</formula>
+
+		<formula name="At">
+			<description>Returns the character at the specified index in the string. </description> 
+			<signature>At(str, index)</signature>
+			<category>Text</category>
+	  		<Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+			<property name="class" value="com.tplus.transform.runtime.formula.TextFunctions" />
+			<property name="method" value="charAt" />
+    	</formula>
+
+		<formula name="Equal">
+			<description>Returns true if str1 equals str2, returns false otherwise. The Comparison is case-sensitive. </description> 
+			<signature>Equal(str1, str2)</signature>
+			<category>Logical</category>
+	  		<Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+			<property name="class" value="com.tplus.transform.runtime.formula.TextFunctions" />
+            <property name="method" value="equal" />
+            <property name="nullable" value="true" />
+    	</formula>
+
+		<formula name="NotEqual">
+			<description>Returns true if str1 not equals str2, returns false otherwise. The Comparison is case-sensitive. </description> 
+			<signature>NotEqual(str1, str2)</signature>
+			<category>Logical</category>
+	  		<Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+			<property name="class" value="com.tplus.transform.runtime.formula.TextFunctions" />
+			<property name="method" value="notEqual" />
+            <property name="nullable" value="true" />
+    	</formula>
+
+		<formula name="Greater">
+			<description>Returns TRUE if val1 occurs after val2.Returns FALSE otherwise</description>
+			<signature>Greater(val1, val2)</signature>
+			<category>Logical</category>
+	  		<Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+			<property name="class" value="com.tplus.transform.runtime.formula.TextFunctions" />
+			<property name="method" value="greater" />
+		</formula>
+
+		<formula name="Less">
+			<description>Returns TRUE if val1 is before val2. Returns FALSE otherwise</description>
+			<signature>Less(val1, val1)</signature>
+			<category>Logical</category>
+	  		<Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+			<property name="class" value="com.tplus.transform.runtime.formula.TextFunctions" />
+			<property name="method" value="less" />
+		</formula>
+
+		<formula name="LessEqual">
+			<description>Returns TRUE if argument1 is less than or equal to argument2. The two arguments must be of the same type.</description>
+			<signature>LessEqual(val1, val2)</signature>
+			<category>Logical</category>
+	  		<Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+			<property name="class" value="com.tplus.transform.runtime.formula.TextFunctions" />
+			<property name="method" value="lessEqual" />
+    	</formula>
+
+
+		<formula name="GreaterEqual">
+			<description>Returns TRUE if argument1 is greater than or equal to argument2. The two arguments must be of the same type.</description>
+			<signature>GreaterEqual(val1, val2)</signature>
+			<category>Logical</category>
+	  		<Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+			<property name="class" value="com.tplus.transform.runtime.formula.TextFunctions" />
+			<property name="method" value="greaterEqual" />
+    	</formula>
+
+
+		<formula name="StartsWith">
+			<description>Returns true if str starts with the prefix start_text at the start_index specified. Returns false otherwise. If start_index is omitted,checks from the beginning of the string. The check is case-sensitive. </description>
+			<signature>StartsWith(str, start_text, start_index_opt)</signature>
+			<category>Text</category>
+	  		<Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+			<property name="class" value="com.tplus.transform.runtime.formula.TextFunctions" />
+			<property name="method" value="startsWith" />
+    	</formula>
+		
+		<formula name="StartsWithIgnoreCase">
+			<description>Returns true if str starts with the prefix start_text at the start_index specified. Returns false otherwise. If start_index is omitted,checks from the beginning of the string. The check is not case-sensitive. </description>
+			<signature>StartsWithIgnoreCase(str, start_text, start_index_opt)</signature>
+			<category>Text</category>
+	  		<Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+			<property name="class" value="com.tplus.transform.runtime.formula.TextFunctions" />
+			<property name="method" value="startsWithIgnoreCase" />
+    	</formula>
+
+		<formula name="EndsWith">
+			<description>Returns true if str ends with the suffix end_text. Returns false otherwise. The check is case-sensitive. </description>
+			<signature>EndsWith(str, end_text)</signature>
+			<category>Text</category>
+	  		<Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+			<property name="class" value="com.tplus.transform.runtime.formula.TextFunctions" />
+			<property name="method" value="endsWith" />
+    	</formula>
+		
+		<formula name="EndsWithIgnoreCase">
+			<description>Returns true if str ends with the suffix end_text. Returns false otherwise. The check is not case-sensitive. </description>
+			<signature>EndsWithIgnoreCase(str, end_text)</signature>
+			<category>Text</category>
+	  		<Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+			<property name="class" value="com.tplus.transform.runtime.formula.TextFunctions" />
+			<property name="method" value="endsWithIgnoreCase" />
+    	</formula>
+
+		<formula name="Lower">
+			<description>Converts the characters in str to lowercase and returns the converted string. </description>
+			<signature>Lower(str)</signature>
+			<category>Text</category>
+	  		<Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+			<property name="class" value="com.tplus.transform.runtime.formula.TextFunctions" />
+			<property name="method" value="lower" />
+    	</formula>
+
+		<formula name="Upper">
+			<description>Converts the characters in str to uppercase and returns the converted string. </description>
+			<signature>Upper(str)</signature>
+			<category>Text</category>
+	  		<Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+			<property name="class" value="com.tplus.transform.runtime.formula.TextFunctions" />
+			<property name="method" value="upper" />
+    	</formula>
+
+		<formula name="Trim">
+			<description>Removes white space from both ends of str and returns the trimmed string. </description>
+			<signature>TRIM(str)</signature>
+			<category>Text</category>
+	  		<Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+			<property name="class" value="com.tplus.transform.runtime.formula.TextFunctions" />
+			<property name="method" value="trim" />
+    	</formula>
+		
+		<formula name="TrimLeft">
+			<description>Removes white space from the left end of str and returns the result string. </description>
+			<signature>TrimLeft(str)</signature>
+			<category>Text</category>
+	  		<Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+			<property name="class" value="com.tplus.transform.runtime.formula.TextFunctions" />
+			<property name="method" value="trimLeft" />
+    	</formula>
+
+		<formula name="TrimRight">
+			<description>Removes white space from the right end of str and returns the result string. </description>
+			<signature>TrimRight(str)</signature>
+			<category>Text</category>
+	  		<Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+			<property name="class" value="com.tplus.transform.runtime.formula.TextFunctions" />
+			<property name="method" value="trimRight" />
+    	</formula>
+
+		<formula name="CompareWhereLettersPrecedeNumbers">
+			<description>Compares str1 with str2, where letters take precedence over numbers. Returns 0 if both are equal. Returns a value less than 0 if str1 lesser than str2. Returns a value greater than 0 if str1 greater than str2. </description>
+			<signature>CompareWhereLettersPrecedeNumbers(str1, str2)</signature>
+			<category>Text</category>
+	  		<Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+			<property name="class" value="com.tplus.transform.runtime.formula.TextFunctions" />
+			<property name="method" value="compareWhereLettersPrecedeNumbers" />
+    	</formula>
+
+		<formula name="Compare">
+			<description>Compares str1 with str2 lexicographically. Returns 0 if both are equal. Returns a value less than 0 if str1 lesser than str2. Returns a value greater than 0 if str1 greater than str2. </description>
+			<signature>Compare(str1, str2)</signature>
+			<category>Text</category>
+	  		<Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+			<property name="class" value="com.tplus.transform.runtime.formula.TextFunctions" />
+			<property name="method" value="compare" />
+    	</formula>
+
+		<formula name="CompareIgnoreCase">
+			<description>Compares str1 with str2 lexicographically, ignoring case. Returns 0 if both are equal. Returns a value 
+	 					 less than 0 if str1 lesser than str2. Returns a value greater than 0 if str1 greater than str2.
+			 </description>
+			<signature>CompareIgnoreCase(str1, str2)</signature>
+			<category>Text</category>
+	  		<Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+			<property name="class" value="com.tplus.transform.runtime.formula.TextFunctions" />
+			<property name="method" value="compareIgnoreCase" />
+    	</formula>
+
+		<formula name="Reverse">
+			<description>Returns the reversed sequence of characters in str. </description>
+			<signature>Reverse(str)</signature>
+			<category>Text</category>
+	  		<Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+			<property name="class" value="com.tplus.transform.runtime.formula.TextFunctions" />
+			<property name="method" value="reverse" />
+    	</formula>
+
+		<formula name="Replace">
+			<description>Replaces all occurrences of old char/string with new char/string in str and returns the result string. </description>
+			<signature>Replace(str, tobeReplaced, toReplace)</signature>
+			<category>Text</category>
+	  		<Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+			<property name="class" value="com.tplus.transform.runtime.formula.TextFunctions" />
+			<property name="method" value="replace" />
+    	</formula>
+		
+		<formula name="Replace">
+			<description>Replaces character at index with newchar in str and returns the result. If str is null, returns empty string. If index >= str's length or less than 0, returns the original string without any replacement. </description>
+			<signature>Replace(str, index, newChar)</signature>
+			<category>Text</category>
+	  		<Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+			<property name="class" value="com.tplus.transform.runtime.formula.TextFunctions" />
+			<property name="method" value="replace" />
+    	</formula>
+		
+		<formula name="Replace">
+			<description>Replaces num_chars no.of characters starting from start_index in str with newstr. If str is null, returns empty string. If start_index >= str's length or less than 0, or if num_chars less than 0, or if newstr is null, returns the original string without any replacement. If num_chars no.of chars are not available starting from start_index specified, replaces the available chars from start_index till str's length. If num_chars = 0, inserts newstr at start_index specified, not replacing any characters (moves the characters towards right after insertion).</description>
+			<signature>Replace(str, start_index, num_chars, newstr)</signature>
+			<category>Text</category>
+	  		<Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+			<property name="class" value="com.tplus.transform.runtime.formula.TextFunctions" />
+			<property name="method" value="replace" />
+    	</formula>
+
+		<formula name="FindFirst">
+			<description>Returns the index of first occurrence of a string/character in another string, searching from the index specified. If the index is not specified, searches from the beginning of the string. </description>
+			<signature>FindFirst(withinStr, toFind, start_index_opt)</signature>
+			<category>Text</category>
+	  		<Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+			<property name="class" value="com.tplus.transform.runtime.formula.TextFunctions" />
+			<property name="method" value="findFirst" />
+    	</formula>
+
+		<formula name="FindLast">
+			<description>Returns the index of last occurrence of a string/character in another string, searching from the index specified. If the index is not specified, searches from the end of the string. The search is from right to left of the string.</description>
+			<signature>FindLast(withinStr, toFind, start_index_opt)</signature>
+			<category>Text</category>
+	  		<Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+			<property name="class" value="com.tplus.transform.runtime.formula.TextFunctions" />
+			<property name="method" value="findLast" />
+    	</formula>
+
+
+
+    	
+		<formula name="EqualIgnoreCase">
+			<description>Returns true if str1 equals str2, returns false otherwise. The Comparison is not case-sensitive.  </description>
+			<signature>EqualIgnoreCase(str1, str2)</signature>
+			<category>Text</category>
+	  		<Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+			<property name="class" value="com.tplus.transform.runtime.formula.TextFunctions" />
+			<property name="method" value="equalIgnoreCase" />
+    	</formula>
+
+		<formula name="NotEqualIgnoreCase">
+			<description>Returns true if str1 not equals str2, returns false otherwise. The Comparison is not case-sensitive.  </description>
+			<signature>NotEqualIgnoreCase(str1, str2)</signature>
+			<category>Text</category>
+	  		<Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+			<property name="class" value="com.tplus.transform.runtime.formula.TextFunctions" />
+			<property name="method" value="notEqualIgnoreCase" />
+    	</formula>
+
+		<formula name="Insert">
+			<description>Inserts a text or a primitive value such as an integer,float,double or char in withinStr at the specified index and returns the string.</description>
+			<signature>Insert(withinStr, index, insert_TextOrPrimitiveValue)</signature>
+			<category>Text</category>
+	  		<Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+			<property name="class" value="com.tplus.transform.runtime.formula.TextFunctions" />
+			<property name="method" value="insert" />
+    	</formula>
+
+		<formula name="DeleteCharAt">
+			<description>Removes the character at the specified index in str and returns the string.  </description>
+			<signature>DeleteCharAt(str, index)</signature>
+			<category>Text</category>
+	  		<Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+			<property name="class" value="com.tplus.transform.runtime.formula.TextFunctions" />
+			<property name="method" value="deleteCharAt" />
+    	</formula>
+
+		<formula name="Delete">
+			<description>Deletes num_chars no.of characters starting from start_index in str. </description>
+			<signature>Delete(str, start_index, num_chars)</signature>
+			<category>Text</category>
+	  		<Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+			<property name="class" value="com.tplus.transform.runtime.formula.TextFunctions" />
+			<property name="method" value="deleteStr" />
+    	</formula>
+
+
+		<formula name="LeftStr">
+			<description>Returns the substring in a string, which is to the left of the delimiter string. </description>
+			<signature>LeftStr(str, delimiterStr)</signature>
+			<category>Text</category>
+	  		<Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+			<property name="class" value="com.tplus.transform.runtime.formula.TextFunctions" />
+			<property name="method" value="leftStr" />
+    	</formula>
+
+		<formula name="RightStr">
+			<description>Returns the substring in a string, which is to the right of the delimiter string. </description>
+			<signature>RightStr(str, delimiterStr)</signature>
+			<category>Text</category>
+	  		<Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+			<property name="class" value="com.tplus.transform.runtime.formula.TextFunctions" />
+			<property name="method" value="rightStr" />
+    	</formula>
+
+		<formula name="Split">
+			<description>Splits the string into number of string using separator as boundary and returns the collection of string.</description>
+			<signature>Split(separator, str, countOpt)</signature>
+			<category>Text</category>
+	  		<Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+			<property name="class" value="com.tplus.transform.runtime.formula.TextFunctions" />
+			<property name="method" value="split" />
+    	</formula>
+
+
+		<formula name="Repeat">
+			<description>Repeats the string <i>str</i> <i>count</i> number of times and returns the string.</description>
+			<signature>Repeat(str, count)</signature>
+			<category>Text</category>
+	  		<Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+			<property name="class" value="com.tplus.transform.runtime.formula.TextFunctions" />
+			<property name="method" value="repeat" />
+    	</formula>
+
+		<formula name="Rpad">
+			<description>Pads the string str on the right with <i>pad_char</i> making the total length of the string equal to <i>max_chars</i> and returns it.</description>
+			<signature>Rpad(str, pad_char, max_chars)</signature>
+			<category>Text</category>
+	  		<Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+			<property name="class" value="com.tplus.transform.runtime.formula.TextFunctions" />
+			<property name="method" value="rpad" />
+    	</formula>
+
+		<formula name="Lpad">
+			<description>Pads the string str on the left with <i>pad_char</i> making the total length of the string equal to <i>max_chars</i> and returns it.</description>
+			<signature>Lpad(str, pad_char, max_chars)</signature>
+			<category>Text</category>
+	  		<Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+			<property name="class" value="com.tplus.transform.runtime.formula.TextFunctions" />
+			<property name="method" value="lpad" />
+    	</formula>
+
+		<formula name="IsAlpha">
+			<description>Returns true if the argument (character or string) contains only alphabetic characters ([a-z]|[A-Z]).</description>
+			<signature>IsAlpha(str_or_char)</signature>
+			<category>Text</category>
+	  		<Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+			<property name="class" value="com.tplus.transform.runtime.formula.TextFunctions" />
+			<property name="method" value="isAlpha" />
+    	</formula>
+
+
+		<formula name="IsAlphaUpper">
+			<description>Returns true if the argument (character or string) contains only uppercase alphabetic characters ([A-Z]) and returns it.</description>
+			<signature>IsAlphaUpper(str_or_char)</signature>
+			<category>Text</category>
+	  		<Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+			<property name="class" value="com.tplus.transform.runtime.formula.TextFunctions" />
+			<property name="method" value="isAlphaUpper" />
+    	</formula>
+
+
+		<formula name="IsAlphaNum">
+			<description>Returns true if the argument (character or string) contains only alphabetic or numeric characters ([A-Z]|[a-z]|[0-9]).</description>
+			<signature>IsAlphaNum(str_or_char)</signature>
+			<category>Text</category>
+	  		<Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+			<property name="class" value="com.tplus.transform.runtime.formula.TextFunctions" />
+			<property name="method" value="isAlphaNum" />
+    	</formula>
+
+		<formula name="IsAlphaUpperNum">
+			<description>Returns true if the argument (character or string) contains only uppercase alphabetic or numeric characters ([A-Z]|[0-9]).</description>
+			<signature>IsAlphaUpperNum(str or char)</signature>
+			<category>Text</category>
+	  		<Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+			<property name="class" value="com.tplus.transform.runtime.formula.TextFunctions" />
+			<property name="method" value="isAlphaUpperNum" />
+    	</formula>
+		<formula name="IsNum">
+			<description>Returns true if the argument (character or string) contains only numeric characters ([0-9]).</description>
+			<signature>IsNum(str_or_char)</signature>
+			<category>Text</category>
+	  		<Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+			<property name="class" value="com.tplus.transform.runtime.formula.TextFunctions" />
+			<property name="method" value="isNum" />
+    	</formula>
+		<formula name="Append">
+			<description>Appends the string representation of the given value to the string buffer 'buffer' and returns the resultant string buffer. The value can be of any Designer type.</description>
+			<signature>Append(buffer, value)</signature>
+			<category>Text</category>
+	  		<Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+			<property name="class" value="com.tplus.transform.runtime.formula.TextFunctions" />
+			<property name="method" value="append" />
+			<property name="canIgnoreReturnValue" value="true" />
+    	</formula>
+		<formula name="StringBuffer">
+			<description>Constructs and returns an empty string buffer with the specified initial capacity. If the capacity is not specified, the string buffer is constructed with the initial capacity of 16 characters.</description>
+			<signature>StringBuffer(capacityOpt)</signature>
+			<category>Text</category>
+	  		<Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+			<property name="class" value="com.tplus.transform.runtime.formula.TextFunctions" />
+			<property name="method" value="createStringBuffer" />
+    	</formula>
+</formulae> 

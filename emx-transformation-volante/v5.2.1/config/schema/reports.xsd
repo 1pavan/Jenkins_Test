@@ -1,0 +1,75 @@
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="unqualified"
+            attributeFormDefault="unqualified">
+    <!-- include constructs -->
+    <xsd:include schemaLocation="messageflow.xsd"/>
+    <xsd:element name="Report" type="ReportType" substitutionGroup="ServiceElement"/>
+    <xsd:complexType name="ReportType">
+        <xsd:complexContent>
+            <xsd:extension base="ServiceElementType">
+                <xsd:sequence>
+                    <xsd:element name="version" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="description" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="parameterfields" minOccurs="0">
+                        <xsd:complexType>
+                            <xsd:sequence>
+                                <xsd:element name="parameterfield" minOccurs="0" maxOccurs="unbounded">
+                                    <xsd:complexType>
+                                        <xsd:sequence>
+                                            <xsd:element name="name" type="xsd:string"/>
+                                            <xsd:element name="type" type="xsd:string"/>
+                                            <xsd:element name="message" type="xsd:string" minOccurs="0"/>
+                                            <xsd:element name="minoccurs" type="xsd:integer" minOccurs="0"/>
+                                            <xsd:element name="maxoccurs" type="xsd:integer" minOccurs="0"/>
+                                            <xsd:element name="description" type="xsd:string" minOccurs="0"/>
+                                        </xsd:sequence>
+                                    </xsd:complexType>
+                                </xsd:element>
+                            </xsd:sequence>
+                        </xsd:complexType>
+                    </xsd:element>
+                    <xsd:element name="report-info" minOccurs="0">
+                        <xsd:complexType>
+                            <xsd:sequence>
+                                <xsd:element name="report-folder" type="xsd:string" minOccurs="0"/>
+                                <xsd:element name="report-file" type="xsd:string" minOccurs="0"/>
+                                <xsd:element name="format" type="xsd:string" minOccurs="0"/>
+                                <xsd:element name="report-source-type" type="xsd:string" minOccurs="0"/>
+                            </xsd:sequence>
+                            <xsd:attribute name="type" type="xsd:string"/>
+                        </xsd:complexType>
+                    </xsd:element>
+                </xsd:sequence>
+                <xsd:attribute name="name" type="xsd:string"/>
+                <xsd:attribute name="type" type="xsd:string"/>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="Report">
+        <xsd:complexContent>
+            <xsd:extension base="FlowElementType">
+                <xsd:sequence>
+                    <xsd:element name="in" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="out" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="options" type="FlowOptionsType" minOccurs="0"/>
+                    <xsd:element name="multi-source-input" minOccurs="0">
+                        <xsd:complexType>
+                            <xsd:sequence>
+                                <xsd:element name="field" type="MessageFlowMappingField" minOccurs="0"
+                                             maxOccurs="unbounded"/>
+                            </xsd:sequence>
+                        </xsd:complexType>
+                    </xsd:element>
+                    <xsd:element name="report" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="visual" type="FlowVisualType"/>
+                    <xsd:element name="property" minOccurs="0">
+                        <xsd:complexType>
+                            <xsd:attribute name="name" type="xsd:string" use="required"/>
+                            <xsd:attribute name="value" type="xsd:string" use="required"/>
+                        </xsd:complexType>
+                    </xsd:element>
+                </xsd:sequence>
+                <xsd:attribute name="type" type="xsd:string" use="required" fixed="Report"/>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+</xsd:schema>

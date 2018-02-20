@@ -1,0 +1,1780 @@
+<SwiftFields>
+	<SwiftSystemFieldDef Name="application-id" Tag="101">
+		<Format><![CDATA[1!c]]></Format>
+		<Specification><![CDATA[(application-id)]]></Specification>
+		<Description><![CDATA[Application Identifier, where:
+
+a)  F = FIN application
+
+b)  A/L = GPA application
+
+c)  X = all applications]]></Description>
+        <Validations>
+			<Validation>
+				<formula><![CDATA[In($value, "F", "A", "L", "X")]]></formula>
+	            <error-code>V08</error-code>
+	            <actionmessage><![CDATA["Invalid Application Identifier '" + $value + "'. Valid Application Identifier values are : F, A, L, X."]]></actionmessage>
+			</Validation>
+		</Validations>
+	</SwiftSystemFieldDef>
+	<SwiftSystemFieldDef Name="swift-address" Tag="102">
+		<Format><![CDATA[(4!a2!a2!c1!c3!c)]]></Format>
+		<Specification><![CDATA[(swift-address)]]></Specification>
+		<Description><![CDATA[Complete 12-character address, including LT code and branch code, or default branch code XXX.]]></Description>
+	</SwiftSystemFieldDef>
+	<SwiftSystemFieldDef Name="service-code" Tag="103">
+		<Format><![CDATA[3!a]]></Format>
+		<Specification><![CDATA[(service-code)]]></Specification>
+		<Description><![CDATA[SWIFTNet FIN Copy Service Code.]]></Description>
+    </SwiftSystemFieldDef>
+	<SwiftSystemFieldDef Name="msg-priority" Tag="104">
+		<Format><![CDATA[1!a]]></Format>
+		<Specification><![CDATA[(msg-priority)]]></Specification>
+		<Description><![CDATA[Message Priority, where:
+
+a)  S = system
+
+b)  U = urgent
+
+c)  N = normal]]></Description>
+		<Validations>
+			<Validation>
+				<formula><![CDATA[In($value, "S", "U", "N")]]></formula>
+	            <error-code>V08</error-code>
+	            <actionmessage><![CDATA["Invalid Message Priority '" + $value + "'"]]></actionmessage>
+			</Validation>
+		</Validations>
+	</SwiftSystemFieldDef>
+	<SwiftSystemFieldDef Name="delivery-monitoring" Tag="105">
+		<Format><![CDATA[1!n]]></Format>
+		<Specification><![CDATA[(delivery-monitoring)]]></Specification>
+		<Description><![CDATA[Delivery Monitoring, where:
+
+a)  1 = non-delivery warning
+
+b)  2 = delivery notification
+
+c)  3 = both]]></Description>
+	</SwiftSystemFieldDef>
+	<SwiftSystemFieldDef Name="mir" Tag="106">
+		<Format><![CDATA[(6!n)(4!a2!a2!c1!c)(3!c)(4!n)(6!n)]]></Format>
+		<Specification><![CDATA[(date)(lt-identifier)(branch-code)(session-number)(isn)]]></Specification>
+		<Description><![CDATA[MIR containing:
+
+a)  Input date
+
+b)  Input LT including branch code
+
+c)  Session number
+
+d)  ISN]]></Description>
+		<Validations>
+			<Validation>
+				<subfield>date</subfield>
+				<formula><![CDATA[IsDate($value,"yyMMdd")]]></formula>
+	            <error-code>V04</error-code>
+	            <actionmessage><![CDATA["Invalid Input Date '" + $value + "'"]]></actionmessage>
+			</Validation>
+		</Validations>
+	</SwiftSystemFieldDef>
+	<SwiftSystemFieldDef Name="mor" Tag="107">
+		<Format><![CDATA[(6!n)(4!a2!a2!c1!c)(3!c)(4!n)(6!n)]]></Format>
+		<Specification><![CDATA[(date)(lt-identifier)(branch-code)(session-number)(osn)]]></Specification>
+		<Description><![CDATA[MOR containing:
+
+a)  Output date
+
+b)  Output LT including branch code
+
+c)  Session number
+
+d)  OSN]]></Description>
+		<Validations>
+			<Validation>
+				<subfield>date</subfield>
+				<formula><![CDATA[IsDate($value,"yyMMdd")]]></formula>
+	            <error-code>V04</error-code>
+	            <actionmessage><![CDATA["Invalid Date '" + $value + "'"]]></actionmessage>
+			</Validation>
+		</Validations>
+	</SwiftSystemFieldDef>
+	<SwiftSystemFieldDef Name="mur" Tag="108">
+		<Format><![CDATA[16x]]></Format>
+		<Specification><![CDATA[(mur)]]></Specification>
+		<Description><![CDATA[Message User Reference as used in the header of the original message]]></Description>
+	</SwiftSystemFieldDef>
+	<SwiftSystemFieldDef Name="original-user-message-reference" Tag="109">
+		<Format><![CDATA[(6!n)(6!n)(28!c)]]></Format>
+		<Specification><![CDATA[(date)(full-time)(mir)]]></Specification>
+		<Description><![CDATA[Original Message Reference (MRF) of the corresponding MT 096 SWIFTNet FIN Copy to Central Institution Message , containing:
+
+a)  GMT date and time of the input message acceptance (12 characters).
+
+b)  Original message MIR (28 characters).]]></Description>
+        <Validations>
+			<Validation>
+				<subfield>date</subfield>
+				<formula><![CDATA[IsDate($value,"yyMMdd")]]></formula>
+	            <error-code>V04</error-code>
+	            <actionmessage><![CDATA["Invalid Date '" + $value + "'. date should be in the format yyMMdd."]]></actionmessage>
+			</Validation>
+			<Validation>
+				<subfield>full-time</subfield>
+				<formula><![CDATA[IsDate($value,"HHmmss")]]></formula>
+	            <error-code>V05</error-code>
+	            <actionmessage><![CDATA["Invalid Time '" + $value + "'. full-time should be in the format HHmmss."]]></actionmessage>
+			</Validation>
+		</Validations>
+	</SwiftSystemFieldDef>
+	<SwiftSystemFieldDef Name="window-size" Tag="110">
+		<Format><![CDATA[3!n]]></Format>
+		<Specification><![CDATA[(window-size)]]></Specification>
+		<Description><![CDATA[Maximum number of messages sent or received without waiting for or sending acknowledgement.]]></Description>
+	</SwiftSystemFieldDef>
+	<SwiftSystemFieldDef Name="banking-priority" Tag="113">
+		<Format><![CDATA[4!x]]></Format>
+		<Specification><![CDATA[(banking-priority)]]></Specification>
+		<Description><![CDATA[Assigned by the sender of the message.]]></Description>
+	</SwiftSystemFieldDef>
+	<SwiftSystemFieldDef Name="payment-release-information-sender" Tag="114">
+		<Format><![CDATA[32x]]></Format>
+		<Specification><![CDATA[(payment-release-information-sender)]]></Specification>
+		<Description><![CDATA[Information from Central Institution to sender of payment message.]]></Description>
+	</SwiftSystemFieldDef>
+	<SwiftSystemFieldDef Name="payment-release-information-receiver" Tag="115">
+		<Format><![CDATA[32x]]></Format>
+		<Specification><![CDATA[(payment-release-information-receiver)]]></Specification>
+		<Description><![CDATA[Information from Central Institution to the receiver of payment message.
+
+See SWIFTNet FIN Copy Service Description for further information.]]></Description>
+	</SwiftSystemFieldDef>
+	<SwiftSystemFieldDef Name="value-date-today" Tag="116">
+		<Format><![CDATA[1!a]]></Format>
+		<Specification><![CDATA[(value-date-today)]]></Specification>
+		<Description><![CDATA[Restricts delivery of messages, where:
+
+a)  Y = yes. Only deliver messages with a value date of today or earlier
+
+b)  N = no. Do not restrict delivery based on value date]]></Description>
+		<Validations>
+			<Validation>
+				<formula><![CDATA[In($value, "Y", "N")]]></formula>
+	            <error-code>V08</error-code>
+	            <actionmessage><![CDATA["Invalid Value Date Today '" + $value + "'"]]></actionmessage>
+			</Validation>
+		</Validations>
+	</SwiftSystemFieldDef>
+	<SwiftSystemFieldDef Name="authentication-code" Tag="117">
+		<Format><![CDATA[8!h]]></Format>
+		<Specification><![CDATA[(authentication-code)]]></Specification>
+		<Description><![CDATA[Reserved for internal use.]]></Description>
+	</SwiftSystemFieldDef>
+	<SwiftSystemFieldDef Name="lt-subsets-shared-flag" Tag="118">
+		<Format><![CDATA[1!a]]></Format>
+		<Specification><![CDATA[(lt-subsets-shared-flag)]]></Specification>
+		<Description><![CDATA[Whether an LT allows sharing of its selected FIN delivery subsets with other LTs at the same destination, where:
+
+a)  Y = yes
+LT operating in shared mode
+
+b)  N = no
+LT not operating in shared mode]]></Description>
+		<Validations>
+			<Validation>
+				<formula><![CDATA[In($value, "Y", "N")]]></formula>
+	            <error-code>V08</error-code>
+	            <actionmessage><![CDATA["Invalid VLT Subsets Shared Flag '" + $value + "'"]]></actionmessage>
+			</Validation>
+		</Validations>
+	</SwiftSystemFieldDef>
+	<SwiftSystemFieldDef Name="validation flag" Tag="119">
+		<Format><![CDATA[8c]]></Format>
+		<Specification><![CDATA[(validation flag)]]></Specification>
+		<Description><![CDATA[Request for specific validation, followed by the validation identifier. This field may appear in Block 3, the User Header.]]></Description>
+	</SwiftSystemFieldDef>
+	<SwiftSystemFieldDef Name="msg-identifier" Tag="120">
+		<Format><![CDATA[16x]]></Format>
+		<Specification><![CDATA[(msg-identifier)]]></Specification>
+		<Description><![CDATA[Refers to a specific message in a tank file by means of the message-identifier, which is recorded in the first field 20 or 20C::SEME of the message. No duplicates are allowed.
+
+Can be repeated up to 999 times.]]></Description>
+		<Additional-Format><![CDATA[]]></Additional-Format>
+	</SwiftSystemFieldDef>
+	<SwiftSystemFieldDef Name="number-of-messages" Tag="122">
+		<Format><![CDATA[3n]]></Format>
+		<Specification><![CDATA[(number-of-messages)]]></Specification>
+		<Description><![CDATA[Number of messages that can be requested to be sent by the system to a Test & Training LT in Local Test mode. A maximum of 999 messages may be requested.]]></Description>
+	</SwiftSystemFieldDef>
+	<SwiftSystemFieldDef Name="msg-list" Tag="123">
+		<Format><![CDATA[3!a]]></Format>
+		<Specification><![CDATA[(msg-list)]]></Specification>
+		<Description><![CDATA[Whole tank file. It should contain the value ALL, indicating that the entire set of tank file messages is requested.]]></Description>
+	</SwiftSystemFieldDef>
+	<SwiftSystemFieldDef Name="msg-type" Tag="124">
+		<Format><![CDATA[3!n]]></Format>
+		<Specification><![CDATA[(msg-type)]]></Specification>
+		<Description><![CDATA[A valid SWIFTNet FIN user-to-user Message Type, or Message Type 094. It can be repeated up to a value equal to the number of different user-to-user messages plus 1 (for MT 094). No duplicates are allowed.]]></Description>
+	</SwiftSystemFieldDef>
+	<SwiftSystemFieldDef Name="msg-category" Tag="125">
+		<Format><![CDATA[1!n]]></Format>
+		<Specification><![CDATA[(msg-category)]]></Specification>
+		<Description><![CDATA[A valid SWIFTNet FIN user-to-user Message Category. It can be repeated up to 9 times. No duplicates are allowed.
+
+See the SWIFTStandards Message Reference Guides for more information.]]></Description>
+	</SwiftSystemFieldDef>
+	<SwiftSystemFieldDef Name="random-number-seed" Tag="126">
+		<Format><![CDATA[4!n]]></Format>
+		<Specification><![CDATA[(random-number-seed)]]></Specification>
+		<Description><![CDATA[Identifies a set of test messages. It contains a seed defined by the user, which allows them to receive the same set of messages in a subsequent session if the same seed is used.]]></Description>
+	</SwiftSystemFieldDef>
+	<SwiftSystemFieldDef Name="test-mode-selection" Tag="127">
+		<Format><![CDATA[2!a]]></Format>
+		<Specification><![CDATA[(test-mode-selection)]]></Specification>
+		<Description><![CDATA[Test mode selection must be one of the following:
+
+a)  FC = full function mode, current
+
+b)  FF = full function mode, future
+
+c)  LC = local test mode, current
+
+d)  LF = local test mode, future]]></Description>
+		<Validations>
+			<Validation>
+				<formula><![CDATA[In($value, "FC", "FF", "LC", "LF")]]></formula>
+	            <error-code>V08</error-code>
+	            <actionmessage><![CDATA["Invalid Test mode Selection '" + $value + "'"]]></actionmessage>
+			</Validation>
+		</Validations>
+	</SwiftSystemFieldDef>
+	<SwiftSystemFieldDef Name="priority-billable-BIC" Tag="128">
+		<Format><![CDATA[(1!a'/'4!a2!a2!c)]]></Format>
+		<Specification><![CDATA[(priority-billable-BIC)]]></Specification>
+		<Description><![CDATA[Broadcast priority and billable BIC
+note: branch code is not allowed.]]></Description>
+		<Additional-Format><![CDATA["U"|"N" "/"4!a2!a2!c]]></Additional-Format>
+        <Validations>
+			<Validation>
+				<formula><![CDATA[(StartsWith($value, "U") || StartsWith($value, "N"))]]></formula>
+	            <error-code>V07</error-code>
+	            <actionmessage><![CDATA["Invalid Priority Code '" + At($value,0) + "'. Valid priority codes should start with U or N."]]></actionmessage>
+			</Validation>
+		</Validations>
+	</SwiftSystemFieldDef>
+	<SwiftSystemFieldDef Name="section-number" Tag="129">
+		<Format><![CDATA[(2n'/'2n)]]></Format>
+		<Specification><![CDATA[(section-number)]]></Specification>
+		<Description><![CDATA[Section number.]]></Description>
+	</SwiftSystemFieldDef>
+	<SwiftSystemFieldDef Name="heading-code" Tag="130">
+		<Format><![CDATA[(2*69x)]]></Format>
+		<Specification><![CDATA[(heading-code)]]></Specification>
+		<Description><![CDATA[Heading code line 1
+
+Heading code line 2
+
+IF (tag130:/09/ ...) or (tag 130:/23/ ...) is present, then tag 132 or 133 but not both, must be used.]]></Description>
+		<Validations>
+			<Validation>
+				<formula><![CDATA[If(FindFirst($value, "\r\n") == -1, 
+   							In($value, "/20/REVOKED CERTIFICATES", 
+      						"/21/TIME ZONE CHANGE", "/22/DUPLICATION WITHOUT PDE", 
+      						"/23/STRIKE NOTIFICATION", "/24/EXCEPTIONAL SITUATION", 
+      						"/99/OTHER", "/40/REVOKED CERTIFICATES", 
+      						"/41/TIME ZONE CHANGE", "/42/EXCEPTIONAL SITUATION", 
+      						"/43/STRIKE NOTIFICATION"),true)]]>
+				</formula>
+	            <error-code>V07</error-code>
+	            <actionmessage><![CDATA["Invalid Code Word in line 1 '" + LeftStr($value, "\r\n") + "'. It is not a valid code when code word consists of 1 line"]]></actionmessage>
+			</Validation>
+			<Validation>
+				<formula><![CDATA[$index = FindFirst($value, "\r\n");
+							$line1 = (If($index != -1, LeftStr($value, "\r\n"), $value));
+							If($index != -1, 
+							   In($line1, "/01/BANK", "/02/LOCAL NOTIFICATIONS", 
+							      "/03/CORRESPONDENT BANK", "/04/TELEX", "/05/SWIFT BIC", 
+							      "/06/WARNING LOST OR STOLEN", "/07/FRAUD NOTIFICATION", 
+							      "/08/CURRENCY", "/09/BROADCAST AMENDMENT", 
+							      "/10/BUSINESS CONTINUITY PLANNING", "/30/CURRENCY", 
+							      "/31/SWIFT NOTIFICATION", "/32/BROADCAST AMENDMENT", 
+							      "/33/LOCAL NOTIFICATIONS"),true)]]>
+				</formula>
+	            <error-code>V07</error-code>
+	            <actionmessage><![CDATA["Invalid Code Word in line 1 '" + LeftStr($value, "\r\n") + "'. It is not a valid code when code word consists of 2 lines"]]></actionmessage>
+			</Validation>
+			<Validation>
+				<formula><![CDATA[$line1 = LeftStr($value, "\r\n");
+							$line2 = RightStr($value, "\r\n");
+							If($line1 == "/01/BANK", 
+							   In($line2, "/01/OPERATIONAL", "/02/CLOSURE", 
+							      "/03/BRANCH CLOSURE", "/04/MERGER", 
+							      "/05/OWNERSHIP CHANGE", "/06/CHANGE OF OFFICERS", 
+							      "/07/CHANGE IN AUTHORISED SIGNATURES", 
+							      "/08/TELEPHONE/FAX NUMBER CHANGE", 
+							      "/09/ADDRESS CHANGE", "/10/STANDING ORDERS", 
+							      "/11/CHANGE OF NAME", "/12/HOLIDAY"),true)]]>
+				</formula>
+	            <error-code>V07</error-code>
+	            <actionmessage><![CDATA["Invalid code word in line 2 '" + RightStr($value, "\r\n") + "'. The code word does not correspond to the code word in line 1 '" + LeftStr($value, "\r\n") +"'."]]></actionmessage>
+			</Validation>
+			<Validation>
+				<formula><![CDATA[$line1 = LeftStr($value, "\r\n");
+							$line2 = RightStr($value, "\r\n");
+							If($line1 == "/02/LOCAL NOTIFICATIONS", 
+							   In($line2, "/01/DOMESTIC CLEARING SYSTEM CHANGES", 
+							      "/02/HOLIDAY NOTIFICATION"),true)]]>
+				</formula>
+	            <error-code>V07</error-code>
+	            <actionmessage><![CDATA["Invalid code word in line 2 '" + RightStr($value, "\r\n") + "'. The code word does not correspond to the code word in line 1 '" + LeftStr($value, "\r\n")+"'." ]]></actionmessage>
+			</Validation>
+			<Validation>
+				<formula><![CDATA[$line1 = LeftStr($value, "\r\n");
+							$line2 = RightStr($value, "\r\n");
+							If($line1 == "/03/CORRESPONDENT BANK", 
+							   In($line2, "/01/LIST", "/02/CHANGE", 
+							      "/03/ACCOUNT NUMBER CHANGE", "/04/CLS SSI INFORMATION", 
+							      "/05/ACCOUNT NUMBER DELETION", 
+							      "/06/NEW ACCOUNT NUMBER"),true)]]>
+				</formula>
+	            <error-code>V07</error-code>
+	            <actionmessage><![CDATA["Invalid code word in line 2 '" + RightStr($value, "\r\n") + "'. The code word does not correspond to the code word in line 1 '" + LeftStr($value, "\r\n") +"'."]]></actionmessage>
+			</Validation>
+			<Validation>
+				<formula><![CDATA[$line1 = LeftStr($value, "\r\n");
+							$line2 = RightStr($value, "\r\n");
+							If($line1 == "/04/TELEX", 
+							   In($line2, "/01/CHANGE", "/02/GARBLED", "/03/FAILURE", 
+							      "/04/END OF USE"), true)]]>
+				</formula>
+	            <error-code>V07</error-code>
+	            <actionmessage><![CDATA["Invalid code word in line 2 '" + RightStr($value, "\r\n") + "'. The code word does not correspond to the code word in line 1 '" + LeftStr($value, "\r\n") +"'."]]></actionmessage>
+			</Validation>
+			<Validation>
+				<formula><![CDATA[$line1 = LeftStr($value, "\r\n");
+							$line2 = RightStr($value, "\r\n");
+							If($line1 == "/05/SWIFT BIC", 
+							   In($line2, "/01/CHANGE", "/02/ADDITION", 
+							      "/03/DEACTIVATION"),true)]]>
+				</formula>
+	            <error-code>V07</error-code>
+	            <actionmessage><![CDATA["Invalid code word in line 2 '" + RightStr($value, "\r\n") + "'. The code word does not correspond to the code word in line 1 '" + LeftStr($value, "\r\n") +"'."]]></actionmessage>
+			</Validation>
+			<Validation>
+				<formula><![CDATA[$line1 = LeftStr($value, "\r\n");
+							$line2 = RightStr($value, "\r\n");
+							If($line1 == "/06/WARNING LOST OR STOLEN", 
+							   In($line2, "/01/INSTRUMENTS (GENERAL WARNING)", 
+							      "/02/DRAFTS", "/03/CHEQUES", "/04/TRAVELLERS CHEQUES", 
+							      "/05/BANK CARDS"),true)]]>
+				</formula>
+	            <error-code>V07</error-code>
+	            <actionmessage><![CDATA["Invalid code word in line 2 '" + RightStr($value, "\r\n") + "'. The code word does not correspond to the code word in line 1 '" + LeftStr($value, "\r\n") +"'."]]></actionmessage>
+			</Validation>
+			<Validation>
+				<formula><![CDATA[$line1 = LeftStr($value, "\r\n");
+							$line2 = RightStr($value, "\r\n");
+							If($line1 == "/07/FRAUD NOTIFICATION", 
+							   In($line2, "/01/GENERAL", "/02/DRAFTS", "/03/CHEQUES", 
+							      "/04/TRAVELLERS CHEQUES", "/05/MONEY LAUNDERING"),true)]]>
+				</formula>
+	            <error-code>V07</error-code>
+	            <actionmessage><![CDATA["Invalid code word in line 2 '" + RightStr($value, "\r\n") + "'. The code word does not correspond to the code word in line 1 '" + LeftStr($value, "\r\n") +"'."]]></actionmessage>
+			</Validation>
+			<Validation>
+				<formula><![CDATA[$line1 = LeftStr($value, "\r\n");
+							$line2 = RightStr($value, "\r\n");
+							If($line1 == "/08/CURRENCY", 
+							   In($line2, "/01/REVALUATION", "/02/DEVALUATION", 
+							      "/03/DECIMAL VALUE CHANGE"),true)]]>
+				</formula>
+	            <error-code>V07</error-code>
+	            <actionmessage><![CDATA["Invalid code word in line 2 '" + RightStr($value, "\r\n") + "'. The code word does not correspond to the code word in line 1 '" + LeftStr($value, "\r\n") +"'."]]></actionmessage>
+			</Validation>
+			<Validation>
+				<formula><![CDATA[$line1 = LeftStr($value, "\r\n");
+							$line2 = RightStr($value, "\r\n");
+							If($line1 == "/09/BROADCAST AMENDMENT", 
+							   In($line2, 
+							      "/01/BROADCAST SEQUENCE NUMBER OF ORIGINAL BROADCAST"),true)]]>
+				</formula>
+	            <error-code>V07</error-code>
+	            <actionmessage><![CDATA["Invalid code word in line 2 '" + RightStr($value, "\r\n") + "'. The code word does not correspond to the code word in line 1 '" + LeftStr($value, "\r\n") +"'."]]></actionmessage>
+			</Validation>
+			<Validation>
+				<formula><![CDATA[$line1 = LeftStr($value, "\r\n");
+							$line2 = RightStr($value, "\r\n");
+							If($line1 == "/10/BUSINESS CONTINUITY PLANNING", 
+							   In($line2, "/01/NATURAL CATASTROPHE", "/02/OTHER"),true)]]>
+				</formula>
+	            <error-code>V07</error-code>
+	            <actionmessage><![CDATA["Invalid code word in line 2 '" + RightStr($value, "\r\n") + "'. The code word does not correspond to the code word in line 1 '" + LeftStr($value, "\r\n")+"'."]]></actionmessage>
+			</Validation>
+			<Validation>
+				<formula><![CDATA[$line1 = LeftStr($value, "\r\n");
+							$line2 = RightStr($value, "\r\n");
+							If($line1 == "/30/CURRENCY", 
+							   In($line2, "/01/CODE CHANGE", "/02/DECIMAL VALUE CHANGE", 
+							      "/03/ADDITION", "/04/DELETION", "/99/OTHER"),true)]]>
+				</formula>
+	            <error-code>V07</error-code>
+	            <actionmessage><![CDATA["Invalid code word in line 2 '" + RightStr($value, "\r\n") + "'. The code word does not correspond to the code word in line 1 '" + LeftStr($value, "\r\n") +"'."]]></actionmessage>
+			</Validation>
+			<Validation>
+				<formula><![CDATA[$line1 = LeftStr($value, "\r\n");
+							$line2 = RightStr($value, "\r\n");
+							If($line1 == "/31/SWIFT NOTIFICATION", 
+							   In($line2, "/01/GENERAL", "/02/OPERATIONAL", 
+							      "/03/TECHNICAL", "/04/DIRECTORY MODIFICATIONS", 
+							      "/05/BIC DIRECTORY UPDATE", 
+							      "/06/LOCATION NOTIFICATION - COUNTRY"),true)]]>
+				</formula>
+	            <error-code>V07</error-code>
+	            <actionmessage><![CDATA["Invalid code word in line 2 '" + RightStr($value, "\r\n") + "'. The code word does not correspond to the code word in line 1 '" + LeftStr($value, "\r\n") +"'."]]></actionmessage>
+			</Validation>
+			<Validation>
+				<formula><![CDATA[$line1 = LeftStr($value, "\r\n");
+							$line2 = RightStr($value, "\r\n");
+							If($line1 == "/32/BROADCAST AMENDMENT", 
+							   In($line2, 
+							      "/01/BROADCAST SEQUENCE NUMBER OF ORIGINAL BROADCAST"),true)]]>
+				</formula>
+	            <error-code>V07</error-code>
+	            <actionmessage><![CDATA["Invalid code word in line 2 '" + RightStr($value, "\r\n") + "'. The code word does not correspond to the code word in line 1 '" + LeftStr($value, "\r\n") +"'."]]></actionmessage>
+			</Validation>
+			<Validation>
+				<formula><![CDATA[$line1 = LeftStr($value, "\r\n");
+							$line2 = RightStr($value, "\r\n");
+							If($line1 == "/33/LOCAL NOTIFICATIONS", 
+							   In($line2, "/01/CHANGES IN LOCAL BANKING CONDITIONS", 
+							      "/02/HOLIDAY NOTIFICATION COUNTRY"),true)]]>
+				</formula>
+	            <error-code>V07</error-code>
+	            <actionmessage><![CDATA["Invalid code word in line 2 '" + RightStr($value, "\r\n") + "'. The code word does not correspond to the code word in line 1 '" + LeftStr($value, "\r\n") +"'."]]></actionmessage>
+			</Validation>
+		</Validations>
+		<Additional-Format><![CDATA["/"2!n"/"<X>1-65[<CrLf>"/"2!n"/"< X>1-65]]]></Additional-Format>
+	</SwiftSystemFieldDef>
+	<SwiftSystemFieldDef Name="original-broadcast-number" Tag="132">
+		<Format><![CDATA[(1!a5!n)]]></Format>
+		<Specification><![CDATA[(original-broadcast-number)]]></Specification>
+		<Description><![CDATA[Original broadcast number for broadcast sent to all users.
+
+Tag 132 can only be present if tag 130:/09/ or tag 130:/32/ is present.
+
+Tag 132 may be repeated.]]></Description>
+		<Validations>
+			<Validation>
+				<formula><![CDATA[(StartsWith($value, "B") || StartsWith($value, "S"))]]></formula>
+	            <error-code>V07</error-code>
+	            <actionmessage><![CDATA["Invalid Original Broadcast Number Sent To All Users '" + $value + "'"]]></actionmessage>
+			</Validation>
+		</Validations>
+		<Additional-Format><![CDATA["B"|"S"5!n]]></Additional-Format>
+	</SwiftSystemFieldDef>
+	<SwiftSystemFieldDef Name="original-broadcast-number" Tag="133">
+		<Format><![CDATA[(6!a4!n)]]></Format>
+		<Specification><![CDATA[(original-broadcast-number)]]></Specification>
+		<Description><![CDATA[Original broadcast number for broadcast sent to selected countries
+
+Tag 133 can only be present if tag 130:/09/ or tag 130:/32/ is present
+
+Note: "B"|"S" "XXX" "HQ"|"HK"|"NL"|"US"4!n corresponds to: B User-initiated Broadcast
+
+S SWIFT-initiated Broadcast
+
+XXX indicates an unsequenced Broadcast (i.e. for selected countries)
+
+HQ Broadcast issued from La Hulpe
+
+HK Broadcast issued from Hong Kong
+
+NL Broadcast issued from Netherlands
+
+US Broadcast issued from the United States
+
+4!n 4 digit Broadcast number
+
+Tag 133 may be repeated.]]></Description>
+		<Validations>
+			<Validation>
+				<formula><![CDATA[(StartsWith($value, "B") || StartsWith($value, "S"))]]></formula>
+	            <error-code>V07</error-code>
+	            <actionmessage><![CDATA["Invalid Original Broadcast Number Sent To Selected Countries '" + $value + "'."]]></actionmessage>
+			</Validation>
+			<Validation>
+				<formula><![CDATA[$unsequencedBroadcast = Mid($value, 1, 3);
+							$unsequencedBroadcast == "XXX";]]>
+				</formula>
+	            <error-code>V07</error-code>
+	            <actionmessage><![CDATA["Invalid Original Broadcast Number Sent To Selected Countries '" + $value + "'."]]></actionmessage>
+			</Validation>
+			<Validation>
+				<formula><![CDATA[$broadcastIssuedFrom = Mid($value, 4, 2);
+							In($broadcastIssuedFrom, "HQ", "HK", "NL", "US");]]>
+				</formula>
+	            <error-code>V07</error-code>
+	            <actionmessage><![CDATA["Invalid Original Broadcast Number Sent To Selected Countries '" + $value + "'."]]></actionmessage>
+			</Validation>
+		</Validations>
+		<Additional-Format><![CDATA["B"|"S""XXX""HQ"|"HK"|"NL"|"US"4!n]]></Additional-Format>
+	</SwiftSystemFieldDef>
+	<SwiftSystemFieldDef Name="broadcast-requester" Tag="134">
+		<Format><![CDATA[(4!a2!a2!c[3!c])(CRLF65x)(CRLF65x)]]></Format>
+		<Specification><![CDATA[(bicofbroadcastrequester)(nameofbroadcastrequester)(cityofbroadcastrequester)]]></Specification>
+		<Description><![CDATA[BIC of Broadcast Requester.
+
+Name of Broadcast Requester.
+
+City of Broadcast Requester.]]></Description>
+	</SwiftSystemFieldDef>
+	<SwiftSystemFieldDef Name="broadcast-priority" Tag="135">
+		<Format><![CDATA[1!a]]></Format>
+		<Specification><![CDATA[(broadcast-priority)]]></Specification>
+		<Description><![CDATA[Broadcast processing priority.]]></Description>
+		<Validations>
+			<Validation>
+				<formula><![CDATA[In($value, "U", "N")]]></formula>
+	            <error-code>V07</error-code>
+	            <actionmessage><![CDATA["Invalid Broadcast Priority '" + $value + "'. Broadcast Priority should be either 'U' or 'N'."]]></actionmessage>
+			</Validation>
+		</Validations>
+		<Additional-Format><![CDATA["U"|"N"]]></Additional-Format>
+	</SwiftSystemFieldDef>
+	<SwiftSystemFieldDef Name="broadcast-number" Tag="136">
+		<Format><![CDATA[(1!a5!n)]]></Format>
+		<Specification><![CDATA[(broadcast-number)]]></Specification>
+		<Description><![CDATA[Broadcast number for broadcast sent to all users.]]></Description>
+		<Validations>
+			<Validation>
+				<formula><![CDATA[(StartsWith($value, "B") || StartsWith($value, "S"))]]></formula>
+	            <error-code>V07</error-code>
+	            <actionmessage><![CDATA["Invalid Broadcast Number Sent To All Users '" + $value +"'"]]></actionmessage>
+			</Validation>
+		</Validations>
+		<Additional-Format><![CDATA["B"|"S"5!n]]></Additional-Format>
+	</SwiftSystemFieldDef>
+	<SwiftSystemFieldDef Name="broadcast-number" Tag="137">
+		<Format><![CDATA[(6!a4!n)]]></Format>
+		<Specification><![CDATA[(broadcast-number)]]></Specification>
+		<Description><![CDATA[Broadcast number for broadcast sent to selected countries.
+
+See tag 133 for details.]]></Description>
+		<Validations>
+			<Validation>
+				<formula><![CDATA[(StartsWith($value, "B") || StartsWith($value, "S"))]]></formula>
+	            <error-code>V07</error-code>
+	            <actionmessage><![CDATA["Invalid Broadcast Number Sent To Selected Countries '" + $value + "'."]]></actionmessage>
+			</Validation>
+			<Validation>
+				<formula><![CDATA[$unsequencedBroadcast = Mid($value, 1, 3);
+							$unsequencedBroadcast == "XXX";]]>
+				</formula>
+	            <error-code>V07</error-code>
+	            <actionmessage><![CDATA["Invalid Broadcast Number Sent To Selected Countries '" + $value + "'."]]></actionmessage>
+			</Validation>
+			<Validation>
+				<formula><![CDATA[$broadcastIssuedFrom = Mid($value, 4, 2);
+							In($broadcastIssuedFrom, "HQ", "HK", "NL", "US");]]>
+				</formula>
+	            <error-code>V07</error-code>
+	            <actionmessage><![CDATA["Invalid Broadcast Number Sent To Selected Countries '" + $value + "'."]]></actionmessage>
+			</Validation>
+		</Validations>
+		<Additional-Format><![CDATA["B"|"S" "XXX" "HQ"|"HK"|"NL"|"US" 4!n]]></Additional-Format>
+	</SwiftSystemFieldDef>
+	<SwiftSystemFieldDef Name="session-number" Tag="151">
+		<Format><![CDATA[4!n]]></Format>
+		<Specification><![CDATA[(session-number)]]></Specification>
+		<Description><![CDATA[Session Number allocated to the new session.]]></Description>
+	</SwiftSystemFieldDef>
+	<SwiftSystemFieldDef Name="1st-isn" Tag="152">
+		<Format><![CDATA[6!n]]></Format>
+		<Specification><![CDATA[(1st-isn)]]></Specification>
+		<Description><![CDATA[First ISN to be retrieved in a multiple input message retrieval.]]></Description>
+	</SwiftSystemFieldDef>
+	<SwiftSystemFieldDef Name="1st-osn" Tag="153">
+		<Format><![CDATA[6!n]]></Format>
+		<Specification><![CDATA[(1st-osn)]]></Specification>
+		<Description><![CDATA[First OSN to be retrieved in a multiple output message retrieval.]]></Description>
+	</SwiftSystemFieldDef>
+	<SwiftSystemFieldDef Name="date" Tag="171">
+		<Format><![CDATA[6!n]]></Format>
+		<Specification><![CDATA[(date)]]></Specification>
+		<Additional-Format><![CDATA[YYMMDD]]></Additional-Format>
+		<Description><![CDATA[Date and time are always given as local, unless otherwise specified. Local time for the SWIFTNetwork is in GMT.]]></Description>
+		<Validations>
+			<Validation>
+				<formula><![CDATA[IsDate($value,"yyMMdd")]]></formula>
+	            <error-code>V04</error-code>
+	            <actionmessage><![CDATA["Invalid Date '" + $value + "'"]]></actionmessage>
+			</Validation>
+		</Validations>
+	</SwiftSystemFieldDef>
+	<SwiftSystemFieldDef Name="date-range" Tag="172">
+		<Format><![CDATA[(4!n)(4!n)]]></Format>
+		<Specification><![CDATA[(start-date)(end-date)]]></Specification>
+		<Additional-Format><![CDATA[MMDDMMDD]]></Additional-Format>
+		<Description><![CDATA[Date range, containing:
+
+a)  Start date
+
+b)  End date]]></Description>
+        <Validations>
+			<Validation>
+				<subfield>start-date</subfield>
+				<formula><![CDATA[IsDate($value,"MMdd")]]></formula>
+	            <error-code>V04</error-code>
+	            <actionmessage><![CDATA["Invalid Start Date '" + $value + "'. start-date should be in the format MMdd."]]></actionmessage>
+			</Validation>
+			<Validation>
+				<subfield>end-date</subfield>
+				<formula><![CDATA[IsDate($value,"MMdd")]]></formula>
+	            <error-code>V04</error-code>
+	            <actionmessage><![CDATA["Invalid End Date '" + $value + "'. end-date should be in the format MMdd."]]></actionmessage>
+			</Validation>
+		</Validations>
+	</SwiftSystemFieldDef>
+	<SwiftSystemFieldDef Name="day-time" Tag="173">
+		<Format><![CDATA[6!n]]></Format>
+		<Specification><![CDATA[(day-time)]]></Specification>
+		<Additional-Format><![CDATA[DDHHMM]]></Additional-Format>
+		<Description><![CDATA[Date and time are always given as local, unless otherwise specified. Local time for the SWIFTNetwork is in GMT.]]></Description>
+        <Validations>
+			<Validation>
+				<subfield>day-time</subfield>
+				<formula><![CDATA[IsDate($value,"ddHHmm")]]></formula>
+	            <error-code>V05</error-code>
+	            <actionmessage><![CDATA["Invalid day-time '" + $value + "'. day-time should be in format ddHHmm."]]></actionmessage>
+			</Validation>
+        </Validations> 
+	</SwiftSystemFieldDef>
+	<SwiftSystemFieldDef Name="hour" Tag="174">
+		<Format><![CDATA[2!n]]></Format>
+		<Specification><![CDATA[(hour)]]></Specification>
+		<Additional-Format><![CDATA[HH]]></Additional-Format>
+		<Description><![CDATA[Range: 00-23
+
+Date and time are always given as local, unless otherwise specified. Local time for the SWIFTNetwork is in GMT.]]></Description>
+        <Validations>
+			<Validation>
+				<formula><![CDATA[IsDate($value,"HH")]]></formula>
+	            <error-code>V05</error-code>
+	            <actionmessage><![CDATA["Invalid Hour '" + $value + "'. hour should be in the format HH and in between 00 to 23."]]></actionmessage>
+			</Validation>
+		</Validations>
+	</SwiftSystemFieldDef>
+	<SwiftSystemFieldDef Name="time" Tag="175">
+		<Format><![CDATA[4!n]]></Format>
+		<Specification><![CDATA[(time)]]></Specification>
+		<Additional-Format><![CDATA[HHMM]]></Additional-Format>
+		<Description><![CDATA[Date and time are always given as local, unless otherwise specified. Local time for the SWIFTNetwork is in GMT.]]></Description>
+		<Validations>
+			<Validation>
+				<formula><![CDATA[IsDate($value,"HHmm")]]></formula>
+	            <error-code>V05</error-code>
+	            <actionmessage><![CDATA["Invalid Time '" + $value + "'"]]></actionmessage>
+			</Validation>
+		</Validations>
+	</SwiftSystemFieldDef>
+	<SwiftSystemFieldDef Name="date-time" Tag="177">
+		<Format><![CDATA[(10!n)]]></Format>
+		<Specification><![CDATA[(date-time)]]></Specification>
+		<Additional-Format><![CDATA[YYMMDDHHMM]]></Additional-Format>
+		<Description><![CDATA[Date and time are always given as local, unless otherwise specified. Local time for the SWIFTNetwork is in GMT.]]></Description>
+		<Validations>
+			<Validation>
+				<formula><![CDATA[IsDate($value,"yyMMddHHmm")]]></formula>
+	            <error-code>V05</error-code>
+	            <actionmessage><![CDATA["Invalid Date/Time '" + $value + "'"]]></actionmessage>
+			</Validation>
+		</Validations>
+	</SwiftSystemFieldDef>
+	<SwiftSystemFieldDef Name="full-time" Tag="179">
+		<Format><![CDATA[6!n]]></Format>
+		<Specification><![CDATA[(full-time)]]></Specification>
+		<Additional-Format><![CDATA[HHMMSS]]></Additional-Format>
+		<Description><![CDATA[Reserved for internal use.]]></Description>
+	</SwiftSystemFieldDef>
+	<SwiftSystemFieldDef Name="copy-msg-text" Tag="199">
+		<Format><![CDATA[9911z]]></Format>
+		<Specification><![CDATA[(copy-msg-text)]]></Specification>
+		<Description><![CDATA[Reserved for internal use.]]></Description>
+	</SwiftSystemFieldDef>
+	<SwiftSystemFieldDef Name="section-number" Tag="202">
+		<Format><![CDATA[4!n]]></Format>
+		<Specification><![CDATA[(section-number)]]></Specification>
+		<Description><![CDATA[Sequential section number, beginning with 0001, identifying the position of an individual message in a multiple-section message.]]></Description>
+		<Validations>
+			<Validation>
+				<formula><![CDATA[(ToInt($value) > 0)]]></formula>
+	            <error-code>V07</error-code>
+	            <actionmessage><![CDATA["Invalid Section Number '" + $value + "'"]]></actionmessage>
+			</Validation>
+		</Validations>
+	</SwiftSystemFieldDef>
+	<SwiftSystemFieldDef Name="total-sections" Tag="203">
+		<Format><![CDATA[4!n]]></Format>
+		<Specification><![CDATA[(total-sections)]]></Specification>
+		<Description><![CDATA[Total number of sections in a multi-section message.]]></Description>
+	</SwiftSystemFieldDef>
+	<SwiftSystemFieldDef Name="select-state" Tag="204">
+		<Format><![CDATA[2!a]]></Format>
+		<Specification><![CDATA[(select-state)]]></Specification>
+		<Description><![CDATA[LT select state, where:
+
+a)  YN = input only
+
+b)  NY = output only
+
+c)  YY = input and output.
+
+Output refers to messages which are not LT-directed.]]></Description>
+        <Validations>
+			<Validation>
+				<formula><![CDATA[In($value, "YN", "NY", "YY")]]></formula>
+	            <error-code>V08</error-code>
+	            <actionmessage><![CDATA["Invalid State '" + $value + "'. Valid State values are : YN, NY, YY."]]></actionmessage>
+			</Validation>
+		</Validations>
+	</SwiftSystemFieldDef>
+	<SwiftSystemFieldDef Name="value-date-ordering" Tag="206">
+		<Format><![CDATA[1!a]]></Format>
+		<Specification><![CDATA[(value-date-ordering)]]></Specification>
+		<Description><![CDATA[Value date ordering, where:
+
+a)  Y = on
+
+b)  N = off]]></Description>
+		<Validations>
+			<Validation>
+				<formula><![CDATA[In($value, "Y", "N")]]></formula>
+	            <error-code>V08</error-code>
+	            <actionmessage><![CDATA["Invalid Value Date Ordering '" + $value + "'"]]></actionmessage>
+			</Validation>
+		</Validations>
+		<Additional-Format><![CDATA[Y/N]]></Additional-Format>
+	</SwiftSystemFieldDef>
+	<SwiftSystemFieldDef Name="lt-directed-queue" Tag="208">
+		<Format><![CDATA[1!a]]></Format>
+		<Specification><![CDATA[(lt-directed-queue)]]></Specification>
+		<Description><![CDATA[Select output of messages from the LT-directed queue, where:
+
+a)  Y = yes
+
+b)  N = no]]></Description>
+		<Validations>
+			<Validation>
+				<formula><![CDATA[In($value, "Y", "N")]]></formula>
+	            <error-code>V08</error-code>
+	            <actionmessage><![CDATA["Invalid LT Directed Queue '" + $value + "'"]]></actionmessage>
+			</Validation>
+		</Validations>
+		<Additional-Format><![CDATA[Y/N]]></Additional-Format>
+	</SwiftSystemFieldDef>
+	<SwiftSystemFieldDef Name="system-news-version" Tag="209">
+		<Format><![CDATA[4!n]]></Format>
+		<Specification><![CDATA[(system-news-version)]]></Specification>
+		<Description><![CDATA[Latest version of the System News.]]></Description>
+	</SwiftSystemFieldDef>
+	<SwiftSystemFieldDef Name="ICC-shipment-reference" Tag="220">
+		<Format><![CDATA[6!n]]></Format>
+		<Specification><![CDATA[(ICC-shipment-reference)]]></Specification>
+		<Description><![CDATA[ICC shipment reference number as indicated on Delivery Notification accompanying the ICCs.]]></Description>
+	</SwiftSystemFieldDef>
+	<SwiftSystemFieldDef Name="swift-card-number" Tag="221">
+		<Format><![CDATA[(6!n1e5!n1e4!n1e1!n)]]></Format>
+		<Specification><![CDATA[(swift-card-number)]]></Specification>
+		<Description><![CDATA[ICC's SWIFT card number as engraved on the face of each SWIFT ICC.]]></Description>
+	</SwiftSystemFieldDef>
+	<SwiftSystemFieldDef Name="FIN-copy-service-status" Tag="242">
+		<Format><![CDATA[1!a]]></Format>
+		<Specification><![CDATA[(FIN-copy-service-status)]]></Specification>
+		<Description><![CDATA[Requested Service Status, where:
+
+a)  O = open. Start-up service
+
+b)  C = close. Shutdown service]]></Description>
+	</SwiftSystemFieldDef>
+	<SwiftSystemFieldDef Name="hold-queue-request-type" Tag="243">
+		<Format><![CDATA[1!n]]></Format>
+		<Specification><![CDATA[(hold-queue-request-type)]]></Specification>
+		<Description><![CDATA[Type of Hold Queue report, where:
+
+a)  1 = counts and MIRs
+
+b)  2 = counts only]]></Description>
+        <Validations>
+			<Validation>
+				<formula><![CDATA[In($value, "1", "2")]]></formula>
+	            <error-code>V08</error-code>
+	            <actionmessage><![CDATA["Invalid Hold Queue Report Type '" + $value + "'. hold-queue-report-types are:1,2"]]></actionmessage>
+			</Validation>
+		</Validations>
+	</SwiftSystemFieldDef>
+	<SwiftSystemFieldDef Name="mir" Tag="251">
+		<Format><![CDATA[(6!n)(4!a2!a2!c1!c)(3!a)(4!n)(6!n)]]></Format>
+		<Specification><![CDATA[(date)(lt-identifier)(branch-code)(session-number)(isn)]]></Specification>
+		<Description><![CDATA[MIR of the individual message that is to be retrieved. It consists of:
+
+a)  Date of input of the message
+
+b)  Sending LT and branch code XXX (irrespective of the branch code used in the original message)
+
+c)  Session number
+
+d)  ISN]]></Description>
+		<Validations>
+			<Validation>
+				<subfield>date</subfield>
+				<formula><![CDATA[IsDate($value,"yyMMdd")]]></formula>
+	            <error-code>V04</error-code>
+	            <actionmessage><![CDATA["Invalid Input Date '" + $value + "'"]]></actionmessage>
+			</Validation>
+		</Validations>
+	</SwiftSystemFieldDef>
+	<SwiftSystemFieldDef Name="mir-range" Tag="252">
+		<Format><![CDATA[(6!n)(4!a2!a2!c1!c)(3!a)(4!n)(6!n)(6!n)(4!a2!a2!c1!c)(3!a)(4!n)(6!n)([4!n4!n])]]></Format>
+		<Specification><![CDATA[(mir1-date)(mir1-lt-identifier)(mir1-branch-code)(mir1-session-number)(mir1-isn)(mir2-date)(mir2-lt-identifier)(mir2-branch-code)(mir2-session-number)(mir2-isn)(time-range)]]></Specification>
+		<Description><![CDATA[Range of MIRs for retrieval. The MIRs consist of:
+
+a)  Date of input of the message
+
+b)  Sending LT and branch code XXX (irrespective of which branch code was used in the original message)
+
+c)  Session number
+
+d)  ISN
+
+An optional time range criterion can be specified.]]></Description>
+		<Validations>
+			<Validation>
+				<subfield>mir1-date</subfield>
+				<formula><![CDATA[IsDate($value,"yyMMdd")]]></formula>
+	            <error-code>V04</error-code>
+	            <actionmessage><![CDATA["Invalid Input Date '" + $value + "'"]]></actionmessage>
+			</Validation>
+			<Validation>
+				<subfield>mir2-date</subfield>
+				<formula><![CDATA[IsDate($value,"yyMMdd")]]></formula>
+	            <error-code>V04</error-code>
+	            <actionmessage><![CDATA["Invalid Input Date '" + $value + "'"]]></actionmessage>
+			</Validation>
+		</Validations>
+	</SwiftSystemFieldDef>
+	<SwiftSystemFieldDef Name="mor" Tag="253">
+		<Format><![CDATA[(6!n)(4!a2!a2!c1!c)(3!a)(4!n)(6!n)]]></Format>
+		<Specification><![CDATA[(date)(lt-identifier)(branch-code)(session-number)(osn)]]></Specification>
+		<Description><![CDATA[MOR of the individual message that is to be retrieved. It consists of:
+
+a)  Date of output of the message
+
+b)  Receiving LT and branch code XXX (irrespective of the branch code used in the original message)
+
+c)  Session number
+
+d)  OSN]]></Description>
+		<Validations>
+			<Validation>
+				<subfield>date</subfield>
+				<formula><![CDATA[IsDate($value,"yyMMdd")]]></formula>
+	            <error-code>V04</error-code>
+	            <actionmessage><![CDATA["Invalid Output Date '" + $value + "'"]]></actionmessage>
+			</Validation>
+		</Validations>
+	</SwiftSystemFieldDef>
+	<SwiftSystemFieldDef Name="mor-range" Tag="254">
+		<Format><![CDATA[(6!n)(4!a2!a2!c1!c)(3!a)(4!n)(6!n)(6!n)(4!a2!a2!c1!c)(3!a)(4!n)(6!n)([4!n4!n])]]></Format>
+		<Specification><![CDATA[(mor1-date)(mor1-lt-identifier)(mor1-branch-code)(mor1-session-number)(mor1-osn)(mor2-date)(mor2-lt-identifier)(mor2-branch-code)(mor2-session-number)(mor2-osn)(time-range)]]></Specification>
+		<Description><![CDATA[Range of MORs for retrieval. The MORs consist of:
+
+a)  Date of output of the message
+
+b)  Receiving LT and branch code XXX (irrespective of which branch code was used in the original message)
+
+c)  Session number
+
+d)  OSN
+
+An optional time range criterion can be specified.]]></Description>
+		<Validations>
+			<Validation>
+				<subfield>mor1-date</subfield>
+				<formula><![CDATA[IsDate($value,"yyMMdd")]]></formula>
+	            <error-code>V04</error-code>
+	            <actionmessage><![CDATA["Invalid Output Date '" + $value + "'"]]></actionmessage>
+			</Validation>
+			<Validation>
+				<subfield>mor2-date</subfield>
+				<formula><![CDATA[IsDate($value,"yyMMdd")]]></formula>
+	            <error-code>V04</error-code>
+	            <actionmessage><![CDATA["Invalid Input Date '" + $value + "'"]]></actionmessage>
+			</Validation>
+		</Validations>
+	</SwiftSystemFieldDef>
+	<SwiftSystemFieldDef Name="msg-input-type" Tag="255">
+		<Format><![CDATA[(4!a2!a2!c1!c)(3!a)(4!n)(3!n)(6!n)([4!n4!n])]]></Format>
+		<Specification><![CDATA[(lt-identifier)(branch-code)(session-number)(msg-type)(date)(time-range)]]></Specification>
+		<Description><![CDATA[Message input type, containing:
+
+a)  Input LT including branch code XXX
+
+b)  Input session
+
+c)  Message type
+
+d)  Input date
+
+e)  Input time range]]></Description>
+		<Validations>
+			<Validation>
+				<subfield>date</subfield>
+				<formula><![CDATA[IsDate($value,"yyMMdd")]]></formula>
+	            <error-code>V04</error-code>
+	            <actionmessage><![CDATA["Invalid Input Date '" + $value + "'"]]></actionmessage>
+			</Validation>
+		</Validations>
+	</SwiftSystemFieldDef>
+	<SwiftSystemFieldDef Name="cat-input-type" Tag="256">
+		<Format><![CDATA[(4!a2!a2!c1!c)(3!a)(4!n)(1!n)(6!n)([4!n4!n])]]></Format>
+		<Specification><![CDATA[(lt-identifier)(branch-code)(session-number)(msg-category)(date)(time-range)]]></Specification>
+		<Description><![CDATA[Category input type, containing:
+
+a)  Input LT including branch code XXX
+
+b)  Input session
+
+c)  Message category
+
+d)  Input date
+
+e)  Input time range]]></Description>
+		<Validations>
+			<Validation>
+				<subfield>date</subfield>
+				<formula><![CDATA[IsDate($value,"yyMMdd")]]></formula>
+	            <error-code>V04</error-code>
+	            <actionmessage><![CDATA["Invalid Input Date '" + $value + "'"]]></actionmessage>
+			</Validation>
+		</Validations>
+	</SwiftSystemFieldDef>
+	<SwiftSystemFieldDef Name="input-time-range" Tag="257">
+		<Format><![CDATA[(4!a2!a2!c1!c)(3!a)(6!n)(4!n4!n)([4!n])]]></Format>
+		<Specification><![CDATA[(lt-identifier)(branch-code)(date)(time-range)(session-number)]]></Specification>
+		<Description><![CDATA[Input time range, containing:
+
+a)  Input LT including branch code XXX
+
+b)  Input date
+
+c)  Input time range
+
+d)  Input session]]></Description>
+		<Validations>
+			<Validation>
+				<subfield>date</subfield>
+				<formula><![CDATA[IsDate($value,"yyMMdd")]]></formula>
+	            <error-code>V04</error-code>
+	            <actionmessage><![CDATA["Invalid Input Date '" + $value + "'"]]></actionmessage>
+			</Validation>
+		</Validations>
+	</SwiftSystemFieldDef>
+	<SwiftSystemFieldDef Name="msg-output-type" Tag="258">
+		<Format><![CDATA[(4!a2!a2!c1!c)(3!a)(4!n)(3!n)(6!n)([4!n4!n])]]></Format>
+		<Specification><![CDATA[(lt-identifier)(branch-code)(session-number)(msg-type)(date)(time-range)]]></Specification>
+		<Description><![CDATA[Message output type, containing:
+
+a)  Output LT including branch code XXX
+
+b)  Output session
+
+c)  Message Type
+
+d)  Output date
+
+e)  Output time range]]></Description>
+		<Validations>
+			<Validation>
+				<subfield>date</subfield>
+				<formula><![CDATA[IsDate($value,"yyMMdd")]]></formula>
+	            <error-code>V04</error-code>
+	            <actionmessage><![CDATA["Invalid Output Date '" + $value + "'"]]></actionmessage>
+			</Validation>
+		</Validations>
+	</SwiftSystemFieldDef>
+	<SwiftSystemFieldDef Name="cat-output-type" Tag="259">
+		<Format><![CDATA[(4!a2!a2!c1!c)(3!a)(4!n)(1!n)(6!n)(4!n4!n)]]></Format>
+		<Specification><![CDATA[(lt-identifier)(branch-code)(session-number)(msg-category)(date)(time-range)]]></Specification>
+		<Description><![CDATA[Category output type, containing:
+
+a)  Output LT including branch code XXX
+
+b)  Output session
+
+c)  Message Category
+
+d)  Output date
+
+e)  Output time range]]></Description>
+		<Validations>
+			<Validation>
+				<subfield>date</subfield>
+				<formula><![CDATA[IsDate($value,"yyMMdd")]]></formula>
+	            <error-code>V04</error-code>
+	            <actionmessage><![CDATA["Invalid Output Date '" + $value + "'"]]></actionmessage>
+			</Validation>
+		</Validations>
+	</SwiftSystemFieldDef>
+	<SwiftSystemFieldDef Name="output-time-range" Tag="260">
+		<Format><![CDATA[(4!a2!a2!c1!c)(3!a)(6!n)(4!n4!n)([4!n])]]></Format>
+		<Specification><![CDATA[(lt-identifier)(branch-code)(date)(time-range)(session-number)]]></Specification>
+		<Description><![CDATA[Output time range, containing:
+
+a)  Output LT including branch code XXX
+
+b)  Output date
+
+c)  Output time range
+
+d)  Output session]]></Description>
+		<Validations>
+			<Validation>
+				<subfield>date</subfield>
+				<formula><![CDATA[IsDate($value,"yyMMdd")]]></formula>
+	            <error-code>V04</error-code>
+	            <actionmessage><![CDATA["Invalid Output Date '" + $value + "'"]]></actionmessage>
+			</Validation>
+		</Validations>
+	</SwiftSystemFieldDef>
+	<SwiftSystemFieldDef Name="mur-input" Tag="263">
+		<Format><![CDATA[(4!a2!a2!c1!c)(3!a)(6!n)(4!n4!n)([4!n])]]></Format>
+		<Specification><![CDATA[(lt-identifier)(branch-code)(date)(time-range)(session-number)]]></Specification>
+		<Description><![CDATA[Input MUR, containing:
+
+a)  Input LT including branch code XXX
+
+b)  Input date
+
+c)  Input time range
+
+d)  Input session]]></Description>
+		<Validations>
+			<Validation>
+				<subfield>date</subfield>
+				<formula><![CDATA[IsDate($value,"yyMMdd")]]></formula>
+	            <error-code>V04</error-code>
+	            <actionmessage><![CDATA["Invalid Input Date '" + $value + "'"]]></actionmessage>
+			</Validation>
+		</Validations>
+	</SwiftSystemFieldDef>
+	<SwiftSystemFieldDef Name="mur-output" Tag="264">
+		<Format><![CDATA[(4!a2!a2!c1!c)(3!a)(6!n)(4!n4!n)([4!n])]]></Format>
+		<Specification><![CDATA[(lt-identifier)(branch-code)(date)(time-range)(session-number)]]></Specification>
+		<Description><![CDATA[Output MUR, containing:
+
+a)  Output LT including branch code XXX
+
+b)  Output date
+
+c)  Output time range
+
+d)  Output session]]></Description>
+		<Validations>
+			<Validation>
+				<subfield>date</subfield>
+				<formula><![CDATA[IsDate($value,"yyMMdd")]]></formula>
+	            <error-code>V04</error-code>
+	            <actionmessage><![CDATA["Invalid Output Date '" + $value + "'"]]></actionmessage>
+			</Validation>
+		</Validations>
+	</SwiftSystemFieldDef>
+	<SwiftSystemFieldDef Name="login-attempt" Tag="270">
+		<Format><![CDATA[(10!n)(99*65x)([99*65x])]]></Format>
+		<Specification><![CDATA[(timestamp)(login-block)(login-result)]]></Specification>
+		<Description><![CDATA[YYMMDDHHMM
+
+02 Login Request Message LAK or LNK ( 22 Login Positive Acknowledgement (LAK) or 42 Login Negative Acknowledgement (LNK) )]]></Description>
+		<Additional-Format><![CDATA[<timestamp> 10!n<login-block>[<login-result>]]]></Additional-Format>
+	</SwiftSystemFieldDef>
+	<SwiftSystemFieldDef Name="logout-info" Tag="271">
+		<Format><![CDATA[(10!n)(99*65x)([99*65x])]]></Format>
+		<Specification><![CDATA[(timestamp)(logout-block)(logout-result)]]></Specification>
+		<Description><![CDATA[YYMMDDHHMM
+
+Logout Service Identifier block
+
+Logout ACK block]]></Description>
+		<Additional-Format><![CDATA[<timestamp> 10!n<logout-block>[<logout-result>]]]></Additional-Format>
+	</SwiftSystemFieldDef>
+	<SwiftSystemFieldDef Name="abort-info" Tag="272">
+		<Format><![CDATA[(10!n)(99*65x)]]></Format>
+		<Specification><![CDATA[(timestamp)(abort)]]></Specification>
+		<Description><![CDATA[YYMMDDHHMM
+
+Message block of a 14 System Request to Remove LT or a 15 System Confirmation of User-Initiated LT Abort .]]></Description>
+		<Additional-Format><![CDATA[<timestamp> 10!n<abort>]]></Additional-Format>
+	</SwiftSystemFieldDef>
+	<SwiftSystemFieldDef Name="input-history" Tag="280">
+		<Format><![CDATA[(4!n)(28!c)(1!a)[[3!n][3n]]]]></Format>
+		<Specification><![CDATA[(time)(mir)(acceptance)(error-code)(line-tag)]]></Specification>
+		<Description><![CDATA[Message input history, containing:
+
+a)  Input time of message
+
+b)  MIR
+
+c)  Accepted or rejected (Y or N)
+
+d)  If rejected, error code and line number (in banking message) or field number (in system message)
+
+Time in MIR is local to the sender.]]></Description>
+		<Additional-Format><![CDATA[<time> 4!n<mir> 28!c<acceptance> 1!a[<error-code> 3!n [<line-tag>]]]]></Additional-Format>
+		<Validations>
+			<Validation>
+				<subfield>time</subfield>
+				<formula><![CDATA[IsDate($value,"HHmm")]]></formula>
+	            <error-code>V05</error-code>
+	            <actionmessage><![CDATA["Invalid Timestamp '" + $value + "'. time should be in the format HHmm."]]></actionmessage>
+			</Validation>
+			<Validation>
+				<subfield>acceptance</subfield>
+				<formula><![CDATA[In($value, "Y", "N")]]></formula>
+	            <error-code>V08</error-code>
+	            <actionmessage><![CDATA["Invalid Acceptance value '" + $value + "'. acceptance value should be Y or N."]]></actionmessage>
+			</Validation>
+            <Validation>
+                <subfield>error-code</subfield>
+                <formula><![CDATA[In($value, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24)]]></formula>
+                <error-code>V08</error-code>
+                <actionmessage><![CDATA["Invalid Error-Code '" + $value + "'. Valid Error-Codes are : 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24."]]></actionmessage>
+            </Validation>
+		</Validations>
+	</SwiftSystemFieldDef>
+	<SwiftSystemFieldDef Name="delivery-history" Tag="281">
+		<Format><![CDATA[(4!n)(28!c)(1!a)([3!c])]]></Format>
+		<Specification><![CDATA[(time)(mor)(delivery-result)(error-code)]]></Specification>
+		<Description><![CDATA[Message delivery history, noting each delivery attempt. For each attempt, it contains:
+
+a)  Output time of message
+
+b)  MOR
+
+c)  Accepted or rejected (Y or N)
+
+d)  If rejected, an error code if UNKed:
+
+a)  A00 = aborted
+
+b)  D03 = cancelled
+
+c)  D07 = requeued due to user SYNC request
+
+d)  D08 = requeued due to session abort
+
+e)  D09 = requeued due to system recovery
+
+f)  D12 = UAK text format error
+
+g)  Ynn = rejected by receiver]]></Description>
+	</SwiftSystemFieldDef>
+	<SwiftSystemFieldDef Name="reporting-options" Tag="301">
+		<Format><![CDATA[2!c]]></Format>
+		<Specification><![CDATA[(reporting-options)]]></Specification>
+		<Description><![CDATA[Reporting Options, where:
+
+a)  RT = all undelivered at report time
+
+b)  nn = undelivered for more than nn hours (range: 00 < nn < 24)
+
+c)  VD = value-date-sensitive message undelivered after the Receiver's cut-off time on the value date.]]></Description>
+		<Validations>
+			<Validation>
+				<formula><![CDATA[If(IsInt($value), 
+	   						Between(ToInt($value), 0, 24), 
+	   						In($value, "RT", "VD"))]]>
+				</formula>
+	            <error-code>V08</error-code>
+	            <actionmessage><![CDATA["Invalid Reporting Options '" + $value + "'"]]></actionmessage>
+		</Validation>
+		</Validations>
+	</SwiftSystemFieldDef>
+	<SwiftSystemFieldDef Name="holiday-suppression" Tag="302">
+		<Format><![CDATA[1!a]]></Format>
+		<Specification><![CDATA[(holiday-suppression)]]></Specification>
+		<Description><![CDATA[Holiday suppression option, where:
+
+a)  Y = yes. Suppression during holiday
+
+b)  N = no. No suppression during holiday]]></Description>
+        <Validations>
+			<Validation>
+				<formula><![CDATA[In($value, "Y", "N")]]></formula>
+	            <error-code>V08</error-code>
+	            <actionmessage><![CDATA["Invalid Holiday Suppression Option '" + $value + "'. holiday-suppression value should be either Y or N."]]></actionmessage>
+			</Validation>
+		</Validations>
+	</SwiftSystemFieldDef>
+	<SwiftSystemFieldDef Name="lt-code" Tag="303">
+		<Format><![CDATA[1!c]]></Format>
+		<Specification><![CDATA[(lt-code)]]></Specification>
+		<Description><![CDATA[9th character of BIC-12. The value X signifies details of all LTs belonging to the destination.]]></Description>
+	</SwiftSystemFieldDef>
+	<SwiftSystemFieldDef Name="region" Tag="304">
+		<Format><![CDATA[3!c]]></Format>
+		<Specification><![CDATA[(region)]]></Specification>
+		<Description><![CDATA[Region identified by the country code followed by the region code.
+
+If the region code is defined as X, then all regions of the country are identified.
+
+ALL = all regions.
+
+Tag 304 may be repeated.]]></Description>
+		<Additional-Format><![CDATA["ALL"OR<CC>"X"3!c]]></Additional-Format>
+	</SwiftSystemFieldDef>
+	<SwiftSystemFieldDef Name="lt-code" Tag="305">
+		<Format><![CDATA[1!c]]></Format>
+		<Specification><![CDATA[(lt-code)]]></Specification>
+		<Description><![CDATA[9th character of BIC-12.]]></Description>
+	</SwiftSystemFieldDef>
+	<SwiftSystemFieldDef Name="text" Tag="311">
+		<Format><![CDATA[(1000*65x)]]></Format>
+		<Specification><![CDATA[(text)]]></Specification>
+		<Description><![CDATA[Free format text for SWIFT-to-user and user-to-SWIFT messages. Text is in lines of 65 characters separated by CrLf. Maximum size of text is 1800 characters. Last character must not be CrLf. Upper case is mandatory.]]></Description>
+		<Additional-Format><![CDATA[ 65x[65x]...]]></Additional-Format>
+	</SwiftSystemFieldDef>
+	<SwiftSystemFieldDef Name="broadcast-text" Tag="312">
+		<Format><![CDATA[(1000*65x)]]></Format>
+		<Specification><![CDATA[(broadcast-text)]]></Specification>
+		<Description><![CDATA[Broadcast text is minimum 1 and up to n lines of 65 characters.]]></Description>
+		<Additional-Format><![CDATA[<X>1-65[<CrLf><X>1-65] 0-n]]></Additional-Format>
+	</SwiftSystemFieldDef>
+	<SwiftSystemFieldDef Name="reconnect-allowed" Tag="329">
+		<Format><![CDATA[1!a]]></Format>
+		<Specification><![CDATA[(reconnect-allowed)]]></Specification>
+		<Description><![CDATA[Reconnect allowed option, where:
+
+a)  Y = yes. Reconnect allowed
+
+b)  N = no. No reconnect allowed]]></Description>
+        <Validations>
+			<Validation>
+				<formula><![CDATA[In($value, "Y", "N")]]></formula>
+	            <error-code>V08</error-code>
+	            <actionmessage><![CDATA["Invalid Reconnect Allowed Option '" + $value + "'. Valid Reconnect Allowed Option values are : Y, N."]]></actionmessage>
+			</Validation>
+		</Validations>
+	</SwiftSystemFieldDef>
+	<SwiftSystemFieldDef Name="current-session-info" Tag="330">
+		<Format><![CDATA[(4!n)(6!n)(6!n)(6!n)(6!n)(1!n)]]></Format>
+		<Specification><![CDATA[(session-number)(isn)(isnnak)(osn)(osnnak)(ack-replay-indicator)]]></Specification>
+		<Description><![CDATA[Current session information. For example: 00250000450000440000500000501 where:
+
+a)  session-number = 025
+
+b)  isn = 000045
+
+c)  isnnak = 000044
+
+d)  osn = 000050
+
+e)  osnnak = 000050
+
+f)  ack-replay-indicator = 1]]></Description>
+	</SwiftSystemFieldDef>
+	<SwiftSystemFieldDef Name="session-info" Tag="331">
+		<Format><![CDATA[(4!n)(6!n)(4!n)(6!n)(4!n)(3!n)(6!n)(6!n)(6!n)(6!n)(6!n)(6!n)]]></Format>
+		<Specification><![CDATA[(session-number)(session-opened-date)(session-opened-time)(session-closed-date)(session-closed-time)(error-code)(isn-qty)(osn-qty)(first-isn)(last-isn)(first-osn)(last-osn)]]></Specification>
+		<Description><![CDATA[Session information, including:
+
+a)  session number
+
+b)  date session opened
+
+c)  time session opened
+
+d)  date session closed
+
+e)  time session closed
+
+f)  reason for closure
+
+g)  quantity of messages sent
+
+h)  quantity of messages received
+
+i)  first ISN
+
+j)  last ISN
+
+k)  first OSN
+
+l)  last OSN]]></Description>
+		<Validations>
+			<Validation>
+				<subfield>session-opened-date</subfield>
+				<formula><![CDATA[IsDate($value,"yyMMdd")]]></formula>
+	            <error-code>V04</error-code>
+	            <actionmessage><![CDATA["Invalid Session-Opened-Date '" + $value + "'. session-opened-date should be in the format yyMMdd."]]></actionmessage>
+			</Validation>
+			<Validation>
+				<subfield>session-opened-time</subfield>
+				<formula><![CDATA[IsDate($value,"HHmm")]]></formula>
+	            <error-code>V05</error-code>
+	            <actionmessage><![CDATA["Invalid Session-Opened-Time '" + $value + "'. session-opened-time should be in the format HHmm."]]></actionmessage>
+			</Validation>
+			<Validation>
+				<subfield>session-closed-date</subfield>
+				<formula><![CDATA[IsDate($value,"yyMMdd")]]></formula>
+	            <error-code>V04</error-code>
+	            <actionmessage><![CDATA["Invalid Session-Closed-Date '" + $value + "'. session-closed-date should be in the format yyMMdd."]]></actionmessage>
+			</Validation>
+			<Validation>
+				<subfield>session-closed-time</subfield>
+				<formula><![CDATA[IsDate($value,"HHmm")]]></formula>
+	            <error-code>V05</error-code>
+	            <actionmessage><![CDATA["Invalid Session-Closed-Time '" + $value + "'. session-closed-time should be in the format HHmm."]]></actionmessage>
+			</Validation>
+            <Validation>
+                <subfield>error-code</subfield>
+                <formula><![CDATA[In($value, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24)]]></formula>
+                <error-code>V08</error-code>
+                <actionmessage><![CDATA["Invalid Error-Code '" + $value + "'. Valid Error-Codes are : 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24."]]></actionmessage>
+            </Validation>
+         </Validations>
+	</SwiftSystemFieldDef>
+	<SwiftSystemFieldDef Name="lt-summary" Tag="332">
+		<Format><![CDATA[(6!n)(6!n)]]></Format>
+		<Specification><![CDATA[(isn-qty)(osn-qty)]]></Specification>
+		<Description><![CDATA[LT summary, including:
+
+a)  total messages sent
+
+b)  total messages received]]></Description>
+	</SwiftSystemFieldDef>
+	<SwiftSystemFieldDef Name="previous-session-info" Tag="333">
+		<Format><![CDATA[(6!n)(4!n)(4!n)(6!n)(4!n)(3!n)(6!n)(6!n)]]></Format>
+		<Specification><![CDATA[(last-session-opened-date)(last-session-opened-time)(session-number)(last-session-closed-date)(last-session-closed-time)(error-code)(isn)(osn)]]></Specification>
+		<Description><![CDATA[Previous session information, including:
+
+a)  date last session opened
+
+b)  time last session opened
+
+c)  session number
+
+d)  date last session closed
+
+e)  time last session closed
+
+f)  reason for closure
+
+g)  last ISN received
+
+h)  last OSN sent]]></Description>
+		<Validations>
+			<Validation>
+				<subfield>last-session-opened-date</subfield>
+				<formula><![CDATA[IsDate($value,"yyMMdd")]]></formula>
+	            <error-code>V04</error-code>
+	            <actionmessage><![CDATA["Invalid Last-Session-Opened-Date '" + $value + "'. last-session-opened-date should be in the format yyMMdd"]]></actionmessage>
+			</Validation>
+			<Validation>
+				<subfield>last-session-opened-time</subfield>
+				<formula><![CDATA[IsDate($value,"HHmm")]]></formula>
+	            <error-code>V05</error-code>
+	            <actionmessage><![CDATA["Invalid Last-Session-Opened-Time '" + $value + "'. last-session-opened-time should be in the format HHmm"]]></actionmessage>
+			</Validation>
+			<Validation>
+				<subfield>last-session-closed-date</subfield>
+				<formula><![CDATA[IsDate($value,"yyMMdd")]]></formula>
+	            <error-code>V04</error-code>
+	            <actionmessage><![CDATA["Invalid Last-Session-Closed-Date '" + $value + "'. last-session-closed-date should be in the format yyMMdd"]]></actionmessage>
+			</Validation>
+			<Validation>
+				<subfield>last-session-closed-time</subfield>
+				<formula><![CDATA[IsDate($value,"HHmm")]]></formula>
+	            <error-code>V05</error-code>
+	            <actionmessage><![CDATA["Invalid Last-Session-Closed-Time '" + $value + "'. last-session-closed-time should be in the format HHmm"]]></actionmessage>
+			</Validation>
+            <Validation>
+                <subfield>error-code</subfield>
+                <formula><![CDATA[In($value, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24)]]></formula>
+                <error-code>V08</error-code>
+                <actionmessage><![CDATA["Invalid Error-Code '" + $value + "'. Valid Error-Codes are : 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24."]]></actionmessage>
+            </Validation>
+	</Validations>
+	</SwiftSystemFieldDef>
+	<SwiftSystemFieldDef Name="region-info" Tag="334">
+		<Format><![CDATA[(3!c)(4!n)]]></Format>
+		<Specification><![CDATA[(region)(region-delta-time)]]></Specification>
+		<Description><![CDATA[Region information, including:
+
+a)  country and region code
+
+b)  region delta hour
+
+c)  region delta minutes]]></Description>
+		<Additional-Format><![CDATA[<region>3!c<hour>2!n<minutes>2!n]]></Additional-Format>
+		<Validations>
+			<Validation>
+				<subfield>region-delta-time</subfield>
+				<formula><![CDATA[IsDate($value,"HHmm")]]></formula>
+	            <error-code>V05</error-code>
+	            <actionmessage><![CDATA["Invalid Region Delta Time '" + $value + "'. region-delta-time should be in the format HHmm."]]></actionmessage>
+			</Validation>
+		</Validations>
+	</SwiftSystemFieldDef>
+	<SwiftSystemFieldDef Name="report-line" Tag="335">
+		<Format><![CDATA[(4!n)(28!c)(3!n)(4!a2!a2!c1!c3!c)([4!n])]]></Format>
+		<Specification><![CDATA[(sender-time)(mir)(msg-type)(address)(receiver-time)]]></Specification>
+		<Description><![CDATA[For each message, the report line gives:
+
+a)  The time, local to the sender, when the message entered the system
+
+b)  The MIR of the message being reported
+
+c)  The Message Type (of the message being reported)
+
+d)  The intended receiver's address
+
+e)  The time, local to the receiver, when the last delivery attempt was made]]></Description>
+		<Validations>
+			<Validation>
+				<subfield>sender-time</subfield>
+				<formula><![CDATA[IsDate($value, "HHmm")]]></formula>
+	            <error-code>V05</error-code>
+	            <actionmessage><![CDATA["Invalid Sender Time'"+$value+"'."]]></actionmessage>
+			</Validation>
+			<Validation>
+				<subfield>receiver-time</subfield>
+				<formula><![CDATA[IsDate($value, "HHmm")]]></formula>
+	            <error-code>V05</error-code>
+	            <actionmessage><![CDATA["Invalid Receiver Time'"+$value+"'."]]></actionmessage>
+			</Validation>
+		</Validations>
+	</SwiftSystemFieldDef>
+	<SwiftSystemFieldDef Name="delivery-subset-status" Tag="336">
+		<Format><![CDATA[(6!c)(5!n)([1!c])]]></Format>
+		<Specification><![CDATA[(delivery-subset-name)(count)(lt-code)]]></Specification>
+		<Description><![CDATA[Specifies the delivery subset name, the number of messages in the queue and, optionally, the LT code.
+
+For LT-directed queues, the delivery subset name is in the form LTDIRa where a identifies the LT that selects the specified subset.]]></Description>
+	</SwiftSystemFieldDef>
+	<SwiftSystemFieldDef Name="lt-select-status" Tag="337">
+		<Format><![CDATA[2!a]]></Format>
+		<Specification><![CDATA[(lt-select-status)]]></Specification>
+		<Description><![CDATA[LT select status, where:
+
+a)  YN = input only
+
+b)  NY = output only
+
+c)  YY = input/output
+
+d)  NN = no session]]></Description>
+		<Validations>
+			<Validation>
+				<formula><![CDATA[In($value, "YN", "NY", "YY", "NN")]]></formula>
+	            <error-code>V08</error-code>
+	            <actionmessage><![CDATA["Invalid LT Select Status '" + $value + "'"]]></actionmessage>
+			</Validation>
+		</Validations>
+	</SwiftSystemFieldDef>
+	<SwiftSystemFieldDef Name="delivery-subset-list" Tag="338">
+		<Format><![CDATA[(180c)]]></Format>
+		<Specification><![CDATA[(delivery-subset-list)]]></Specification>
+		<Description><![CDATA[Up to 30 delivery subsets can be selected.]]></Description>
+		<Validations>
+			<Validation>
+				<formula><![CDATA[Length($value)%6==0]]></formula>
+	            <error-code>V07</error-code>
+	            <actionmessage><![CDATA["Invalid Delivery Subset List '"+$value+"'"]]></actionmessage>
+			</Validation>
+		</Validations>
+		<Additional-Format><![CDATA[<delivery-subset-name> 6!c[*30]]]></Additional-Format>
+	</SwiftSystemFieldDef>
+	<SwiftSystemFieldDef Name="delivery-subset-name" Tag="339">
+		<Format><![CDATA[6!c]]></Format>
+		<Specification><![CDATA[(delivery-subset-name)]]></Specification>
+		<Description><![CDATA[Name assigned by the user to a delivery subset.]]></Description>
+	</SwiftSystemFieldDef>
+	<SwiftSystemFieldDef Name="non-banking-days" Tag="340">
+		<Format><![CDATA[(2!a)([56n])]]></Format>
+		<Specification><![CDATA[(country-code)(dates)]]></Specification>
+		<Description><![CDATA[Can be repeated as many times as there are regions requested. For each country there can be a maximum of 14 dates.]]></Description>
+		<Additional-Format><![CDATA[<country-code> 2!a [<MMDD>[*1-14 ]]]]></Additional-Format>
+	</SwiftSystemFieldDef>
+	<SwiftSystemFieldDef Name="generation-time-options" Tag="341">
+		<Format><![CDATA[2!c]]></Format>
+		<Specification><![CDATA[(generation-time-options)]]></Specification>
+		<Description><![CDATA[Generation option, where:
+
+a)  <hour> = fixed hour every day, in the range 00-23
+
+b)  CF = cut-off time for every country
+
+c)  RQ = on request only]]></Description>
+        <Validations>
+			<Validation>
+				<formula><![CDATA[If(IsInt($value), 
+	   						Between(ToInt($value), 00, 23), 
+	   						In($value, "CF", "RQ"))]]>
+				</formula>
+	            <error-code>V08</error-code>
+	            <actionmessage><![CDATA["Invalid Generation Option '" + $value + "'. generation-time-options value should be CF , RQ or in between 00 to 23."]]></actionmessage>
+			</Validation>
+		</Validations>
+	</SwiftSystemFieldDef>
+	<SwiftSystemFieldDef Name="cut-off-time" Tag="342">
+		<Format><![CDATA[(3!c)(4!n)]]></Format>
+		<Specification><![CDATA[(region)(time)]]></Specification>
+		<Description><![CDATA[Region and time. Repeated once for each cut-off region that is requested.]]></Description>
+		<Validations>
+			<Validation>
+				<subfield>time</subfield>
+				<formula><![CDATA[IsDate($value,"HHmm")]]></formula>
+	            <error-code>V05</error-code>
+	            <actionmessage><![CDATA["Invalid Time '" + $value + "'. time should be in the format HHmm."]]></actionmessage>
+			</Validation>
+		</Validations>
+	</SwiftSystemFieldDef>
+	<SwiftSystemFieldDef Name="cut-off-time-count" Tag="343">
+		<Format><![CDATA[5n]]></Format>
+		<Specification><![CDATA[(cut-off-time-count)]]></Specification>
+		<Description><![CDATA[Occurs 4 or 8 times.
+
+See notes in appropriate chapters.]]></Description>
+	</SwiftSystemFieldDef>
+	<SwiftSystemFieldDef Name="priority-category" Tag="344">
+		<Format><![CDATA[(1!a)([9n])]]></Format>
+		<Specification><![CDATA[(priority)(msg-category)]]></Specification>
+		<Description><![CDATA[Priority and, optionally, message categories. Can appear up to three times for each occurrence of field 339.]]></Description>
+		<Additional-Format><![CDATA[<priority> 1!a[<msg-category>9!n ]]]></Additional-Format>
+	</SwiftSystemFieldDef>
+	<SwiftSystemFieldDef Name="msg-type-service-code-list" Tag="345">
+		<Format><![CDATA[30c]]></Format>
+		<Specification><![CDATA[(msg-type-service-code-list)]]></Specification>
+		<Description><![CDATA[List of up to 10 Message Types and/or Service Codes in any combination. Can appear once for each occurrence of field 344.]]></Description>
+		<Validations>
+			<Validation>
+				<formula><![CDATA[Length($value)%3==0]]></formula>
+	            <error-code>V07</error-code>
+	            <actionmessage><![CDATA["Invalid Message Type Service Code List '"+$value+"'"]]></actionmessage>
+			</Validation>
+		</Validations>
+		<Additional-Format><![CDATA[3!c[*10]]]></Additional-Format>
+	</SwiftSystemFieldDef>
+	<SwiftSystemFieldDef Name="branch-code-list" Tag="346">
+		<Format><![CDATA[30c]]></Format>
+		<Specification><![CDATA[(branch-code-list)]]></Specification>
+		<Description><![CDATA[List of up to 10 branch codes. Can appear once for each occurrence of field 344.Default branch code "XXX" is not allowed.Branch code must be a valid branch code when the MT 047 is issued.]]></Description>
+		<Validations>
+			<Validation>
+				<formula><![CDATA[Length($value)%3==0]]></formula>
+	            <error-code>V07</error-code>
+	            <actionmessage><![CDATA["Invalid Branch Code List '"+$value+"'"]]></actionmessage>
+			</Validation>
+		</Validations>
+		<Additional-Format><![CDATA[3!c[*10]]]></Additional-Format>
+	</SwiftSystemFieldDef>
+	<SwiftSystemFieldDef Name="field-list" Tag="347">
+		<Format><![CDATA[30c]]></Format>
+		<Specification><![CDATA[(field-list)]]></Specification>
+		<Description><![CDATA[List of up to 10 field tags.
+
+13C is the only field currently supported.]]></Description>
+		<Validations>
+			<Validation>
+				<formula><![CDATA[Length($value)%3==0]]></formula>
+	            <error-code>V07</error-code>
+	            <actionmessage><![CDATA["Invalid Field List '"+$value+"'"]]></actionmessage>
+			</Validation>
+		</Validations>
+		<Additional-Format><![CDATA[3!c[*10]]]></Additional-Format>
+	</SwiftSystemFieldDef>
+	<SwiftSystemFieldDef Name="error-code-l/q" Tag="401">
+		<Format><![CDATA[2!n]]></Format>
+		<Specification><![CDATA[(error-code-l/q)]]></Specification>
+		<Description><![CDATA[Error code for Logout/Quit, where:
+
+a)  01 = incorrect time/day
+
+b)  02 = TNG trailer missing
+
+c)  03 = ISN error
+
+See the SWIFTNet FIN Error Codes module for the full set of error codes.]]></Description>
+        <Validations>
+			<Validation>
+				<formula><![CDATA[In($value, "01", "02","03")]]></formula>
+	            <error-code>V08</error-code>
+	            <actionmessage><![CDATA["Invalid Error Code	'"+$value+"'. Valid Error Codes are : 01, 02, 03."]]></actionmessage>
+			</Validation>
+		</Validations>
+	</SwiftSystemFieldDef>
+	<SwiftSystemFieldDef Name="rejection-reason" Tag="405">
+		<Format><![CDATA[(3!c)([3n])]]></Format>
+		<Specification><![CDATA[(error-code)(line-tag)]]></Specification>
+		<Description><![CDATA[Reason for rejection. See the SWIFTNet FIN Error Codes module for the full set of error codes.
+
+Also contains a line number (for user-to-user messages) or a field number (for system messages).]]></Description>
+		<Additional-Format><![CDATA[<error-code> 3!c [<line-tag>]]]></Additional-Format>
+	</SwiftSystemFieldDef>
+	<SwiftSystemFieldDef Name="rtv-error-code" Tag="421">
+		<Format><![CDATA[3!c]]></Format>
+		<Specification><![CDATA[(rtv-error-code)]]></Specification>
+		<Description><![CDATA[Reason why the retrieval request cannot be satisfied. See the SWIFTNet FIN Error Codes module for the full set of error codes.]]></Description>
+		<Validations>
+			<Validation>
+				<formula><![CDATA[In($value,"000","002","003","004","005","006","007","010","011","012","013","014","015","016","018","019","020","021","022","023","032","033","034","035","036","037","038","040","041","043","044","045","046","047","048","049","099")]]>
+				</formula>
+	            <error-code>V07</error-code>
+	            <actionmessage><![CDATA["Invalid Message Status '" + $value + "'. Valid rtv-error-code values are:000,002,003,004,005,006,007,010,011,012,013,014,015,016,018,019,020,021,022,023,032,033,034,035,036,037,038,040,041,043,044,045,046,047,048,049,099."]]></actionmessage>
+			</Validation>
+		</Validations>
+	</SwiftSystemFieldDef>
+	<SwiftSystemFieldDef Name="msg-status" Tag="431">
+		<Format><![CDATA[2!n]]></Format>
+		<Specification><![CDATA[(msg-status)]]></Specification>
+		<Description><![CDATA[Message status (for example, whether delivered or aborted). See the SWIFTNet FIN Error Codes module for the full set of error codes.]]></Description>
+		<Validations>
+			<Validation>
+				<formula><![CDATA[  In($value, "01", "02", "03", "04", "07", "08", "10", "12", 
+	                       "31", "32", "33", "34", "35", "37", "38", "41", "44", 
+	                        "47", "48", "49") || (IsInt($value) && Between(ToInt($value), 50, 99))]]>
+				</formula>
+	            <error-code>V07</error-code>
+	            <actionmessage><![CDATA["Invalid Message Status '" + $value + "'"]]></actionmessage>
+			</Validation>
+		</Validations>
+	</SwiftSystemFieldDef>
+	<SwiftSystemFieldDef Name="abort-reason" Tag="432">
+		<Format><![CDATA[2!c]]></Format>
+		<Specification><![CDATA[(abort-reason)]]></Specification>
+		<Description><![CDATA[Reason for the abort, and, for the SWIFTNet FIN Copy Service, reason for message refusals. See the SWIFTNet FIN Error Codes module for the full set of error codes.]]></Description>
+		<Validations>
+			<Validation>
+				<formula><![CDATA[  (In($value, "01", "02", "03", "04", "05", "06", "11", "12", 
+	      				    "13", "14", "21", "22", "23", "24", "32", "33", "35") || 
+	     				    CharAt($value, 0) >= '5')]]></formula>
+	            <error-code>V08</error-code>
+	            <actionmessage><![CDATA["Invalid Abort Reason '" + $value + "'"]]></actionmessage>
+			</Validation>
+		</Validations>
+	</SwiftSystemFieldDef>
+	<SwiftSystemFieldDef Name="user-abort-code" Tag="441">
+		<Format><![CDATA[3!c]]></Format>
+		<Specification><![CDATA[(user-abort-code)]]></Specification>
+		<Description><![CDATA[Reason for user abort. See the SWIFTNet FIN Error Codes module for the full set of abort codes.]]></Description>
+        <Validations>
+			<Validation>
+				<formula><![CDATA[  In($value, "U02","U03","U04","U05","U06")]]></formula>
+	            <error-code>V08</error-code>
+	            <actionmessage><![CDATA["Invalid User Abort Code '" + $value + "'. Valid User Abort Codes are : U02, U03, U04, U05, U06."]]></actionmessage>
+			</Validation>
+		</Validations>
+	</SwiftSystemFieldDef>
+	<SwiftSystemFieldDef Name="reason" Tag="442">
+		<Format><![CDATA[2!n]]></Format>
+		<Specification><![CDATA[(reason)]]></Specification>
+		<Description><![CDATA[Reason why a message could not be cancelled. See the SWIFTNet FIN Error Codes module for the full set of error codes.]]></Description>
+		<Validations>
+			<Validation>
+				<formula><![CDATA[  In($value, "01","02","03","04","05","06","07","08","09","10","12")]]></formula>
+	            <error-code>V08</error-code>
+	            <actionmessage><![CDATA["Invalid Cancellation Reason code '" + $value + "'. Valid Cancellation Reason codes are : 01,02,03,04,05,06,07,08,09,10 and 12."]]></actionmessage>
+			</Validation>
+		</Validations>
+	</SwiftSystemFieldDef>
+	<SwiftSystemFieldDef Name="system-abort-code" Tag="443">
+		<Format><![CDATA[3!c]]></Format>
+		<Specification><![CDATA[(system-abort-code)]]></Specification>
+		<Description><![CDATA[Reason for system abort. See the SWIFTNet FIN Error Codes module for the full set of abort codes.]]></Description>
+        <Validations>
+			<Validation>
+				<formula><![CDATA[  In($value, "000","001","002","004","006","007","008","009","010","011","014","015","016","020","051","052","053","054")]]></formula>
+	            <error-code>V08</error-code>
+	            <actionmessage><![CDATA["Invalid System Abort code '" + $value + "'. Valid System Abort codes are : 000, 001, 002, 004, 006, 007, 008, 009, 010, 011, 014, 015, 016, 020, 051, 052, 053, 054."]]></actionmessage>
+			</Validation>
+		</Validations>
+	</SwiftSystemFieldDef>
+	<SwiftSystemFieldDef Name="accept-reject" Tag="451">
+		<Format><![CDATA[1!n]]></Format>
+		<Specification><![CDATA[(accept-reject)]]></Specification>
+		<Description><![CDATA[Accepted or rejected, where:
+
+a)  0 = accepted
+
+b)  1 = rejected]]></Description>
+		<Validations>
+			<Validation>
+				<formula><![CDATA[In($value, "0","1")]]></formula>
+	            <error-code>V04</error-code>
+	            <actionmessage><![CDATA["Invalid Accept-Reject value '" + $value + "'."]]></actionmessage>
+			</Validation>
+		</Validations>
+	</SwiftSystemFieldDef>
+	<SwiftSystemFieldDef Name="empty-report" Tag="461">
+		<Format><![CDATA[3!c]]></Format>
+		<Specification><![CDATA[(empty-report)]]></Specification>
+		<Description><![CDATA[Report error code. See the SWIFTNet FIN Error Codes module for the full set of error codes.]]></Description>
+		<Validations>
+			<Validation>
+				<formula><![CDATA[In($value, "001", "002", "003", "004", "005", "099")]]></formula>
+	            <error-code>V04</error-code>
+	            <actionmessage><![CDATA["Invalid Empty Report Error Code '" + $value + "'."]]></actionmessage>
+			</Validation>
+		</Validations>
+	</SwiftSystemFieldDef>
+	<SwiftSystemFieldDef Name="user-authentication" Tag="501">
+		<Format><![CDATA[64!x]]></Format>
+		<Specification><![CDATA[(user-authentication)]]></Specification>
+		<Description><![CDATA[Text used to authenticate the user connecting to SWIFT.]]></Description>
+	</SwiftSystemFieldDef>
+	<SwiftSystemFieldDef Name="system-authentication" Tag="502">
+		<Format><![CDATA[64!x]]></Format>
+		<Specification><![CDATA[(system-authentication)]]></Specification>
+		<Description><![CDATA[MAC which the user's CBT must verify.]]></Description>
+	</SwiftSystemFieldDef>
+	<SwiftSystemFieldDef Name="error-code-l/s" Tag="503">
+		<Format><![CDATA[3!c]]></Format>
+		<Specification><![CDATA[(error-code-l/s)]]></Specification>
+		<Description><![CDATA[Login/Select Error Code. See the SWIFTNet FIN Error Codes module for the full set of error codes.]]></Description>
+        <Validations>
+			<Validation>
+				<formula><![CDATA[In($value, "L01", "L02", "L03", "L04", "L05", "L30", "L33", "L34", "L35", "L37", "L55", "L56", "S10", "S11", "S12", "S13", "S14", "S15", "S16", "S17", "S19", "S20", "S21", "S30", "S31", "S33", "S34", "S35", "S36", "S37", "S42")]]></formula>
+	            <error-code>V04</error-code>
+	            <actionmessage><![CDATA["Invalid Login/Select Error Code '" + $value + "'. valid Login/Select Error Codes are : L01, L02, L03, L04, L05, L30, L33, L34, L35, L37, L55, L56, S10, S11, S12, S13, S14, S15, S16, S17, S19, S20, S21, S30, S31, S33, S34, S35, S36, S37, S42."]]></actionmessage>
+			</Validation>
+		</Validations>
+	</SwiftSystemFieldDef>
+	<SwiftSystemFieldDef Name="CSM-of-class-RTC" Tag="602">
+		<Format><![CDATA[(CSM'('MCL'/'RTC1eRCV'/')(4!a2!a2!c)(1eORG'/'SWHQBECA1eEXP'/')(4!n)(1eCV'/')(160-288h)(1ePKS'/')(160-288h)(1e)[(VER'/')(3!n)(1e)](SCR'/')(6!n)(1eMAC'/')(4!h1e4!h)(')')]]></Format>
+		<Specification><![CDATA[(CSMMessageIdentifierandClass_RCV)(ReceiverSpecification)(OriginatorSpecification_EXP)(Requested_CV_ExpiryDate)(CV)(RequestedCertificate)(PKS)(SWIFTPublicRSAKey)(Space1)(VER)(PKSVersion)(Space2)(SCR)(SCRNumber)(MAC)(CSM_MAC)(Closing Delimiter)]]></Specification>
+		<Description><![CDATA[Response to Certification Cryptographic Service Message.]]></Description>
+	</SwiftSystemFieldDef>
+	<SwiftSystemFieldDef Name="CSM-of-class-ESM" Tag="603">
+		<Format><![CDATA[(CSM'('MCL'/'ESM1eRCV'/')(4!a2!a2!c)(1eORG'/'SWHQBECA1eEXP'/')(4!n)(1e)[(VER'/')(3!n)(1e)](SCR'/')(6!n)(1eERF'/')(1a)(1ePNL'/')(4!n)(')')]]></Format>
+		<Specification><![CDATA[(CSMMessageIdentifierandClass_RCV)(ReceiverSpecification)(OriginatorSpecification_EXP)(CV_ExpiryDate)(Space1)(VER)(NewHighestPKSVersion)(Space2)(SCR)(SCRNumber)(ERF)(ErrorField)(PNL)(PNLField)(Closing Delimiter)]]></Specification>
+		<Description><![CDATA[Error returned in MT 076 Certification Error .]]></Description>
+	</SwiftSystemFieldDef>
+	<SwiftSystemFieldDef Name="CSM-of-class-RFC" Tag="604">
+		<Format><![CDATA[(CSM'('MCL'/'RFC1e)(RCV'/'SWHQBECA1eORG'/')(4!a2!a2!c)(1eEXP'/')(4!n)(1ePKA'/')(128-256h)(1e)[(VER'/')(3!n)(1e)](CTC'/')(14!h)(1eSCR'/')(6!n)(1eSCN'/')(16!n)(1eMAC'/')(4!h1e4!h)(')')]]></Format>
+		<Specification><![CDATA[(CSMMessageIdentifierandClass)(ReceiverSpecification_ORG)(OriginatorSpecification)(EXP)(Requested_CV_ExpiryDate)(PKA)(PublicRSAKeyofUser)(Space1)(VER)(PKSVersion)(Space2)(CTC)(ConstantValue)(SCR)(SCRNumber)(SCN)(SWIFTCardNumber)(MAC)(CSM_MAC)(Closing Delimiter)]]></Specification>
+		<Description><![CDATA[Request for Certification Cryptographic Service Message.]]></Description>
+	</SwiftSystemFieldDef>
+	<SwiftSystemFieldDef Name="service-code" Tag="619">
+		<Format><![CDATA[3!a]]></Format>
+		<Specification><![CDATA[(service-code)]]></Specification>
+		<Description><![CDATA[SWIFTNet FIN Copy Service Code.]]></Description>
+	</SwiftSystemFieldDef>
+	<SwiftSystemFieldDef Name="copy-msg-text" Tag="999">
+		<Format><![CDATA[9911z]]></Format>
+		<Specification><![CDATA[(copy-msg-text)]]></Specification>
+		<Description><![CDATA[Reserved for internal use.]]></Description>
+	</SwiftSystemFieldDef>
+	<SwiftSystemFieldDef Name="ack-replay-indicator" Tag="NONE">
+		<Format><![CDATA[1!n]]></Format>
+		<Specification><![CDATA[(ack-replay-indicator)]]></Specification>
+		<Description><![CDATA[Session information - Indicates the last ACK can be replayed.]]></Description>
+	</SwiftSystemFieldDef>
+</SwiftFields>

@@ -1,0 +1,2431 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xpath-functions>
+    <function>
+        <name>text</name>
+        <signature>text(node $srcval)</signature>
+        <category>Text</category>
+        <arg>
+            <name>$srcval</name>
+            <type>node</type>
+        </arg>
+        <type>xs:string</type>
+        <description>Returns the text value of a node.</description>
+        <uri>http://www.w3.org/2005/xpath-functions</uri>
+    </function>
+	<function>
+		<name>abs</name>
+		<signature>abs(numeric? $srcval)</signature>
+		<category>Math</category>
+		<arg>
+			<name>$srcval</name>
+			<type>numeric ?</type>
+		</arg>
+		<result>numeric ?</result>
+		<description>Returns the absolute value of a given number. Returns the same type as the supplied argument.</description>
+		<uri>http://www.w3.org/2005/xpath-functions</uri>
+	</function>
+	<function>
+		<name>QName</name>
+		<signature>QName(string $paramURI, string $paramLocal)</signature>
+		<category>QName</category>
+		<arg>
+			<name>$paramURI</name>
+			<type>xs:string</type>
+		</arg>
+		<arg>
+			<name>$paramLocal</name>
+			<type>xs:string</type>
+		</arg>
+		<result>xs:QName</result>
+		<description>Constructs a QName value from a URI and local name. The second argument may be a lexical QName, and the prefix of the lexical QName is returned in the constructed value, for use if it is converted back to a string.</description>
+		<uri>http://www.w3.org/2005/xpath-functions</uri>
+	</function>
+	<function>
+		<name>adjust-date-to-timezone</name>
+		<signature>adjust-date-to-timezone($srcval as date?)</signature>
+		<category>Date Time</category>
+		<arg>
+			<name>$srcval</name>
+			<type>xs:date ?</type>
+		</arg>
+		<result>xs:date ?</result>
+		<description>Returns a date value equivalent to the original date, but with the timezone removed.</description>
+		<uri>http://www.w3.org/2005/xpath-functions</uri>
+	</function>
+	<function>
+		<name>adjust-date-to-timezone</name>
+		<signature>adjust-date-to-timezone($srcval as date?)</signature>
+		<category>Date Time</category>
+		<arg>
+			<name>$srcval</name>
+			<type>xs:date ?</type>
+		</arg>
+		<arg>
+			<name>$timezone</name>
+			<type>xs:dayTimeDuration</type>
+		</arg>
+		<result>xs:date ?</result>
+		<description>Returns a date value equivalent to the original date, but with a different timezone.</description>
+		<uri>http://www.w3.org/2005/xpath-functions</uri>
+	</function>
+	<function>
+		<name>adjust-dateTime-to-timezone</name>
+		<signature>adjust-dateTime-to-timezone($srcval as dateTime?)</signature>
+		<category>Date Time</category>
+		<arg>
+			<name>$srcval</name>
+			<type>xs:dateTime ?</type>
+		</arg>
+		<result>xs:dateTime ?</result>
+		<description>Returns a dateTime value equivalent to the original dateTime, but with the timezone removed.</description>
+		<uri>http://www.w3.org/2005/xpath-functions</uri>
+	</function>
+	<function>
+		<name>adjust-dateTime-to-timezone</name>
+		<signature>adjust-dateTime-to-timezone($srcval as dateTime?, $timezone as dayTimeDuration)</signature>
+		<category>Date Time</category>
+		<arg>
+			<name>$srcval</name>
+			<type>xs:dateTime ?</type>
+		</arg>
+		<arg>
+			<name>$timezone</name>
+			<type>xs:dayTimeDuration</type>
+		</arg>
+		<result>xs:dateTime ?</result>
+		<description>Returns a dateTime value equivalent to the original dateTime, but with a different timezone.</description>
+		<uri>http://www.w3.org/2005/xpath-functions</uri>
+	</function>
+	<function>
+		<name>adjust-time-to-timezone</name>
+		<signature>adjust-time-to-timezone($srcval as time?)</signature>
+		<category>Date Time</category>
+		<arg>
+			<name>$srcval</name>
+			<type>xs:time ?</type>
+		</arg>
+		<result>xs:time ?</result>
+		<description>Returns a time value equivalent to the original time, but with the timezone removed.</description>
+		<uri>http://www.w3.org/2005/xpath-functions</uri>
+	</function>
+	<function>
+		<name>adjust-time-to-timezone</name>
+		<signature>adjust-time-to-timezone($srcval as time?, $timezone as dayTimeDuration)</signature>
+		<category>Date Time</category>
+		<arg>
+			<name>$srcval</name>
+			<type>xs:time ?</type>
+		</arg>
+		<arg>
+			<name>$timezone</name>
+			<type>xs:dayTimeDuration</type>
+		</arg>
+		<result>xs:time ?</result>
+		<description>Returns a time value equivalent to the original time, but with a different timezone.</description>
+		<uri>http://www.w3.org/2005/xpath-functions</uri>
+	</function>
+	<function>
+		<name>avg</name>
+		<signature>avg(anyAtomicType* $srcval)</signature>
+		<category>Aggregate</category>
+		<arg>
+			<name>$srcval</name>
+			<type>xs:anyAtomicType *</type>
+		</arg>
+		<result>xs:anyAtomicType ?</result>
+		<description>Returns the average of a set of numbers or durations</description>
+		<uri>http://www.w3.org/2005/xpath-functions</uri>
+	</function>
+	<function>
+		<name>base-uri</name>
+		<signature>base-uri()</signature>
+		<category>Accessor</category>
+		<result>xs:anyURI ?</result>
+		<description>Returns the base URI of the context node</description>
+		<uri>http://www.w3.org/2005/xpath-functions</uri>
+	</function>
+	<function>
+		<name>base-uri</name>
+		<signature>base-uri(node $srcval)</signature>
+		<category>Accessor</category>
+		<arg>
+			<name>$srcval</name>
+			<type>node()</type>
+		</arg>
+		<result>xs:anyURI ?</result>
+		<description>Returns the base URI of a given node</description>
+		<uri>http://www.w3.org/2005/xpath-functions</uri>
+	</function>
+	<function>
+		<name>boolean</name>
+		<signature>boolean(item* $srcval)</signature>
+		<category>Boolean</category>
+		<arg>
+			<name>$srcval</name>
+			<type>item() *</type>
+		</arg>
+		<result>xs:boolean</result>
+		<description>Obtains the effective boolean value of the supplied argument. The result is true if the argument value is a sequence starting with a node, or the singleton boolean true(), a singleton non-zero number, or a singleton non-zero-length string (or untypedAtomic). The result is false if the argument is an empty sequence, the singleton boolean false, a singleton number zero or NaN, or a singleton zero-length string (or untypedAtomic). In all other cases the result is an error.</description>
+		<uri>http://www.w3.org/2005/xpath-functions</uri>
+	</function>
+	<function>
+		<name>ceiling</name>
+		<signature>ceiling(numeric? $srcval)</signature>
+		<category>Math</category>
+		<arg>
+			<name>$srcval</name>
+			<type>numeric ?</type>
+		</arg>
+		<result>numeric ?</result>
+		<description>Rounds a value towards positive infinity</description>
+		<uri>http://www.w3.org/2005/xpath-functions</uri>
+	</function>
+	<function>
+		<name>codepoint-equal</name>
+		<signature>codepoint-equal(string? $comparand1, string? $comparand2)</signature>
+		<category>Text</category>
+		<arg>
+			<name>$comparand1</name>
+			<type>xs:string ?</type>
+		</arg>
+		<arg>
+			<name>$comparand2</name>
+			<type>xs:string ?</type>
+		</arg>
+		<result>xs:boolean ?</result>
+		<description>Compares two strings using the Unicode codepoint collation</description>
+		<uri>http://www.w3.org/2005/xpath-functions</uri>
+	</function>
+	<function>
+		<name>codepoints-to-string</name>
+		<signature>codepoints-to-string(integer* codes)</signature>
+		<category>Text</category>
+		<arg>
+			<name>$codes</name>
+			<type>xs:integer *</type>
+		</arg>
+		<result>xs:string</result>
+		<description>Converts a sequence of integers representing Unicode characters to the corresponding string. Throws an error if any of the integers doesn't represent a valid XML character. The set of valid XML characters depends on whether XML 1.0 or 1.1 is the chosen version in the Configuration.</description>
+		<uri>http://www.w3.org/2005/xpath-functions</uri>
+	</function>
+	<function>
+		<name>collection</name>
+		<signature>collection()</signature>
+		<category>Sequence</category>
+		<arg>
+			<name>$srcval</name>
+			<type>xs:string</type>
+		</arg>
+		<result>node() *</result>
+		<description>Returns the default collection if there is one.</description>
+		<uri>http://www.w3.org/2005/xpath-functions</uri>
+	</function>
+	<function>
+		<name>collection</name>
+		<signature>collection(string $srcval)</signature>
+		<category>Sequence</category>
+		<arg>
+			<name>$srcval</name>
+			<type>xs:string</type>
+		</arg>
+		<result>node() *</result>
+		<description>Loads an external collection of nodes identified by the URI of the collection</description>
+		<uri>http://www.w3.org/2005/xpath-functions</uri>
+	</function>
+	<function>
+		<name>compare</name>
+		<signature>compare(string? $comparand1, string? $comparand2)</signature>
+		<category>Text</category>
+		<arg>
+			<name>$comparand1</name>
+			<type>xs:string ?</type>
+		</arg>
+		<arg>
+			<name>$comparand2</name>
+			<type>xs:string ?</type>
+		</arg>
+		<result>xs:integer ?</result>
+		<description>Compares two strings using the default collation</description>
+		<uri>http://www.w3.org/2005/xpath-functions</uri>
+	</function>
+	<function>
+		<name>compare</name>
+		<signature>compare(string? $comparand1, string? $comparand2, string $collation)</signature>
+		<category>Text</category>
+		<arg>
+			<name>$comparand1</name>
+			<type>xs:string ?</type>
+		</arg>
+		<arg>
+			<name>$comparand2</name>
+			<type>xs:string ?</type>
+		</arg>
+		<arg>
+			<name>$collation</name>
+			<type>xs:string</type>
+		</arg>
+		<result>xs:integer ?</result>
+		<description>Compares two strings using a specified collation</description>
+		<uri>http://www.w3.org/2005/xpath-functions</uri>
+	</function>
+	<function>
+		<name>concat</name>
+		<signature>concat(anyAtomicType $arg1, ...)</signature>
+		<category>Text</category>
+		<arg>
+			<name>$arg1</name>
+			<type>xs:anyAtomicType</type>
+		</arg>
+		<result>xs:string</result>
+		<description>Concatenates the string-values of the arguments into a single string. There must be at least two arguments.</description>
+		<uri>http://www.w3.org/2005/xpath-functions</uri>
+	</function>
+	<function>
+		<name>contains</name>
+		<signature>contains(string? $operand1, string? $operand2)</signature>
+		<category>Text</category>
+		<arg>
+			<name>$operand1</name>
+			<type>xs:string ?</type>
+		</arg>
+		<arg>
+			<name>$operand2</name>
+			<type>xs:string ?</type>
+		</arg>
+		<result>xs:boolean ?</result>
+		<description>Returns true if the second string is a substring of the first</description>
+		<uri>http://www.w3.org/2005/xpath-functions</uri>
+	</function>
+	<function>
+		<name>contains</name>
+		<signature>contains(string? $operand1, string? $operand2, string $collation)</signature>
+		<category>Text</category>
+		<arg>
+			<name>$operand1</name>
+			<type>xs:string ?</type>
+		</arg>
+		<arg>
+			<name>$operand2</name>
+			<type>xs:string ?</type>
+		</arg>
+		<arg>
+			<name>$collation</name>
+			<type>xs:string</type>
+		</arg>
+		<result>xs:boolean ?</result>
+		<description>Returns true the second string is a substring of the first, under the rules of the chosen collation. This must correspond to a RuleBaseCollator.</description>
+		<uri>http://www.w3.org/2005/xpath-functions</uri>
+	</function>
+	<function>
+		<name>count</name>
+		<signature>count(item* $srcval)</signature>
+		<category>Aggregate</category>
+		<arg>
+			<name>$srcval</name>
+			<type>item() *</type>
+		</arg>
+		<result>xs:integer</result>
+		<description>Counts the number of items in a sequence</description>
+		<uri>http://www.w3.org/2005/xpath-functions</uri>
+	</function>
+	<function>
+		<name>current</name>
+		<signature>current()</signature>
+		<category>XSLT</category>
+		<result>item() ?</result>
+		<description>Returns the item that was the current item supplied on entry to the XPath expression</description>
+		<uri>http://www.w3.org/1999/XSL/Transform</uri>
+	</function>
+	<function>
+		<name>current-date</name>
+		<signature>current-date()</signature>
+		<category>Context</category>
+		<result>xs:date</result>
+		<description>Returns the current date</description>
+		<uri>http://www.w3.org/2005/xpath-functions</uri>
+	</function>
+	<function>
+		<name>current-dateTime</name>
+		<signature>current-dateTime() </signature>
+		<category>Context</category>
+		<result>xs:dateTime</result>
+		<description>Returns the current date and time. Note that this does not change during the execution of the query or transformation.</description>
+		<uri>http://www.w3.org/2005/xpath-functions</uri>
+	</function>
+	<function>
+		<name>current-group</name>
+		<signature>current-group()</signature>
+		<category>XSLT</category>
+		<result>item() *</result>
+		<description>Returns the contents of the current group selected by xsl:for-each-group</description>
+		<uri>http://www.w3.org/1999/XSL/Transform</uri>
+	</function>
+	<function>
+		<name>current-grouping-key</name>
+		<signature>current-grouping-key()</signature>
+		<category>XSLT</category>
+		<result>xs:anyAtomicType</result>
+		<description>Returns the value that is the grouping key of the current group selected by xsl:for-each-group</description>
+		<uri>http://www.w3.org/1999/XSL/Transform</uri>
+	</function>
+	<function>
+		<name>current-time</name>
+		<signature>current-time()</signature>
+		<category>Context</category>
+		<result>xs:time</result>
+		<description>Returns the current time. Note that this does not change during the execution of the query or transformation.</description>
+		<uri>http://www.w3.org/2005/xpath-functions</uri>
+	</function>
+	<function>
+		<name>data</name>
+		<signature>data(item* $srcval)</signature>
+		<category>Accessor</category>
+		<arg>
+			<name>$srcval</name>
+			<type>item() *</type>
+		</arg>
+		<result>xs:anyAtomicType *</result>
+		<description>Returns the result of atomizing the supplied sequence</description>
+		<uri>http://www.w3.org/2005/xpath-functions</uri>
+	</function>
+	<function>
+		<name>dateTime</name>
+		<signature>dateTime(date $date, time $time)</signature>
+		<category>Date Time</category>
+		<arg>
+			<name>$date</name>
+			<type>xs:date</type>
+		</arg>
+		<arg>
+			<name>$time</name>
+			<type>xs:time</type>
+		</arg>
+		<result>xs:dateTime</result>
+		<description>Combines the given date and time. The result has a timezone if either of the inputs has a timezone; if they both have a timezone, then the two timezones must be the same.</description>
+		<uri>http://www.w3.org/2005/xpath-functions</uri>
+	</function>
+	<function>
+		<name>day-from-date</name>
+		<signature>day-from-date( date? $srcval)</signature>
+		<category>Date Time</category>
+		<arg>
+			<name>$srcval</name>
+			<type>xs:date ?</type>
+		</arg>
+		<result>xs:integer ?</result>
+		<description>Extracts the day component of a date value</description>
+		<uri>http://www.w3.org/2005/xpath-functions</uri>
+	</function>
+	<function>
+		<name>day-from-dateTime</name>
+		<signature>day-from-dateTime( dateTime? $srcval)</signature>
+		<category>Date Time</category>
+		<arg>
+			<name>$srcval</name>
+			<type>xs:dateTime ?</type>
+		</arg>
+		<result>xs:integer ?</result>
+		<description>Extracts the day component of a dateTime value</description>
+		<uri>http://www.w3.org/2005/xpath-functions</uri>
+	</function>
+	<function>
+		<name>days-from-duration</name>
+		<signature>days-from-duration( dayTimeDuration? $srcval)</signature>
+		<category>Date Time</category>
+		<arg>
+			<name>$srcval</name>
+			<type>xs:dayTimeDuration ?</type>
+		</arg>
+		<result>xs:integer ?</result>
+		<description>Extracts the days component of a dayTimeDuration value</description>
+		<uri>http://www.w3.org/2005/xpath-functions</uri>
+	</function>
+	<function>
+		<name>deep-equal</name>
+		<signature>deep-equal(item()* $parameter1, item()* $parameter2)</signature>
+		<category>Sequence</category>
+		<arg>
+			<name>$operand1</name>
+			<type>item() *</type>
+		</arg>
+		<arg>
+			<name>$operand2</name>
+			<type>item() *</type>
+		</arg>
+		<result>xs:boolean</result>
+		<description>Compares two sequences for deep equality; string values are compared using the default collation; nodes are compared for deep equality of names and content.</description>
+		<uri>http://www.w3.org/2005/xpath-functions</uri>
+	</function>
+	<function>
+		<name>deep-equal</name>
+		<signature>deep-equal(item()* $parameter1, item()* $parameter2, string $collation)</signature>
+		<category>Sequence</category>
+		<arg>
+			<name>$operand1</name>
+			<type>item() *</type>
+		</arg>
+		<arg>
+			<name>$operand2</name>
+			<type>item() *</type>
+		</arg>
+		<arg>
+			<name>$collation</name>
+			<type>string</type>
+		</arg>
+		<result>xs:boolean</result>
+		<description>Compares two sequences for deep equality; string values are compared using the named collation; nodes are compared for deep equality of names and content.</description>
+		<uri>http://www.w3.org/2005/xpath-functions</uri>
+	</function>
+	<function>
+		<name>default-collation</name>
+		<signature>default-collation()</signature>
+		<category>Context</category>
+		<result>xs:string</result>
+		<description>Returns the name of the default collation. If no collation has been set explicitly this will be the URI of the Unicode codepoint collation.</description>
+		<uri>http://www.w3.org/2005/xpath-functions</uri>
+	</function>
+	<function>
+		<name>distinct-values</name>
+		<signature>distinct-values( xs:anyAtomicType* $srcval)</signature>
+		<category>Sequence</category>
+		<arg>
+			<name>$srcval</name>
+			<type>xs:anyAtomicType *</type>
+		</arg>
+		<result>xs:anyAtomicType *</result>
+		<description>Returns the set of distinct values present in a given sequence. The current Saxon implementation returns the values in "order of first appearance", but it cannot be assumed that this will always remain the case.</description>
+		<uri>http://www.w3.org/2005/xpath-functions</uri>
+	</function>
+	<function>
+		<name>distinct-values</name>
+		<signature>distinct-values( xs:anyAtomicType* $srcval, string $collation)</signature>
+		<category>Sequence</category>
+		<arg>
+			<name>$srcval</name>
+			<type>xs:anyAtomicType *</type>
+		</arg>
+		<arg>
+			<name>$collation</name>
+			<type>string</type>
+		</arg>
+		<result>xs:anyAtomicType *</result>
+		<description>Returns the set of distinct values present in a given sequence, comparing strings using a named collation. The current Saxon implementation returns the values in "order of first appearance", but it cannot be assumed that this will always remain the case.</description>
+		<uri>http://www.w3.org/2005/xpath-functions</uri>
+	</function>
+	<function>
+		<name>doc</name>
+		<signature>doc(string? $uri)</signature>
+		<category>Sequence</category>
+		<arg>
+			<name>$uri</name>
+			<type>string ?</type>
+		</arg>
+		<result>document-node() ?</result>
+		<description>Loads a document identified by its URI</description>
+		<uri>http://www.w3.org/2005/xpath-functions</uri>
+	</function>
+	<function>
+		<name>doc-available</name>
+		<signature>doc-available(string? $uri)</signature>
+		<category>Sequence</category>
+		<arg>
+			<name>$uri</name>
+			<type>string ?</type>
+		</arg>
+		<result>boolean</result>
+		<description>Returns true if a document with the given URI can be successfully loaded, false otherwise.</description>
+		<uri>http://www.w3.org/2005/xpath-functions</uri>
+	</function>
+	<function>
+		<name>document</name>
+		<signature>document(item* $srcval1)</signature>
+		<category>XSLT</category>
+		<arg>
+			<name>$uri</name>
+			<type>item *</type>
+		</arg>
+		<result>node() *</result>
+		<description>Loads one or more documents identified by their URIs. URIs are handled by the URIResolver in the same way as the doc() function.</description>
+		<uri>http://www.w3.org/1999/XSL/Transform</uri>
+	</function>
+	<function>
+		<name>document</name>
+		<signature>document(item* $srcval1, node* $srcval2)</signature>
+		<category>XSLT</category>
+		<arg>
+			<name>$uri</name>
+			<type>item *</type>
+		</arg>
+		<arg>
+			<name>$base</name>
+			<type>node() *</type>
+		</arg>
+		<result>node() *</result>
+		<description>Loads one or more documents identified by their URIs, using the base URI of the node given in the second argument to resolve any relative URIs. URIs are handled by the URIResolver in the same way as the doc() function.</description>
+		<uri>http://www.w3.org/1999/XSL/Transform</uri>
+	</function>
+	<function>
+		<name>document-uri</name>
+		<signature>document-uri(node $srcval)</signature>
+		<category>Accessor</category>
+		<arg>
+			<name>$srcval</name>
+			<type>node()</type>
+		</arg>
+		<result>xs:anyURI ?</result>
+		<description>Returns the URI of a document</description>
+		<uri>http://www.w3.org/2005/xpath-functions</uri>
+	</function>
+	<function>
+		<name>element-available</name>
+		<signature>element-available(string $element)</signature>
+		<category>XSLT</category>
+		<arg>
+			<name>$element</name>
+			<type>xs:string</type>
+		</arg>
+		<result>xs:boolean</result>
+		<description>Determines whether a particular instruction (typically, an extension element) is available for use in a stylesheet</description>
+		<uri>http://www.w3.org/1999/XSL/Transform</uri>
+	</function>
+	<function>
+		<name>empty</name>
+		<signature>empty(item()* $srcval)</signature>
+		<category>Sequence</category>
+		<arg>
+			<name>$srcval</name>
+			<type>item() *</type>
+		</arg>
+		<result>xs:boolean</result>
+		<description>Returns true if the given sequence is empty</description>
+		<uri>http://www.w3.org/2005/xpath-functions</uri>
+	</function>
+	<function>
+		<name>encode-for-uri</name>
+		<signature>encode-for-uri(string $uri-part)</signature>
+		<category>Text</category>
+		<arg>
+			<name>$uri-part</name>
+			<type>xs:string</type>
+		</arg>
+		<result>string</result>
+		<description>Applies the %HH escaping convention to a URI, escaping both disallowed characters and reserved characters such as "/" and ":"</description>
+		<uri>http://www.w3.org/2005/xpath-functions</uri>
+	</function>
+	<function>
+		<name>ends-with</name>
+		<signature>ends-with(string? $operand1, string? $operand2)</signature>
+		<category>Text</category>
+		<arg>
+			<name>$operand1</name>
+			<type>xs:string ?</type>
+		</arg>
+		<arg>
+			<name>$operand2</name>
+			<type>xs:string ?</type>
+		</arg>
+		<result>xs:boolean ?</result>
+		<description>Returns true if the first string ends with the second string</description>
+		<uri>http://www.w3.org/2005/xpath-functions</uri>
+	</function>
+	<function>
+		<name>ends-with</name>
+		<signature>ends-with(string? $operand1, string? $operand2, string $collation)</signature>
+		<category>Text</category>
+		<arg>
+			<name>$operand1</name>
+			<type>xs:string ?</type>
+		</arg>
+		<arg>
+			<name>$operand2</name>
+			<type>xs:string ?</type>
+		</arg>
+		<arg>
+			<name>$collation</name>
+			<type>xs:string</type>
+		</arg>
+		<result>xs:boolean ?</result>
+		<description>Returns true if the first string ends with the second string, when compared using the named collation. This must be a collation based on a RuleBasedCollator.</description>
+		<uri>http://www.w3.org/2005/xpath-functions</uri>
+	</function>
+	<function>
+		<name>error</name>
+		<signature>error()</signature>
+		<category>Error</category>
+		<description>Raises an error.</description>
+		<uri>http://www.w3.org/2005/xpath-functions</uri>
+	</function>
+	<function>
+		<name>error</name>
+		<signature>error($error as xs:QName?)</signature>
+		<category>Error</category>
+		<arg>
+			<name>$error</name>
+			<type>xs:QName?</type>
+		</arg>
+		<description>Raises an error.</description>
+		<uri>http://www.w3.org/2005/xpath-functions</uri>
+	</function>
+	<function>
+		<name>error</name>
+		<signature>error($error as xs:QName?, $description as xs:string)</signature>
+		<category>Error</category>
+		<arg>
+			<name>$error</name>
+			<type>xs:QName?</type>
+		</arg>
+		<arg>
+			<name>$description</name>
+			<type>xs:string</type>
+		</arg>
+		<description>Raises an error.</description>
+		<uri>http://www.w3.org/2005/xpath-functions</uri>
+	</function>
+	<function>
+		<name>error</name>
+		<signature>error($error as xs:QName?, $description as xs:string, $error-object as item()*)</signature>
+		<category>Error</category>
+		<arg>
+			<name>$error</name>
+			<type>xs:QName?</type>
+		</arg>
+		<arg>
+			<name>$description</name>
+			<type>xs:string</type>
+		</arg>
+		<arg>
+			<name>$error-object</name>
+			<type>item()*</type>
+		</arg>
+		<description>Raises an error.</description>
+		<uri>http://www.w3.org/2005/xpath-functions</uri>
+	</function>
+	<function>
+		<name>escape-html-uri</name>
+		<signature>escape-html-uri(string $uri-part)</signature>
+		<category>Text</category>
+		<arg>
+			<name>$uri-part</name>
+			<type>xs:string</type>
+		</arg>
+		<result>string</result>
+		<description>Applies the %HH escaping convention to a URI, according to the rules of the HTML specification: that is, non-ASCII characters are escaped, but all ASCII characters, including spaces, are retained intact.</description>
+		<uri>http://www.w3.org/2005/xpath-functions</uri>
+	</function>
+	<function>
+		<name>exactly-one</name>
+		<signature>exactly-one($srcval as item*)</signature>
+		<category>Sequence</category>
+		<arg>
+			<name>$srcval</name>
+			<type>item() *</type>
+		</arg>
+		<result>item() ?</result>
+		<description>Checks whether $srcval contains exactly one item; fails if it is empty or contains multiple items.</description>
+		<uri>http://www.w3.org/2005/xpath-functions</uri>
+	</function>
+	<function>
+		<name>exists</name>
+		<signature>exists($srcval as item())</signature>
+		<category>Sequence</category>
+		<arg>
+			<name>$srcval</name>
+			<type>item() *</type>
+		</arg>
+		<result>xs:boolean</result>
+		<description>Returns true if the given sequence is not empty</description>
+		<uri>http://www.w3.org/2005/xpath-functions</uri>
+	</function>
+	<function>
+		<name>false</name>
+		<signature>false()</signature>
+		<category>Boolean</category>
+		<result>xs:boolean</result>
+		<description>Returns the boolean value false</description>
+		<uri>http://www.w3.org/2005/xpath-functions</uri>
+	</function>
+	<function>
+		<name>floor</name>
+		<signature>floor(numeric? $srcval)</signature>
+		<category>Math</category>
+		<arg>
+			<name>$srcval</name>
+			<type>numeric ?</type>
+		</arg>
+		<result>numeric ?</result>
+		<description>Rounds a number towards minus infinity</description>
+		<uri>http://www.w3.org/2005/xpath-functions</uri>
+	</function>
+	<function>
+		<name>format-date</name>
+		<signature>format-date(xs:date value, string picture)</signature>
+		<category>XSLT</category>
+		<arg>
+			<name>$value</name>
+			<type>xs:date ?</type>
+		</arg>
+		<arg>
+			<name>$picture</name>
+			<type>xs:string</type>
+		</arg>
+		<result>xs:string</result>
+		<description>Formats a date, using a format controlled by the picture string. The result is equivalent to the 5-argument form of the function, with the third, fourth, and fifth arguments set to an empty sequence.</description>
+		<uri>http://www.w3.org/1999/XSL/Transform</uri>
+	</function>
+	<function>
+		<name>format-date</name>
+		<signature>format-date(xs:date value, string picture, string language)</signature>
+		<category>XSLT</category>
+		<arg>
+			<name>$value</name>
+			<type>xs:date ?</type>
+		</arg>
+		<arg>
+			<name>$picture</name>
+			<type>xs:string</type>
+		</arg>
+		<arg>
+			<name>$language</name>
+			<type>xs:string ?</type>
+		</arg>
+		<arg>
+			<name>$calendar</name>
+			<type>xs:string ?</type>
+		</arg>
+		<arg>
+			<name>$country</name>
+			<type>xs:string ?</type>
+		</arg>
+		<result>xs:string</result>
+		<description>Formats a date, using a format controlled by the picture string. If no language is specified, the value is taken from the current Java locale. If the language (explicitly supplied or defaulted) is other than "en", the system tries to locate a class named net.sf.saxon.number.Numberer_XX  where XX is the language; this class must provide methods to perform the localization.</description>
+		<uri>http://www.w3.org/1999/XSL/Transform</uri>
+	</function>
+	<function>
+		<name>format-dateTime</name>
+		<signature>format-dateTime(xs:dateTime value, string picture)</signature>
+		<category>XSLT</category>
+		<arg>
+			<name>$value</name>
+			<type>xs:dateTime ?</type>
+		</arg>
+		<arg>
+			<name>$picture</name>
+			<type>xs:string</type>
+		</arg>
+		<result>xs:string</result>
+		<description>Formats a dateTime, using a format controlled by the picture string. The result is equivalent to the 5-argument form of the function, with the third, fourth, and fifth arguments set to an empty sequence.</description>
+		<uri>http://www.w3.org/1999/XSL/Transform</uri>
+	</function>
+	<function>
+		<name>format-dateTime</name>
+		<signature>format-dateTime(xs:dateTime value, string picture,string language,string calendar,string country)</signature>
+		<category>XSLT</category>
+		<arg>
+			<name>$value</name>
+			<type>xs:dateTime ?</type>
+		</arg>
+		<arg>
+			<name>$picture</name>
+			<type>xs:string</type>
+		</arg>
+		<arg>
+			<name>$language</name>
+			<type>xs:string ?</type>
+		</arg>
+		<arg>
+			<name>$calendar</name>
+			<type>xs:string ?</type>
+		</arg>
+		<arg>
+			<name>$country</name>
+			<type>xs:string ?</type>
+		</arg>
+		<result>xs:string</result>
+		<description>Formats a date, using a format controlled by the picture string. If no language is specified, the value is taken from the current Java locale. If the language (explicitly supplied or defaulted) is other than "en", the system tries to locate a class named net.sf.saxon.number.Numberer_XX  where XX is the language; this class must provide methods to perform the localization.</description>
+		<uri>http://www.w3.org/1999/XSL/Transform</uri>
+	</function>
+	<function>
+		<name>format-number</name>
+		<signature>format-number(numeric $value, string $picture)</signature>
+		<category>XSLT</category>
+		<arg>
+			<name>$value</name>
+			<type>xs:double ?</type>
+		</arg>
+		<arg>
+			<name>$picture</name>
+			<type>xs:string</type>
+		</arg>
+		<result>xs:string</result>
+		<description>Formats a number as specified by a picture string, using the default decimal format</description>
+		<uri>http://www.w3.org/1999/XSL/Transform</uri>
+	</function>
+	<function>
+		<name>format-number</name>
+		<signature>format-number(numeric $value, string $picture, string $decimal-format)</signature>
+		<category>XSLT</category>
+		<arg>
+			<name>$value</name>
+			<type>xs:double ?</type>
+		</arg>
+		<arg>
+			<name>$picture</name>
+			<type>xs:string</type>
+		</arg>
+		<arg>
+			<name>$decimal-format</name>
+			<type>xs:string</type>
+		</arg>
+		<result>xs:string</result>
+		<description>Formats a number as specified by a picture string, using a named decimal format</description>
+		<uri>http://www.w3.org/1999/XSL/Transform</uri>
+	</function>
+	<function>
+		<name>format-time</name>
+		<signature>format-time(time $value, string $picture, string $language,string $calendar,string $country)</signature>
+		<category>XSLT</category>
+		<arg>
+			<name>$value</name>
+			<type>xs:time ?</type>
+		</arg>
+		<arg>
+			<name>$picture</name>
+			<type>xs:string</type>
+		</arg>
+		<arg>
+			<name>$language</name>
+			<type>xs:string ?</type>
+		</arg>
+		<arg>
+			<name>$calendar</name>
+			<type>xs:string ?</type>
+		</arg>
+		<arg>
+			<name>$country</name>
+			<type>xs:string ?</type>
+		</arg>
+		<result>xs:string</result>
+		<description>Formats a date, using a format controlled by the picture string. If no language is specified, the value is taken from the current Java locale. If the language (explicitly supplied or defaulted) is other than "en", the system tries to locate a class named net.sf.saxon.number.Numberer_XX  where XX is the language; this class must provide methods to perform the localization.</description>
+		<uri>http://www.w3.org/1999/XSL/Transform</uri>
+	</function>
+	<function>
+		<name>format-time</name>
+		<signature>format-time(time $value, string $picture)</signature>
+		<category>XSLT</category>
+		<arg>
+			<name>$value</name>
+			<type>xs:time ?</type>
+		</arg>
+		<arg>
+			<name>$picture</name>
+			<type>xs:string</type>
+		</arg>
+		<result>xs:string</result>
+		<description>Formats a time, using a format controlled by the picture string. This has the same effect as calling the 5-argument form of the function with an empty sequence supplied for the last three arguments.</description>
+		<uri>http://www.w3.org/1999/XSL/Transform</uri>
+	</function>
+	<function>
+		<name>function-available</name>
+		<signature>function-available(string $function)</signature>
+		<category>XSLT</category>
+		<arg>
+			<name>$function</name>
+			<type>xs:string</type>
+		</arg>
+		<result>xs:boolean</result>
+		<description>Determines whether a function with a given name (regardless of arity) is available in the context</description>
+		<uri>http://www.w3.org/1999/XSL/Transform</uri>
+	</function>
+	<function>
+		<name>function-available</name>
+		<signature>function-available(string $function,integer $arity)</signature>
+		<category>XSLT</category>
+		<arg>
+			<name>$function</name>
+			<type>xs:string</type>
+		</arg>
+		<arg>
+			<name>$arity</name>
+			<type>xs:integer</type>
+		</arg>
+		<result>xs:boolean</result>
+		<description>Determines whether a function with the given name and arity is available in the context.</description>
+		<uri>http://www.w3.org/1999/XSL/Transform</uri>
+	</function>
+	<function>
+		<name>generate-id</name>
+		<signature>generate-id()</signature>
+		<category>XSLT</category>
+		<result>xs:string</result>
+		<description>Returns a generated unique ASCII identifier for the context node</description>
+		<uri>http://www.w3.org/1999/XSL/Transform</uri>
+	</function>
+	<function>
+		<name>generate-id</name>
+		<signature>generate-id(node()? $srcval)</signature>
+		<category>XSLT</category>
+		<arg>
+			<name>$srcval</name>
+			<type>node() ?</type>
+		</arg>
+		<result>xs:string</result>
+		<description>Returns a generated unique ASCII identifier for a given node</description>
+		<uri>http://www.w3.org/1999/XSL/Transform</uri>
+	</function>
+	<function>
+		<name>hours-from-dateTime</name>
+		<signature>hours-from-dateTime( dateTime? $srcval)</signature>
+		<category>Date Time</category>
+		<arg>
+			<name>$srcval</name>
+			<type>xs:dateTime ?</type>
+		</arg>
+		<result>xs:integer ?</result>
+		<description>Extracts the hour component of a dateTime value</description>
+		<uri>http://www.w3.org/2005/xpath-functions</uri>
+	</function>
+	<function>
+		<name>hours-from-duration</name>
+		<signature>hours-from-duration( dayTimeDuration? $srcval)</signature>
+		<category>Date Time</category>
+		<arg>
+			<name>$srcval</name>
+			<type>xs:dayTimeDuration ?</type>
+		</arg>
+		<result>xs:integer ?</result>
+		<description>Extracts the hours component of a dayTimeDuration value</description>
+		<uri>http://www.w3.org/2005/xpath-functions</uri>
+	</function>
+	<function>
+		<name>hours-from-time</name>
+		<signature>hours-from-time( time? $srcval)</signature>
+		<category>Date Time</category>
+		<arg>
+			<name>$srcval</name>
+			<type>xs:time ?</type>
+		</arg>
+		<result>xs:integer ?</result>
+		<description>Extracts the hours component of a time value. Note that this is from the localized value, not the normalized value: for example if the supplied time value is 01:23:00+05:00 then the result is 1.</description>
+		<uri>http://www.w3.org/2005/xpath-functions</uri>
+	</function>
+	<function>
+		<name>id</name>
+		<signature>id(string* $srcval)</signature>
+		<category>Sequence</category>
+		<arg>
+			<name>$srcval</name>
+			<type>xs:string *</type>
+		</arg>
+		<result>element() *</result>
+		<description>Finds the elements with given ID attribute values</description>
+		<uri>http://www.w3.org/2005/xpath-functions</uri>
+	</function>
+	<function>
+		<name>id</name>
+		<signature>id(string* $srcval, node() node)</signature>
+		<category>Sequence</category>
+		<arg>
+			<name>$srcval</name>
+			<type>xs:string *</type>
+		</arg>
+		<result>element() *</result>
+		<description>Finds the elements with given ID attribute values, within a specified document.</description>
+		<uri>http://www.w3.org/2005/xpath-functions</uri>
+	</function>
+	<function>
+		<name>idref</name>
+		<signature>idref(string* $srcval)</signature>
+		<category>Sequence</category>
+		<arg>
+			<name>$srcval</name>
+			<type>xs:string *</type>
+		</arg>
+		<result>node() *</result>
+		<description>Finds the nodes that link to the element with a given ID value. These will be element or attribute nodes marked by virtue of schema or DTD validation as IDREF or IDREFS values.</description>
+		<uri>http://www.w3.org/2005/xpath-functions</uri>
+	</function>
+	<function>
+		<name>idref</name>
+		<signature>idref(string* $srcval, node() $doc)</signature>
+		<category>Sequence</category>
+		<arg>
+			<name>$srcval</name>
+			<type>xs:string *</type>
+		</arg>
+		<result>node() *</result>
+		<description>Finds the elements that link to the element with a given ID value. These will be element or attribute nodes marked by virtue of schema or DTD validation as IDREF or IDREFS values.</description>
+		<uri>http://www.w3.org/2005/xpath-functions</uri>
+	</function>
+	<function>
+		<name>implicit-timezone</name>
+		<signature>implicit-timezone()</signature>
+		<category>Context</category>
+		<result>xs:dayTimeDuration</result>
+		<description>Returns the implicit timezone. By default, the implicit timezone in Saxon is the timezone taken from the system clock at the time the Configuration object is instantiated. This ensures that the implicit timezone is known at compile time.</description>
+		<uri>http://www.w3.org/2005/xpath-functions</uri>
+	</function>
+	<function>
+		<name>in-scope-prefixes</name>
+		<signature>in-scope-prefixes($element as element())</signature>
+		<category>QName</category>
+		<arg>
+			<name>$element</name>
+			<type>element()</type>
+		</arg>
+		<result>xs:string *</result>
+		<description>Returns the names of the namespaces that are in scope for an element. Except for the unnamed namespace, which is represented by the string "", the names will be of type xs:NCName.</description>
+		<uri>http://www.w3.org/2005/xpath-functions</uri>
+	</function>
+	<function>
+		<name>index-of</name>
+		<signature>index-of(xs:anyAtomicType* $seqParam, xs:anyAtomicType $srchParam)</signature>
+		<category>Sequence</category>
+		<arg>
+			<name>$seqParam</name>
+			<type>xs:anyAtomicType *</type>
+		</arg>
+		<arg>
+			<name>$srchParam</name>
+			<type>xs:anyAtomicType</type>
+		</arg>
+		<result>xs:integer *</result>
+		<description>Finds the positions of items in a sequence that match the second argument</description>
+		<uri>http://www.w3.org/2005/xpath-functions</uri>
+	</function>
+	<function>
+		<name>index-of</name>
+		<signature>index-of(xs:anyAtomicType* $seqParam, xs:anyAtomicType $srchParam, string $collation)</signature>
+		<category>Sequence</category>
+		<arg>
+			<name>$seqParam</name>
+			<type>xs:anyAtomicType *</type>
+		</arg>
+		<arg>
+			<name>$srchParam</name>
+			<type>xs:anyAtomicType</type>
+		</arg>
+		<arg>
+			<name>$collation</name>
+			<type>xs:string</type>
+		</arg>
+		<result>xs:integer *</result>
+		<description>Finds the positions of items in a sequence that match the second argument, using a named collation for the comparison</description>
+		<uri>http://www.w3.org/2005/xpath-functions</uri>
+	</function>
+	<function>
+		<name>insert-before</name>
+		<signature>insert-before(item()* $target, integer $position, item()* $inserts)</signature>
+		<category>Sequence</category>
+		<arg>
+			<name>$target</name>
+			<type>item() *</type>
+		</arg>
+		<arg>
+			<name>$position</name>
+			<type>xs:integer</type>
+		</arg>
+		<arg>
+			<name>$inserts</name>
+			<type>item() *</type>
+		</arg>
+		<result>item() *</result>
+		<description>Insert an item into a sequence</description>
+		<uri>http://www.w3.org/2005/xpath-functions</uri>
+	</function>
+	<function>
+		<name>iri-to-uri</name>
+		<signature>iri-to-uri(string $uri-part)</signature>
+		<category>Text</category>
+		<arg>
+			<name>$uri-part</name>
+			<type>xs:string</type>
+		</arg>
+		<result>string</result>
+		<description>Applies the %HH escaping convention to a URI, escaping only disallowed characters (but not reserved characters such as "/" and ":")</description>
+		<uri>http://www.w3.org/2005/xpath-functions</uri>
+	</function>
+	<function>
+		<name>key</name>
+		<signature>key(string $key-name,anyAtomicType * $key-value)</signature>
+		<category>XSLT</category>
+		<arg>
+			<name>$key-name</name>
+			<type>xs:string</type>
+		</arg>
+		<arg>
+			<name>$key-value</name>
+			<type>xs:anyAtomicType *</type>
+		</arg>
+		<result>node() *</result>
+		<description>Returns the nodes identified by a named key declaration in the stylesheet.</description>
+		<uri>http://www.w3.org/1999/XSL/Transform</uri>
+	</function>
+	<function>
+		<name>key</name>
+		<signature>key(string $key-name,anyAtomicType * $key-value,node() $root-node)</signature>
+		<category>XSLT</category>
+		<arg>
+			<name>$key-name</name>
+			<type>xs:string</type>
+		</arg>
+		<arg>
+			<name>$key-value</name>
+			<type>xs:anyAtomicType *</type>
+		</arg>
+		<arg>
+			<name>$root-node</name>
+			<type>node()</type>
+		</arg>
+		<result>node() *</result>
+		<description>Returns the nodes identified by a named key declaration in the stylesheet. The nodes selected are those that have a matching key-value, and that are within the subtree rooted at $root-node (which will generally be either a document node or an element)</description>
+		<uri>http://www.w3.org/1999/XSL/Transform</uri>
+	</function>
+	<function>
+		<name>lang</name>
+		<signature>lang(string $testlang)</signature>
+		<category>QName</category>
+		<arg>
+			<name>$testlang</name>
+			<type>xs:string *</type>
+		</arg>
+		<result>xs:boolean</result>
+		<description>Returns true if the xml:lang value for the context node matches the given language</description>
+		<uri>http://www.w3.org/2005/xpath-functions</uri>
+	</function>
+	<function>
+		<name>lang</name>
+		<signature>lang(string $testlang, node() node)</signature>
+		<category>QName</category>
+		<arg>
+			<name>$testlang</name>
+			<type>xs:string *</type>
+		</arg>
+		<arg>
+			<name>$node</name>
+			<type>node()</type>
+		</arg>
+		<result>xs:boolean</result>
+		<description>Returns true if the xml:lang value for the given node matches the given language</description>
+		<uri>http://www.w3.org/2005/xpath-functions</uri>
+	</function>
+	<function>
+		<name>last</name>
+		<signature>last()</signature>
+		<category>Context</category>
+		<result>xs:integer</result>
+		<description>Returns the context size (the size of the sequence of items currently being processed)</description>
+		<uri>http://www.w3.org/2005/xpath-functions</uri>
+	</function>
+	<function>
+		<name>local-name</name>
+		<signature>local-name()</signature>
+		<category>Node</category>
+		<result>xs:string</result>
+		<description>Returns the local part of the name of the context node</description>
+		<uri>http://www.w3.org/2005/xpath-functions</uri>
+	</function>
+	<function>
+		<name>local-name</name>
+		<signature>local-name(node? $srcval)</signature>
+		<category>Node</category>
+		<arg>
+			<name>$srcval</name>
+			<type>node() ?</type>
+		</arg>
+		<result>xs:string</result>
+		<description>Returns the local part of the name of a given node</description>
+		<uri>http://www.w3.org/2005/xpath-functions</uri>
+	</function>
+	<function>
+		<name>local-name-from-QName</name>
+		<signature>local-name-from-QName( QName? $srcval)</signature>
+		<category>QName</category>
+		<arg>
+			<name>$srcval</name>
+			<type>xs:QName ?</type>
+		</arg>
+		<result>xs:NCName ?</result>
+		<description>Extracts the local name component of a QName value, as an xs:NCName</description>
+		<uri>http://www.w3.org/2005/xpath-functions</uri>
+	</function>
+	<function>
+		<name>lower-case</name>
+		<signature>lower-case(string? $srcval)</signature>
+		<category>Text</category>
+		<arg>
+			<name>$srcval</name>
+			<type>xs:string ?</type>
+		</arg>
+		<result>xs:string ?</result>
+		<description>Translates characters in a string to lower case</description>
+		<uri>http://www.w3.org/2005/xpath-functions</uri>
+	</function>
+	<function>
+		<name>matches</name>
+		<signature>matches(string? $input, string $pattern)</signature>
+		<category>RegEx</category>
+		<arg>
+			<name>$input</name>
+			<type>xs:string ?</type>
+		</arg>
+		<arg>
+			<name>$pattern</name>
+			<type>xs:string</type>
+		</arg>
+		<result>xs:boolean ?</result>
+		<description>Returns true if the given string matches the given regular expression</description>
+		<uri>http://www.w3.org/2005/xpath-functions</uri>
+	</function>
+	<function>
+		<name>matches</name>
+		<signature>matches(string? $input, string $pattern, string $flags)</signature>
+		<category>RegEx</category>
+		<arg>
+			<name>$input</name>
+			<type>xs:string ?</type>
+		</arg>
+		<arg>
+			<name>$pattern</name>
+			<type>xs:string</type>
+		</arg>
+		<arg>
+			<name>$flags</name>
+			<type>xs:string</type>
+		</arg>
+		<result>xs:boolean ?</result>
+		<description>Returns true if the given string matches the given regular expression, specifying flags to control the way pattern matching is performed</description>
+		<uri>http://www.w3.org/2005/xpath-functions</uri>
+	</function>
+	<function>
+		<name>max</name>
+		<signature>max(xs:anyAtomicType* $srcval)</signature>
+		<category>Aggregate</category>
+		<arg>
+			<name>$srcval</name>
+			<type>xs:anyAtomicType *</type>
+		</arg>
+		<result>xs:anyAtomicType ?</result>
+		<description>Returns the highest value in a sequence of comparable items</description>
+		<uri>http://www.w3.org/2005/xpath-functions</uri>
+	</function>
+	<function>
+		<name>max</name>
+		<signature>max(xs:anyAtomicType* $srcval, string $collation)</signature>
+		<category>Aggregate</category>
+		<arg>
+			<name>$srcval</name>
+			<type>xs:anyAtomicType *</type>
+		</arg>
+		<arg>
+			<name>$collation</name>
+			<type>xs:string</type>
+		</arg>
+		<result>xs:anyAtomicType ?</result>
+		<description>Returns the highest value in a sequence of strings, using a specified collation to perform the comparisons</description>
+		<uri>http://www.w3.org/2005/xpath-functions</uri>
+	</function>
+	<function>
+		<name>min</name>
+		<signature>min(xs:anyAtomicType* $srcval)</signature>
+		<category>Aggregate</category>
+		<arg>
+			<name>$srcval</name>
+			<type>xs:anyAtomicType *</type>
+		</arg>
+		<result>xs:anyAtomicType ?</result>
+		<description>Returns the lowest value in a sequence of comparable items</description>
+		<uri>http://www.w3.org/2005/xpath-functions</uri>
+	</function>
+	<function>
+		<name>min</name>
+		<signature>min(xs:anyAtomicType* $srcval, string $collation)</signature>
+		<category>Aggregate</category>
+		<arg>
+			<name>$srcval</name>
+			<type>xs:anyAtomicType *</type>
+		</arg>
+		<arg>
+			<name>$collation</name>
+			<type>xs:string</type>
+		</arg>
+		<result>xs:anyAtomicType ?</result>
+		<description>Returns the lowest value in a sequence of strings, using a specified collation to perform the comparisons</description>
+		<uri>http://www.w3.org/2005/xpath-functions</uri>
+	</function>
+	<function>
+		<name>minutes-from-dateTime</name>
+		<signature>minutes-from-dateTime( dateTime? $srcval)</signature>
+		<category>Date Time</category>
+		<arg>
+			<name>$srcval</name>
+			<type>xs:dateTime ?</type>
+		</arg>
+		<result>xs:integer ?</result>
+		<description>Extracts the minutes component of a dateTime value</description>
+		<uri>http://www.w3.org/2005/xpath-functions</uri>
+	</function>
+	<function>
+		<name>minutes-from-duration</name>
+		<signature>minutes-from-duration( dayTimeDuration? $srcval)</signature>
+		<category>Date Time</category>
+		<arg>
+			<name>$srcval</name>
+			<type>xs:dayTimeDuration ?</type>
+		</arg>
+		<result>xs:integer ?</result>
+		<description>Extracts the minutes component of a dayTimeDuration value</description>
+		<uri>http://www.w3.org/2005/xpath-functions</uri>
+	</function>
+	<function>
+		<name>minutes-from-time</name>
+		<signature>minutes-from-time( time? $srcval)</signature>
+		<category>Date Time</category>
+		<arg>
+			<name>$srcval</name>
+			<type>xs:time ?</type>
+		</arg>
+		<result>xs:integer ?</result>
+		<description>Extracts the minutes component of a time value</description>
+		<uri>http://www.w3.org/2005/xpath-functions</uri>
+	</function>
+	<function>
+		<name>month-from-date</name>
+		<signature>month-from-date( date? $srcval)</signature>
+		<category>Date Time</category>
+		<arg>
+			<name>$srcval</name>
+			<type>xs:date ?</type>
+		</arg>
+		<result>xs:integer ?</result>
+		<description>Extracts the month component of a date value</description>
+		<uri>http://www.w3.org/2005/xpath-functions</uri>
+	</function>
+	<function>
+		<name>month-from-dateTime</name>
+		<signature>month-from-dateTime( dateTime? $srcval)</signature>
+		<category>Date Time</category>
+		<arg>
+			<name>$srcval</name>
+			<type>xs:dateTime ?</type>
+		</arg>
+		<result>xs:integer ?</result>
+		<description>Extracts the month component of a dateTime value</description>
+		<uri>http://www.w3.org/2005/xpath-functions</uri>
+	</function>
+	<function>
+		<name>months-from-duration</name>
+		<signature>months-from-duration( yearMonthDuration? $srcval)</signature>
+		<category>Date Time</category>
+		<arg>
+			<name>$srcval</name>
+			<type>xs:yearMonthDuration ?</type>
+		</arg>
+		<result>xs:integer ?</result>
+		<description>Extracts the months component of a yearMonthDuration value</description>
+		<uri>http://www.w3.org/2005/xpath-functions</uri>
+	</function>
+	<function>
+		<name>name</name>
+		<signature>name()</signature>
+		<category>Node</category>
+		<result>xs:string</result>
+		<description>Returns the name of the context node, as a string in the lexical form of a QName</description>
+		<uri>http://www.w3.org/2005/xpath-functions</uri>
+	</function>
+	<function>
+		<name>name</name>
+		<signature>name(node()? $srcval)</signature>
+		<category>Node</category>
+		<arg>
+			<name>$srcval</name>
+			<type>node() ?</type>
+		</arg>
+		<result>xs:string</result>
+		<description>Returns the name of a given node, as a string in the lexical form of a QName</description>
+		<uri>http://www.w3.org/2005/xpath-functions</uri>
+	</function>
+	<function>
+		<name>namespace-uri</name>
+		<signature>namespace-uri()</signature>
+		<category>Node</category>
+		<result>xs:string</result>
+		<description>Returns the namespace URI of the name of the context node</description>
+		<uri>http://www.w3.org/2005/xpath-functions</uri>
+	</function>
+	<function>
+		<name>namespace-uri</name>
+		<signature>namespace-uri(node? $srcval)</signature>
+		<category>Node</category>
+		<arg>
+			<name>$srcval</name>
+			<type>node() ?</type>
+		</arg>
+		<result>xs:string</result>
+		<description>Returns the namespace URI of the name of a given node</description>
+		<uri>http://www.w3.org/2005/xpath-functions</uri>
+	</function>
+	<function>
+		<name>namespace-uri-for-prefix</name>
+		<signature>namespace-uri-for-prefix(string? $prefix, element $element)</signature>
+		<category>QName</category>
+		<arg>
+			<name>$prefix</name>
+			<type>xs:string?</type>
+		</arg>
+		<arg>
+			<name>$element</name>
+			<type>element()</type>
+		</arg>
+		<result>string ?</result>
+		<description>Returns the namespace URI corresponding to a given prefix, using the namespaces that are in scope for a given element</description>
+		<uri>http://www.w3.org/2005/xpath-functions</uri>
+	</function>
+	<function>
+		<name>namespace-uri-from-QName</name>
+		<signature>namespace-uri-from-QName( QName? $srcval)</signature>
+		<category>QName</category>
+		<arg>
+			<name>$srcval</name>
+			<type>xs:QName ?</type>
+		</arg>
+		<result>anyURI ?</result>
+		<description>Extracts the namespace URI component of a QName value</description>
+		<uri>http://www.w3.org/2005/xpath-functions</uri>
+	</function>
+	<function>
+		<name>nilled</name>
+		<signature>nilled( node()? $element)</signature>
+		<category>Accessor</category>
+		<arg>
+			<name>$arg</name>
+			<type>node() ?</type>
+		</arg>
+		<result>boolean ?</result>
+		<description>Returns true if the argument is an element that has the "nilled" property.</description>
+		<uri>http://www.w3.org/2005/xpath-functions</uri>
+	</function>
+	<function>
+		<name>node-name</name>
+		<signature>node-name(node $srcval)</signature>
+		<category>Accessor</category>
+		<arg>
+			<name>$srcval</name>
+			<type>node()</type>
+		</arg>
+		<result>xs:QName ?</result>
+		<description>Returns the name of the given node, as a QName value (that is, a namespace URI plus local name)</description>
+		<uri>http://www.w3.org/2005/xpath-functions</uri>
+	</function>
+	<function>
+		<name>normalize-space</name>
+		<signature>normalize-space()</signature>
+		<category>Text</category>
+		<result>xs:string ?</result>
+		<description>Eliminates redundant spaces from the string value of the context item</description>
+		<uri>http://www.w3.org/2005/xpath-functions</uri>
+	</function>
+	<function>
+		<name>normalize-space</name>
+		<signature>normalize-space( string? $srcval)</signature>
+		<category>Text</category>
+		<arg>
+			<name>$srcval</name>
+			<type>xs:string ?</type>
+		</arg>
+		<result>xs:string ?</result>
+		<description>Eliminates redundant spaces from a string</description>
+		<uri>http://www.w3.org/2005/xpath-functions</uri>
+	</function>
+	<function>
+		<name>normalize-unicode</name>
+		<signature>normalize-unicode( string? $srcval)</signature>
+		<category>Text</category>
+		<arg>
+			<name>$srcval</name>
+			<type>xs:string ?</type>
+		</arg>
+		<result>xs:string ?</result>
+		<description>Converts a string to Unicode normalized form NFC by modifying the way in which combining characters are represented</description>
+		<uri>http://www.w3.org/2005/xpath-functions</uri>
+	</function>
+	<function>
+		<name>normalize-unicode</name>
+		<signature>normalize-unicode( string? $srcval, string $normalizationForm)</signature>
+		<category>Text</category>
+		<arg>
+			<name>$srcval</name>
+			<type>xs:string ?</type>
+		</arg>
+		<arg>
+			<name>$normalizationForm</name>
+			<type>xs:string</type>
+		</arg>
+		<result>xs:string ?</result>
+		<description>Converts a string to a given Unicode normalized form by modifying the way in which combining characters are represented</description>
+		<uri>http://www.w3.org/2005/xpath-functions</uri>
+	</function>
+	<function>
+		<name>not</name>
+		<signature>not(item()* $srcval)</signature>
+		<category>Boolean</category>
+		<arg>
+			<name>$srcval</name>
+			<type>item() *</type>
+		</arg>
+		<result>xs:boolean</result>
+		<description>Returns true if the effective boolean value of the argument is false, and vice versa</description>
+		<uri>http://www.w3.org/2005/xpath-functions</uri>
+	</function>
+	<function>
+		<name>number</name>
+		<signature>number()</signature>
+		<category>Math</category>
+		<result>xs:double</result>
+		<description>Equivalent to number(.)</description>
+		<uri>http://www.w3.org/2005/xpath-functions</uri>
+	</function>
+	<function>
+		<name>number</name>
+		<signature>number(item()? $srcval)</signature>
+		<category>Math</category>
+		<arg>
+			<name>$srcval</name>
+			<type>item() ?</type>
+		</arg>
+		<result>xs:double</result>
+		<description>Converts the given value to a number, after atomization if necessary. Returns NaN if conversion is not possible.</description>
+		<uri>http://www.w3.org/2005/xpath-functions</uri>
+	</function>
+	<function>
+		<name>one-or-more</name>
+		<signature>one-or-more($srcval as item*)</signature>
+		<category>Sequence</category>
+		<arg>
+			<name>$srcval</name>
+			<type>item() *</type>
+		</arg>
+		<result>item() +</result>
+		<description>Tests whether $srcval contains one or more items; fails if it is an empty sequence.</description>
+		<uri>http://www.w3.org/2005/xpath-functions</uri>
+	</function>
+	<function>
+		<name>position</name>
+		<signature>position()</signature>
+		<category>Context</category>
+		<result>xs:integer</result>
+		<description>Returns the context position (that is, the position of the context item in the sequence currenly being processed)</description>
+		<uri>http://www.w3.org/2005/xpath-functions</uri>
+	</function>
+	<function>
+		<name>prefix-from-QName</name>
+		<signature>prefix-from-QName( QName? $srcval)</signature>
+		<category>QName</category>
+		<arg>
+			<name>$srcval</name>
+			<type>xs:QName ?</type>
+		</arg>
+		<result>xs:NCName ?</result>
+		<description>Extracts the prefix component of a QName value. Returns an empty sequence if the QName has no prefix.</description>
+		<uri>http://www.w3.org/2005/xpath-functions</uri>
+	</function>
+	<function>
+		<name>regex-group</name>
+		<signature>regex-group(integer $groupNumber)</signature>
+		<category>XSLT</category>
+		<arg>
+			<name>$groupNumber</name>
+			<type>xs:integer</type>
+		</arg>
+		<result>xs:string</result>
+		<description>Returns the contents of the substring that matched the n'th subexpression in a regular expression processed using xsl:analyze-string</description>
+		<uri>http://www.w3.org/1999/XSL/Transform</uri>
+	</function>
+	<function>
+		<name>remove</name>
+		<signature>remove(item* $target, integer $position)</signature>
+		<category>Sequence</category>
+		<arg>
+			<name>$target</name>
+			<type>item() *</type>
+		</arg>
+		<arg>
+			<name>$position</name>
+			<type>xs:integer</type>
+		</arg>
+		<result>item() *</result>
+		<description>Removes the item at a given position in a sequence</description>
+		<uri>http://www.w3.org/2005/xpath-functions</uri>
+	</function>
+	<function>
+		<name>replace</name>
+		<signature>replace(string? $input, string $pattern, string $replacement)</signature>
+		<category>RegEx</category>
+		<arg>
+			<name>$input</name>
+			<type>xs:string ?</type>
+		</arg>
+		<arg>
+			<name>$pattern</name>
+			<type>xs:string</type>
+		</arg>
+		<arg>
+			<name>$replacement</name>
+			<type>xs:string</type>
+		</arg>
+		<result>xs:string ?</result>
+		<description>Replaces sequences of characters within a string that match a given regular expression</description>
+		<uri>http://www.w3.org/2005/xpath-functions</uri>
+	</function>
+	<function>
+		<name>replace</name>
+		<signature>replace(string? $input, string? $pattern, string? $replacement, string? $flags)</signature>
+		<category>RegEx</category>
+		<arg>
+			<name>$input</name>
+			<type>xs:string ?</type>
+		</arg>
+		<arg>
+			<name>$pattern</name>
+			<type>xs:string</type>
+		</arg>
+		<arg>
+			<name>$replacement</name>
+			<type>xs:string</type>
+		</arg>
+		<arg>
+			<name>$flags</name>
+			<type>xs:string</type>
+		</arg>
+		<result>xs:string ?</result>
+		<description>Replaces sequences of characters within a string that match a given regular expression, specifying flags to control the way the regular expression is matched</description>
+		<uri>http://www.w3.org/2005/xpath-functions</uri>
+	</function>
+	<function>
+		<name>resolve-QName</name>
+		<signature>resolve-QName($qname as xs:string, $element as element())</signature>
+		<category>QName</category>
+		<arg>
+			<name>$qname</name>
+			<type>xs:string ?</type>
+		</arg>
+		<arg>
+			<name>$element</name>
+			<type>element()</type>
+		</arg>
+		<result>xs:QName ?</result>
+		<description>Expands a lexical QName using the in-scope namespaces from the given element</description>
+		<uri>http://www.w3.org/2005/xpath-functions</uri>
+	</function>
+	<function>
+		<name>resolve-uri</name>
+		<signature>resolve-uri($relative as xs:string())</signature>
+		<category>General</category>
+		<arg>
+			<name>$relative</name>
+			<type>xs:string</type>
+		</arg>
+		<result>xs:anyURI</result>
+		<description>Resolves a relative URI against the base URI from the static context</description>
+		<uri>http://www.w3.org/2005/xpath-functions</uri>
+	</function>
+	<function>
+		<name>resolve-uri</name>
+		<signature>resolve-uri($relative as xs:string, $base as xs:string)</signature>
+		<category>General</category>
+		<arg>
+			<name>$relative</name>
+			<type>xs:string</type>
+		</arg>
+		<arg>
+			<name>$base</name>
+			<type>xs:string</type>
+		</arg>
+		<result>xs:anyURI</result>
+		<description>Resolves a relative URI against a given base URI</description>
+		<uri>http://www.w3.org/2005/xpath-functions</uri>
+	</function>
+	<function>
+		<name>reverse</name>
+		<signature>reverse($srcval as item()*)</signature>
+		<category>Sequence</category>
+		<arg>
+			<name>$srcval</name>
+			<type>item() *</type>
+		</arg>
+		<result>item() *</result>
+		<description>Reverses the order of the items in the input sequence.</description>
+		<uri>http://www.w3.org/2005/xpath-functions</uri>
+	</function>
+	<function>
+		<name>root</name>
+		<signature>root()</signature>
+		<category>Node</category>
+		<result>node()</result>
+		<description>Returns the root node (typically but not necessarily a document node) of the tree containing the context node</description>
+		<uri>http://www.w3.org/2005/xpath-functions</uri>
+	</function>
+	<function>
+		<name>root</name>
+		<signature>root(node $srcval)</signature>
+		<category>Node</category>
+		<arg>
+			<name>$srcval</name>
+			<type>node()</type>
+		</arg>
+		<result>node()</result>
+		<description>Returns the root node (typically but not necessarily a document node) of the tree containing the given node</description>
+		<uri>http://www.w3.org/2005/xpath-functions</uri>
+	</function>
+	<function>
+		<name>round</name>
+		<signature>round(numeric? $srcval)</signature>
+		<category>Math</category>
+		<arg>
+			<name>$srcval</name>
+			<type>numeric ?</type>
+		</arg>
+		<result>numeric ?</result>
+		<description>Rounds a numeric value to the nearest whole number, rounding x.5 towards positive infinity.</description>
+		<uri>http://www.w3.org/2005/xpath-functions</uri>
+	</function>
+	<function>
+		<name>round-half-to-even</name>
+		<signature>round-half-to-even(numeric? $srcval)</signature>
+		<category>Math</category>
+		<arg>
+			<name>$srcval</name>
+			<type>numeric ?</type>
+		</arg>
+		<result>numeric ?</result>
+		<description>Rounds a numeric value to the nearest whole number, rounding x.5 towards the nearest even number.</description>
+		<uri>http://www.w3.org/2005/xpath-functions</uri>
+	</function>
+	<function>
+		<name>round-half-to-even</name>
+		<signature>round-half-to-even(numeric? $srcval, integer $precision)</signature>
+		<category>Math</category>
+		<arg>
+			<name>$srcval</name>
+			<type>numeric ?</type>
+		</arg>
+		<arg>
+			<name>$precision</name>
+			<type>xs:integer</type>
+		</arg>
+		<result>numeric ?</result>
+		<description>Rounds a numeric value to the nearest integer multiple of 10 the power of minus precision, rounding x.5 towards the nearest number whose last digit is even.</description>
+		<uri>http://www.w3.org/2005/xpath-functions</uri>
+	</function>
+	<function>
+		<name>seconds-from-dateTime</name>
+		<signature>seconds-from-dateTime( dateTime? $srcval)</signature>
+		<category>Date Time</category>
+		<arg>
+			<name>$srcval</name>
+			<type>xs:dateTime ?</type>
+		</arg>
+		<result>xs:integer ?</result>
+		<description>Extracts the seconds component of a dateTime value</description>
+		<uri>http://www.w3.org/2005/xpath-functions</uri>
+	</function>
+	<function>
+		<name>seconds-from-duration</name>
+		<signature>seconds-from-duration( dayTimeDuration? $srcval)</signature>
+		<category>Date Time</category>
+		<arg>
+			<name>$srcval</name>
+			<type>xs:dayTimeDuration ?</type>
+		</arg>
+		<result>xs:decimal ?</result>
+		<description>Extracts the seconds component of a dayTimeDuration value</description>
+		<uri>http://www.w3.org/2005/xpath-functions</uri>
+	</function>
+	<function>
+		<name>seconds-from-time</name>
+		<signature>seconds-from-time( time? $srcval)</signature>
+		<category>Date Time</category>
+		<arg>
+			<name>$srcval</name>
+			<type>xs:time ?</type>
+		</arg>
+		<result>xs:decimal ?</result>
+		<description>Extracts the seconds component of a time value</description>
+		<uri>http://www.w3.org/2005/xpath-functions</uri>
+	</function>
+	<function>
+		<name>starts-with</name>
+		<signature>starts-with(string? $operand1, string? $operand2)</signature>
+		<category>Text</category>
+		<arg>
+			<name>$operand1</name>
+			<type>xs:string ?</type>
+		</arg>
+		<arg>
+			<name>$operand2</name>
+			<type>xs:string ?</type>
+		</arg>
+		<result>xs:boolean ?</result>
+		<description>Tests whether one string starts with another string</description>
+		<uri>http://www.w3.org/2005/xpath-functions</uri>
+	</function>
+	<function>
+		<name>starts-with</name>
+		<signature>starts-with(string? $operand1, string? $operand2, string $collation)</signature>
+		<category>Text</category>
+		<arg>
+			<name>$operand1</name>
+			<type>xs:string ?</type>
+		</arg>
+		<arg>
+			<name>$operand2</name>
+			<type>xs:string ?</type>
+		</arg>
+		<arg>
+			<name>$collation</name>
+			<type>xs:string</type>
+		</arg>
+		<result>xs:boolean ?</result>
+		<description>Tests whether one string starts with another string, using the given collation for comparison</description>
+		<uri>http://www.w3.org/2005/xpath-functions</uri>
+	</function>
+	<function>
+		<name>static-base-uri</name>
+		<signature>static-base-uri()</signature>
+		<category>Context</category>
+		<result>xs:string ?</result>
+		<description>Returns the base URI of the static context</description>
+		<uri>http://www.w3.org/2005/xpath-functions</uri>
+	</function>
+	<function>
+		<name>string</name>
+		<signature>string()</signature>
+		<category>Text</category>
+		<result>xs:string</result>
+		<description>Returns the string value of the context node</description>
+		<uri>http://www.w3.org/2005/xpath-functions</uri>
+	</function>
+	<function>
+		<name>string</name>
+		<signature>string(item()? $srcval)</signature>
+		<category>Text</category>
+		<arg>
+			<name>$srcval</name>
+			<type>item() ?</type>
+		</arg>
+		<result>xs:string</result>
+		<description>Returns the string value of the argument. Saxon implements the argument as type item()* rather than item()?</description>
+		<uri>http://www.w3.org/2005/xpath-functions</uri>
+	</function>
+	<function>
+		<name>string-join</name>
+		<signature>string-join(string* $sequence, string $separator)</signature>
+		<category>Text</category>
+		<arg>
+			<name>$sequence</name>
+			<type>xs:string *</type>
+		</arg>
+		<arg>
+			<name>$separator</name>
+			<type>xs:string</type>
+		</arg>
+		<result>xs:string</result>
+		<description>Concatenates all the strings in the given sequence, separated by the given separator</description>
+		<uri>http://www.w3.org/2005/xpath-functions</uri>
+	</function>
+	<function>
+		<name>string-length</name>
+		<signature>string-length()</signature>
+		<category>Text</category>
+		<result>xs:integer ?</result>
+		<description>Returns the number of characters in the string value of the context item</description>
+		<uri>http://www.w3.org/2005/xpath-functions</uri>
+	</function>
+	<function>
+		<name>string-length</name>
+		<signature>string-length(string? $srcval)</signature>
+		<category>Text</category>
+		<arg>
+			<name>$srcval</name>
+			<type>xs:string ?</type>
+		</arg>
+		<result>xs:integer ?</result>
+		<description>Returns the number of characters in the given string</description>
+		<uri>http://www.w3.org/2005/xpath-functions</uri>
+	</function>
+	<function>
+		<name>string-to-codepoints</name>
+		<signature>string-to-codepoints(string $srcval)</signature>
+		<category>Text</category>
+		<arg>
+			<name>$srcval</name>
+			<type>xs:string</type>
+		</arg>
+		<result>xs:integer *</result>
+		<description>Returns a sequence of integers representing the Unicode codepoints of the characters in the supplied string</description>
+		<uri>http://www.w3.org/2005/xpath-functions</uri>
+	</function>
+	<function>
+		<name>subsequence</name>
+		<signature>subsequence(item()* $sourceSeq, double $startingLoc)</signature>
+		<category>Sequence</category>
+		<arg>
+			<name>$sourceSeq</name>
+			<type>item() *</type>
+		</arg>
+		<arg>
+			<name>$startingLoc</name>
+			<type>xs:double</type>
+		</arg>
+		<result>item() *</result>
+		<description>Returns those items in the given sequence from the given starting position to the end of the sequence</description>
+		<uri>http://www.w3.org/2005/xpath-functions</uri>
+	</function>
+	<function>
+		<name>subsequence</name>
+		<signature>subsequence(item()* $sourceSeq, double $startingLoc, double $length)</signature>
+		<category>Sequence</category>
+		<arg>
+			<name>$sourceSeq</name>
+			<type>item() *</type>
+		</arg>
+		<arg>
+			<name>$startingLoc</name>
+			<type>xs:double</type>
+		</arg>
+		<arg>
+			<name>$length</name>
+			<type>xs:double</type>
+		</arg>
+		<result>item() *</result>
+		<description>Returns those items in the given sequence from the given starting position up to the position implied by the given length</description>
+		<uri>http://www.w3.org/2005/xpath-functions</uri>
+	</function>
+	<function>
+		<name>substring</name>
+		<signature>substring(string? $sourceString, double $startingLoc)</signature>
+		<category>Text</category>
+		<arg>
+			<name>$sourceString</name>
+			<type>xs:string ?</type>
+		</arg>
+		<arg>
+			<name>$startingLoc</name>
+			<type>xs:double</type>
+		</arg>
+		<result>xs:string ?</result>
+		<description>Returns a substring of a given string starting at the given starting position and continuing to the end of the string</description>
+		<uri>http://www.w3.org/2005/xpath-functions</uri>
+	</function>
+	<function>
+		<name>substring</name>
+		<signature>substring(string? $sourceString, double $startingLoc, double $length)</signature>
+		<category>Text</category>
+		<arg>
+			<name>$sourceString</name>
+			<type>xs:string ?</type>
+		</arg>
+		<arg>
+			<name>$startingLoc</name>
+			<type>xs:double</type>
+		</arg>
+		<arg>
+			<name>$length</name>
+			<type>xs:double</type>
+		</arg>
+		<result>xs:string ?</result>
+		<description>Returns a subtring of a given string, starting at a given position and continuing up to a given length</description>
+		<uri>http://www.w3.org/2005/xpath-functions</uri>
+	</function>
+	<function>
+		<name>substring-after</name>
+		<signature>substring-after( string? $operand1, string? $operand2)</signature>
+		<category>Text</category>
+		<arg>
+			<name>$operand1</name>
+			<type>xs:string ?</type>
+		</arg>
+		<arg>
+			<name>$operand2</name>
+			<type>xs:string ?</type>
+		</arg>
+		<result>xs:string ?</result>
+		<description>Returns that part of the given input string that occurs after the first occurrence of the string given in $operand2</description>
+		<uri>http://www.w3.org/2005/xpath-functions</uri>
+	</function>
+	<function>
+		<name>substring-after</name>
+		<signature>substring-after( string? $operand1, string? $operand2, string $collation)</signature>
+		<category>Text</category>
+		<arg>
+			<name>$operand1</name>
+			<type>xs:string ?</type>
+		</arg>
+		<arg>
+			<name>$operand2</name>
+			<type>xs:string ?</type>
+		</arg>
+		<arg>
+			<name>$collation</name>
+			<type>xs:string</type>
+		</arg>
+		<result>xs:string ?</result>
+		<description>Returns that part of the given input string that occurs after the first occurrence of the string given in $operand2, using the given collation to compare strings</description>
+		<uri>http://www.w3.org/2005/xpath-functions</uri>
+	</function>
+	<function>
+		<name>substring-before</name>
+		<signature>substring-before( string? $operand1, string? $operand2)</signature>
+		<category>Text</category>
+		<arg>
+			<name>$operand1</name>
+			<type>xs:string ?</type>
+		</arg>
+		<arg>
+			<name>$operand2</name>
+			<type>xs:string ?</type>
+		</arg>
+		<result>xs:string ?</result>
+		<description>Returns that part of the given input string that occurs before the first occurrence of the string given in $operand2</description>
+		<uri>http://www.w3.org/2005/xpath-functions</uri>
+	</function>
+	<function>
+		<name>substring-before</name>
+		<signature>substring-before( string? $operand1, string? $operand2, anyURI $collation)</signature>
+		<category>Text</category>
+		<arg>
+			<name>$operand1</name>
+			<type>xs:string ?</type>
+		</arg>
+		<arg>
+			<name>$operand2</name>
+			<type>xs:string ?</type>
+		</arg>
+		<arg>
+			<name>$collation</name>
+			<type>xs:string</type>
+		</arg>
+		<result>xs:string ?</result>
+		<description>Returns that part of the given input string that occurs before the first occurrence of the string given in $operand2, using the given collation to compare strings</description>
+		<uri>http://www.w3.org/2005/xpath-functions</uri>
+	</function>
+	<function>
+		<name>sum</name>
+		<signature>sum($srcval as xs:anyAtomicType*)</signature>
+		<category>Aggregate</category>
+		<arg>
+			<name>$arg</name>
+			<type>xs:anyAtomicType *</type>
+		</arg>
+		<result>xs:anyAtomicType</result>
+		<description>Returns the total of a sequence of numbers or durations</description>
+		<uri>http://www.w3.org/2005/xpath-functions</uri>
+	</function>
+	<function>
+		<name>sum</name>
+		<signature>sum($srcval as xs:anyAtomicType*, $zero as xs:anyAtomicType?)</signature>
+		<category>Aggregate</category>
+		<arg>
+			<name>$arg</name>
+			<type>xs:anyAtomicType *</type>
+		</arg>
+		<arg>
+			<name>$zero</name>
+			<type>xs:anyAtomicType ?</type>
+		</arg>
+		<result>xs:anyAtomicType ?</result>
+		<description>Returns the total of a sequence of numbers, specifying the value to be returned for an empty sequence</description>
+		<uri>http://www.w3.org/2005/xpath-functions</uri>
+	</function>
+	<function>
+		<name>system-property</name>
+		<signature>system-property(string $propertyName)</signature>
+		<category>XSLT</category>
+		<arg>
+			<name>$propertyName</name>
+			<type>xs:string</type>
+		</arg>
+		<result>xs:string</result>
+		<description>Returns the value of a system property</description>
+		<uri>http://www.w3.org/1999/XSL/Transform</uri>
+	</function>
+	<function>
+		<name>timezone-from-date</name>
+		<signature>timezone-from-date( date? $srcval)</signature>
+		<category>Date Time</category>
+		<arg>
+			<name>$srcval</name>
+			<type>xs:date ?</type>
+		</arg>
+		<result>xs:dayTimeDuration ?</result>
+		<description>Extracts the timezone component of a date value</description>
+		<uri>http://www.w3.org/2005/xpath-functions</uri>
+	</function>
+	<function>
+		<name>timezone-from-dateTime</name>
+		<signature>timezone-from-dateTime( dateTime? $srcval)</signature>
+		<category>Date Time</category>
+		<arg>
+			<name>$srcval</name>
+			<type>xs:dateTime ?</type>
+		</arg>
+		<result>xs:dayTimeDuration ?</result>
+		<description>Extracts the timezone component of a dateTime value</description>
+		<uri>http://www.w3.org/2005/xpath-functions</uri>
+	</function>
+	<function>
+		<name>timezone-from-time</name>
+		<signature>timezone-from-time( time? $srcval)</signature>
+		<category>Date Time</category>
+		<arg>
+			<name>$srcval</name>
+			<type>xs:time ?</type>
+		</arg>
+		<result>xs:dayTimeDuration ?</result>
+		<description>Extracts the timezone component of a time value</description>
+		<uri>http://www.w3.org/2005/xpath-functions</uri>
+	</function>
+	<function>
+		<name>tokenize</name>
+		<signature>tokenize(string? $input, string $pattern)</signature>
+		<category>RegEx</category>
+		<arg>
+			<name>$input</name>
+			<type>xs:string ?</type>
+		</arg>
+		<arg>
+			<name>$pattern</name>
+			<type>xs:string</type>
+		</arg>
+		<result>xs:string *</result>
+		<description>Returns a sequence of strings formed by breaking the input string at any substring that matches the given regular expression</description>
+		<uri>http://www.w3.org/2005/xpath-functions</uri>
+	</function>
+	<function>
+		<name>tokenize</name>
+		<signature>tokenize(string? $input, string $pattern, string $flags)</signature>
+		<category>RegEx</category>
+		<arg>
+			<name>$input</name>
+			<type>xs:string ?</type>
+		</arg>
+		<arg>
+			<name>$pattern</name>
+			<type>xs:string</type>
+		</arg>
+		<arg>
+			<name>$flags</name>
+			<type>xs:string</type>
+		</arg>
+		<result>xs:string *?</result>
+		<description>Returns a sequence of strings formed by breaking the input string at any substring that matches the given regular expression, using flags to control the way regular expression matching is performed</description>
+		<uri>http://www.w3.org/2005/xpath-functions</uri>
+	</function>
+	<function>
+		<name>trace</name>
+		<signature>trace($value as item()*, $label as xs:string)</signature>
+		<category>Trace</category>
+		<arg>
+			<name>$value</name>
+			<type>item() *</type>
+		</arg>
+		<arg>
+			<name>$label</name>
+			<type>xs:string</type>
+		</arg>
+		<result>item() *</result>
+		<description>Returns the value of the first argument after outputting a diagnostic message</description>
+		<uri>http://www.w3.org/2005/xpath-functions</uri>
+	</function>
+	<function>
+		<name>translate</name>
+		<signature>translate(string? $srcval, string? $mapString, string? $transString)</signature>
+		<category>Text</category>
+		<arg>
+			<name>$srcval</name>
+			<type>xs:string ?</type>
+		</arg>
+		<arg>
+			<name>$mapString</name>
+			<type>xs:string ?</type>
+		</arg>
+		<arg>
+			<name>$transString</name>
+			<type>xs:string ?</type>
+		</arg>
+		<result>xs:string ?</result>
+		<description>Returns a string formed by replacing individual characters that appear in the second argument with the characters that appear at the corresponding position in the third argument</description>
+		<uri>http://www.w3.org/2005/xpath-functions</uri>
+	</function>
+	<function>
+		<name>true</name>
+		<signature>true()</signature>
+		<category>Boolean</category>
+		<result>xs:boolean</result>
+		<description>Return the boolean value true</description>
+		<uri>http://www.w3.org/2005/xpath-functions</uri>
+	</function>
+	<function>
+		<name>type-available</name>
+		<signature>type-available(string $type)</signature>
+		<category>XSLT</category>
+		<arg>
+			<name>$type</name>
+			<type>xs:string</type>
+		</arg>
+		<result>xs:boolean</result>
+		<description>Determines whether a type with a given name is available in the static context. The current implementation has a restriction: if the argument is known only at run-time, then the function tests whether the type exists in the run-time configuration, which does not necessarily prove that it was present in the static context.</description>
+		<uri>http://www.w3.org/1999/XSL/Transform</uri>
+	</function>
+	<function>
+		<name>unordered</name>
+		<signature>unordered(item* $sequence)</signature>
+		<category>Sequence</category>
+		<arg>
+			<name>$sequence</name>
+			<type>item() *</type>
+		</arg>
+		<result>item() *</result>
+		<description>Returns a random permutation of its argument</description>
+		<uri>http://www.w3.org/2005/xpath-functions</uri>
+	</function>
+	<function>
+		<name>unparsed-entity-public-id</name>
+		<signature>unparsed-entity-public-id(string $srcval)</signature>
+		<category>XSLT</category>
+		<arg>
+			<name>$srcval</name>
+			<type>xs:string</type>
+		</arg>
+		<result>xs:string </result>
+		<description>Return the public ID of an unparsed entity, given its name</description>
+		<uri>http://www.w3.org/1999/XSL/Transform</uri>
+	</function>
+	<function>
+		<name>unparsed-entity-uri</name>
+		<signature>unparsed-entity-uri(string $srcval)</signature>
+		<category>XSLT</category>
+		<arg>
+			<name>$srcval</name>
+			<type>xs:string</type>
+		</arg>
+		<result>xs:string</result>
+		<description>Return the system ID of an unparsed entity, given its name</description>
+		<uri>http://www.w3.org/1999/XSL/Transform</uri>
+	</function>
+	<function>
+		<name>unparsed-text</name>
+		<signature>unparsed-text(string $uri)</signature>
+		<category>XSLT</category>
+		<arg>
+			<name>$uri</name>
+			<type>xs:string</type>
+		</arg>
+		<result>xs:string</result>
+		<description>Returns the contents of an external text file, given its URI. Saxon attempts to infer the encoding. First it looks in the HTTP headers if available. Then it examines the start of the file looking first for a byte-order-mark, and failing that for an XML declaration. If none of this works, it assumes the encoding is UTF-8.</description>
+		<uri>http://www.w3.org/1999/XSL/Transform</uri>
+	</function>
+	<function>
+		<name>unparsed-text</name>
+		<signature>unparsed-text(string $uri, string $encoding)</signature>
+		<category>XSLT</category>
+		<arg>
+			<name>$uri</name>
+			<type>xs:string</type>
+		</arg>
+		<arg>
+			<name>$encoding</name>
+			<type>xs:string</type>
+		</arg>
+		<result>xs:string </result>
+		<description>Returns the contents of an external text file, given its URI and encoding</description>
+		<uri>http://www.w3.org/1999/XSL/Transform</uri>
+	</function>
+	<function>
+		<name>unparsed-text-available</name>
+		<signature>unparsed-text-available(string $uri)</signature>
+		<category>XSLT</category>
+		<arg>
+			<name>$uri</name>
+			<type>xs:string</type>
+		</arg>
+		<result>xs:boolean</result>
+		<description>Determines whether the corresponding call on unparsed-text() would succeed.</description>
+		<uri>http://www.w3.org/1999/XSL/Transform</uri>
+	</function>
+	<function>
+		<name>unparsed-text-available</name>
+		<signature>unparsed-text-available(string $uri, string $encoding)</signature>
+		<category>XSLT</category>
+		<arg>
+			<name>$uri</name>
+			<type>xs:string</type>
+		</arg>
+		<arg>
+			<name>$encoding</name>
+			<type>xs:string</type>
+		</arg>
+		<result>xs:boolean</result>
+		<description>Determines whether the corresponding call on unparsed-text() would succeed.</description>
+		<uri>http://www.w3.org/1999/XSL/Transform</uri>
+	</function>
+	<function>
+		<name>upper-case</name>
+		<signature>upper-case(string? $srcval)</signature>
+		<category>Text</category>
+		<arg>
+			<name>$srcval</name>
+			<type>xs:string ?</type>
+		</arg>
+		<result>xs:string ?</result>
+		<description>Converts a string to upper case</description>
+		<uri>http://www.w3.org/2005/xpath-functions</uri>
+	</function>
+	<function>
+		<name>year-from-date</name>
+		<signature>year-from-date( date? $srcval)</signature>
+		<category>Date Time</category>
+		<arg>
+			<name>$srcval</name>
+			<type>xs:date ?</type>
+		</arg>
+		<result>xs:integer ?</result>
+		<description>Extracts the year component of a date value</description>
+		<uri>http://www.w3.org/2005/xpath-functions</uri>
+	</function>
+	<function>
+		<name>year-from-dateTime</name>
+		<signature>year-from-dateTime( dateTime? $srcval)</signature>
+		<category>Date Time</category>
+		<arg>
+			<name>$srcval</name>
+			<type>xs:dateTime ?</type>
+		</arg>
+		<result>xs:integer ?</result>
+		<description>Extracts the year component of a dateTime value</description>
+		<uri>http://www.w3.org/2005/xpath-functions</uri>
+	</function>
+	<function>
+		<name>years-from-duration</name>
+		<signature>years-from-duration( yearMonthDuration? $srcval)</signature>
+		<category>Date Time</category>
+		<arg>
+			<name>$srcval</name>
+			<type>xs:yearMonthDuration ?</type>
+		</arg>
+		<result>xs:integer ?</result>
+		<description>Extracts the years component of a yearMonthDuration value</description>
+		<uri>http://www.w3.org/2005/xpath-functions</uri>
+	</function>
+	<function>
+		<name>zero-or-one</name>
+		<signature>zero-or-one($srcval as item*)</signature>
+		<category>Sequence</category>
+		<arg>
+			<name>$srcval</name>
+			<type>item() *</type>
+		</arg>
+		<result>item() ?</result>
+		<description>Tests whether $srcval contains zero or one items; fails if it contains multiple items.</description>
+		<uri>http://www.w3.org/2005/xpath-functions</uri>
+	</function>
+</xpath-functions>

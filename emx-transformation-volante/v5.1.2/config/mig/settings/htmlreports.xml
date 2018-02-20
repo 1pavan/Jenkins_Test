@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<reports xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<name>Default</name>
+	<report name="FieldValidationRulesMIG" visible="true">
+		<item name="Summary Table" type="table" visible="true">
+			<item name="Name" type="column" visible="true"/>
+			<item name="Detail" type="column" visible="true"/>
+			<item name="Description" type="column" visible="false"/>
+			<item name="Mult." type="column" visible="true"/>
+			<item name="Presence" type="column" visible="true"/>
+			<item name="Rules" type="column" visible="true"/>
+		</item>
+		<item name="Details Table" type="table" visible="true">
+			<item name="Name" type="column" visible="true"/>
+			<item name="Parent Section" type="column" visible="true"/>
+			<item name="Type" type="column" visible="true"/>
+			<item name="Default Value" type="column" visible="true"/>
+			<item name="Max Length" type="column" visible="true"/>
+			<item name="Multiplicity" type="column" visible="true"/>
+			<item name="Description" type="column" visible="true"/>
+			<item name="Format" type="column" visible="true"/>
+			<item name="Facets" type="column" visible="true"/>
+		</item>
+		<item name="Code Lists" type="table" visible="true">
+			<item name="Code" type="column" visible="true"/>
+			<item name="Detailed Name" type="column" visible="true"/>
+			<item name="Description" type="column" visible="true"/>
+		</item>
+	</report>
+	<report name="MessageValidationRulesMIG" visible="true">
+		<item name="Summary Table" type="table" visible="true">
+			<item name="Name" type="column" visible="true"/>
+			<item name="Detail" type="column" visible="true"/>
+			<item name="Description" type="column" visible="true"/>
+			<item name="Mult." type="column" visible="true"/>
+			<item name="Presence" type="column" visible="true"/>
+			<item name="Rules" type="column" visible="true"/>
+		</item>
+		<item name="Details Table" type="table" visible="true">
+			<item name="Name" type="column" visible="true"/>
+			<item name="Parent Section" type="column" visible="true"/>
+			<item name="Type" type="column" visible="true"/>
+			<item name="Default Value" type="column" visible="true"/>
+			<item name="Max Length" type="column" visible="true"/>
+			<item name="Multiplicity" type="column" visible="true"/>
+			<item name="Description" type="column" visible="true"/>
+			<item name="Format" type="column" visible="true"/>
+			<item name="Facets" type="column" visible="true"/>
+		</item>
+		<item name="Code Lists" type="table" visible="true">
+			<item name="Code" type="column" visible="true"/>
+			<item name="Detailed Name" type="column" visible="true"/>
+			<item name="Description" type="column" visible="true"/>
+		</item>
+	</report>
+	<report name="ValidationRulesMIG" visible="true">
+		<item name="Summary Table" type="table" visible="true">
+			<item name="Name" type="column" visible="true"/>
+			<item name="Detail" type="column" visible="true"/>
+			<item name="Description" type="column" visible="true"/>
+			<item name="Mult." type="column" visible="true"/>
+			<item name="Presence" type="column" visible="true"/>
+			<item name="Rules" type="column" visible="true"/>
+		</item>
+		<item name="Details Table" type="table" visible="true">
+			<item name="Name" type="column" visible="true"/>
+			<item name="Parent Section" type="column" visible="true"/>
+			<item name="Type" type="column" visible="true"/>
+			<item name="Default Value" type="column" visible="true"/>
+			<item name="Max Length" type="column" visible="true"/>
+			<item name="Multiplicity" type="column" visible="true"/>
+			<item name="Description" type="column" visible="true"/>
+			<item name="Format" type="column" visible="true"/>
+			<item name="Facets" type="column" visible="true"/>
+		</item>
+		<item name="Code Lists" type="table" visible="true">
+			<item name="Code" type="column" visible="true"/>
+			<item name="Detailed Name" type="column" visible="true"/>
+			<item name="Description" type="column" visible="true"/>
+		</item>
+	</report>
+</reports>

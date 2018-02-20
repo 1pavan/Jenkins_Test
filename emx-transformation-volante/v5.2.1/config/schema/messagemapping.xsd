@@ -1,0 +1,75 @@
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="unqualified"
+            attributeFormDefault="unqualified">
+    <!-- include constructs -->
+    <xsd:include schemaLocation="cartridge-include.xsd"/>
+    <xsd:include schemaLocation="mapping-data.xsd"/>
+    <!-- MessageMapping -->
+    <xsd:element name="messagemapping" type="MessageMappingType" substitutionGroup="ServiceElement"/>
+    <xsd:complexType name="MessageMappingType">
+        <xsd:complexContent>
+            <xsd:extension base="ServiceElementType">
+                <xsd:sequence>
+                    <xsd:element name="description" type="xsd:string" minOccurs="0"/>
+                    <xsd:element ref="additional-properties" minOccurs="0"/>
+                    <xsd:group ref="sourceGroup"/>
+                    <xsd:group ref="destGroup"/>
+                    <xsd:element ref="mappingrules"/>
+                    <xsd:element ref="elementproperties" minOccurs="0"/>
+                </xsd:sequence>
+                <xsd:attribute name="rulename" type="xsd:string"/>
+                <xsd:attribute name="type" type="xsd:string"/>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:group name="sourceGroup">
+        <xsd:choice>
+            <xsd:element name="source" type="xsd:string"/>
+            <xsd:element name="source-format" type="MappingDataFormat"/>
+        </xsd:choice>
+    </xsd:group>
+    <xsd:group name="destGroup">
+        <xsd:choice>
+            <xsd:element name="destination" type="xsd:string"/>
+            <xsd:element name="destination-format" type="MappingDataFormat"/>
+        </xsd:choice>
+    </xsd:group>
+    <xsd:complexType name="MappingDataFormat">
+        <xsd:sequence>
+            <xsd:element ref="xpath-namespaces" minOccurs="0"/>
+            <xsd:element name="fields">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="field" type="MappingField" minOccurs="0" maxOccurs="unbounded"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="MappingField">
+        <xsd:sequence>
+            <xsd:element name="name" type="xsd:string"/>
+            <xsd:element name="type" type="xsd:string"/>
+            <xsd:element name="aliasname" type="xsd:string" minOccurs="0"/>
+            <xsd:element name="description" type="xsd:string" minOccurs="0"/>
+            <xsd:choice>
+                <xsd:group ref="MapPrimFieldGroup"/>
+                <xsd:group ref="MapDataObjSecFieldGroup"/>
+            </xsd:choice>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:group name="MapPrimFieldGroup">
+        <xsd:sequence>
+            <xsd:element name="notnull" type="xsd:boolean" minOccurs="0"/>
+            <xsd:element name="length" type="xsd:integer" minOccurs="0"/>
+        </xsd:sequence>
+    </xsd:group>
+    <xsd:group name="MapDataObjSecFieldGroup">
+        <xsd:sequence>
+            <xsd:element name="minoccurs" type="xsd:integer"/>
+            <xsd:element name="maxoccurs" type="xsd:integer"/>
+            <xsd:element name="message" type="xsd:string"/>
+            <xsd:element name="fields"/>
+        </xsd:sequence>
+    </xsd:group>
+    <!-- END  MessageMapping -->
+</xsd:schema>

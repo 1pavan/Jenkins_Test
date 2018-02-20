@@ -1,0 +1,461 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<SwiftMessageFormat name="MT074">
+	<standard-version><![CDATA[SRG 2014]]></standard-version>
+	<standard-release-qualifier>20140520</standard-release-qualifier>
+	<DescriptiveName><![CDATA[Broadcast Request]]></DescriptiveName>
+	<Category><![CDATA[System]]></Category>
+	<Description><![CDATA[This message requests the system to generate a FIN or GPA MT 094 Broadcast message for a list of users.
+Requests for FIN broadcasts must always be addressed to SWHQBEBBXBCT. Requests for GPA broadcasts
+must be addressed to SWHQBEBBABCT. Requests will normally be handled during normal Belgian working
+hours (0900-1730 hours, Monday to Friday).
+To request priority treatment of a Broadcast Request, field 128 must contain priority U. Broadcast Requests
+with priority U will be handled inside or outside Belgian working hours and will be invoiced accordingly.
+Please notify your CSC when sending an urgent Broadcast Request outside of Belgian working hours.
+For FIN messages, the ninth character of the address must be X. For GPA messages it must be A.
+For detailed information about the cost of Broadcast messages, see the SWIFT Price List.
+
+Application: GPA and FIN
+
+From: User To: SWIFT HQ]]></Description>
+	<SwiftFields>
+		<customizable>true</customizable>
+		<modifiable>true</modifiable>
+		<SwiftMessageType>System</SwiftMessageType>
+		<HeaderAndTrailerType>SWIFT_INPUT_HEADER</HeaderAndTrailerType>
+		<Header>
+		</Header>
+		<Data>
+			<Fields>
+				<SystemField Name="priority-billable-BIC">
+					<description><![CDATA[Priority must be U or N. The <billableBIC> must be a registered 8 character SWIFT BIC. Branch code is not allowed.]]></description>
+					<datatype>String</datatype>
+					<required>true</required>
+					<SwiftSystemFieldDef Name="priority-billable-BIC" Tag="128">
+						<Format><![CDATA[(1!a'/'4!a2!a2!c)]]></Format>
+						<Specification><![CDATA[(priority-billable-BIC)]]></Specification>
+						<Additional-Format><![CDATA["U"|"N" "/"4!a2!a2!c]]></Additional-Format>
+						<Description><![CDATA[Broadcast priority and billable BIC
+note: branch code is not allowed.]]></Description>
+						<Validations>
+							<Validation>
+								<formula>(StartsWith($value, "U") || StartsWith($value, "N"))</formula>
+								<error-code>V07</error-code>
+								<actionmessage>"Invalid Priority Code '" + At($value,0) + "'. Valid priority codes are: U, N."</actionmessage>
+							</Validation>
+						</Validations>
+					</SwiftSystemFieldDef>
+				</SystemField>
+				<SystemField Name="region">
+					<description><![CDATA[Region identified by the country code followed by the region code.
+
+If the region code is defined as X, then all regions of the country are identified.
+
+ALL = all regions.
+
+Tag 304 may be repeated.]]></description>
+					<datatype>Section</datatype>
+					<minoccurs>0</minoccurs>
+					<maxoccurs>10</maxoccurs>
+					<SwiftSystemFieldDef Name="region" Tag="304">
+						<Format><![CDATA[3!c]]></Format>
+						<Specification><![CDATA[(region)]]></Specification>
+						<Additional-Format><![CDATA["ALL"OR<CC>"X"3!c]]></Additional-Format>
+						<Description><![CDATA[Region identified by the country code followed by the region code.
+
+If the region code is defined as X, then all regions of the country are identified.
+
+ALL = all regions.
+
+Tag 304 may be repeated.]]></Description>
+					</SwiftSystemFieldDef>
+				</SystemField>
+				<SystemField Name="group">
+					<description><![CDATA[Group of existing country codes.
+One of the following codes must be:
+AFRI = Africa
+APAC = Asia Pacific
+CEEE = Central and Eastern Europe
+CLAM = Central and Latin America
+EUZN = Euro zone
+EEAR = European Economic Area
+MIDE = Middle East
+NAMR = North America]]></description>
+					<datatype>String</datatype>
+					<required>false</required>
+					<SwiftSystemFieldDef Name="group" Tag="307">
+						<Format><![CDATA[4!c]]></Format>
+						<Specification><![CDATA[(Group)]]></Specification>
+						<Description><![CDATA[Group of existing country codes.
+One of the following codes must be:
+AFRI = Africa
+APAC = Asia Pacific
+CEEE = Central and Eastern Europe
+CLAM = Central and Latin America
+EUZN = Euro zone
+EEAR = European Economic Area
+MIDE = Middle East
+NAMR = North America]]></Description>
+					</SwiftSystemFieldDef>
+				</SystemField>
+				<SystemField Name="section-number">
+					<description><![CDATA[Section # of # for multi-section requests.]]></description>
+					<datatype>String</datatype>
+					<required>false</required>
+					<SwiftSystemFieldDef Name="section-number" Tag="129">
+						<Format><![CDATA[(2n'/'2n)]]></Format>
+						<Specification><![CDATA[(section-number)]]></Specification>
+						<Description><![CDATA[Section number.]]></Description>
+					</SwiftSystemFieldDef>
+				</SystemField>
+				<SystemField Name="heading-code">
+					<description><![CDATA[Heading code line 1
+
+Heading code line 2
+
+IF (tag130:/09/ ...) or (tag 130:/23/ ...) is present, then tag 132 or 133 but not both, must be used.]]></description>
+					<datatype>String</datatype>
+					<required>true</required>
+					<SwiftSystemFieldDef Name="heading-code" Tag="130">
+						<Format><![CDATA[(2*69x)]]></Format>
+						<Specification><![CDATA[(heading-code)]]></Specification>
+						<Additional-Format><![CDATA["/"2!n"/"<X>1-65[<CrLf>"/"2!n"/"< X>1-65]]]></Additional-Format>
+						<Description><![CDATA[Heading code line 1
+
+Heading code line 2
+
+IF (tag130:/09/ ...) or (tag 130:/23/ ...) is present, then tag 132 or 133 but not both, must be used.]]></Description>
+					</SwiftSystemFieldDef>
+				</SystemField>
+				<SystemField Name="original-broadcast-number-users">
+					<description><![CDATA[Original broadcast number for broadcast sent to all users.
+
+Tag 132 can only be present if tag 130:/09/ or tag 130:/32/ is present.
+
+Tag 132 may be repeated.]]></description>
+					<datatype>Section</datatype>
+					<minoccurs>0</minoccurs>
+					<maxoccurs>-1</maxoccurs>
+					<SwiftSystemFieldDef Name="original-broadcast-number" Tag="132">
+						<Format><![CDATA[(1!a5!n)]]></Format>
+						<Specification><![CDATA[(original-broadcast-number)]]></Specification>
+						<Additional-Format><![CDATA["B"|"S"5!n]]></Additional-Format>
+						<Description><![CDATA[Original broadcast number for broadcast sent to all users.
+
+Tag 132 can only be present if tag 130:/09/ or tag 130:/32/ is present.
+
+Tag 132 may be repeated.]]></Description>
+						<Validations>
+							<Validation>
+								<formula>(StartsWith($value, "B") || StartsWith($value, "S"))</formula>
+								<error-code>V07</error-code>
+								<actionmessage>"Invalid Original Broadcast Number Sent To All Users '" + $value + "'"</actionmessage>
+							</Validation>
+						</Validations>
+					</SwiftSystemFieldDef>
+				</SystemField>
+				<SystemField Name="original-broadcast-number-countries">
+					<description><![CDATA[Original broadcast number for broadcast sent to selected countries
+
+Tag 133 can only be present if tag 130:/09/ or tag 130:/32/ is present
+
+Note: "B"|"S" "XXX" "HQ"|"HK"|"NL"|"US"4!n corresponds to: B User-initiated Broadcast
+
+S SWIFT-initiated Broadcast
+
+XXX indicates an unsequenced Broadcast (i.e. for selected countries)
+
+HQ Broadcast issued from La Hulpe
+
+HK Broadcast issued from Hong Kong
+
+NL Broadcast issued from Netherlands
+
+US Broadcast issued from the United States
+
+4!n 4 digit Broadcast number
+
+Tag 133 may be repeated.]]></description>
+					<datatype>Section</datatype>
+					<minoccurs>0</minoccurs>
+					<maxoccurs>-1</maxoccurs>
+					<SwiftSystemFieldDef Name="original-broadcast-number" Tag="133">
+						<Format><![CDATA[(6!a4!n)]]></Format>
+						<Specification><![CDATA[(original-broadcast-number)]]></Specification>
+						<Additional-Format><![CDATA["B"|"S""XXX""HQ"|"HK"|"NL"|"US"4!n]]></Additional-Format>
+						<Description><![CDATA[Original broadcast number for broadcast sent to selected countries
+
+Tag 133 can only be present if tag 130:/09/ or tag 130:/32/ is present
+
+Note: "B"|"S" "XXX" "HQ"|"HK"|"NL"|"US"4!n corresponds to: B User-initiated Broadcast
+
+S SWIFT-initiated Broadcast
+
+XXX indicates an unsequenced Broadcast (i.e. for selected countries)
+
+HQ Broadcast issued from La Hulpe
+
+HK Broadcast issued from Hong Kong
+
+NL Broadcast issued from Netherlands
+
+US Broadcast issued from the United States
+
+4!n 4 digit Broadcast number
+
+Tag 133 may be repeated.]]></Description>
+						<Validations>
+							<Validation>
+								<formula>(StartsWith($value, "B") || StartsWith($value, "S"))</formula>
+								<error-code>V07</error-code>
+								<actionmessage>"Invalid Original Broadcast Number Sent To Selected Countries '" + $value + "'."</actionmessage>
+							</Validation>
+							<Validation>
+								<formula>$unsequencedBroadcast = Mid($value, 1, 3);
+							$unsequencedBroadcast == "XXX";
+				</formula>
+								<error-code>V07</error-code>
+								<actionmessage>"Invalid Original Broadcast Number Sent To Selected Countries '" + $value + "'."</actionmessage>
+							</Validation>
+							<Validation>
+								<formula>$broadcastIssuedFrom = Mid($value, 4, 2);
+							In($broadcastIssuedFrom, "HQ", "HK", "NL", "US");
+				</formula>
+								<error-code>V07</error-code>
+								<actionmessage>"Invalid Original Broadcast Number Sent To Selected Countries '" + $value + "'."</actionmessage>
+							</Validation>
+						</Validations>
+					</SwiftSystemFieldDef>
+				</SystemField>
+				<SystemField Name="broadcast-requester">
+					<description><![CDATA[BIC of Broadcast Requester.
+
+Name of Broadcast Requester.
+
+City of Broadcast Requester.]]></description>
+					<datatype>Section</datatype>
+					<minoccurs>1</minoccurs>
+					<maxoccurs>1</maxoccurs>
+					<SwiftSystemFieldDef Name="broadcast-requester" Tag="134">
+						<Format><![CDATA[(4!a2!a2!c[3!c])(CRLF65x)(CRLF65x)]]></Format>
+						<Specification><![CDATA[(bicofbroadcastrequester)(nameofbroadcastrequester)(cityofbroadcastrequester)]]></Specification>
+						<Description><![CDATA[BIC of Broadcast Requester.
+
+Name of Broadcast Requester.
+
+City of Broadcast Requester.]]></Description>
+					</SwiftSystemFieldDef>
+				</SystemField>
+				<SystemField Name="broadcast-text">
+					<description><![CDATA[n times 65 characters up to maximum input message length of 2,000 characters.]]></description>
+					<datatype>String</datatype>
+					<required>true</required>
+					<SwiftSystemFieldDef Name="broadcast-text" Tag="312">
+						<Format><![CDATA[(1000*65x)]]></Format>
+						<Specification><![CDATA[(broadcast-text)]]></Specification>
+						<Additional-Format><![CDATA[<X>1-65[<CrLf><X>1-65] 0-n]]></Additional-Format>
+						<Description><![CDATA[Broadcast text is minimum 1 and up to n lines of 65 characters.]]></Description>
+					</SwiftSystemFieldDef>
+				</SystemField>
+			</Fields>
+		</Data>
+		<Trailer>
+		</Trailer>
+	</SwiftFields>
+	<validationrules name="Default">
+		<hdrvalidationrules>
+			<fieldvalidations>
+			</fieldvalidations>
+		</hdrvalidationrules>
+		<datavalidationrules>
+			<fieldvalidations>
+				<fieldvalidation>
+					<name>E1</name>
+					<fieldname>heading-code</fieldname>
+					<comment><![CDATA[IF (tag130:/09/ ...) or (tag 130:/23/ ...) is present, then tag 132 or 133 but not both, must be used.]]></comment>
+					<formula><![CDATA[If(StartsWith($value, "/09/") || StartsWith($value, "/23/"), 
+   If(original_broadcast_number_users.$size > 0, 
+      original_broadcast_number_countries.$size == 0, 
+      original_broadcast_number_countries.$size > 
+        0), 
+   true)]]></formula>
+					<severity>error</severity>
+					<cascade>true</cascade>
+					<error-code>V07</error-code>
+					<actionmessage><![CDATA["If (tag130:/09/..) or (tag130:/23/..)is present, then tag 132 or 133 but not both, must be used."]]></actionmessage>
+				</fieldvalidation>
+				<fieldvalidation>
+					<name>E2</name>
+					<fieldname>heading-code</fieldname>
+					<comment><![CDATA[Tag 132 can only be present if tag 130:/09/ or tag 130:/23/ is present. Tag 132 may be repeated.]]></comment>
+					<formula><![CDATA[If(!StartsWith($value, "/09/") && 
+     !StartsWith($value, "/23/"), 
+   original_broadcast_number_users.$size == 0, 
+   true)]]></formula>
+					<severity>error</severity>
+					<cascade>true</cascade>
+					<error-code>V07</error-code>
+					<actionmessage><![CDATA["Tag 132 (original-broadcast-number-users) can only be present if tag 130:/09/ or 130:/23/ is present"]]></actionmessage>
+				</fieldvalidation>
+				<fieldvalidation>
+					<name>E3</name>
+					<fieldname>heading-code</fieldname>
+					<comment><![CDATA[Tag 133 can only be present if tag 130:/09/ or tag 130:/23/ is present.]]></comment>
+					<formula><![CDATA[If(!StartsWith($value, "/09/") && 
+     !StartsWith($value, "/23/"), 
+   original_broadcast_number_countries.$size == 0, 
+   true)]]></formula>
+					<severity>error</severity>
+					<cascade>true</cascade>
+					<error-code>V07</error-code>
+					<actionmessage><![CDATA["Tag 133 (original-broadcast-number-countries) can only be present if tag 130:/09/ or 130:/23/ is present"]]></actionmessage>
+				</fieldvalidation>
+				<fieldvalidation>
+					<name>E4</name>
+					<fieldname>region.region</fieldname>
+					<comment><![CDATA[Region value should be 'ALL' or 'CC'X.]]></comment>
+					<formula><![CDATA[($value == "ALL") || 
+  (GetCountryName(Left($value, 2)) != "" ) && (Right($value, 1) == "X");
+]]></formula>
+					<severity>error</severity>
+					<cascade>true</cascade>
+					<error-code>V08</error-code>
+					<actionmessage><![CDATA["Region value should be 'ALL' or 'CC'X."]]></actionmessage>
+				</fieldvalidation>
+				<fieldvalidation>
+					<name>E5</name>
+					<fieldname>heading-code</fieldname>
+					<formula><![CDATA[def ActualValue = replace($value, "\r\n", "\n");
+def lines = Split("\n", ActualValue);
+def retval = true;
+if(!VerifyFormat(lines[0], "/2!n/65x"))
+    retval = false;
+
+if(!In(lines[0], "/01/BANK", "/02/LOCAL NOTIFICATIONS", "/03/CORRESPONDENT BANK", 
+       "/04/TELEX", "/05/SWIFT BIC", "/06/WARNING LOST OR STOLEN", 
+       "/07/FRAUD NOTIFICATION", "/08/CURRENCY", "/09/BROADCAST AMENDMENT", 
+       "/10/BUSINESS CONTINUITY PLANNING", "/20/REVOKED CERTIFICATES", 
+       "/21/TIME ZONE CHANGE", "/22/DUPLICATION WITHOUT PDE", 
+       "/23/STRIKE NOTIFICATION", "/24/EXCEPTIONAL SITUATION", "/99/OTHER")) {
+    retval = false;
+}
+if(In(lines[0], "/20/REVOKED CERTIFICATES", "/21/TIME ZONE CHANGE", 
+      "/22/DUPLICATION WITHOUT PDE", "/23/STRIKE NOTIFICATION", 
+      "/24/EXCEPTIONAL SITUATION", "/99/OTHER")) {
+    if(lines.Length() != 1)
+        retval = false;
+
+}
+if(In(lines[0], "/01/BANK", "/02/LOCAL NOTIFICATIONS", "/03/CORRESPONDENT BANK", 
+       "/04/TELEX", "/05/SWIFT BIC", "/06/WARNING LOST OR STOLEN", 
+       "/07/FRAUD NOTIFICATION", "/08/CURRENCY", "/09/BROADCAST AMENDMENT", 
+       "/10/BUSINESS CONTINUITY PLANNING")) {
+    if(lines.Length() != 2)
+        retval = false;
+
+}
+if(lines.Length() > 1) {
+    if(!VerifyFormat(lines[1], "/2!n/65x"))
+        retval = false;
+
+    if(lines[0] == "/01/BANK") {
+        if(!In(lines[1], "/01/OPERATIONAL", "/02/CLOSURE", "/03/BRANCH CLOSURE", 
+               "/04/MERGER", "/05/OWNERSHIP CHANGE", "/06/CHANGE OF OFFICERS", 
+                   "/07/CHANGE IN AUTHORISED SIGNATURES", 
+                   "/08/TELEPHONE/FAX NUMBER CHANGE", "/09/ADDRESS CHANGE", 
+               "/10/STANDING ORDERS", "/11/CHANGE OF NAME", "/12/HOLIDAY"))
+            retval = false;
+
+    }
+    if(lines[0] == "/02/LOCAL NOTIFICATIONS") {
+        if(!In(lines[1], "/01/DOMESTIC CLEARING SYSTEM CHANGES", 
+               "/02/HOLIDAY NOTIFICATION"))
+            retval = false;
+
+    }
+    if(lines[0] == "/03/CORRESPONDENT BANK") {
+        if(!In(lines[1], "/01/LIST", "/02/CHANGE", "/03/ACCOUNT NUMBER CHANGE", 
+               "/04/CLS SSI INFORMATION", "/05/ACCOUNT NUMBER DELETION", 
+               "/06/NEW ACCOUNT NUMBER"))
+            retval = false;
+
+    }
+    if(lines[0] == "/04/TELEX") {
+        if(!In(lines[1], "/01/CHANGE", "/02/GARBLED", "/03/FAILURE", 
+               "/04/END OF USE"))
+            retval = false;
+
+    }
+    if(lines[0] == "/05/SWIFT BIC") {
+        if(!In(lines[1], "/01/CHANGE", "/02/ADDITION", "/03/DEACTIVATION"))
+            retval = false;
+
+    }
+    if(lines[0] == "/06/WARNING LOST OR STOLEN") {
+        if(!In(lines[1], "/01/INSTRUMENTS (GENERAL WARNING)", "/02/DRAFTS", 
+               "/03/CHEQUES", "/04/TRAVELLERS CHEQUES", "/05/BANK CARDS"))
+            retval = false;
+
+    }
+    if(lines[0] == "/07/FRAUD NOTIFICATION") {
+        if(!In(lines[1], "/01/GENERAL", "/02/DRAFTS", "/03/CHEQUES", 
+               "/04/TRAVELLERS CHEQUES", "/05/MONEY LAUNDERING"))
+            retval = false;
+
+    }
+    if(lines[0] == "/08/CURRENCY") {
+        if(!In(lines[1], "/01/REVALUATION", "/02/DEVALUATION", 
+               "/03/DECIMAL VALUE CHANGE"))
+            retval = false;
+
+    }
+    if(lines[0] == "/09/BROADCAST AMENDMENT") {
+        if(!In(lines[1], "/01/BROADCAST SEQUENCE NUMBER OF ORIGINAL BROADCAST"))
+            retval = false;
+
+    }
+    if(lines[0] == "/10/BUSINESS CONTINUITY PLANNING") {
+        if(!In(lines[1], "/01/NATURAL CATASTROPHE", "/02/OTHER"))
+            retval = false;
+
+    }
+}
+return retval;
+]]></formula>
+					<severity>error</severity>
+					<cascade>true</cascade>
+					<error-code>V07</error-code>
+					<actionmessage><![CDATA[def ActualValue = replace($value, "\r\n", "\n");
+"Invalid code word in line 1 '" + LeftStr(ActualValue, "\n") + "' or invalid code word in line 2. '" + RightStr(ActualValue, "\n") + "' does not correspond to the code word in line 1 '" + LeftStr(ActualValue, "\n") +" or format of line1 or line2 is not correct. It should be '/2!n/65x'."]]></actionmessage>
+				</fieldvalidation>
+				<fieldvalidation>
+					<name>E6</name>
+					<fieldname>group</fieldname>
+					<comment><![CDATA[E6
+Allowed values for Group are : AFRI, APAC, CLAM, EUZN, EEAR, MIDE, NAMR.]]></comment>
+						<formula><![CDATA[In($value, "AFRI", "APAC", "CEEE", "CLAM", "EUZN", "EEAR", "MIDE", "NAMR")]]></formula>
+					<severity>error</severity>
+					<cascade>true</cascade>
+					<error-code>V08</error-code>
+						<actionmessage><![CDATA["Invalid Group '" + $value + "'. Allowed values are : AFRI, APAC, CEEE, CLAM, EUZN, EEAR, MIDE, NAMR."]]></actionmessage>
+				</fieldvalidation>
+				<fieldvalidation>
+					<name>E7</name>
+					<comment><![CDATA[E7
+If tag 307 is present in the message, then tag 304 must not be present else tag 304 must be present. If tag 304 is absent, then 307 tag is mandatory.]]></comment>
+					<formula><![CDATA[If(!IsNull(group), 
+   region.$size == 0, 
+   If(region.$size == 0, !IsNull(group), true))]]></formula>
+					<severity>error</severity>
+					<cascade>true</cascade>
+					<error-code>V07</error-code>
+					<actionmessage><![CDATA["If tag 307 is present in the message, then tag 304 must not be present else tag 304 must be present. If tag 304 is absent, then 307 tag is mandatory."]]></actionmessage>
+				</fieldvalidation>
+			</fieldvalidations>
+		</datavalidationrules>
+		<tlrvalidationrules>
+			<fieldvalidations>
+			</fieldvalidations>
+		</tlrvalidationrules>
+	</validationrules>
+</SwiftMessageFormat>
+

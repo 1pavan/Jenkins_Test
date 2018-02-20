@@ -1,0 +1,95 @@
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="unqualified" attributeFormDefault="unqualified">
+	<!-- include constructs -->
+	<xsd:include schemaLocation="externalmsg.xsd"/>
+	<xsd:complexType name="ExcelFormat">
+		<xsd:complexContent>
+			<xsd:extension base="ExternalMessageType"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:element name="excelfields" substitutionGroup="ExternalMessageFields">
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="ExternalMessageFieldsType">
+					<xsd:sequence>
+						<xsd:element ref="target-namespace" minOccurs="0"/>
+						<xsd:element ref="xpath-namespaces" minOccurs="0"/>
+						<xsd:element ref="platforminfo" minOccurs="0"/>
+						<xsd:element ref="field-attributes" minOccurs="0"/>
+						<xsd:element name="headerfields" type="ExcelFieldStructType"/>
+						<xsd:element name="datafields" type="ExcelFieldStructType"/>
+						<xsd:element name="trailerfields" type="ExcelFieldStructType"/>
+						<xsd:element name="options">
+							<xsd:complexType>
+								<xsd:sequence>
+									<xsd:element name="default-sheet" type="xsd:string" minOccurs="0"/>
+									<xsd:element name="excel-implementation" type="xsd:string" minOccurs="0"/>
+									<xsd:element name="output-template" type="xsd:string" minOccurs="0"/>
+								</xsd:sequence>
+							</xsd:complexType>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:complexType name="ExcelAbstractFieldType" abstract="true">
+		<xsd:sequence>
+			<xsd:element name="name" type="xsd:string"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="ExcelFieldStructType">
+		<xsd:sequence>
+			<xsd:element ref="platforminfo" minOccurs="0"/>
+			<xsd:element ref="field-attributes" minOccurs="0"/>
+			<xsd:element name="field" type="ExcelAbstractFieldType" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="ExcelFieldType">
+		<xsd:complexContent>
+			<xsd:extension base="ExcelAbstractFieldType">
+				<xsd:sequence>
+					<xsd:element name="datatype" type="xsd:string"/>
+					<xsd:element name="detailed-name" type="xsd:string" minOccurs="0"/>
+					<xsd:element name="description" type="xsd:string" minOccurs="0"/>
+					<xsd:element name="aliasname" type="xsd:string" minOccurs="0"/>
+					<xsd:element name="required" type="xsd:boolean" minOccurs="0"/>
+					<xsd:element name="defaultvalue" type="xsd:string" minOccurs="0"/>
+					<xsd:element name="dateformat" type="xsd:string" minOccurs="0"/>
+					<xsd:element name="column" type="xsd:string" minOccurs="0"/>
+					<xsd:element name="parsed-value" type="xsd:string" minOccurs="0"/>
+					<xsd:element name="serialized-value" type="xsd:string" minOccurs="0"/>
+					<xsd:element name="cell-sheet" type="xsd:string" minOccurs="0"/>
+					<xsd:element name="cell-row" type="xsd:string" minOccurs="0"/>
+					<xsd:element name="cell-column" type="xsd:string" minOccurs="0"/>
+					<xsd:element ref="platforminfo" minOccurs="0"/>
+					<xsd:element ref="field-attributes" minOccurs="0"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="ExcelSectionType">
+		<xsd:complexContent>
+			<xsd:extension base="ExcelAbstractFieldType">
+				<xsd:sequence>
+					<xsd:element name="datatype" type="xsd:string" fixed="Section"/>
+					<xsd:element name="detailed-name" type="xsd:string" minOccurs="0"/>
+					<xsd:element name="description" type="xsd:string" minOccurs="0"/>
+					<xsd:element name="aliasname" type="xsd:string" minOccurs="0"/>
+					<xsd:element name="minoccurs" type="xsd:integer"/>
+					<xsd:element name="maxoccurs" type="xsd:integer"/>
+					<xsd:element name="fields" type="ExcelFieldStructType"/>
+					<xsd:element name="section-node-type" type="xsd:string" minOccurs="0"/>
+					<xsd:element name="cell-sheet" type="xsd:string" minOccurs="0"/>
+					<xsd:element name="cell-row" type="xsd:string" minOccurs="0"/>
+					<xsd:element name="cell-column" type="xsd:string" minOccurs="0"/>
+					<xsd:element name="cell-row-end" type="xsd:string" minOccurs="0"/>
+					<xsd:element name="cell-column-end" type="xsd:string" minOccurs="0"/>
+					<xsd:element name="row-condition" type="xsd:string" minOccurs="0"/>
+					<xsd:element name="table-end-condition" type="xsd:string" minOccurs="0"/>
+					<xsd:element ref="platforminfo" minOccurs="0"/>
+					<xsd:element ref="field-attributes" minOccurs="0"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+</xsd:schema>

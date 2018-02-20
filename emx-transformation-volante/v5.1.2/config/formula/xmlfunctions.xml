@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<formulae>
+    <formula name="anyToText">
+        <description>Converts Any object to XML text</description>
+        <signature>anyToText(object)</signature>
+        <category>XML</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.xmlrt.XMLFunctions"/>
+        <property name="method" value="anyToText"/>
+        <property name="args" value="1"/>
+        <property name="arg1" value="com.tplus.transform.runtime.DataObject"/>
+        <property name="returns" value="String"/>
+        <property name="lib" value="xmlrt"/>
+    </formula>
+    <formula name="textToAny">
+        <description>Converts XML text to Any</description>
+        <signature>textToAny(text)</signature>
+        <category>XML</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.xmlrt.XMLFunctions"/>
+        <property name="method" value="textToAny"/>
+        <property name="args" value="1"/>
+        <property name="arg1" value="String"/>
+        <property name="returns" value="com.tplus.transform.runtime.DataObject"/>
+        <property name="lib" value="xmlrt"/>
+    </formula>
+    <formula name="createAnyElement">
+        <description>Creates an any element under this element</description>
+        <signature>createAnyElement(obj, name, namespace, valueOpt)</signature>
+        <category>XML</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.xmlrt.XMLFunctions"/>
+        <property name="method" value="createAnyElement"/>
+        <property name="args" value="4"/>
+        <property name="arg1" value="com.tplus.transform.runtime.DataObject"/>
+        <property name="arg2" value="String"/>
+        <property name="arg3" value="String"/>
+        <property name="arg4" value="String"/>
+        <property name="returns" value="com.tplus.transform.runtime.DataObject"/>
+        <property name="lib" value="xmlrt"/>
+    </formula>
+    <formula name="createAnyElement">
+        <description>Creates an any element under this element</description>
+        <signature>createAnyElement(obj, name, namespace, valueOpt)</signature>
+        <category>XML</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.xmlrt.XMLFunctions"/>
+        <property name="method" value="createAnyElement"/>
+        <property name="args" value="3"/>
+        <property name="arg1" value="com.tplus.transform.runtime.DataObject"/>
+        <property name="arg2" value="String"/>
+        <property name="arg3" value="String"/>
+        <property name="returns" value="com.tplus.transform.runtime.DataObject"/>
+        <property name="lib" value="xmlrt"/>
+    </formula>
+
+    <formula name="createAnyElement">
+        <description>Creates an any element under this element</description>
+        <signature>createAnyElement(sec, name, namespace, valueOpt)</signature>
+        <category>XML</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.xmlrt.XMLFunctions"/>
+        <property name="method" value="createAnyElement"/>
+        <property name="args" value="4"/>
+        <property name="arg1" value="com.tplus.transform.runtime.DataObjectSection"/>
+        <property name="arg2" value="String"/>
+        <property name="arg3" value="String"/>
+        <property name="arg4" value="String"/>
+        <property name="returns" value="com.tplus.transform.runtime.DataObject"/>
+        <property name="lib" value="xmlrt"/>
+    </formula>
+    <formula name="createAnyElement">
+        <description>Creates an any element under this element</description>
+        <signature>createAnyElement(sec, name, namespace, valueOpt)</signature>
+        <category>XML</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.xmlrt.XMLFunctions"/>
+        <property name="method" value="createAnyElement"/>
+        <property name="args" value="3"/>
+        <property name="arg1" value="com.tplus.transform.runtime.DataObjectSection"/>
+        <property name="arg2" value="String"/>
+        <property name="arg3" value="String"/>
+        <property name="returns" value="com.tplus.transform.runtime.DataObject"/>
+        <property name="lib" value="xmlrt"/>
+    </formula>
+
+</formulae>

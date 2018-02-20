@@ -1,0 +1,58 @@
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="unqualified"
+            attributeFormDefault="unqualified">
+    <!-- include constructs -->
+    <xsd:include schemaLocation="cartridge-include.xsd"/>
+    <xsd:include schemaLocation="functiondeffolder.xsd"/>
+    <!-- External Message -->
+    <xsd:element name="externalmessage" type="ExternalMessageType" substitutionGroup="ServiceElement"/>
+    <xsd:complexType name="ExternalMessageType" abstract="true">
+        <xsd:complexContent>
+            <xsd:extension base="ServiceElementType">
+                <xsd:sequence>
+                    <xsd:element name="description" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="standard" type="xsd:string"/>
+                    <xsd:element name="standard-name" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="standard-version" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="standard-category" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="standard-group" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="standard-detailed-name" type="xsd:string" minOccurs="0"/>
+                    <xsd:element ref="version"/>
+                    <xsd:element ref="additional-properties" minOccurs="0"/>
+                    <xsd:element name="customizable" type="xsd:boolean" minOccurs="0"/>
+                    <xsd:element name="messagetype" type="xsd:string" minOccurs="0"/>
+                    <xsd:element ref="ExternalMessageFields"/>
+                    <xsd:element name="validationrules" minOccurs="0" maxOccurs="unbounded">
+                        <xsd:complexType>
+                            <xsd:sequence>
+                                <xsd:element name="hdrvalidationrules" type="hdr_data_tlr_validationrules"/>
+                                <xsd:element name="datavalidationrules" type="hdr_data_tlr_validationrules"/>
+                                <xsd:element name="tlrvalidationrules" type="hdr_data_tlr_validationrules"/>
+                            </xsd:sequence>
+                            <xsd:attribute name="name" type="xsd:string" use="required"/>
+                        </xsd:complexType>
+                    </xsd:element>
+                    <xsd:element name="folder" type="FunctionDefFolder" minOccurs="0"/>
+                    <xsd:element ref="elementproperties" minOccurs="0"/>
+                </xsd:sequence>
+                <xsd:attribute name="version" type="xsd:string"/>
+                <xsd:attribute name="rulename" type="xsd:string"/>
+                <xsd:attribute name="type" type="xsd:string" use="required"/>
+                <xsd:attribute name="formattype" type="xsd:string" use="required"/>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:element name="ExternalMessageFields" type="ExternalMessageFieldsType"/>
+    <xsd:complexType name="ExternalMessageFieldsType"/>
+    <xsd:complexType name="hdr_data_tlr_validationrules">
+        <xsd:sequence>
+            <xsd:element name="fieldvalidations">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element ref="fieldvalidation" minOccurs="0" maxOccurs="unbounded"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+
+</xsd:schema>

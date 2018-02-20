@@ -1,0 +1,290 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<SwiftMessageFormat xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="MT935">
+	<standard>SWIFT</standard>
+	<standard-name>MT935</standard-name>
+	<standard-version>SRG 2017</standard-version>
+	<standard-release-qualifier>20170227</standard-release-qualifier>
+	<DescriptiveName><![CDATA[Rate Change Advice]]></DescriptiveName>
+	<Category>Cash Management &amp; Customer Status</Category>
+	<Description>This multiple message is used by the Sender to advise interest rate change(s) to the Receiver.
+
+It is used to advise the details of:
+
+a) General interest rate change(s).
+
+b) Interest rate change(s) which apply to specific account(s), other than call/notice loan/deposit account(s), serviced by the Sender of the message for the Receiver.
+
+Interest rate change(s) that can be advised by this message type include: NOTICE, CALL, PRIME, COMMERCIAL, BASE, CURRENT and DEPOSIT.</Description>
+	<SwiftFields>
+		<customizable>true</customizable>
+		<modifiable>true</modifiable>
+		<SwiftMessageType>User</SwiftMessageType>
+		<max-length>2000</max-length>
+		<HeaderAndTrailerType>SWIFT_INPUT_OUTPUT_HEADER</HeaderAndTrailerType>
+		<Header>
+			</Header>
+		<Data>
+			<Fields>
+				<SwiftField Name="20">
+					<SwiftFieldDef Name="20">
+						<Generic>false</Generic>
+						<Description><![CDATA[Reference]]></Description>
+						<Option Name="">
+							<Format><![CDATA[16x]]></Format>
+							<Specification><![CDATA[(TRN)]]></Specification>
+							<Description><![CDATA[Transaction Reference Number]]></Description>
+						</Option>
+					</SwiftFieldDef>
+					<Repeating>false</Repeating>
+					<Presence>M</Presence>
+					<Options> </Options>
+					<Validations>
+						<SubField Name="TRN">
+							<Validation>
+								<Options> </Options>
+								<ErrorCode>T26</ErrorCode>
+								<Comment><![CDATA[This field must not start or end with a slash '/' and must not contain two consecutive slashes '//'(Error code(s): T26).]]></Comment>
+								<ValidationPattern xsi:type="T26" Type="T26">
+									<Type>T26</Type>
+								</ValidationPattern>
+							</Validation>
+						</SubField>
+					</Validations>
+				</SwiftField>
+				<SwiftSequence Name="A">
+					<Name>A</Name>
+					<Description><![CDATA[Sequence A]]></Description>
+					<Mandatory>true</Mandatory>
+					<Repeating>true</Repeating>
+					<Fields>
+						<SwiftField Name="23">
+							<SwiftFieldDef Name="23">
+								<Generic>false</Generic>
+								<Option Name="">
+									<Format><![CDATA[3!a[2!n]11x]]></Format>
+									<Specification><![CDATA[(Currency) (Number of Days) (Function)]]></Specification>
+									<Description><![CDATA[Further Identification]]></Description>
+								</Option>
+							</SwiftFieldDef>
+							<Repeating>false</Repeating>
+							<Presence>O</Presence>
+							<Options> </Options>
+							<Validations>
+								<SubField Name="Function">
+									<Validation>
+										<Enabled>false</Enabled>
+										<Options> </Options>
+										<ErrorCode>T12</ErrorCode>
+										<Comment><![CDATA[Function must contain one of the following codes identifying the function of the message: (This is not a NVR)]]></Comment>
+										<ValidationPattern xsi:type="CODE" Type="CODE">
+											<Type>CODE</Type>
+											<Codes>
+												<Code Name="BASE">
+													<Description>Used to advise a change in the base rate</Description>
+												</Code>
+												<Code Name="CALL">
+													<Description>Used to advise a change in the call rate</Description>
+												</Code>
+												<Code Name="COMMERCIAL">
+													<Description>Used to advise a change in the commercial rate</Description>
+												</Code>
+												<Code Name="CURRENT">
+													<Description>Used to advise a change in the interest rate applicable to current accounts</Description>
+												</Code>
+												<Code Name="DEPOSIT">
+													<Description>Used to advise a change in the interest rate applicable to deposits</Description>
+												</Code>
+												<Code Name="NOTICE">
+													<Description>Used to advise a change in the notice rate</Description>
+												</Code>
+												<Code Name="PRIME">
+													<Description>Used to advise a change in the prime rate</Description>
+												</Code>
+											</Codes>
+										</ValidationPattern>
+									</Validation>
+								</SubField>
+							</Validations>
+						</SwiftField>
+						<SwiftField Name="25">
+							<SwiftFieldDef Name="25">
+								<Generic>false</Generic>
+								<Description><![CDATA[Account Identification]]></Description>
+								<Option Name="">
+									<Format><![CDATA[35x]]></Format>
+									<Specification><![CDATA[(Account)]]></Specification>
+									<Description><![CDATA[Account Identification]]></Description>
+								</Option>
+							</SwiftFieldDef>
+							<Repeating>false</Repeating>
+							<Presence>O</Presence>
+							<Options> </Options>
+						</SwiftField>
+						<SwiftField Name="30">
+							<SwiftFieldDef Name="30">
+								<Generic>false</Generic>
+								<Option Name="">
+									<Format><![CDATA[6!n]]></Format>
+									<Specification><![CDATA[(Date)]]></Specification>
+									<Description><![CDATA[Effective Date of New Rate]]></Description>
+								</Option>
+							</SwiftFieldDef>
+							<Repeating>false</Repeating>
+							<Presence>M</Presence>
+							<Options> </Options>
+							<Validations>
+								<SubField Name="Date">
+									<Validation>
+										<Options> </Options>
+										<ErrorCode>T50</ErrorCode>
+										<Comment><![CDATA[Date must be a valid date expressed as YYMMDD (Error code(s): T50).]]></Comment>
+										<ValidationPattern xsi:type="DATE" Type="DATE">
+											<Type>DATE</Type>
+											<Format>yyMMdd</Format>
+										</ValidationPattern>
+									</Validation>
+								</SubField>
+							</Validations>
+						</SwiftField>
+						<SwiftField Name="37H">
+							<SwiftFieldDef Name="37">
+								<Generic>false</Generic>
+								<Option Name="H">
+									<Format><![CDATA[1!a[N]12d]]></Format>
+									<Specification><![CDATA[(Indicator)(Sign)( Rate)]]></Specification>
+									<Description><![CDATA[New Interest Rate]]></Description>
+								</Option>
+							</SwiftFieldDef>
+							<Repeating>true</Repeating>
+							<Presence>M</Presence>
+							<Options>H</Options>
+							<Validations>
+								<SubField Name="Indicator">
+									<Validation>
+										<Options>H</Options>
+										<ErrorCode>T51</ErrorCode>
+										<Comment><![CDATA[Indicator must contain one of the following codes (Error code(s): T51)]]></Comment>
+										<ValidationPattern xsi:type="CODE" Type="CODE">
+											<Type>CODE</Type>
+											<Codes>
+												<Code Name="C">
+													<DetailedName>Credit</DetailedName>
+													<Description>The new interest rate is a credit rate</Description>
+												</Code>
+												<Code Name="D">
+													<DetailedName>Debit</DetailedName>
+													<Description>The new interest rate is a debit rate.</Description>
+												</Code>
+											</Codes>
+										</ValidationPattern>
+									</Validation>
+								</SubField>
+								<SubField Name="Rate">
+									<Validation>
+										<Options>H</Options>
+										<ErrorCode>T14</ErrorCode>
+										<Comment><![CDATA[Sign must not be used if Rate is zero (Error code(s): T14).]]></Comment>
+										<ValidationPattern xsi:type="T14" Type="T14">
+											<Type>T14</Type>
+											<sign-field>Sign</sign-field>
+										</ValidationPattern>
+									</Validation>
+								</SubField>
+							</Validations>
+						</SwiftField>
+					</Fields>
+				</SwiftSequence>
+				<SwiftField Name="72">
+					<SwiftFieldDef Name="72">
+						<Generic>false</Generic>
+						<Option Name="">
+							<Format><![CDATA[6*35x]]></Format>
+							<Specification><![CDATA[(Narrative)]]></Specification>
+							<Description><![CDATA[Sender to Receiver Information]]></Description>
+						</Option>
+					</SwiftFieldDef>
+					<Repeating>false</Repeating>
+					<Presence>O</Presence>
+					<Options> </Options>
+				</SwiftField>
+			</Fields>
+		</Data>
+		<Trailer>
+			</Trailer>
+	</SwiftFields>
+	<validationrules name="Default">
+		<hdrvalidationrules>
+			<fieldvalidations>
+				<fieldvalidation>
+					<name>U09</name>
+					<formula><![CDATA[if($this.Header.GetFieldIndex("User_Header") != -1) {
+    def userHeader = $this.Header.GetSection("User_Header");
+    if(userHeader.$size > 0 && userHeader[0].IsNotNull("Validation_Flag")) {
+        return false;
+    }
+}
+return true;
+]]></formula>
+					<severity>error</severity>
+					<cascade>true</cascade>
+					<error-code>U09</error-code>
+					<actionmessage><![CDATA["User has used tag 119 in a message that is not a candidate for special processing"]]></actionmessage>
+				</fieldvalidation>
+	<fieldvalidation>
+						<name>U12</name>
+		<fieldname>User Header</fieldname>
+		<formula><![CDATA[Iff(IsNotNull(User_Header.Service_Type_Identifier), 
+    IsNotNull(User_Header.Unique_End_To_End_Transaction_Reference))]]></formula>
+		<severity>error</severity>
+		<cascade>true</cascade>
+						<error-code>U12</error-code>
+		<actionmessage><![CDATA["When populating an end-to-end reference, both fields 111 and 121 must be populated: a message that contains only one of these two fields will not be accepted by FIN."]]></actionmessage>
+	</fieldvalidation>
+					<fieldvalidation>
+						<name>U03</name>
+						<fieldname>User Header.Unique End-To-End Transaction Reference</fieldname>
+						<formula><![CDATA[Matches("[a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[a-b8-9]{1}[a-f0-9]{3}-[a-f0-9]{12}", $value)]]></formula>
+						<severity>error</severity>
+						<cascade>true</cascade>
+						<error-code>U03</error-code>
+						<actionmessage><![CDATA["Invalid format! Format must be 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx' where x is any hexadecimal character (lower case only) and y is one of 8, 9, a, or b."]]></actionmessage>
+					</fieldvalidation>
+			</fieldvalidations>
+		</hdrvalidationrules>
+		<datavalidationrules>
+			<fieldvalidations>
+				<fieldvalidation>
+					<name>C1</name>
+					<formula><![CDATA[A.$size <= 10]]></formula>
+					<severity>error</severity>
+					<cascade>true</cascade>
+					<error-code>T10</error-code>
+					<actionmessage><![CDATA["The repetitive sequence must appear at least once, but not more than ten times."]]></actionmessage>
+				</fieldvalidation>
+				<fieldvalidation>
+					<name>C2</name>
+					<fieldname>A</fieldname>
+					<formula><![CDATA[If(A.F23.$size > 0, A.F25.$size == 0, A.F25.$size > 0)]]></formula>
+					<severity>error</severity>
+					<cascade>true</cascade>
+					<error-code>C83</error-code>
+					<actionmessage><![CDATA["Either field 23 or field 25, but not both, must be present in any repetitive sequence."]]></actionmessage>
+				</fieldvalidation>
+				<fieldvalidation>
+					<name>ERI</name>
+					<fieldname>72.Narrative</fieldname>
+					<formula><![CDATA[ApplyERICodeValidationStructured($value);]]></formula>
+					<severity>error</severity>
+					<cascade>true</cascade>
+					<error-code>T47</error-code>
+					<actionmessage><![CDATA["In an ERI field (i.e. fields 61, 72, 77A, 79, 86) the data part of a code word /OCMT/, or /CHGS/, is being validated, but the ending separator (i.e. third slash) is missing or the code words are duplicated."]]></actionmessage>
+				</fieldvalidation>
+			</fieldvalidations>
+		</datavalidationrules>
+		<tlrvalidationrules>
+			<fieldvalidations>
+			</fieldvalidations>
+		</tlrvalidationrules>
+	</validationrules>
+</SwiftMessageFormat>
+

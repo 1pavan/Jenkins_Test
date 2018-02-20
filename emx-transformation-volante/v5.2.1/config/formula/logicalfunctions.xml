@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<formulae>
+		<formula name="Less">
+			<description>Returns TRUE if argument1 is less than argument2. The two arguments must be of the same type.</description>
+			<signature>Less(val1, val2)</signature>
+			<category>Logical</category>
+	  		<Class>com.tplus.transform.design.formula.functions.LogicalOperatorFunction</Class>
+			<property name="operator" value="&lt;" />
+			<property name="typecheck" value="numeric,char" />
+    	</formula>
+
+		<formula name="Greater">
+			<description>Returns TRUE if argument1 is greater than argument2. The two arguments must be of the same type.</description>
+			<signature>Greater(val1, val2)</signature>
+			<category>Logical</category>
+	  		<Class>com.tplus.transform.design.formula.functions.LogicalOperatorFunction</Class>
+			<property name="operator" value="&gt;" />
+			<property name="typecheck" value="numeric,char" />
+    	</formula>
+
+		<formula name="LessEqual">
+			<description>Returns TRUE if argument1 is less than or equal to argument2. The two arguments must be of the same type.</description>
+			<signature>LessEqual(val1, val2)</signature>
+			<category>Logical</category>
+	  		<Class>com.tplus.transform.design.formula.functions.LogicalOperatorFunction</Class>
+			<property name="operator" value="&lt;=" />
+			<property name="typecheck" value="numeric,char" />
+    	</formula>
+
+		<formula name="GreaterEqual">
+			<description>Returns TRUE if argument1 is greater than or equal to argument2. The two arguments must be of the same type.</description>
+			<signature>GreaterEqual(val1, val2)</signature>
+			<category>Logical</category>
+	  		<Class>com.tplus.transform.design.formula.functions.LogicalOperatorFunction</Class>
+			<property name="operator" value="&gt;=" />
+			<property name="typecheck" value="numeric,char" />
+    	</formula>
+
+		<formula name="Equal">
+			<description>Returns TRUE if argument1 is equal to argument2. The two arguments must be of the same type.</description>
+			<signature>Equal(val1,val2)</signature>
+			<category>Logical</category>
+	  		<Class>com.tplus.transform.design.formula.functions.LogicalOperatorFunction</Class>
+			<property name="operator" value="==" />
+			<property name="typecheck" value="primitive,numeric" />
+            <property name="nullable" value="true" />
+    	</formula>
+
+    <!--
+		<formula name="Equal">
+			<description>Returns TRUE if argument1 is equal to argument2. The two arguments must be of the same type.</description>
+			<signature>Equal(val1,val2)</signature>
+			<category>Logical</category>
+	  		<Class>com.tplus.transform.design.formula.functions.LogicalOperatorFunction</Class>
+			<property name="operator" value="==" />
+			<property name="typecheck" value="numeric" />
+            <property name="nullable" value="true" />
+    	</formula>
+		-->
+
+		<formula name="NotEqual">
+			<description>Returns TRUE if argument1 is not equal to argument2. The two arguments must be of the same type.</description>
+			<signature>NotEqual(val1, val2)</signature>
+			<category>Logical</category>
+	  		<Class>com.tplus.transform.design.formula.functions.LogicalOperatorFunction</Class>
+			<property name="operator" value="!=" />
+			<property name="typecheck" value="primitive" />
+            <property name="nullable" value="true" />
+    	</formula>
+
+		<formula name="And">
+			<description>Returns TRUE if all its arguments are TRUE; returns FALSE if any argument is FALSE.</description>
+			<signature>And(logical1, logical2, ...opt)</signature>
+			<category>Logical</category>
+	  		<Class>com.tplus.transform.design.formula.functions.LogicalOperatorFunction</Class>
+			<property name="args" value="-1" />
+			<property name="operator" value="&amp;&amp;" />
+			<property name="typecheck" value="boolean" />
+    	</formula>
+
+		<formula name="Or">
+			<description>Returns TRUE if any argument is TRUE; returns FALSE if all arguments are FALSE.</description>
+			<signature>Or(logical1, logical2, ...opt)</signature>
+			<category>Logical</category>
+	  		<Class>com.tplus.transform.design.formula.functions.LogicalOperatorFunction</Class>
+			<property name="args" value="-1" />
+			<property name="operator" value="||" />
+			<property name="typecheck" value="boolean" />
+    	</formula>
+
+		<formula name="If">
+			<description>Returns first value if a condition you specify evaluates to TRUE and another value if it evaluates to FALSE (Simliar to Java ternary operator). </description>
+			<signature>IF(logical_test, value_if_true, value_if_falseOpt)</signature>
+			<category>Logical</category>
+	  		<Class>com.tplus.transform.design.formula.functions.IfOperatorFunction</Class>
+    	</formula>
+
+		<formula name="Iff">
+			<description>Returns true if and only if first implies second as well as second implies first. That is, first == second</description>
+			<signature>Iff(first, second)</signature>
+			<category>Logical</category>
+	  		<Class>com.tplus.transform.design.formula.functions.IffOperatorFunction</Class>
+    	</formula>
+
+		<formula name="Implies">
+			<description>Returns true if first is true implies second is also true. If first is false, it returns true.</description>
+			<signature>Implies(first, second)</signature>
+			<category>Logical</category>
+	  		<Class>com.tplus.transform.design.formula.functions.ImpliesOperatorFunction</Class>
+    	</formula>
+
+		<formula name="Less">
+			<description>Returns TRUE if argument1 is less than argument2. The two arguments must be of the same type.</description>
+			<signature>Less(val1, val2)</signature>
+			<category>Logical</category>
+	  		<Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+			<property name="class" value="com.tplus.transform.runtime.formula.BigTypeFunctions" />
+			<property name="method" value="less" />
+    	</formula>
+
+
+
+		<formula name="Greater">
+			<description>Returns TRUE if argument1 is greater than argument2. The two arguments must be of the same type.</description>
+			<signature>Greater(val1, val2)</signature>
+			<category>Logical</category>
+	  		<Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+			<property name="class" value="com.tplus.transform.runtime.formula.BigTypeFunctions" />
+			<property name="method" value="greater" />
+    	</formula>
+
+		<formula name="LessEqual">
+			<description>Returns TRUE if argument1 is less than or equal to argument2. The two arguments must be of the same type.</description>
+			<signature>LessEqual(val1, val2)</signature>
+			<category>Logical</category>
+	  		<Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+			<property name="class" value="com.tplus.transform.runtime.formula.BigTypeFunctions" />
+			<property name="method" value="lessEqual" />
+    	</formula>
+
+		<formula name="GreaterEqual">
+			<description>Returns TRUE if argument1 is greater than or equal to argument2. The two arguments must be of the same type.</description>
+			<signature>GreaterEqual(val1, val2)</signature>
+			<category>Logical</category>
+	  		<Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+			<property name="class" value="com.tplus.transform.runtime.formula.BigTypeFunctions" />
+			<property name="method" value="greaterEqual" />
+    	</formula>
+
+		<formula name="Equal">
+			<description>Returns TRUE if argument1 is equal to argument2. The two arguments must be of the same type.</description>
+			<signature>Equal(val1,val2)</signature>
+			<category>Logical</category>
+	  		<Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+			<property name="class" value="com.tplus.transform.runtime.formula.BigTypeFunctions" />
+			<property name="method" value="equal" />
+            <property name="nullable" value="true" />
+    	</formula>
+
+		
+		<formula name="NotEqual">
+			<description>Returns TRUE if argument1 is not equal to argument2. The two arguments must be of the same type.</description>
+			<signature>NotEqual(val1, val2)</signature>
+			<category>Logical</category>
+	  		<Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+			<property name="class" value="com.tplus.transform.runtime.formula.BigTypeFunctions" />
+			<property name="method" value="notEqual" />
+            <property name="nullable" value="true" />
+    	</formula>
+
+
+</formulae>

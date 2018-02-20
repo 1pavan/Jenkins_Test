@@ -1,0 +1,695 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<SwiftMessageFormat name="MT022">
+	<standard-version><![CDATA[SRG 2012]]></standard-version>
+	<DescriptiveName><![CDATA[Retrieval Request (History)]]></DescriptiveName>
+	<Category><![CDATA[System]]></Category>
+	<Description><![CDATA[This message is used to request a copy of the input and delivery history of FIN or GPA messages previously
+sent or received. Message history can be retrieved using a combination of criteria. The response to this
+message is an MT 023 Retrieved Message (History).
+The maximum retrieval period for live messages is 124 days from the date of input to the system. For Test
+& Training messages the period is 4 days.
+
+
+From: User      To: GPA or FIN]]></Description>
+	<SwiftFields>
+		<customizable>true</customizable>
+		<modifiable>true</modifiable>
+		<SwiftMessageType>System</SwiftMessageType>
+		<HeaderAndTrailerType>SWIFT_INPUT_HEADER</HeaderAndTrailerType>
+		<Header>
+		</Header>
+		<Data>
+			<Fields>
+				<SystemField Name="swift-address">
+					<description><![CDATA[Logical terminal to which the retrieved copy should be delivered.]]></description>
+					<datatype>String</datatype>
+					<required>true</required>
+					<SwiftSystemFieldDef Name="swift-address" Tag="102">
+						<Format><![CDATA[(4!a2!a2!c1!c3!c)]]></Format>
+						<Specification><![CDATA[(swift-address)]]></Specification>
+						<Description><![CDATA[Complete 12-character address, including LT code and branch code, or default branch code XXX.]]></Description>
+					</SwiftSystemFieldDef>
+				</SystemField>
+				<SystemField Name="mir">
+					<description><![CDATA[MIR of the individual message that is to be retrieved. It consists of:
+
+a)  Date of input of the message
+
+b)  Sending LT and branch code XXX (irrespective of the branch code used in the original message)
+
+c)  Session number
+
+d)  ISN]]></description>
+					<datatype>Section</datatype>
+					<minoccurs>0</minoccurs>
+					<maxoccurs>1</maxoccurs>
+					<SwiftSystemFieldDef Name="mir" Tag="251">
+						<Format><![CDATA[(6!n)(4!a2!a2!c1!c)(3!a)(4!n)(6!n)]]></Format>
+						<Specification><![CDATA[(date)(lt-identifier)(branch-code)(session-number)(isn)]]></Specification>
+						<Description><![CDATA[MIR of the individual message that is to be retrieved. It consists of:
+
+a)  Date of input of the message
+
+b)  Sending LT and branch code XXX (irrespective of the branch code used in the original message)
+
+c)  Session number
+
+d)  ISN]]></Description>
+						<Validations>
+							<Validation>
+								<subfield>date</subfield>
+								<formula>IsDate($value,"yyMMdd")</formula>
+								<error-code>V04</error-code>
+								<actionmessage>"Invalid Input Date '" + $value + "'"</actionmessage>
+							</Validation>
+						</Validations>
+					</SwiftSystemFieldDef>
+				</SystemField>
+				<SystemField Name="mir-range">
+					<description><![CDATA[Range of MIRs for retrieval. The MIRs consist of:
+
+a)  Date of input of the message
+
+b)  Sending LT and branch code XXX (irrespective of which branch code was used in the original message)
+
+c)  Session number
+
+d)  ISN
+
+An optional time range criterion can be specified.]]></description>
+					<datatype>Section</datatype>
+					<minoccurs>0</minoccurs>
+					<maxoccurs>1</maxoccurs>
+					<SwiftSystemFieldDef Name="mir-range" Tag="252">
+						<Format><![CDATA[(6!n)(4!a2!a2!c1!c)(3!a)(4!n)(6!n)(6!n)(4!a2!a2!c1!c)(3!a)(4!n)(6!n)([4!n4!n])]]></Format>
+						<Specification><![CDATA[(mir1-date)(mir1-lt-identifier)(mir1-branch-code)(mir1-session-number)(mir1-isn)(mir2-date)(mir2-lt-identifier)(mir2-branch-code)(mir2-session-number)(mir2-isn)(time-range)]]></Specification>
+						<Description><![CDATA[Range of MIRs for retrieval. The MIRs consist of:
+
+a)  Date of input of the message
+
+b)  Sending LT and branch code XXX (irrespective of which branch code was used in the original message)
+
+c)  Session number
+
+d)  ISN
+
+An optional time range criterion can be specified.]]></Description>
+						<Validations>
+							<Validation>
+								<subfield>mir1-date</subfield>
+								<formula>IsDate($value,"yyMMdd")</formula>
+								<error-code>V04</error-code>
+								<actionmessage>"Invalid Input Date '" + $value + "'"</actionmessage>
+							</Validation>
+							<Validation>
+								<subfield>mir2-date</subfield>
+								<formula>IsDate($value,"yyMMdd")</formula>
+								<error-code>V04</error-code>
+								<actionmessage>"Invalid Input Date '" + $value + "'"</actionmessage>
+							</Validation>
+						</Validations>
+					</SwiftSystemFieldDef>
+				</SystemField>
+				<SystemField Name="mor">
+					<description><![CDATA[MOR of the individual message that is to be retrieved. It consists of:
+
+a)  Date of output of the message
+
+b)  Receiving LT and branch code XXX (irrespective of the branch code used in the original message)
+
+c)  Session number
+
+d)  OSN]]></description>
+					<datatype>Section</datatype>
+					<minoccurs>0</minoccurs>
+					<maxoccurs>1</maxoccurs>
+					<SwiftSystemFieldDef Name="mor" Tag="253">
+						<Format><![CDATA[(6!n)(4!a2!a2!c1!c)(3!a)(4!n)(6!n)]]></Format>
+						<Specification><![CDATA[(date)(lt-identifier)(branch-code)(session-number)(osn)]]></Specification>
+						<Description><![CDATA[MOR of the individual message that is to be retrieved. It consists of:
+
+a)  Date of output of the message
+
+b)  Receiving LT and branch code XXX (irrespective of the branch code used in the original message)
+
+c)  Session number
+
+d)  OSN]]></Description>
+						<Validations>
+							<Validation>
+								<subfield>date</subfield>
+								<formula>IsDate($value,"yyMMdd")</formula>
+								<error-code>V04</error-code>
+								<actionmessage>"Invalid Output Date '" + $value + "'"</actionmessage>
+							</Validation>
+						</Validations>
+					</SwiftSystemFieldDef>
+				</SystemField>
+				<SystemField Name="mor-range">
+					<description><![CDATA[Range of MORs for retrieval. The MORs consist of:
+
+a)  Date of output of the message
+
+b)  Receiving LT and branch code XXX (irrespective of which branch code was used in the original message)
+
+c)  Session number
+
+d)  OSN
+
+An optional time range criterion can be specified.]]></description>
+					<datatype>Section</datatype>
+					<minoccurs>0</minoccurs>
+					<maxoccurs>1</maxoccurs>
+					<SwiftSystemFieldDef Name="mor-range" Tag="254">
+						<Format><![CDATA[(6!n)(4!a2!a2!c1!c)(3!a)(4!n)(6!n)(6!n)(4!a2!a2!c1!c)(3!a)(4!n)(6!n)([4!n4!n])]]></Format>
+						<Specification><![CDATA[(mor1-date)(mor1-lt-identifier)(mor1-branch-code)(mor1-session-number)(mor1-osn)(mor2-date)(mor2-lt-identifier)(mor2-branch-code)(mor2-session-number)(mor2-osn)(time-range)]]></Specification>
+						<Description><![CDATA[Range of MORs for retrieval. The MORs consist of:
+
+a)  Date of output of the message
+
+b)  Receiving LT and branch code XXX (irrespective of which branch code was used in the original message)
+
+c)  Session number
+
+d)  OSN
+
+An optional time range criterion can be specified.]]></Description>
+						<Validations>
+							<Validation>
+								<subfield>mor1-date</subfield>
+								<formula>IsDate($value,"yyMMdd")</formula>
+								<error-code>V04</error-code>
+								<actionmessage>"Invalid Output Date '" + $value + "'"</actionmessage>
+							</Validation>
+							<Validation>
+								<subfield>mor2-date</subfield>
+								<formula>IsDate($value,"yyMMdd")</formula>
+								<error-code>V04</error-code>
+								<actionmessage>"Invalid Input Date '" + $value + "'"</actionmessage>
+							</Validation>
+						</Validations>
+					</SwiftSystemFieldDef>
+				</SystemField>
+				<SystemGroup Name="Group255">
+					<datatype>Section</datatype>
+					<minoccurs>0</minoccurs>
+					<maxoccurs>1</maxoccurs>
+					<Fields>
+						<SystemField Name="msg-input-type">
+							<description><![CDATA[Message input type, containing:
+
+a)  Input LT including branch code XXX
+
+b)  Input session
+
+c)  Message type
+
+d)  Input date
+
+e)  Input time range]]></description>
+							<datatype>Section</datatype>
+							<minoccurs>1</minoccurs>
+							<maxoccurs>1</maxoccurs>
+							<SwiftSystemFieldDef Name="msg-input-type" Tag="255">
+								<Format><![CDATA[(4!a2!a2!c1!c)(3!a)(4!n)(3!n)(6!n)([4!n4!n])]]></Format>
+								<Specification><![CDATA[(lt-identifier)(branch-code)(session-number)(msg-type)(date)(time-range)]]></Specification>
+								<Description><![CDATA[Message input type, containing:
+
+a)  Input LT including branch code XXX
+
+b)  Input session
+
+c)  Message type
+
+d)  Input date
+
+e)  Input time range]]></Description>
+								<Validations>
+									<Validation>
+										<subfield>date</subfield>
+										<formula>IsDate($value,"yyMMdd")</formula>
+										<error-code>V04</error-code>
+										<actionmessage>"Invalid Input Date '" + $value + "'"</actionmessage>
+									</Validation>
+								</Validations>
+							</SwiftSystemFieldDef>
+						</SystemField>
+						<SystemField Name="1st-isn">
+							<description><![CDATA[First ISN to be retrieved in a multiple input message retrieval.]]></description>
+							<datatype>String</datatype>
+							<required>false</required>
+							<SwiftSystemFieldDef Name="1st-isn" Tag="152">
+								<Format><![CDATA[6!n]]></Format>
+								<Specification><![CDATA[(1st-isn)]]></Specification>
+								<Description><![CDATA[First ISN to be retrieved in a multiple input message retrieval.]]></Description>
+							</SwiftSystemFieldDef>
+						</SystemField>
+					</Fields>
+				</SystemGroup>
+				<SystemGroup Name="Group257">
+					<datatype>Section</datatype>
+					<minoccurs>0</minoccurs>
+					<maxoccurs>1</maxoccurs>
+					<Fields>
+						<SystemField Name="input-time-range">
+							<description><![CDATA[Input time range, containing:
+
+a)  Input LT including branch code XXX
+
+b)  Input date
+
+c)  Input time range
+
+d)  Input session]]></description>
+							<datatype>Section</datatype>
+							<minoccurs>1</minoccurs>
+							<maxoccurs>1</maxoccurs>
+							<SwiftSystemFieldDef Name="input-time-range" Tag="257">
+								<Format><![CDATA[(4!a2!a2!c1!c)(3!a)(6!n)(4!n4!n)([4!n])]]></Format>
+								<Specification><![CDATA[(lt-identifier)(branch-code)(date)(time-range)(session-number)]]></Specification>
+								<Description><![CDATA[Input time range, containing:
+
+a)  Input LT including branch code XXX
+
+b)  Input date
+
+c)  Input time range
+
+d)  Input session]]></Description>
+								<Validations>
+									<Validation>
+										<subfield>date</subfield>
+										<formula>IsDate($value,"yyMMdd")</formula>
+										<error-code>V04</error-code>
+										<actionmessage>"Invalid Input Date '" + $value + "'"</actionmessage>
+									</Validation>
+								</Validations>
+							</SwiftSystemFieldDef>
+						</SystemField>
+						<SystemField Name="1st-isn">
+							<description><![CDATA[First ISN to be retrieved in a multiple input message retrieval.]]></description>
+							<datatype>String</datatype>
+							<required>false</required>
+							<SwiftSystemFieldDef Name="1st-isn" Tag="152">
+								<Format><![CDATA[6!n]]></Format>
+								<Specification><![CDATA[(1st-isn)]]></Specification>
+								<Description><![CDATA[First ISN to be retrieved in a multiple input message retrieval.]]></Description>
+							</SwiftSystemFieldDef>
+						</SystemField>
+					</Fields>
+				</SystemGroup>
+				<SystemGroup Name="Group258">
+					<datatype>Section</datatype>
+					<minoccurs>0</minoccurs>
+					<maxoccurs>1</maxoccurs>
+					<Fields>
+						<SystemField Name="msg-output-type">
+							<description><![CDATA[Message output type, containing:
+
+a)  Output LT including branch code XXX
+
+b)  Output session
+
+c)  Message Type
+
+d)  Output date
+
+e)  Output time range]]></description>
+							<datatype>Section</datatype>
+							<minoccurs>1</minoccurs>
+							<maxoccurs>1</maxoccurs>
+							<SwiftSystemFieldDef Name="msg-output-type" Tag="258">
+								<Format><![CDATA[(4!a2!a2!c1!c)(3!a)(4!n)(3!n)(6!n)([4!n4!n])]]></Format>
+								<Specification><![CDATA[(lt-identifier)(branch-code)(session-number)(msg-type)(date)(time-range)]]></Specification>
+								<Description><![CDATA[Message output type, containing:
+
+a)  Output LT including branch code XXX
+
+b)  Output session
+
+c)  Message Type
+
+d)  Output date
+
+e)  Output time range]]></Description>
+								<Validations>
+									<Validation>
+										<subfield>date</subfield>
+										<formula>IsDate($value,"yyMMdd")</formula>
+										<error-code>V04</error-code>
+										<actionmessage>"Invalid Output Date '" + $value + "'"</actionmessage>
+									</Validation>
+								</Validations>
+							</SwiftSystemFieldDef>
+						</SystemField>
+						<SystemField Name="1st-osn">
+							<description><![CDATA[First OSN to be retrieved in a multiple output message retrieval.]]></description>
+							<datatype>String</datatype>
+							<required>false</required>
+							<SwiftSystemFieldDef Name="1st-osn" Tag="153">
+								<Format><![CDATA[6!n]]></Format>
+								<Specification><![CDATA[(1st-osn)]]></Specification>
+								<Description><![CDATA[First OSN to be retrieved in a multiple output message retrieval.]]></Description>
+							</SwiftSystemFieldDef>
+						</SystemField>
+					</Fields>
+				</SystemGroup>
+				<SystemGroup Name="Group260">
+					<datatype>Section</datatype>
+					<minoccurs>0</minoccurs>
+					<maxoccurs>1</maxoccurs>
+					<Fields>
+						<SystemField Name="output-time-range">
+							<description><![CDATA[Output time range, containing:
+
+a)  Output LT including branch code XXX
+
+b)  Output date
+
+c)  Output time range
+
+d)  Output session]]></description>
+							<datatype>Section</datatype>
+							<minoccurs>1</minoccurs>
+							<maxoccurs>1</maxoccurs>
+							<SwiftSystemFieldDef Name="output-time-range" Tag="260">
+								<Format><![CDATA[(4!a2!a2!c1!c)(3!a)(6!n)(4!n4!n)([4!n])]]></Format>
+								<Specification><![CDATA[(lt-identifier)(branch-code)(date)(time-range)(session-number)]]></Specification>
+								<Description><![CDATA[Output time range, containing:
+
+a)  Output LT including branch code XXX
+
+b)  Output date
+
+c)  Output time range
+
+d)  Output session]]></Description>
+								<Validations>
+									<Validation>
+										<subfield>date</subfield>
+										<formula>IsDate($value,"yyMMdd")</formula>
+										<error-code>V04</error-code>
+										<actionmessage>"Invalid Output Date '" + $value + "'"</actionmessage>
+									</Validation>
+								</Validations>
+							</SwiftSystemFieldDef>
+						</SystemField>
+						<SystemField Name="1st-osn">
+							<description><![CDATA[First OSN to be retrieved in a multiple output message retrieval.]]></description>
+							<datatype>String</datatype>
+							<required>false</required>
+							<SwiftSystemFieldDef Name="1st-osn" Tag="153">
+								<Format><![CDATA[6!n]]></Format>
+								<Specification><![CDATA[(1st-osn)]]></Specification>
+								<Description><![CDATA[First OSN to be retrieved in a multiple output message retrieval.]]></Description>
+							</SwiftSystemFieldDef>
+						</SystemField>
+					</Fields>
+				</SystemGroup>
+				<SystemGroup Name="Group256">
+					<datatype>Section</datatype>
+					<minoccurs>0</minoccurs>
+					<maxoccurs>1</maxoccurs>
+					<Fields>
+						<SystemField Name="cat-input-type">
+							<description><![CDATA[Category input type, containing:
+
+a)  Input LT including branch code XXX
+
+b)  Input session
+
+c)  Message category
+
+d)  Input date
+
+e)  Input time range]]></description>
+							<datatype>Section</datatype>
+							<minoccurs>1</minoccurs>
+							<maxoccurs>1</maxoccurs>
+							<SwiftSystemFieldDef Name="cat-input-type" Tag="256">
+								<Format><![CDATA[(4!a2!a2!c1!c)(3!a)(4!n)(1!n)(6!n)([4!n4!n])]]></Format>
+								<Specification><![CDATA[(lt-identifier)(branch-code)(session-number)(msg-category)(date)(time-range)]]></Specification>
+								<Description><![CDATA[Category input type, containing:
+
+a)  Input LT including branch code XXX
+
+b)  Input session
+
+c)  Message category
+
+d)  Input date
+
+e)  Input time range]]></Description>
+								<Validations>
+									<Validation>
+										<subfield>date</subfield>
+										<formula>IsDate($value,"yyMMdd")</formula>
+										<error-code>V04</error-code>
+										<actionmessage>"Invalid Input Date '" + $value + "'"</actionmessage>
+									</Validation>
+								</Validations>
+							</SwiftSystemFieldDef>
+						</SystemField>
+						<SystemField Name="1st-isn">
+							<description><![CDATA[First ISN to be retrieved in a multiple input message retrieval.]]></description>
+							<datatype>String</datatype>
+							<required>false</required>
+							<SwiftSystemFieldDef Name="1st-isn" Tag="152">
+								<Format><![CDATA[6!n]]></Format>
+								<Specification><![CDATA[(1st-isn)]]></Specification>
+								<Description><![CDATA[First ISN to be retrieved in a multiple input message retrieval.]]></Description>
+							</SwiftSystemFieldDef>
+						</SystemField>
+					</Fields>
+				</SystemGroup>
+				<SystemGroup Name="Group259">
+					<datatype>Section</datatype>
+					<minoccurs>0</minoccurs>
+					<maxoccurs>1</maxoccurs>
+					<Fields>
+						<SystemField Name="cat-output-type">
+							<description><![CDATA[Category output type, containing:
+
+a)  Output LT including branch code XXX
+
+b)  Output session
+
+c)  Message Category
+
+d)  Output date
+
+e)  Output time range]]></description>
+							<datatype>Section</datatype>
+							<minoccurs>1</minoccurs>
+							<maxoccurs>1</maxoccurs>
+							<SwiftSystemFieldDef Name="cat-output-type" Tag="259">
+								<Format><![CDATA[(4!a2!a2!c1!c)(3!a)(4!n)(1!n)(6!n)(4!n4!n)]]></Format>
+								<Specification><![CDATA[(lt-identifier)(branch-code)(session-number)(msg-category)(date)(time-range)]]></Specification>
+								<Description><![CDATA[Category output type, containing:
+
+a)  Output LT including branch code XXX
+
+b)  Output session
+
+c)  Message Category
+
+d)  Output date
+
+e)  Output time range]]></Description>
+								<Validations>
+									<Validation>
+										<subfield>date</subfield>
+										<formula>IsDate($value,"yyMMdd")</formula>
+										<error-code>V04</error-code>
+										<actionmessage>"Invalid Output Date '" + $value + "'"</actionmessage>
+									</Validation>
+								</Validations>
+							</SwiftSystemFieldDef>
+						</SystemField>
+						<SystemField Name="1st-osn">
+							<description><![CDATA[First OSN to be retrieved in a multiple output message retrieval.]]></description>
+							<datatype>String</datatype>
+							<required>false</required>
+							<SwiftSystemFieldDef Name="1st-osn" Tag="153">
+								<Format><![CDATA[6!n]]></Format>
+								<Specification><![CDATA[(1st-osn)]]></Specification>
+								<Description><![CDATA[First OSN to be retrieved in a multiple output message retrieval.]]></Description>
+							</SwiftSystemFieldDef>
+						</SystemField>
+					</Fields>
+				</SystemGroup>
+				<SystemGroup Name="Group263">
+					<datatype>Section</datatype>
+					<minoccurs>0</minoccurs>
+					<maxoccurs>1</maxoccurs>
+					<Fields>
+						<SystemField Name="mur-input">
+							<description><![CDATA[Input MUR, containing:
+
+a)  Input LT including branch code XXX
+
+b)  Input date
+
+c)  Input time range
+
+d)  Input session]]></description>
+							<datatype>Section</datatype>
+							<minoccurs>1</minoccurs>
+							<maxoccurs>1</maxoccurs>
+							<SwiftSystemFieldDef Name="mur-input" Tag="263">
+								<Format><![CDATA[(4!a2!a2!c1!c)(3!a)(6!n)(4!n4!n)([4!n])]]></Format>
+								<Specification><![CDATA[(lt-identifier)(branch-code)(date)(time-range)(session-number)]]></Specification>
+								<Description><![CDATA[Input MUR, containing:
+
+a)  Input LT including branch code XXX
+
+b)  Input date
+
+c)  Input time range
+
+d)  Input session]]></Description>
+								<Validations>
+									<Validation>
+										<subfield>date</subfield>
+										<formula>IsDate($value,"yyMMdd")</formula>
+										<error-code>V04</error-code>
+										<actionmessage>"Invalid Input Date '" + $value + "'"</actionmessage>
+									</Validation>
+								</Validations>
+							</SwiftSystemFieldDef>
+						</SystemField>
+						<SystemField Name="mur">
+							<description><![CDATA[Message user reference assigned by the sender of a message.Contains one of the following:
+							1.Message User Reference as used in the header of the original message if present.
+                                                        2.Contents of field 20 of the original message, if the message user reference was not present, but only if alphabetical characters were in upper case
+                                                        3.Contents of field 20C, with the codeword SEME and the number (only for category 5 messages), but only if alphabetical characters were in upper case]]></description>
+							<datatype>String</datatype>
+							<required>true</required>
+							<SwiftSystemFieldDef Name="mur" Tag="108">
+								<Format><![CDATA[16x]]></Format>
+								<Specification><![CDATA[(mur)]]></Specification>
+								<Description><![CDATA[Message User Reference as used in the header of the original message]]></Description>
+							</SwiftSystemFieldDef>
+						</SystemField>
+						<SystemField Name="1st-isn">
+							<description><![CDATA[First ISN to be retrieved in a multiple input message retrieval.]]></description>
+							<datatype>String</datatype>
+							<required>false</required>
+							<SwiftSystemFieldDef Name="1st-isn" Tag="152">
+								<Format><![CDATA[6!n]]></Format>
+								<Specification><![CDATA[(1st-isn)]]></Specification>
+								<Description><![CDATA[First ISN to be retrieved in a multiple input message retrieval.]]></Description>
+							</SwiftSystemFieldDef>
+						</SystemField>
+					</Fields>
+				</SystemGroup>
+				<SystemGroup Name="Group264">
+					<datatype>Section</datatype>
+					<minoccurs>0</minoccurs>
+					<maxoccurs>1</maxoccurs>
+					<Fields>
+						<SystemField Name="mur-output">
+							<description><![CDATA[Output MUR, containing:
+
+a)  Output LT including branch code XXX
+
+b)  Output date
+
+c)  Output time range
+
+d)  Output session]]></description>
+							<datatype>Section</datatype>
+							<minoccurs>1</minoccurs>
+							<maxoccurs>1</maxoccurs>
+							<SwiftSystemFieldDef Name="mur-output" Tag="264">
+								<Format><![CDATA[(4!a2!a2!c1!c)(3!a)(6!n)(4!n4!n)([4!n])]]></Format>
+								<Specification><![CDATA[(lt-identifier)(branch-code)(date)(time-range)(session-number)]]></Specification>
+								<Description><![CDATA[Output MUR, containing:
+
+a)  Output LT including branch code XXX
+
+b)  Output date
+
+c)  Output time range
+
+d)  Output session]]></Description>
+								<Validations>
+									<Validation>
+										<subfield>date</subfield>
+										<formula>IsDate($value,"yyMMdd")</formula>
+										<error-code>V04</error-code>
+										<actionmessage>"Invalid Output Date '" + $value + "'"</actionmessage>
+									</Validation>
+								</Validations>
+							</SwiftSystemFieldDef>
+						</SystemField>
+						<SystemField Name="mur">
+							<description><![CDATA[Message user reference assigned by the sender of a message.Contains one of the following:
+							 1.Message User Reference as used in the header of the original message
+                                                         2.Contents of field 20 of the original message, if the message user reference was not present, but only if alphabetical characters were in upper case
+                                                         3.Contents of field 20C, with the codeword SEME and the number (only for category 5 messages), but only if alphabetical characters were in upper case]]></description>
+							<datatype>String</datatype>
+							<required>true</required>
+							<SwiftSystemFieldDef Name="mur" Tag="108">
+								<Format><![CDATA[16x]]></Format>
+								<Specification><![CDATA[(mur)]]></Specification>
+								<Description><![CDATA[Message User Reference as used in the header of the original message]]></Description>
+							</SwiftSystemFieldDef>
+						</SystemField>
+						<SystemField Name="1st-osn">
+							<description><![CDATA[First OSN to be retrieved in a multiple output message retrieval.]]></description>
+							<datatype>String</datatype>
+							<required>false</required>
+							<SwiftSystemFieldDef Name="1st-osn" Tag="153">
+								<Format><![CDATA[6!n]]></Format>
+								<Specification><![CDATA[(1st-osn)]]></Specification>
+								<Description><![CDATA[First OSN to be retrieved in a multiple output message retrieval.]]></Description>
+							</SwiftSystemFieldDef>
+						</SystemField>
+					</Fields>
+				</SystemGroup>
+			</Fields>
+		</Data>
+		<Trailer>
+		</Trailer>
+	</SwiftFields>
+	<validationrules name="Default">
+		<hdrvalidationrules>
+			<fieldvalidations>
+			</fieldvalidations>
+		</hdrvalidationrules>
+		<datavalidationrules>
+			<fieldvalidations>
+				<fieldvalidation>
+					<name>E1</name>
+					<comment><![CDATA[Only ONE of the fields or field groups should be present.]]></comment>
+					<formula><![CDATA[(mir.$size + mir_range.$size + 
+mor.$size + mor_range.$size + 
+Group255.$size + Group257.$size + 
+Group258.$size + Group260.$size + 
+Group256.$size + Group259.$size + 
+Group263.$size + Group264.$size)==1]]></formula>
+					<severity>error</severity>
+					<cascade>true</cascade>
+					<error-code>V03</error-code>
+					<actionmessage><![CDATA["Only ONE of the fields or field groups should be present."]]></actionmessage>
+				</fieldvalidation>
+					<fieldvalidation>
+						<name>E2</name>
+						<formula><![CDATA[Implies(mir.$size > 0, mir.branch_code == "XXX") && 
+  Implies(mor.$size > 0, mor.branch_code == "XXX") && 
+  Equal(Mid(swift_address, 9, 3), "XXX")]]></formula>
+						<severity>error</severity>
+						<cascade>true</cascade>
+						<error-code>016</error-code>
+						<actionmessage><![CDATA["The 'mir', 'mor', and 'swift-address' used in the retrieval criteria must contain the branch-code XXX."]]></actionmessage>
+					</fieldvalidation>
+			</fieldvalidations>
+		</datavalidationrules>
+		<tlrvalidationrules>
+			<fieldvalidations>
+			</fieldvalidations>
+		</tlrvalidationrules>
+	</validationrules>
+</SwiftMessageFormat>
+

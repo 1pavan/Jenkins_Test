@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<formulae> 
+
+    <formula name="SecAddAllElements">
+  			<description>Adds all the elements to the section.</description>
+  			<signature>SecAddAllElements(section, fromSection)</signature>
+  			<category>Section</category>
+  	  		<Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+  			<property name="class" value="com.tplus.transform.runtime.formula.SectionFunctions" />
+  			<property name="method" value="addAllElements" />
+      	</formula>
+
+    <formula name="SecReplaceAllElements">
+  			<description>Clears the section and adds all the elements from the 'fromSection' to the section.</description>
+  			<signature>SecReplaceAllElements(section, fromSection)</signature>
+  			<category>Section</category>
+  	  		<Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+  			<property name="class" value="com.tplus.transform.runtime.formula.SectionFunctions" />
+  			<property name="method" value="replaceAllElements" />
+      	</formula>
+		<formula name="SecAddElement">
+			<description>Adds an element to the section. There are two overloads of this function.
+SecAddElement(section) - Creates a new element and adds it to the section. The new element is returned by this function.
+SecAddElement(section, obj)- Adds the specified element to section. This function does not return anything.
+			</description>
+			<signature>SecAddElement(section, objOpt)</signature>
+			<category>Section</category>
+	  		<Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+			<property name="class" value="com.tplus.transform.runtime.formula.SectionFunctions" />
+			<property name="method" value="addElement" />
+			<property name="designclass" value="com.tplus.transform.design.formula.functions.SectionFunctions" />
+			<property name="designmethod" value="secAddElement" />
+    	</formula>
+
+		<formula name="SecRemoveElement">
+			<description>Removes the specified element.</description>
+			<signature>SecRemoveElement(section, obj)</signature>
+			<category>Section</category>
+	  		<Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+			<property name="class" value="com.tplus.transform.runtime.formula.SectionFunctions" />
+			<property name="method" value="removeElement" />
+    	</formula>
+		<formula name="SecRemoveElement">
+			<description>Removes the element at specified index.</description>
+			<signature>SecRemoveElement(section, index)</signature>
+			<category>Section</category>
+	  		<Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+			<property name="class" value="com.tplus.transform.runtime.formula.SectionFunctions" />
+			<property name="method" value="removeElement" />
+    	</formula>
+
+		<formula name="SecRemoveAllElements">
+			<description>Removes all elements from the specified section.</description>
+			<signature>SecRemoveAllElements(section)</signature>
+			<category>Section</category>
+	  		<Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+			<property name="class" value="com.tplus.transform.runtime.formula.SectionFunctions" />
+			<property name="method" value="removeAllElements" />
+    	</formula>
+
+		<formula name="NewSection">
+			<description>Creates a new section.</description>
+			<signature>NewSection(sectionOpt Or dataObjectOpt)</signature>
+			<category>Section</category>
+	  		<Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+			<property name="class" value="com.tplus.transform.runtime.formula.SectionFunctions" />
+			<property name="method" value="newSection" />
+			<property name="designclass" value="com.tplus.transform.design.formula.functions.SectionFunctions" />
+			<property name="designmethod" value="newSection" />
+    	</formula>
+		<formula name="CreateIndex">
+			<description>Creates an index for the specified field.</description>
+			<signature>CreateIndex(sectionOpt, fieldName)</signature>
+			<category>Section</category>
+	  		<Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+			<property name="class" value="com.tplus.transform.runtime.formula.SectionFunctions" />
+			<property name="method" value="createIndex" />
+    	</formula>
+		<formula name="SecFindFieldWithValue">
+			<description>Returns a collection of elements containing field with specified value. For an element to be treated as a match, the value of the given field of that element should match the given 'fieldValue'.</description>
+			<signature>SecFindFieldWithValue(section, fieldName, fieldValue)</signature>
+			<category>Section</category>
+	  		<Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+			<property name="class" value="com.tplus.transform.runtime.formula.SectionFunctions" />
+			<property name="method" value="secFindFieldWithValue" />
+			<property name="designclass" value="com.tplus.transform.design.formula.functions.SectionFunctions" />
+			<property name="designmethod" value="secFindFieldWithValue" />
+    	</formula>
+		<formula name="SecFindFirstFieldWithValue">
+            <description>Returns the element containing field with specified value. For an element to be treated as a match, the value of the given field of that element should match the given 'fieldValue'.</description>
+			<signature>SecFindFirstFieldWithValue(section, fieldName, fieldValue)</signature>
+			<category>Section</category>
+	  		<Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+			<property name="class" value="com.tplus.transform.runtime.formula.SectionFunctions" />
+			<property name="method" value="secFindFirstFieldWithValue" />
+			<property name="designclass" value="com.tplus.transform.design.formula.functions.SectionFunctions" />
+			<property name="designmethod" value="secFindFirstFieldWithValue" />
+    	</formula></formulae>

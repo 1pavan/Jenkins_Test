@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<SwiftMessageFormat name="MT26">
+	<standard-version><![CDATA[SRG 2017]]></standard-version>
+	<standard-release-qualifier>20170918</standard-release-qualifier>
+	<DescriptiveName><![CDATA[Logout Acknowledgement]]></DescriptiveName>
+	<Category><![CDATA[Service]]></Category>
+	<Description><![CDATA[This message is sent to the user on successful completion of an 06 Logout Command.
+
+From: GPA To: User
+
+Notes
+When the LOGOUT command is recognised by the system, it is always positively acknowledged and the session is closed. If the time and date specified in the LOGOUT command are incorrect, they are ignored and signalled to the user in field 401: <error-code-l/q>.
+
+If there is an ISN error, the LOGOUT is safe stored under the expected ISN, the session is closed, and the user is made aware of this by the value of field 401: <error-code-l/q>.
+
+If, during a session, the CBT sends no messages, the first and last ISNs identified in field 331: <sessioninfo> have values of 0. Likewise, if no messages are sent to the CBT, the first and last OSNs of field 331 have values of 0.
+
+The LOGOUT acknowledgement contains the following session information:
+• Session Number of the GPA session just closed
+• date and time this GPA session was opened
+• date and time this GPA session was closed
+• a reason code indicating the reason for closure
+• number of messages sent during this GPA session
+• number of messages received (OSNs used) during this GPA session
+• first and last ISN used during this GPA session
+• first and last OSN used during this GPA session]]></Description>
+	<SwiftFields>
+		<customizable>false</customizable>
+		<modifiable>true</modifiable>
+		<SwiftMessageType>Service</SwiftMessageType>
+		<HeaderAndTrailerType>SWIFT_INPUT_HEADER</HeaderAndTrailerType>
+		<Header>
+		</Header>
+		<Data>
+			<Fields>
+				<SystemField Name="session-info">
+					<description><![CDATA[Session information, including:
+
+a)  session number
+
+b)  date session opened
+
+c)  time session opened
+
+d)  date session closed
+
+e)  time session closed
+
+f)  reason for closure
+
+g)  quantity of messages sent
+
+h)  quantity of messages received
+
+i)  first ISN
+
+j)  last ISN
+
+k)  first OSN
+
+l)  last OSN]]></description>
+					<datatype>Section</datatype>
+					<minoccurs>1</minoccurs>
+					<maxoccurs>1</maxoccurs>
+					<SwiftSystemFieldDef Name="session-info" Tag="331">
+						<Format><![CDATA[(4!n)(6!n)(4!n)(6!n)(4!n)(3!n)(6!n)(6!n)(6!n)(6!n)(6!n)(6!n)]]></Format>
+						<Specification><![CDATA[(session-number)(session-opened-date)(session-opened-time)(session-closed-date)(session-closed-time)(error-code)(isn-qty)(osn-qty)(first-isn)(last-isn)(first-osn)(last-osn)]]></Specification>
+						<Description><![CDATA[Session information, including:
+
+a)  session number
+
+b)  date session opened
+
+c)  time session opened
+
+d)  date session closed
+
+e)  time session closed
+
+f)  reason for closure
+
+g)  quantity of messages sent
+
+h)  quantity of messages received
+
+i)  first ISN
+
+j)  last ISN
+
+k)  first OSN
+
+l)  last OSN]]></Description>
+						<Validations>
+							<Validation>
+								<subfield>session-opened-date</subfield>
+								<formula>IsDate($value,"yyMMdd")</formula>
+								<error-code>V04</error-code>
+								<actionmessage>"Invalid Session-Opened-Date '" + $value + "'. session-opened-date should be in the format yyMMdd."</actionmessage>
+							</Validation>
+							<Validation>
+								<subfield>session-opened-time</subfield>
+								<formula>IsDate($value,"HHmm")</formula>
+								<error-code>V05</error-code>
+								<actionmessage>"Invalid Session-Opened-Time '" + $value + "'. session-opened-time should be in the format HHmm."</actionmessage>
+							</Validation>
+							<Validation>
+								<subfield>session-closed-date</subfield>
+								<formula>IsDate($value,"yyMMdd")</formula>
+								<error-code>V04</error-code>
+								<actionmessage>"Invalid Session-Closed-Date '" + $value + "'. session-closed-date should be in the format yyMMdd."</actionmessage>
+							</Validation>
+							<Validation>
+								<subfield>session-closed-time</subfield>
+								<formula>IsDate($value,"HHmm")</formula>
+								<error-code>V05</error-code>
+								<actionmessage>"Invalid Session-Closed-Time '" + $value + "'. session-closed-time should be in the format HHmm."</actionmessage>
+							</Validation>
+						</Validations>
+					</SwiftSystemFieldDef>
+				</SystemField>
+				<SystemField Name="error-code-l/q">
+					<description><![CDATA[Error code for Logout/Quit, where:
+
+a)  01 = incorrect time/day
+
+b)  02 = TNG trailer missing
+
+c)  03 = ISN error
+
+See SWIFTNet FIN Error Codes module for the full set of error codes.]]></description>
+					<datatype>String</datatype>
+					<required>false</required>
+					<SwiftSystemFieldDef Name="error-code-l/q" Tag="401">
+						<Format><![CDATA[2!n]]></Format>
+						<Specification><![CDATA[(error-code-l/q)]]></Specification>
+						<Description><![CDATA[Error code for Logout/Quit, where:
+
+a)  01 = incorrect time/day
+
+b)  02 = TNG trailer missing
+
+c)  03 = ISN error
+
+See SWIFTNet FIN Error Codes module for the full set of error codes.]]></Description>
+						<Validations>
+							<Validation>
+								<formula>In($value, "01", "02","03")</formula>
+								<error-code>V08</error-code>
+								<actionmessage>"Invalid Error Code	'"+$value+"'. Valid Error Codes are : 01, 02, 03."</actionmessage>
+							</Validation>
+						</Validations>
+					</SwiftSystemFieldDef>
+				</SystemField>
+			</Fields>
+		</Data>
+		<Trailer>
+		</Trailer>
+	</SwiftFields>
+	<validationrules name="Default">
+		<hdrvalidationrules>
+			<fieldvalidations>
+			</fieldvalidations>
+		</hdrvalidationrules>
+		<datavalidationrules>
+			<fieldvalidations>
+			</fieldvalidations>
+		</datavalidationrules>
+		<tlrvalidationrules>
+			<fieldvalidations>
+			</fieldvalidations>
+		</tlrvalidationrules>
+	</validationrules>
+</SwiftMessageFormat>
+

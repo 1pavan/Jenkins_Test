@@ -1,0 +1,313 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<SwiftMessageFormat name="MT094">
+	<standard-version><![CDATA[SRG 2012]]></standard-version>
+	<DescriptiveName><![CDATA[Broadcast]]></DescriptiveName>
+	<Category><![CDATA[System]]></Category>
+	<Description><![CDATA[This message is the result of a system or user request to broadcast information. It is the response to an
+MT 074 Broadcast Request.
+
+From: GPA or FIN To: User]]></Description>
+	<SwiftFields>
+		<customizable>true</customizable>
+		<modifiable>true</modifiable>
+		<SwiftMessageType>System</SwiftMessageType>
+		<HeaderAndTrailerType>SWIFT_INPUT_HEADER</HeaderAndTrailerType>
+		<Header>
+		</Header>
+		<Data>
+			<Fields>
+				<SystemField Name="broadcast-priority">
+					<description><![CDATA[Priority must be U or N.]]></description>
+					<datatype>String</datatype>
+					<required>true</required>
+					<SwiftSystemFieldDef Name="broadcast-priority" Tag="135">
+						<Format><![CDATA[1!a]]></Format>
+						<Specification><![CDATA[(broadcast-priority)]]></Specification>
+						<Additional-Format><![CDATA["U"|"N"]]></Additional-Format>
+						<Description><![CDATA[Broadcast processing priority.]]></Description>
+						<Validations>
+							<Validation>
+								<formula>In($value, "U", "N")</formula>
+								<error-code>V07</error-code>
+								<actionmessage>"Invalid Broadcast Priority '" + $value + "'. Broadcast Priority should be either 'U' or 'N'."</actionmessage>
+							</Validation>
+						</Validations>
+					</SwiftSystemFieldDef>
+				</SystemField>
+				<SystemField Name="broadcast-number users">
+					<description><![CDATA[Broadcast number for broadcast sent to all users.]]></description>
+					<datatype>String</datatype>
+					<required>false</required>
+					<SwiftSystemFieldDef Name="broadcast-number" Tag="136">
+						<Format><![CDATA[(1!a5!n)]]></Format>
+						<Specification><![CDATA[(broadcast-number)]]></Specification>
+						<Additional-Format><![CDATA["B"|"S"5!n]]></Additional-Format>
+						<Description><![CDATA[Broadcast number for broadcast sent to all users.]]></Description>
+						<Validations>
+							<Validation>
+								<formula>(StartsWith($value, "B") || StartsWith($value, "S"))</formula>
+								<error-code>V07</error-code>
+								<actionmessage>"Invalid Broadcast Number Sent To All Users '" + $value +"'"</actionmessage>
+							</Validation>
+						</Validations>
+					</SwiftSystemFieldDef>
+				</SystemField>
+				<SystemField Name="broadcast-number countres">
+					<description><![CDATA[Broadcast number for broadcast sent to selected countries.
+
+See tag 133 for details.]]></description>
+					<datatype>String</datatype>
+					<required>false</required>
+					<SwiftSystemFieldDef Name="broadcast-number" Tag="137">
+						<Format><![CDATA[(6!a4!n)]]></Format>
+						<Specification><![CDATA[(broadcast-number)]]></Specification>
+						<Additional-Format><![CDATA["B"|"S" "XXX" "HQ"|"HK"|"NL"|"US" 4!n]]></Additional-Format>
+						<Description><![CDATA[Broadcast number for broadcast sent to selected countries.
+
+See tag 133 for details.]]></Description>
+						<Validations>
+							<Validation>
+								<formula>(StartsWith($value, "B") || StartsWith($value, "S"))</formula>
+								<error-code>V07</error-code>
+								<actionmessage>"Invalid Broadcast Number Sent To Selected Countries '" + $value + "'."</actionmessage>
+							</Validation>
+							<Validation>
+								<formula>$unsequencedBroadcast = Mid($value, 1, 3);
+							$unsequencedBroadcast == "XXX";
+				</formula>
+								<error-code>V07</error-code>
+								<actionmessage>"Invalid Broadcast Number Sent To Selected Countries '" + $value + "'."</actionmessage>
+							</Validation>
+							<Validation>
+								<formula>$broadcastIssuedFrom = Mid($value, 4, 2);
+							In($broadcastIssuedFrom, "HQ", "HK", "NL", "US");
+				</formula>
+								<error-code>V07</error-code>
+								<actionmessage>"Invalid Broadcast Number Sent To Selected Countries '" + $value + "'."</actionmessage>
+							</Validation>
+						</Validations>
+					</SwiftSystemFieldDef>
+				</SystemField>
+				<SystemField Name="section-number">
+					<description><![CDATA[Section # of # in a multi-section broadcast.]]></description>
+					<datatype>String</datatype>
+					<required>false</required>
+					<SwiftSystemFieldDef Name="section-number" Tag="129">
+						<Format><![CDATA[(2n'/'2n)]]></Format>
+						<Specification><![CDATA[(section-number)]]></Specification>
+						<Description><![CDATA[Section number.]]></Description>
+					</SwiftSystemFieldDef>
+				</SystemField>
+				<SystemField Name="heading-code">
+					<description><![CDATA[Heading code line 1
+
+Heading code line 2
+
+IF (tag130:/09/ ...) or (tag 130:/23/ ...) is present, then tag 132 or 133 but not both, must be used.]]></description>
+					<datatype>String</datatype>
+					<required>true</required>
+					<SwiftSystemFieldDef Name="heading-code" Tag="130">
+						<Format><![CDATA[(2*69x)]]></Format>
+						<Specification><![CDATA[(heading-code)]]></Specification>
+						<Additional-Format><![CDATA["/"2!n"/"<X>1-65[<CrLf>"/"2!n"/"< X>1-65]]]></Additional-Format>
+						<Description><![CDATA[Heading code line 1
+
+Heading code line 2
+
+IF (tag130:/09/ ...) or (tag 130:/23/ ...) is present, then tag 132 or 133 but not both, must be used.]]></Description>
+					</SwiftSystemFieldDef>
+				</SystemField>
+				<SystemField Name="original-broadcast-number users">
+					<description><![CDATA[Original broadcast number for broadcast sent to all users.
+
+Tag 132 can only be present if tag 130:/09/ or tag 130:/32/ is present.
+
+Tag 132 may be repeated.]]></description>
+					<datatype>Section</datatype>
+					<minoccurs>0</minoccurs>
+					<maxoccurs>-1</maxoccurs>
+					<SwiftSystemFieldDef Name="original-broadcast-number" Tag="132">
+						<Format><![CDATA[(1!a5!n)]]></Format>
+						<Specification><![CDATA[(original-broadcast-number)]]></Specification>
+						<Additional-Format><![CDATA["B"|"S"5!n]]></Additional-Format>
+						<Description><![CDATA[Original broadcast number for broadcast sent to all users.
+
+Tag 132 can only be present if tag 130:/09/ or tag 130:/32/ is present.
+
+Tag 132 may be repeated.]]></Description>
+						<Validations>
+							<Validation>
+								<formula>(StartsWith($value, "B") || StartsWith($value, "S"))</formula>
+								<error-code>V07</error-code>
+								<actionmessage>"Invalid Original Broadcast Number Sent To All Users '" + $value + "'"</actionmessage>
+							</Validation>
+						</Validations>
+					</SwiftSystemFieldDef>
+				</SystemField>
+				<SystemField Name="original-broadcast-number countries">
+					<description><![CDATA[Original broadcast number for broadcast sent to selected countries
+
+Tag 133 can only be present if tag 130:/09/ or tag 130:/32/ is present
+
+Note: "B"|"S" "XXX" "HQ"|"HK"|"NL"|"US"4!n corresponds to: B User-initiated Broadcast
+
+S SWIFT-initiated Broadcast
+
+XXX indicates an unsequenced Broadcast (i.e. for selected countries)
+
+HQ Broadcast issued from La Hulpe
+
+HK Broadcast issued from Hong Kong
+
+NL Broadcast issued from Netherlands
+
+US Broadcast issued from the United States
+
+4!n 4 digit Broadcast number
+
+Tag 133 may be repeated.]]></description>
+					<datatype>Section</datatype>
+					<minoccurs>0</minoccurs>
+					<maxoccurs>-1</maxoccurs>
+					<SwiftSystemFieldDef Name="original-broadcast-number" Tag="133">
+						<Format><![CDATA[(6!a4!n)]]></Format>
+						<Specification><![CDATA[(original-broadcast-number)]]></Specification>
+						<Additional-Format><![CDATA["B"|"S""XXX""HQ"|"HK"|"NL"|"US"4!n]]></Additional-Format>
+						<Description><![CDATA[Original broadcast number for broadcast sent to selected countries
+
+Tag 133 can only be present if tag 130:/09/ or tag 130:/32/ is present
+
+Note: "B"|"S" "XXX" "HQ"|"HK"|"NL"|"US"4!n corresponds to: B User-initiated Broadcast
+
+S SWIFT-initiated Broadcast
+
+XXX indicates an unsequenced Broadcast (i.e. for selected countries)
+
+HQ Broadcast issued from La Hulpe
+
+HK Broadcast issued from Hong Kong
+
+NL Broadcast issued from Netherlands
+
+US Broadcast issued from the United States
+
+4!n 4 digit Broadcast number
+
+Tag 133 may be repeated.]]></Description>
+						<Validations>
+							<Validation>
+								<formula>(StartsWith($value, "B") || StartsWith($value, "S"))</formula>
+								<error-code>V07</error-code>
+								<actionmessage>"Invalid Original Broadcast Number Sent To Selected Countries '" + $value + "'."</actionmessage>
+							</Validation>
+							<Validation>
+								<formula>$unsequencedBroadcast = Mid($value, 1, 3);
+							$unsequencedBroadcast == "XXX";
+				</formula>
+								<error-code>V07</error-code>
+								<actionmessage>"Invalid Original Broadcast Number Sent To Selected Countries '" + $value + "'."</actionmessage>
+							</Validation>
+							<Validation>
+								<formula>$broadcastIssuedFrom = Mid($value, 4, 2);
+							In($broadcastIssuedFrom, "HQ", "HK", "NL", "US");
+				</formula>
+								<error-code>V07</error-code>
+								<actionmessage>"Invalid Original Broadcast Number Sent To Selected Countries '" + $value + "'."</actionmessage>
+							</Validation>
+						</Validations>
+					</SwiftSystemFieldDef>
+				</SystemField>
+				<SystemField Name="broadcast-requester">
+					<description><![CDATA[BIC of Broadcast Requester.
+
+Name of Broadcast Requester.
+
+City of Broadcast Requester.]]></description>
+					<datatype>Section</datatype>
+					<minoccurs>1</minoccurs>
+					<maxoccurs>1</maxoccurs>
+					<SwiftSystemFieldDef Name="broadcast-requester" Tag="134">
+						<Format><![CDATA[(4!a2!a2!c[3!c])(CRLF65x)(CRLF65x)]]></Format>
+						<Specification><![CDATA[(bicofbroadcastrequester)(nameofbroadcastrequester)(cityofbroadcastrequester)]]></Specification>
+						<Description><![CDATA[BIC of Broadcast Requester.
+
+Name of Broadcast Requester.
+
+City of Broadcast Requester.]]></Description>
+					</SwiftSystemFieldDef>
+				</SystemField>
+				<SystemField Name="broadcast-text">
+					<description><![CDATA[Broadcast text is minimum 1 and up to n lines of 65 characters.]]></description>
+					<datatype>String</datatype>
+					<required>true</required>
+					<SwiftSystemFieldDef Name="broadcast-text" Tag="312">
+						<Format><![CDATA[(1000*65x)]]></Format>
+						<Specification><![CDATA[(broadcast-text)]]></Specification>
+						<Additional-Format><![CDATA[<X>1-65[<CrLf><X>1-65] 0-n]]></Additional-Format>
+						<Description><![CDATA[Broadcast text is minimum 1 and up to n lines of 65 characters.]]></Description>
+					</SwiftSystemFieldDef>
+				</SystemField>
+			</Fields>
+		</Data>
+		<Trailer>
+		</Trailer>
+	</SwiftFields>
+	<validationrules name="Default">
+		<hdrvalidationrules>
+			<fieldvalidations>
+			</fieldvalidations>
+		</hdrvalidationrules>
+		<datavalidationrules>
+			<fieldvalidations>
+				<fieldvalidation>
+					<name>E1</name>
+					<fieldname>heading-code</fieldname>
+					<comment><![CDATA[IF (tag130:/09/ ...) or (tag 130:/23/ ...) is present, then tag 132 or 133 but not both, must be used.]]></comment>
+					<formula><![CDATA[If(StartsWith($value, "/09/") || StartsWith($value, "/32/"), 
+   If(original_broadcast_number_users.$size > 0, 
+      original_broadcast_number_countries.$size == 0, 
+      original_broadcast_number_countries.$size > 
+        0), 
+   true)]]></formula>
+					<severity>error</severity>
+					<cascade>true</cascade>
+					<error-code>V07</error-code>
+					<actionmessage><![CDATA["If (tag130:/09/..) or (tag130:/32/..)is present, then tag 132 or 133 but not both, must be used."]]></actionmessage>
+				</fieldvalidation>
+				<fieldvalidation>
+					<name>E2</name>
+					<fieldname>heading-code</fieldname>
+					<comment><![CDATA[Tag 132 can only be present if tag 130:/09/ or tag 130:/32/ is present.
+
+Tag 132 may be repeated.]]></comment>
+					<formula><![CDATA[If(!StartsWith($value, "/09/") && 
+     !StartsWith($value, "/32/"), 
+   original_broadcast_number_users.$size == 0, 
+   true)]]></formula>
+					<severity>error</severity>
+					<cascade>true</cascade>
+					<error-code>V07</error-code>
+					<actionmessage><![CDATA["Tag 132 (Original Broadcast Number Users) can only be present if tag 130:/09/ or 130:/32/ is present"]]></actionmessage>
+				</fieldvalidation>
+				<fieldvalidation>
+					<name>E3</name>
+					<fieldname>heading-code</fieldname>
+					<comment><![CDATA[Tag 133 can only be present if tag 130:/09/ or tag 130:/32/ is present]]></comment>
+					<formula><![CDATA[If(!StartsWith($value, "/09/") && 
+     !StartsWith($value, "/32/"), 
+   original_broadcast_number_countries.$size == 0, 
+   true)]]></formula>
+					<severity>error</severity>
+					<cascade>true</cascade>
+					<error-code>V07</error-code>
+					<actionmessage><![CDATA["Tag 133 (Original Broadcast Number Countriess) can only be present if tag 130:/09/ or 130:/32/ is present"]]></actionmessage>
+				</fieldvalidation>
+			</fieldvalidations>
+		</datavalidationrules>
+		<tlrvalidationrules>
+			<fieldvalidations>
+			</fieldvalidations>
+		</tlrvalidationrules>
+	</validationrules>
+</SwiftMessageFormat>
+

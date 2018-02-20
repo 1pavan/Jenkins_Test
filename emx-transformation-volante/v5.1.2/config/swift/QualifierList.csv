@@ -1,0 +1,750 @@
+ACCA,Accrued Capitalisation
+ACCL,Account Classification
+ACCT,Currency of Account
+ACCW,Account With Institution
+ACOW,Account Owner
+ACRU,Accrued Interest Flag
+ACTI,Activity Flag
+ADDB,Additional Business Process
+ADDR,Address
+ADEL,Late Delivery Date/Time
+ADEX,Additional for Existing Securities
+ADMT,Type of Admittance
+ADSR,Additional for Subscribed Resultant Securities
+ADTX,Additional Text
+ADVI,Quantity of Financial Instrument Advised
+AEXP,Adjusted Exposure Amount
+AFCA,Cancelled Amount
+AFFM,Affirmation Status
+AGGR,Aggregate Balance
+AGRE,Agreement Indicator
+AKTI,Aktiengewinn
+ALAM,Collateralised Amount
+ALLE,Allegement Status
+ALLO,Current Allocation Number
+ALOC,Allocation Status
+ALMR,Allocation Matching Reference
+ALTE,Alternate ID
+AMNT,Amount Description
+ANOU,Annoncement Date
+ANTO,Net Gain/Loss
+APER,Open Indicator
+ARRE,Tax Arrear Amount
+ASRF,Account Servicer Reference
+ATAX,Additional Tax
+AUDT,Audited Statement
+AUTA,Automatic Allocation Indicator
+AUTO,Auto Routing Indicator
+AVAI,Available Balance
+AVAL,Available Date/Time
+AWAS,Available With No Additional Status
+BAGA,Bargain Date/Time
+BAKL,Backload Commission Rate
+BASE,Base Denomination
+BASK,Basket Reference
+BAST,Bargain Settlement Date/Time
+BCOL,Type of Other Collateral Indicator
+BENE,Beneficial Ownership Override Indicator
+BENM,Beneficiary of Money
+BENT,Type of Beneficial Owner
+BIDI,Bid Interval Rate
+BIMY,Beneficial Owners' Intermediary
+BIRT,Name at Birth
+BLCA,Blocked Corporate Action
+BLOC,Block Trade Indicator
+BLOK,Blocked
+BLOT,Blocked Trading
+BLOV,Blocked Authenticity
+BMRB,Block Matching Reference
+BOBD,Beneficial Owner Treaty Benefits for Dividends
+BODE,Pending Borrowed Delivery
+BOLQ,Back End Odd Lot Quantity
+BOOK,Book Value
+BORE,Beneficial Owner Related Treaty Benefits
+BORR,Borrowed
+BOTB,Beneficial Owner Treaty Benefits
+BPAR,Business Partner Number
+BRCR,Broker of Credit
+BREF,Bank Reference Number
+BUSE,Buy/Sell Indicator
+BUYE,Buy Currency and Amount
+BUYR,Buyer
+CABF,Cash Amount Brought Forward
+CACF,Cash Amount Carried Forward
+CACK,Repo Call Acknowledgement Reason
+CACN,Case Number
+CADE,Repurchase Call Delay
+CAEP,Corporate Action Event Processing
+CAEV,Corporate Action Event Indicator
+CALD,Call Date
+CALL,Callable Flag
+CAMV,Mandatory/Voluntary Indicator
+CANC,Quantity to Cancel
+CAND,Cancellation Reason
+CANP,Pending cancellation reason
+CANR,Cancellation Right Indicator
+CAON,CA Option Number
+CAOP,Corporate Action Option Code
+CAPG,Capital Gains Amount
+CAPP,Collateral Approved Flag
+CASH,Cash Account
+CASY,Cash Settlement System Override Indicator
+CATB,Charges/Tax Basis
+CBCH,Correspondent Bank Charges
+CCAL,Collateral Call Amount
+CCAM,Counter Amount
+CCMV,Client's Cash Movement Reference
+CCPT,CCP Eligibility Indicator
+CCTR,Counterparty's Collateral Transaction Reference
+CDEA,Cash Delivery Agent
+CEFI,Certification Format Indicator
+CERT,Certificate Number
+CETI,Certification Type Indicator
+CEXD,Consent Expiration Date
+CFRE,Variable Rate Change Frequency
+CGEN,Generated Reason
+CHAI,Currency Haircut
+CHAN,Change Type
+CHAR,Charges Account
+CINL,Cash in Lieu of Shares Price
+CINS,Collateral Instruction Narrative
+CINT,Collateral Instruction Type Indicator
+CITY,City
+CLAM,Market Claim Counterpart
+CLAS,Classification Type
+CLBR,Clearing Broker
+CLCI,Client's Collateral Instruction Reference
+CLCL,Client Classification Number
+CLCP,Claim Period
+CLEN,Clean
+CLPA,Party A's client
+CLPR,Clean Price Amount
+CLTR,Client's Triparty Collateral Transaction Reference 
+CLTY,Client Type Number
+CMAF,Cash Movements Approved Flag
+CNTR,Counter Currency
+CNVF,Conversion From Indicator
+CNVT,Conversion To Indicator
+COAF,Official Corporate Action Event Reference
+COAL,Collateral Action Type Indicator
+COAP,Court Approval Date/Time
+COAX,Consumption Tax
+CODE,Complete/Updates Indicator
+CODO,Sub-Paying Agent
+COLA,Exposure Type Indicator
+COLI,Collateral In
+COLL,Collateral Type Indicator
+COLO,Collateral Out
+COLR,Collateral Reference
+COMI,Commodity Index Narrative
+COMM,Common Reference 
+COMP,Information to be complied with
+CONB,Confirmed Balance
+COND,Conditional Quantity
+CONF,Quantity of Financial Instrument Confirmed
+CONM,Contingent Margin Amount
+CONS,Consolidated Statement
+CONT,Contractual Payment
+CONU,Contract Number Reference
+CONV,Conversion Date
+COOW,Collateral Ownership Indicator
+CORA,Commission Rate Applied
+CORD,Consent Record Date
+CORE,Collateral Required Amount
+CORP,Corporate Action Reference
+COST,Commission Type
+COUC,Coupon Clipping Date
+COUN,"Country, National Federal Tax"
+COUP,Coupon Date
+COVA,Value of Collateral Held
+COVE,Covered Flag
+COWA,Percentage Commission Waived
+CPRC,Cancellation Processing Status
+CPTA,Customer of Party A
+CPTB,Customer of Party B
+CPTR,Counterparty's Deal Reference
+CRDB,Credit/Debit Indicator
+CREB,Rebate/Bonification
+CRET,Value of Collateral to be Returned
+CRTR,Contract Type Indicator
+CSMV,Client's Securities Movement Reference
+CSPD,Compulsory Purchase Period
+CUFC,Current Factor
+CVPR,Cover Expiration Date
+DAAC,Number of Days Accrued
+DBIR,Date of Birth
+DBNM,Settlement Standing Instruction Database Indicator
+DDTE,Dated Date
+DE17,Deliverer's Intermediary 7
+DE18,Deliverer's Intermediary 8
+DE19,Deliverer's Intermediary 9
+DEAG,Delivering Agent
+DEAL,Deal Price
+DEBA,Depositary Bank
+DECL,Declaration Details Narrative
+DECU, DeliverersCustodian
+DEI1,Deliverer's Intermediary 1
+DEI2,Deliverer's Intermediary 2
+DEI3,Deliverer's Intermediary 3
+DEI4,Deliverer's Intermediary 4
+DEI5,Deliverer's Intermediary 5
+DEI6,Deliverer's Intermediary 6
+DEI7,Deliverer's Intermediary 7
+DEI8,Deliverer's Intermediary 8
+DEI9,Deliverer's Intermediary 9
+DENC,Denomination Choice
+DEND,Denied Reason
+DENO,Currency of Denomination
+DEPO,Deposit Amount
+DERE,Depositary Receipt Type
+DFLT,Default Processing Flag
+DFON,Date of Foundation
+DIRT,Dirty
+DISC,Disclaimer
+DISF,Disposition of Fractions
+DIST,Distribution Form
+DITY,Distribution Type
+DIVI,Dividend Type
+DIVR,Dividend Ranking Date
+DLVR,Delivery Details
+DOCT,Documentation Type
+DOMI,Country of Domicile
+DPLO,Lender/Borrower Indicator
+DPRC,Depositary Receipt Processing Status
+DRAW,Drawn
+DRCU,Depositary Bank's Custodian
+DRDE,Depositary Receipt Deliverer
+DRRE,Depositary Receipt Other Reason
+DRTY,Depositary Receipt Type
+DSCA,Discount Amount
+EARL,Earliest Payment Date
+ECDT,Early Closing Date
+ECIO,Capital Gain In/Out Indicator
+ECPD,Election to Counterparty Deadline
+EFFD,Effective Date
+ELCT,Election Type Indicator
+ELIG,Total Eligible for CA
+EMAI,Email Address
+EMOD,Effective Modification Date
+ENTF,Entrance Fees Amount
+ENTL,Entitled Amount
+EOUL,Equalization/Depreciation Deposit
+EPRC,Corporate Action Event Processing Status
+EQUL,Equalization Date
+EREG,Effective Registration Date
+ERFE,Early Redemption Fee Amount
+ESET,Effective Settlement Date/Time
+ESTA,Corporate Action Event Stage
+ESTT,Quantity of Financial Instrument Settled
+ETC1,ETC Service Provider 1
+ETC2,ETC Service Provider 2
+ETYP,Type of Exemption
+EUTR,EU Tax Retention Amount
+EXBN,Exclusion Basket Identification Indicator
+EXCH,Exchange Rate
+EXCR,Expected Credit Date
+EXEC,Executing Broker's Commission
+EXER,Exercise Price
+EXPI,Expiry Date/Time
+EXPO,Exposure Narrative
+EXPP,Exposed Party
+EXRQ,Execution Requested Date/Time
+EXSE,Expected Settlement Date/Time
+EXVA,Expected Value Date/Time
+FCOU,First Coupon Date
+FDAT,Further Detailed Announcement Date
+FDDT,First Dealing Date
+FDIV,Final Dividend Rate
+FIAN,Financial Instrument Attribute Narrative
+FICL,Final Closing Balance
+FIOP,First Opening Balance
+FISC,Fiscal Stamp
+FLFR,Fully Franked Rate
+FMRD,Face Amount Reduction Rate
+FOLQ,Front End Odd Lot Quantity
+FORC,Date/Time in Force
+FORF,Forfeit Repurchase Amount
+FORM,Form of Securities
+FRNF,Floating Rate Note Flag
+FRNR,Floating Rate Note Reset Date
+FROM,Balance From
+FSBN,Fallback Starting Basket Identification Indicator
+FSSA,Failed Settlement Salvation Indicator
+FXCO,FX Counterparty
+FXCR,FX Common Reference
+FXCX,Forex Order Cancellation Indicator
+FXDT,FX Rate Fixing Date
+FXIB,Currency to Buy
+FXIN,FX Instructions Narrative
+FXIS,Currency to Sell
+FXOR,FX Order Reference
+FXTR,FX Order Transaction Type Indicator
+GALO,Gain/Loss Indicator
+GCOS,Global Counterparty Status
+GCST,Global Currency Status
+GETS,Global Exposure Type Status
+GIUP,Give-up number of days
+GRSS,Gross Dividend Rate
+GUAR,Guarantee Amount
+GUPA,Guaranteed Participation Date/Time
+HOLD,Holding Value
+HOLP,Total Holdings Value of Page
+HOLS,Total Holdings Value of Statement
+IACC,Exercise Period
+IFIX,Index Fixing Date/Time
+INBA,Instructed Balance
+INBR,Introducing Broker
+INCA,Investor Capacity Indicator
+INCE,Cash Incentive Rate
+INCL,Intermediary Closing Balance
+INCO,Information Conditions
+INCR,Incremental Denomination
+INDA,Independent Amount
+INDC,Indicative Price
+INDF,Indemnity on fractions Rate
+INDM,Indemnity Amount
+INDP,Indemnity Period
+INDX,Index Reference
+INIM,Initial Margin Amount
+INMH,Inferred Matching Status
+INOP,Intermediary Opening Balance
+INOU,In/Out Indicator
+INPA,Interested Party
+INPE,Interest Period
+INRE,Income Report Flag
+INST,Corporate Action Instructions Narrative
+INT2,Second intermediary
+INTE,Intermediary
+INTP,Interest Rate
+INTR,Interest Rate
+INVE,Investor
+IPRC,Instruction Processing Status
+ISAG,Issuer Agent
+ISDI,Issue Discount/Allowance
+ISSU,Issue Date
+ITYP,Type of Income
+LADT,Local Tax (DE specific 1)
+LANG,Language Indicator
+LAPD,Lapsed Date/Time
+LDCO,Loan/deposit Counterparty
+LDCR,Deposit Common Reference
+LDFP,Last Day of First Interest Period
+LEGA,Legal Framework Indicator 
+LEGL,Legal Restrictions
+LEOG,Letter of Guarantee Indicator
+LEVY,Payment Levy Tax
+LICO,Liability/Collateral in Transaction Currency
+LIDT,Local Tax (DE specific 2)
+LIMI,Limit Price
+LINK,Linkage Type Indicator
+LIST,List Reference
+LOAN,On Loan
+LOCA,Location
+LOCL,Local Tax
+LOCO,Local Broker's Commission
+LOCR,Letter of Credit Amount
+LODE,Pending On Loan Delivery
+LORE,Pending On Loan Receipt
+LOTE,Local Tax (DE specific 3)
+LOTO,Lottery Type
+LOTS,Lot Number
+LYDT,Local Tax (DE specific 4)
+MACL,Market Side Indicator
+MACO,Matching/ Confirmation Fee
+MADW,Marked Down Price
+MAGV,Margined Value Amount
+MAIL,Mailing Address
+MAIN,Match Increment
+MARG,Margin Amount
+MAST,Master Reference
+MATU,Maturity Date
+MAUP,Marked Up Price
+MAXF,Maximum to be Shown on the Floor at a Time
+MAXP,Maximum Price
+MEET,Meeting Date
+MEOR,Originator of Message
+MERE,Recipient of Message
+MET2,Meeting Place 2
+MET3,Meeting Place 3
+MFDV,Manufactured Dividend
+MFIX,Margin Fixing Date/Time
+MICO,Method of Interest Computation
+MIEX,Minimum Exercisable Quantity
+MILT,Minimum Exercisable Multiple Quantity
+MINI,Minimum Quantity of Financial Instrument
+MINO,Minimum Nominal Quantity (Minimum Nominal Value)
+MINP,Minimum Price
+MITR,Minimum Transfer Amount
+MKDT,Market Deadline Date
+MKTB,Market Value Amount Before Valuation Factor
+MKTC,Market Claim
+MKTP,Market Value Amount Post Valuation Factor
+MKTV,Market Value Amount
+MOVE,Movement Status
+MPLE,Maximum Price Level Indicator
+MRKT,Market Price
+MTCH,Matching Status
+MVBF,Actual Market Value Before Valuation Factor
+MVPF,Actual Market Value Post Valuation Factor
+NAFI,Unaffirmed Reason
+NAME,Name
+NATO,Country of Nationality
+NAVD,Net Asset Value Calculation Date
+NAVL,Not Available Balance
+NAVR,Net Asset Value Ratio
+NBLT,New Board Lot Quantity
+NDIP,Notional Dividend Payable
+NDOM,Country of NON-Domicile
+NEGR,Net Settlement Indicator
+NELP,Non Eligible Proceeds Indicator
+NETT,Net Dividend Rate
+NEWA,New Address
+NEWD,New Denomination Quantity
+NEWO,New to Old
+NINT,Currency and Next Interest Amount
+NMAT,Unmatched Reason
+NOMI,In Nominee Name
+NPCC,Notional Principal Contracts Flag
+NPLI,New Place of Incorporation
+NRAD,Netted Independent Amount
+NRES,Non-Resident Rate
+NSER,New Security Restriction
+NTAX,Notional Tax
+NWFC,Next Factor
+NWRT,New Shares to Rights
+NXRT,Next Interest Rate
+OAPD,Official Announcement/Publication Date
+OBAL,Obligated Balance
+OCCU,Occupation Type Indicator
+OCMT,Original Currency Amount
+ODDC,Odd Coupon Flag
+OFFE,Offer Type
+OFFO,Offeror
+OFFP,Offer Price Paid
+OFFR,Offer Period
+OPCA,Opening Cash Amount
+OPST,Option Style
+OPTE,Option Features
+OPTF,Option Features
+OPTI,Option Type
+OPTN,Currency Option
+ORCU,Ordinary's Custodian
+ORDE,Ordinary's Deliverer
+ORDR,Quantity of Financial Instrument Ordered
+ORGV,Original Face Amount
+ORRE,Ordinary's Receiver
+OSTA,Option Status
+OSUB,Over-subscription Rate
+OTHR,Other Amount
+OVEP,Maximum Allowed Oversubscription Rate
+OWND,Beneficial Owners' ID
+OWNF,Ownership Flag
+OWNT,Type of Ownership Indicator
+PACK,Acknowledgement Reason
+PACO,Party Contact Narrative
+PADI,Payment Direction Indicator
+PAFI,Quantity of Financial Instrument Partially Filled
+PAIR,Quantity of Financial Instrument to be Paired-off
+PAMM,Paying/Sub-paying Agent Commission
+PARL,Parallel Trading Period
+PARS,Partial Settlement Indicator
+PART,Party Narrative
+PAYA,Paying Agent
+PAYD,Payment Date
+PAYE,Paying Institution
+PAYM,Payment Indicator
+PAYS,Payment Status Indicator
+PBOX,Post Box
+PDIV,Partial Dividend Rate
+PDMT,Pending delivery matched balance
+PDUM,Pending delivery unmatched balance
+PECA,Pending Corporate Action
+PEDA,Pending Corporate Action Delivery
+PEND,Pending Delivery
+PENF,Pending/Failing Reason
+PENR,Pending Receipt
+PERM,Permanent Address
+PEVA,Previous Market Price Value
+PFRE,Payment Frequency
+PLED,Pledged
+PLIS,Place of Listing
+PODT,Protect Date
+POOL,Pool Number
+PORT,Class of Portfolio/Fund Indicator
+POST,Postage
+PPDT,Pari Passu Date
+PPRC,Pending Processing Reason
+PRBN,Preferential Basket Identification Indicator
+PRCO,Pre-Allocation Condition
+PRCV,Previous Collateral Value
+PREA,Preadvice Reference
+PREC,Pre-Confirmation Indicator
+PREF,Preference to Income
+PREL,Pre-Release Details
+PREP,Preparation Date/Time
+PREQ,Pre-Release Quantity
+PRER,Pre-Release Flag
+PREV,Previous Reference
+PREX,Previously Executed Quantity of Financial Instrument
+PRFC,Previous Factor
+PRHA,Pre-haircut Collateral Value
+PRIC,Type of Price Indicator
+PRIN,Principal or Corpus
+PRIR,Priority Indicator
+PRIT,Principal and Interest
+PRMA,Premium Amount
+PRMT,Pending receipt matched balance
+PROC,Processing Indicator
+PROD,Proration Date
+PROG,Program Reference
+PROR,Pro-Ration Rate
+PRPP,Price per Product Paid
+PRPR,Price per Product Received
+PRSS,Process Indicator
+PRUM,Pending receipt unmatched balance
+PRWI,Partial Redemption Withholding Amount
+PSET,Place of Settlement
+PSTA,Posting Quantity
+PSTT,Quantity of Financial Instrument Previously Settled
+PTSC,Percentage of Total Share Capital Sought
+PTYA,Party A
+PTYB,Party B
+PUTT,Put Date
+PVAD,Prepayment Value Date/Time
+PWAL,Period of Action
+QAGE,Quotation Age
+QINS,Instructed Quantity
+QINT,Quantity of Intermediate Securities
+QOVE,Quantity Instructed to be Received Over and Above Normal Ensured Entitlement
+QREC,Quantity to Receive
+QREG,Quantity of Financial Instrument to be Registered
+QSEC,Quantity of Securities
+QTSO,Quantity Sought
+QUOT,Quotation Setting Date
+RADD,Basic Amount
+RALA,Remaining Collateralised Amount
+RATE,Applicable Rate
+RATS,Source of Rating
+RCHG,Redemption Charges Flag
+RCTR,Receiver's Collateral Transaction Reference
+RDDT,Response Deadline Date
+RDIS,Reinvestment Discount Rate to Market
+RDTE,Record Date
+REAG,Receiving Agent
+REAS,Reason Narrative
+RECA,Reported Currency and Amount
+RECT,Recipient Type
+RECU,Receiver's Custodian
+REDE,Receive/Deliver Indicator
+REDM,Redemption Date
+REDP,Redemption Premium Amount
+REFD,Expected Refund
+REGE,Regulatory Fees
+REGF,Regulatory Fees
+REGI,Registration Details Narrative
+REGO,Out for Registration
+REGR,Registrar
+REGT,Registration Override Indicator
+REI1,Receiver's Intermediary 1
+REI2,Receiver's Intermediary 2
+REI3,Receiver's Intermediary 3
+REI4,Receiver's Intermediary 4
+REI5,Receiver's Intermediary 5
+REI6,Receiver's Intermediary 6
+REI7,Receiver's Intermediary 7
+REI8,Receiver's Intermediary 8
+REI9,Receiver's Intermediary 9
+REIN,Reinvestment Price
+REJT,Rejection Reason
+RELA,Related Reference
+RELC,Liability/Collateral in Reporting Currency
+RELD,Release Date/Time
+REMA,Quantity of Financial Instrument Remaining on Order
+REMI,Quantity of Financial Instrument Remaining on Order
+REPA,Repurchase Amount
+REPL,Reply Period
+REPO,Repurchase Rate
+REPP,Repurchase Premium Amount
+REPR,Collateral Receive/Provide Indicator
+REPT,Repurchase Type Indicator
+REPU,Repurchase Date/Time
+REQU,Requested Message Type
+RERA,Rate Change Date/Time
+RERC,Registration Processing Status
+RERT,Repurchase Rate Type
+RESI,Country of Residence
+REST,Restrictions
+RESU,Resulting Amount
+REVA,Revaluation Indicator
+REVO,Revocability Period
+RHDI,Intermediate Securities Distribution Type
+RINR,Related Index Rate
+RMAG,Required Margin Amount
+RMOD,Requested Modification Date
+RMTH,Rounding Method Requested
+RODI,Currency and Increase/Decrease Amount
+ROUN,Rounding Integer Amount
+RPOR,Reporting Indicator
+RPRC,Replacement Processing Status
+RQBR,Requested Broker
+RREA,Registration Reason Indicator
+RREG,Requested Registration Date
+RSET,Requested Settlement Date
+RSPR,Repurchase Spread Rate
+RSTR,Restricted
+RSTT,Quantity of Financial Instrument Remaining to be Settled
+RTGS,Securities Real-Time Gross Settlement Override Indicator
+RTRN,Delivery Return Types Indicator
+RTUN,Rights to Underlying
+RVAL,Requested Value Date/Time
+SAFE,Safekeeping Account
+SCOL,Collateral Settlement Type Indicator
+SCTR,Sender's Collateral Transaction Reference
+SEAD,Sell Thru Issuer Period
+SEBL,Settlement Amount of Block Trade
+SECO,Second Leg Reference
+SECU,Securities Flag
+SECV,Quantity of Securities Valued
+SELL,Seller
+SEME,Sender's Reference
+SETG,Settlement Instruction Generation Indicator
+SETR,Type of Settlement Transaction
+SETS,Settlement System Indicator
+SETT,Settlement Status
+SFRE,Statement Frequency Indicator
+SHAI,Securities Haircurt
+SHAR,Shareholder Number
+SHIP,Shipping
+SIZE,Contract Size
+SLMG,Stock Loan Margin
+SMAF,Securities Movements Approved Flag
+SNUM,Street Number
+SOFE,Solicitation Fee Rate
+SOIC,Sundry Other Income
+SPCN,Special Concessions
+SPLT,Deadline to Split
+SPOS,Street Position
+SPRC,Request for Statement/Status Advice Status
+SPRO,Settlement Instruction Processing Narrative
+STAM,Stamp Duty Indicator
+STAQ,Status Quantity
+STAT,Statement Number
+STBA,Statement Basis
+STBR,Step-In Broker
+STCO,Settlement Transaction Condition
+STEX,Stock Exchange Tax
+STIN,Standing Instruction Indicator
+STOP,Stop Price
+STRT,Start Date
+STST,Statement Structure Type Indicator
+STTY,Statement Type
+SUBB,Sub-Balance Details Narrative
+SUBS,Subscription Date
+SUPR,Subscription Price
+SUSP,Suspension of Privilege
+SWRT,Switch Rate
+SXDT,Special Ex-Date/Time
+TACR,Total Accrued Interest Amount
+TAKO,Take-over Type
+TAPC,Termination Amount per Piece of Collateral
+TAVI,Total Available
+TAVO,Tax Voucher Reference
+TAXB,Requested Taxation Rate
+TAXC,Tax Credit Rate
+TAXE,Tax Account
+TAXR,Withholding Tax Rate
+TCHA,Total Fees/Commissions
+TCMV,Triparty's Cash Movement Reference
+TCOP,Total Collateral Hel Value of Page
+TCOR,Total Collateral Required
+TCPI,Tax Capacity Party Indicator
+TCRL,Total Credit Line Amount
+TCTR,Triparty Agent Collateral Transaction Reference 
+TDMT,Taxable Income Per Dividend/Share
+TDTA,TID/TIS Calculated Indicator
+TEMP,Temporary Indicator
+TERM,Closing Date/Time
+TEXA,Total Exposure Amount
+TEXP,Total Exposure Value of Page
+THRS,Secured Threshold Amount
+THRU,Unsecured Threshold Amount
+TILI,Time Limit
+TITL,Title of Correspondence
+TLDE,Type of Loan/Deposit Event
+TOAL,Total Number of Allocations
+TOBA,Balance To
+TOCO,Total Number of Collateral Instructions
+TODE,Total of Linked Delivery Instructions
+TOOR,Type of Order
+TORE,Total of Linked Receipt Instructions
+TOSE,Total of Linked Settlement Instructions
+TOVA,Total Eligible Collateral Value
+TPIN,Total Pending Collateral In
+TPOU,Total Pending Collateral Out
+TPRC,Processing Change Command Status
+TPRI,Total of Principals
+TPRO,Trade Instruction Processing Narrative
+TQBT,Quantity of Block Trade
+TRAA,Transaction Amount
+TRAD,Place of Trade
+TRAG,Triparty Agent
+TRAK,Tracking Indicator
+TRAN,Transfer Tax
+TRAX,Transaction Tax
+TRCA,Party Capacity Indicator
+TRCI,Triparty's Collateral Instruction Reference
+TRCN,Trade Regulatory Conditions
+TRDE,Transaction Details Narrative
+TRDP,Trading Period
+TRDT,Trading Resumed Date
+TREX,Transaction Execution Status
+TRRE,Trade Regulator
+TRRF,Deal Reference
+TRSE,Trading Session Indicator
+TRTE,Termination Transaction Amount
+TRTR,Trade Transaction Type
+TRUS,Trustee/Third Party
+TSDT,Trading Suspended Date
+TSMT,Taxable Income Per Share
+TSMV,Triparty's Securities Movement Reference
+TSTA,TIS Calculated Indicator
+TTCO,Trade Transaction Condition Indicator
+TVOC,Total Value of Own Collateral
+TVRC,Total Value of Reused Collateral
+TXDF,Tax Deferred
+TXFR,Tax Free Amount
+TXIN,Tax on Income
+TXNR,Narrative Version
+TXPR,Tax on Profits
+TXRC,Reclaim of Taxes Rate
+TYCO,Type of Collateralisation Indicator
+TYPP,Type of Position Flag
+UBLK,Unblocking Date
+UNBA,Uninstructed Balance
+UNCO,Unconditional Date
+UNDL,Underlying Quantity
+UNFR,Unfranked Amount
+UNRG,Unregistered
+UTIN,U.S.Tax Identification Flag
+VAFC,Valuation Factor
+VAHA,Source of Haircut
+VALC,Date/Time of Valuation of the Collateral
+VALE,Date/Time of Valuation of the Exposure
+VALN,Valuation Date/Time
+VALU,Value Date/Time
+VASO,Value Sought Amount
+VASU,Variable Rate Support
+VATA,Value Added Tax
+VEND,Vendor
+VERN,Version Number
+VSMR,Value Sought Margin Rate
+WEBB,Web Site Address
+WITF,Withholding of Foreign Tax
+WITH,Withholding Tax
+WITL,Withholding of Local Tax
+WRTS,Warrants Attached on Delivery Flag
+WTHD,Withdrawal Allowed Flag
+WUCO,Wholly Unconditional Date
+XCPN,Ex-coupon Presentation Date
+XDTE,Ex-Dividend or Distribution Date
+ZWIS,Zwischengewinn

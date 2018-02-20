@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<SwiftMessageFormat name="MT044">
+	<standard-version><![CDATA[SRG 2016]]></standard-version>
+	<standard-release-qualifier>20160308</standard-release-qualifier>
+	<DescriptiveName><![CDATA[Undelivered Report Rules Redefinition]]></DescriptiveName>
+	<Category><![CDATA[System]]></Category>
+	<Description><![CDATA[This message causes the system to change the rules for generating the Undelivered Message Report for the
+requesting LT. The response to this message is an MT 064 Undelivered Report Rules Change Report.
+
+From: User       To: FIN
+]]></Description>
+	<SwiftFields>
+		<customizable>true</customizable>
+		<modifiable>true</modifiable>
+		<SwiftMessageType>System</SwiftMessageType>
+		<HeaderAndTrailerType>SWIFT_INPUT_HEADER</HeaderAndTrailerType>
+		<Header>
+		</Header>
+		<Data>
+			<Fields>
+				<SystemField Name="holiday-suppression">
+					<description><![CDATA[Holiday suppression option, where:
+
+a)  Y = yes. Suppression during holiday
+
+b)  N = no. No suppression during holiday]]></description>
+					<datatype>String</datatype>
+					<required>true</required>
+					<SwiftSystemFieldDef Name="holiday-suppression" Tag="302">
+						<Format><![CDATA[1!a]]></Format>
+						<Specification><![CDATA[(holiday-suppression)]]></Specification>
+						<Description><![CDATA[Holiday suppression option, where:
+
+a)  Y = yes. Suppression during holiday
+
+b)  N = no. No suppression during holiday]]></Description>
+						<Validations>
+							<Validation>
+								<formula>In($value, "Y", "N")</formula>
+								<error-code>V08</error-code>
+								<actionmessage>"Invalid Holiday Suppression Option '" + $value + "'. holiday-suppression value should be either Y or N."</actionmessage>
+							</Validation>
+						</Validations>
+					</SwiftSystemFieldDef>
+				</SystemField>
+				<SystemField Name="generation-time-options">
+					<description><![CDATA[Generation option, where:
+
+a)  <hour> = fixed hour every day, in the range 00-23
+
+b)  CF = cut-off time for every country
+
+c)  RQ = on request only]]></description>
+					<datatype>String</datatype>
+					<required>true</required>
+					<SwiftSystemFieldDef Name="generation-time-options" Tag="341">
+						<Format><![CDATA[2!c]]></Format>
+						<Specification><![CDATA[(generation-time-options)]]></Specification>
+						<Description><![CDATA[Generation option, where:
+
+a)  <hour> = fixed hour every day, in the range 00-23
+
+b)  CF = cut-off time for every country
+
+c)  RQ = on request only]]></Description>
+						<Validations>
+							<Validation>
+								<formula>If(IsInt($value), 
+	   						Between(ToInt($value), 00, 23), 
+	   						In($value, "CF", "RQ"))
+				</formula>
+								<error-code>V08</error-code>
+								<actionmessage>"Invalid Generation Option '" + $value + "'. generation-time-options value should be CF , RQ or in between 00 to 23."</actionmessage>
+							</Validation>
+						</Validations>
+					</SwiftSystemFieldDef>
+				</SystemField>
+				<SystemField Name="reporting-options">
+					<description><![CDATA[Reporting Options, where:
+
+a)  RT = all undelivered at report time
+
+b)  nn = undelivered for more than nn hours (range: 00 <nn < 24)
+
+c)  VD = value-date-sensitive message undelivered after the Receiver's cut-off time on the value date.]]></description>
+					<datatype>String</datatype>
+					<required>false</required>
+					<SwiftSystemFieldDef Name="reporting-options" Tag="301">
+						<Format><![CDATA[2!c]]></Format>
+						<Specification><![CDATA[(reporting-options)]]></Specification>
+						<Description><![CDATA[Reporting Options, where:
+
+a)  RT = all undelivered at report time
+
+b)  nn = undelivered for more than nn hours (range: 00 < nn < 24)
+
+c)  VD = value-date-sensitive message undelivered after the Receiver's cut-off time on the value date.]]></Description>
+					</SwiftSystemFieldDef>
+				</SystemField>
+			</Fields>
+		</Data>
+		<Trailer>
+		</Trailer>
+	</SwiftFields>
+	<validationrules name="Default">
+		<hdrvalidationrules>
+			<fieldvalidations>
+			</fieldvalidations>
+		</hdrvalidationrules>
+		<datavalidationrules>
+			<fieldvalidations>
+				<fieldvalidation>
+					<name>E1</name>
+					<fieldname>reporting-options</fieldname>
+					<formula><![CDATA[If(IsInt($value), Between(ToInt($value), 00, 24), In($value, "RT", "VD"))]]></formula>
+					<severity>error</severity>
+					<cascade>true</cascade>
+					<error-code>V08</error-code>
+					<actionmessage><![CDATA["Invalid Reporting Options '" + $value + "'. Must be 'RT' or 'VD' or must be between 0 and 24."]]></actionmessage>
+				</fieldvalidation>
+			</fieldvalidations>
+		</datavalidationrules>
+		<tlrvalidationrules>
+			<fieldvalidations>
+			</fieldvalidations>
+		</tlrvalidationrules>
+	</validationrules>
+</SwiftMessageFormat>
+

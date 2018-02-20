@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<SwiftMessageFormat name="MT064">
+	<standard-version><![CDATA[SRG 2014]]></standard-version>
+	<standard-release-qualifier>20140520</standard-release-qualifier>
+	<DescriptiveName><![CDATA[Undelivered Report Rules Change Report]]></DescriptiveName>
+	<Category><![CDATA[System]]></Category>
+	<Description><![CDATA[This message shows the user's future options for the Undelivered Message Report. It is the response to an
+MT 044 Undelivered Report Rules Redefinition.
+
+From: FIN To: User]]></Description>
+	<SwiftFields>
+		<customizable>true</customizable>
+		<modifiable>true</modifiable>
+		<SwiftMessageType>System</SwiftMessageType>
+		<HeaderAndTrailerType>SWIFT_INPUT_HEADER</HeaderAndTrailerType>
+		<Header>
+		</Header>
+		<Data>
+			<Fields>
+				<SystemField Name="holiday-suppression">
+					<description><![CDATA[Holiday suppression option, where:
+
+a)  Y = yes. Suppression during holiday
+
+b)  N = no. No suppression during holiday]]></description>
+					<datatype>String</datatype>
+					<required>true</required>
+					<SwiftSystemFieldDef Name="holiday-suppression" Tag="302">
+						<Format><![CDATA[1!a]]></Format>
+						<Specification><![CDATA[(holiday-suppression)]]></Specification>
+						<Description><![CDATA[Holiday suppression option, where:
+
+a)  Y = yes. Suppression during holiday
+
+b)  N = no. No suppression during holiday]]></Description>
+						<Validations>
+							<Validation>
+								<formula>In($value, "Y", "N")</formula>
+								<error-code>V08</error-code>
+								<actionmessage>"Invalid Holiday Suppression Option '" + $value + "'. holiday-suppression value should be either Y or N."</actionmessage>
+							</Validation>
+						</Validations>
+					</SwiftSystemFieldDef>
+				</SystemField>
+				<SystemField Name="generation-time-options">
+					<description><![CDATA[Generation option, where:
+
+a)  <hour> = fixed hour every day, in the range 00-23
+
+b)  CF = cut-off time for every country
+
+c)  RQ = on request only]]></description>
+					<datatype>String</datatype>
+					<required>true</required>
+					<SwiftSystemFieldDef Name="generation-time-options" Tag="341">
+						<Format><![CDATA[2!c]]></Format>
+						<Specification><![CDATA[(generation-time-options)]]></Specification>
+						<Description><![CDATA[Generation option, where:
+
+a)  <hour> = fixed hour every day, in the range 00-23
+
+b)  CF = cut-off time for every country
+
+c)  RQ = on request only]]></Description>
+						<Validations>
+							<Validation>
+								<formula>If(IsInt($value), 
+	   						Between(ToInt($value), 00, 23), 
+	   						In($value, "CF", "RQ"))
+				</formula>
+								<error-code>V08</error-code>
+								<actionmessage>"Invalid Generation Option '" + $value + "'. generation-time-options value should be CF , RQ or in between 00 to 23."</actionmessage>
+							</Validation>
+						</Validations>
+					</SwiftSystemFieldDef>
+				</SystemField>
+				<SystemField Name="reporting-options">
+					<description><![CDATA[Reporting Options, where:
+
+a)  RT = all undelivered at report time
+
+b)  nn = undelivered for more than nn hours (range: 00 < nn < 24)
+
+c)  VD = value-date-sensitive message undelivered after the Receiver's cut-off time on the value date.]]></description>
+					<datatype>String</datatype>
+					<required>false</required>
+					<SwiftSystemFieldDef Name="reporting-options" Tag="301">
+						<Format><![CDATA[2!c]]></Format>
+						<Specification><![CDATA[(reporting-options)]]></Specification>
+						<Description><![CDATA[Reporting Options, where:
+
+a)  RT = all undelivered at report time
+
+b)  nn = undelivered for more than nn hours (range: 00 < nn < 24)
+
+c)  VD = value-date-sensitive message undelivered after the Receiver's cut-off time on the value date.]]></Description>
+						<Validations>
+							<Validation>
+								<formula>If(IsInt($value), 
+	   						Between(ToInt($value), 0, 24), 
+	   						In($value, "RT", "VD","CS"))
+				</formula>
+								<error-code>V08</error-code>
+								<actionmessage>"Invalid Reporting Options '" + $value + "'"</actionmessage>
+							</Validation>
+						</Validations>
+					</SwiftSystemFieldDef>
+				</SystemField>
+			</Fields>
+		</Data>
+		<Trailer>
+		</Trailer>
+	</SwiftFields>
+	<validationrules name="Default">
+		<hdrvalidationrules>
+			<fieldvalidations>
+			</fieldvalidations>
+		</hdrvalidationrules>
+		<datavalidationrules>
+			<fieldvalidations>
+			</fieldvalidations>
+		</datavalidationrules>
+		<tlrvalidationrules>
+			<fieldvalidations>
+			</fieldvalidations>
+		</tlrvalidationrules>
+	</validationrules>
+</SwiftMessageFormat>
+

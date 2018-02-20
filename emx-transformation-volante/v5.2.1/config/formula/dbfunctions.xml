@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<formulae>
+    <formula name="DBQuery">
+        <description>Executes the SQL query (Select) statement and returns ResultSet</description>
+        <signature>dbQuery(poolName, sqlStatement)</signature>
+        <category>Database</category>
+        <Class>com.tplus.transform.design.formula.functions.JavaDisposableFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.DatabaseFunctions"/>
+        <property name="method" value="dbQuery"/>
+    </formula>
+
+    <formula name="DBQueryMessage">
+        <description>[Beta]Executes the defined query and returns a collection of objects</description>
+        <signature>DBQueryMessage(messageName, queryName, queryParamsOpt...)</signature>
+        <category>Database</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.DatabaseFunctions"/>
+        <property name="method" value="dbQueryMessage"/>
+    </formula>
+    <formula name="DBLimitQueryMessage">
+        <description>[Beta]Executes the defined query and returns a collection of objects in the range specified.</description>
+        <signature>DBLimitQueryMessage(messageName, queryName, start, count, queryParamsOpt...)</signature>
+        <category>Database</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.DatabaseFunctions"/>
+        <property name="method" value="dbLimitQueryMessage"/>
+    </formula>
+    <formula name="DBCountMessage">
+        <description>[Beta]Executes the defined query and returns the number of selected messages</description>
+        <signature>DBCountMessage(messageName, queryName, queryParamsOpt...)</signature>
+        <category>Database</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.DatabaseFunctions"/>
+        <property name="method" value="dbCountMessage"/>
+    </formula>
+    <formula name="DBCountSQLQueryMessage">
+        <description>[Beta]Executes the SQL query (Select) statement and returns the count of message objects</description>
+        <signature>DBCountSQLQueryMessage(messageName, sqlStatement, queryParamsOpt...)</signature>
+        <category>Database</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.DatabaseFunctions"/>
+        <property name="method" value="dbCountSQLQueryMessage"/>
+    </formula>
+    <formula name="DBSQLQueryMessage">
+        <description>[Beta]Executes the SQL query (Select) statement and returns a collection of message objects</description>
+        <signature>DBSQLQueryMessage(messageName, sqlStatement, queryParamsOpt...)</signature>
+        <category>Database</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.DatabaseFunctions"/>
+        <property name="method" value="dbSQLQueryMessage"/>
+    </formula>
+    <formula name="DBSQLLimitQueryMessage">
+        <description>[Beta]Executes the SQL query (Select) statement and returns a collection of message objects in the range specified</description>
+        <signature>DBSQLLimitQueryMessage(messageName, sqlStatement, start, count, queryParamsOpt...)</signature>
+        <category>Database</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.DatabaseFunctions"/>
+        <property name="method" value="dbSQLLimitQueryMessage"/>
+    </formula>
+
+    <formula name="DBSecQuery">
+        <description>Executes the SQL query (Select) statement and returns a collection of objects</description>
+        <signature>dbSecQuery(poolName, sqlStatement, queryParamsOpt...)</signature>
+        <category>Database</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.DBSecQueryFunction"/>
+        <property name="method" value="dbSecQuery"/>
+    </formula>
+	
+    <formula name="DBCSecQuery">
+        <description>Executes the SQL query (Select) statement and a collection of objects. The collection is cached with the query as the key. Subsequence calls with the same query will result in the same collection
+            being returned.
+        </description>
+        <signature>dbcSecQuery(poolName, sqlStatement)</signature>
+        <category>Database</category>
+        <Class>com.tplus.transform.design.formula.functions.JavaDisposableFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.DBSecQueryFunction"/>
+        <property name="method" value="dbcSecQuery"/>
+    </formula>
+	
+    <formula name="DBExecute">
+        <description>Executes any valid SQL statement. This function does not return anything</description>
+        <signature>dbExecute(poolName, sqlStatement, sqlParamsOpt...)</signature>
+        <category>Database</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.DatabaseFunctions"/>
+        <property name="method" value="dbExecute"/>
+    </formula>
+
+
+    <formula name="dbExecuteStoredProc">
+        <description>Executes the SQL stored procedure</description>
+        <signature>dbExecuteStoredProc(poolName, storedProc, params...)</signature>
+        <category>Database</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.DBSecQueryFunction"/>
+        <property name="method" value="dbExecStoredProc"/>
+    </formula>
+
+    <formula name="DBUpdate">
+        <description>Executes any valid SQL statement. This function returns the number of rows updated in the table.</description>
+        <signature>dbUpdate(poolName, sqlStatement, paramsOpt...)</signature>
+        <category>Database</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.DatabaseFunctions"/>
+        <property name="method" value="dbExecuteUpdate"/>
+    </formula>
+
+    <formula name="DBGetInt">
+        <description>Returns the value of the column from the ResultSet. The column should be of type integer. If the name or index is not specified first column is assumed.</description>
+        <signature>dbGetInt(ResultSet, ColumnNameOrIndexOpt)</signature>
+        <category>Database</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.DatabaseFunctions"/>
+        <property name="method" value="dbGetInt"/>
+    </formula>
+
+    <formula name="DBGetDouble">
+        <description>Returns the value of the column from the ResultSet.The column should be of numeric type. If the name or index is not specified first column is assumed.</description>
+        <signature>dbGetDouble(ResultSet, ColumnNameOrIndexOpt)</signature>
+        <category>Database</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.DatabaseFunctions"/>
+        <property name="method" value="dbGetDouble"/>
+    </formula>
+    <formula name="DBGetString">
+        <description>Returns the value the column from the ResultSet. If the name or index is not specified first column is assumed.</description>
+        <signature>dbGetString(ResultSet, ColumnNameOrIndexOpt)</signature>
+        <category>Database</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.DatabaseFunctions"/>
+        <property name="method" value="dbGetString"/>
+    </formula>
+
+    <formula name="DBGetDate">
+        <description>Returns the value of the column from the ResultSet. If the name or index is not specified first column is assumed.</description>
+        <signature>dbGetDate(ResultSet, ColumnNameOrIndexOpt)</signature>
+        <category>Database</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.DatabaseFunctions"/>
+        <property name="method" value="dbGetDate"/>
+    </formula>
+
+    <formula name="DBAvg">
+        <description>Gets the average value (as double) for the specified column. The column should be of numeric type.</description>
+        <signature>dbAvg(poolName, tableName, fieldName, conditionOpt)</signature>
+        <category>Database</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.DatabaseFunctions"/>
+        <property name="method" value="dbAvg"/>
+    </formula>
+
+    <formula name="DBMin">
+        <description>Gets the MIN value for the specified column. The column should be of type integer.</description>
+        <signature>dbMin(poolName, tableName, fieldName, conditionOpt)</signature>
+        <category>Database</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.DatabaseFunctions"/>
+        <property name="method" value="dbMin"/>
+    </formula>
+    <formula name="DBMinDouble">
+        <description>Gets the MIN value for the specified column. The column should be of numeric type.</description>
+        <signature>dbMinDouble(poolName, tableName, fieldName, conditionOpt)</signature>
+        <category>Database</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.DatabaseFunctions"/>
+        <property name="method" value="dbMinDouble"/>
+    </formula>
+
+    <formula name="DBMax">
+        <description>Gets the MAX value of specified column. The column should be of integer type.</description>
+        <signature>dbMax(poolName, tableName, fieldName, conditionOpt)</signature>
+        <category>Database</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.DatabaseFunctions"/>
+        <property name="method" value="dbMax"/>
+    </formula>
+
+    <formula name="DBMaxDouble">
+        <description>Gets the MAX value of specified column. The column should be of numeric double.</description>
+        <signature>dbMaxDouble(poolName, tableName, fieldName, conditionOpt)</signature>
+        <category>Database</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.DatabaseFunctions"/>
+        <property name="method" value="dbMaxDouble"/>
+    </formula>
+
+    <formula name="DBSum">
+        <description>Gets the SUM value of the specified column. The column should be of type integer.</description>
+        <signature>dbSum(poolName, tableName, fieldName, conditionOpt)</signature>
+        <category>Database</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.DatabaseFunctions"/>
+        <property name="method" value="dbSum"/>
+    </formula>
+
+    <formula name="DBSumDouble">
+        <description>Gets the SUM value of the specified column. The column should be of numeric type.</description>
+        <signature>dbSumDouble(poolName, tableName, fieldName, conditionOpt)</signature>
+        <category>Database</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.DatabaseFunctions"/>
+        <property name="method" value="dbSumDouble"/>
+    </formula>
+
+
+    <formula name="DBCount">
+        <description>Gets the number of records in the table satisfying the given condition.</description>
+        <signature>dbCount(poolName, tableName, conditionOpt)</signature>
+        <category>Database</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.DatabaseFunctions"/>
+        <property name="method" value="dbCount"/>
+    </formula>
+
+
+    <formula name="DBCountRecords">
+        <description>Gets the number of records in the resultset.</description>
+        <signature>dbCountRecords(ResultSet)</signature>
+        <category>Database</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.DatabaseFunctions"/>
+        <property name="method" value="dbCountRecords"/>
+    </formula>
+
+    <formula name="DBFirst">
+        <description>Moves the cursor to the first record</description>
+        <signature>dbFirst(ResultSet)</signature>
+        <category>Database</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.DatabaseFunctions"/>
+        <property name="method" value="dbFirst"/>
+    </formula>
+
+    <formula name="DBLast">
+        <description>Moves the cursor to the last record</description>
+        <signature>dbLast(ResultSet)</signature>
+        <category>Database</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.DatabaseFunctions"/>
+        <property name="method" value="dbLast"/>
+    </formula>
+
+    <formula name="DBNext">
+        <description>Moves the cursor to the next record</description>
+        <signature>dbNext(ResultSet)</signature>
+        <category>Database</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.DatabaseFunctions"/>
+        <property name="method" value="dbNext"/>
+    </formula>
+
+    <formula name="DBPrevious">
+        <description>Moves the cursor to the previous record</description>
+        <signature>dbPrevious(ResultSet)</signature>
+        <category>Database</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.DatabaseFunctions"/>
+        <property name="method" value="dbPrevious"/>
+    </formula>
+	
+	<formula name="DBHasNext">
+        <description>Moves the cursor to the next record</description>
+        <signature>dbHasNext(ResultSet)</signature>
+        <category>Database</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.DatabaseFunctions"/>
+        <property name="method" value="dbHasNext"/>
+    </formula>
+	
+</formulae> 

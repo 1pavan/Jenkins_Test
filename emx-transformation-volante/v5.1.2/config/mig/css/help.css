@@ -1,0 +1,268 @@
+.BodyText
+{
+    FONT-SIZE: 10pt;
+    MARGIN: 9pt 0pt;
+    FONT-FAMILY: Verdana,sans-serif
+}
+.ImgBanner
+{
+    BACKGROUND-COLOR: lightsteelblue
+}
+.FieldValues
+{
+    FONT-SIZE: 9pt;
+    FONT-FAMILY: Verdana
+}
+.TableHeadingLevel1
+{
+    FONT-WEIGHT: normal;
+    FONT-SIZE: 11pt;
+    COLOR: navy;
+    FONT-FAMILY: 'Times New Roman';
+    BACKGROUND-COLOR: snow;
+    TEXT-ALIGN: left
+}
+.TableHeadingLevel2
+{
+    BORDER-TOP: 1px;
+    FONT-SIZE: 10pt;
+    COLOR: green;
+    FONT-FAMILY: Verdana
+}
+.Formula
+{
+    FONT-SIZE: 9pt;
+    BORDER-LEFT: 1px;
+    FONT-FAMILY: 'Courier New'
+}
+.MappingRules
+{
+    FONT-SIZE: 9pt;
+    COLOR: blue;
+    FONT-FAMILY: Verdana
+}
+.TitleLevel1
+{
+    FONT-WEIGHT: normal;
+    FONT-SIZE: 14pt;
+    WIDTH: 100%;
+    COLOR: navy;
+    FONT-FAMILY: 'Times New Roman'
+}
+.TitleLevel2
+{
+    PADDING-LEFT: 5px;
+    FONT-WEIGHT: normal;
+    FONT-SIZE: 14pt;
+    BORDER-LEFT: thin;
+    WIDTH: 100%;
+    COLOR: white;
+    FONT-FAMILY: 'Times New Roman';
+    BACKGROUND-COLOR: #4d43aa
+}
+.TitleLevel3
+{
+    BORDER-RIGHT: silver 1px;
+    BORDER-TOP: silver 1px;
+    FONT-WEIGHT: normal;
+    FONT-SIZE: 14pt;
+    BORDER-LEFT: silver 1px;
+    COLOR: orange;
+    TEXT-INDENT: 5pt;
+    BORDER-BOTTOM: silver 1px;
+    FONT-FAMILY: 'Times New Roman';
+    TEXT-ALIGN: left
+}
+.SubTitleLevel1
+{
+    FONT-WEIGHT: bold;
+    FONT-SIZE: 11pt;
+    FONT-FAMILY: Verdana
+}
+.SubTitleLevel2
+{
+    FONT-WEIGHT: bold;
+    FONT-SIZE: 10pt;
+    TEXT-TRANSFORM: capitalize;
+    FONT-FAMILY: Verdana
+}
+.UpperCase
+{
+    FONT-FAMILY: Verdana;
+    FONT-VARIANT: small-caps
+}
+.ChildTable
+{
+    BORDER-RIGHT: silver 1px solid;
+    BORDER-TOP: silver 1px solid;
+    FONT-SIZE: 11pt;
+    BORDER-LEFT: silver 1px solid;
+    BORDER-BOTTOM: silver 1px solid;
+    FONT-FAMILY: Verdana
+}
+.IndexTable
+{
+    BORDER-RIGHT: teal 1pt ridge;
+    PADDING-RIGHT: 0px;
+    BORDER-TOP: teal 1pt ridge;
+    PADDING-LEFT: 0px;
+    FONT-WEIGHT: normal;
+    FONT-SIZE: 12pt;
+    PADDING-BOTTOM: 0px;
+    BORDER-LEFT: teal 1pt ridge;
+    WIDTH: 100%;
+    COLOR: white;
+    PADDING-TOP: 0px;
+    BORDER-BOTTOM: teal 1pt ridge;
+    FONT-FAMILY: 'Times New Roman';
+    BACKGROUND-COLOR: white
+}
+.IndexRowLevel1
+{
+    BORDER-RIGHT: 1px;
+    BORDER-TOP: 1px;
+    FONT-WEIGHT: normal;
+    FONT-SIZE: 13pt;
+    BORDER-LEFT: 1px;
+    BORDER-BOTTOM: 1px;
+    FONT-FAMILY: 'Times New Roman';
+    BACKGROUND-COLOR: #f5f5ff
+}
+.IndexTopRow
+{
+    BORDER-RIGHT: 1px;
+    BORDER-TOP: 1px;
+    FONT-WEIGHT: normal;
+    FONT-SIZE: 13pt;
+    BORDER-LEFT: 1px;
+    COLOR: white;
+    BORDER-BOTTOM: 1px;
+    FONT-FAMILY: 'Times New Roman'
+}
+.ChildTableTd
+{
+    BACKGROUND-COLOR: #f5f5ff
+}
+.OddTd
+{
+    BORDER-RIGHT: #f5f5ff 1px;
+    BORDER-TOP: #f5f5ff 1px;
+    PADDING-LEFT: 5px;
+    FONT-SIZE: 9pt;
+    BORDER-LEFT: #baa2ff 1px solid;
+    BORDER-BOTTOM: 1px;
+    FONT-FAMILY: Verdana;
+    BACKGROUND-COLOR: #f5f5ff
+}
+.EvenTd
+{
+    BORDER-RIGHT: 1px;
+    BORDER-TOP: 1px;
+    PADDING-LEFT: 5px;
+    FONT-SIZE: 9pt;
+    BORDER-LEFT: #baa2ff 1px solid;
+    BORDER-BOTTOM: 1px;
+    FONT-FAMILY: Verdana
+}
+.Bline
+{
+    BORDER-BOTTOM: 1px solid;
+    BACKGROUND-COLOR: lavender
+}
+.TableInfo
+{
+    BORDER-RIGHT: #baa2ff 1px solid;
+    BORDER-TOP: #baa2ff 1px solid;
+    WIDTH: 100%;
+    BORDER-BOTTOM: #baa2ff 1px solid;
+    FONT-FAMILY: 'Times New Roman'
+}
+.LBorder
+{
+    BORDER-RIGHT: 1px;
+    BORDER-TOP: 1px;
+    FONT-SIZE: 10pt;
+    BORDER-LEFT: #baa2ff 1px solid;
+    COLOR: green;
+    BORDER-BOTTOM: #baa2ff 1px solid;
+    FONT-FAMILY: Verdana;
+    BACKGROUND-COLOR: #f5f5ff
+}
+.LBorderOddTD
+{
+    BORDER-RIGHT: 1px;
+    BORDER-TOP: 1px;
+    FONT-SIZE: 10pt;
+    BORDER-LEFT: #baa2ff 1px solid;
+    COLOR: green;
+    BORDER-BOTTOM: #baa2ff 1px solid;
+    FONT-FAMILY: Verdana
+}
+.FormulaOddTD
+{
+    BORDER-RIGHT: #f5f5ff 1px;
+    BORDER-TOP: medium none;
+    PADDING-LEFT: 5px;
+    FONT-SIZE: 9pt;
+    BORDER-LEFT: #baa2ff 1px solid;
+    BORDER-BOTTOM: medium none;
+    FONT-FAMILY: 'Courier New';
+    BACKGROUND-COLOR: #f5f5ff
+}
+.FormulaEvenTD
+{
+    BORDER-RIGHT: 1px;
+    BORDER-TOP: 1px;
+    PADDING-LEFT: 5px;
+    FONT-SIZE: 9pt;
+    BORDER-LEFT: #baa2ff 1px solid;
+    BORDER-BOTTOM: 1px;
+    FONT-FAMILY: 'Courier New'
+}
+.Text
+{
+    PAGE-BREAK-BEFORE: always;
+    PADDING-LEFT: 5pt;
+    PAGE-BREAK-AFTER: always;
+    VERTICAL-ALIGN: super;
+    WIDTH: 100%;
+    CURSOR: default;
+    BACKGROUND-COLOR: #f5f5ff
+}
+PRE
+{
+    WIDTH: 100%
+}
+.FieldValues1
+{
+    FONT-SIZE: 10pt;
+    FONT-FAMILY: 'Times New Roman'
+}
+.MappingOddTD
+{
+    BORDER-RIGHT: 1px;
+    BORDER-TOP: 1px;
+    FONT-SIZE: 9pt;
+    BORDER-LEFT: #baa2ff 1px solid;
+    COLOR: blue;
+    BORDER-BOTTOM: 1px;
+    FONT-FAMILY: Verdana;
+    BACKGROUND-COLOR: #f5f5ff
+}
+.MappingEvenTD
+{
+    FONT-SIZE: 9pt;
+    BORDER-LEFT: #baa2ff 1px solid;
+    COLOR: blue;
+    FONT-FAMILY: Verdana
+}
+HR
+{
+    BORDER-RIGHT: medium none;
+    BORDER-TOP: medium none;
+    FONT-SIZE: 0pt;
+    BORDER-LEFT: medium none;
+    BORDER-BOTTOM: medium none;
+    HEIGHT: 2pt;
+    BACKGROUND-COLOR: #f5f5ff
+}

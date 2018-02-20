@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<SwiftMessageFormat name="MT081">
+	<standard-version><![CDATA[SRG 2015]]></standard-version>
+	<standard-release-qualifier>20150731</standard-release-qualifier>
+	<DescriptiveName><![CDATA[Daily Check Report]]></DescriptiveName>
+	<Category><![CDATA[System]]></Category>
+	<Description><![CDATA[This message lists the number of messages sent and received for all FIN or GPA sessions closed since the
+previous Daily Check Report.
+
+From: GPA or FIN To: User]]></Description>
+	<SwiftFields>
+		<customizable>true</customizable>
+		<modifiable>true</modifiable>
+		<SwiftMessageType>System</SwiftMessageType>
+		<HeaderAndTrailerType>SWIFT_INPUT_HEADER</HeaderAndTrailerType>
+		<Header>
+		</Header>
+		<Data>
+			<Fields>
+				<SystemField Name="section-number">
+					<description><![CDATA[Sequential section number, beginning with 0001,to identify the position of an individual message in a multiple-section message.]]></description>
+					<datatype>String</datatype>
+					<required>true</required>
+					<SwiftSystemFieldDef Name="section-number" Tag="202">
+						<Format><![CDATA[4!n]]></Format>
+						<Specification><![CDATA[(section-number)]]></Specification>
+						<Description><![CDATA[Sequential section number, beginning with 0001,to identify the position of an individual message in a multiple-section message.]]></Description>
+						<Validations>
+							<Validation>
+								<formula>(ToInt($value) &gt; 0)</formula>
+								<error-code>V07</error-code>
+								<actionmessage>"Invalid Section Number '" + $value + "'"</actionmessage>
+							</Validation>
+						</Validations>
+					</SwiftSystemFieldDef>
+				</SystemField>
+				<SystemField Name="total-sections">
+					<description><![CDATA[Total number of sections in a multi-section message.]]></description>
+					<datatype>String</datatype>
+					<required>true</required>
+					<SwiftSystemFieldDef Name="total-sections" Tag="203">
+						<Format><![CDATA[4!n]]></Format>
+						<Specification><![CDATA[(total-sections)]]></Specification>
+						<Description><![CDATA[Total number of sections in a multi-section message.]]></Description>
+					</SwiftSystemFieldDef>
+				</SystemField>
+				<SystemGroup Name="Group">
+					<datatype>Section</datatype>
+					<minoccurs>0</minoccurs>
+					<maxoccurs>-1</maxoccurs>
+					<Fields>
+						<SystemField Name="lt-code">
+							<description><![CDATA[9th character of BIC-12.]]></description>
+							<datatype>String</datatype>
+							<required>false</required>
+							<SwiftSystemFieldDef Name="lt-code" Tag="305">
+								<Format><![CDATA[1!c]]></Format>
+								<Specification><![CDATA[(lt-code)]]></Specification>
+								<Description><![CDATA[9th character of BIC-12.]]></Description>
+							</SwiftSystemFieldDef>
+						</SystemField>
+						<SystemField Name="session-info">
+							<description><![CDATA[Session information, including:
+
+a)  session number
+
+b)  date session opened
+
+c)  time session opened
+
+d)  date session closed
+
+e)  time session closed
+
+f)  reason for closure
+
+g)  quantity of messages sent
+
+h)  quantity of messages received
+
+i)  first ISN
+
+j)  last ISN
+
+k)  first OSN
+
+l)  last OSN]]></description>
+							<datatype>Section</datatype>
+							<minoccurs>0</minoccurs>
+							<maxoccurs>-1</maxoccurs>
+							<SwiftSystemFieldDef Name="session-info" Tag="331">
+								<Format><![CDATA[(4!n)(6!n)(4!n)(6!n)(4!n)(3!n)(6!n)(6!n)(6!n)(6!n)(6!n)(6!n)]]></Format>
+								<Specification><![CDATA[(session-number)(session-opened-date)(session-opened-time)(session-closed-date)(session-closed-time)(error-code)(isn-qty)(osn-qty)(first-isn)(last-isn)(first-osn)(last-osn)]]></Specification>
+								<Description><![CDATA[Session information, including:
+
+a)  session number
+
+b)  date session opened
+
+c)  time session opened
+
+d)  date session closed
+
+e)  time session closed
+
+f)  reason for closure
+
+g)  quantity of messages sent
+
+h)  quantity of messages received
+
+i)  first ISN
+
+j)  last ISN
+
+k)  first OSN
+
+l)  last OSN]]></Description>
+								<Validations>
+									<Validation>
+										<subfield>session-opened-date</subfield>
+										<formula>IsDate($value,"yyMMdd")</formula>
+										<error-code>V04</error-code>
+										<actionmessage>"Invalid Session-Opened-Date '" + $value + "'. session-opened-date should be in the format yyMMdd."</actionmessage>
+									</Validation>
+									<Validation>
+										<subfield>session-opened-time</subfield>
+										<formula>IsDate($value,"HHmm")</formula>
+										<error-code>V05</error-code>
+										<actionmessage>"Invalid Session-Opened-Time '" + $value + "'. session-opened-time should be in the format HHmm."</actionmessage>
+									</Validation>
+									<Validation>
+										<subfield>session-closed-date</subfield>
+										<formula>IsDate($value,"yyMMdd")</formula>
+										<error-code>V04</error-code>
+										<actionmessage>"Invalid Session-Closed-Date '" + $value + "'. session-closed-date should be in the format yyMMdd."</actionmessage>
+									</Validation>
+									<Validation>
+										<subfield>session-closed-time</subfield>
+										<formula>IsDate($value,"HHmm")</formula>
+										<error-code>V05</error-code>
+										<actionmessage>"Invalid Session-Closed-Time '" + $value + "'. session-closed-time should be in the format HHmm."</actionmessage>
+									</Validation>
+								</Validations>
+							</SwiftSystemFieldDef>
+						</SystemField>
+						<SystemField Name="lt-summary">
+							<description><![CDATA[LT summary, including:
+
+a)  total messages sent
+
+b)  total messages received]]></description>
+							<datatype>Section</datatype>
+							<minoccurs>1</minoccurs>
+							<maxoccurs>1</maxoccurs>
+							<SwiftSystemFieldDef Name="lt-summary" Tag="332">
+								<Format><![CDATA[(6!n)(6!n)]]></Format>
+								<Specification><![CDATA[(isn-qty)(osn-qty)]]></Specification>
+								<Description><![CDATA[LT summary, including:
+
+a)  total messages sent
+
+b)  total messages received]]></Description>
+							</SwiftSystemFieldDef>
+						</SystemField>
+					</Fields>
+				</SystemGroup>
+			</Fields>
+		</Data>
+		<Trailer>
+		</Trailer>
+	</SwiftFields>
+	<validationrules name="Default">
+		<hdrvalidationrules>
+			<fieldvalidations>
+			</fieldvalidations>
+		</hdrvalidationrules>
+		<datavalidationrules>
+			<fieldvalidations>
+			</fieldvalidations>
+		</datavalidationrules>
+		<tlrvalidationrules>
+			<fieldvalidations>
+			</fieldvalidations>
+		</tlrvalidationrules>
+	</validationrules>
+</SwiftMessageFormat>
+

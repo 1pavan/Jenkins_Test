@@ -1,0 +1,22 @@
+<!ELEMENT CustomerCode ( #PCDATA ) >
+
+<!ELEMENT FniNameKeyTable ( NameKeyDefList ) >
+
+<!ELEMENT MTType ( #PCDATA ) >
+
+<!ELEMENT NameKey ( #PCDATA ) >
+
+<!ELEMENT NameKeyAsn ( #PCDATA ) >
+
+<!ELEMENT NameKeyDef ( NameKey | RowDefList )* >
+
+<!ELEMENT NameKeyDefList ( NameKeyDef+ ) >
+
+<!ELEMENT NameKeyTrn ( #PCDATA ) >
+
+<!ELEMENT OutputQueue ( #PCDATA ) >
+
+<!ELEMENT RowDef ( CustomerCode | MTType | NameKeyAsn | NameKeyTrn | OutputQueue )* >
+
+<!ELEMENT RowDefList ( RowDef+ ) >
+

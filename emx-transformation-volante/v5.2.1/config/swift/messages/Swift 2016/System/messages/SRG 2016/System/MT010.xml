@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<SwiftMessageFormat name="MT010">
+	<standard-version><![CDATA[SRG 2016]]></standard-version>
+	<standard-release-qualifier>20160308</standard-release-qualifier>
+	<DescriptiveName><![CDATA[Non-Delivery Warning]]></DescriptiveName>
+	<Category><![CDATA[System]]></Category>
+	<Description><![CDATA[This message indicates that a message that was being monitored in case of non-delivery, was not delivered before its obsolescence period expired.
+	
+	From: FIN     To: User]]></Description>
+	<SwiftFields>
+		<customizable>true</customizable>
+		<modifiable>true</modifiable>
+		<SwiftMessageType>System</SwiftMessageType>
+		<HeaderAndTrailerType>SWIFT_INPUT_HEADER</HeaderAndTrailerType>
+		<Header>
+		</Header>
+		<Data>
+			<Fields>
+				<SystemField Name="mir">
+					<description><![CDATA[MIR of the undelivered message,containing:
+
+a)  Input date
+
+b)  Input LT including branch code
+
+c)  Session number
+
+d)  ISN]]></description>
+					<datatype>Section</datatype>
+					<minoccurs>1</minoccurs>
+					<maxoccurs>1</maxoccurs>
+					<SwiftSystemFieldDef Name="mir" Tag="106">
+						<Format><![CDATA[(6!n)(4!a2!a2!c1!c)(3!c)(4!n)(6!n)]]></Format>
+						<Specification><![CDATA[(date)(lt-identifier)(branch-code)(session-number)(isn)]]></Specification>
+						<Description><![CDATA[Message input reference of the undelivered message, containing:
+
+a)  Input date
+
+b)  Input LT including branch code
+
+c)  Session number
+
+d)  ISN]]></Description>
+						<Validations>
+							<Validation>
+								<subfield>date</subfield>
+								<formula>IsDate($value,"yyMMdd")</formula>
+								<error-code>V04</error-code>
+								<actionmessage>"Invalid Input Date '" + $value + "'"</actionmessage>
+							</Validation>
+						</Validations>
+					</SwiftSystemFieldDef>
+				</SystemField>
+				<SystemField Name="mur">
+					<description><![CDATA[Contains one of the following:
+					1.Message User Reference as used in the header of the original message if present.      
+     2.If no message user reference was present in the original message, this tag may contain the contents of field 20 of the original message or (for Category 5 messages only) the contents of field 20C, with the code word SEME.]]></description>
+					<datatype>String</datatype>
+					<required>false</required>
+					<SwiftSystemFieldDef Name="mur" Tag="108">
+						<Format><![CDATA[16x]]></Format>
+						<Specification><![CDATA[(mur)]]></Specification>
+						<Description><![CDATA[Message User Reference as used in the header of the original message if present.Tag 108 with only blanks (spaces) is accepted by the system.]]></Description>
+					</SwiftSystemFieldDef>
+				</SystemField>
+				<SystemField Name="msg-status">
+					<description><![CDATA[Message status (for example, whether delivered or aborted). See FIN Error Codes module for the full set of error codes.]]></description>
+					<datatype>String</datatype>
+					<required>true</required>
+					<SwiftSystemFieldDef Name="msg-status" Tag="431">
+						<Format><![CDATA[2!n]]></Format>
+						<Specification><![CDATA[(msg-status)]]></Specification>
+						<Description><![CDATA[Message status (for example, whether delivered or aborted). See FIN Error Codes module for the full set of error codes.]]></Description>
+					</SwiftSystemFieldDef>
+				</SystemField>
+				<SystemField Name="swift-address">
+					<description><![CDATA[Complete 12-character destination, including LT code and branch code, or default branch code to which the undelivered message was sent.]]></description>
+					<datatype>String</datatype>
+					<required>true</required>
+					<SwiftSystemFieldDef Name="swift-address" Tag="102">
+						<Format><![CDATA[(4!a2!a2!c1!c3!c)]]></Format>
+						<Specification><![CDATA[(swift-address)]]></Specification>
+						<Description><![CDATA[Complete 12-character destination, including logical terminal code and branch code, or default branch code XXX.]]></Description>
+					</SwiftSystemFieldDef>
+				</SystemField>
+				<SystemField Name="msg-priority">
+					<description><![CDATA[Message Priority, where:
+
+a)  S = system
+
+b)  U = urgent
+
+c)  N = normal]]></description>
+					<datatype>String</datatype>
+					<required>true</required>
+					<SwiftSystemFieldDef Name="msg-priority" Tag="104">
+						<Format><![CDATA[1!a]]></Format>
+						<Specification><![CDATA[(msg-priority)]]></Specification>
+						<Description><![CDATA[Message Priority, where:
+
+a)  S = system
+
+b)  U = urgent
+
+c)  N = normal]]></Description>
+						<Validations>
+							<Validation>
+								<formula>In($value, "S", "U", "N")</formula>
+								<error-code>V08</error-code>
+								<actionmessage>"Invalid Message Priority '" + $value + "'"</actionmessage>
+							</Validation>
+						</Validations>
+					</SwiftSystemFieldDef>
+				</SystemField>
+			</Fields>
+		</Data>
+		<Trailer>
+		</Trailer>
+	</SwiftFields>
+	<validationrules name="Default">
+		<hdrvalidationrules>
+			<fieldvalidations>
+			</fieldvalidations>
+		</hdrvalidationrules>
+		<datavalidationrules>
+			<fieldvalidations>
+			</fieldvalidations>
+		</datavalidationrules>
+		<tlrvalidationrules>
+			<fieldvalidations>
+			</fieldvalidations>
+		</tlrvalidationrules>
+	</validationrules>
+</SwiftMessageFormat>
+

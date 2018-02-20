@@ -1,0 +1,19 @@
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="unqualified"
+            attributeFormDefault="unqualified">
+    <!-- include constructs -->
+    <xsd:include schemaLocation="cartridge-include.xsd"/>
+    <xsd:include schemaLocation="formulafunction.xsd"/>
+    <xsd:complexType name="FunctionDefFolder">
+        <xsd:sequence>
+            <xsd:element ref="additional-properties" minOccurs="0"/>
+            <xsd:element name="description" type="xsd:string" minOccurs="0"/>
+            <xsd:choice minOccurs="0" maxOccurs="unbounded">
+                <xsd:element ref="FormulaFunctionDef"/>
+                <xsd:element name="folder" type="FunctionDefFolder"/>
+            </xsd:choice>
+            <xsd:element ref="elementproperties"/>
+        </xsd:sequence>
+        <xsd:attribute name="name" type="xsd:string"/>
+        <xsd:attribute name="type" type="xsd:string" fixed="FunctionDefFolder"/>
+    </xsd:complexType>
+</xsd:schema>

@@ -1,0 +1,9 @@
+#ifndef CANONICALTAGALIAS_H
+#define CANONICALTAGALIAS_H
+enum
+{
+CFT_QuoteAssistCode=11146
+};
+
+#endif /* CANONICALTAGALIAS_H */
+

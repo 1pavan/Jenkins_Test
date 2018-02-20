@@ -1,0 +1,39 @@
+<!-- Please follow the instructions given below -->
+<TITLE> Deploying EJB Application In Orion </TITLE>
+<H1> <CENTER> Deploying EJB Application In Orion </CENTER> </H1>
+<B>
+<font face = " Verdana" size="2">
+To deploy the generated EJB application '${APPNAME}' perform the following steps<BR><BR>
+</B>
+1.Specify the correct path for ORION_DIR in  ${APPNAME}\client\setpath.bat. <BR><BR>
+2.Copy the following statement to ORION_DIR\config\server.xml directory. 
+</font>
+<PRE>
+<font face = " Courier New " size="2">
+&lt;application name="${APPNAME}"
+             path="file:///${CARTDIR}" /&gt;
+</font>
+</PRE>
+<P>
+<B>
+<font face = " Verdana" size="2">
+To test the application '${APPNAME}' perform the following steps
+</B>
+<BR><BR>
+1. Start orion.<BR><BR>
+2. Start ${APPNAME}\client\execute.bat. The message flows and external messages deployed will
+   be displayed. Execute the message flow or external message you want to test.
+</P>
+</font>
+
+
+<P>
+<font face = " Verdana" size="2">
+<B>
+Executing EJB Application From Command Processor
+</B>
+</font>
+</P>
+
+
+

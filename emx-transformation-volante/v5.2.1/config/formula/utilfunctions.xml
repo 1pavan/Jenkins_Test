@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<formulae>
+    <formula name="Info">
+        <description>Logs the string.</description>
+        <signature>Info(str)</signature>
+        <category>Util</category>
+        <Class>com.tplus.transform.design.formula.functions.LogFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.UtilFunctions"/>
+        <property name="method" value="info"/>
+    </formula>
+	<formula name="Info">
+        <description>Logs the object.</description>
+        <signature>Info(dataObject)</signature>
+        <category>Util</category>
+        <Class>com.tplus.transform.design.formula.functions.LogFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.UtilFunctions"/>
+        <property name="method" value="info"/>
+    </formula>
+	
+    <formula name="Error">
+        <description>Logs the string.</description>
+        <signature>Error(str)</signature>
+        <category>Util</category>
+        <Class>com.tplus.transform.design.formula.functions.LogFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.UtilFunctions"/>
+        <property name="method" value="error"/>
+    </formula>
+	<formula name="Error">
+        <description>Logs the object.</description>
+        <signature>Error(dataObject)</signature>
+        <category>Util</category>
+        <Class>com.tplus.transform.design.formula.functions.LogFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.UtilFunctions"/>
+        <property name="method" value="error"/>
+    </formula>
+	
+    <formula name="Debug">
+        <description>Logs the string.</description>
+        <signature>Debug(str)</signature>
+        <category>Util</category>
+        <Class>com.tplus.transform.design.formula.functions.LogFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.UtilFunctions"/>
+        <property name="method" value="debug"/>
+    </formula>
+	<formula name="Debug">
+        <description>Logs the object.</description>
+        <signature>Debug(dataObject)</signature>
+        <category>Util</category>
+        <Class>com.tplus.transform.design.formula.functions.LogFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.UtilFunctions"/>
+        <property name="method" value="debug"/>
+    </formula>
+
+    <formula name="UUID">
+        <description>Returns a randomly generated universally unique identifier (UUID). A UUID represents a 128-bit value.</description>
+        <signature>UUID()</signature>
+        <category>Util</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.UtilFunctions"/>
+        <property name="method" value="uuid"/>
+    </formula>
+    <formula name="GetContextProperty" alias="GetProperty">
+        <description>Gets the context property indicated by the specified name. If the property does not exist and a default value is not specified an empty string is returned. TransformContext must be available at the
+            usage point.
+        </description>
+        <signature>GetContextProperty(name, defaultValOpt)</signature>
+        <category>Util</category>
+        <Class>com.tplus.transform.design.formula.functions.TransformContextFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.UtilFunctions"/>
+        <property name="method" value="getContextProperty"/>
+    </formula>
+
+    <formula name="SetContextProperty">
+        <description>Sets the context property indicated by the specified name. TransformContext must be available at the usage point.</description>
+        <signature>SetContextProperty(name, value)</signature>
+        <category>Util</category>
+        <Class>com.tplus.transform.design.formula.functions.TransformContextFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.UtilFunctions"/>
+        <property name="method" value="setContextProperty"/>
+    </formula>
+
+    <formula name="SetContextObjectProperty">
+        <description>Sets the context property indicated by the specified name with specified Object/Variant. TransformContext must be available at the usage point.</description>
+        <signature>SetContextObjectProperty(name, value)</signature>
+        <category>Util</category>
+        <Class>com.tplus.transform.design.formula.functions.TransformContextFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.UtilFunctions"/>
+        <property name="method" value="setContextObjectProperty"/>
+    </formula>
+
+    <formula name="GetContextObjectProperty">
+        <description>Gets the context property indicated by the specified name as a Object/Variant. If the property does not exist null is is returned. TransformContext must be available at the usage point.</description>
+        <signature>GetContextObjectProperty(name)</signature>
+        <category>Util</category>
+        <Class>com.tplus.transform.design.formula.functions.TransformContextFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.UtilFunctions"/>
+        <property name="method" value="getContextObjectProperty"/>
+    </formula>
+
+    <formula name="SetJavaProperty">
+        <description>Sets the Java bean property indicated by the specified name.  The first parameter should be of Object/Variant type</description>
+        <signature>SetJavaProperty(object, name, value)</signature>
+        <category>Util</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.UtilFunctions"/>
+        <property name="method" value="setJavaProperty"/>
+    </formula>
+
+    <formula name="GetJavaProperty">
+        <description>Gets the Java bean property indicated by the specified name as an Object/Variant.  The first  parameter should be of Object/Variant type.</description>
+        <signature>GetJavaProperty(object, name)</signature>
+        <category>Util</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.UtilFunctions"/>
+        <property name="method" value="getJavaProperty"/>
+    </formula>
+
+    <formula name="LoadInternalMessagesXML">
+        <description>Loads one of more internal messages XML from resource files in the classpath and returns a collection of Internal message objects.
+            resourceFileName : Name of the resource file name. Resource file(s) must be bundled in one or more of the Jars and included in the classpath. One simple option would be include it as part of a cartridge (as external source)
+            messageName : Name of the internal message.
+            Returns: Collection of internal messages or empty collection if no such config file is found.
+            Throws : Transform Exception if there is an error in reading one of the XMLs.
+        </description>
+        <signature>LoadInternalMessagesXML(resourceFileName, messageName)</signature>
+        <category>Util</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.UtilFunctions"/>
+        <property name="method" value="loadInternalMessagesXML"/>
+    </formula>
+	
+	<formula name="CreateProperties">
+        <description>Returns empty raw message to which properties can be added. </description>
+        <signature>CreateProperties()</signature>
+        <category>Util</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.UtilFunctions"/>
+        <property name="method" value="createProperties"/>
+    </formula>
+	<formula name="LoadPropertiesFromResource">
+        <description>Loads properties from resource.</description>
+        <signature>LoadPropertiesFromResource(rawMessage, resourceFileName)</signature>
+        <category>Util</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.UtilFunctions"/>
+        <property name="method" value="loadPropertiesFromResource"/>
+    </formula>
+	<formula name="LoadPropertiesFromResource">
+        <description>Loads properties from resource to specified raw message.</description>
+        <signature>LoadPropertiesFromResource(resourceFileName)</signature>
+        <category>Util</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.UtilFunctions"/>
+        <property name="method" value="loadPropertiesFromResource"/>
+    </formula>
+</formulae>

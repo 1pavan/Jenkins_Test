@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<SwiftMessageFormat name="MT410">
+	<standard>SWIFT</standard>
+	<standard-name>MT410</standard-name>
+	<standard-version>SRG 2016</standard-version>
+	<standard-release-qualifier>20160308</standard-release-qualifier>
+	<DescriptiveName><![CDATA[Acknowledgement]]></DescriptiveName>
+	<Category>Collections &amp; Cash Letters</Category>
+	<Description>This message type is sent by a collecting bank to a remitting bank to acknowledge the receipt of a collection.
+
+It may also be sent by a collecting bank to another collecting bank.
+
+Unless otherwise expressly stated, this message type states that the collecting bank intends to act in accordance with the collection instruction.</Description>
+	<SwiftFields>
+		<customizable>true</customizable>
+		<modifiable>false</modifiable>
+		<SwiftMessageType>User</SwiftMessageType>
+		<max-length>2000</max-length>
+		<HeaderAndTrailerType>SWIFT_INPUT_OUTPUT_HEADER</HeaderAndTrailerType>
+		<Header>
+		</Header>
+		<Data>
+			<Fields>
+				<SwiftSequence Name="A">
+					<Name>A</Name>
+					<Description><![CDATA[Sequence A]]></Description>
+					<Mandatory>true</Mandatory>
+					<Repeating>false</Repeating>
+					<Fields>
+						<SwiftSequence Name="A1">
+							<Name>A1</Name>
+							<Description><![CDATA[Subsequence of A]]></Description>
+							<Mandatory>true</Mandatory>
+							<Repeating>true</Repeating>
+							<Fields>
+								<SwiftField Name="20">
+									<SwiftFieldDef Name="20">
+										<Generic>false</Generic>
+										<Description><![CDATA[Reference]]></Description>
+										<Option Name="">
+											<Format><![CDATA[16x]]></Format>
+											<Specification><![CDATA[(Sending Bank's TRN)]]></Specification>
+											<Description><![CDATA[Sending Bank's TRN]]></Description>
+										</Option>
+									</SwiftFieldDef>
+									<Repeating>false</Repeating>
+									<Presence>M</Presence>
+									<Options> </Options>
+									<Validations>
+										<SubField Name="Sending_Bank's_TRN">
+											<Validation>
+												<Options> </Options>
+												<ErrorCode>T26</ErrorCode>
+												<Comment><![CDATA[This field must not start or end with a slash '/' and must not contain two consecutive slashes '//' (Error code(s): T26).]]></Comment>
+												<ValidationPattern xsi:type="T26" Type="T26">
+													<Type>T26</Type>
+												</ValidationPattern>
+											</Validation>
+										</SubField>
+									</Validations>
+								</SwiftField>
+								<SwiftField Name="21">
+									<SwiftFieldDef Name="21">
+										<Generic>false</Generic>
+										<Option Name="">
+											<Format><![CDATA[16x]]></Format>
+											<Specification><![CDATA[(Related Reference)]]></Specification>
+											<Description><![CDATA[Related Reference]]></Description>
+										</Option>
+									</SwiftFieldDef>
+									<Repeating>false</Repeating>
+									<Presence>M</Presence>
+									<Options> </Options>
+									<Validations>
+										<SubField Name="Related_Reference">
+											<Validation>
+												<Options> </Options>
+												<ErrorCode>T26</ErrorCode>
+												<Comment><![CDATA[This field must not start or end with a slash '/' and must not contain two consecutive slashes '//' (Error code(s): T26).]]></Comment>
+												<ValidationPattern xsi:type="T26" Type="T26">
+													<Type>T26</Type>
+												</ValidationPattern>
+											</Validation>
+										</SubField>
+									</Validations>
+								</SwiftField>
+								<SwiftField Name="32a">
+									<SwiftFieldDef Name="32">
+										<Generic>false</Generic>
+										<Option Name="A">
+											<Format><![CDATA[6!n3!a15d]]></Format>
+											<Specification><![CDATA[(Date) (Currency) (Amount)]]></Specification>
+											<Description><![CDATA[Amount Acknowledged]]></Description>
+										</Option>
+										<Option Name="B">
+											<Format><![CDATA[3!a15d]]></Format>
+											<Specification><![CDATA[(Currency) (Amount)]]></Specification>
+											<Description><![CDATA[Amount Acknowledged]]></Description>
+										</Option>
+										<Option Name="K">
+											<Format><![CDATA[1!a3!n2!a3!a15d]]></Format>
+											<Specification><![CDATA[(Day/Month) (# of Days/Months)(Code) (Currency) (Amount)]]></Specification>
+											<Description><![CDATA[Amount Acknowledged]]></Description>
+										</Option>
+									</SwiftFieldDef>
+									<Repeating>false</Repeating>
+									<Presence>M</Presence>
+									<Options>B, A, K</Options>
+									<Validations>
+										<SubField Name="Date">
+											<Validation>
+												<Options>A</Options>
+												<ErrorCode>T50</ErrorCode>
+												<Comment><![CDATA[In option A, Date must be a valid date expressed as YYMMDD (Error code(s): T50).]]></Comment>
+												<ValidationPattern xsi:type="DATE" Type="DATE">
+													<Type>DATE</Type>
+													<Format>yyMMdd</Format>
+												</ValidationPattern>
+											</Validation>
+										</SubField>
+										<SubField Name="Currency">
+											<Validation>
+												<Options>A, B, K</Options>
+												<ErrorCode>T52</ErrorCode>
+												<Comment><![CDATA[Currency must be a valid ISO 4217 currency code (Error code(s): T52).]]></Comment>
+												<ValidationPattern xsi:type="Currency_Code" Type="Currency Code">
+													<Type>Currency Code</Type>
+												</ValidationPattern>
+											</Validation>
+										</SubField>
+										<SubField Name="Code">
+											<Validation>
+												<Options>K</Options>
+												<ErrorCode>T20</ErrorCode>
+												<Comment><![CDATA[In option K, Code must contain one of the following codes specifying additional information  about the maturity period (Error code(s): T20):]]></Comment>
+												<ValidationPattern xsi:type="CODE" Type="CODE">
+													<Type>CODE</Type>
+													<Codes>
+														<Code Name="BE">
+															<Description>After date of bill of exchange</Description>
+														</Code>
+														<Code Name="CC">
+															<Description>After customs clearance of goods</Description>
+														</Code>
+														<Code Name="FD">
+															<Description>After goods pass food and drug administration</Description>
+														</Code>
+														<Code Name="FP">
+															<Description>First presentation</Description>
+														</Code>
+														<Code Name="GA">
+															<Description>After arrival of goods</Description>
+														</Code>
+														<Code Name="ID">
+															<Description>After invoice date</Description>
+														</Code>
+														<Code Name="ST">
+															<Description>After sight</Description>
+														</Code>
+														<Code Name="TD">
+															<Description>After date of transport documents</Description>
+														</Code>
+														<Code Name="XX">
+															<Description>See field 72 for specification</Description>
+														</Code>
+													</Codes>
+												</ValidationPattern>
+											</Validation>
+										</SubField>
+										<SubField Name="Day/Month">
+											<Validation>
+												<Options>K</Options>
+												<ErrorCode>T61</ErrorCode>
+												<Comment><![CDATA[In option K, Day/Month must contain one of the following codes (Error code(s): T61):]]></Comment>
+												<ValidationPattern xsi:type="CODE" Type="CODE">
+													<Type>CODE</Type>
+													<Codes>
+														<Code Name="D">
+															<Description>Maturity period is expressed as a number of days</Description>
+														</Code>
+														<Code Name="M">
+															<Description>Maturity period is expressed as a number of months</Description>
+														</Code>
+													</Codes>
+												</ValidationPattern>
+											</Validation>
+										</SubField>
+										<SubField Name="Amount">
+											<Validation>
+												<Options>A, B, K</Options>
+												<ErrorCode>C03</ErrorCode>
+												<Comment><![CDATA[The number of digits following the comma must not exceed the maximum number allowed for the specified currency.]]></Comment>
+												<ValidationPattern xsi:type="Decimal" Type="Decimal">
+													<Type>Decimal</Type>
+													<currency-field>Currency</currency-field>
+												</ValidationPattern>
+											</Validation>
+										</SubField>
+									</Validations>
+								</SwiftField>
+							</Fields>
+						</SwiftSequence>
+						<SwiftField Name="72">
+							<SwiftFieldDef Name="72">
+								<Generic>false</Generic>
+								<Description><![CDATA[Sender to Receiver Information]]></Description>
+								<Option Name="">
+									<Format><![CDATA[6*35x]]></Format>
+									<Specification><![CDATA[(Narrative)]]></Specification>
+									<Description><![CDATA[Sender to Receiver Information]]></Description>
+								</Option>
+							</SwiftFieldDef>
+							<Repeating>false</Repeating>
+							<Presence>O</Presence>
+							<Options> </Options>
+						</SwiftField>
+					</Fields>
+				</SwiftSequence>
+			</Fields>
+		</Data>
+		<Trailer>
+		</Trailer>
+	</SwiftFields>
+	<validationrules name="Default">
+		<hdrvalidationrules>
+			<fieldvalidations>
+				<fieldvalidation>
+					<name>U09</name>
+					<formula><![CDATA[if($this.Header.GetFieldIndex("User_Header") != -1) {
+    def userHeader = $this.Header.GetSection("User_Header");
+    if(userHeader.$size > 0 && userHeader[0].IsNotNull("Validation_Flag")) {
+        return false;
+    }
+}
+return true;
+]]></formula>
+					<severity>error</severity>
+					<cascade>true</cascade>
+					<error-code>U09</error-code>
+					<actionmessage><![CDATA["User has used tag 119 in a message that is not a candidate for special processing"]]></actionmessage>
+				</fieldvalidation>
+	<fieldvalidation>
+		<name>U03</name>
+		<fieldname>User Header</fieldname>
+		<formula><![CDATA[Iff(IsNotNull(User_Header.Service_Type_Identifier), 
+    IsNotNull(User_Header.Unique_End_To_End_Transaction_Reference))]]></formula>
+		<severity>error</severity>
+		<cascade>true</cascade>
+		<error-code>U03</error-code>
+		<actionmessage><![CDATA["When populating an end-to-end reference, both fields 111 and 121 must be populated: a message that contains only one of these two fields will not be accepted by FIN."]]></actionmessage>
+	</fieldvalidation>
+			</fieldvalidations>
+		</hdrvalidationrules>
+		<datavalidationrules>
+			<fieldvalidations>
+				<fieldvalidation>
+					<name>C1</name>
+					<fieldname>A</fieldname>
+					<formula><![CDATA[A[0].A1.$size <= 10]]></formula>
+					<severity>error</severity>
+					<cascade>true</cascade>
+					<error-code>T10</error-code>
+					<actionmessage><![CDATA["Fields 20, 21, and 32a may not appear more than ten times."]]></actionmessage>
+				</fieldvalidation>
+				<fieldvalidation>
+					<name>C2</name>
+					<fieldname>A.A1.32a.Currency</fieldname>
+					<formula><![CDATA[$value == A[0].A1[0].F32a[0].Currency]]></formula>
+					<severity>error</severity>
+					<cascade>true</cascade>
+					<error-code>C02</error-code>
+					<actionmessage><![CDATA["The currency code in the amount field 32a must be the same for all occurrences of this field in the message."]]></actionmessage>
+				</fieldvalidation>
+				<fieldvalidation>
+					<name>ERI</name>
+					<fieldname>A.72.Narrative</fieldname>
+					<formula><![CDATA[ApplyERICodeValidationStructured($value);]]></formula>
+					<severity>error</severity>
+					<cascade>true</cascade>
+					<error-code>T47</error-code>
+					<actionmessage><![CDATA["In an ERI field (i.e. fields 61, 72, 77A, 79, 86) the data part of a code word /OCMT/, or /CHGS/, is being validated, but the ending separator (i.e. third slash) is missing or the code words are duplicated."]]></actionmessage>
+				</fieldvalidation>
+			</fieldvalidations>
+		</datavalidationrules>
+		<tlrvalidationrules>
+			<fieldvalidations>
+			</fieldvalidations>
+		</tlrvalidationrules>
+	</validationrules>
+</SwiftMessageFormat>
+

@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<SwiftMessageFormat name="MT052">
+	<standard-version><![CDATA[SRG 2015]]></standard-version>
+	<standard-release-qualifier>20150731</standard-release-qualifier>
+	<DescriptiveName><![CDATA[Delivery Subset Status Report]]></DescriptiveName>
+	<Category><![CDATA[System]]></Category>
+	<Description><![CDATA[This message gives the total number of messages awaiting delivery in each subset at generation time. It is
+the response to an MT 032 Delivery Subset Status Request.
+
+From: GPA or FIN To: User]]></Description>
+	<SwiftFields>
+		<customizable>true</customizable>
+		<modifiable>true</modifiable>
+		<SwiftMessageType>System</SwiftMessageType>
+		<HeaderAndTrailerType>SWIFT_INPUT_HEADER</HeaderAndTrailerType>
+		<Header>
+		</Header>
+		<Data>
+			<Fields>
+				<SystemField Name="subset-sharing">
+					<description><![CDATA[Indicates the way in which selected FIN delivery subsets can be shared among multiple logical terminals of a destination, where:
+ 
+                     N = subset sharing is not allowed
+
+                     O = sharing allowed using overflow mechanism
+
+                     L = sharing allowed using load-balancing mechanism
+
+                     If this field is not present, then subset sharing is not allowed]]></description>
+					<datatype>String</datatype>
+					<required>false</required>
+					<minoccurs>0</minoccurs>
+					<maxoccurs>1</maxoccurs>
+					<SwiftSystemFieldDef Name="subset-sharing" Tag="348">
+						<Format><![CDATA[1!c]]></Format>
+						<Specification><![CDATA[(subset-sharing)]]></Specification>
+						<Description><![CDATA[Indicates the way in which selected FIN delivery subsets can be shared among multiple logical terminals of a destination, where: 
+
+                          N = subset sharing is not allowed
+
+                          O = sharing allowed using overflow mechanism
+
+                          L = sharing allowed using load-balancing mechanism
+
+                       If this field is not present, then subset sharing is not allowed]]></Description>
+						<Validations>
+							<Validation>
+								<formula>In($value, "N","O","L")</formula>
+								<error-code>V08</error-code>
+								<actionmessage>"Invalid Subset Sharing value '" + $value + "'.Valid Subset Sharing values are : N,O,L."</actionmessage>
+							</Validation>
+						</Validations>
+					</SwiftSystemFieldDef>
+				</SystemField>
+				<SystemField Name="delivery-subset-status">
+					<description><![CDATA[Can be repeated as many times as there are delivery subsets. It specifies the delivery subset name, the number of messages in the queue and, optionally, the logical terminal code or codes if the logical terminals are sharing subsets. For example: {336:NORMAL00000ABC}.
+
+For LT-directed queues, the delivery subset name is in the form LTDIRa where a identifies the logical terminal that selects the specified subset. For example: {336:LTDIRB00000B}.]]></description>
+					<datatype>Section</datatype>
+					<minoccurs>0</minoccurs>
+					<maxoccurs>-1</maxoccurs>
+					<SwiftSystemFieldDef Name="delivery-subset-status" Tag="336">
+						<Format><![CDATA[(6!c)(5!n)[36c]]]></Format>
+						<Specification><![CDATA[(delivery-subset-name)(count)(lt-code)]]></Specification>
+						<Additional-Format><![CDATA[([1!c [*1-36]])]]></Additional-Format>
+						<Description><![CDATA[Can be repeated as many times as there are delivery subsets. It specifies the delivery subset name, the number of messages in the queue and, optionally, the logical terminal code or codes if the logical terminals are sharing subsets. For example: {336:NORMAL00000ABC}.
+
+For LT-directed queues, the delivery subset name is in the form LTDIRa where a identifies the logical terminal that selects the specified subset. For example: {336:LTDIRB00000B}.]]></Description>
+					</SwiftSystemFieldDef>
+				</SystemField>
+				<SystemField Name="report-code">
+					<description><![CDATA[Report error code. In the General Purpose Application, 001 if the report is empty.]]></description>
+					<datatype>String</datatype>
+					<required>false</required>
+					<SwiftSystemFieldDef Name="report-code" Tag="461">
+						<Format><![CDATA[3!c]]></Format>
+						<Specification><![CDATA[(report-code)]]></Specification>
+						<Description><![CDATA[Report error code. See the FIN Error Codes module for the full set of error codes.]]></Description>
+					</SwiftSystemFieldDef>
+				</SystemField>
+			</Fields>
+		</Data>
+		<Trailer>
+		</Trailer>
+	</SwiftFields>
+	<validationrules name="Default">
+		<hdrvalidationrules>
+			<fieldvalidations>
+			</fieldvalidations>
+		</hdrvalidationrules>
+		<datavalidationrules>
+			<fieldvalidations>
+				<fieldvalidation>
+					<name>E1</name>
+					<comment><![CDATA[Only ONE of the, 336 or 461 contained in the report.]]></comment>
+					<formula><![CDATA[Iff(delivery_subset_status.$size > 0, IsNull(report_code))]]></formula>
+					<severity>error</severity>
+					<cascade>true</cascade>
+					<error-code>V03</error-code>
+					<actionmessage><![CDATA["Only ONE of the, 336 or 461 must be present, both cannot be present."]]></actionmessage>
+				</fieldvalidation>
+			</fieldvalidations>
+		</datavalidationrules>
+		<tlrvalidationrules>
+			<fieldvalidations>
+			</fieldvalidations>
+		</tlrvalidationrules>
+	</validationrules>
+</SwiftMessageFormat>
+

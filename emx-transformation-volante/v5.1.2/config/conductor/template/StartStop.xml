@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<messageflowtemplate name="StartStop">
+	<descriptiveName><![CDATA[aa]]></descriptiveName>
+	<category><![CDATA[General]]></category>
+	<description><![CDATA[Creates a message flow with just start & stop activities]]></description>
+	<serviceelements>
+	</serviceelements>
+	<variables>
+	</variables>
+	<originalmessageflow>
+		<messageflow name="" type="MessageFlow">
+			<version>1.0</version>
+			<transaction>Required</transaction>
+			<flowelement name="Start1" uid="a3fbf35b-b24b-4c00-bb16-c4713a99f585" type="Start" >
+				<label>Start</label>
+				<visual>
+					<position x="212" y="54"/>
+					<line-color>#008000</line-color>
+					<text-color>#000000</text-color>
+					<fill-color>#F0F0FF</fill-color>
+				</visual>
+			</flowelement>
+			<flowelement name="Stop1" uid="e52873a4-f8b7-4bbb-8690-560d2987d8e7" type="Stop" >
+				<label>Stop</label>
+				<visual>
+					<position x="212" y="109"/>
+					<line-color>#008000</line-color>
+					<text-color>#000000</text-color>
+					<fill-color>#F0F0FF</fill-color>
+				</visual>
+			</flowelement>
+			<link type="Default">
+				<controlflow>true</controlflow>
+				<dataflow>false</dataflow>
+				<outputport uid="a3fbf35b-b24b-4c00-bb16-c4713a99f585" portindex="0"/>
+				<inputport uid="e52873a4-f8b7-4bbb-8690-560d2987d8e7" portindex="0"/>
+				<edge-type>DIRECT</edge-type>
+			</link>
+			<visual>
+				<bounds x="182" y="42" width="60" height="80"/>
+			</visual>
+			<elementproperties>
+				<propertymap>
+				</propertymap>
+			</elementproperties>
+		</messageflow>
+	</originalmessageflow>
+</messageflowtemplate>
+

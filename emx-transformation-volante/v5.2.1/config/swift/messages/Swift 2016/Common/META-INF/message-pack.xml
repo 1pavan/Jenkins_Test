@@ -1,0 +1,32 @@
+<message-pack xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <url>http://www.volantetech.com</url>
+
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.volantetech.volante</groupId>
+    <artifactId>volante-swift-common</artifactId>
+    <packaging>jar</packaging>
+    <version>SRG 2016</version>
+    <classifier>20160308</classifier>
+    <name>SWIFT - Common Messages</name>
+
+    <description><![CDATA[<b><i>S.W.I.F.T.</i></b> SCRL is the abbreviation for Society for Worldwide Interbank Financial Telecommunication, Societe Cooperative a Responsibilite Limited. SWIFT's purpose is to provide technology-based communication services across all financial markets through member banks so that they can profitably meet their own and their end-customers' needs.
+    Minimum dependency for this message pack is Swift Plugin 5.1.2.
+        
+    This pack includes Common category with the following messages-<ol><li>MTAllTags</li><li>MTGeneric</li><li>MTn90</li><li>MTn91</li><li>MTn92</li><li>MTn95</li><li>MTn96</li><li>MTn98</li><li>MTn99</li></ol>    
+    <b>MTAllTags -</b> This message consists of all the tags like 11 to 99 which are extensively used in a swift message.
+    <b>MTGeneric -</b> This message is a generic message which can be used in place of any user message from MT101 to MT999.
+    <b>MTn90, MTn91, MTn92, MTn95, MTn96, MTn98, MTn99 -</b> These messages are generic under 90, 91 or other series (e.g. MTn90 can be used in place of MT190, MT290... Same goes with others).
+    
+    For additional information please refer Release notes/readme document.]]></description>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.volantetech.volante</groupId>
+            <artifactId>SWIFT</artifactId>
+            <version>5.1.2</version>
+        </dependency>
+    </dependencies>
+
+</message-pack>

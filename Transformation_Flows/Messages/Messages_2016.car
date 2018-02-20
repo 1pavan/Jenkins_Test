@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<cartridge xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="5.2.1" name="Messages_2016" type="Cartridge">
+	<version>1.0</version>
+	<private>
+		<summary>
+			<function name="IsSwiftSequenceEmpty"/>
+			<function name="IsSwiftSequenceEmpty"/>
+			<function name="IsSwiftSequenceEmpty"/>
+			<function name="IsSwiftSequenceEmpty"/>
+			<function name="IsSwiftSequenceEmpty"/>
+			<function name="IsSwiftSequenceEmpty"/>
+			<function name="IsSwiftSequenceEmpty"/>
+			<function name="IsSwiftSequenceEmpty"/>
+			<function name="IsSwiftSequenceEmpty"/>
+			<function name="IsSwiftSequenceEmpty"/>
+			<function name="IsSwiftSequenceEmpty"/>
+			<function name="IsSwiftSequenceEmpty"/>
+			<function name="IsSwiftSequenceEmpty"/>
+			<function name="IsSwiftSequenceEmpty"/>
+			<function name="IsSwiftSequenceEmpty"/>
+			<function name="IsSwiftSequenceEmpty"/>
+		</summary>
+	</private>
+	<references type="References">
+		<reference>
+			<type>Cartridge</type>
+			<relative-path>MT0_2016.car</relative-path>
+			<absolute-path>E:\Mounika\PROJECTS\FNI\August\22082017\FNIV1.3-RT1\src\Transformation_Flows\Messages\MT0_2016.car</absolute-path>
+		</reference>
+		<reference>
+			<type>Cartridge</type>
+			<relative-path>MT1-2_2016.car</relative-path>
+			<absolute-path>E:\Mounika\PROJECTS\FNI\August\22082017\FNIV1.3-RT1\src\Transformation_Flows\Messages\MT1-2_2016.car</absolute-path>
+		</reference>
+		<reference>
+			<type>Cartridge</type>
+			<relative-path>MT3-4_2016.car</relative-path>
+			<absolute-path>E:\Mounika\PROJECTS\FNI\August\22082017\FNIV1.3-RT1\src\Transformation_Flows\Messages\MT3-4_2016.car</absolute-path>
+		</reference>
+		<reference>
+			<type>Cartridge</type>
+			<relative-path>MT5_2016.car</relative-path>
+			<absolute-path>E:\Mounika\PROJECTS\FNI\August\22082017\FNIV1.3-RT1\src\Transformation_Flows\Messages\MT5_2016.car</absolute-path>
+		</reference>
+		<reference>
+			<type>Cartridge</type>
+			<relative-path>MT6-7_2016.car</relative-path>
+			<absolute-path>E:\Mounika\PROJECTS\FNI\August\22082017\FNIV1.3-RT1\src\Transformation_Flows\Messages\MT6-7_2016.car</absolute-path>
+		</reference>
+		<reference>
+			<type>Cartridge</type>
+			<relative-path>MT8-9_2016.car</relative-path>
+			<absolute-path>E:\Mounika\PROJECTS\FNI\August\22082017\FNIV1.3-RT1\src\Transformation_Flows\Messages\MT8-9_2016.car</absolute-path>
+		</reference>
+	</references>
+	<elementproperties>
+		<propertymap>
+			<property name="DOCUMENT_PROPERTIES">
+				<value>
+					<propertymap>
+						<property name="Creation Time" value="Mon Jun 29 15:43:35 IST 2015"/>
+						<property name="Author" value="xbbkqpv"/>
+						<property name="Title" value="Messages_2015"/>
+						<property name="Client Id" value="mounikaHYD@volantetech.com"/>
+						<property name="Last Author" value="sys"/>
+						<property name="Last Save Time" value="Thu Aug 24 11:42:54 IST 2017"/>
+						<property name="Designer Build" value="1631"/>
+						<property name="Revision Number" value="24"/>
+					</propertymap>
+				</value>
+			</property>
+			<property name="CARTRIDGE_INFO">
+				<value>
+					<propertymap type="com.tplus.transform.design.CartridgeInfo">
+						<property name="GeneratedFiles">
+							<value>
+								<propertymap>
+								</propertymap>
+							</value>
+						</property>
+						<property name="cartridgefilename" value="E:\Mounika\PROJECTS\FNI\August\22082017\FNIV1.3-RT1\src\Transformation_Flows\Messages\Messages_2016.car"/>
+					</propertymap>
+				</value>
+			</property>
+		</propertymap>
+	</elementproperties>
+	<workspace>
+		<selected-element root="E:\Mounika\PROJECTS\FNI\August\22082017\FNIV1.3-RT1\src\Transformation_Flows\Messages\Messages_2016.car">Messages_2016/References</selected-element>
+	</workspace>
+</cartridge>
+

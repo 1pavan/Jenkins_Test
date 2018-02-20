@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<SwiftMessageFormat name="MT21GPA_ACKNAK">
+	<standard-version><![CDATA[SRG 2015]]></standard-version>
+	<standard-release-qualifier>20150731</standard-release-qualifier>
+	<DescriptiveName><![CDATA[Acknowledgement of a GPA Message Sent by an LT (ACK/NAK)]]></DescriptiveName>
+	<Category><![CDATA[Service]]></Category>
+	<Description><![CDATA[This message confirms that the system has received a message with Service Identifier 01 from a user, and that the system has accepted (ACK) or rejected (NAK) the message.
+
+From: GPA To: User
+
+Notes
+The Basic Header identifies the message which is being acknowledged. The LT in the Basic Header is
+exactly the same as the sending LT in the input message header.]]></Description>
+	<SwiftFields>
+		<customizable>true</customizable>
+		<modifiable>true</modifiable>
+		<SwiftMessageType>Service</SwiftMessageType>
+		<HeaderAndTrailerType>SWIFT_INPUT_HEADER</HeaderAndTrailerType>
+		<Header>
+		</Header>
+		<Data>
+			<Fields>
+				<SystemField Name="date-time">
+					<description><![CDATA[Date and time, local to the user, at which the Slice Processor safe stored the acknowledged message (whether the acknowledgement is an ACK or a NAK).]]></description>
+					<datatype>String</datatype>
+					<required>true</required>
+					<SwiftSystemFieldDef Name="date-time" Tag="177">
+						<Format><![CDATA[(10!n)]]></Format>
+						<Specification><![CDATA[(date-time)]]></Specification>
+						<Additional-Format><![CDATA[YYMMDDHHMM]]></Additional-Format>
+						<Description><![CDATA[Date and time are always given as local, unless otherwise specified. Local time for the SWIFT Network is in GMT.]]></Description>
+						<Validations>
+							<Validation>
+								<formula>IsDate($value,"yyMMddHHmm")</formula>
+								<error-code>V05</error-code>
+								<actionmessage>"Invalid Date/Time '" + $value + "'"</actionmessage>
+							</Validation>
+						</Validations>
+					</SwiftSystemFieldDef>
+				</SystemField>
+				<SystemField Name="accept-reject">
+					<description><![CDATA[Accepted or rejected, where:
+
+a)  0 = accepted
+
+b)  1 = rejected]]></description>
+					<datatype>String</datatype>
+					<required>true</required>
+					<SwiftSystemFieldDef Name="accept-reject" Tag="451">
+						<Format><![CDATA[1!n]]></Format>
+						<Specification><![CDATA[(accept-reject)]]></Specification>
+						<Description><![CDATA[Accepted or rejected, where:
+
+a)  0 = accepted
+
+b)  1 = rejected]]></Description>
+						<Validations>
+							<Validation>
+								<formula>In($value, "0","1")</formula>
+								<error-code>V04</error-code>
+								<actionmessage>"Invalid Accept-Reject value '" + $value + "'."</actionmessage>
+							</Validation>
+						</Validations>
+					</SwiftSystemFieldDef>
+				</SystemField>
+				<SystemField Name="rejection-reason">
+					<description><![CDATA[Reason for rejection. See the SWIFTNet FIN Error Codes module for the full set of error codes.
+
+Also contains a line number (for user-to-user messages) or a field number (for system messages).]]></description>
+					<datatype>Section</datatype>
+					<minoccurs>0</minoccurs>
+					<maxoccurs>1</maxoccurs>
+					<SwiftSystemFieldDef Name="rejection-reason" Tag="405">
+						<Format><![CDATA[(3!c)([3!n])]]></Format>
+						<Specification><![CDATA[(error-code)(line-tag)]]></Specification>
+						<Description><![CDATA[Reason for rejection. See the SWIFTNet FIN Error Codes module for the full set of error codes.
+
+Also contains a line number (for user-to-user messages) or a field number (for system messages).]]></Description>
+					</SwiftSystemFieldDef>
+				</SystemField>
+			</Fields>
+		</Data>
+		<Trailer>
+		</Trailer>
+	</SwiftFields>
+	<validationrules name="Default">
+		<hdrvalidationrules>
+			<fieldvalidations>
+			</fieldvalidations>
+		</hdrvalidationrules>
+		<datavalidationrules>
+			<fieldvalidations>
+			</fieldvalidations>
+		</datavalidationrules>
+		<tlrvalidationrules>
+			<fieldvalidations>
+			</fieldvalidations>
+		</tlrvalidationrules>
+	</validationrules>
+</SwiftMessageFormat>
+

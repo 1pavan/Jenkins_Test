@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<SwiftMessageFormat name="MT029">
+	<standard-version><![CDATA[SRG 2014]]></standard-version>
+	<standard-release-qualifier>20140520</standard-release-qualifier>
+	<DescriptiveName><![CDATA[FIN Copy Message Status Report]]></DescriptiveName>
+	<Category><![CDATA[System]]></Category>
+	<Description><![CDATA[This message returns counts of messages queued at the FIN Copy Server. It is the response to an MT 028 FIN Copy Message Status Request.The message length of MT 029 is 10,000 characters only if the corresponding MT 028 FINCopy Message
+Status Request has a tag 243 value of 3. Otherwise the length remains 2,000 characters.
+
+See the FIN Copy Service Description module for further information.
+
+From: FIN      To:FIN Copy Server
+
+Notes:
+
+The optional fields <date-time>, <service-code> and <cut-off-time-count> are only
+present in the first section of the report.
+
+When field 243:<hold-queue-request-type> of the MT 028 FIN Copy Message Status
+Request is 1, the MT 029 FIN Copy Message Status Report provides the counts and MIRs for all messages in the hold queue. Otherwise, only the counts are provided.
+
+Field 343 contains four 5-digit numbers, separated by a space. The sequence of numbers contains the following information
+    • The number of status 1 urgent messages with an ACK time later than the start time (if given) and earlier than the cut-off or end times.
+    • The number of status 2 urgent messages with an ACK time later than the start time (if given) and earlier
+than the cut-off or end times.
+• The number of status 1 normal messages with an ACK time later than the start time (if given) and
+earlier than the cut-off or end times.
+• The number of status 2 normal messages with an ACK time later than the start time (if given) and
+earlier than the cut-off or end times.
+If a message is status 1, this means that the FIN Copy message has been received by the SWIFT
+system but the MT 096 FIN Copy to Central Institution Message has not yet been received by
+the Central Institution server.
+If a message is status 2, this means that the MT 096 message has been received by the Central Institution
+server, but the message has not yet been released by the server (that is, the message is in the FIN
+Copy hold queue).
+]]></Description>
+	<SwiftFields>
+		<customizable>false</customizable>
+		<modifiable>true</modifiable>
+		<SwiftMessageType>System</SwiftMessageType>
+		<HeaderAndTrailerType>SWIFT_INPUT_HEADER</HeaderAndTrailerType>
+		<Header>
+		</Header>
+		<Data>
+			<Fields>
+				<SystemField Name="section-number">
+					<description><![CDATA[Sequential section number, beginning with 0001, identifying the position of an individual message in a multiple-section message.]]></description>
+					<datatype>String</datatype>
+					<required>true</required>
+					<SwiftSystemFieldDef Name="section-number" Tag="202">
+						<Format><![CDATA[4!n]]></Format>
+						<Specification><![CDATA[(section-number)]]></Specification>
+						<Description><![CDATA[Sequential section number, beginning with 0001, identifying the position of an individual message in a multiple-section message.]]></Description>
+						<Validations>
+							<Validation>
+								<formula>(ToInt($value) &gt; 0)</formula>
+								<error-code>V07</error-code>
+								<actionmessage>"Invalid Section Number '" + $value + "'"</actionmessage>
+							</Validation>
+						</Validations>
+					</SwiftSystemFieldDef>
+				</SystemField>
+				<SystemField Name="total-sections">
+					<description><![CDATA[Total number of sections in a multi-section message.]]></description>
+					<datatype>String</datatype>
+					<required>true</required>
+					<SwiftSystemFieldDef Name="total-sections" Tag="203">
+						<Format><![CDATA[4!n]]></Format>
+						<Specification><![CDATA[(total-sections)]]></Specification>
+						<Description><![CDATA[Total number of sections in a multi-section message.]]></Description>
+					</SwiftSystemFieldDef>
+				</SystemField>
+				<SystemGroup Name="Group177">
+					<datatype>Section</datatype>
+					<minoccurs>0</minoccurs>
+					<maxoccurs>2</maxoccurs>
+					<Fields>
+						<SystemField Name="date-time">
+							<description><![CDATA[Local to the FIN Copy Server.]]></description>
+							<datatype>String</datatype>
+							<required>false</required>
+							<SwiftSystemFieldDef Name="date-time" Tag="177">
+								<Format><![CDATA[(10!n)]]></Format>
+								<Specification><![CDATA[(date-time)]]></Specification>
+								<Additional-Format><![CDATA[YYMMDDHHMM]]></Additional-Format>
+								<Description><![CDATA[Date and time are always given as local, unless otherwise specified. Local time for the SWIFTNetwork is in GMT.]]></Description>
+								<Validations>
+									<Validation>
+										<formula>IsDate($value,"yyMMddHHmm")</formula>
+										<error-code>V05</error-code>
+										<actionmessage>"Invalid Date/Time '" + $value + "'"</actionmessage>
+									</Validation>
+								</Validations>
+							</SwiftSystemFieldDef>
+						</SystemField>
+					</Fields>
+				</SystemGroup>
+				<SystemField Name="service-code">
+					<description><![CDATA[FIN Copy Service Code.]]></description>
+					<datatype>String</datatype>
+					<required>false</required>
+					<SwiftSystemFieldDef Name="service-code" Tag="103">
+						<Format><![CDATA[3!a]]></Format>
+						<Specification><![CDATA[(service-code)]]></Specification>
+						<Description><![CDATA[FIN Copy Service Code.]]></Description>
+					</SwiftSystemFieldDef>
+				</SystemField>
+				<SystemField Name="cut-off-time-count_1">
+					<description><![CDATA[Four 5-digit numbers, each separated by a space]]></description>
+					<datatype>Section</datatype>
+					<minoccurs>0</minoccurs>
+					<maxoccurs>1</maxoccurs>
+					<SwiftSystemFieldDef Name="cut-off-time-count" Tag="343">
+						<Format><![CDATA[(5n1!e5n1!e5n1!e5n)]]></Format>
+						<Specification><![CDATA[(cut-off-time-count)]]></Specification>
+						<Additional-Format><![CDATA[([5!n [*1-n]])]]></Additional-Format>
+						<Description><![CDATA[Four 5-digit numbers, each separated by a space]]></Description>
+					</SwiftSystemFieldDef>
+				</SystemField>
+				<SystemField Name="cut-off-time-count_2">
+					<description><![CDATA[Field 533 contains one 5-digit number.]]></description>
+					<datatype>Section</datatype>
+					<minoccurs>0</minoccurs>
+					<maxoccurs>1</maxoccurs>
+					<SwiftSystemFieldDef Name="cut-off-time-count" Tag="533">
+						<Format><![CDATA[5!n]]></Format>
+						<Specification><![CDATA[(cut-off-time-count)]]></Specification>
+						<Description><![CDATA[Field 533 contains one 5-digit number.]]></Description>
+					</SwiftSystemFieldDef>
+				</SystemField>
+				<SystemField Name="mir">
+					<description><![CDATA[MIR of the message in the hold queue, containing:
+
+a)  Input date
+
+b)  Input LT including branch code
+
+c)  Session number
+
+d)  ISN
+
+This field can be repeated up to 40 times when <hold-queuerequest-type> is 1 and up to 245 times when <hold-queuerequest-type> is 3.]]></description>
+					<datatype>Section</datatype>
+					<minoccurs>0</minoccurs>
+					<maxoccurs>245</maxoccurs>
+					<SwiftSystemFieldDef Name="mir" Tag="106">
+						<Format><![CDATA[(6!n)(4!a2!a2!c1!c)(3!c)(4!n)(6!n)]]></Format>
+						<Specification><![CDATA[(date)(lt-identifier)(branch-code)(session-number)(isn)]]></Specification>
+						<Description><![CDATA[MIR containing:
+
+a)  Input date
+
+b)  Input LT including branch code
+
+c)  Session number
+
+d)  ISN
+
+This field can be repeated up to 40 times when <hold-queuerequest-type> is 1 and up to 245 times when <hold-queuerequest-type> is 3.]]></Description>
+						<Validations>
+							<Validation>
+								<subfield>date</subfield>
+								<formula>IsDate($value,"yyMMdd")</formula>
+								<error-code>V04</error-code>
+								<actionmessage>"Invalid Input Date '" + $value + "'"</actionmessage>
+							</Validation>
+						</Validations>
+					</SwiftSystemFieldDef>
+				</SystemField>
+			</Fields>
+		</Data>
+		<Trailer>
+		</Trailer>
+	</SwiftFields>
+	<validationrules name="Default">
+		<hdrvalidationrules>
+			<fieldvalidations>
+			</fieldvalidations>
+		</hdrvalidationrules>
+		<datavalidationrules>
+			<fieldvalidations>
+				<fieldvalidation>
+					<name>E1</name>
+					<formula><![CDATA[!(cut_off_time_count_1.$size > 0 && cut_off_time_count_2.$size > 0)]]></formula>
+					<severity>error</severity>
+					<cascade>true</cascade>
+					<error-code>V07</error-code>
+					<actionmessage><![CDATA["Either field 343 or field 533 will be present, but not both."]]></actionmessage>
+				</fieldvalidation>
+			</fieldvalidations>
+		</datavalidationrules>
+		<tlrvalidationrules>
+			<fieldvalidations>
+			</fieldvalidations>
+		</tlrvalidationrules>
+	</validationrules>
+</SwiftMessageFormat>
+

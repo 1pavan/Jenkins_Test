@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<formulae> 
+	<formula name="MD5">
+			<description>Returns the MD5 digest of the given message.</description>
+			<signature>MD5(rawMessage)</signature>
+			<category>Security</category>
+	  		<Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+			<property name="class" value="com.tplus.transform.runtime.formula.SecurityFunctions" />
+			<property name="method" value="md5" />
+    </formula>
+	<formula name="MD5">
+			<description>Returns the MD5 digest of the given message.</description>
+			<signature>MD5(binary)</signature>
+			<category>Security</category>
+	  		<Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+			<property name="class" value="com.tplus.transform.runtime.formula.SecurityFunctions" />
+			<property name="method" value="md5" />
+    </formula>
+    
+	<formula name="SHA">
+        <description>Returns the SHA digest of the given message.</description>
+        <signature>SHA(rawMessage)</signature>
+        <category>Security</category>
+          <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.SecurityFunctions" />
+        <property name="method" value="sha" />
+    </formula>
+	<formula name="SHA">
+        <description>Returns the SHA digest of the given message.</description>
+        <signature>SHA(binary)</signature>
+        <category>Security</category>
+          <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.SecurityFunctions" />
+        <property name="method" value="sha" />
+    </formula>
+		
+    <formula name="SHA256">
+        <description>Returns the SHA256 digest of the given message.</description>
+        <signature>SHA256(rawMessage)</signature>
+        <category>Security</category>
+          <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.SecurityFunctions" />
+        <property name="method" value="sha256" />
+    </formula>
+	<formula name="SHA256">
+        <description>Returns the SHA256 digest of the given message.</description>
+        <signature>SHA256(binary)</signature>
+        <category>Security</category>
+          <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.SecurityFunctions" />
+        <property name="method" value="sha256" />
+    </formula>
+	
+</formulae>

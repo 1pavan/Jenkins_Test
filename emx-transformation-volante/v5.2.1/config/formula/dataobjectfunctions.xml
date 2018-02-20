@@ -1,0 +1,636 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<formulae>
+
+    <formula name="IsNull">
+        <description>Returns true if the field indicated by fieldNameOrIndex has a null value.</description>
+        <signature>IsNull(obj, fieldNameOrIndex)</signature>
+        <category>DataObject</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.DataObjectFunctions"/>
+        <property name="method" value="objIsNull"/>
+    </formula>
+    <formula name="IsNotNull">
+        <description>Returns true if the field indicated by fieldNameOrIndex has a non-null value.</description>
+        <signature>IsNotNull(obj, fieldNameOrIndex)</signature>
+        <category>DataObject</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.DataObjectFunctions"/>
+        <property name="method" value="objIsNotNull"/>
+    </formula>
+
+    <formula name="SetNull">
+        <description>Sets the value of a field indicated by fieldNameOrIndex to 'null'.</description>
+        <signature>SetNull(obj, fieldNameOrIndex)</signature>
+        <category>DataObject</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.DataObjectFunctions"/>
+        <property name="method" value="objsetNull"/>
+    </formula>
+
+    <formula name="GetBoolean">
+        <description>Returns the value of the field indicated by fieldNameOrIndex from the given object. The object should be a data object (element of a section). The return type is 'boolean'.</description>
+        <signature>GetBoolean(obj, fieldNameOrIndex)</signature>
+        <category>DataObject</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.DataObjectFunctions"/>
+        <property name="method" value="objGetBoolean"/>
+    </formula>
+
+    <formula name="SetBoolean">
+        <description>Sets the value of the field indicated by fieldNameOrIndex in the given object. The object should be a data object (element of a section). The value should be of type 'boolean'.</description>
+        <signature>SetBoolean(obj, fieldNameOrIndex, value)</signature>
+        <category>DataObject</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.DataObjectFunctions"/>
+        <property name="method" value="objSetBoolean"/>
+    </formula>
+
+    <formula name="GetVariant">
+        <description>Returns the value of the field indicated by fieldNameOrIndex from the given object as a variant. The object should be a data object (element of a section). The return type is 'variant'.</description>
+        <signature>GetVariant(obj, fieldNameOrIndex)</signature>
+        <category>DataObject</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.DataObjectFunctions"/>
+        <property name="method" value="objGetVariant"/>
+    </formula>
+
+    <formula name="SetVariant">
+        <description>Sets the value of the field indicated by fieldNameOrIndex in the given object. The object should be a data object (element of a section). The value should be of type 'variant'.</description>
+        <signature>SetVariant(obj, fieldNameOrIndex, value)</signature>
+        <category>DataObject</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.DataObjectFunctions"/>
+        <property name="method" value="objSetVariant"/>
+    </formula>
+    <formula name="GetChar">
+        <description>Returns the value of the field indicated by fieldNameOrIndex from the given object. The object should be a data object (element of a section). The return type is 'char'.</description>
+        <signature>GetChar(obj, fieldNameOrIndex)</signature>
+        <category>DataObject</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.DataObjectFunctions"/>
+        <property name="method" value="objGetCharacter"/>
+    </formula>
+
+    <formula name="SetChar">
+        <description>Sets the value of the field indicated by fieldNameOrIndex in the given object. The object should be a data object (element of a section). The value should be of type 'char'.</description>
+        <signature>SetChar(obj, fieldNameOrIndex, Value)</signature>
+        <category>DataObject</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.DataObjectFunctions"/>
+        <property name="method" value="objSetCharacter"/>
+    </formula>
+
+    <formula name="GetInt">
+        <description>Returns the value of the field indicated by fieldNameOrIndex from the given object. The object should be a data object (element of a section). The return type is 'int'.</description>
+        <signature>GetInt(obj, fieldNameOrIndex)</signature>
+        <category>DataObject</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.DataObjectFunctions"/>
+        <property name="method" value="objGetInt"/>
+    </formula>
+
+    <formula name="SetInt">
+        <description>Sets the value of the field indicated by fieldNameOrIndex in the given object. The object should be a data object (element of a section). The value should be of type 'int'.</description>
+        <signature>SetInt(obj, fieldNameOrIndex, value)</signature>
+        <category>DataObject</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.DataObjectFunctions"/>
+        <property name="method" value="objSetInt"/>
+    </formula>
+
+    <formula name="GetString">
+        <description>Returns the value of the field indicated by fieldNameOrIndex from the given object. The object should be a data object (element of a section). The return type is 'String'.</description>
+        <signature>GetString(obj, fieldNameOrIndex)</signature>
+        <category>DataObject</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.DataObjectFunctions"/>
+        <property name="method" value="objGetString"/>
+    </formula>
+
+    <formula name="SetString">
+        <description>Sets the value of the field indicated by fieldNameOrIndex in the given object. The object should be a data object (element of a section). The value should be of type 'String'.</description>
+        <signature>SetString(obj, fieldNameOrIndex, value)</signature>
+        <category>DataObject</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.DataObjectFunctions"/>
+        <property name="method" value="objSetString"/>
+    </formula>
+
+    <formula name="GetSection">
+        <description>Returns the section indicated by secNameOrIndex from the given object. The object should be a data object (element of a section). The return type is 'DataObjectSection'.</description>
+        <signature>GetSection(obj, secNameOrIndex)</signature>
+        <category>DataObject</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.DataObjectFunctions"/>
+        <property name="method" value="objGetSection"/>
+    </formula>
+	
+	<formula name="GetSection">
+        <description>Returns the section.</description>
+        <signature>GetSection(variant)</signature>
+        <category>DataObject</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.DataObjectFunctions"/>
+        <property name="method" value="objGetSection"/>
+    </formula>
+	
+    <formula name="GetObject">
+        <description>Returns the object indicated by objNameOrIndex from the given object. The object should be a data object (element of a section). The return type is 'DataObject'.</description>
+        <signature>GetObject(obj, objNameOrIndex)</signature>
+        <category>DataObject</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.DataObjectFunctions"/>
+        <property name="method" value="objGetObject"/>
+    </formula>
+
+    <formula name="GetDouble">
+        <description>Returns the value of the field indicated by fieldNameOrIndex from the given object. The object should be a data object (element of a section). The return type is 'double'.</description>
+        <signature>GetDouble(obj, fieldNameOrIndex)</signature>
+        <category>DataObject</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.DataObjectFunctions"/>
+        <property name="method" value="objGetDouble"/>
+    </formula>
+
+    <formula name="SetDouble">
+        <description>Sets the value of the field indicated by fieldNameOrIndex in the given object. The object should be a data object (element of a section). The value should be of type 'double'.</description>
+        <signature>SetDouble(obj, fieldNameOrIndex, value)</signature>
+        <category>DataObject</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.DataObjectFunctions"/>
+        <property name="method" value="objSetDouble"/>
+    </formula>
+
+    <formula name="GetLong">
+        <description>Returns the value of the field indicated by fieldNameOrIndex from the given object. The object should be a data object (element of a section). The return type is 'long'.</description>
+        <signature>GetLong(obj, fieldNameOrIndex)</signature>
+        <category>DataObject</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.DataObjectFunctions"/>
+        <property name="method" value="objGetLong"/>
+    </formula>
+
+    <formula name="SetLong">
+        <description>Sets the value of the field indicated by fieldNameOrIndex in the given object. The object should be a data object (element of a section). The value should of type 'long'.</description>
+        <signature>SetLong(obj, fieldNameOrIndex, value)</signature>
+        <category>DataObject</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.DataObjectFunctions"/>
+        <property name="method" value="objSetLong"/>
+    </formula>
+
+    <formula name="GetFloat">
+        <description>Returns the value of the field indicated by fieldNameOrIndex from the given object. The object should be a data object (element of a section). The return type is 'float'.</description>
+        <signature>GetFloat(obj, fieldNameOrIndex)</signature>
+        <category>DataObject</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.DataObjectFunctions"/>
+        <property name="method" value="objGetFloat"/>
+    </formula>
+
+    <formula name="SetFloat">
+        <description>Sets the value of the field indicated by fieldNameOrIndex in the given object. The object should be a data object (element of a section). The value should be of type 'float'.</description>
+        <signature>SetFloat(obj, fieldNameOrIndex, value)</signature>
+        <category>DataObject</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.DataObjectFunctions"/>
+        <property name="method" value="objSetFloat"/>
+    </formula>
+
+    <formula name="GetDate">
+        <description>Returns the value of the field indicated by fieldNameOrIndex from the given object. The object should be a data object (element of a section). The return type is 'Date'.</description>
+        <signature>GetDate(obj, fieldNameOrIndex)</signature>
+        <category>DataObject</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.DataObjectFunctions"/>
+        <property name="method" value="objGetDate"/>
+    </formula>
+
+    <formula name="SetDate">
+        <description>Sets the value of the field indicated by fieldNameOrIndex in the given object. The object should be a data object (element of a section). The value should be of type 'Date'.</description>
+        <signature>SetDate(obj, fieldNameOrIndex, value)</signature>
+        <category>DataObject</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.DataObjectFunctions"/>
+        <property name="method" value="objSetDate"/>
+    </formula>
+
+    <formula name="GetISODate">
+        <description>Returns the value of the field indicated by fieldNameOrIndex from the given object. The object should be a data object (element of a section). The return type is 'Date'.</description>
+        <signature>GetISODate(obj, fieldNameOrIndex)</signature>
+        <category>DataObject</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.DataObjectFunctions"/>
+        <property name="method" value="objGetISODate"/>
+    </formula>
+
+    <formula name="SetISODate">
+        <description>Sets the value of the field indicated by fieldNameOrIndex in the given object. The object should be a data object (element of a section). The value should be of type 'Date'.</description>
+        <signature>SetISODate(obj, fieldNameOrIndex, value)</signature>
+        <category>DataObject</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.DataObjectFunctions"/>
+        <property name="method" value="objSetISODate"/>
+    </formula>
+
+    <formula name="GetBigInteger">
+        <description>Returns the big integer value of the field indicated by fieldNameOrIndex from the given object. The object should be a data object (element of a section).</description>
+        <signature>GetBigInteger(obj, fieldNameOrIndex)</signature>
+        <category>DataObject</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.DataObjectFunctions"/>
+        <property name="method" value="objGetBigInteger"/>
+    </formula>
+
+    <formula name="SetBigInteger">
+        <description>Sets the value of the field indicated by fieldNameOrIndex in the given object. The object should be a data object (element of a section). The value should be of type 'BigInteger'.</description>
+        <signature>SetBigInteger(obj, fieldNameOrIndex, value)</signature>
+        <category>DataObject</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.DataObjectFunctions"/>
+        <property name="method" value="objSetBigInteger"/>
+    </formula>
+
+    <formula name="GetBigDecimal">
+        <description>Returns the big decimal value of the field indicated by fieldNameOrIndex from the given object. The object should be a data object (element of a section).</description>
+        <signature>GetBigDecimal(obj, fieldNameOrIndex)</signature>
+        <category>DataObject</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.DataObjectFunctions"/>
+        <property name="method" value="objGetBigDecimal"/>
+    </formula>
+
+    <formula name="SetBigDecimal">
+        <description>Sets the value of the field indicated by fieldNameOrIndex in the given object. The object should be a data object (element of a section). The value should be of type 'BigDecimal'.</description>
+        <signature>SetBigDecimal(obj, fieldNameOrIndex, value)</signature>
+        <category>DataObject</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.DataObjectFunctions"/>
+        <property name="method" value="objSetBigDecimal"/>
+    </formula>
+
+    <formula name="GetScaledDecimal">
+        <description>Returns the saled decimal value of the field indicated by fieldNameOrIndex from the given object. The object should be a data object (element of a section).</description>
+        <signature>GetScaledDecimal(obj, fieldNameOrIndex)</signature>
+        <category>DataObject</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.DataObjectFunctions"/>
+        <property name="method" value="objGetScaledDecimal"/>
+    </formula>
+
+    <formula name="SetScaledDecimal">
+        <description>Sets the value of the field indicated by fieldNameOrIndex in the given object. The object should be a data object (element of a section). The value should be of type 'BigDecimal'.</description>
+        <signature>SetScaledDecimal(obj, fieldNameOrIndex, value)</signature>
+        <category>DataObject</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.DataObjectFunctions"/>
+        <property name="method" value="objSetScaledDecimal"/>
+    </formula>
+    <formula name="GetBinary">
+        <description>Returns the binary value (byte array) of the field indicated by fieldNameOrIndexfrom the given object. The object should be a data object (element of a section).</description>
+        <signature>GetBinary(obj, fieldNameOrIndex)</signature>
+        <category>DataObject</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.DataObjectFunctions"/>
+        <property name="method" value="objGetBinary"/>
+    </formula>
+
+    <formula name="SetBinary">
+        <description>Sets the value of the field indicated by fieldNameOrIndex in the given object. The object should be a data object (element of a section). The value should be of type 'byte[]'.</description>
+        <signature>SetBinary(obj, fieldNameOrIndex, value)</signature>
+        <category>DataObject</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.DataObjectFunctions"/>
+        <property name="method" value="objSetBinary"/>
+    </formula>
+
+    <formula name="GetFieldCount">
+        <description>Returns the number of fields in the given data object.</description>
+        <signature>GetFieldCount(obj)</signature>
+        <category>DataObject</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.DataObjectFunctions"/>
+        <property name="method" value="objGetFieldCount"/>
+    </formula>
+
+    <formula name="GetFieldIndex">
+        <description>Returns the index of the field with the specified name in the given data object. It returns -1 if the field with the specified name is not found.</description>
+        <signature>GetFieldIndex(obj, fieldName)</signature>
+        <category>DataObject</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.DataObjectFunctions"/>
+        <property name="method" value="objGetFieldIndex"/>
+    </formula>
+
+    <formula name="GetFieldName">
+        <description>Returns the name of the field at the specified index in the given data object. It returns empty string if there is no field at the specified index.</description>
+        <signature>GetFieldName(obj, fieldIndex)</signature>
+        <category>DataObject</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.DataObjectFunctions"/>
+        <property name="method" value="objGetFieldName"/>
+    </formula>
+
+    <formula name="GetFieldType">
+        <description>Returns the type of the field at the specified index in the given data object. It returns empty string if there is no field at the specified index.</description>
+        <signature>GetFieldType(obj, fieldNameOrIndex)</signature>
+        <category>DataObject</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.DataObjectFunctions"/>
+        <property name="method" value="objGetFieldType"/>
+    </formula>
+
+    <formula name="GetFieldId">
+        <description>Returns the ID field at the specified index in the given data object. If fieldNameOrIndexOpt is not specified returns the fieldId of this object/section</description>
+        <signature>GetFieldId(obj, fieldNameOrIndexOpt)</signature>
+        <category>DataObject</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.DataObjectFunctions"/>
+        <property name="method" value="objGetFieldId"/>
+    </formula>
+
+    <formula name="GetFieldAt">
+        <description>Returns the id of the field/section at the specified location in the given data object. For this method to work, the data object should have been obtained from a parser with 'locationInfo' enabled.
+            This function returns empty string if there is no field at the specified location or if location info is not available. Note that the line and column parameters should have a minimum value of 1.
+        </description>
+        <signature>GetFieldAt(obj, line, column)</signature>
+        <category>DataObject</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.DataObjectFunctions"/>
+        <property name="method" value="getFieldAt"/>
+    </formula>
+
+
+    <formula name="FieldIdToFieldName">
+        <description>Converts the field id to the field name by stripping off array accessors.</description>
+        <signature>FieldIdToFieldName(fieldId)</signature>
+        <category>DataObject</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.DataObjectFunctions"/>
+        <property name="method" value="fieldIdToFieldName"/>
+    </formula>
+    <formula name="FieldIdToXPath">
+        <description>Converts the field id to the XPath.</description>
+        <signature>FieldIdToXPath(obj, fieldId, optionsOpt)</signature>
+        <category>DataObject</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.DataObjectFunctions"/>
+        <property name="method" value="fieldIdToXPath"/>
+    </formula>
+
+    <formula name="FieldIdEquals">
+        <description>Returns true if the field ids are the same.</description>
+        <signature>FieldIdEquals(fieldId1, fieldId2)</signature>
+        <category>DataObject</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.DataObjectFunctions"/>
+        <property name="method" value="fieldIdEquals"/>
+    </formula>
+
+    <formula name="GetCanonicalFieldId">
+        <description>Converts the field id to its canonical form (that is always containing array indices).</description>
+        <signature>GetCanonicalFieldId(fieldId)</signature>
+        <category>DataObject</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.DataObjectFunctions"/>
+        <property name="method" value="getCanonicalFieldId"/>
+    </formula>
+
+    <formula name="AddComment">
+        <description>Adds comment to specified field or section. nameOrIndex refers to the field's name or index to which this comment will be associated with. If left out the comment is associated with the object
+            itself.
+        </description>
+        <signature>AddComment(obj, nameOrIndex, comment)</signature>
+        <category>DataObject</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.DataObjectFunctions"/>
+        <property name="method" value="addComment"/>
+    </formula>
+
+	<formula name="AddComment">
+        <description>Comment is associated with the object.
+        </description>
+        <signature>AddComment(obj, comment)</signature>
+        <category>DataObject</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.DataObjectFunctions"/>
+        <property name="method" value="addComment"/>
+    </formula>
+
+    <formula name="GetComments">
+        <description>Gets the comments associated with an object or a field in the DataObject as a StringList.</description>
+        <signature>GetComments(obj, nameOrIndexOpt)</signature>
+        <category>DataObject</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.DataObjectFunctions"/>
+        <property name="method" value="getComments"/>
+    </formula>
+
+    <formula name="GetExceptionProperty">
+        <description>Returns the value of the property with the specified key in the exception object. If the specified property is not available, empty string is returned.</description>
+        <signature>GetExceptionProperty(exObj, key)</signature>
+        <category>Exception</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.DataObjectFunctions"/>
+        <property name="method" value="getExceptionProperty"/>
+    </formula>
+
+    <formula name="SetExceptionProperty">
+        <description>Adds an arbitrary key/value "property" to the exception object. The property can be accessed using getExceptionProperty function.</description>
+        <signature>SetExceptionProperty(exObj, key, value)</signature>
+        <category>Exception</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.DataObjectFunctions"/>
+        <property name="method" value="setExceptionProperty"/>
+    </formula>
+
+    <formula name="GetCascadedExceptions">
+        <description>Returns a collection containing the cascaded exceptions for the given exception. The collection can be iterated using foreach construct. Each element in the collection is an Exception Object with
+            same set of fields as TransformException
+        </description>
+        <signature>GetCascadedExceptions(exObj)</signature>
+        <category>Exception</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.DataObjectFunctions"/>
+        <property name="method" value="getCascadedExceptions"/>
+        <property name="designclass" value="com.tplus.transform.design.formula.functions.SectionFunctions"/>
+        <property name="designmethod" value="getCascadedExceptions"/>
+    </formula>
+
+    <formula name="AddCascadedExceptions">
+        <description>Adds/cascades the exception (toAddEx) to the target exception and returns a collection containing the cascaded exceptions for the given exception. The collection can be iterated using foreach
+            construct. Each element in the collection is an Exception Object with same set of fields as TransformException
+        </description>
+        <signature>AddCascadedExceptions(targetEx, toAddEx)</signature>
+        <category>Exception</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.DataObjectFunctions"/>
+        <property name="method" value="addCascadedExceptions"/>
+    </formula>
+	
+	<formula name="RemoveCascadedExceptions">
+        <description>Removes the exception from target exception. The collection can be iterated using foreach
+            construct. Each element in the collection is an Exception Object with same set of fields as TransformException
+        </description>
+        <signature>RemoveCascadedExceptions(targetEx, toRemoveEx)</signature>
+        <category>Exception</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.DataObjectFunctions"/>
+        <property name="method" value="removeCascadedExceptions"/>
+    </formula>
+
+    <formula name="CreateException">
+        <description>Creates a exception object with specified message</description>
+        <signature>CreateException(message)</signature>
+        <category>Exception</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.DataObjectFunctions"/>
+        <property name="method" value="createException"/>
+        <property name="designclass" value="com.tplus.transform.design.formula.functions.SectionFunctions"/>
+        <property name="designmethod" value="createException"/>
+    </formula>
+
+    <formula name="ThrowException">
+        <description>Throws the exception</description>
+        <signature>ThrowException(ex)</signature>
+        <category>Exception</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.DataObjectFunctions"/>
+        <property name="method" value="throwException"/>
+    </formula>
+
+    <formula name="GetBatchException">
+        <description>Returns the exception encountered while parsing the given record of the batch. This function can be used within a BatchParse activity to get the exceptions associated with current record
+        </description>
+        <signature>GetBatchException(exObj)</signature>
+        <category>DataObject</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.DataObjectFunctions"/>
+        <property name="method" value="getBatchException"/>
+    </formula>
+    <formula name="GetBatchObject">
+        <description>Returns the object associated with the batch. This function can be used within a PhasedParse activity to get the object associated with current record</description>
+        <signature>GetBatchObject(exObj)</signature>
+        <category>DataObject</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.DataObjectFunctions"/>
+        <property name="method" value="getBatchObject"/>
+    </formula>
+    <formula name="GetBatchSection">
+        <description>Returns the section that triggered this callback while parsing the given record of the batch. This function can be used within a PhasedParse activity to get the section associated with current
+            record
+        </description>
+        <signature>GetBatchSection(exObj)</signature>
+        <category>DataObject</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.DataObjectFunctions"/>
+        <property name="method" value="getBatchSection"/>
+    </formula>
+
+    <formula name="ToText">
+        <description>Returns the string representation of the object or primitive value.</description>
+        <signature>ToText(obj)</signature>
+        <category>DataObject</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.DataObjectFunctions"/>
+        <property name="method" value="toText"/>
+    </formula>
+    <formula name="ToXML">
+        <description>Returns the XML string representation of the object (same as ToText).</description>
+        <signature>ToXML(obj)</signature>
+        <category>DataObject</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.DataObjectFunctions"/>
+        <property name="method" value="toText"/>
+    </formula>
+    <formula name="FromXML">
+        <description>Convert XML String to Section.</description>
+        <signature>FromXML(obj, xmlText)</signature>
+        <category>DataObject</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.DataObjectFunctions"/>
+        <property name="method" value="fromText"/>
+    </formula>
+
+    <formula name="ToJSON">
+        <description>Returns the JSON string representation of the object.</description>
+        <signature>ToJSON(obj)</signature>
+        <category>DataObject</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.DataObjectFunctions"/>
+        <property name="method" value="toJSON"/>
+    </formula>
+    <formula name="FromJSON">
+        <description>Convert JSON String to Section</description>
+        <signature>FromJSON(obj, jsonText)</signature>
+        <category>DataObject</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.DataObjectFunctions"/>
+        <property name="method" value="fromJSON"/>
+    </formula>
+
+    <formula name="Equal">
+        <description>Returns true if obj1 equals obj2, returns false otherwise.</description>
+        <signature>Equal(obj1, obj2)</signature>
+        <category>DataObject</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.DataObjectFunctions"/>
+        <property name="method" value="equal"/>
+        <property name="nullable" value="true"/>
+    </formula>
+
+    <formula name="NotEqual">
+        <description>Returns true if obj1 not equals obj2, returns false otherwise.</description>
+        <signature>NotEqual(obj1, obj2)</signature>
+        <category>DataObject</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.DataObjectFunctions"/>
+        <property name="method" value="notEqual"/>
+        <property name="nullable" value="true"/>
+    </formula>
+
+    <formula name="GetParentSection">
+        <description>Returns the parent section of this object or section. The return type is 'DataObjectSection'.</description>
+        <signature>GetParentSection(objOrSec)</signature>
+        <category>DataObject</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.DataObjectFunctions"/>
+        <property name="method" value="objGetParentSection"/>
+        <!--
+                <property name="designclass" value="com.tplus.transform.design.formula.functions.SectionFunctions"/>
+                <property name="designmethod" value="getParentSection"/>
+        -->
+    </formula>
+
+    <formula name="GetParentObject">
+        <description>Returns the parent object of this object or section. The return type is 'DataObject'.</description>
+        <signature>GetParentObject(objOrSec)</signature>
+        <category>DataObject</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.DataObjectFunctions"/>
+        <property name="method" value="objGetParentObject"/>
+        <!--
+                <property name="designclass" value="com.tplus.transform.design.formula.functions.SectionFunctions"/>
+                <property name="designmethod" value="getParentObject"/>
+        -->
+    </formula>
+
+    <formula name="GetParentObjectTyped">
+        <description>Returns the parent object of this object or section. The return type is a typed 'DataObject'.</description>
+        <signature>GetParentObjectTyped(objOrSec)</signature>
+        <category>DataObject</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.DataObjectFunctions"/>
+        <property name="method" value="objGetParentObject"/>
+        <property name="designclass" value="com.tplus.transform.design.formula.functions.SectionFunctions"/>
+        <property name="designmethod" value="getParentObject"/>
+    </formula>
+    <formula name="ToText">
+        <description>Returns the string representation of the object or primitive value.</description>
+        <signature>ToText(obj)</signature>
+        <category>DataObject</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.DataObjectFunctions"/>
+        <property name="method" value="toText"/>
+    </formula>
+</formulae>

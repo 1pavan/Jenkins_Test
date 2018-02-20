@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xpath-functions>
+	<function>
+		<name>ancestor::</name>
+        <signature>ancestor::</signature>
+		<category>Axis</category>
+		<result>node ?</result>
+		<description>Selects all ancestors (parent,grandparent,etc.) of the current node.</description>
+	</function>
+    <function>
+        <name>ancestor-or-self::</name>
+        <signature>ancestor-or-self::</signature>
+        <category>Axis</category>
+        <result>node ?</result>
+        <description>Selects all ancestors (parent,grandparent,etc.) of the current node and the current node itself.</description>
+    </function>
+    <function>
+        <name>attribute::</name>
+        <signature>attribute::</signature>
+        <category>Axis</category>
+        <result>node ?</result>
+        <description>Selects all attributes of the current node.</description>
+    </function>
+    <function>
+        <name>child::</name>
+        <signature>child::</signature>
+        <category>Axis</category>
+        <result>node ?</result>
+        <description>Selects all children of the current node.</description>
+    </function>
+    <function>
+        <name>descendent::</name>
+        <signature>descendent::</signature>
+        <category>Axis</category>
+        <result>node ?</result>
+        <description>Selects all descendants (children,grandchildren,etc.) of the current node.</description>
+    </function>
+    <function>
+        <name>following::</name>
+        <signature>following::</signature>
+        <category>Axis</category>
+        <result>node ?</result>
+        <description>Selects everything in the document after the closing tag of the current node.</description>
+    </function>
+    <function>
+        <name>following-sibling::</name>
+        <signature>following-sibling::</signature>
+        <category>Axis</category>
+        <result>node ?</result>
+        <description>Selects all siblings after the current node.</description>
+    </function>
+    <function>
+        <name>parent::</name>
+        <signature>parent::</signature>
+        <category>Axis</category>
+        <result>node ?</result>
+        <description>Selects the parent of the current node.</description>
+    </function>
+    <function>
+        <name>self::</name>
+        <signature>self::</signature>
+        <category>Axis</category>
+        <result>node ?</result>
+        <description>Selects the current node.</description>
+    </function>
+    <function>
+        <name>preceding::</name>
+        <signature>preceding::</signature>
+        <category>Axis</category>
+        <result>node ?</result>
+        <description>Selects everything in the document that is before the start tag of the current node.</description>
+    </function>
+    <function>
+        <name>preceding-sibling::</name>
+        <signature>preceding-sibling::</signature>
+        <category>Axis</category>
+        <result>node ?</result>
+        <description>Selects all siblings before the current node.</description>
+    </function>
+</xpath-functions>

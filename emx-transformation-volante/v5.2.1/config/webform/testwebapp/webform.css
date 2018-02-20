@@ -1,0 +1,453 @@
+.fieldheading {
+    font-family: Tahoma, Arial, Helvetica, sans-serif;
+    font-size: 80.0%;
+    font-weight:bold;
+}
+.fielddisplay {
+    font-family: Tahoma, Arial, Helvetica, sans-serif;
+    font-size: 80.0%;
+    font-weight:normal;
+}
+
+.fieldcontent {
+    padding-top: .3em;
+    padding-bottom: .3em;
+    font-family: Courier New, Tahoma, Arial, Helvetica, sans-serif;
+    font-size: 80.0%;
+    background-color: #f1f4fa;
+    border: 1px solid #7F9DB9;
+
+}
+
+/* LINK */
+
+A.LNK {
+    color: #CCCCCC;
+    text-decoration: none;
+}
+
+A.LNK: hover {
+    color: Black;
+    text-decoration: underline;
+}
+
+A.LNKACTIVE {
+    color: white;
+    text-decoration: none;
+}
+
+/* TAB MENU */
+.toolbar {
+	BORDER-RIGHT: #6785a7 1px solid; BORDER-TOP: #6785a7 1px solid; BORDER-LEFT: #6785a7 1px solid; BORDER-BOTTOM: #6785a7 1px solid;
+    FONT-FAMILY: Tahoma,Arial,Helvetica,Verdana,sans-serif;
+    FONT-SIZE: small;
+}
+.toplinks {
+	PADDING-RIGHT: 4px; PADDING-LEFT: 4px; PADDING-BOTTOM: 4px; COLOR: #4a637b; PADDING-TOP: 4px; BACKGROUND-COLOR: #e7effc
+}
+.toplinks2 {
+	COLOR: #4a637b; BACKGROUND-COLOR: #eeeeee
+}
+.toplinksbold {
+	PADDING-RIGHT: 4px; PADDING-LEFT: 4px; FONT-WEIGHT: bold; PADDING-BOTTOM: 4px; COLOR: #4a637b; PADDING-TOP: 4px; BACKGROUND-COLOR: #e7effc
+}
+.toplinksdivide {
+	BORDER-RIGHT: #6785a7 1px solid; PADDING-RIGHT: 4px; PADDING-LEFT: 4px; PADDING-BOTTOM: 4px; COLOR: #4a637b; PADDING-TOP: 4px; BACKGROUND-COLOR: #e7effc
+}
+.linktop {
+	BORDER-RIGHT: #4a637b 1px dotted; PADDING-RIGHT: 10px; PADDING-LEFT: 10px; PADDING-BOTTOM: 4px; COLOR: #4a637b; PADDING-TOP: 4px; BORDER-BOTTOM: #4a637b 1px solid; TEXT-DECORATION: none
+}
+
+A.linktop {
+	BORDER-RIGHT: #4a637b 1px dotted; PADDING-RIGHT: 10px; PADDING-LEFT: 10px; PADDING-BOTTOM: 4px; COLOR: #4a637b; PADDING-TOP: 4px; BORDER-BOTTOM: #4a637b 1px solid; TEXT-DECORATION: none
+}
+A.linktop:active {
+	BORDER-RIGHT: #4a637b 1px dotted; PADDING-RIGHT: 10px; PADDING-LEFT: 10px; PADDING-BOTTOM: 4px; COLOR: #4a637b; PADDING-TOP: 4px; BORDER-BOTTOM: #4a637b 1px solid; TEXT-DECORATION: none
+}
+A.linktop:visited {
+	BORDER-RIGHT: #4a637b 1px dotted; PADDING-RIGHT: 10px; PADDING-LEFT: 10px; PADDING-BOTTOM: 4px; COLOR: #4a637b; PADDING-TOP: 4px; BORDER-BOTTOM: #4a637b 1px solid; TEXT-DECORATION: none
+}
+A.linktop:hover {
+	BORDER-RIGHT: #4a637b 1px solid; PADDING-RIGHT: 10px; PADDING-LEFT: 10px; PADDING-BOTTOM: 4px; COLOR: #19355e; PADDING-TOP: 4px; BACKGROUND-COLOR: #e7effc; TEXT-DECORATION: underline
+}
+
+/* BANNER */
+.banner {
+    background-color: #1d4873;
+    vertical-align: middle;
+    text-align: center;
+}
+
+.banner.corner {
+    width: 32%
+}
+
+.banner.center {
+    width: 36%
+}
+
+.titleStyle {
+    font-size: 18px;
+    font-family: Garamond,sans-serif;
+    font-weight: bold;
+    background: #1d4873;
+    color: white;
+    height: 22px;
+    padding-top: 2px;
+    padding-bottom: 6px;
+    padding-left: 6px;
+    padding-right: 15px
+}
+
+/* LOGIN */
+.login-column-head {
+    padding-top: .5em;
+    padding-bottom: .5em;
+    padding-left: .5em;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 77.0%;
+    font-weight: bold;
+    text-align: left;
+    color: #FFFFFF;
+    background-color: #8691C7;
+}
+
+.login-table-text {
+    padding-top: .3em;
+    padding-bottom: .3em;
+    padding-left: .5em;
+    padding-right: .5em;
+    background-color: #F7F7F7;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 80.0%;
+}
+
+/* BUTTONS */
+.button {
+    font-family: Verdana, sans-serif;
+    font-size: 70.0%;
+    background-color: #E2E2E2;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    border-top: 1px outset #B1B1B1;
+    border-bottom: 1px outset #000000;
+    border-left: 1px outset #B1B1B1;
+    border-right: 1px outset #000000;
+}
+
+/* TABLE */
+.column-head {
+    padding-top: .3em;
+    padding-bottom: .3em;
+    padding-left: .5em;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 70.0%;
+    font-weight: bold;
+    text-align: left;
+    color: #FFFFFF;
+    background-color: #8691C7;
+}
+
+.table-text {
+    padding-top: .3em;
+    padding-bottom: .3em;
+    padding-left: .5em;
+    padding-right: .5em;
+    background-color: #F7F7F7;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 70.0%;
+}
+
+/* MISCELLANEOUS */
+.rect-frame {
+    border-left: 1px solid #000000;
+    border-right: 1px solid #000000;
+    border-bottom: 1px solid #000000;
+    border-top: 1px solid #000000;
+}
+
+.rectangle-border {
+    border: 1px solid #000000;
+}
+
+.errorstyle {
+    padding-top: .3em;
+    padding-bottom: .3em;
+    padding-left: .5em;
+    padding-right: .5em;
+    color: #FF0000;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 70.0%;
+}
+
+
+
+.DefaultLabelStyle {
+    font-family: Tahoma, Verdana, Arial, sans-serif;
+    font-weight: normal;
+    font-size: 12px;
+}
+
+.DefaultRendererStyle {
+    font-family: Tahoma, Verdana, Arial, sans-serif;;
+    font-size: 12px;
+    margin-top: 3px;
+    margin-bottom: 3px;
+    background-color: #E7EFFC;
+    border: 1px solid #7F9DB9;
+    font-weight: normal;
+}
+
+.DefaultHighlightStyle {
+    background-color: #E0E0E0;
+}
+
+.SwiftSequenceStyle {
+    font-family: Tahoma, Verdana, Arial, sans-serif;
+    font-weight: bold;
+    font-size: 12px;
+    color: black;
+}
+.SectionStyle {
+    font-family: Tahoma, Verdana, Arial, sans-serif;
+    font-weight: bold;
+    font-size: 12px;
+    color: black;
+}
+.SectionBackgroundStyle {
+    background-color: #ECE9D8;
+    padding-left: 4px;
+    padding-right: 4px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    BORDER-RIGHT: #a6b3c6 1px solid;
+    BORDER-TOP: #a6b3c6 1px solid;
+    BORDER-LEFT: #a6b3c6 1px solid;
+    BORDER-BOTTOM: #a6b3c6 1px solid;
+}
+
+.SwiftSequenceBackgroundStyle {
+    background-color: #ECE9D8;
+    padding-left: 4px;
+    padding-right: 4px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    BORDER-RIGHT: #a6b3c6 1px solid;
+    BORDER-TOP: #a6b3c6 1px solid;
+    BORDER-LEFT: #a6b3c6 1px solid;
+    BORDER-BOTTOM: #a6b3c6 1px solid;
+}
+
+.SwiftFieldStyle {
+    font-family: Tahoma, Verdana, Arial, sans-serif;
+    font-weight: bold;
+    font-size: 12px;
+    color: black;
+}
+
+.SwiftFieldBackgroundStyle {
+    background-color: #ECE9D8;
+    padding-left: 4px;
+    padding-right: 4px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    BORDER-RIGHT: #a6b3c6 1px solid;
+    BORDER-TOP: #a6b3c6 1px solid;
+    BORDER-LEFT: #a6b3c6 1px solid;
+    BORDER-BOTTOM: #a6b3c6 1px solid;
+}
+
+.SwiftQualifierStyle {
+    font-family: Tahoma, Verdana, Arial, sans-serif;
+    font-weight: normal;
+    font-size: 12px;
+}
+
+.SwiftQualifierBackgroundStyle {
+    background-color: #F2EFDD;
+    padding-left: 4px;
+    padding-right: 4px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    BORDER-RIGHT: #a6b3c6 1px solid;
+    BORDER-TOP: #a6b3c6 1px solid;
+    BORDER-LEFT: #a6b3c6 1px solid;
+    BORDER-BOTTOM: #a6b3c6 1px solid;
+}
+
+.DefaultLabelColumnStyle {
+    padding-left: 6px;
+    padding-right: 4px;
+    BORDER-RIGHT: #a6b3c6 1px solid;
+    BORDER-TOP: #a6b3c6 1px solid;
+    BORDER-LEFT: #a6b3c6 1px solid;
+    BORDER-BOTTOM: #a6b3c6 1px solid;
+}
+
+.DefaultRendererColumnStyle {
+    padding-left: 6px;
+    padding-right: 4px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    BORDER-RIGHT: #a6b3c6 1px solid;
+    BORDER-TOP: #a6b3c6 1px solid;
+    BORDER-LEFT: #a6b3c6 1px solid;
+    BORDER-BOTTOM: #a6b3c6 1px solid;
+}
+
+.LookupButtonStyle {
+    height: 20px;
+    width: 100px;
+    font-family: Tahoma, Verdana, Arial, sans-serif;
+    text-align: center;
+    vertical-align: bottom;
+    text-decoration: none;
+    color: black;
+    font-size: 12px;
+    border: 1px solid #4A637B;
+    background-image: url( images/button_bg_gray.gif );
+    margin-left: 3px;
+    margin-top: 3px;
+    margin-bottom: 3px;
+}
+
+.SearchStyle {
+    border:none;
+    text-decoration: none;
+    color: white;
+}
+
+.TableStyle {
+    border-collapse: collapse;
+    border: 1px solid #A6B3C6;
+}
+
+.FormTitleStyle {
+    font-family: Tahoma, Verdana, Arial, sans-serif;
+    font-size: 12px;
+    FONT-WEIGHT: bold;
+    BACKGROUND-COLOR: #FFFFFF;
+    padding-left: 6px;
+    padding-right: 4px;
+    BORDER-RIGHT: #a6b3c6 1px solid;
+    BORDER-TOP: #a6b3c6 1px solid;
+    BORDER-LEFT: #a6b3c6 1px solid;
+    BORDER-BOTTOM: #a6b3c6 1px solid;
+}
+
+.PageTitleStyle {
+    font-family: Tahoma, Verdana, Arial, sans-serif;
+    font-weight: bold;
+    font-size: 12px;
+    color: black;
+    background-color: #ECE9D8;
+    padding-left: 4px;
+    padding-right: 4px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    BORDER-RIGHT: #a6b3c6 1px solid;
+    BORDER-TOP: #a6b3c6 1px solid;
+    BORDER-LEFT: #a6b3c6 1px solid;
+    BORDER-BOTTOM: #a6b3c6 1px solid;
+}
+
+tr.tableRowHeader {
+    font-family: Garamond,sans-serif,Arial;
+    font-size: small;
+    color: #000000;
+    background-color: #003300;
+
+    padding-top: 4px;
+    padding-bottom: 4px;
+    padding-left: 6px;
+    padding-right: 4px;
+    BORDER-RIGHT: #a6b3c6 1px solid;
+    BORDER-TOP: #a6b3c6 1px solid;
+    BORDER-LEFT: #a6b3c6 1px solid;
+    BORDER-BOTTOM: #a6b3c6 1px solid;
+}
+
+th.tableCellHeader {
+    font-family: Garamond,sans-serif,Arial;
+    font-size:small;
+    color: white;
+    background-color: #003300;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    padding-left: 6px;
+    padding-right: 4px;
+    BORDER-RIGHT: #a6b3c6 1px solid;
+    BORDER-TOP: #a6b3c6 1px solid;
+    BORDER-LEFT: #a6b3c6 1px solid;
+    BORDER-BOTTOM: #a6b3c6 1px solid;
+}
+
+td.tableCell {
+    padding-top: 6px;
+    padding-bottom: 6px;
+    padding-left: 6px;
+    padding-right: 4px;
+    BORDER-RIGHT: #a6b3c6 1px solid;
+    BORDER-TOP: #a6b3c6 1px solid;
+    BORDER-LEFT: #a6b3c6 1px solid;
+    BORDER-BOTTOM: #a6b3c6 1px solid;
+}
+
+tr.tableRowAction {
+    font-family: verdana, tahoma, arial, helvetica, sans-serif;
+    font-size: x-small;
+    color: #000000;
+    background-color: #F2EFDD;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    padding-left: 6px;
+    padding-right: 4px;
+}
+
+td.tableCellAction {
+    background-color: white;
+    color: #000000;
+    font-family: verdana, tahoma, arial, helvetica, sans-serif;
+    font-size: 80.0%;
+    padding-left: 4px;
+    padding-right: 4px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+}
+
+tr.tableRowOdd {
+    font-family: Tahoma, Verdana, Arial, sans-serif;
+    font-weight: normal;
+    font-size: 12px;
+    BACKGROUND-COLOR: white;
+    padding-left: 4px;
+    padding-right: 4px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+}
+
+tr.tableRowEven {
+    font-family: Tahoma, Verdana, Arial, sans-serif;
+    font-weight: normal;
+    font-size: 12px;
+    BACKGROUND-COLOR: #EFF2DD;
+    padding-left: 4px;
+    padding-right: 4px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+}
+
+.Header{
+    FONT-WEIGHT: bold;
+    FONT-SIZE: 14px;
+    FONT-FAMILY: Tahoma, Verdana, Arial, sans-serif;
+    color: black;
+    background-color: #ECE9D8;
+    padding-left: 4px;
+    padding-right: 4px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    BORDER-RIGHT: #a6b3c6 1px solid;
+    BORDER-TOP: #a6b3c6 1px solid;
+    BORDER-LEFT: #a6b3c6 1px solid;
+}

@@ -1,0 +1,27 @@
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="unqualified"
+            attributeFormDefault="unqualified">
+    <!-- include constructs -->
+    <xsd:include schemaLocation="cartridge-include.xsd"/>
+    <xsd:element name="folder" type="FolderType" substitutionGroup="ServiceElement"/>
+    <!-- Folder -->
+    <xsd:complexType name="FolderType">
+        <xsd:complexContent>
+            <xsd:extension base="ServiceElementType">
+                <xsd:sequence>
+                    <xsd:element ref="additional-properties" minOccurs="0"/>
+                    <xsd:element name="description" type="xsd:string" minOccurs="0"/>
+                    <xsd:element ref="ServiceElement" minOccurs="0" maxOccurs="unbounded"/>
+                    <xsd:element ref="elementproperties"/>
+                </xsd:sequence>
+                <xsd:attribute name="name" type="xsd:string"/>
+                <xsd:attribute name="type" type="FolderTypeOptions"/>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:simpleType name="FolderTypeOptions">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="FolderElement"/>
+            <xsd:enumeration value="FunctionDefFolder"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+</xsd:schema>

@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<SwiftMessageFormat name="MT019">
+	<standard-version><![CDATA[SRG 2016]]></standard-version>
+	<standard-release-qualifier>20160308</standard-release-qualifier>
+	<DescriptiveName><![CDATA[Abort Notification]]></DescriptiveName>
+	<Category><![CDATA[System]]></Category>
+	<Description><![CDATA[This message notifies the sender that the system has been unable to deliver the message specified in the <text-block>, and has been forced to abort it instead.
+
+If the aborted message contains a field tag 103 (in the User Header) or was copied through FINInform in Y-copy mode, the field tag 619 containing a copy of the field tag 103 is added to the MT 019 format. This applies to all codes recorded in a field tag 103.
+
+From: FIN    To: User ]]></Description>
+	<SwiftFields>
+		<customizable>true</customizable>
+		<modifiable>true</modifiable>
+		<SwiftMessageType>System</SwiftMessageType>
+		<HeaderAndTrailerType>SWIFT_INPUT_HEADER</HeaderAndTrailerType>
+		<Header>
+		</Header>
+		<Data>
+			<Fields>
+				<SystemField Name="input-time">
+					<description><![CDATA[Local to the sender, of the aborted message.]]></description>
+					<datatype>String</datatype>
+					<required>true</required>
+					<SwiftSystemFieldDef Name="time" Tag="175">
+						<Format><![CDATA[4!n]]></Format>
+						<Specification><![CDATA[(time)]]></Specification>
+						<Additional-Format><![CDATA[HHMM]]></Additional-Format>
+						<Description><![CDATA[Date and time are always given as local, unless otherwise specified. Local time for the SWIFT Network is in GMT.]]></Description>
+						<Validations>
+							<Validation>
+								<formula>IsDate($value,"HHmm")</formula>
+								<error-code>V05</error-code>
+								<actionmessage>"Invalid Time '" + $value + "'"</actionmessage>
+							</Validation>
+						</Validations>
+					</SwiftSystemFieldDef>
+				</SystemField>
+				<SystemField Name="mir">
+					<description><![CDATA[MIR of the aborted message, containing:
+
+a)  Input date
+
+b)  Input LT including branch code
+
+c)  Session number
+
+d)  ISN]]></description>
+					<datatype>Section</datatype>
+					<minoccurs>1</minoccurs>
+					<maxoccurs>1</maxoccurs>
+					<SwiftSystemFieldDef Name="mir" Tag="106">
+						<Format><![CDATA[(6!n)(4!a2!a2!c1!c)(3!c)(4!n)(6!n)]]></Format>
+						<Specification><![CDATA[(date)(lt-identifier)(branch-code)(session-number)(isn)]]></Specification>
+						<Description><![CDATA[MIR of the aborted message, containing:
+
+a)  Input date
+
+b)  Input LT including branch code
+
+c)  Session number
+
+d)  ISN]]></Description>
+						<Validations>
+							<Validation>
+								<subfield>date</subfield>
+								<formula>IsDate($value,"yyMMdd")</formula>
+								<error-code>V04</error-code>
+								<actionmessage>"Invalid Input Date '" + $value + "'"</actionmessage>
+							</Validation>
+						</Validations>
+					</SwiftSystemFieldDef>
+				</SystemField>
+				<SystemField Name="mur">
+					<description><![CDATA[Contains one of the following:
+					1.Message User Reference as used in the header of the original message if present.
+     2. If no message user reference was present in the original message, this tag may contain the contents of field 20 of the original message or (for Category 5 messages only) the contents of field 20C, with the code word SEME. Tag 108 with only blanks (spaces) is accepted by the system.]]></description>
+					<datatype>String</datatype>
+					<required>false</required>
+					<SwiftSystemFieldDef Name="mur" Tag="108">
+						<Format><![CDATA[16x]]></Format>
+						<Specification><![CDATA[(mur)]]></Specification>
+						<Description><![CDATA[Message User Reference as used in the header of the original message]]></Description>
+					</SwiftSystemFieldDef>
+				</SystemField>
+				<SystemField Name="swift-address">
+					<description><![CDATA[Complete 12-character destination, including logical terminal code and branch code, of the aborted message.]]></description>
+					<datatype>String</datatype>
+					<required>true</required>
+					<SwiftSystemFieldDef Name="swift-address" Tag="102">
+						<Format><![CDATA[(4!a2!a2!c1!c3!c)]]></Format>
+						<Specification><![CDATA[(swift-address)]]></Specification>
+						<Description><![CDATA[Complete 12-character address, including LT code and branch code, or default branch code XXX.]]></Description>
+					</SwiftSystemFieldDef>
+				</SystemField>
+				<SystemField Name="mor">
+					<description><![CDATA[Message output reference of the aborted message, containing:
+
+a)  Output date
+
+b)  Output LT including branch code
+
+c)  Session number
+
+d)  OSN  If more than one delivery attempt has been made, field 107 contains the last valid message output reference.]]></description>
+					<datatype>Section</datatype>
+					<minoccurs>0</minoccurs>
+					<maxoccurs>1</maxoccurs>
+					<SwiftSystemFieldDef Name="mor" Tag="107">
+						<Format><![CDATA[(6!n)(4!a2!a2!c1!c)(3!c)(4!n)(6!n)]]></Format>
+						<Specification><![CDATA[(date)(lt-identifier)(branch-code)(session-number)(osn)]]></Specification>
+						<Description><![CDATA[Message output reference of the aborted message, containing:
+
+a)  Output date
+
+b)  Output LT including branch code
+
+c)  Session number
+
+d)  OSN]]></Description>
+						<Validations>
+							<Validation>
+								<subfield>date</subfield>
+								<formula>IsDate($value,"yyMMdd")</formula>
+								<error-code>V04</error-code>
+								<actionmessage>"Invalid Date '" + $value + "'"</actionmessage>
+							</Validation>
+						</Validations>
+					</SwiftSystemFieldDef>
+				</SystemField>
+				<SystemField Name="abort-reason">
+					<description><![CDATA[Reason for the abort. See FIN Error Codes for the full set of error codes.]]></description>
+					<datatype>String</datatype>
+					<required>true</required>
+					<SwiftSystemFieldDef Name="abort-reason" Tag="432">
+						<Format><![CDATA[2!c]]></Format>
+						<Specification><![CDATA[(abort-reason)]]></Specification>
+						<Description><![CDATA[Reason for the abort, and, for the SWIFTNet FIN Copy Service, reason for message refusals. See the SWIFTNet FIN Error Codes module for the full set of error codes.]]></Description>
+					</SwiftSystemFieldDef>
+				</SystemField>
+				<SystemField Name="service-code">
+					<description><![CDATA[Service code of the aborted message]]></description>
+					<datatype>String</datatype>
+					<required>false</required>
+					<SwiftSystemFieldDef Name="service-code" Tag="619">
+						<Format><![CDATA[3!a]]></Format>
+						<Specification><![CDATA[(service-code)]]></Specification>
+						<Description><![CDATA[FIN Copy Service Code.]]></Description>
+					</SwiftSystemFieldDef>
+				</SystemField>
+			</Fields>
+		</Data>
+		<Trailer>
+		</Trailer>
+	</SwiftFields>
+	<validationrules name="Default">
+		<hdrvalidationrules>
+			<fieldvalidations>
+			</fieldvalidations>
+		</hdrvalidationrules>
+		<datavalidationrules>
+			<fieldvalidations>
+			</fieldvalidations>
+		</datavalidationrules>
+		<tlrvalidationrules>
+			<fieldvalidations>
+			</fieldvalidations>
+		</tlrvalidationrules>
+	</validationrules>
+</SwiftMessageFormat>
+

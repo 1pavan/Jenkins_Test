@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<SwiftMessageFormat name="MT05">
+	<standard-version><![CDATA[SRG 2015]]></standard-version>
+	<standard-release-qualifier>20150731</standard-release-qualifier>
+	<DescriptiveName><![CDATA[Quit Command]]></DescriptiveName>
+	<Category><![CDATA[Service]]></Category>
+	<Description><![CDATA[This message causes the system to terminate the current FIN session. This message cannot be issued by a synonym.
+
+From: User To: FIN
+
+Notes 
+
+Field 173: <day-time> represents a date and time before which another SELECT command cannot be performed. The Quit message is positively acknowledged and contains error code 01 if this field represents a date which is more than seven days after the current date. See the 25 Quit Acknowledgement service message.
+
+The Text Block 4 should be absent unless the user specifies field 173: <day-time>.
+The Trailer Block is only present if the message is sent by a Test & Training LT and contains a TNG trailer.]]></Description>
+	<SwiftFields>
+		<customizable>false</customizable>
+		<modifiable>true</modifiable>
+		<SwiftMessageType>Service</SwiftMessageType>
+		<HeaderAndTrailerType>SWIFT_INPUT_HEADER</HeaderAndTrailerType>
+		<Header>
+		</Header>
+		<Data>
+			<Fields>
+				<SystemField Name="day-time">
+					<description><![CDATA[ Day and time, local to the user, in the format DDHHMM.]]></description>
+					<datatype>String</datatype>
+					<required>false</required>
+					<SwiftSystemFieldDef Name="day-time" Tag="173">
+						<Format><![CDATA[6!n]]></Format>
+						<Specification><![CDATA[(day-time)]]></Specification>
+						<Additional-Format><![CDATA[DDHHMM]]></Additional-Format>
+						<Description><![CDATA[Date and time are always given as local, unless otherwise specified. Local time for the SWIFTNetwork is in GMT.]]></Description>
+						<Validations>
+							<Validation>
+								<subfield>day-time</subfield>
+								<formula>IsDate($value,"ddHHmm")</formula>
+								<error-code>V05</error-code>
+								<actionmessage>"Invalid day-time '" + $value + "'. day-time should be in format ddHHmm."</actionmessage>
+							</Validation>
+						</Validations>
+					</SwiftSystemFieldDef>
+				</SystemField>
+			</Fields>
+		</Data>
+		<Trailer>
+		</Trailer>
+	</SwiftFields>
+	<validationrules name="Default">
+		<hdrvalidationrules>
+			<fieldvalidations>
+			</fieldvalidations>
+		</hdrvalidationrules>
+		<datavalidationrules>
+			<fieldvalidations>
+			</fieldvalidations>
+		</datavalidationrules>
+		<tlrvalidationrules>
+			<fieldvalidations>
+			</fieldvalidations>
+		</tlrvalidationrules>
+	</validationrules>
+</SwiftMessageFormat>
+

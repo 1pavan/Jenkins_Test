@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<SwiftMessageFormat name="MT011">
+	<standard-version><![CDATA[SRG 2016]]></standard-version>
+	<standard-release-qualifier>20160308</standard-release-qualifier>
+	<DescriptiveName><![CDATA[Delivery Notification]]></DescriptiveName>
+	<Category><![CDATA[System]]></Category>
+	<Description><![CDATA[This message indicates that a message being monitored for delivery has actually been delivered.
+
+From: FIN       To: User ]]></Description>
+	<SwiftFields>
+		<customizable>true</customizable>
+		<modifiable>true</modifiable>
+		<SwiftMessageType>System</SwiftMessageType>
+		<HeaderAndTrailerType>SWIFT_INPUT_HEADER</HeaderAndTrailerType>
+		<Header>
+		</Header>
+		<Data>
+			<Fields>
+				<SystemField Name="input-time">
+					<description><![CDATA[Local to the sender, of the delivered message.
+]]></description>
+					<datatype>String</datatype>
+					<required>true</required>
+					<SwiftSystemFieldDef Name="time" Tag="175">
+						<Format><![CDATA[4!n]]></Format>
+						<Specification><![CDATA[(time)]]></Specification>
+						<Additional-Format><![CDATA[HHMM]]></Additional-Format>
+						<Description><![CDATA[Date and time are always given as local, unless otherwise specified. Local time for the SWIFT Network is in GMT.]]></Description>
+						<Validations>
+							<Validation>
+								<formula>IsDate($value,"HHmm")</formula>
+								<error-code>V05</error-code>
+								<actionmessage>"Invalid Time '" + $value + "'"</actionmessage>
+							</Validation>
+						</Validations>
+					</SwiftSystemFieldDef>
+				</SystemField>
+				<SystemField Name="mir">
+					<description><![CDATA[MIR of the delivered message,containing:
+
+a)  Input date
+
+b)  Input LT including branch code
+
+c)  Session number
+
+d)  ISN]]></description>
+					<datatype>Section</datatype>
+					<minoccurs>1</minoccurs>
+					<maxoccurs>1</maxoccurs>
+					<SwiftSystemFieldDef Name="mir" Tag="106">
+						<Format><![CDATA[(6!n)(4!a2!a2!c1!c)(3!c)(4!n)(6!n)]]></Format>
+						<Specification><![CDATA[(date)(lt-identifier)(branch-code)(session-number)(isn)]]></Specification>
+						<Description><![CDATA[MIR of the delivered message,containing:
+
+a)  Input date
+
+b)  Input LT including branch code
+
+c)  Session number
+
+d)  ISN]]></Description>
+						<Validations>
+							<Validation>
+								<subfield>date</subfield>
+								<formula>IsDate($value,"yyMMdd")</formula>
+								<error-code>V04</error-code>
+								<actionmessage>"Invalid Input Date '" + $value + "'"</actionmessage>
+							</Validation>
+						</Validations>
+					</SwiftSystemFieldDef>
+				</SystemField>
+				<SystemField Name="mur">
+					<description><![CDATA[Contains one of the following:
+
+MUR as used in the header of the original message if present.
+
+If no MUR was present in the original message, this tag may contain the contents of field 20 of the original message or (for Category 5 messages only) the contents of field 20C, with the code word SEME.Tag 108 with only blanks (spaces) is accepted by the system.]]></description>
+					<datatype>String</datatype>
+					<required>false</required>
+					<SwiftSystemFieldDef Name="mur" Tag="108">
+						<Format><![CDATA[16x]]></Format>
+						<Specification><![CDATA[(mur)]]></Specification>
+						<Description><![CDATA[Message User Reference as used in the header of the original message if present.
+                         If no message user reference was present in the original message, this tag may contain the contents of field 20 of the original message or (for Category 5 messages only) the contents of field 20C, with the code word SEME.]]></Description>
+					</SwiftSystemFieldDef>
+				</SystemField>
+				<SystemField Name="output-time">
+					<description><![CDATA[Local to the receiver, of the delivered message.]]></description>
+					<datatype>String</datatype>
+					<required>true</required>
+					<SwiftSystemFieldDef Name="time" Tag="175">
+						<Format><![CDATA[4!n]]></Format>
+						<Specification><![CDATA[(time)]]></Specification>
+						<Additional-Format><![CDATA[HHMM]]></Additional-Format>
+						<Description><![CDATA[See the note above this table.]]></Description>
+						<Validations>
+							<Validation>
+								<formula>IsDate($value,"HHmm")</formula>
+								<error-code>V05</error-code>
+								<actionmessage>"Invalid Time '" + $value + "'"</actionmessage>
+							</Validation>
+						</Validations>
+					</SwiftSystemFieldDef>
+				</SystemField>
+				<SystemField Name="mor">
+					<description><![CDATA[MOR of the delivered message,containing:
+
+a)  Output date
+
+b)  Output LT including branch code
+
+c)  Session number
+
+d)  OSN]]></description>
+					<datatype>Section</datatype>
+					<minoccurs>1</minoccurs>
+					<maxoccurs>1</maxoccurs>
+					<SwiftSystemFieldDef Name="mor" Tag="107">
+						<Format><![CDATA[(6!n)(4!a2!a2!c1!c)(3!c)(4!n)(6!n)]]></Format>
+						<Specification><![CDATA[(date)(lt-identifier)(branch-code)(session-number)(osn)]]></Specification>
+						<Description><![CDATA[Message output reference of the delivered message, containing:
+
+a)  Output date
+
+b)  Output LT including branch code
+
+c)  Session number
+
+d)  OSN]]></Description>
+						<Validations>
+							<Validation>
+								<subfield>date</subfield>
+								<formula>IsDate($value,"yyMMdd")</formula>
+								<error-code>V04</error-code>
+								<actionmessage>"Invalid Date '" + $value + "'"</actionmessage>
+							</Validation>
+						</Validations>
+					</SwiftSystemFieldDef>
+				</SystemField>
+			</Fields>
+		</Data>
+		<Trailer>
+		</Trailer>
+	</SwiftFields>
+	<validationrules name="Default">
+		<hdrvalidationrules>
+			<fieldvalidations>
+			</fieldvalidations>
+		</hdrvalidationrules>
+		<datavalidationrules>
+			<fieldvalidations>
+			</fieldvalidations>
+		</datavalidationrules>
+		<tlrvalidationrules>
+			<fieldvalidations>
+			</fieldvalidations>
+		</tlrvalidationrules>
+	</validationrules>
+</SwiftMessageFormat>
+

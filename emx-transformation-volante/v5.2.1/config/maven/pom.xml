@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+    <properties>
+        <designer.home>$DESIGNER_HOME</designer.home>
+    </properties>
+    <groupId>messageflow-volante</groupId>
+    <version>1.0</version>
+    <artifactId>$ENTITY_NAME</artifactId>
+    <packaging>jar</packaging>
+    <name>$ENTITY_NAME</name>
+    <description></description>
+
+    <dependencies>
+
+    </dependencies>
+
+    <profiles>
+        <profile>
+            <id>$ENTITY_NAME</id>
+        </profile>
+    </profiles>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>com.volantetech.volante</groupId>
+                <artifactId>volante-tasks</artifactId>
+                <version>$VOLANTE_VERSION</version>
+                <!-- use the current version -->
+                <configuration>
+                    <home>${designer.home}</home>
+#if($PROJECT_FILE_NAME)
+                    <projectFile>$PROJECT_FILE_NAME</projectFile>
+#else
+                    <cartridgeFile>$CARTRIDGE_FILE_NAME</cartridgeFile>
+#end
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>execution1</id>
+                        <phase>compile</phase>
+                        <configuration>
+                            <rebuild>false</rebuild>
+                            <noDebug>true</noDebug>
+                            <targetDir>./target</targetDir>
+                            <includeDependencies>true</includeDependencies>
+                        </configuration>
+                        <goals>
+                            <goal>build</goal>
+                        </goals>
+                    </execution>
+                    <!--  To generate reports
+                      <execution>
+                          <id>execution2</id>
+                          <phase>package</phase>
+                          <goals>
+                              <goal>report</goal>
+                          </goals>
+                      </execution>
+                      -->
+                    <execution>
+                        <id>execution3</id>
+                        <phase>test</phase>
+                        <configuration>
+                            <report>
+                                <type>junit</type>
+                                <format>html</format>
+                                <option>frames</option>
+                                <toDir>./target/volante-test-report</toDir>
+                            </report>
+                        </configuration>
+                        <goals>
+                            <goal>test</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-clean-plugin</artifactId>
+                <version>2.4.1</version>
+                <configuration>
+                    <filesets>
+                        <fileset>
+                            <directory>${basedir}</directory>
+                            <includes>
+                                <include>**/java/**</include>
+                            </includes>
+                            <followSymlinks>false</followSymlinks>
+                        </fileset>
+                    </filesets>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>

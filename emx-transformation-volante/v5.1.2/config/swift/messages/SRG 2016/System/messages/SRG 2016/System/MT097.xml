@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<SwiftMessageFormat name="MT097">
+	<standard>SWIFT</standard>
+	<standard-name>MT097</standard-name>
+	<standard-version><![CDATA[SRG 2016]]></standard-version>
+	<standard-release-qualifier>20160308</standard-release-qualifier>
+	<DescriptiveName><![CDATA[FIN Copy Message Authorisation/Refusal Notification]]></DescriptiveName>
+	<Category>System</Category>
+	<Description>This message is used by the Copy destination in FINCopy and FINInform services to authorise or reject message delivery.
+
+From: Copy destination           To: FIN</Description>
+	<SwiftFields>
+		<customizable>true</customizable>
+		<modifiable>true</modifiable>
+		<SwiftMessageType>System</SwiftMessageType>
+		<HeaderAndTrailerType>SWIFT_INPUT_OUTPUT_HEADER</HeaderAndTrailerType>
+		<Header>
+		</Header>
+		<Data>
+			<Fields>
+				<SystemField Name="service-code">
+					<description><![CDATA[FIN Copy Service Code.]]></description>
+					<datatype>String</datatype>
+					<required>true</required>
+					<SwiftSystemFieldDef Name="service-code" Tag="103">
+						<Format><![CDATA[3!a]]></Format>
+						<Specification><![CDATA[(service-code)]]></Specification>
+						<Description><![CDATA[FIN Copy Service Code.]]></Description>
+					</SwiftSystemFieldDef>
+				</SystemField>
+				<SystemField Name="original-user-message-reference">
+					<description><![CDATA[Original Message Reference (MRF) of the corresponding MT 096 FIN Copy to to Server Destination Message, containing:
+
+a)  GMT date and time of the input message acceptance (12 characters).
+
+b)  Original message MIR (28 characters).]]></description>
+					<datatype>Section</datatype>
+					<minoccurs>1</minoccurs>
+					<maxoccurs>1</maxoccurs>
+					<SwiftSystemFieldDef Name="original-user-message-reference" Tag="109">
+						<Format><![CDATA[(6!n)(6!n)(28!c)]]></Format>
+						<Specification><![CDATA[(date)(full-time)(mir)]]></Specification>
+						<Description><![CDATA[Original Message Reference (MRF) of the corresponding MT 096 FIN Copy to to Server Destination Message, containing:
+
+a)  GMT date and time of the input message acceptance (12 characters).
+
+b)  Original message MIR (28 characters).]]></Description>
+						<Validations>
+							<Validation>
+								<subfield>date</subfield>
+								<formula>IsDate($value,"yyMMdd")</formula>
+								<error-code>V04</error-code>
+								<actionmessage>"Invalid Date '" + $value + "'. date should be in the format yyMMdd."</actionmessage>
+							</Validation>
+							<Validation>
+								<subfield>full-time</subfield>
+								<formula>IsDate($value,"HHmmss")</formula>
+								<error-code>V05</error-code>
+								<actionmessage>"Invalid Time '" + $value + "'.full-time should be in the format HHmmss."</actionmessage>
+							</Validation>
+						</Validations>
+					</SwiftSystemFieldDef>
+				</SystemField>
+				<SystemField Name="accept-reject">
+					<description><![CDATA[Accepted or rejected, where:
+
+a)  0 = accepted
+
+b)  1 = rejected]]></description>
+					<datatype>String</datatype>
+					<required>true</required>
+					<SwiftSystemFieldDef Name="accept-reject" Tag="451">
+						<Format><![CDATA[1!n]]></Format>
+						<Specification><![CDATA[(accept-reject)]]></Specification>
+						<Description><![CDATA[Accepted or rejected, where:
+
+a)  0 = accepted
+
+b)  1 = rejected]]></Description>
+						<Validations>
+							<Validation>
+								<formula>In($value, "0","1")</formula>
+								<error-code>V04</error-code>
+								<actionmessage>"Invalid Accept-Reject value '" + $value + "'."</actionmessage>
+							</Validation>
+						</Validations>
+					</SwiftSystemFieldDef>
+				</SystemField>
+				<SystemField Name="abort-reason">
+					<description><![CDATA[Service-specific reason for the message refusal. See FIN Error Codes for the full set of error codes.]]></description>
+					<datatype>String</datatype>
+					<required>false</required>
+					<SwiftSystemFieldDef Name="abort-reason" Tag="432">
+						<Format><![CDATA[2!c]]></Format>
+						<Specification><![CDATA[(abort-reason)]]></Specification>
+						<Description><![CDATA[Reason for the abort, and, for the FINCopy service, reason for message refusals. See the FIN Error Codes for the full set of error codes.]]></Description>
+					</SwiftSystemFieldDef>
+				</SystemField>
+				<SystemField Name="payment-release-information-sender">
+					<description><![CDATA[Information from server destination to sender of payment message.Tag 114 with only blanks (spaces) is accepted by the system.]]></description>
+					<datatype>String</datatype>
+					<required>false</required>
+					<SwiftSystemFieldDef Name="payment-release-information-sender" Tag="114">
+						<Format><![CDATA[32x]]></Format>
+						<Specification><![CDATA[(payment-release-information-sender)]]></Specification>
+						<Description><![CDATA[Information from server destination to sender of payment message.]]></Description>
+					</SwiftSystemFieldDef>
+				</SystemField>
+				<SystemField Name="payment-release-information-receiver_FINCopyServices">
+					<description><![CDATA[Information from server destination to the receiver of the payment message (FINCopy services).
+See the FINCopy Service Description for further information.]]></description>
+					<datatype>String</datatype>
+					<required>false</required>
+					<SwiftSystemFieldDef Name="payment-release-information-receiver" Tag="115">
+						<Format><![CDATA[32x]]></Format>
+						<Specification><![CDATA[(payment-release-information-receiver)]]></Specification>
+						<Description><![CDATA[Information from server destination to the receiver of the payment message (FINCopy services). Tag 115 with only blanks (spaces) is accepted by the system. See the FINCopy Service Description for further information.]]></Description>
+					</SwiftSystemFieldDef>
+				</SystemField>
+				<SystemField Name="payment-release-information-receiver_FINInformServices">
+					<description><![CDATA[Information from server destination to the receiver of the payment
+message (FINInform services).
+See the FINInform Service Description for further information.]]></description>
+					<datatype>String</datatype>
+					<required>false</required>
+					<SwiftSystemFieldDef Name="payment-release-information-receiver-FINInform" Tag="165">
+						<Format><![CDATA[('/'3!c'/'34x)]]></Format>
+						<Specification><![CDATA[(payment-release-information-receiver-FINInform)]]></Specification>
+						<Description><![CDATA[A three character service code, between slashes, followed by information from the server destination to the receiver of the payment message (FINInform services).]]></Description>
+					</SwiftSystemFieldDef>
+				</SystemField>
+				<SystemField Name="sanctions-screening-information-receiver">
+					<description><![CDATA[Screening results and additional information inserted by the compliance officer.
+	  
+	  AOK - message automatically released by screening service
+	  
+	  FPO - compliance officer has flagged the screening result as false positive
+	  
+	  NOK - compliance officer has flagged the message as suspect]]></description>
+					<datatype>Section</datatype>
+					<minoccurs>0</minoccurs>
+					<maxoccurs>1</maxoccurs>
+					<SwiftSystemFieldDef Name="sanctions-screening-information-receiver" Tag="433">
+						<Format><![CDATA[/3!a/[20x]]]></Format>
+						<Specification><![CDATA[(code-word)(additional-information)]]></Specification>
+						<Description><![CDATA[Screening results and additional information inserted by the compliance officer.
+	  
+	  AOK - message automatically released by screening service
+	  
+	  FPO - compliance officer has flagged the screening result as false positive
+	  
+	  NOK - compliance officer has flagged the message as suspect]]></Description>
+						<Validations>
+							<Validation>
+								<formula>In(sanctions_screening_information_receiver.code_word, "AOK", "FPO","NOK")</formula>
+								<error-code>V08</error-code>
+								<actionmessage>"Invalid sanctions screening information receiver'" +sanctions_screening_information_receiver.code_word+ "'. Valid sanctions screening information receiver are : AOK, FPO, NOK."</actionmessage>
+							</Validation>
+						</Validations>
+					</SwiftSystemFieldDef>
+				</SystemField>
+				<SystemField Name="screening-service-reconciliation-data">
+					<description><![CDATA[Data provided by the screening application]]></description>
+					<datatype>String</datatype>
+					<required>false</required>
+					<SwiftSystemFieldDef Name="screening-service-reconciliation-data" Tag="434">
+						<Format><![CDATA[150z]]></Format>
+						<Specification><![CDATA[(screening service reconciliation data)]]></Specification>
+						<Description><![CDATA[Data provided by the screening application]]></Description>
+					</SwiftSystemFieldDef>
+				</SystemField>
+				<SystemField Name="copy-message-data-text">
+					<description><![CDATA[This field is only for use by Market Infrastructures which have subscribed to the Market Infrastructure Resiliency Service (MIRS).]]></description>
+					<datatype>String</datatype>
+					<required>false</required>
+					<SwiftSystemFieldDef Name="copy-message-data-text" Tag="422">
+						<Format><![CDATA[(12!c'/'38x)]]></Format>
+						<Specification><![CDATA[(copy message data text)]]></Specification>
+						<Description><![CDATA[This field is only for use by Market Infrastructures which have subscribed to the Market Infrastructure Resiliency Service (MIRS).]]></Description>
+					</SwiftSystemFieldDef>
+				</SystemField>
+				<SystemField Name="MI-message-data-text">
+					<description><![CDATA[This field is only for use by Market Infrastructures which have subscribed to the Market Infrastructure Resiliency Service (MIRS).]]></description>
+					<datatype>String</datatype>
+					<required>false</required>
+					<SwiftSystemFieldDef Name="MI-message-data-text" Tag="425">
+						<Format><![CDATA[(40!c'/'37x)]]></Format>
+						<Specification><![CDATA[(MI message data text)]]></Specification>
+						<Additional-Format><![CDATA[20*2!c/37x]]></Additional-Format>
+						<Description><![CDATA[This field is only for use by Market Infrastructures which have subscribed to the Market Infrastructure Resiliency Service (MIRS).]]></Description>
+					</SwiftSystemFieldDef>
+				</SystemField>
+			</Fields>
+		</Data>
+		<Trailer>
+		</Trailer>
+	</SwiftFields>
+	<validationrules name="Default">
+		<hdrvalidationrules>
+			<fieldvalidations>
+			</fieldvalidations>
+		</hdrvalidationrules>
+		<datavalidationrules>
+			<fieldvalidations>
+				<fieldvalidation>
+					<name>E1</name>
+					<fieldname>accept-reject</fieldname>
+					<comment><![CDATA[If field 451:accept-reject has a value of 1 then field 432:abort-reason is mandatory.]]></comment>
+					<formula><![CDATA[Implies($value == "1", IsNotNull(abort_reason))]]></formula>
+					<severity>error</severity>
+					<cascade>true</cascade>
+					<error-code>V03</error-code>
+					<actionmessage><![CDATA["If field 451:accept-reject has a value of 1 then field 432:abort-reason is mandatory."]]></actionmessage>
+				</fieldvalidation>
+			</fieldvalidations>
+		</datavalidationrules>
+		<tlrvalidationrules>
+			<fieldvalidations>
+			</fieldvalidations>
+		</tlrvalidationrules>
+	</validationrules>
+</SwiftMessageFormat>
+

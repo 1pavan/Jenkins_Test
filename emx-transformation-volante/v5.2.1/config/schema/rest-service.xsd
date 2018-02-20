@@ -1,0 +1,391 @@
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="unqualified"
+            attributeFormDefault="unqualified">
+    <!-- include constructs -->
+    <xsd:include schemaLocation="xml-data.xsd"/>
+    <!-- Dependency on xml plugin -->
+    <xsd:include schemaLocation="messageflow.xsd"/>
+    <!-- for extending conductor -->
+    <!-- RestServiceClient -->
+    <xsd:element name="restclient" type="RestClient" substitutionGroup="ServiceElement"/>
+    <xsd:complexType name="RestClient">
+        <xsd:complexContent>
+            <xsd:extension base="ServiceElementType">
+                <xsd:sequence>
+                    <xsd:element name="version" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="description" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="application-info">
+                        <xsd:complexType>
+                            <xsd:sequence>
+                                <xsd:element name="name" type="xsd:string"/>
+                                <xsd:element name="version" type="xsd:string"/>
+                                <xsd:element name="description" type="xsd:string"/>
+                                <xsd:element name="host" type="xsd:string"/>
+                                <xsd:element name="base-path" type="xsd:string"/>
+                            </xsd:sequence>
+                        </xsd:complexType>
+                    </xsd:element>
+                    <xsd:element name="service" minOccurs="0" maxOccurs="unbounded">
+                        <xsd:complexType>
+                            <xsd:sequence>
+                                <xsd:element name="path" type="xsd:string"/>
+                                <xsd:element name="description" type="xsd:string" minOccurs="0"/>
+                                <xsd:element name="deprecated" type="xsd:boolean" minOccurs="0"/>
+                                <xsd:element name="excluded" type="xsd:boolean" minOccurs="0"/>
+                                <xsd:element name="operation" minOccurs="0" maxOccurs="unbounded">
+                                    <xsd:complexType>
+                                        <xsd:sequence>
+                                            <xsd:element name="path" type="xsd:string" minOccurs="0"/>
+                                            <xsd:element name="description" type="xsd:string" minOccurs="0"/>
+                                            <xsd:element name="summary" type="xsd:string" minOccurs="0"/>
+                                            <xsd:element name="deprecated" type="xsd:boolean" minOccurs="0"/>
+                                            <xsd:element name="excluded" type="xsd:boolean" minOccurs="0"/>
+                                            <xsd:element name="method" type="ServiceMethodType"/>
+                                            <xsd:element name="content-type">
+                                                <xsd:simpleType>
+                                                    <xsd:restriction base="xsd:string">
+                                                        <xsd:enumeration value="application/xml"/>
+                                                        <xsd:enumeration value="application/json"/>
+                                                        <xsd:enumeration value="application/x-www-form-urlencoded"/>
+                                                        <xsd:enumeration value="multipart/form-data"/>
+                                                        <xsd:enumeration value="multipart/mixed"/>
+                                                    </xsd:restriction>
+                                                </xsd:simpleType>
+                                            </xsd:element>
+                                            <xsd:element name="parameter" type="RestClientServiceOpReqParamType"
+                                                         minOccurs="0" maxOccurs="unbounded"/>
+                                            <xsd:element name="response-parameter"
+                                                         type="RestClientServiceOpResParamType" minOccurs="0"
+                                                         maxOccurs="unbounded"/>
+                                        </xsd:sequence>
+                                        <xsd:attribute name="name" type="xsd:string"/>
+                                    </xsd:complexType>
+                                </xsd:element>
+                            </xsd:sequence>
+                            <xsd:attribute name="name" type="xsd:string"/>
+                        </xsd:complexType>
+                    </xsd:element>
+                </xsd:sequence>
+                <xsd:attribute name="name" type="xsd:string"/>
+                <xsd:attribute name="type" type="xsd:string"/>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+
+    <xsd:complexType name="RestClientServiceOpReqParamType">
+        <xsd:sequence>
+            <xsd:element name="description" type="xsd:string" minOccurs="0"/>
+            <xsd:element name="binding-name" type="xsd:string" minOccurs="0"/>
+            <xsd:element name="binding-type">
+                <xsd:simpleType>
+                    <xsd:restriction base="xsd:string">
+                        <xsd:enumeration value="uri"/>
+                        <xsd:enumeration value="query"/>
+                        <xsd:enumeration value="form"/>
+                        <xsd:enumeration value="header"/>
+                        <xsd:enumeration value="cookie"/>
+                        <xsd:enumeration value="body"/>
+                    </xsd:restriction>
+                </xsd:simpleType>
+            </xsd:element>
+            <xsd:element name="message-name" type="xsd:string" minOccurs="0"/>
+            <xsd:element name="required" type="xsd:boolean"/>
+            <xsd:element name="repeat" type="xsd:boolean"/>
+            <xsd:element name="designer-type" type="xsd:string"/>
+        </xsd:sequence>
+        <xsd:attribute name="name" type="xsd:string"/>
+    </xsd:complexType>
+
+    <xsd:complexType name="RestServerServiceOpReqParamType">
+        <xsd:sequence>
+            <xsd:element name="description" type="xsd:string" minOccurs="0"/>
+            <xsd:element name="binding-name" type="xsd:string" minOccurs="0"/>
+            <xsd:element name="binding-type">
+                <xsd:simpleType>
+                    <xsd:restriction base="xsd:string">
+                        <xsd:enumeration value="uri"/>
+                        <xsd:enumeration value="query"/>
+                        <xsd:enumeration value="form"/>
+                        <xsd:enumeration value="header"/>
+                        <xsd:enumeration value="cookie"/>
+                        <xsd:enumeration value="body"/>
+                        <xsd:enumeration value="fixed"/>
+                    </xsd:restriction>
+                </xsd:simpleType>
+            </xsd:element>
+            <xsd:element name="message-name" type="xsd:string" minOccurs="0"/>
+            <xsd:element name="required" type="xsd:boolean"/>
+            <xsd:element name="repeat" type="xsd:boolean"/>
+            <xsd:element name="ignoreadditionalfields" type="xsd:boolean" minOccurs="0"/>
+        </xsd:sequence>
+        <xsd:attribute name="name" type="xsd:string"/>
+    </xsd:complexType>
+
+    <xsd:complexType name="RestClientServiceOpResParamType">
+        <xsd:sequence>
+            <xsd:element name="response-code" type="xsd:string"/>
+            <xsd:element name="description" type="xsd:string"/>
+            <xsd:element name="message-name" type="xsd:string" minOccurs="0"/>
+            <xsd:element name="repeat" type="xsd:boolean"/>
+            <xsd:element name="required" type="xsd:boolean"/>
+        </xsd:sequence>
+        <xsd:attribute name="name" type="xsd:string"/>
+    </xsd:complexType>
+
+    <xsd:complexType name="RestServerServiceOpResParamType">
+        <xsd:sequence>
+            <xsd:element name="response-code" type="xsd:string"/>
+            <xsd:element name="description" type="xsd:string"/>
+            <xsd:element name="message-name" type="xsd:string" minOccurs="0"/>
+            <xsd:element name="repeat" type="xsd:boolean"/>
+            <xsd:element name="required" type="xsd:boolean"/>
+            <xsd:element name="ignoreadditionalfields" type="xsd:boolean" minOccurs="0"/>
+        </xsd:sequence>
+        <xsd:attribute name="name" type="xsd:string"/>
+    </xsd:complexType>
+
+    <xsd:element name="restserver" type="RESTServer" substitutionGroup="ServiceElement"/>
+    <xsd:complexType name="RESTServer">
+        <xsd:complexContent>
+            <xsd:extension base="ServiceElementType">
+                <xsd:sequence>
+                    <xsd:element name="version" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="description" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="application-info">
+                        <xsd:complexType>
+                            <xsd:sequence>
+                                <xsd:element name="name" type="xsd:string"/>
+                                <xsd:element name="version" type="xsd:string"/>
+                                <xsd:element name="description" type="xsd:string"/>
+                                <xsd:element name="host" type="xsd:string"/>
+                                <xsd:element name="base-path" type="xsd:string"/>
+                                <xsd:element name="contact-name" type="xsd:string"/>
+                                <xsd:element name="contact-url" type="xsd:string"/>
+                                <xsd:element name="contact-mail" type="xsd:string"/>
+                            </xsd:sequence>
+                        </xsd:complexType>
+                    </xsd:element>
+                    <xsd:element name="handler-info">
+                        <xsd:complexType>
+                            <xsd:sequence>
+                                <xsd:element name="error-handler" type="xsd:string"/>
+                                <xsd:element name="auth-handler" type="xsd:string"/>
+                            </xsd:sequence>
+                        </xsd:complexType>
+                    </xsd:element>
+                    <xsd:element name="access-tags">
+                        <xsd:complexType>
+                            <xsd:sequence>
+                                <xsd:element name="access-tag" type="xsd:string"/>
+                            </xsd:sequence>
+                            <xsd:attribute name="default" type="xsd:string"/>
+                        </xsd:complexType>
+                    </xsd:element>
+                    <xsd:element name="service" minOccurs="0" maxOccurs="unbounded">
+                        <xsd:complexType>
+                            <xsd:sequence>
+                                <xsd:element name="path" type="xsd:string" minOccurs="0"/>
+                                <xsd:element name="description" type="xsd:string" minOccurs="0"/>
+                                <xsd:element name="deprecated" type="xsd:boolean" minOccurs="0"/>
+                                <xsd:element name="excluded" type="xsd:boolean" minOccurs="0"/>
+                                <xsd:element name="operation" minOccurs="0" maxOccurs="unbounded">
+                                    <xsd:complexType>
+                                        <xsd:sequence>
+                                            <xsd:element name="path" type="xsd:string" minOccurs="0"/>
+                                            <xsd:element name="description" type="xsd:string" minOccurs="0"/>
+                                            <xsd:element name="summary" type="xsd:string" minOccurs="0"/>
+                                            <xsd:element name="deprecated" type="xsd:boolean" minOccurs="0"/>
+                                            <xsd:element name="excluded" type="xsd:boolean" minOccurs="0"/>
+                                            <xsd:element name="method" type="ServiceMethodType"/>
+                                            <xsd:element name="messageFlow" type="xsd:string"/>
+                                            <xsd:element name="parameter" type="RestServerServiceOpReqParamType"
+                                                         minOccurs="0" maxOccurs="unbounded"/>
+                                            <xsd:element name="response-parameter"
+                                                         type="RestServerServiceOpResParamType" minOccurs="0"
+                                                         maxOccurs="unbounded"/>
+                                        </xsd:sequence>
+                                        <xsd:attribute name="name" type="xsd:string"/>
+                                    </xsd:complexType>
+                                </xsd:element>
+                            </xsd:sequence>
+                            <xsd:attribute name="name" type="xsd:string"/>
+                        </xsd:complexType>
+                    </xsd:element>
+                </xsd:sequence>
+                <xsd:attribute name="name" type="xsd:string"/>
+                <xsd:attribute name="type" type="xsd:string"/>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+
+    <xsd:simpleType name="ServiceMethodType">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="GET"/>
+            <xsd:enumeration value="POST"/>
+            <xsd:enumeration value="PUT"/>
+            <xsd:enumeration value="DELETE"/>
+            <xsd:enumeration value="OPTIONS"/>
+            <xsd:enumeration value="HEAD"/>
+            <xsd:enumeration value="TRACE"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+
+    <!-- End RestServiceClient -->
+
+    <!-- RestService Flow Element -->
+
+    <xsd:complexType name="RESTClient">
+        <xsd:complexContent>
+            <xsd:extension base="FlowElementType">
+                <xsd:sequence>
+                    <xsd:element name="options" type="FlowOptionsType" minOccurs="0"/>
+                    <xsd:element name="RestClient" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="RestService" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="RestOperation" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="OutputMapping" type="OutputMappingType" minOccurs="0"/>
+                    <xsd:element name="InputMapping" type="InputMappingType" minOccurs="0"/>
+                    <xsd:element name="Header-Input" type="HeaderInputType" minOccurs="0"/>
+                    <xsd:element name="Header-Output" type="HeaderOutputType" minOccurs="0"/>
+                    <xsd:element name="visual" type="FlowVisualType"/>
+                    <xsd:element name="property" minOccurs="0">
+                        <xsd:complexType>
+                            <xsd:attribute name="name" type="xsd:string" use="required"/>
+                            <xsd:attribute name="value" type="xsd:string" use="required"/>
+                        </xsd:complexType>
+                    </xsd:element>
+                </xsd:sequence>
+                <xsd:attribute name="type" type="xsd:string" use="required"/>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+
+    <xsd:complexType name="OutputMappingParamType">
+        <xsd:sequence>
+            <xsd:element name="Name" type="xsd:string"/>
+            <xsd:element name="Type">
+                <xsd:simpleType>
+                    <xsd:restriction base="xsd:string">
+                        <xsd:enumeration value="String"/>
+                        <xsd:enumeration value="DataObject"/>
+                    </xsd:restriction>
+                </xsd:simpleType>
+            </xsd:element>
+            <xsd:element name="Repeating" type="xsd:string" minOccurs="0"/>
+            <xsd:element name="Required" type="xsd:string" minOccurs="0"/>
+            <xsd:element name="Message" type="xsd:string" minOccurs="0"/>
+            <xsd:element name="Value" type="xsd:string" minOccurs="0"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="InputMappingParamType">
+        <xsd:sequence>
+            <xsd:element name="Name" type="xsd:string"/>
+            <xsd:element name="Type">
+                <xsd:simpleType>
+                    <xsd:restriction base="xsd:string">
+                        <xsd:enumeration value="BigDecimal"/>
+                        <xsd:enumeration value="BigInteger"/>
+                        <xsd:enumeration value="Binary"/>
+                        <xsd:enumeration value="Boolean"/>
+                        <xsd:enumeration value="Character"/>
+                        <xsd:enumeration value="DataObject"/>
+                        <xsd:enumeration value="DateOnly"/>
+                        <xsd:enumeration value="DateTime"/>
+                        <xsd:enumeration value="Double"/>
+                        <xsd:enumeration value="Float"/>
+                        <xsd:enumeration value="ISODate"/>
+                        <xsd:enumeration value="ISODateTime"/>
+                        <xsd:enumeration value="ISOTime"/>
+                        <xsd:enumeration value="Integer"/>
+                        <xsd:enumeration value="Long"/>
+                        <xsd:enumeration value="String"/>
+                        <xsd:enumeration value="TimeOnly"/>
+                    </xsd:restriction>
+                </xsd:simpleType>
+            </xsd:element>
+            <xsd:element name="Repeating" type="xsd:boolean" minOccurs="0"/>
+            <xsd:element name="Required" type="xsd:boolean" minOccurs="0"/>
+            <xsd:element name="Message" type="xsd:string" minOccurs="0"/>
+            <xsd:element name="Value" type="xsd:string" minOccurs="0"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="HeaderInputOutputParamType">
+        <xsd:sequence>
+            <xsd:element name="MapType">
+                <xsd:simpleType>
+                    <xsd:restriction base="xsd:string">
+                        <xsd:enumeration value="Header"/>
+                        <xsd:enumeration value="Cookie"/>
+                    </xsd:restriction>
+                </xsd:simpleType>
+            </xsd:element>
+            <xsd:element name="Name">
+                <xsd:simpleType>
+                    <xsd:restriction base="xsd:string">
+                        <xsd:enumeration value="Accept"/>
+                        <xsd:enumeration value="Accept-Charset"/>
+                        <xsd:enumeration value="Accept-Encoding"/>
+                        <xsd:enumeration value="Accept-Language"/>
+                        <xsd:enumeration value="Accept-Datetime"/>
+                        <xsd:enumeration value="Authorization"/>
+                        <xsd:enumeration value="Cache-Control"/>
+                        <xsd:enumeration value="Connection"/>
+                        <xsd:enumeration value="Content-Length"/>
+                        <xsd:enumeration value="Content-MD5"/>
+                        <xsd:enumeration value="Content-Type"/>
+                        <xsd:enumeration value="Date"/>
+                        <xsd:enumeration value="Expect"/>
+                        <xsd:enumeration value="Forwarded"/>
+                        <xsd:enumeration value="From"/>
+                        <xsd:enumeration value="Host"/>
+                        <xsd:enumeration value="If-Match"/>
+                        <xsd:enumeration value="If-Modified-Since"/>
+                        <xsd:enumeration value="If-None-Match"/>
+                        <xsd:enumeration value="If-Range"/>
+                        <xsd:enumeration value="If-Unmodified-Since"/>
+                        <xsd:enumeration value="Max-Forwards"/>
+                        <xsd:enumeration value="Origin"/>
+                        <xsd:enumeration value="Pragma"/>
+                        <xsd:enumeration value="Proxy-Authorization"/>
+                        <xsd:enumeration value="Range"/>
+                        <xsd:enumeration value="User-Agent"/>
+                        <xsd:enumeration value="Via"/>
+                        <xsd:enumeration value="TE"/>
+                        <xsd:enumeration value="Upgrade"/>
+                        <xsd:enumeration value="Warning"/>
+                        <xsd:enumeration value="Cookies"/>
+                    </xsd:restriction>
+                </xsd:simpleType>
+            </xsd:element>
+            <xsd:element name="Type" fixed="String"/>
+            <xsd:element name="Value" type="xsd:string"/>
+            <xsd:element name="Enabled" type="xsd:boolean"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="OutputMappingType">
+        <xsd:sequence>
+            <xsd:element name="Param" type="OutputMappingParamType" minOccurs="0" maxOccurs="unbounded"/>
+            <xsd:element name="StatusCode" type="xsd:string" minOccurs="0"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="InputMappingType">
+        <xsd:sequence>
+            <xsd:element name="Param" type="InputMappingParamType" minOccurs="0" maxOccurs="unbounded"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="HeaderInputType">
+        <xsd:sequence>
+            <xsd:element name="Param" type="HeaderInputOutputParamType" minOccurs="0" maxOccurs="unbounded"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="HeaderOutputType">
+        <xsd:sequence>
+            <xsd:element name="Param" type="HeaderInputOutputParamType" minOccurs="0" maxOccurs="unbounded"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <!-- End RestService Flow Element -->
+</xsd:schema>

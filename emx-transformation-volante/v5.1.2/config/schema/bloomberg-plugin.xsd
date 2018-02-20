@@ -1,0 +1,68 @@
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="unqualified" attributeFormDefault="unqualified">
+	<!-- include constructs -->
+	<xsd:include schemaLocation="externalmsg.xsd"/>
+	<xsd:complexType name="BloombergFormat">
+		<xsd:complexContent>
+			<xsd:extension base="ExternalMessageType"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:element name="bloombergfields" substitutionGroup="ExternalMessageFields">
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="ExternalMessageFieldsType">
+					<xsd:sequence>
+						<xsd:element name="model" type="xsd:string"/>
+						<xsd:element ref="target-namespace" minOccurs="0"/>
+						<xsd:element ref="xpath-namespaces" minOccurs="0"/>
+						<xsd:element ref="platforminfo" minOccurs="0"/>
+						<xsd:element ref="field-attributes" minOccurs="0"/>
+						<xsd:element name="headerfields">
+							<xsd:complexType>
+								<xsd:sequence>
+									<xsd:element ref="platforminfo" minOccurs="0"/>
+									<xsd:element ref="field-attributes" minOccurs="0"/>
+									<xsd:element name="field" type="BloombergFieldType" minOccurs="0" maxOccurs="unbounded"/>
+								</xsd:sequence>
+							</xsd:complexType>
+						</xsd:element>
+						<xsd:element name="datafields">
+							<xsd:complexType>
+								<xsd:sequence>
+									<xsd:element ref="platforminfo" minOccurs="0"/>
+									<xsd:element ref="field-attributes" minOccurs="0"/>
+									<xsd:element name="field" type="BloombergFieldType" minOccurs="0" maxOccurs="unbounded"/>
+								</xsd:sequence>
+							</xsd:complexType>
+						</xsd:element>
+						<xsd:element name="trailerfields">
+							<xsd:complexType>
+								<xsd:sequence>
+									<xsd:element ref="platforminfo" minOccurs="0"/>
+									<xsd:element ref="field-attributes" minOccurs="0"/>
+									<xsd:element name="field" type="BloombergFieldType" minOccurs="0" maxOccurs="unbounded"/>
+								</xsd:sequence>
+							</xsd:complexType>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:complexType name="BloombergFieldType">
+		<xsd:sequence>
+			<xsd:element name="name" type="xsd:string"/>
+			<xsd:element name="datatype" type="xsd:string"/>
+			<xsd:element name="detailed-name" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="description" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="aliasname" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="required" type="xsd:boolean" minOccurs="0"/>
+			<xsd:element name="defaultvalue" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="dateformat" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="bloomberg-id" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="bloombergtype" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="enumeration" type="xsd:string" minOccurs="0"/>
+			<xsd:element ref="platforminfo" minOccurs="0"/>
+			<xsd:element ref="field-attributes" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

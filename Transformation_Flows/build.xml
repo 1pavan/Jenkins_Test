@@ -1,0 +1,243 @@
+<?xml version="1.0" standalone="yes"?>
+<project basedir="." default="run">
+	<property name="designer.ver" value="5.2.1"/>
+	<property name="designer.version" value="v${designer.ver}" />
+	<property name="designer.home" value="${basedir}/../emx-transformation-volante/${designer.version}" />
+	<property name="cartridge.dir" value="${basedir}" />
+	<property name="target.dir" value="${basedir}/target" />
+	<property name="build.boolean" value="true"/>
+	<!-- property for identifying car location for build -->
+	<property name="carFolderList" value="BNYInternal,flow,Messages,passarea"/>
+	<!-- property for identifying folders for maven build -->
+	<property name="targetFolderList" value="BNYInternal,flow,Messages,passarea"/>
+	<!-- property for identifying folders for maven build that are nested-->
+	<property name="targetNestedFolderList" value=""/>
+		
+	<dirset dir="${cartridge.dir}" id="mappingDirectoryList">
+		<include name="*/*"/>
+	</dirset>
+	<!-- Get tasks from antcontrib by referring to the ant-contrib jar from Maven Repository -->
+	<taskdef resource="net/sf/antcontrib/antcontrib.properties">
+		<classpath>
+			<pathelement location="${ant-contrib:ant-contrib:jar}"/>
+		</classpath>
+	</taskdef>
+
+
+
+	<!-- =================================================================== -->
+	<!-- Clean all generated artifacts 		                                 -->
+	<!-- =================================================================== -->
+	<target name="clean.target" description="Deletes all the generated artifacts.">
+		<echo message="Deleting target files ..."/>
+		<delete includeemptydirs="true">
+			<fileset dir="${target.dir}" excludes="**/antrun/"/>
+		</delete>
+	</target>
+	<!-- =================================================================== -->
+	<!-- Builds the cartridges (using the task above)                        -->
+	<!-- =================================================================== -->
+	<target name="compile.all">
+		<echo message="Building all EMX cartridges ..."/>
+
+
+		<foreach target="compile.cartridge" 
+  			list="${carFolderList}"
+  			param="build.folderName" 
+  			inheritall="true">
+		</foreach>
+		<!-- Some mappings/flow could have dependency with canonical messages, delete non-jar files ONLY after all volante car files are compiled -->
+		<!--
+		<foreach target="keep.java" 
+		  			list="${carFolderList}"
+		  			param="build.folderName" 
+		  			inheritall="true">
+		</foreach>
+		-->
+	</target>
+
+
+	<target name="compile.cartridge" if="${build.boolean}">
+		<echo message="Building cartridge ${build.folderName} ..."/>
+		<!-- =================================================================== -->
+		<!-- Define the code generator task                                      -->
+		<!-- =================================================================== -->
+		<path id="volante.classpath">
+			<fileset dir="${designer.home}/lib" includes="*.jar" />
+		</path>
+
+		<taskdef name="volantecg" classname="com.tplus.transform.design.ui.VolanteCGTask">
+			<classpath refid="volante.classpath"/>
+		</taskdef>
+
+		<volantecg platform="java" depend="true" home="${designer.home}" >
+			<fileset dir="${cartridge.dir}/${build.folderName}" includes="**/*.car" />
+		</volantecg>
+
+	</target>
+
+	<!-- =================================================================== -->
+	<!-- Clean all generated artifacts except JARs                           -->
+	<!-- =================================================================== -->
+	<target name="keep.java" description="Deletes all the non-jar generated artifacts.">
+		<echo message="Deleting ${build.folderName} non-jar files ..."/>
+		<delete includeemptydirs="true">
+			<fileset dir="${cartridge.dir}/${build.folderName}" includes="**/java/" excludes="**/java/*.jar," />
+		</delete>
+	</target>
+
+	<!-- =================================================================== -->
+	<!-- Copies Jars required for runtime from volante location         		-->
+	<!-- =================================================================== -->
+	<target name="copy.runtime.jars">
+		<echo message="Copying Volante Runtime ..."/>
+
+		<echo message="Copying Volante ${designer.home}/lib/runtime" />
+		<copy todir="${target.dir}/${designer.version}/runtime/java" preservelastmodified="true">
+			<fileset dir="${designer.home}/lib/runtime/deploy">
+				<include name="cp.jar"/>
+			</fileset>
+			<fileset dir="${designer.home}/lib/runtime">
+				<include name="asciifixedrt.jar"/>
+				<include name="asciirt.jar"/>
+				<include name="beanrt.jar"/>
+				<include name="commons-beanutils.jar"/>
+				<include name="commons-collections.jar"/>
+				<include name="commons-logging.jar"/>
+				<include name="generalutils.jar"/>
+				<include name="log4j.jar"/>
+				<include name="resourcemanager.jar"/>
+				<include name="simplert.jar"/>
+				<include name="swiftgenericrt.jar"/>
+				<include name="swiftresources.jar"/>
+				<include name="swiftrt.jar"/>
+				<include name="transformrt.jar"/>
+				<include name="universalrt.jar"/>
+				<include name="webformsrt.jar"/>
+				<include name="xercesImpl.jar"/>
+				<include name="xml-apis.jar"/>
+				<include name="xmlrt.jar"/>
+								
+			</fileset>
+			<fileset dir="${designer.home}/lib/ext">
+				<include name="sqlutils.jar"/>
+			</fileset>
+		</copy>
+
+		<copy todir="${target.dir}/${designer.version}" preservelastmodified="true">
+			<fileset dir="${basedir}">
+				<include name="*.pom"/>
+			</fileset>
+		</copy>
+
+		<copy todir="${target.dir}/${designer.version}" preservelastmodified="true">
+			<fileset dir="${cartridge.dir}" excludes="target/">
+				<include name="**/java/*.jar"/>
+			</fileset>
+		</copy>
+	</target>
+	<!-- =================================================================== -->
+	<!-- Check if directory exists                                           -->
+	<!-- =================================================================== -->
+	<target name="designer.check">
+		<condition property="designer.exists">
+			<available file="${designer.home}" type="dir"/>
+		</condition>
+	</target>
+	<target name="folder.check">
+		<condition property="folder.exists">
+			<available file="${folder.name}" type="dir"/>
+		</condition>
+	</target>
+
+	<!-- =================================================================== -->
+	<!-- Install, Deploy for Maven                                           -->
+	<!-- =================================================================== -->
+	<target name="build.maven.folders">
+		<echo message="Looping through cartridge folders ..." />
+		<foreach target="build.maven.files" 
+	  		list="${targetFolderList}"
+	  		param="maven.subgroup" 
+	  		inheritall="true">
+		</foreach>
+	</target>
+
+
+	<target name="build.maven.files">
+		<echo message="Getting files from : ${maven.subgroup}"/>
+
+		<foreach target="build.maven" param="fileName" inheritall="true">
+			<fileset dir="${target.dir}/${designer.version}/${maven.subgroup}/java" casesensitive="yes">
+				<include name="*.jar"/>
+			</fileset>
+		</foreach>
+	</target>
+
+	<target name="build.maven">
+		<basename property="maven.artifactId" file="${fileName}" suffix=".jar" />
+		<if>
+			<equals arg1="${maven.subgroup}" arg2="runtime"/>
+			<then>
+				<property name="pom.file.name" value="runtime.pom"/>
+			</then>
+			<else>
+				<property name="pom.file.name" value="cartridges.pom"/>
+			</else>
+		</if>
+		
+		<echo message="Processing ${maven.subgroup} with pom file: ${pom.file.name}" />
+		<subant target="run" inheritall="true">
+			<fileset dir="${basedir}" includes="build-maven.xml"/>
+		</subant>
+	</target>
+	<!-- =================================================================== -->
+	<!-- Install, Deploy for Maven  from nested folders						 -->
+	<!-- =================================================================== -->
+	<!-- subgroup names-->
+	<target name="build.nested.folders">
+		<echo message="Getting Parent Folders ${targetNestedFolderList}"/>
+		<foreach target="build.nested.folder" param="maven.module" inheritall="true" list="${targetNestedFolderList}"/>
+	</target>
+	<!-- get mapping names-->		
+	<target name="build.nested.folder">
+		<echo message ="Getting Nested Folders: ${maven.module}"/>
+		<foreach target="build.nested.file" param="mapping.name" inheritall="true">
+			<path>
+				<dirset dir="${maven.module}">
+					<include name="*"/>
+				</dirset>
+			</path>
+		</foreach>
+		
+	</target>
+	<!-- get mapping jar file names-->	
+	<target name="build.nested.file">
+			<!-- get the base folder name --> 
+			<basename property="mapping.folder.name" file="${mapping.name}" />
+			<!-- get the parent folder path --> 
+			<dirname property="mavaen.subgroupPath" file="${mapping.name}" />
+			<!-- get the parent folder name--> 
+			<basename property="maven.subgroup" file="${mavaen.subgroupPath}" />
+			
+			<property name="pom.file.name" value="cartridges.pom"/>
+			<echo message="Processing files in ${maven.subgroup}/${mapping.folder.name} with POM: ${pom.file.name}"/>
+
+			<foreach target="build.maven.nested.file" param="fileName" inheritall="true">
+				<fileset dir="${target.dir}/${designer.version}/${maven.subgroup}/${mapping.folder.name}/java" casesensitive="yes">
+					<include name="*.jar"/>
+				</fileset>
+			</foreach>
+	</target>
+	<!-- call maven build for each jar file-->
+	<target name="build.maven.nested.file">
+		<basename property="maven.artifactId" file="${fileName}" suffix=".jar" />
+		<echo message="Install / Deploy: ${maven.subgroup}/${mapping.folder.name}/${maven.artifactId}" />
+		<subant target="runNested" inheritall="true">
+			<fileset dir="${basedir}" includes="build-maven.xml"/>
+		</subant>
+	</target>
+
+	<!--Primary target for this build.xml-->
+	<target name="run" depends="clean.target,compile.all,copy.runtime.jars,build.maven.folders,build.nested.folders" description="Build all EMX Validation cartridges">
+	</target>
+</project>

@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<SwiftMessageFormat name="MT598">
+	<standard-version><![CDATA[SRG 2015]]></standard-version>
+	<standard-release-qualifier>20150304</standard-release-qualifier>
+	<DescriptiveName><![CDATA[Proprietary Message]]></DescriptiveName>
+	<Category><![CDATA[Securities Markets]]></Category>
+	<Description><![CDATA[This message type is used by financial institutions, with their own offices, and/or with other financial institutions with which they have established bilateral agreements.
+
+It is used as an envelope for a specified message included in it.
+
+It allows for the definition of a unique format for which another message type is not available or applicable.
+
+It also allows financial institutions to use message types which are awaiting live implementation on the SWIFT system.]]></Description>
+	<SwiftFields>
+		<customizable>false</customizable>
+		<modifiable>true</modifiable>
+		<SwiftMessageType>User</SwiftMessageType>
+		<max-length>10000</max-length>
+		<Header>
+		</Header>
+		<Data>
+			<Fields>
+				<SwiftField Name="20">
+					<SwiftFieldDef Name="20">
+						<Generic>false</Generic>
+						<Description><![CDATA[Reference]]></Description>
+						<Option Name="">
+							<Format><![CDATA[16x]]></Format>
+							<Specification><![CDATA[(Reference)]]></Specification>
+							<Description><![CDATA[Transaction Reference Number]]></Description>
+						</Option>
+					</SwiftFieldDef>
+					<Description><![CDATA[]]></Description>
+					<Repeating>false</Repeating>
+					<Presence>M</Presence>
+					<Options> </Options>
+					<Validations>
+						<SubField Name="Reference">
+							<Validation>
+								<Options> </Options>
+								<ErrorCode>T26</ErrorCode>
+								<Comment><![CDATA[This field must not start or end with a slash '/' and must not contain two consecutive slashes '//' (Error code(s): T26).]]></Comment>
+								<ValidationPattern Type="T26">
+								</ValidationPattern>
+							</Validation>
+						</SubField>
+					</Validations>
+				</SwiftField>
+				<SwiftField Name="12">
+					<SwiftFieldDef Name="12">
+						<Generic>false</Generic>
+						<Description><![CDATA[Type of Financial Instrument]]></Description>
+						<Option Name="">
+							<Format><![CDATA[3!n]]></Format>
+							<Specification><![CDATA[(MT Number)]]></Specification>
+							<Description><![CDATA[Sub-Message Type]]></Description>
+						</Option>
+					</SwiftFieldDef>
+					<Description><![CDATA[]]></Description>
+					<Repeating>false</Repeating>
+					<Presence>M</Presence>
+					<Options> </Options>
+				</SwiftField>
+				<SwiftField Name="77E">
+					<SwiftFieldDef Name="77">
+						<Generic>false</Generic>
+						<Option Name="E">
+							<Format><![CDATA[73x[CRLF1000*78x]]]></Format>
+							<Specification><![CDATA[(Text1)(Text2)]]></Specification>
+							<Description><![CDATA[Proprietary Message]]></Description>
+						</Option>
+					</SwiftFieldDef>
+					<Description><![CDATA[]]></Description>
+					<Repeating>false</Repeating>
+					<Presence>M</Presence>
+					<Options>E</Options>
+				</SwiftField>
+			</Fields>
+		</Data>
+		<Trailer>
+		</Trailer>
+	</SwiftFields>
+	<validationrules>
+		<hdrvalidationrules>
+			<fieldvalidations>
+				<fieldvalidation>
+					<name>U09</name>
+					<formula><![CDATA[if($this.Header.GetFieldIndex("User_Header") != -1) {
+    def userHeader = $this.Header.GetSection("User_Header");
+    if(userHeader.$size > 0 && userHeader[0].IsNotNull("Validation_Flag")) {
+        return false;
+    }
+}
+return true;
+]]></formula>
+					<severity>error</severity>
+					<cascade>true</cascade>
+					<error-code>U09</error-code>
+					<actionmessage><![CDATA["User has used tag 119 in a message that is not a candidate for special processing"]]></actionmessage>
+				</fieldvalidation>
+			</fieldvalidations>
+		</hdrvalidationrules>
+		<datavalidationrules>
+			<fieldvalidations>
+				<fieldvalidation>
+					<name>F77E-A</name>
+					<fieldname>77E</fieldname>
+				<formula><![CDATA[def fullText = F77E.Text1 + "\r\n" + Val(F77E.Text2);
+def fieldLength = fullText.Length();
+return fieldLength <= 9800;]]></formula>
+					<severity>error</severity>
+					<cascade>true</cascade>
+					<error-code>T33</error-code>
+					<actionmessage><![CDATA["The maximum size of this field is limited to 9800 characters."]]></actionmessage>
+				</fieldvalidation>
+			</fieldvalidations>
+		</datavalidationrules>
+		<tlrvalidationrules>
+			<fieldvalidations>
+			</fieldvalidations>
+		</tlrvalidationrules>
+	</validationrules>
+</SwiftMessageFormat>
+

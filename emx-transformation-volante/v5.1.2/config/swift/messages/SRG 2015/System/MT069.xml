@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<SwiftMessageFormat name="MT069">
+	<standard-version><![CDATA[SRG 2015]]></standard-version>
+	<standard-release-qualifier>20150731</standard-release-qualifier>
+	<DescriptiveName><![CDATA[Daily Check Report Time Status]]></DescriptiveName>
+	<Category><![CDATA[System]]></Category>
+	<Description><![CDATA[This message shows the time at which the Daily Check Report for the GPA or FIN application is generated
+for the requesting destination. It is the response to an MT 049 Daily Check Report Time Query.
+
+From: GPA or FIN To: User]]></Description>
+	<SwiftFields>
+		<customizable>true</customizable>
+		<modifiable>true</modifiable>
+		<SwiftMessageType>System</SwiftMessageType>
+		<HeaderAndTrailerType>SWIFT_INPUT_HEADER</HeaderAndTrailerType>
+		<Header>
+		</Header>
+		<Data>
+			<Fields>
+				<SystemField Name="hour">
+					<description><![CDATA[Hour, local to the receiver, when the Daily Check Report is generated. Hour
+is in the range 00-23.]]></description>
+					<datatype>String</datatype>
+					<required>true</required>
+					<SwiftSystemFieldDef Name="hour" Tag="174">
+						<Format><![CDATA[2!n]]></Format>
+						<Specification><![CDATA[(hour)]]></Specification>
+						<Additional-Format><![CDATA[HH]]></Additional-Format>
+						<Description><![CDATA[Range: 00-23
+
+Date and time are always given as local, unless otherwise specified. Local time for the SWIFTNetwork is in GMT.]]></Description>
+						<Validations>
+							<Validation>
+								<formula>IsDate($value,"HH")</formula>
+								<error-code>V05</error-code>
+								<actionmessage>"Invalid Hour '" + $value + "'. hour should be in the format HH and in between 00 to 23."</actionmessage>
+							</Validation>
+						</Validations>
+					</SwiftSystemFieldDef>
+				</SystemField>
+			</Fields>
+		</Data>
+		<Trailer>
+		</Trailer>
+	</SwiftFields>
+	<validationrules name="Default">
+		<hdrvalidationrules>
+			<fieldvalidations>
+			</fieldvalidations>
+		</hdrvalidationrules>
+		<datavalidationrules>
+			<fieldvalidations>
+			</fieldvalidations>
+		</datavalidationrules>
+		<tlrvalidationrules>
+			<fieldvalidations>
+			</fieldvalidations>
+		</tlrvalidationrules>
+	</validationrules>
+</SwiftMessageFormat>
+

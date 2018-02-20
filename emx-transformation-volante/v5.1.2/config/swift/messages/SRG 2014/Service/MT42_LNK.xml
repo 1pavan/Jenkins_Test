@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<SwiftMessageFormat name="MT42_LNK">
+	<standard-version><![CDATA[SRG 2014]]></standard-version>
+	<standard-release-qualifier>20140520</standard-release-qualifier>
+	<DescriptiveName><![CDATA[Login Negative Acknowledgement (LNK)]]></DescriptiveName>
+	<Category><![CDATA[Service]]></Category>
+	<Description><![CDATA[This message is sent to the user by the system to refuse an 02 Login Request Message. The system does not create a GPA session for this LT.
+
+From: GPA To: User
+
+Notes
+Any user who does not get a response from the system to an 02 Login Request Message, or who receives a 42 Login Negative Acknowledgement (LNK) with an error code L35, should contact the Customer Service Centre.
+
+Field tag 502 is mandatory in SWIFTNet Phase 1 and not allowed in SWIFTNet Phase 2.]]></Description>
+	<SwiftFields>
+		<customizable>false</customizable>
+		<modifiable>true</modifiable>
+		<SwiftMessageType>Service</SwiftMessageType>
+		<HeaderAndTrailerType>SWIFT_INPUT_HEADER</HeaderAndTrailerType>
+		<Header>
+		</Header>
+		<Data>
+			<Fields>
+				<SystemField Name="error-code-l/s">
+					<description><![CDATA[Reason why the login was rejected. Error code is in the form Lnn where nn is a two-digit number. See FIN Error Codes for the full set of error codes.]]></description>
+					<datatype>String</datatype>
+					<required>true</required>
+					<SwiftSystemFieldDef Name="error-code-l/s" Tag="503">
+						<Format><![CDATA[3!c]]></Format>
+						<Specification><![CDATA[(error-code-l/s)]]></Specification>
+						<Description><![CDATA[Reason why the login was rejected. Error code is in the form Lnn where nn is a two-digit number. See FIN Error Codes for the full set of error codes.]]></Description>
+					</SwiftSystemFieldDef>
+				</SystemField>
+				<SystemField Name="date-time">
+					<description><![CDATA[Date and time, local to the user, of the rejection.]]></description>
+					<datatype>String</datatype>
+					<required>true</required>
+					<SwiftSystemFieldDef Name="date-time" Tag="177">
+						<Format><![CDATA[(10!n)]]></Format>
+						<Specification><![CDATA[(date-time)]]></Specification>
+						<Additional-Format><![CDATA[YYMMDDHHMM]]></Additional-Format>
+						<Description><![CDATA[Date and time are always given as local, unless otherwise specified. Local time for the SWIFTNetwork is in GMT.]]></Description>
+						<Validations>
+							<Validation>
+								<formula>IsDate($value,"yyMMddHHmm")</formula>
+								<error-code>V05</error-code>
+								<actionmessage>"Invalid Date/Time '" + $value + "'"</actionmessage>
+							</Validation>
+						</Validations>
+					</SwiftSystemFieldDef>
+				</SystemField>
+			</Fields>
+		</Data>
+		<Trailer>
+		</Trailer>
+	</SwiftFields>
+	<validationrules name="Default">
+		<hdrvalidationrules>
+			<fieldvalidations>
+			</fieldvalidations>
+		</hdrvalidationrules>
+		<datavalidationrules>
+			<fieldvalidations>
+			</fieldvalidations>
+		</datavalidationrules>
+		<tlrvalidationrules>
+			<fieldvalidations>
+			</fieldvalidations>
+		</tlrvalidationrules>
+	</validationrules>
+</SwiftMessageFormat>
+

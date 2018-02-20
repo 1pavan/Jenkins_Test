@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="iso-8859-1" standalone="no"?>
+<conductorcategory name="Persistence">
+	<flowelement type="Persist"/>
+	<flowelement type="Query"/>
+	<flowelement type="DynamicQuery"/>
+	<flowelement type="Delete"/>
+</conductorcategory>
+

@@ -1,0 +1,1255 @@
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="unqualified"
+            attributeFormDefault="unqualified">
+    <!-- include constructs -->
+    <xsd:include schemaLocation="cartridge-include.xsd"/>
+    <xsd:include schemaLocation="internalmsg.xsd"/>
+    <xsd:element name="messageflow" type="MessageFlowType" substitutionGroup="ServiceElement"/>
+    <xsd:complexType name="MessageFlowType">
+        <xsd:complexContent>
+            <xsd:extension base="ServiceElementType">
+                <xsd:sequence>
+                    <xsd:element ref="version" minOccurs="0"/>
+                    <xsd:element name="description" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="transaction" minOccurs="0">
+                        <xsd:simpleType>
+                            <xsd:restriction base="xsd:string">
+                                <xsd:enumeration value="NotRequired"/>
+                                <xsd:enumeration value="Required"/>
+                                <xsd:enumeration value="RequiresNew"/>
+                            </xsd:restriction>
+                        </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element name="excluded" type="xsd:boolean" minOccurs="0"/>
+                    <xsd:element name="message-flow-ports" minOccurs="0">
+                        <xsd:complexType>
+                            <xsd:sequence>
+                                <xsd:element ref="port" minOccurs="0" maxOccurs="unbounded"/>
+                            </xsd:sequence>
+                        </xsd:complexType>
+                    </xsd:element>
+                    <xsd:element name="message-flow-references" minOccurs="0">
+                        <xsd:complexType>
+                            <xsd:sequence>
+                                <xsd:element name="reference" minOccurs="0" maxOccurs="unbounded">
+                                    <xsd:complexType>
+                                        <xsd:attribute name="name" type="xsd:string" use="required"/>
+                                        <xsd:attribute name="type" type="xsd:string" use="required"/>
+                                    </xsd:complexType>
+                                </xsd:element>
+                            </xsd:sequence>
+                        </xsd:complexType>
+                    </xsd:element>
+                    <xsd:element name="variables" type="FlowVariablesType" minOccurs="0"/>
+                    <xsd:element ref="additional-properties" minOccurs="0"/>
+                    <xsd:element name="flowelement" type="FlowElementType" minOccurs="0" maxOccurs="unbounded"/>
+                    <xsd:element name="link" type="Link" minOccurs="0" maxOccurs="unbounded"/>
+                    <xsd:element name="visual">
+                        <xsd:complexType>
+                            <xsd:sequence>
+                                <xsd:element name="bounds">
+                                    <xsd:complexType>
+                                        <xsd:attribute name="x" type="xsd:integer"/>
+                                        <xsd:attribute name="y" type="xsd:integer"/>
+                                        <xsd:attribute name="width" type="xsd:integer"/>
+                                        <xsd:attribute name="height" type="xsd:integer"/>
+                                    </xsd:complexType>
+                                </xsd:element>
+                            </xsd:sequence>
+                        </xsd:complexType>
+                    </xsd:element>
+                    <xsd:element name="message-definitions" type="MessageDefinitionType" minOccurs="0"/>
+                    <xsd:element ref="elementproperties" minOccurs="0"/>
+                </xsd:sequence>
+                <xsd:attribute name="name" type="xsd:string" use="required"/>
+                <xsd:attribute name="type" type="xsd:string" use="required" fixed="MessageFlow"/>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:element name="port">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="protocol" type="xsd:string"/>
+                <xsd:element name="device" type="xsd:string"/>
+            </xsd:sequence>
+            <xsd:attribute name="name" type="xsd:string"/>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:complexType name="FlowFieldType">
+        <xsd:sequence>
+            <xsd:element name="name" type="xsd:string"/>
+            <xsd:element name="type" type="xsd:string"/>
+            <xsd:element name="detailed-name" type="xsd:string" minOccurs="0"/>
+            <xsd:element name="description" type="xsd:string" minOccurs="0"/>
+            <xsd:element name="notnull" type="xsd:boolean" minOccurs="0"/>
+            <xsd:element name="minoccurs" type="xsd:integer" minOccurs="0"/>
+            <xsd:element name="maxoccurs" type="xsd:integer" minOccurs="0"/>
+            <xsd:element name="length" type="xsd:integer" minOccurs="0"/>
+            <xsd:element name="variabletype">
+                <xsd:simpleType>
+                    <xsd:restriction base="xsd:string">
+                        <xsd:enumeration value="LOCAL"/>
+                        <xsd:enumeration value="INPUT"/>
+                        <xsd:enumeration value="OUTPUT"/>
+                        <xsd:enumeration value="CACHED"/>
+                        <xsd:enumeration value="IN/OUT"/>
+                    </xsd:restriction>
+                </xsd:simpleType>
+            </xsd:element>
+            <xsd:element name="notnull" type="xsd:boolean" minOccurs="0"/>
+            <xsd:element name="message" type="xsd:string" minOccurs="0"/>
+            <xsd:element name="fields" minOccurs="0">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="field" type="FlowFieldType" minOccurs="0" maxOccurs="unbounded"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="FlowVariablesType">
+        <xsd:sequence>
+            <xsd:element ref="xpath-namespaces" minOccurs="0"/>
+            <xsd:element name="fields">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="field" type="FlowFieldType" minOccurs="0" maxOccurs="unbounded"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="Switch">
+        <xsd:complexContent>
+            <xsd:extension base="FlowElementType">
+                <xsd:sequence>
+                    <xsd:element name="messageflow" minOccurs="1">
+                        <xsd:complexType>
+                            <xsd:sequence>
+                                <xsd:element name="flowelement" type="Case" minOccurs="0" maxOccurs="unbounded"/>
+
+                                <xsd:element name="visual">
+                                    <xsd:complexType>
+                                        <xsd:sequence>
+                                            <xsd:element name="bounds">
+                                                <xsd:complexType>
+                                                    <xsd:attribute name="x" type="xsd:integer"/>
+                                                    <xsd:attribute name="y" type="xsd:integer"/>
+                                                    <xsd:attribute name="width" type="xsd:integer"/>
+                                                    <xsd:attribute name="height" type="xsd:integer"/>
+                                                </xsd:complexType>
+                                            </xsd:element>
+                                        </xsd:sequence>
+                                    </xsd:complexType>
+                                </xsd:element>
+                            </xsd:sequence>
+                            <xsd:attribute name="name" type="xsd:string" use="required"/>
+                            <xsd:attribute name="type" type="xsd:string" use="required" fixed="MessageFlow"/>
+                        </xsd:complexType>
+                    </xsd:element>
+                    <xsd:element name="visual" type="FlowVisualType"/>
+                    <xsd:element name="property" minOccurs="0">
+                        <xsd:complexType>
+                            <xsd:attribute name="name" type="xsd:string" use="required"/>
+                            <xsd:attribute name="value" type="xsd:string" use="required"/>
+                        </xsd:complexType>
+                    </xsd:element>
+                </xsd:sequence>
+                <xsd:attribute name="type" type="xsd:string" use="required" fixed="Switch"/>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="FlowContainerElemType">
+        <xsd:complexContent>
+            <xsd:extension base="FlowElementType">
+                <xsd:sequence>
+                    <xsd:element ref="messageflow" minOccurs="1"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="Sequence">
+        <xsd:complexContent>
+            <xsd:extension base="FlowContainerElemType">
+                <xsd:sequence>
+                    <xsd:element name="visual" type="FlowVisualType"/>
+                    <xsd:element name="property" minOccurs="0">
+                        <xsd:complexType>
+                            <xsd:attribute name="name" type="xsd:string" use="required"/>
+                            <xsd:attribute name="value" type="xsd:string" use="required"/>
+                        </xsd:complexType>
+                    </xsd:element>
+                </xsd:sequence>
+                <xsd:attribute name="type" type="xsd:string" use="required" fixed="Sequence"/>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="BatchParse">
+        <xsd:complexContent>
+            <xsd:extension base="FlowElementType">
+                <xsd:sequence>
+                    <xsd:element name="in" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="out" type="xsd:string" minOccurs="0"/>
+                    <xsd:element ref="messageflow" minOccurs="1"/>
+                    <xsd:element name="options" type="FlowOptionsType" minOccurs="0"/>
+                    <xsd:element name="message" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="cascade-exceptions" type="xsd:boolean"/>
+                    <xsd:element name="condition" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="record-exception" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="add-to-destination" type="xsd:boolean" minOccurs="0"/>
+                    <xsd:element name="visual" type="FlowVisualType"/>
+                    <xsd:element name="property" minOccurs="0">
+                        <xsd:complexType>
+                            <xsd:attribute name="name" type="xsd:string" use="required"/>
+                            <xsd:attribute name="value" type="xsd:string" use="required"/>
+                        </xsd:complexType>
+                    </xsd:element>
+                </xsd:sequence>
+                <xsd:attribute name="type" type="xsd:string" use="required" fixed="BatchParse"/>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="Loop">
+        <xsd:complexContent>
+            <xsd:extension base="FlowContainerElemType">
+                <xsd:sequence>
+                    <xsd:element name="condition" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="init" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="increment" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="visual" type="FlowVisualType"/>
+                    <xsd:element name="property" minOccurs="0">
+                        <xsd:complexType>
+                            <xsd:attribute name="name" type="xsd:string" use="required"/>
+                            <xsd:attribute name="value" type="xsd:string" use="required"/>
+                        </xsd:complexType>
+                    </xsd:element>
+                </xsd:sequence>
+                <xsd:attribute name="type" type="xsd:string" use="required" fixed="Loop"/>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="Case">
+        <xsd:complexContent>
+            <xsd:extension base="FlowContainerElemType">
+                <xsd:sequence>
+                    <xsd:group ref="SwitchCaseTypeGroup" minOccurs="0"/>
+                    <xsd:element name="visual" type="FlowVisualType"/>
+                    <xsd:element name="property" minOccurs="0">
+                        <xsd:complexType>
+                            <xsd:attribute name="name" type="xsd:string" use="required"/>
+                            <xsd:attribute name="value" type="xsd:string" use="required"/>
+                        </xsd:complexType>
+                    </xsd:element>
+                </xsd:sequence>
+                <xsd:attribute name="type" type="xsd:string" use="required" fixed="Case"/>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:group name="SwitchCaseTypeGroup">
+        <xsd:choice>
+            <xsd:element name="condition" type="xsd:string"/>
+            <xsd:element name="default" type="xsd:boolean"/>
+        </xsd:choice>
+    </xsd:group>
+    <xsd:complexType name="BatchQuery">
+        <xsd:complexContent>
+            <xsd:extension base="FlowElementType">
+                <xsd:sequence>
+                    <xsd:element name="out" type="xsd:string" minOccurs="0"/>
+                    <xsd:element ref="messageflow" minOccurs="1"/>
+                    <xsd:element name="options" type="FlowOptionsType" minOccurs="0"/>
+                    <xsd:element name="message" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="name" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="parameters" minOccurs="0">
+                        <xsd:complexType>
+                            <xsd:sequence>
+                                <xsd:element name="parameters" minOccurs="0" maxOccurs="unbounded">
+                                    <xsd:complexType>
+                                        <xsd:sequence>
+                                            <xsd:element name="name" type="xsd:string"/>
+                                            <xsd:element name="type" type="xsd:string"/>
+                                            <xsd:element name="value" type="xsd:string" minOccurs="0"/>
+                                        </xsd:sequence>
+                                    </xsd:complexType>
+                                </xsd:element>
+                            </xsd:sequence>
+                        </xsd:complexType>
+                    </xsd:element>
+                    <xsd:element name="condition" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="visual" type="FlowVisualType"/>
+                    <xsd:element name="property" minOccurs="0">
+                        <xsd:complexType>
+                            <xsd:attribute name="name" type="xsd:string" use="required"/>
+                            <xsd:attribute name="value" type="xsd:string" use="required"/>
+                        </xsd:complexType>
+                    </xsd:element>
+                </xsd:sequence>
+                <xsd:attribute name="type" type="xsd:string" use="required" fixed="BatchQuery"/>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="PhasedParse">
+        <xsd:complexContent>
+            <xsd:extension base="FlowElementType">
+                <xsd:sequence>
+                    <xsd:element name="in" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="out" type="xsd:string" minOccurs="0"/>
+                    <xsd:element ref="messageflow" minOccurs="1"/>
+                    <xsd:element name="options" type="FlowOptionsType" minOccurs="0"/>
+                    <xsd:element name="message" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="cascade-exceptions" type="xsd:boolean"/>
+                    <xsd:element name="condition" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="record-exception" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="add-to-destination" type="xsd:boolean" minOccurs="0"/>
+                    <xsd:element name="visual" type="FlowVisualType"/>
+                    <xsd:element name="property" minOccurs="0">
+                        <xsd:complexType>
+                            <xsd:attribute name="name" type="xsd:string" use="required"/>
+                            <xsd:attribute name="value" type="xsd:string" use="required"/>
+                        </xsd:complexType>
+                    </xsd:element>
+                </xsd:sequence>
+                <xsd:attribute name="type" type="xsd:string" use="required" fixed="PhasedParse"/>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="PhasedSerialize">
+        <xsd:complexContent>
+            <xsd:extension base="FlowElementType">
+                <xsd:sequence>
+                    <xsd:element name="in" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="out" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="options" type="FlowOptionsType" minOccurs="0"/>
+                    <xsd:element name="message" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="cascade-exceptions" type="xsd:boolean"/>
+                    <xsd:element name="serializerId" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="visual" type="FlowVisualType"/>
+                    <xsd:element name="property" minOccurs="0">
+                        <xsd:complexType>
+                            <xsd:attribute name="name" type="xsd:string" use="required"/>
+                            <xsd:attribute name="value" type="xsd:string" use="required"/>
+                        </xsd:complexType>
+                    </xsd:element>
+                </xsd:sequence>
+                <xsd:attribute name="type" type="xsd:string" use="required" fixed="PhasedSerialize"/>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="Start">
+        <xsd:complexContent>
+            <xsd:extension base="FlowElementType">
+                <xsd:sequence>
+                    <xsd:element name="visual" type="FlowVisualType"/>
+                    <xsd:element name="property" minOccurs="0">
+                        <xsd:complexType>
+                            <xsd:attribute name="name" type="xsd:string" use="required"/>
+                            <xsd:attribute name="value" type="xsd:string" use="required"/>
+                        </xsd:complexType>
+                    </xsd:element>
+                </xsd:sequence>
+                <xsd:attribute name="type" type="xsd:string" use="required" fixed="Start"/>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="Stop">
+        <xsd:complexContent>
+            <xsd:extension base="FlowElementType">
+                <xsd:sequence>
+                    <xsd:element name="visual" type="FlowVisualType"/>
+                    <xsd:element name="property" minOccurs="0">
+                        <xsd:complexType>
+                            <xsd:attribute name="name" type="xsd:string" use="required"/>
+                            <xsd:attribute name="value" type="xsd:string" use="required"/>
+                        </xsd:complexType>
+                    </xsd:element>
+                </xsd:sequence>
+                <xsd:attribute name="type" type="xsd:string" use="required" fixed="Stop"/>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="CreateBatchMessage">
+        <xsd:complexContent>
+            <xsd:extension base="FlowElementType">
+                <xsd:sequence>
+                    <xsd:element name="in" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="port" minOccurs="0">
+                        <xsd:complexType>
+                            <xsd:attribute name="name" type="xsd:string"/>
+                        </xsd:complexType>
+                    </xsd:element>
+                    <xsd:element name="visual" type="FlowVisualType"/>
+                    <xsd:element name="property" minOccurs="0">
+                        <xsd:complexType>
+                            <xsd:attribute name="name" type="xsd:string" use="required"/>
+                            <xsd:attribute name="value" type="xsd:string" use="required"/>
+                        </xsd:complexType>
+                    </xsd:element>
+                </xsd:sequence>
+                <xsd:attribute name="type" type="xsd:string" use="required" fixed="CreateBatchMessage"/>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="Custom">
+        <xsd:complexContent>
+            <xsd:extension base="FlowElementType">
+                <xsd:sequence>
+                    <xsd:element name="code" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="visual" type="FlowVisualType"/>
+                    <xsd:element name="property" minOccurs="0">
+                        <xsd:complexType>
+                            <xsd:attribute name="name" type="xsd:string" use="required"/>
+                            <xsd:attribute name="value" type="xsd:string" use="required"/>
+                        </xsd:complexType>
+                    </xsd:element>
+                </xsd:sequence>
+                <xsd:attribute name="type" type="xsd:string" use="required" fixed="Custom"/>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="Create">
+        <xsd:complexContent>
+            <xsd:extension base="FlowElementType">
+                <xsd:sequence>
+                    <xsd:element name="out" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="message" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="init" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="visual" type="FlowVisualType"/>
+                    <xsd:element name="property" minOccurs="0">
+                        <xsd:complexType>
+                            <xsd:attribute name="name" type="xsd:string" use="required"/>
+                            <xsd:attribute name="value" type="xsd:string" use="required"/>
+                        </xsd:complexType>
+                    </xsd:element>
+                </xsd:sequence>
+                <xsd:attribute name="type" type="xsd:string" use="required" fixed="Create"/>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="Parse">
+        <xsd:complexContent>
+            <xsd:extension base="FlowElementType">
+                <xsd:sequence>
+                    <xsd:element name="in" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="out" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="options" type="FlowOptionsType" minOccurs="0"/>
+                    <xsd:element name="message" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="cascade-exceptions" type="xsd:boolean"/>
+                    <xsd:element name="record-exception" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="visual" type="FlowVisualType"/>
+                    <xsd:element name="property" minOccurs="0">
+                        <xsd:complexType>
+                            <xsd:attribute name="name" type="xsd:string" use="required"/>
+                            <xsd:attribute name="value" type="xsd:string" use="required"/>
+                        </xsd:complexType>
+                    </xsd:element>
+                </xsd:sequence>
+                <xsd:attribute name="type" type="xsd:string" use="required" fixed="Parse"/>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="BatchSerialize">
+        <xsd:complexContent>
+            <xsd:extension base="FlowElementType">
+                <xsd:sequence>
+                    <xsd:element name="options" type="FlowOptionsType" minOccurs="0"/>
+                    <xsd:element name="in" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="out" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="message" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="cascade-exceptions" type="xsd:boolean"/>
+                    <xsd:element name="visual" type="FlowVisualType"/>
+                    <xsd:element name="property" minOccurs="0">
+                        <xsd:complexType>
+                            <xsd:attribute name="name" type="xsd:string" use="required"/>
+                            <xsd:attribute name="value" type="xsd:string" use="required"/>
+                        </xsd:complexType>
+                    </xsd:element>
+                </xsd:sequence>
+                <xsd:attribute name="type" type="xsd:string" use="required" fixed="BatchSerialize"/>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="Serialize">
+        <xsd:complexContent>
+            <xsd:extension base="FlowElementType">
+                <xsd:sequence>
+                    <xsd:element name="in" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="out" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="options" type="FlowOptionsType" minOccurs="0"/>
+                    <xsd:element name="message" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="cascade-exceptions" type="xsd:boolean"/>
+                    <xsd:element name="visual" type="FlowVisualType"/>
+                    <xsd:element name="property" minOccurs="0">
+                        <xsd:complexType>
+                            <xsd:attribute name="name" type="xsd:string" use="required"/>
+                            <xsd:attribute name="value" type="xsd:string" use="required"/>
+                        </xsd:complexType>
+                    </xsd:element>
+                </xsd:sequence>
+                <xsd:attribute name="type" type="xsd:string" use="required" fixed="Serialize"/>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="Validate">
+        <xsd:complexContent>
+            <xsd:extension base="FlowElementType">
+                <xsd:sequence>
+                    <xsd:element name="in" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="options" type="FlowOptionsType" minOccurs="0"/>
+                    <xsd:element name="message" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="cascade-exceptions" type="xsd:boolean"/>
+                    <xsd:element name="validation-name" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="visual" type="FlowVisualType"/>
+                    <xsd:element name="property" minOccurs="0">
+                        <xsd:complexType>
+                            <xsd:attribute name="name" type="xsd:string" use="required"/>
+                            <xsd:attribute name="value" type="xsd:string" use="required"/>
+                        </xsd:complexType>
+                    </xsd:element>
+                </xsd:sequence>
+                <xsd:attribute name="type" type="xsd:string" use="required" fixed="Validate"/>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="Process">
+        <xsd:complexContent>
+            <xsd:extension base="FlowElementType">
+                <xsd:sequence>
+                    <xsd:element name="in" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="message" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="cascade-exceptions" type="xsd:boolean"/>
+                    <xsd:element name="processing-name" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="visual" type="FlowVisualType"/>
+                    <xsd:element name="property" minOccurs="0">
+                        <xsd:complexType>
+                            <xsd:attribute name="name" type="xsd:string" use="required"/>
+                            <xsd:attribute name="value" type="xsd:string" use="required"/>
+                        </xsd:complexType>
+                    </xsd:element>
+                </xsd:sequence>
+                <xsd:attribute name="type" type="xsd:string" use="required" fixed="Process"/>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="Persist">
+        <xsd:complexContent>
+            <xsd:extension base="FlowElementType">
+                <xsd:sequence>
+                    <xsd:element name="in" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="options" type="FlowOptionsType" minOccurs="0"/>
+                    <xsd:element name="message" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="persist-option">
+                        <xsd:simpleType>
+                            <xsd:restriction base="xsd:string">
+                                <xsd:enumeration value="Persist"/>
+                                <xsd:enumeration value="Update"/>
+                                <xsd:enumeration value="Persist or Update"/>
+                            </xsd:restriction>
+                        </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element name="visual" type="FlowVisualType"/>
+                    <xsd:element name="property" minOccurs="0">
+                        <xsd:complexType>
+                            <xsd:attribute name="name" type="xsd:string" use="required"/>
+                            <xsd:attribute name="value" type="xsd:string" use="required"/>
+                        </xsd:complexType>
+                    </xsd:element>
+                </xsd:sequence>
+                <xsd:attribute name="type" type="xsd:string" use="required" fixed="Persist"/>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="Query">
+        <xsd:complexContent>
+            <xsd:extension base="FlowElementType">
+                <xsd:sequence>
+                    <xsd:element name="out" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="message" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="name" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="options" type="FlowOptionsType" minOccurs="0"/>
+                    <xsd:element name="parameters" minOccurs="0">
+                        <xsd:complexType>
+                            <xsd:sequence>
+                                <xsd:element name="parameters" minOccurs="0" maxOccurs="unbounded">
+                                    <xsd:complexType>
+                                        <xsd:sequence>
+                                            <xsd:element name="name" type="xsd:string"/>
+                                            <xsd:element name="type" type="xsd:string"/>
+                                            <xsd:element name="value" type="xsd:string" minOccurs="0"/>
+                                        </xsd:sequence>
+                                    </xsd:complexType>
+                                </xsd:element>
+                            </xsd:sequence>
+                        </xsd:complexType>
+                    </xsd:element>
+                    <xsd:element name="visual" type="FlowVisualType"/>
+                    <xsd:element name="property" minOccurs="0">
+                        <xsd:complexType>
+                            <xsd:attribute name="name" type="xsd:string" use="required"/>
+                            <xsd:attribute name="value" type="xsd:string" use="required"/>
+                        </xsd:complexType>
+                    </xsd:element>
+                </xsd:sequence>
+                <xsd:attribute name="type" type="xsd:string" use="required" fixed="Query"/>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="DynamicQuery">
+        <xsd:complexContent>
+            <xsd:extension base="FlowElementType">
+                <xsd:sequence>
+                    <xsd:element name="out" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="message" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="parameters" minOccurs="0">
+                        <xsd:complexType>
+                            <xsd:sequence>
+                                <xsd:element name="parameters" minOccurs="0" maxOccurs="unbounded">
+                                    <xsd:complexType>
+                                        <xsd:sequence>
+                                            <xsd:element name="name" type="xsd:string"/>
+                                            <xsd:element name="type" type="xsd:string"/>
+                                            <xsd:element name="value" minOccurs="0" maxOccurs="unbounded">
+                                                <xsd:complexType>
+                                                    <xsd:simpleContent>
+                                                        <xsd:extension base="xsd:string">
+                                                            <xsd:attribute name="index" type="xsd:integer"
+                                                                           use="required"/>
+                                                        </xsd:extension>
+                                                    </xsd:simpleContent>
+                                                </xsd:complexType>
+                                            </xsd:element>
+                                            <xsd:element name="operation">
+                                                <xsd:simpleType>
+                                                    <xsd:restriction base="xsd:string">
+                                                        <xsd:enumeration value="Equal"/>
+                                                        <xsd:enumeration value="LessThan"/>
+                                                        <xsd:enumeration value="LessThanEqual"/>
+                                                        <xsd:enumeration value="GreaterThan"/>
+                                                        <xsd:enumeration value="GreaterThanEqual"/>
+                                                        <xsd:enumeration value="Between"/>
+                                                        <xsd:enumeration value="Like"/>
+                                                        <xsd:enumeration value="In"/>
+                                                    </xsd:restriction>
+                                                </xsd:simpleType>
+                                            </xsd:element>
+                                            <xsd:element name="conjunction">
+                                                <xsd:simpleType>
+                                                    <xsd:restriction base="xsd:string">
+                                                        <xsd:enumeration value="And"/>
+                                                        <xsd:enumeration value="Or"/>
+                                                    </xsd:restriction>
+                                                </xsd:simpleType>
+                                            </xsd:element>
+                                        </xsd:sequence>
+                                    </xsd:complexType>
+                                </xsd:element>
+                            </xsd:sequence>
+                        </xsd:complexType>
+                    </xsd:element>
+                    <xsd:element name="visual" type="FlowVisualType"/>
+                    <xsd:element name="property" minOccurs="0">
+                        <xsd:complexType>
+                            <xsd:attribute name="name" type="xsd:string" use="required"/>
+                            <xsd:attribute name="value" type="xsd:string" use="required"/>
+                        </xsd:complexType>
+                    </xsd:element>
+                </xsd:sequence>
+                <xsd:attribute name="type" type="xsd:string" use="required" fixed="DynamicQuery"/>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="Delete">
+        <xsd:complexContent>
+            <xsd:extension base="FlowElementType">
+                <xsd:sequence>
+                    <xsd:element name="in" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="message" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="visual" type="FlowVisualType"/>
+                    <xsd:element name="property" minOccurs="0">
+                        <xsd:complexType>
+                            <xsd:attribute name="name" type="xsd:string" use="required"/>
+                            <xsd:attribute name="value" type="xsd:string" use="required"/>
+                        </xsd:complexType>
+                    </xsd:element>
+                </xsd:sequence>
+                <xsd:attribute name="type" type="xsd:string" use="required" fixed="Delete"/>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="Mapping">
+        <xsd:complexContent>
+            <xsd:extension base="FlowElementType">
+                <xsd:sequence>
+                    <xsd:element name="in" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="out" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="options" type="FlowOptionsType" minOccurs="0"/>
+                    <xsd:element name="multi-source-input" minOccurs="0">
+                        <xsd:complexType>
+                            <xsd:sequence>
+                                <xsd:element name="field" type="MessageFlowMappingField" minOccurs="0"
+                                             maxOccurs="unbounded"/>
+                            </xsd:sequence>
+                        </xsd:complexType>
+                    </xsd:element>
+                    <xsd:element name="multi-source-output" minOccurs="0">
+                        <xsd:complexType>
+                            <xsd:sequence>
+                                <xsd:element name="field" type="MessageFlowMappingField" minOccurs="0"
+                                             maxOccurs="unbounded"/>
+                            </xsd:sequence>
+                        </xsd:complexType>
+                    </xsd:element>
+                    <xsd:element name="messagemapping" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="create-destination" type="xsd:boolean"/>
+                    <xsd:element name="visual" type="FlowVisualType"/>
+                    <xsd:element name="property" minOccurs="0">
+                        <xsd:complexType>
+                            <xsd:attribute name="name" type="xsd:string" use="required"/>
+                            <xsd:attribute name="value" type="xsd:string" use="required"/>
+                        </xsd:complexType>
+                    </xsd:element>
+                </xsd:sequence>
+                <xsd:attribute name="type" type="xsd:string" use="required" fixed="Mapping"/>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="MessageFlowMappingField">
+        <xsd:sequence>
+            <xsd:element name="name" type="xsd:string"/>
+            <xsd:element name="type" type="xsd:string"/>
+            <xsd:element name="value" type="xsd:string" minOccurs="0"/>
+            <xsd:choice>
+                <xsd:group ref="dataObjSecFieldGroup"/>
+                <xsd:group ref="primFieldGroup"/>
+            </xsd:choice>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:group name="dataObjSecFieldGroup">
+        <xsd:sequence>
+            <xsd:element name="notnull" type="xsd:boolean" minOccurs="0"/>
+        </xsd:sequence>
+    </xsd:group>
+    <xsd:group name="primFieldGroup">
+        <xsd:sequence>
+            <xsd:element name="minoccurs" type="xsd:integer"/>
+            <xsd:element name="maxoccurs" type="xsd:integer"/>
+            <xsd:element name="message" type="xsd:string"/>
+            <xsd:element name="fields"/>
+        </xsd:sequence>
+    </xsd:group>
+    <xsd:complexType name="MapException">
+        <xsd:complexContent>
+            <xsd:extension base="FlowElementType">
+                <xsd:sequence>
+                    <xsd:element name="in" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="out" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="messagemapping" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="create-destination" type="xsd:boolean"/>
+                    <xsd:element name="source-to-destination" type="xsd:boolean"/>
+                    <xsd:element name="cascade-exceptions" type="xsd:boolean"/>
+                    <xsd:element name="visual" type="FlowVisualType"/>
+                    <xsd:element name="property" minOccurs="0">
+                        <xsd:complexType>
+                            <xsd:attribute name="name" type="xsd:string" use="required"/>
+                            <xsd:attribute name="value" type="xsd:string" use="required"/>
+                        </xsd:complexType>
+                    </xsd:element>
+                </xsd:sequence>
+                <xsd:attribute name="type" type="xsd:string" use="required" fixed="MapException"/>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="Send">
+        <xsd:complexContent>
+            <xsd:extension base="FlowElementType">
+                <xsd:sequence>
+                    <xsd:element name="in" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="options" type="FlowOptionsType" minOccurs="0"/>
+                    <xsd:element name="port" minOccurs="0">
+                        <xsd:complexType>
+                            <xsd:attribute name="name" type="xsd:string"/>
+                        </xsd:complexType>
+                    </xsd:element>
+                    <xsd:element name="visual" type="FlowVisualType"/>
+                    <xsd:element name="property" minOccurs="0">
+                        <xsd:complexType>
+                            <xsd:attribute name="name" type="xsd:string" use="required"/>
+                            <xsd:attribute name="value" type="xsd:string" use="required"/>
+                        </xsd:complexType>
+                    </xsd:element>
+                </xsd:sequence>
+                <xsd:attribute name="type" type="xsd:string" use="required" fixed="Send"/>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="InvokeExternal">
+        <xsd:complexContent>
+            <xsd:extension base="FlowElementType">
+                <xsd:sequence>
+                    <xsd:element name="in" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="name" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="cascade-exceptions" type="xsd:boolean" minOccurs="0"/>
+                    <xsd:element name="input" type="InvokeParamType"/>
+                    <xsd:element name="output" type="InvokeParamType"/>
+                    <xsd:element name="visual" type="FlowVisualType"/>
+                    <xsd:element name="property" minOccurs="0">
+                        <xsd:complexType>
+                            <xsd:attribute name="name" type="xsd:string" use="required"/>
+                            <xsd:attribute name="value" type="xsd:string" use="required"/>
+                        </xsd:complexType>
+                    </xsd:element>
+                </xsd:sequence>
+                <xsd:attribute name="type" type="xsd:string" use="required" fixed="InvokeExternal"/>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="Invoke">
+        <xsd:complexContent>
+            <xsd:extension base="FlowElementType">
+                <xsd:sequence>
+                    <xsd:element name="options" type="FlowOptionsType" minOccurs="0"/>
+                    <xsd:element name="name" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="cascade-exceptions" type="xsd:boolean" minOccurs="0"/>
+                    <xsd:element name="input" type="InvokeParamType"/>
+                    <xsd:element name="output" type="InvokeParamType"/>
+                    <xsd:element name="visual" type="FlowVisualType"/>
+                    <xsd:element name="property" minOccurs="0">
+                        <xsd:complexType>
+                            <xsd:attribute name="name" type="xsd:string" use="required"/>
+                            <xsd:attribute name="value" type="xsd:string" use="required"/>
+                        </xsd:complexType>
+                    </xsd:element>
+                </xsd:sequence>
+                <xsd:attribute name="type" type="xsd:string" use="required" fixed="Invoke"/>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="Decision">
+        <xsd:complexContent>
+            <xsd:extension base="FlowElementType">
+                <xsd:sequence>
+                    <xsd:element name="case" minOccurs="0" maxOccurs="unbounded">
+                        <xsd:complexType>
+                            <xsd:sequence>
+                                <xsd:element name="label" type="xsd:string"/>
+                                <xsd:element name="condition" type="xsd:string" minOccurs="0"/>
+                            </xsd:sequence>
+                        </xsd:complexType>
+                    </xsd:element>
+                    <xsd:element name="visual" type="FlowVisualType"/>
+                    <xsd:element name="property" minOccurs="0">
+                        <xsd:complexType>
+                            <xsd:attribute name="name" type="xsd:string" use="required"/>
+                            <xsd:attribute name="value" type="xsd:string" use="required"/>
+                        </xsd:complexType>
+                    </xsd:element>
+                </xsd:sequence>
+                <xsd:attribute name="type" type="xsd:string" use="required" fixed="Decision"/>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="If">
+        <xsd:complexContent>
+            <xsd:extension base="FlowElementType">
+                <xsd:sequence>
+                    <xsd:element name="in" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="condition" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="visual" type="FlowVisualType"/>
+                    <xsd:element name="property" minOccurs="0">
+                        <xsd:complexType>
+                            <xsd:attribute name="name" type="xsd:string" use="required"/>
+                            <xsd:attribute name="value" type="xsd:string" use="required"/>
+                        </xsd:complexType>
+                    </xsd:element>
+                </xsd:sequence>
+                <xsd:attribute name="type" type="xsd:string" use="required" fixed="If"/>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="Throw">
+        <xsd:complexContent>
+            <xsd:extension base="FlowElementType">
+                <xsd:sequence>
+                    <xsd:element name="in" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="visual" type="FlowVisualType"/>
+                    <xsd:element name="property" minOccurs="0">
+                        <xsd:complexType>
+                            <xsd:attribute name="name" type="xsd:string" use="required"/>
+                            <xsd:attribute name="value" type="xsd:string" use="required"/>
+                        </xsd:complexType>
+                    </xsd:element>
+                </xsd:sequence>
+                <xsd:attribute name="type" type="xsd:string" use="required" fixed="Throw"/>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="Resume">
+        <xsd:complexContent>
+            <xsd:extension base="FlowElementType">
+                <xsd:sequence>
+                    <xsd:element name="visual" type="FlowVisualType"/>
+                    <xsd:element name="property" minOccurs="0">
+                        <xsd:complexType>
+                            <xsd:attribute name="name" type="xsd:string" use="required"/>
+                            <xsd:attribute name="value" type="xsd:string" use="required"/>
+                        </xsd:complexType>
+                    </xsd:element>
+                </xsd:sequence>
+                <xsd:attribute name="type" type="xsd:string" use="required" fixed="Resume"/>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="Filter">
+        <xsd:complexContent>
+            <xsd:extension base="FlowElementType">
+                <xsd:sequence>
+                    <xsd:element name="in" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="out" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="reject" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="condition" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="visual" type="FlowVisualType"/>
+                    <xsd:element name="property" minOccurs="0">
+                        <xsd:complexType>
+                            <xsd:attribute name="name" type="xsd:string" use="required"/>
+                            <xsd:attribute name="value" type="xsd:string" use="required"/>
+                        </xsd:complexType>
+                    </xsd:element>
+                </xsd:sequence>
+                <xsd:attribute name="type" type="xsd:string" use="required" fixed="Filter"/>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="Sort">
+        <xsd:complexContent>
+            <xsd:extension base="FlowElementType">
+                <xsd:sequence>
+                    <xsd:element name="in" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="out" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="sort-info" type="SortInfoType" minOccurs="0"/>
+                    <xsd:element name="visual" type="FlowVisualType"/>
+                </xsd:sequence>
+                <xsd:attribute name="type" type="xsd:string" use="required" fixed="Sort"/>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="SortInfoType">
+        <xsd:sequence>
+            <xsd:element name="fieldName" type="xsd:string" minOccurs="0"/>
+            <xsd:element name="order" type="xsd:string"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="Deduplicate">
+        <xsd:complexContent>
+            <xsd:extension base="FlowElementType">
+                <xsd:sequence>
+                    <xsd:element name="in" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="out" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="duplicate-out" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="duplicate-option">
+                        <xsd:simpleType>
+                            <xsd:restriction base="xsd:string">
+                                <xsd:enumeration value="First"/>
+                                <xsd:enumeration value="Last"/>
+                                <xsd:enumeration value="Remove"/>
+                            </xsd:restriction>
+                        </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element name="sort" type="xsd:boolean" minOccurs="0"/>
+                    <xsd:element name="key-fields" type="KeyFieldsInfoType" minOccurs="0"/>
+                    <xsd:element name="visual" type="FlowVisualType"/>
+                </xsd:sequence>
+                <xsd:attribute name="type" type="xsd:string" use="required" fixed="Deduplicate"/>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="KeyFieldsInfoType">
+        <xsd:sequence>
+            <xsd:element name="fieldName" type="xsd:string" minOccurs="0"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="Join">
+        <xsd:complexContent>
+            <xsd:extension base="FlowElementType">
+                <xsd:sequence>
+                    <xsd:element name="out" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="all-input-in-join" type="xsd:boolean" minOccurs="0"/>
+                    <xsd:element name="inputs" type="InputsType" minOccurs="0"/>
+                    <xsd:element name="joins" type="JoinsType" minOccurs="0"/>
+                    <xsd:element name="output-message" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="use-defined-mapping" type="xsd:boolean" minOccurs="0"/>
+                    <xsd:element name="mapping" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="visual" type="FlowVisualType"/>
+                </xsd:sequence>
+                <xsd:attribute name="type" type="xsd:string" use="required" fixed="Join"/>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="InputsType">
+        <xsd:sequence>
+            <xsd:element name="input" minOccurs="0" maxOccurs="unbounded">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="name" type="xsd:string" minOccurs="0"/>
+                        <xsd:element name="value" type="xsd:string" minOccurs="0"/>
+                        <xsd:element name="reject" type="xsd:string" minOccurs="0"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="JoinsType">
+        <xsd:sequence>
+            <xsd:element name="join" minOccurs="0" maxOccurs="unbounded">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="input1" type="xsd:string" minOccurs="0"/>
+                        <xsd:element name="input1-field1" type="xsd:string" minOccurs="0"/>
+                        <xsd:element name="input1-field2" type="xsd:string" minOccurs="0"/>
+                        <xsd:element name="input2" type="xsd:string" minOccurs="0"/>
+                        <xsd:element name="input2-field1" type="xsd:string" minOccurs="0"/>
+                        <xsd:element name="input2-field2" type="xsd:string" minOccurs="0"/>
+                        <xsd:element name="join-type">
+                            <xsd:simpleType>
+                                <xsd:restriction base="xsd:string">
+                                    <xsd:enumeration value="Inner"/>
+                                    <xsd:enumeration value="LeftOuter"/>
+                                    <xsd:enumeration value="RightOuter"/>
+                                    <xsd:enumeration value="FullOuter"/>
+                                </xsd:restriction>
+                            </xsd:simpleType>
+                        </xsd:element>
+                        <xsd:element name="join-condition" type="xsd:string" minOccurs="0"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="Group">
+        <xsd:complexContent>
+            <xsd:extension base="FlowElementType">
+                <xsd:sequence>
+                    <xsd:element name="in" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="out" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="key-fields" type="KeyFieldsInfoType" minOccurs="0" maxOccurs="unbounded"/>
+                    <xsd:element name="visual" type="FlowVisualType"/>
+                </xsd:sequence>
+                <xsd:attribute name="type" type="xsd:string" use="required" fixed="Group"/>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="Normalize">
+        <xsd:complexContent>
+            <xsd:extension base="NormalizeDenormalizeType">
+                <xsd:attribute name="type" type="xsd:string" use="required" fixed="Normalize"/>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="Denormalize">
+        <xsd:complexContent>
+            <xsd:extension base="NormalizeDenormalizeType">
+                <xsd:attribute name="type" type="xsd:string" use="required" fixed="Denormalize"/>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="NormalizeDenormalizeType">
+        <xsd:complexContent>
+            <xsd:extension base="FlowElementType">
+                <xsd:sequence>
+                    <xsd:element name="in" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="out" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="normalized-field" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="key-fields" type="KeyFieldsInfoType" minOccurs="0"/>
+                    <xsd:element name="visual" type="FlowVisualType"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+
+    <xsd:complexType name="Reformat">
+        <xsd:complexContent>
+            <xsd:extension base="FlowElementType">
+                <xsd:sequence>
+                    <xsd:element name="in" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="out" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="use-defined-mapping" type="xsd:boolean" minOccurs="0"/>
+                    <xsd:element name="mapping" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="messagemapping" type="ReformatMessageMappingType" minOccurs="0"/>
+                    <xsd:element name="visual" type="FlowVisualType"/>
+                </xsd:sequence>
+                <xsd:attribute name="type" type="xsd:string" use="required" fixed="Reformat"/>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+
+    <xsd:complexType name="Aggregate">
+        <xsd:complexContent>
+            <xsd:extension base="FlowElementType">
+                <xsd:sequence>
+                    <xsd:element name="in" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="out" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="sort" type="xsd:boolean" minOccurs="0"/>
+                    <xsd:element name="key-fields" type="KeyFieldsInfoType" minOccurs="0"/>
+                    <xsd:element name="use-defined-mapping" type="xsd:boolean" minOccurs="0"/>
+                    <xsd:element name="mapping" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="messagemapping" type="ReformatMessageMappingType" minOccurs="0"/>
+                    <xsd:element name="visual" type="FlowVisualType"/>
+                </xsd:sequence>
+                <xsd:attribute name="type" type="xsd:string" use="required" fixed="Aggregate"/>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+
+    <xsd:complexType name="InvokeParamType">
+        <xsd:sequence>
+            <xsd:element name="field" minOccurs="0" maxOccurs="unbounded">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="name" type="xsd:string" minOccurs="0"/>
+                        <xsd:element name="type" type="xsd:string" minOccurs="0"/>
+                        <xsd:element name="value" type="xsd:string" minOccurs="0"/>
+                        <xsd:element name="notnull" type="xsd:boolean" minOccurs="0"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="Link" abstract="true"/>
+    <xsd:complexType name="Default">
+        <xsd:complexContent>
+            <xsd:extension base="Link">
+                <xsd:sequence>
+                    <xsd:element name="outputport" type="PortType"/>
+                    <xsd:element name="inputport" type="PortType"/>
+                    <xsd:element name="edge-type">
+                        <xsd:simpleType>
+                            <xsd:restriction base="xsd:string">
+                                <xsd:enumeration value="ELBOW"/>
+                                <xsd:enumeration value="DIRECT"/>
+                            </xsd:restriction>
+                        </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element ref="note" minOccurs="0"/>
+                </xsd:sequence>
+                <xsd:attribute name="type" use="required" fixed="Default"/>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="Exception">
+        <xsd:complexContent>
+            <xsd:extension base="Link">
+                <xsd:sequence>
+                    <xsd:element name="message" type="xsd:string" fixed="TransformException"/>
+                    <xsd:element name="out" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="cascade-exceptions" type="xsd:boolean" default="false"/>
+                    <xsd:element name="runtime-exceptions" type="xsd:boolean" minOccurs="0"/>
+                    <xsd:element name="outputport" type="PortType"/>
+                    <xsd:element name="inputport" type="PortType"/>
+                    <xsd:element name="edge-type">
+                        <xsd:simpleType>
+                            <xsd:restriction base="xsd:string">
+                                <xsd:enumeration value="ELBOW"/>
+                                <xsd:enumeration value="DIRECT"/>
+                            </xsd:restriction>
+                        </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element ref="note" minOccurs="0"/>
+                </xsd:sequence>
+                <xsd:attribute name="type" use="required" fixed="Exception"/>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="PortType">
+        <xsd:attribute name="uid" type="xsd:string" use="required"/>
+        <xsd:attribute name="portindex" type="xsd:integer" use="required"/>
+    </xsd:complexType>
+    <xsd:complexType name="FlowVisualType">
+        <xsd:sequence>
+            <xsd:element name="position" minOccurs="1">
+                <xsd:complexType>
+                    <xsd:attribute name="x" type="xsd:integer" use="required"/>
+                    <xsd:attribute name="y" type="xsd:integer" use="required"/>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="subgraph-color" type="xsd:string" minOccurs="0"/>
+            <xsd:element name="line-color" type="xsd:string" minOccurs="0"/>
+            <xsd:element name="text-color" type="xsd:string" minOccurs="0"/>
+            <xsd:element name="fill-color" type="xsd:string" minOccurs="0"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:element name="note">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="visual">
+                    <xsd:complexType>
+                        <xsd:sequence>
+                            <xsd:element name="location">
+                                <xsd:complexType>
+                                    <xsd:attribute name="x" type="xsd:integer"/>
+                                    <xsd:attribute name="y" type="xsd:integer"/>
+                                </xsd:complexType>
+                            </xsd:element>
+                        </xsd:sequence>
+                    </xsd:complexType>
+                </xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:complexType name="FlowOptionsType">
+        <xsd:sequence>
+            <xsd:element name="option" minOccurs="0" maxOccurs="unbounded">
+                <xsd:complexType>
+                    <xsd:simpleContent>
+                        <xsd:extension base="xsd:string">
+                            <xsd:attribute name="name" type="xsd:string"/>
+                        </xsd:extension>
+                    </xsd:simpleContent>
+                </xsd:complexType>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="FlowElementType" abstract="true">
+        <xsd:sequence>
+            <xsd:element name="label" type="xsd:string"/>
+            <xsd:element name="description" type="xsd:string" minOccurs="0"/>
+        </xsd:sequence>
+        <xsd:attribute name="name" type="xsd:string" use="required"/>
+        <xsd:attribute name="uid" type="xsd:string" use="required"/>
+    </xsd:complexType>
+    <xsd:complexType name="MessageDefinitionType">
+        <xsd:sequence>
+            <xsd:element ref="internalmessage" minOccurs="0" maxOccurs="unbounded"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="ReformatMessageMappingType">
+        <xsd:sequence>
+            <xsd:element name="source-format" type="MessageMappingSrcDestFormatType"/>
+            <xsd:element name="destination-format" type="MessageMappingSrcDestFormatType"/>
+            <xsd:element ref="mappingrules"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="MessageMappingSrcDestFormatType">
+        <xsd:sequence>
+            <xsd:element ref="xpath-namespaces" minOccurs="0"/>
+            <xsd:element name="fields" type="MessageMappingFieldTypes" minOccurs="0" maxOccurs="1"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="MessageMappingFieldTypes">
+        <xsd:sequence>
+            <xsd:element name="field" type="MessageMappingFieldType" minOccurs="0"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="MessageMappingFieldType">
+        <xsd:sequence>
+            <xsd:element name="name" type="xsd:string"/>
+            <xsd:element name="type" type="xsd:string"/>
+            <xsd:element name="minoccurs" type="xsd:integer"/>
+            <xsd:element name="maxoccurs" type="xsd:integer"/>
+            <xsd:element name="message" type="xsd:string"/>
+            <xsd:element name="fields" type="MessageMappingFieldTypes"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+</xsd:schema>

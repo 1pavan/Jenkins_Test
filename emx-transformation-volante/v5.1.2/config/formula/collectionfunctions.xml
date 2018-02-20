@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<formulae>
+    <formula name="Length">
+        <description>Returns the length of sequence of characters in str.</description>
+        <signature>Length(list)</signature>
+        <category>Collection</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="interface" value="com.tplus.transform.runtime.collection.ValueList"/>
+        <property name="this" value="0"/>
+        <property name="method" value="size"/>
+    </formula>
+
+
+    <formula name="At">
+        <description>Returns the character at the specified index in the string.</description>
+        <signature>At(list, index)</signature>
+        <category>Collection</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="interface" value="com.tplus.transform.runtime.collection.ValueList"/>
+        <property name="this" value="0"/>
+        <property name="method" value="getValue"/>
+    </formula>
+
+    <formula name="Add">
+        <description>Adds the given item to the list 'c1' and returns the resultant list.</description>
+        <signature>Add(list, item)</signature>
+        <category>Collection</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="interface" value="com.tplus.transform.runtime.collection.ValueList"/>
+        <property name="this" value="0"/>
+        <property name="method" value="add"/>
+        <property name="canIgnoreReturnValue" value="true"/>
+    </formula>
+
+    <formula name="Intersects">
+        <description>Returns true if there exists one or more common item(s) in the lists 'c1' and 'c2', returns false otherwise.
+        </description>
+        <signature>Intersects(c1, c2)</signature>
+        <category>Collection</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="interface" value="com.tplus.transform.runtime.collection.ValueList"/>
+        <property name="this" value="0"/>
+        <property name="method" value="intersects"/>
+    </formula>
+
+
+    <formula name="In">
+        <description>Returns 'true' if the given value is one of the values in list 'c1', returns 'false' otherwise.</description>
+        <signature>In(value, c1)</signature>
+        <category>Collection</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="interface" value="com.tplus.transform.runtime.collection.ValueList"/>
+        <property name="this" value="1"/>
+        <property name="method" value="contains"/>
+    </formula>
+
+     <formula name="EqualsAll">
+         <description>Returns true if c1 equals c2, returns false otherwise. The Comparison is case-sensitive. </description>
+         <signature>EqualsAll(c1, c2)</signature>
+         <category>Collection</category>
+           <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+         <property name="interface" value="com.tplus.transform.runtime.collection.ValueList"/>
+         <property name="this" value="0" />
+         <property name="method" value="equalsAll" />
+     </formula>
+
+     <formula name="ContainsAll">
+         <description>Returns true if c1 contains all the elements in c2.</description>
+         <signature>ContainsAll(c1, c2)</signature>
+         <category>Collection</category>
+           <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+         <property name="interface" value="com.tplus.transform.runtime.collection.ValueList"/>
+         <property name="this" value="0" />
+         <property name="method" value="containsAll" />
+     </formula>
+
+     <formula name="ContainsAny">
+         <description>Returns true if c1 contains at least one element in c2.</description>
+         <signature>ContainsAny(c1, c2)</signature>
+         <category>Collection</category>
+           <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+         <property name="interface" value="com.tplus.transform.runtime.collection.ValueList"/>
+         <property name="this" value="0" />
+         <property name="method" value="containsAny" />
+     </formula>
+     <formula name="Union">
+         <description>Returns a collection which is a union of c1 and c2.</description>
+         <signature>Union(c1, c2)</signature>
+         <category>Collection</category>
+           <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+         <property name="interface" value="com.tplus.transform.runtime.collection.ValueList"/>
+         <property name="this" value="0" />
+         <property name="method" value="union" />
+     </formula>
+     <formula name="Intersection">
+         <description>Returns a collection which is an intersection of c1 and c2 (repetitions are discarded).</description>
+         <signature>Intersection(c1, c2)</signature>
+         <category>Collection</category>
+           <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+         <property name="interface" value="com.tplus.transform.runtime.collection.ValueList"/>
+         <property name="this" value="0" />
+         <property name="method" value="intersection" />
+     </formula>
+     <formula name="Subtract">
+         <description>Returns a collection which is the difference between c1 and c2 (contains all elements of c1 which are not there in c2).</description>
+         <signature>Subtract(c1, c2)</signature>
+         <category>Collection</category>
+           <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+         <property name="interface" value="com.tplus.transform.runtime.collection.ValueList"/>
+         <property name="this" value="0" />
+         <property name="method" value="subtract" />
+     </formula>
+     <formula name="Unique">
+         <description>Returns a collection which contains only the unique elements of collection c1.</description>
+         <signature>Unique(c1)</signature>
+         <category>Logical</category>
+           <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+         <property name="interface" value="com.tplus.transform.runtime.collection.ValueList"/>
+         <property name="this" value="0" />
+         <property name="method" value="unique" />
+     </formula>
+     <formula name="Sort">
+         <description>Returns a collection which contains elements of collection c1 in sorted order.</description>
+         <signature>Sort(c1)</signature>
+         <category>Collection</category>
+           <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+         <property name="interface" value="com.tplus.transform.runtime.collection.ValueList"/>
+         <property name="this" value="0" />
+         <property name="method" value="sort" />
+     </formula>
+    <formula name="FindFirst">
+        <description>Returns true if there exists one or more common item(s) in the lists 'c1' and 'c2', returns false otherwise.
+        </description>
+        <signature>FindFirst(c1, value)</signature>
+        <category>Collection</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="interface" value="com.tplus.transform.runtime.collection.ValueList"/>
+        <property name="this" value="0"/>
+        <property name="method" value="indexOf"/>
+    </formula>
+
+    <formula name="FindLast">
+        <description>Returns true if there exists one or more common item(s) in the lists 'c1' and 'c2', returns false otherwise.
+        </description>
+        <signature>FindLast(c1, value)</signature>
+        <category>Collection</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="interface" value="com.tplus.transform.runtime.collection.ValueList"/>
+        <property name="this" value="0"/>
+        <property name="method" value="lastIndexOf"/>
+    </formula>
+
+    <formula name="toText">
+        <description>Returns true if there exists one or more common item(s) in the lists 'c1' and 'c2', returns false otherwise.
+        </description>
+        <signature>toText(c1)</signature>
+        <category>Collection</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="interface" value="com.tplus.transform.runtime.collection.ValueList"/>
+        <property name="this" value="0"/>
+        <property name="method" value="toString"/>
+    </formula>
+</formulae> 

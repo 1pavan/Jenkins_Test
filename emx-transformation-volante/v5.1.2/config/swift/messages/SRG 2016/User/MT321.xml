@@ -1,0 +1,1390 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<SwiftMessageFormat name="MT321">
+	<standard>SWIFT</standard>
+	<standard-name>MT321</standard-name>
+	<standard-version>SRG 2016</standard-version>
+	<standard-release-qualifier>20160308</standard-release-qualifier>
+	<DescriptiveName><![CDATA[Instruction to Settle a Third Party Loan/Deposit]]></DescriptiveName>
+	<Category>Treasury Markets Foreign Exchange,Money Markets &amp;Derivatives</Category>
+	<Description>This message is sent by a fund manager to the fund's custodian to advise the trade details and instruct the settlement of a fixed term loan/deposit done with a third party financial institution. The trade may cover one single trade or one block trade.
+
+The definition of third party must be agreed up front between the fund manager and the custodian relative to deals executed by the custodians' treasury area on behalf of the fund manager.
+
+This message is used to:
+
+a)  provide details about a new contract between the parties
+
+b)  provide details of a rollover/renovation of a contract between the parties
+
+c)  provide details of the maturity of a contract
+
+d)  cancel a previously sent message.</Description>
+	<SwiftFields>
+		<customizable>true</customizable>
+		<modifiable>false</modifiable>
+		<SwiftMessageType>User</SwiftMessageType>
+		<max-length>10000</max-length>
+		<HeaderAndTrailerType>SWIFT_INPUT_OUTPUT_HEADER</HeaderAndTrailerType>
+		<Header>
+		</Header>
+		<Data>
+			<Fields>
+				<SwiftSequence Name="A">
+					<Name>A</Name>
+					<Description><![CDATA[General Information]]></Description>
+					<Mandatory>true</Mandatory>
+					<Repeating>false</Repeating>
+					<BlockDelimited>true</BlockDelimited>
+					<Code>GENL</Code>
+					<StartBlockField>16R</StartBlockField>
+					<StartFieldFormat>16c</StartFieldFormat>
+					<EndBlockField>16S</EndBlockField>
+					<EndFieldFormat>16c</EndFieldFormat>
+					<Fields>
+						<SwiftField Name="20C">
+							<SwiftFieldDef Name="20">
+								<Generic>true</Generic>
+								<Description><![CDATA[Reference]]></Description>
+								<Option Name="C">
+									<Format><![CDATA[:4!c//16x]]></Format>
+									<Specification><![CDATA[(Qualifier) (Reference)]]></Specification>
+									<Description><![CDATA[Reference]]></Description>
+								</Option>
+							</SwiftFieldDef>
+							<Qualifier Name="SEME">
+								<Description><![CDATA[Sender's Reference]]></Description>
+								<Repeating>false</Repeating>
+								<Presence>M</Presence>
+								<Options>C</Options>
+							</Qualifier>
+							<Qualifier Name="LDCR">
+								<Description><![CDATA[Deposit Common Reference]]></Description>
+								<Repeating>false</Repeating>
+								<Presence>O</Presence>
+								<Options>C</Options>
+							</Qualifier>
+							<Validations>
+								<SubField Name="Reference">
+									<Validation>
+										<Qualifiers>LDCR, SEME</Qualifiers>
+										<Options>C</Options>
+										<ErrorCode>T26</ErrorCode>
+										<Comment><![CDATA[Reference must not start or end with a slash '/' and not contain two consecutive slashes '//' (Error code(s): T26) .]]></Comment>
+										<ValidationPattern xsi:type="T26" Type="T26">
+											<Type>T26</Type>
+										</ValidationPattern>
+									</Validation>
+								</SubField>
+							</Validations>
+						</SwiftField>
+						<SwiftField Name="23G">
+							<SwiftFieldDef Name="23">
+								<Generic>false</Generic>
+								<Description><![CDATA[Function of the Message]]></Description>
+								<Option Name="G">
+									<Format><![CDATA[4!c[/4!c]]]></Format>
+									<Specification><![CDATA[(Function) (Sub-function)]]></Specification>
+									<Description><![CDATA[Function of the Message]]></Description>
+								</Option>
+							</SwiftFieldDef>
+							<Repeating>false</Repeating>
+							<Presence>M</Presence>
+							<Options>G</Options>
+							<Validations>
+								<SubField Name="Function">
+									<Validation>
+										<Options>G</Options>
+										<ErrorCode>T86</ErrorCode>
+										<Comment><![CDATA[Function must contain one of the following codes (Error code(s): T86) :]]></Comment>
+										<ValidationPattern xsi:type="CODE" Type="CODE">
+											<Type>CODE</Type>
+											<Codes>
+												<Code Name="CANC">
+													<Description>This is a request to cancel a previously sent instruction for a loan/deposit.</Description>
+												</Code>
+												<Code Name="NEWM">
+													<Description>This is a new instruction for a loan/deposit.</Description>
+												</Code>
+											</Codes>
+										</ValidationPattern>
+									</Validation>
+								</SubField>
+								<SubField Name="Sub-function">
+									<Validation>
+										<Options>G</Options>
+										<ErrorCode>T85</ErrorCode>
+										<Comment><![CDATA[Sub-function, when present, must contain one of the following codes (Error code(s): T85) :]]></Comment>
+										<ValidationPattern xsi:type="CODE" Type="CODE">
+											<Type>CODE</Type>
+											<Codes>
+												<Code Name="CODU">
+													<Description>This message is being sent as a copy, for information purposes and the message is a duplicate of a message previously sent.</Description>
+												</Code>
+												<Code Name="COPY">
+													<Description>The message is being sent as a copy, for information purposes.</Description>
+												</Code>
+												<Code Name="DUPL">
+													<Description>The message is for information/confirmation purposes. It is a duplicate of a message previously sent.</Description>
+												</Code>
+											</Codes>
+										</ValidationPattern>
+									</Validation>
+								</SubField>
+							</Validations>
+						</SwiftField>
+						<SwiftField Name="22H">
+							<SwiftFieldDef Name="22">
+								<Generic>true</Generic>
+								<Description><![CDATA[Indicator]]></Description>
+								<Option Name="H">
+									<Format><![CDATA[:4!c//4!c]]></Format>
+									<Specification><![CDATA[(Qualifier) (Indicator)]]></Specification>
+									<Description><![CDATA[Indicator]]></Description>
+								</Option>
+							</SwiftFieldDef>
+							<Qualifier Name="TLDE">
+								<Description><![CDATA[Type of Loan/Deposit Event]]></Description>
+								<Repeating>false</Repeating>
+								<Presence>M</Presence>
+								<Options>H</Options>
+							</Qualifier>
+							<Qualifier Name="BLOC">
+								<Description><![CDATA[Block Trade Indicator]]></Description>
+								<Repeating>false</Repeating>
+								<Presence>O</Presence>
+								<Options>H</Options>
+							</Qualifier>
+							<Validations>
+								<SubField Name="Indicator">
+									<Validation>
+										<Qualifiers>BLOC</Qualifiers>
+										<Options>H</Options>
+										<ErrorCode>K22</ErrorCode>
+										<Comment><![CDATA[When Qualifier is BLOC, Indicator must contain one of the following codes (Error code(s): K22) :]]></Comment>
+										<ValidationPattern xsi:type="CODE" Type="CODE">
+											<Type>CODE</Type>
+											<Codes>
+												<Code Name="BLCH">
+													<Description>The transaction is a block trade child.</Description>
+												</Code>
+												<Code Name="BLPA">
+													<Description>The transaction is a block trade parent.</Description>
+												</Code>
+											</Codes>
+										</ValidationPattern>
+									</Validation>
+									<Validation>
+										<Qualifiers>TLDE</Qualifiers>
+										<Options>H</Options>
+										<ErrorCode>K22</ErrorCode>
+										<Comment><![CDATA[When Qualifier is TLDE, Indicator must contain one of the following codes (Error code(s): K22) :]]></Comment>
+										<ValidationPattern xsi:type="CODE" Type="CODE">
+											<Type>CODE</Type>
+											<Codes>
+												<Code Name="CONF">
+													<Description>This is an instruction to settle a first confirmation.</Description>
+												</Code>
+												<Code Name="MATU">
+													<Description>This is an instruction to settle a liquidation of a fixed loan/deposit.</Description>
+												</Code>
+												<Code Name="ROLL">
+													<Description>This is an instruction to settle a mutually agreed rollover/renewal with/without change in the principal amount and the interest to be settled or added/substracted from that amount.</Description>
+												</Code>
+											</Codes>
+										</ValidationPattern>
+									</Validation>
+								</SubField>
+							</Validations>
+						</SwiftField>
+						<SwiftField Name="99B">
+							<SwiftFieldDef Name="99">
+								<Generic>true</Generic>
+								<Description><![CDATA[Number Count]]></Description>
+								<Option Name="B">
+									<Format><![CDATA[:4!c//3!n]]></Format>
+									<Specification><![CDATA[(Qualifier) (Number)]]></Specification>
+									<Description><![CDATA[Number Count]]></Description>
+								</Option>
+							</SwiftFieldDef>
+							<Qualifier Name="SETT">
+								<Description><![CDATA[Current Settlement Instruction Number]]></Description>
+								<Repeating>false</Repeating>
+								<Presence>O</Presence>
+								<Options>B</Options>
+							</Qualifier>
+							<Qualifier Name="TOSE">
+								<Description><![CDATA[Total of Linked Settlement Instructions]]></Description>
+								<Repeating>false</Repeating>
+								<Presence>O</Presence>
+								<Options>B</Options>
+							</Qualifier>
+						</SwiftField>
+						<SwiftSequence Name="A1">
+							<Name>A1</Name>
+							<Description><![CDATA[Linkages]]></Description>
+							<Mandatory>false</Mandatory>
+							<Repeating>true</Repeating>
+							<BlockDelimited>true</BlockDelimited>
+							<Code>LINK</Code>
+							<StartBlockField>16R</StartBlockField>
+							<StartFieldFormat>16c</StartFieldFormat>
+							<EndBlockField>16S</EndBlockField>
+							<EndFieldFormat>16c</EndFieldFormat>
+							<Fields>
+								<SwiftField Name="13a">
+									<SwiftFieldDef Name="13">
+										<Generic>true</Generic>
+										<Description><![CDATA[Number Identification]]></Description>
+										<Option Name="A">
+											<Format><![CDATA[:4!c//3!c]]></Format>
+											<Specification><![CDATA[(Qualifier) (Number Id)]]></Specification>
+											<Description><![CDATA[Number Identification]]></Description>
+										</Option>
+										<Option Name="B">
+											<Format><![CDATA[:4!c/[8c]/30x]]></Format>
+											<Specification><![CDATA[(Qualifier) (Data Source Scheme) (Number)]]></Specification>
+											<Description><![CDATA[Number Identification]]></Description>
+										</Option>
+									</SwiftFieldDef>
+									<Qualifier Name="LINK">
+										<Description><![CDATA[Linked Message]]></Description>
+										<Repeating>false</Repeating>
+										<Presence>O</Presence>
+										<Options>A, B</Options>
+									</Qualifier>
+									<Validations>
+										<SubField Name="Number">
+											<Validation>
+												<Qualifiers>LINK</Qualifiers>
+												<Options>B</Options>
+												<ErrorCode>T26</ErrorCode>
+												<Comment><![CDATA[Number (Format Option B) must not start or end with a slash '/' and not contain two consecutive slashes '//' (Error code(s): T26) .]]></Comment>
+												<ValidationPattern xsi:type="T26" Type="T26">
+													<Type>T26</Type>
+												</ValidationPattern>
+											</Validation>
+										</SubField>
+									</Validations>
+								</SwiftField>
+								<SwiftField Name="20C">
+									<SwiftFieldDef Name="20">
+										<Generic>true</Generic>
+										<Description><![CDATA[Reference]]></Description>
+										<Option Name="C">
+											<Format><![CDATA[:4!c//16x]]></Format>
+											<Specification><![CDATA[(Qualifier) (Reference)]]></Specification>
+											<Description><![CDATA[Reference]]></Description>
+										</Option>
+									</SwiftFieldDef>
+									<Qualifier Name="POOL">
+										<Description><![CDATA[Pool Reference]]></Description>
+										<Repeating>false</Repeating>
+										<Presence>M</Presence>
+										<Options>C</Options>
+									</Qualifier>
+									<Qualifier Name="PREV">
+										<Description><![CDATA[Previous Reference]]></Description>
+										<Repeating>false</Repeating>
+										<Presence>OR</Presence>
+										<Options>C</Options>
+									</Qualifier>
+									<Qualifier Name="RELA">
+										<Description><![CDATA[Related Reference]]></Description>
+										<Repeating>false</Repeating>
+										<Presence>OR</Presence>
+										<Options>C</Options>
+									</Qualifier>
+									<Validations>
+										<SubField Name="Reference">
+											<Validation>
+												<Qualifiers>POOL, PREV, RELA</Qualifiers>
+												<Options>C</Options>
+												<ErrorCode>T26</ErrorCode>
+												<Comment><![CDATA[Reference must not start or end with a slash '/' and not contain two consecutive slashes '//' (Error code(s): T26) .]]></Comment>
+												<ValidationPattern xsi:type="T26" Type="T26">
+													<Type>T26</Type>
+												</ValidationPattern>
+											</Validation>
+										</SubField>
+									</Validations>
+								</SwiftField>
+							</Fields>
+						</SwiftSequence>
+					</Fields>
+				</SwiftSequence>
+				<SwiftSequence Name="B">
+					<Name>B</Name>
+					<Description><![CDATA[Loan/Deposit Details]]></Description>
+					<Mandatory>true</Mandatory>
+					<Repeating>false</Repeating>
+					<BlockDelimited>true</BlockDelimited>
+					<Code>LDDET</Code>
+					<StartBlockField>16R</StartBlockField>
+					<StartFieldFormat>16c</StartFieldFormat>
+					<EndBlockField>16S</EndBlockField>
+					<EndFieldFormat>16c</EndFieldFormat>
+					<Fields>
+						<SwiftField Name="20C">
+							<SwiftFieldDef Name="20">
+								<Generic>true</Generic>
+								<Description><![CDATA[Reference]]></Description>
+								<Option Name="C">
+									<Format><![CDATA[:4!c//16x]]></Format>
+									<Specification><![CDATA[(Qualifier) (Reference)]]></Specification>
+									<Description><![CDATA[Reference]]></Description>
+								</Option>
+							</SwiftFieldDef>
+							<Qualifier Name="CONU">
+								<Description><![CDATA[Contract Number Reference]]></Description>
+								<Repeating>false</Repeating>
+								<Presence>M</Presence>
+								<Options>C</Options>
+							</Qualifier>
+							<Validations>
+								<SubField Name="Reference">
+									<Validation>
+										<Qualifiers>CONU</Qualifiers>
+										<Options>C</Options>
+										<ErrorCode>T26</ErrorCode>
+										<Comment><![CDATA[Reference must not start or end with a slash '/' and not contain two consecutive slashes '//' (Error code(s): T26) .]]></Comment>
+										<ValidationPattern xsi:type="T26" Type="T26">
+											<Type>T26</Type>
+										</ValidationPattern>
+									</Validation>
+								</SubField>
+							</Validations>
+						</SwiftField>
+						<SwiftField Name="22H">
+							<SwiftFieldDef Name="22">
+								<Generic>true</Generic>
+								<Description><![CDATA[Indicator]]></Description>
+								<Option Name="H">
+									<Format><![CDATA[:4!c//4!c]]></Format>
+									<Specification><![CDATA[(Qualifier) (Indicator)]]></Specification>
+									<Description><![CDATA[Indicator]]></Description>
+								</Option>
+							</SwiftFieldDef>
+							<Qualifier Name="DPLO">
+								<Description><![CDATA[Lender/Borrower Indicator]]></Description>
+								<Repeating>false</Repeating>
+								<Presence>M</Presence>
+								<Options>H</Options>
+							</Qualifier>
+							<Qualifier Name="MICO">
+								<Description><![CDATA[Method of Interest Computation Indicator]]></Description>
+								<Repeating>false</Repeating>
+								<Presence>O</Presence>
+								<Options>H</Options>
+							</Qualifier>
+							<Validations>
+								<SubField Name="Indicator">
+									<Validation>
+										<Qualifiers>DPLO</Qualifiers>
+										<Options>H</Options>
+										<ErrorCode>K22</ErrorCode>
+										<Comment><![CDATA[When Qualifier is DPLO, Indicator must contain one of the following codes (Error code(s): K22) :]]></Comment>
+										<ValidationPattern xsi:type="CODE" Type="CODE">
+											<Type>CODE</Type>
+											<Codes>
+												<Code Name="BORR">
+													<Description>The Sender, or the institution/corporate on behalf of which the message is sent is the borrower (receives the principal amount and pays the interest).</Description>
+												</Code>
+												<Code Name="LEND">
+													<Description>The Sender, or the institution/corporate on behalf of which the message is sent is the lender (pays the principal amount and receives the interest).</Description>
+												</Code>
+											</Codes>
+										</ValidationPattern>
+									</Validation>
+									<Validation>
+										<Qualifiers>MICO</Qualifiers>
+										<Options>H</Options>
+										<ErrorCode>K22</ErrorCode>
+										<Comment><![CDATA[When Qualifier is MICO, Indicator must contain one of the following codes (Error code(s): K22) :]]></Comment>
+										<ValidationPattern xsi:type="CODE" Type="CODE">
+											<Type>CODE</Type>
+											<Codes>
+												<Code Name="A001">
+													<Description>'30/360', '360/360' or 'Bond Basis'.</Description>
+												</Code>
+												<Code Name="A004">
+													<Description>'Actual/360' (28-31/360).</Description>
+												</Code>
+												<Code Name="A007">
+													<Description>'30E/360' or 'Eurobond Basis'.</Description>
+												</Code>
+												<Code Name="A008">
+													<Description>'Actual/365' or 'Actual/Actual' (28-31/365-6).</Description>
+												</Code>
+												<Code Name="A009">
+													<Description>'Actual/365 (fixed)' (28-31/365).</Description>
+												</Code>
+											</Codes>
+										</ValidationPattern>
+									</Validation>
+								</SubField>
+							</Validations>
+						</SwiftField>
+						<SwiftField Name="98A">
+							<SwiftFieldDef Name="98">
+								<Generic>true</Generic>
+								<Description><![CDATA[Date]]></Description>
+								<Option Name="A">
+									<Format><![CDATA[:4!c//8!n]]></Format>
+									<Specification><![CDATA[(Qualifier) (Date)]]></Specification>
+									<Description><![CDATA[Date]]></Description>
+								</Option>
+							</SwiftFieldDef>
+							<Qualifier Name="TRAD">
+								<Description><![CDATA[Trade Date]]></Description>
+								<Repeating>false</Repeating>
+								<Presence>M</Presence>
+								<Options>A</Options>
+							</Qualifier>
+							<Qualifier Name="VALU">
+								<Description><![CDATA[Value Date]]></Description>
+								<Repeating>false</Repeating>
+								<Presence>M</Presence>
+								<Options>A</Options>
+							</Qualifier>
+							<Qualifier Name="MATU">
+								<Description><![CDATA[Maturity Date]]></Description>
+								<Repeating>false</Repeating>
+								<Presence>M</Presence>
+								<Options>A</Options>
+							</Qualifier>
+							<Qualifier Name="INTR">
+								<Description><![CDATA[Next Interest Due Date]]></Description>
+								<Repeating>false</Repeating>
+								<Presence>O</Presence>
+								<Options>A</Options>
+							</Qualifier>
+							<Qualifier Name="LDFP">
+								<Description><![CDATA[Last Day of First Interest Period]]></Description>
+								<Repeating>false</Repeating>
+								<Presence>O</Presence>
+								<Options>A</Options>
+							</Qualifier>
+							<Validations>
+								<SubField Name="Date">
+									<Validation>
+										<Qualifiers>INTR, LDFP, MATU, TRAD, VALU</Qualifiers>
+										<Options>A</Options>
+										<ErrorCode>T50</ErrorCode>
+										<Comment><![CDATA[Date must be a valid date expressed as YYYYMMDD (Error code(s): T50) .]]></Comment>
+										<ValidationPattern xsi:type="DATE" Type="DATE">
+											<Type>DATE</Type>
+											<Format>yyyyMMdd</Format>
+										</ValidationPattern>
+									</Validation>
+								</SubField>
+							</Validations>
+						</SwiftField>
+						<SwiftField Name="19A">
+							<SwiftFieldDef Name="19">
+								<Generic>true</Generic>
+								<Description><![CDATA[Amount]]></Description>
+								<Option Name="A">
+									<Format><![CDATA[:4!c//[N]3!a15d]]></Format>
+									<Specification><![CDATA[(Qualifier) (Sign) (Currency Code) (Amount)]]></Specification>
+									<Description><![CDATA[Amount]]></Description>
+								</Option>
+							</SwiftFieldDef>
+							<Qualifier Name="PRIN">
+								<Description><![CDATA[Principal Currency and Amount]]></Description>
+								<Repeating>false</Repeating>
+								<Presence>M</Presence>
+								<Options>A</Options>
+							</Qualifier>
+							<Qualifier Name="SETT">
+								<Description><![CDATA[Currency and Amount to be Settled]]></Description>
+								<Repeating>false</Repeating>
+								<Presence>O</Presence>
+								<Options>A</Options>
+							</Qualifier>
+							<Qualifier Name="NINT">
+								<Description><![CDATA[Currency and Next Interest Amount]]></Description>
+								<Repeating>false</Repeating>
+								<Presence>O</Presence>
+								<Options>A</Options>
+							</Qualifier>
+							<Qualifier Name="CINT">
+								<Description><![CDATA[Currency and Current Interest Amount]]></Description>
+								<Repeating>false</Repeating>
+								<Presence>O</Presence>
+								<Options>A</Options>
+							</Qualifier>
+							<Qualifier Name="RODI">
+								<Description><![CDATA[Currency and Increase/Decrease Amount]]></Description>
+								<Repeating>false</Repeating>
+								<Presence>O</Presence>
+								<Options>A</Options>
+							</Qualifier>
+							<Validations>
+								<SubField Name="Currency_Code">
+									<Validation>
+										<Qualifiers>CINT, NINT, PRIN, RODI, SETT</Qualifiers>
+										<Options>A</Options>
+										<ErrorCode>T52</ErrorCode>
+										<Comment><![CDATA[Currency Code must be a valid ISO 4217 currency code (Error code(s): T52) .]]></Comment>
+										<ValidationPattern xsi:type="Currency_Code" Type="Currency Code">
+											<Type>Currency Code</Type>
+										</ValidationPattern>
+									</Validation>
+								</SubField>
+								<SubField Name="Amount">
+									<Validation>
+										<Qualifiers>CINT, NINT, PRIN, RODI, SETT</Qualifiers>
+										<Options>A</Options>
+										<ErrorCode>C03</ErrorCode>
+										<Comment><![CDATA[The number of digits following the comma must not exceed the maximum allowed for the specified currency (Error code(s): C03,T40,T43) .]]></Comment>
+										<ValidationPattern xsi:type="Decimal" Type="Decimal">
+											<Type>Decimal</Type>
+											<currency-field>Currency_Code</currency-field>
+										</ValidationPattern>
+									</Validation>
+									<Validation>
+										<Qualifiers>CINT, NINT, PRIN, RODI, SETT</Qualifiers>
+										<Options>A</Options>
+										<ErrorCode>T14</ErrorCode>
+										<Comment><![CDATA[When Sign is present, Amount must not be zero (Error code(s): T14) .]]></Comment>
+										<ValidationPattern xsi:type="T14" Type="T14">
+											<Type>T14</Type>
+											<sign-field>Sign</sign-field>
+										</ValidationPattern>
+									</Validation>
+								</SubField>
+							</Validations>
+						</SwiftField>
+						<SwiftField Name="92A">
+							<SwiftFieldDef Name="92">
+								<Generic>true</Generic>
+								<Description><![CDATA[Rate]]></Description>
+								<Option Name="A">
+									<Format><![CDATA[:4!c//[N]15d]]></Format>
+									<Specification><![CDATA[(Qualifier) (Sign) (Rate)]]></Specification>
+									<Description><![CDATA[Rate]]></Description>
+								</Option>
+							</SwiftFieldDef>
+							<Qualifier Name="INTR">
+								<Description><![CDATA[Interest Rate]]></Description>
+								<Repeating>false</Repeating>
+								<Presence>M</Presence>
+								<Options>A</Options>
+							</Qualifier>
+							<Validations>
+								<SubField Name="Rate">
+									<Validation>
+										<Qualifiers>INTR</Qualifiers>
+										<Options>A</Options>
+										<ErrorCode>T14</ErrorCode>
+										<Comment><![CDATA[When Sign is present, Rate must not be zero (Error code(s): T14) .]]></Comment>
+										<ValidationPattern xsi:type="T14" Type="T14">
+											<Type>T14</Type>
+											<sign-field>Sign</sign-field>
+										</ValidationPattern>
+									</Validation>
+								</SubField>
+							</Validations>
+						</SwiftField>
+						<SwiftField Name="99B">
+							<SwiftFieldDef Name="99">
+								<Generic>true</Generic>
+								<Description><![CDATA[Number Count]]></Description>
+								<Option Name="B">
+									<Format><![CDATA[:4!c//3!n]]></Format>
+									<Specification><![CDATA[(Qualifier) (Number)]]></Specification>
+									<Description><![CDATA[Number Count]]></Description>
+								</Option>
+							</SwiftFieldDef>
+							<Qualifier Name="DAAC">
+								<Description><![CDATA[Number of Days Accrued.]]></Description>
+								<Repeating>false</Repeating>
+								<Presence>O</Presence>
+								<Options>B</Options>
+							</Qualifier>
+						</SwiftField>
+						<SwiftSequence Name="B1">
+							<Name>B1</Name>
+							<Description><![CDATA[Loan/Deposit Parties 1]]></Description>
+							<Mandatory>true</Mandatory>
+							<Repeating>false</Repeating>
+							<BlockDelimited>true</BlockDelimited>
+							<Code>LDPRTY1</Code>
+							<StartBlockField>16R</StartBlockField>
+							<StartFieldFormat>16c</StartFieldFormat>
+							<EndBlockField>16S</EndBlockField>
+							<EndFieldFormat>16c</EndFieldFormat>
+							<Fields>
+								<SwiftField Name="95a">
+									<SwiftFieldDef Name="95">
+										<Generic>true</Generic>
+										<Description><![CDATA[Party]]></Description>
+										<Option Name="P">
+											<Format><![CDATA[:4!c(//4!a2!a2!c[3!c])]]></Format>
+											<Specification><![CDATA[(Qualifier) (Identifier Code)]]></Specification>
+											<Description><![CDATA[Party]]></Description>
+										</Option>
+										<Option Name="Q">
+											<Format><![CDATA[:4!c//4*35x]]></Format>
+											<Specification><![CDATA[(Qualifier) (Name & Address)]]></Specification>
+											<Description><![CDATA[Party]]></Description>
+										</Option>
+										<Option Name="R">
+											<Format><![CDATA[:4!c/8c/34x]]></Format>
+											<Specification><![CDATA[(Qualifier) (Data Source Scheme) (Proprietary Code)]]></Specification>
+											<Description><![CDATA[Party]]></Description>
+										</Option>
+									</SwiftFieldDef>
+									<Qualifier Name="LDCO">
+										<Description><![CDATA[Loan/deposit Counterparty]]></Description>
+										<Repeating>false</Repeating>
+										<Presence>M</Presence>
+										<Options>P, Q, R</Options>
+									</Qualifier>
+									<Validations>
+										<SubField Name="Identifier_Code">
+											<Validation>
+												<Qualifiers>LDCO</Qualifiers>
+												<Options>P</Options>
+												<ErrorCode>T27, T28, T29, T45</ErrorCode>
+												<Comment><![CDATA[Identifier Code must be a registered BIC or BEI (Error code(s): T27,T28,T29,T45)]]></Comment>
+												<ValidationPattern xsi:type="BIC" Type="BIC">
+													<Type>BIC</Type>
+												</ValidationPattern>
+											</Validation>
+										</SubField>
+										<SubField Name="Name_&amp;_Address">
+											<Validation>
+												<Qualifiers>LDCO</Qualifiers>
+												<Options>Q</Options>
+												<ErrorCode>T26</ErrorCode>
+												<Comment><![CDATA[Name & Address (Format Option Q) must not start or end with a slash '/' and not contain two consecutive slashes '//' (Error code(s): T26) .]]></Comment>
+												<ValidationPattern xsi:type="T26" Type="T26">
+													<Type>T26</Type>
+												</ValidationPattern>
+											</Validation>
+										</SubField>
+										<SubField Name="Proprietary_Code">
+											<Validation>
+												<Qualifiers>LDCO</Qualifiers>
+												<Options>R</Options>
+												<ErrorCode>T26</ErrorCode>
+												<Comment><![CDATA[Proprietary Code (Format Option R) must not start or end with a slash '/' and not contain two consecutive slashes '//' (Error code(s): T26) .]]></Comment>
+												<ValidationPattern xsi:type="T26" Type="T26">
+													<Type>T26</Type>
+												</ValidationPattern>
+											</Validation>
+										</SubField>
+									</Validations>
+								</SwiftField>
+							</Fields>
+						</SwiftSequence>
+						<SwiftSequence Name="B2">
+							<Name>B2</Name>
+							<Description><![CDATA[Loan/Deposit Parties 2]]></Description>
+							<Mandatory>true</Mandatory>
+							<Repeating>false</Repeating>
+							<BlockDelimited>true</BlockDelimited>
+							<Code>LDPRTY2</Code>
+							<StartBlockField>16R</StartBlockField>
+							<StartFieldFormat>16c</StartFieldFormat>
+							<EndBlockField>16S</EndBlockField>
+							<EndFieldFormat>16c</EndFieldFormat>
+							<Fields>
+								<SwiftField Name="95a">
+									<SwiftFieldDef Name="95">
+										<Generic>true</Generic>
+										<Description><![CDATA[Party]]></Description>
+										<Option Name="P">
+											<Format><![CDATA[:4!c(//4!a2!a2!c[3!c])]]></Format>
+											<Specification><![CDATA[(Qualifier) (Identifier Code)]]></Specification>
+											<Description><![CDATA[Party]]></Description>
+										</Option>
+										<Option Name="Q">
+											<Format><![CDATA[:4!c//4*35x]]></Format>
+											<Specification><![CDATA[(Qualifier) (Name & Address)]]></Specification>
+											<Description><![CDATA[Party]]></Description>
+										</Option>
+										<Option Name="R">
+											<Format><![CDATA[:4!c/8c/34x]]></Format>
+											<Specification><![CDATA[(Qualifier) (Data Source Scheme) (Proprietary Code)]]></Specification>
+											<Description><![CDATA[Party]]></Description>
+										</Option>
+									</SwiftFieldDef>
+									<Qualifier Name="INVE">
+										<Description><![CDATA[Investor]]></Description>
+										<Repeating>false</Repeating>
+										<Presence>O</Presence>
+										<Options>P, Q, R</Options>
+									</Qualifier>
+									<Validations>
+										<SubField Name="Identifier_Code">
+											<Validation>
+												<Qualifiers>INVE</Qualifiers>
+												<Options>P</Options>
+												<ErrorCode>T27, T28, T29, T45</ErrorCode>
+												<Comment><![CDATA[Identifier Code must be a registered BIC or BEI (Error code(s): T27,T28,T29,T45)]]></Comment>
+												<ValidationPattern xsi:type="BIC" Type="BIC">
+													<Type>BIC</Type>
+												</ValidationPattern>
+											</Validation>
+										</SubField>
+										<SubField Name="Name_&amp;_Address">
+											<Validation>
+												<Qualifiers>INVE</Qualifiers>
+												<Options>Q</Options>
+												<ErrorCode>T26</ErrorCode>
+												<Comment><![CDATA[Name & Address (Format Option Q) must not start or end with a slash '/' and not contain two consecutive slashes '//' (Error code(s): T26) .]]></Comment>
+												<ValidationPattern xsi:type="T26" Type="T26">
+													<Type>T26</Type>
+												</ValidationPattern>
+											</Validation>
+										</SubField>
+										<SubField Name="Proprietary_Code">
+											<Validation>
+												<Qualifiers>INVE</Qualifiers>
+												<Options>R</Options>
+												<ErrorCode>T26</ErrorCode>
+												<Comment><![CDATA[Proprietary Code (Format Option R) must not start or end with a slash '/' and not contain two consecutive slashes '//' (Error code(s): T26) .]]></Comment>
+												<ValidationPattern xsi:type="T26" Type="T26">
+													<Type>T26</Type>
+												</ValidationPattern>
+											</Validation>
+										</SubField>
+									</Validations>
+								</SwiftField>
+								<SwiftField Name="97A">
+									<SwiftFieldDef Name="97">
+										<Generic>true</Generic>
+										<Description><![CDATA[Account]]></Description>
+										<Option Name="A">
+											<Format><![CDATA[:4!c//35x]]></Format>
+											<Specification><![CDATA[(Qualifier) (Account Number)]]></Specification>
+											<Description><![CDATA[Account]]></Description>
+										</Option>
+									</SwiftFieldDef>
+									<Qualifier Name="SAFE">
+										<Description><![CDATA[Safekeeping Account]]></Description>
+										<Repeating>false</Repeating>
+										<Presence>M</Presence>
+										<Options>A</Options>
+									</Qualifier>
+								</SwiftField>
+							</Fields>
+						</SwiftSequence>
+						<SwiftSequence Name="B3">
+							<Name>B3</Name>
+							<Description><![CDATA[Other Parties ]]></Description>
+							<Mandatory>false</Mandatory>
+							<Repeating>false</Repeating>
+							<BlockDelimited>true</BlockDelimited>
+							<Code>OTHRPRTY</Code>
+							<StartBlockField>16R</StartBlockField>
+							<StartFieldFormat>16c</StartFieldFormat>
+							<EndBlockField>16S</EndBlockField>
+							<EndFieldFormat>16c</EndFieldFormat>
+							<Fields>
+								<SwiftField Name="95a">
+									<SwiftFieldDef Name="95">
+										<Generic>true</Generic>
+										<Description><![CDATA[Party]]></Description>
+										<Option Name="P">
+											<Format><![CDATA[:4!c(//4!a2!a2!c[3!c])]]></Format>
+											<Specification><![CDATA[(Qualifier) (Identifier Code)]]></Specification>
+										</Option>
+										<Option Name="Q">
+											<Format><![CDATA[:4!c//4*35x]]></Format>
+											<Specification><![CDATA[ (Qualifier) (Name & Address) ]]></Specification>
+										</Option>
+										<Option Name="R">
+											<Format><![CDATA[:4!c/8c/34x]]></Format>
+											<Specification><![CDATA[(Qualifier) (Data Source Scheme) (Proprietary Code)]]></Specification>
+										</Option>
+									</SwiftFieldDef>
+									<Qualifier Name="EXBO">
+										<Description><![CDATA[Executing Broker]]></Description>
+										<Repeating>false</Repeating>
+										<Presence>O</Presence>
+										<Options>P, Q, R</Options>
+									</Qualifier>
+									<Qualifier Name="MEOR">
+										<Description><![CDATA[Message Originator]]></Description>
+										<Repeating>false</Repeating>
+										<Presence>O</Presence>
+										<Options>P, Q, R</Options>
+									</Qualifier>
+									<Validations>
+										<SubField Name="Identifier_Code">
+											<Validation>
+												<Qualifiers>EXBO, MEOR</Qualifiers>
+												<Options>P</Options>
+												<ErrorCode>T27, T28, T29, T45</ErrorCode>
+												<Comment><![CDATA[Identifier Code must be a registered BIC or BEI (Error code(s): T27,T28,T29,T45).]]></Comment>
+												<ValidationPattern xsi:type="BIC" Type="BIC">
+													<Type>BIC</Type>
+												</ValidationPattern>
+											</Validation>
+										</SubField>
+										<SubField Name="Name_&amp;_Address">
+											<Validation>
+												<Qualifiers>EXBO, MEOR</Qualifiers>
+												<Options>Q</Options>
+												<ErrorCode>T26</ErrorCode>
+												<Comment><![CDATA[Name & Address must not start or end with a slash '/' and not contain two consecutive slashes '//'(Error code(s): T26).]]></Comment>
+												<ValidationPattern xsi:type="T26" Type="T26">
+													<Type>T26</Type>
+												</ValidationPattern>
+											</Validation>
+										</SubField>
+										<SubField Name="Proprietary_Code">
+											<Validation>
+												<Qualifiers>EXBO, MEOR</Qualifiers>
+												<Options>R</Options>
+												<ErrorCode>T26</ErrorCode>
+												<Comment><![CDATA[Proprietary Code must not start or end with a slash '/' and not contain two consecutive slashes '//'(Error code(s): T26).]]></Comment>
+												<ValidationPattern xsi:type="T26" Type="T26">
+													<Type>T26</Type>
+												</ValidationPattern>
+											</Validation>
+										</SubField>
+									</Validations>
+								</SwiftField>
+							</Fields>
+						</SwiftSequence>
+					</Fields>
+				</SwiftSequence>
+				<SwiftSequence Name="C">
+					<Name>C</Name>
+					<Description><![CDATA[Settlement Details]]></Description>
+					<Mandatory>true</Mandatory>
+					<Repeating>true</Repeating>
+					<BlockDelimited>true</BlockDelimited>
+					<Code>SETDET</Code>
+					<StartBlockField>16R</StartBlockField>
+					<StartFieldFormat>16c</StartFieldFormat>
+					<EndBlockField>16S</EndBlockField>
+					<EndFieldFormat>16c</EndFieldFormat>
+					<Fields>
+						<SwiftField Name="22H">
+							<SwiftFieldDef Name="22">
+								<Generic>true</Generic>
+								<Description><![CDATA[Indicator]]></Description>
+								<Option Name="H">
+									<Format><![CDATA[:4!c//4!c]]></Format>
+									<Specification><![CDATA[(Qualifier) (Indicator)]]></Specification>
+									<Description><![CDATA[Indicator]]></Description>
+								</Option>
+							</SwiftFieldDef>
+							<Qualifier Name="PRIT">
+								<Description><![CDATA[Principal and Interest]]></Description>
+								<Repeating>false</Repeating>
+								<Presence>M</Presence>
+								<Options>H</Options>
+							</Qualifier>
+							<Validations>
+								<SubField Name="Indicator">
+									<Validation>
+										<Qualifiers>PRIT</Qualifiers>
+										<Options>H</Options>
+										<ErrorCode>K22</ErrorCode>
+										<Comment><![CDATA[When Qualifier is PRIT, Indicator must contain one of the following codes (Error code(s): K22) :]]></Comment>
+										<ValidationPattern xsi:type="CODE" Type="CODE">
+											<Type>CODE</Type>
+											<Codes>
+												<Code Name="APCP">
+													<Description>Settlement Instructions for Amounts Payable by the Loan/Deposit Counterparty.</Description>
+												</Code>
+												<Code Name="APFM">
+													<Description>Settlement Instructions for Amounts Payable by the Investor.</Description>
+												</Code>
+												<Code Name="IPCP">
+													<Description>Settlement Instructions for Interests Payable by the Loan/Deposit Counterparty.</Description>
+												</Code>
+												<Code Name="IPFM">
+													<Description>Settlement Instructions for Interests Payable by the Investor.</Description>
+												</Code>
+											</Codes>
+										</ValidationPattern>
+									</Validation>
+								</SubField>
+							</Validations>
+						</SwiftField>
+						<SwiftSequence Name="C1">
+							<Name>C1</Name>
+							<Description><![CDATA[Settlement Parties]]></Description>
+							<Mandatory>true</Mandatory>
+							<Repeating>true</Repeating>
+							<BlockDelimited>true</BlockDelimited>
+							<Code>SETPRTY</Code>
+							<StartBlockField>16R</StartBlockField>
+							<StartFieldFormat>16c</StartFieldFormat>
+							<EndBlockField>16S</EndBlockField>
+							<EndFieldFormat>16c</EndFieldFormat>
+							<Fields>
+								<SwiftField Name="95a">
+									<SwiftFieldDef Name="95">
+										<Generic>true</Generic>
+										<Description><![CDATA[Party]]></Description>
+										<Option Name="P">
+											<Format><![CDATA[:4!c(//4!a2!a2!c[3!c])]]></Format>
+											<Specification><![CDATA[(Qualifier) (Identifier Code)]]></Specification>
+											<Description><![CDATA[Party]]></Description>
+										</Option>
+										<Option Name="Q">
+											<Format><![CDATA[:4!c//4*35x]]></Format>
+											<Specification><![CDATA[(Qualifier) (Name & Address)]]></Specification>
+											<Description><![CDATA[Party]]></Description>
+										</Option>
+										<Option Name="R">
+											<Format><![CDATA[:4!c/8c/34x]]></Format>
+											<Specification><![CDATA[(Qualifier) (Data Source Scheme) (Proprietary Code)]]></Specification>
+											<Description><![CDATA[Party]]></Description>
+										</Option>
+									</SwiftFieldDef>
+									<Qualifier Name="CDEA">
+										<Description><![CDATA[Cash Delivery Agent]]></Description>
+										<Repeating>false</Repeating>
+										<Presence>M</Presence>
+										<Options>P, Q, R</Options>
+									</Qualifier>
+									<Qualifier Name="INT2">
+										<Description><![CDATA[Second intermediary]]></Description>
+										<Repeating>false</Repeating>
+										<Presence>OR</Presence>
+										<Options>P, Q, R</Options>
+									</Qualifier>
+									<Qualifier Name="INTE">
+										<Description><![CDATA[Intermediary]]></Description>
+										<Repeating>false</Repeating>
+										<Presence>OR</Presence>
+										<Options>P, Q, R</Options>
+									</Qualifier>
+									<Qualifier Name="ACCW">
+										<Description><![CDATA[Account With Institution]]></Description>
+										<Repeating>false</Repeating>
+										<Presence>OR</Presence>
+										<Options>P, Q, R</Options>
+									</Qualifier>
+									<Qualifier Name="BENM">
+										<Description><![CDATA[Beneficiary of Money]]></Description>
+										<Repeating>false</Repeating>
+										<Presence>OR</Presence>
+										<Options>P, Q, R</Options>
+									</Qualifier>
+									<Qualifier Name="ALTE">
+										<Description><![CDATA[Alternate Identification]]></Description>
+										<Repeating>false</Repeating>
+										<Presence>O</Presence>
+										<Options>R</Options>
+									</Qualifier>
+									<Validations>
+										<SubField Name="Identifier_Code">
+											<Validation>
+												<Qualifiers>ACCW, BENM, CDEA, INT2, INTE</Qualifiers>
+												<Options>P</Options>
+												<ErrorCode>T27, T28, T29, T45</ErrorCode>
+												<Comment><![CDATA[Identifier Code must be a registered BIC or BEI (Error code(s): T27,T28,T29,T45)]]></Comment>
+												<ValidationPattern xsi:type="BIC" Type="BIC">
+													<Type>BIC</Type>
+												</ValidationPattern>
+											</Validation>
+											<Validation>
+												<Qualifiers>ACCW, CDEA, INT2, INTE</Qualifiers>
+												<Options>P</Options>
+												<ErrorCode>C05</ErrorCode>
+												<Comment><![CDATA[If Qualifier is CDEA, INT2, INTE or ACCW, Identifier Code must not be a BEI. Please refer to the latest version of the BIC Directory - Corporations for more information on BEIs. This error code applies to all types of BICs referenced in a FIN message including SWIFT BICs, non-SWIFT BICs, Masters, Synonyms, Live destinations and Test & Training destinations. (Error code(s): C05) .]]></Comment>
+												<ValidationPattern xsi:type="C05" Type="C05">
+													<Type>C05</Type>
+												</ValidationPattern>
+											</Validation>
+										</SubField>
+										<SubField Name="Name_&amp;_Address">
+											<Validation>
+												<Qualifiers>ACCW, BENM, CDEA, INT2, INTE</Qualifiers>
+												<Options>Q</Options>
+												<ErrorCode>T26</ErrorCode>
+												<Comment><![CDATA[Name & Address (Format Option Q) must not start or end with a slash '/' and not contain two consecutive slashes '//' (Error code(s): T26) .]]></Comment>
+												<ValidationPattern xsi:type="T26" Type="T26">
+													<Type>T26</Type>
+												</ValidationPattern>
+											</Validation>
+										</SubField>
+										<SubField Name="Proprietary_Code">
+											<Validation>
+												<Qualifiers>ACCW, ALTE, BENM, CDEA, INT2, INTE</Qualifiers>
+												<Options>R</Options>
+												<ErrorCode>T26</ErrorCode>
+												<Comment><![CDATA[Proprietary Code (Format Option R) must not start or end with a slash '/' and not contain two consecutive slashes '//' (Error code(s): T26) .]]></Comment>
+												<ValidationPattern xsi:type="T26" Type="T26">
+													<Type>T26</Type>
+												</ValidationPattern>
+											</Validation>
+										</SubField>
+									</Validations>
+								</SwiftField>
+								<SwiftField Name="97A">
+									<SwiftFieldDef Name="97">
+										<Generic>true</Generic>
+										<Description><![CDATA[Account]]></Description>
+										<Option Name="A">
+											<Format><![CDATA[:4!c//35x]]></Format>
+											<Specification><![CDATA[(Qualifier) (Account Number)]]></Specification>
+											<Description><![CDATA[Account]]></Description>
+										</Option>
+									</SwiftFieldDef>
+									<Qualifier Name="CASH">
+										<Description><![CDATA[Cash Account]]></Description>
+										<Repeating>false</Repeating>
+										<Presence>O</Presence>
+										<Options>A</Options>
+									</Qualifier>
+								</SwiftField>
+								<SwiftField Name="70C">
+									<SwiftFieldDef Name="70">
+										<Generic>true</Generic>
+										<Description><![CDATA[Narrative]]></Description>
+										<Option Name="C">
+											<Format><![CDATA[:4!c//4*35x]]></Format>
+											<Specification><![CDATA[(Qualifier) (Narrative)]]></Specification>
+											<Description><![CDATA[Narrative]]></Description>
+										</Option>
+									</SwiftFieldDef>
+									<Qualifier Name="PACO">
+										<Description><![CDATA[Party Contact Narrative]]></Description>
+										<Repeating>false</Repeating>
+										<Presence>O</Presence>
+										<Options>C</Options>
+									</Qualifier>
+								</SwiftField>
+							</Fields>
+						</SwiftSequence>
+					</Fields>
+				</SwiftSequence>
+			</Fields>
+		</Data>
+		<Trailer>
+		</Trailer>
+	</SwiftFields>
+	<validationrules name="Default">
+		<hdrvalidationrules>
+			<fieldvalidations>
+				<fieldvalidation>
+					<name>U09</name>
+					<formula><![CDATA[if($this.Header.GetFieldIndex("User_Header") != -1) {
+    def userHeader = $this.Header.GetSection("User_Header");
+    if(userHeader.$size > 0 && userHeader[0].IsNotNull("Validation_Flag")) {
+        return false;
+    }
+}
+return true;
+]]></formula>
+					<severity>error</severity>
+					<cascade>true</cascade>
+					<error-code>U09</error-code>
+					<actionmessage><![CDATA["User has used tag 119 in a message that is not a candidate for special processing"]]></actionmessage>
+				</fieldvalidation>
+	<fieldvalidation>
+		<name>U03</name>
+		<fieldname>User Header</fieldname>
+		<formula><![CDATA[Iff(IsNotNull(User_Header.Service_Type_Identifier), 
+    IsNotNull(User_Header.Unique_End_To_End_Transaction_Reference))]]></formula>
+		<severity>error</severity>
+		<cascade>true</cascade>
+		<error-code>U03</error-code>
+		<actionmessage><![CDATA["When populating an end-to-end reference, both fields 111 and 121 must be populated: a message that contains only one of these two fields will not be accepted by FIN."]]></actionmessage>
+	</fieldvalidation>
+			</fieldvalidations>
+		</hdrvalidationrules>
+		<datavalidationrules>
+			<fieldvalidations>
+				<fieldvalidation>
+					<name>C1-1</name>
+					<fieldname>A.22H.TLDE.Indicator</fieldname>
+					<comment><![CDATA[C1-1
+In sequence B, the presence of field 19A and of the Next Interest Due Date (field :98A::INTR) depends on the Type of Loan/Deposit Event (field :22H::TLDE) in sequence A as follows (Error code(s): C59).]]></comment>
+					<formula><![CDATA[If($value == "CONF", 
+   B[0].F98A[0].INTR.$size > 0 && B[0].F19A[0].SETT.$size == 0 && B[0].F19A[0].RODI.$size == 0 && B[0].F19A[0].CINT.$size == 0 && B[0].F19A[0].NINT.$size > 0 , 
+   true)]]></formula>
+					<severity>error</severity>
+					<cascade>true</cascade>
+					<error-code>C59</error-code>
+					<actionmessage><![CDATA["In sequence B, the presence of field 19A and of the Next Interest Due Date (field :98A::INTR) depends on the Type of Loan/Deposit Event (field :22H::TLDE) in sequence A as follows (Error code(s): C59):"]]></actionmessage>
+				</fieldvalidation>
+				<fieldvalidation>
+					<name>C1-2</name>
+					<fieldname>A.22H.TLDE.Indicator</fieldname>
+					<comment><![CDATA[C1-2
+In sequence B, the presence of field 19A and of the Next Interest Due Date (field :98A::INTR) depends on the Type of Loan/Deposit Event (field :22H::TLDE) in sequence A as follows (Error code(s): C59).
+]]></comment>
+					<formula><![CDATA[If($value == "ROLL", 
+   B[0].F98A[0].INTR.$size > 0 && B[0].F19A[0].SETT.$size > 0 && B[0].F19A[0].NINT.$size > 0 , 
+   true)]]></formula>
+					<severity>error</severity>
+					<cascade>true</cascade>
+					<error-code>C59</error-code>
+					<actionmessage><![CDATA["In sequence B, the presence of field 19A and of the Next Interest Due Date (field :98A::INTR) depends on the Type of Loan/Deposit Event (field :22H::TLDE) in sequence A as follows (Error code(s): C59):"]]></actionmessage>
+				</fieldvalidation>
+				<fieldvalidation>
+					<name>C1-3</name>
+					<fieldname>A.22H.TLDE.Indicator</fieldname>
+					<comment><![CDATA[C1-3
+In sequence B, the presence of field 19A and of the Next Interest Due Date (field :98A::INTR) depends on the Type of Loan/Deposit Event (field :22H::TLDE) in sequence A as follows (Error code(s): C59).]]></comment>
+					<formula><![CDATA[If($value == "MATU", 
+   B[0].F98A[0].INTR.$size == 0 && B[0].F19A[0].SETT.$size > 0 && B[0].F19A[0].RODI.$size == 0 &&  B[0].F19A[0].NINT.$size == 0 , 
+   true)]]></formula>
+					<severity>error</severity>
+					<cascade>true</cascade>
+					<error-code>C59</error-code>
+					<actionmessage><![CDATA["In sequence B, the presence of field 19A and of the Next Interest Due Date (field :98A::INTR) depends on the Type of Loan/Deposit Event (field :22H::TLDE) in sequence A as follows (Error code(s): C59):"]]></actionmessage>
+				</fieldvalidation>
+				<fieldvalidation>
+					<name>C2</name>
+					<fieldname>A.22H.TLDE.Indicator</fieldname>
+					<comment><![CDATA[C2
+In Sequence A, if Type of Loan/Deposit Event (field :22H::TLDE) (a)is MATU, then in Sequence B  field ':98A::LDFP' is not allowed (b)is not MATU, then in Sequence B  field ':98A::LDFP' is optional(Error code(s): C61).]]></comment>
+					<formula><![CDATA[If($value=="MATU",B[0].F98A[0].LDFP.$size==0,true)]]></formula>
+					<severity>error</severity>
+					<cascade>true</cascade>
+					<error-code>C61</error-code>
+					<actionmessage><![CDATA["In Sequence A, if Type of Loan/Deposit Event (field :22H::TLDE) (a)is MATU, then in Sequence B  field ':98A::LDFP' is not allowed (b)is not MATU, then in Sequence B  field ':98A::LDFP' is optional"]]></actionmessage>
+				</fieldvalidation>
+				<fieldvalidation>
+					<name>C3</name>
+					<fieldname>B</fieldname>
+					<comment><![CDATA[C3
+In Sequence B, (a) if Last Day of the First Interest Period (field :98A::LDFP) is present then Number of Days Accrued (field :99B::DAAC) is mandatory (b) if Last Day of the First Interest Period (field :98A::LDFP) is not present then Number of Days Accrued (field :99B::DAAC) is not allowed (Error code(s): C62).]]></comment>
+					<formula><![CDATA[If(B.F98A[0].LDFP.$size > 0, B.F99B.$size > 0, B.F99B.$size == 0)]]></formula>
+					<severity>error</severity>
+					<cascade>true</cascade>
+					<error-code>C62</error-code>
+					<actionmessage><![CDATA["In Sequence B, (a) if Last Day of the First Interest Period (field :98A::LDFP) is present then Number of Days Accrued (field :99B::DAAC) is mandatory (b) if Last Day of the First Interest Period (field :98A::LDFP) is not present then Number of Days Accrued (field :99B::DAAC) is not allowed"]]></actionmessage>
+				</fieldvalidation>
+				<fieldvalidation>
+					<name>C4-1</name>
+					<fieldname>C</fieldname>
+					<comment><![CDATA[C4-1
+In each occurrence of sequence C, the party field:95a::CDEA for subsequence C1 cannot appear more than once (Error code(s): E84).]]></comment>
+					<formula><![CDATA[SecExistsInAtMostOne(C.C1,"F95a.CDEA")]]></formula>
+					<severity>error</severity>
+					<cascade>true</cascade>
+					<error-code>E84</error-code>
+					<actionmessage><![CDATA["In each occurrence of sequence C, the party field:95a::CDEA for subsequence C1 cannot appear more than once"]]></actionmessage>
+				</fieldvalidation>
+				<fieldvalidation>
+					<name>C4-2</name>
+					<fieldname>C</fieldname>
+					<comment><![CDATA[C4-2
+In each occurrence of sequence C, the party field :95a::INT2 for subsequence C1 cannot appear more than once (Error code(s): E84).]]></comment>
+					<formula><![CDATA[SecExistsInAtMostOne(C.C1,"F95a.INT2")]]></formula>
+					<severity>error</severity>
+					<cascade>true</cascade>
+					<error-code>E84</error-code>
+					<actionmessage><![CDATA["In each occurrence of sequence C, the party field :95a::INT2 for subsequence C1 cannot appear more than once"]]></actionmessage>
+				</fieldvalidation>
+				<fieldvalidation>
+					<name>C4-3</name>
+					<fieldname>C</fieldname>
+					<comment><![CDATA[C4-3
+In each occurrence of sequence C, the party field :95a::INTE for subsequence C1 cannot appear more than once (Error code(s): E84).]]></comment>
+					<formula><![CDATA[SecExistsInAtMostOne(C.C1,"F95a.INTE")]]></formula>
+					<severity>error</severity>
+					<cascade>true</cascade>
+					<error-code>E84</error-code>
+					<actionmessage><![CDATA["In each occurrence of sequence C, the party field :95a::INTE for subsequence C1 cannot appear more than once"]]></actionmessage>
+				</fieldvalidation>
+				<fieldvalidation>
+					<name>C4-4</name>
+					<fieldname>C</fieldname>
+					<comment><![CDATA[C4-4
+In each occurrence of sequence C, the party field :95a::ACCW for subsequence C1 cannot appear more than once (Error code(s): E84).
+]]></comment>
+					<formula><![CDATA[SecExistsInAtMostOne(C.C1,"F95a.ACCW")]]></formula>
+					<severity>error</severity>
+					<cascade>true</cascade>
+					<error-code>E84</error-code>
+					<actionmessage><![CDATA["In each occurrence of sequence C, the party field :95a::ACCW for subsequence C1 cannot appear more than once"]]></actionmessage>
+				</fieldvalidation>
+				<fieldvalidation>
+					<name>C4-5</name>
+					<fieldname>C</fieldname>
+					<comment><![CDATA[C4-5
+In each occurrence of sequence C, the party field :95a::BENM for subsequence C1 cannot appear more than once (Error code(s): E84). ]]></comment>
+					<formula><![CDATA[SecExistsInAtMostOne(C.C1,"F95a.BENM")]]></formula>
+					<severity>error</severity>
+					<cascade>true</cascade>
+					<error-code>E84</error-code>
+					<actionmessage><![CDATA["In each occurrence of sequence C, the party field :95a::BENM for subsequence C1 cannot appear more than once"]]></actionmessage>
+				</fieldvalidation>
+				<fieldvalidation>
+					<name>C5</name>
+					<comment><![CDATA[C5
+One occurrence of sequence C must have the value: :22H::PRIT//APFM (Error code(s): E90).
+]]></comment>
+					<formula><![CDATA[FieldValueExistsInAtLeastOne(C,"F22H.PRIT.Indicator","APFM")]]></formula>
+					<severity>error</severity>
+					<cascade>true</cascade>
+					<error-code>E90</error-code>
+					<actionmessage><![CDATA["One occurrence of sequence C must have the value: :22H::PRIT//APFM"]]></actionmessage>
+				</fieldvalidation>
+				<fieldvalidation>
+					<name>C6</name>
+					<comment><![CDATA[C6
+One occurrence of sequence C must have the value: :22H::PRIT//APCP (Error code(s): E90).]]></comment>
+					<formula><![CDATA[FieldValueExistsInAtLeastOne(C,"F22H.PRIT.Indicator","APCP")]]></formula>
+					<severity>error</severity>
+					<cascade>true</cascade>
+					<error-code>E90</error-code>
+					<actionmessage><![CDATA["One occurrence of sequence C must have the value: :22H::PRIT//APCP"]]></actionmessage>
+				</fieldvalidation>
+				<fieldvalidation>
+					<name>C7-1</name>
+					<comment><![CDATA[C7-1
+In a message, the sequence C field :22H::PRIT//APFM cannot appear more than once (Error code(s): E92).]]></comment>
+					<formula><![CDATA[$sec = SecFilter(C, "$filterObj.F22H[0].PRIT[0].Indicator == \"APFM\"");
+if($sec.$size > 1){
+	return false;
+}
+return true;
+]]></formula>
+					<severity>error</severity>
+					<cascade>true</cascade>
+					<error-code>E92</error-code>
+					<actionmessage><![CDATA["In a message, the sequence C field :22H::PRIT//APFM cannot appear more than once"]]></actionmessage>
+				</fieldvalidation>
+				<fieldvalidation>
+					<name>C7-2</name>
+					<comment><![CDATA[C7-2
+In a message, the sequence C field :22H::PRIT//APCP cannot appear more than once (Error code(s): E92).]]></comment>
+					<formula><![CDATA[$sec = SecFilter(C, "$filterObj.F22H[0].PRIT[0].Indicator == \"APCP\"");
+//Info( ToText($sec));
+if($sec.$size > 1){
+	return false;
+}
+return true;
+]]></formula>
+					<severity>error</severity>
+					<cascade>true</cascade>
+					<error-code>E92</error-code>
+					<actionmessage><![CDATA["In a message, the sequence C field :22H::PRIT//APCP cannot appear more than once"]]></actionmessage>
+				</fieldvalidation>
+				<fieldvalidation>
+					<name>C7-3</name>
+					<comment><![CDATA[C7-3
+In a message, the sequence C field :22H::PRIT//IPFM cannot appear more than once (Error code(s): E92).]]></comment>
+					<formula><![CDATA[$sec = SecFilter(C, "$filterObj.F22H[0].PRIT[0].Indicator == \"IPFM\"");
+//Info( ToText($sec));
+if($sec.$size > 1){
+	return false;
+}
+return true;
+]]></formula>
+					<severity>error</severity>
+					<cascade>true</cascade>
+					<error-code>E92</error-code>
+					<actionmessage><![CDATA["In a message, the sequence C field :22H::PRIT//IPFM cannot appear more than once"]]></actionmessage>
+				</fieldvalidation>
+				<fieldvalidation>
+					<name>C7-4</name>
+					<comment><![CDATA[C7-4
+In a message, the sequence C field :22H::PRIT//IPCP cannot appear more than once (Error code(s): E92).]]></comment>
+					<formula><![CDATA[$sec = SecFilter(C, "$filterObj.F22H[0].PRIT[0].Indicator == \"IPCP\"");
+//Info( ToText($sec));
+if($sec.$size > 1){
+	return false;
+}
+return true;
+]]></formula>
+					<severity>error</severity>
+					<cascade>true</cascade>
+					<error-code>E92</error-code>
+					<actionmessage><![CDATA["In a message, the sequence C field :22H::PRIT//IPCP cannot appear more than once"]]></actionmessage>
+				</fieldvalidation>
+				<fieldvalidation>
+					<name>C8</name>
+					<fieldname>B.19A</fieldname>
+					<comment><![CDATA[C8
+The currency code in the amount fields (field 19A in Sequence B) must be the same for all occurrences of this field in the message (Error code(s): C02)]]></comment>
+					<formula><![CDATA[If(B.F19A.SETT.$size > 0, 
+   B.F19A.SETT[0].Currency_Code == B.F19A.PRIN[0].Currency_Code, 
+   true) && 
+  If(B.F19A.NINT.$size > 0, 
+     B.F19A.NINT[0].Currency_Code == B.F19A.PRIN[0].Currency_Code, 
+     true) && 
+  If(B.F19A.CINT.$size > 0, 
+     B.F19A.CINT[0].Currency_Code == B.F19A.PRIN[0].Currency_Code, 
+     true) && 
+  If(B.F19A.RODI.$size > 0, 
+     B.F19A.RODI[0].Currency_Code == B.F19A.PRIN[0].Currency_Code, 
+     true)]]></formula>
+					<severity>error</severity>
+					<cascade>true</cascade>
+					<error-code>C02</error-code>
+					<actionmessage><![CDATA["The currency code in the amount fields (field 19A in Sequence B) must be the same for all occurrences of this field in the message"]]></actionmessage>
+				</fieldvalidation>
+				<fieldvalidation>
+					<name>C9-1</name>
+					<fieldname>C</fieldname>
+					<comment><![CDATA[C9-1
+In each occurrence of Sequence C, if field :22H::PRIT is APCP or IPCP then In one occurrence of Subseq. C1 field 95a::CDEA is Mandatory (Error code(s): E91).]]></comment>
+					<formula><![CDATA[If(In(C.F22H[0].PRIT[0].Indicator, "APCP", "IPCP"), SecExistsInAtLeastOne(C.C1, "95a.CDEA"), true);]]></formula>
+					<severity>error</severity>
+					<cascade>true</cascade>
+					<error-code>E91</error-code>
+					<actionmessage><![CDATA["In each occurrence of Sequence C, if field :22H::PRIT is APCP or IPCP then In one occurrence of Subseq. C1 field 95a::CDEA is Mandatory"]]></actionmessage>
+				</fieldvalidation>
+				<fieldvalidation>
+					<name>C9-2</name>
+					<fieldname>C</fieldname>
+					<comment><![CDATA[C9-2
+In each occurrence of Sequence C, if field :22H::PRIT is APFM or IPFM then In one occurrence of Subseq. C1 field 95a::ACCW is Mandatory (Error code(s): E91).]]></comment>
+					<formula><![CDATA[If(In(C.F22H[0].PRIT[0].Indicator, "APFM", "IPFM"), SecExistsInAtLeastOne(C.C1, "95a.ACCW"), true);]]></formula>
+					<severity>error</severity>
+					<cascade>true</cascade>
+					<error-code>E91</error-code>
+					<actionmessage><![CDATA["In each occurrence of Sequence C, if field :22H::PRIT is APFM or IPFM then In one occurrence of Subseq. C1 field 95a::ACCW is Mandatory"]]></actionmessage>
+				</fieldvalidation>
+				<fieldvalidation>
+					<name>C10</name>
+					<fieldname>A</fieldname>
+					<comment><![CDATA[C10
+In sequence A, the presence of the Number Count (field :99B) depends on the presence of the Block Trade Indicator (field 22H::BLOC) as follows (a) Sequence A if field :22H::BLOC is Present then field :99B in sequence A is Mandatory (b) Sequence A if field :22H::BLOC is Not Present then field :99B in sequence A is Not allowed (Error code(s): C60).]]></comment>
+					<formula><![CDATA[If(A.F22H[0].BLOC.$size>0,A.F99B.$size>0,A.F99B.$size==0)]]></formula>
+					<severity>error</severity>
+					<cascade>true</cascade>
+					<error-code>C60</error-code>
+					<actionmessage><![CDATA["In sequence A, the presence of the Number Count (field :99B) depends on the presence of the Block Trade Indicator (field 22H::BLOC) as follows (a) Sequence A if field :22H::BLOC is Present then field :99B in sequence A is Mandatory (b) Sequence A if field :22H::BLOC is Not Present then field :99B in sequence A is Not allowed"]]></actionmessage>
+				</fieldvalidation>
+				<fieldvalidation>
+					<name>C11</name>
+					<fieldname>A.99B</fieldname>
+					<comment><![CDATA[In sequence A, if field 99B is present, then all qualifiers must be present
+]]></comment>
+					<formula><![CDATA[A.F99B.SETT.$size > 0 && A.F99B.TOSE.$size > 0]]></formula>
+					<severity>error</severity>
+					<cascade>true</cascade>
+					<error-code>C63</error-code>
+					<actionmessage><![CDATA["In sequence A, if field 99B is present, then all qualifiers must be present"]]></actionmessage>
+				</fieldvalidation>
+				<fieldvalidation>
+					<name>C12</name>
+					<fieldname>B.B3</fieldname>
+					<comment><![CDATA[C12
+In subsequence B3, all orders of field 95a are optional, but at least one order (any one) must be present (Error code(s): D92). 
+
+
+]]></comment>
+					<formula><![CDATA[$value.F95a.$size >0]]></formula>
+					<severity>error</severity>
+					<cascade>true</cascade>
+					<error-code>D92</error-code>
+					<actionmessage><![CDATA["In subsequence B3, all orders of field 95a are optional, but at least one order (any one) must be present."]]></actionmessage>
+				</fieldvalidation>
+			</fieldvalidations>
+		</datavalidationrules>
+		<tlrvalidationrules>
+			<fieldvalidations>
+			</fieldvalidations>
+		</tlrvalidationrules>
+	</validationrules>
+</SwiftMessageFormat>
+

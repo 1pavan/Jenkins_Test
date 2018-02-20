@@ -1,0 +1,348 @@
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="unqualified"
+            attributeFormDefault="unqualified">
+    <!-- include constructs -->
+    <xsd:include schemaLocation="internalmsg.xsd"/>
+    <!-- Webforms Designer -->
+    <xsd:element name="WebFormDesigner" substitutionGroup="InternalMsgExtElement">
+        <xsd:complexType>
+            <xsd:complexContent>
+                <xsd:extension base="InternalMsgExtType">
+                    <xsd:sequence>
+                        <xsd:element name="description" type="xsd:string" minOccurs="0"/>
+                        <xsd:element ref="webformoptions"/>
+                        <xsd:element ref="webformuiformat"/>
+                    </xsd:sequence>
+                    <xsd:attribute name="name" type="xsd:string" use="required"/>
+                    <xsd:attribute name="type" type="xsd:string" use="required" fixed="WebFormDesigner"/>
+                </xsd:extension>
+            </xsd:complexContent>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="styles">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="style" minOccurs="0" maxOccurs="unbounded">
+                    <xsd:complexType>
+                        <xsd:sequence>
+                            <xsd:element name="name" type="xsd:string"/>
+                            <xsd:element name="customtext" type="xsd:string"/>
+                        </xsd:sequence>
+                    </xsd:complexType>
+                </xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="webformoptions">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="defaultlabelstyle" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="defaultlabelcolumnstyle" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="defaultrendererstyle" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="defaultrenderercolumnstyle" type="xsd:string" minOccurs="0"/>
+                <xsd:element ref="columns" minOccurs="0"/>
+                <xsd:element name="labelposition" type="xsd:integer" minOccurs="0"/>
+                <xsd:element name="indentsubfields" type="xsd:integer" minOccurs="0"/>
+                <xsd:element name="emit-css" type="xsd:boolean" minOccurs="0"/>
+                <xsd:element name="collapsible" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="instance-separator" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="defaultsectionlabelstyle" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="defaultsectionbackgroundstyle" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="pagename" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="pagetitlestyle" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="showpagetitle" type="xsd:boolean" minOccurs="0"/>
+                <xsd:element name="showpagetitleprefix" type="xsd:boolean" minOccurs="0"/>
+                <xsd:element name="pagetitle" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="formtitle" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="formtitlestyle" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="formtablestyle" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="formwidthinpixels" type="xsd:boolean" minOccurs="0"/>
+                <xsd:element name="formwidth" type="xsd:integer" minOccurs="0"/>
+                <xsd:element name="cell-padding" type="xsd:integer" minOccurs="0"/>
+                <xsd:element name="cell-spacing" type="xsd:integer" minOccurs="0"/>
+                <xsd:element name="border-size" type="xsd:integer" minOccurs="0"/>
+                <xsd:element ref="styles"/>
+                <xsd:element ref="customlookups"/>
+                <xsd:element ref="customcomponents" minOccurs="0"/>
+                <xsd:element ref="images"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="images">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="image" minOccurs="0" maxOccurs="unbounded">
+                    <xsd:complexType>
+                        <xsd:sequence>
+                            <xsd:element name="name" type="xsd:string"/>
+                            <xsd:element name="filename" type="xsd:string"/>
+                        </xsd:sequence>
+                    </xsd:complexType>
+                </xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="customcomponents">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="customcomponent" minOccurs="0" maxOccurs="unbounded">
+                    <xsd:complexType>
+                        <xsd:sequence>
+                            <xsd:element name="name" type="xsd:string"/>
+                            <xsd:element name="script-files">
+                                <xsd:complexType>
+                                    <xsd:sequence>
+                                        <xsd:element name="script-file" minOccurs="0" maxOccurs="unbounded">
+                                            <xsd:complexType>
+                                                <xsd:simpleContent>
+                                                    <xsd:extension base="xsd:string">
+                                                        <xsd:attribute name="base-dir" type="xsd:string"/>
+                                                    </xsd:extension>
+                                                </xsd:simpleContent>
+                                            </xsd:complexType>
+                                        </xsd:element>
+                                    </xsd:sequence>
+                                </xsd:complexType>
+                            </xsd:element>
+                            <xsd:element name="init-script" type="xsd:string" minOccurs="0"/>
+                            <xsd:element name="finish-script" type="xsd:string" minOccurs="0"/>
+                        </xsd:sequence>
+                    </xsd:complexType>
+                </xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="customlookups">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="customlookup" minOccurs="0" maxOccurs="unbounded">
+                    <xsd:complexType>
+                        <xsd:sequence>
+                            <xsd:element name="name" type="xsd:string"/>
+                            <xsd:element name="image" type="xsd:boolean"/>
+                            <xsd:element name="button" type="xsd:boolean"/>
+                            <xsd:element name="value" type="xsd:string"/>
+                            <xsd:element name="link" type="xsd:string" minOccurs="0"/>
+                            <xsd:element name="style" type="xsd:string" minOccurs="0"/>
+                            <xsd:element name="help" type="xsd:string" minOccurs="0"/>
+                        </xsd:sequence>
+                    </xsd:complexType>
+                </xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="webformuiformat">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="fields">
+                    <xsd:complexType>
+                        <xsd:sequence>
+                            <xsd:element name="field" type="WebFormFieldType" minOccurs="0" maxOccurs="unbounded"/>
+                        </xsd:sequence>
+                    </xsd:complexType>
+                </xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:complexType name="WebFormFieldType">
+        <xsd:sequence>
+            <xsd:element name="name" type="xsd:string"/>
+            <xsd:element name="type" type="xsd:string"/>
+            <xsd:choice>
+                <xsd:group ref="webformfieldgroup"/>
+                <xsd:group ref="webformsectiongroup"/>
+            </xsd:choice>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:group name="webformfieldgroup">
+        <xsd:choice>
+            <xsd:group ref="webformfieldgroup_1"/>
+            <xsd:group ref="webformfieldgroup_2"/>
+            <xsd:group ref="webformfieldgroup_3"/>
+        </xsd:choice>
+    </xsd:group>
+    <xsd:group name="webformfieldgroup_1">
+        <xsd:sequence>
+            <xsd:element ref="noofcolumns" minOccurs="0"/>
+            <xsd:element name="pagetitle" type="xsd:string" minOccurs="0"/>
+            <xsd:element name="pagename" type="xsd:string" minOccurs="0"/>
+        </xsd:sequence>
+    </xsd:group>
+    <xsd:group name="webformfieldgroup_2">
+        <xsd:sequence>
+            <xsd:element name="label" type="xsd:string"/>
+            <xsd:element ref="image" minOccurs="0"/>
+            <xsd:element name="defaultvalue" type="xsd:string" minOccurs="0"/>
+            <xsd:element name="visible" type="xsd:boolean"/>
+            <xsd:element name="enabled" type="xsd:boolean"/>
+            <xsd:element name="notnull" type="xsd:boolean"/>
+            <xsd:element name="rendererstyle" type="xsd:string" minOccurs="0"/>
+            <xsd:element name="renderercolumnstyle" type="xsd:string" minOccurs="0"/>
+            <xsd:element name="labelstyle" type="xsd:string" minOccurs="0"/>
+            <xsd:element name="labelcolumnstyle" type="xsd:string" minOccurs="0"/>
+            <xsd:element name="labelposition" type="xsd:integer"/>
+            <xsd:element name="rowspan" type="xsd:integer"/>
+            <xsd:element name="columnspan" type="xsd:integer"/>
+            <xsd:element name="newrow" type="xsd:boolean"/>
+            <xsd:element name="dateformat" type="xsd:string" minOccurs="0"/>
+            <xsd:element name="renderer" type="RendererType"/>
+        </xsd:sequence>
+    </xsd:group>
+    <xsd:group name="webformfieldgroup_3">
+        <xsd:sequence>
+            <xsd:element name="customfieldtype" type="xsd:string"/>
+            <xsd:element name="cutomtext" type="xsd:string" minOccurs="0"/>
+            <xsd:element name="rowspan" type="xsd:integer"/>
+            <xsd:element name="columnspan" type="xsd:integer"/>
+            <xsd:element name="newrow" type="xsd:boolean"/>
+        </xsd:sequence>
+    </xsd:group>
+    <xsd:group name="webformsectiongroup">
+        <xsd:sequence>
+            <xsd:element name="showsectionheader" type="xsd:boolean"/>
+            <xsd:element name="collapsible" type="xsd:boolean" minOccurs="0"/>
+            <xsd:element name="instance-separator" type="xsd:string" minOccurs="0"/>
+            <xsd:element name="sectionheader" type="xsd:string"/>
+            <xsd:element ref="image" minOccurs="0"/>
+            <xsd:element name="indentsubfields" type="xsd:integer"/>
+            <xsd:element name="labelstyle" type="xsd:string" minOccurs="0"/>
+            <xsd:element name="backgroundstyle" type="xsd:string" minOccurs="0"/>
+            <xsd:element name="customsectionlayout" type="xsd:boolean"/>
+            <xsd:element ref="noofcolumns" minOccurs="0"/>
+            <xsd:element name="customsectionlayoutstyle" type="xsd:string" minOccurs="0"/>
+            <xsd:element name="minoccurs" type="xsd:integer" minOccurs="0"/>
+            <xsd:element name="maxoccurs" type="xsd:integer" minOccurs="0"/>
+            <xsd:element name="fields" minOccurs="0">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="field" type="WebFormFieldType" minOccurs="0" maxOccurs="unbounded"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:group>
+    <xsd:complexType name="RendererType" abstract="true">
+        <xsd:sequence>
+            <xsd:element name="type" type="xsd:string" minOccurs="0"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:element name="customattributes">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="property" xml:base="xsd:string" minOccurs="0" maxOccurs="unbounded">
+                    <xsd:complexType>
+                    <xsd:simpleContent>
+                        <xsd:extension base="xsd:string">
+                                <xsd:attribute name="name" type="xsd:string"/>
+                                <xsd:attribute name="value" type="xsd:string"/>
+                        </xsd:extension>
+                    </xsd:simpleContent>
+                    </xsd:complexType>
+                </xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:complexType name="TextField">
+        <xsd:complexContent>
+            <xsd:extension base="RendererType">
+                <xsd:sequence>
+                    <xsd:element name="password" type="xsd:boolean" minOccurs="0"/>
+                    <xsd:element name="readonly" type="xsd:boolean" minOccurs="0"/>
+                    <xsd:element name="transform" type="xsd:integer" minOccurs="0"/>
+                    <xsd:element name="width" type="xsd:integer" minOccurs="0"/>
+                    <xsd:element name="max-length" type="xsd:integer" minOccurs="0"/>
+                    <xsd:element name="customlookupname" type="xsd:string" minOccurs="0"/>
+                    <xsd:element ref="customattributes" minOccurs="0"/>
+                </xsd:sequence>
+                <xsd:attribute name="type" type="xsd:string" use="required" fixed="TextField"/>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="TextArea">
+        <xsd:complexContent>
+            <xsd:extension base="RendererType">
+                <xsd:sequence>
+                    <xsd:element name="width" type="xsd:integer" minOccurs="0"/>
+                    <xsd:element name="rows" type="xsd:integer" minOccurs="0"/>
+                    <xsd:element name="readonly" type="xsd:boolean" minOccurs="0"/>
+                    <xsd:element name="transform" type="xsd:integer" minOccurs="0"/>
+                    <xsd:element ref="customattributes" minOccurs="0"/>
+                </xsd:sequence>
+                <xsd:attribute name="type" type="xsd:string" use="required" fixed="TextArea"/>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="Choice">
+        <xsd:complexContent>
+            <xsd:extension base="RendererType">
+                <xsd:sequence>
+                    <xsd:element name="choicerenderer">
+                        <xsd:simpleType>
+                            <xsd:restriction base="xsd:string">
+                                <xsd:enumeration value="ComboChoiceRenderer"/>
+                                <xsd:enumeration value="ListChoiceRenderer"/>
+                                <xsd:enumeration value="RadioChoiceRenderer"/>
+                                <xsd:enumeration value="CheckBoxChoiceRenderer"/>
+                            </xsd:restriction>
+                        </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:choice minOccurs="0">
+                        <xsd:element name="height" type="xsd:integer"/>
+                        <xsd:element name="layoutdirection" type="xsd:integer"/>
+                    </xsd:choice>
+                    <xsd:group ref="choiceOptions" minOccurs="0" maxOccurs="unbounded"/>
+                    <xsd:element name="width" type="xsd:integer" minOccurs="0"/>
+                    <xsd:element name="rows" type="xsd:integer" minOccurs="0"/>
+                    <xsd:element name="readonly" type="xsd:boolean" minOccurs="0"/>
+                    <xsd:element name="transform" type="xsd:integer" minOccurs="0"/>
+                    <xsd:element ref="customattributes" minOccurs="0"/>
+                </xsd:sequence>
+                <xsd:attribute name="type" type="xsd:string" use="required" fixed="Choice"/>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="Label">
+        <xsd:complexContent>
+            <xsd:extension base="RendererType">
+                <xsd:attribute name="type" type="xsd:string" use="required" fixed="Label"/>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="CustomRenderer">
+        <xsd:complexContent>
+            <xsd:extension base="RendererType">
+                <xsd:sequence>
+                    <xsd:element name="width" type="xsd:integer" minOccurs="0"/>
+                    <xsd:element name="displayvalue" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="actualvalue" type="xsd:string" minOccurs="0"/>
+                </xsd:sequence>
+                <xsd:attribute name="type" type="xsd:string" use="required"/>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:group name="choiceOptions">
+        <xsd:sequence>
+            <xsd:element name="displayvalue" type="xsd:string"/>
+            <xsd:element name="actualvalue" type="xsd:string"/>
+        </xsd:sequence>
+    </xsd:group>
+    <xsd:element name="image" type="xsd:string"/>
+    <xsd:element name="noofcolumns">
+        <xsd:complexType>
+            <xsd:simpleContent>
+                <xsd:extension base="xsd:integer">
+                    <xsd:attribute name="column-widths" type="xsd:string"/>
+                </xsd:extension>
+            </xsd:simpleContent>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="columns">
+        <xsd:complexType>
+            <xsd:simpleContent>
+                <xsd:extension base="xsd:integer">
+                    <xsd:attribute name="column-widths" type="xsd:string"/>
+                </xsd:extension>
+            </xsd:simpleContent>
+        </xsd:complexType>
+    </xsd:element>
+    <!-- End Webforms Designer -->
+</xsd:schema>

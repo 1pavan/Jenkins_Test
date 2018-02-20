@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<SwiftMessageFormat name="MT061">
+	<standard-version><![CDATA[SRG 2014]]></standard-version>
+	<standard-release-qualifier>20140520</standard-release-qualifier>
+	<DescriptiveName><![CDATA[Select Status Report for FIN]]></DescriptiveName>
+	<Category><![CDATA[System]]></Category>
+	<Description><![CDATA[This message indicates the SELECT status for each LT at the destination. It is a response to an MT 041
+Select Status Request for FIN.
+
+From: GPA or FIN To: User]]></Description>
+	<SwiftFields>
+		<customizable>true</customizable>
+		<modifiable>true</modifiable>
+		<SwiftMessageType>System</SwiftMessageType>
+		<HeaderAndTrailerType>SWIFT_INPUT_HEADER</HeaderAndTrailerType>
+		<Header>
+		</Header>
+		<Data>
+			<Fields>
+				<SystemField Name="section-number">
+					<description><![CDATA[Sequential section number, beginning with 0001, to identify the position of an individual message in a multiple-section message.]]></description>
+					<datatype>String</datatype>
+					<required>true</required>
+					<SwiftSystemFieldDef Name="section-number" Tag="202">
+						<Format><![CDATA[4!n]]></Format>
+						<Specification><![CDATA[(section-number)]]></Specification>
+						<Description><![CDATA[Sequential section number, beginning with 0001, to identify the position of an individual message in a multiple-section message.]]></Description>
+						<Validations>
+							<Validation>
+								<formula>(ToInt($value) &gt; 0)</formula>
+								<error-code>V07</error-code>
+								<actionmessage>"Invalid Section Number '" + $value + "'"</actionmessage>
+							</Validation>
+						</Validations>
+					</SwiftSystemFieldDef>
+				</SystemField>
+				<SystemField Name="total-sections">
+					<description><![CDATA[Total number of sections in a multi-section message.]]></description>
+					<datatype>String</datatype>
+					<required>true</required>
+					<SwiftSystemFieldDef Name="total-sections" Tag="203">
+						<Format><![CDATA[4!n]]></Format>
+						<Specification><![CDATA[(total-sections)]]></Specification>
+						<Description><![CDATA[Total number of sections in a multi-section message.]]></Description>
+					</SwiftSystemFieldDef>
+				</SystemField>
+				<SystemField Name="value-date-ordering">
+					<description><![CDATA[Value date ordering, where:
+
+a)  Y = on
+
+b)  N = off]]></description>
+					<datatype>String</datatype>
+					<required>true</required>
+					<SwiftSystemFieldDef Name="value-date-ordering" Tag="206">
+						<Format><![CDATA[1!a]]></Format>
+						<Specification><![CDATA[(value-date-ordering)]]></Specification>
+						<Additional-Format><![CDATA[Y/N]]></Additional-Format>
+						<Description><![CDATA[Value date ordering, where:
+
+a)  Y = on
+
+b)  N = off]]></Description>
+						<Validations>
+							<Validation>
+								<formula>In($value, "Y", "N")</formula>
+								<error-code>V08</error-code>
+								<actionmessage>"Invalid Value Date Ordering '" + $value + "'"</actionmessage>
+							</Validation>
+						</Validations>
+					</SwiftSystemFieldDef>
+				</SystemField>
+
+                   <SystemField Name="subset-sharing">
+					<description><![CDATA[Indicates the way in which selected FIN delivery subsets can be shared among multiple logical terminals of a destination, where:
+ 
+                     N = subset sharing is not allowed
+
+                     O = sharing allowed using overflow mechanism
+
+                     L = sharing allowed using load-balancing mechanism
+
+                     If this field is not present, then subset sharing is not allowed.]]></description>
+					<datatype>String</datatype>
+                    <required>false</required>
+					<minoccurs>0</minoccurs>
+					<maxoccurs>1</maxoccurs>
+					<SwiftSystemFieldDef Name="subset-sharing" Tag="348">
+						<Format><![CDATA[1!c]]></Format>
+						<Specification><![CDATA[(subset-sharing)]]></Specification>
+						<Description><![CDATA[Indicates the way in which selected FIN delivery subsets can be shared among multiple logical terminals of a destination, where: 
+
+                          N = subset sharing is not allowed
+
+                          O = sharing allowed using overflow mechanism
+
+                          L = sharing allowed using load-balancing mechanism
+
+                       If this field is not present, then subset sharing is not allowed]]></Description>
+                     <Validations>
+							<Validation>
+								<formula>In($value, "N","O","L")</formula>
+								<error-code>V08</error-code>
+								<actionmessage>"Invalid Subset Sharing value '" + $value + "'.Valid Subset Sharing values are : N,O,L."</actionmessage>
+							</Validation>
+						</Validations>
+					</SwiftSystemFieldDef>
+                   </SystemField>
+
+				<SystemGroup Name="Group">
+					<datatype>Section</datatype>
+					<minoccurs>0</minoccurs>
+					<maxoccurs>-1</maxoccurs>
+					<Fields>
+						<SystemField Name="lt-code">
+							<description><![CDATA[9th character of BIC-12.]]></description>
+							<datatype>String</datatype>
+							<required>true</required>
+							<SwiftSystemFieldDef Name="lt-code" Tag="305">
+								<Format><![CDATA[1!c]]></Format>
+								<Specification><![CDATA[(lt-code)]]></Specification>
+								<Description><![CDATA[9th character of BIC-12.]]></Description>
+							</SwiftSystemFieldDef>
+						</SystemField>
+						<SystemField Name="lt-select-status">
+							<description><![CDATA[LT select status, where:
+
+a)  YN = input only
+
+b)  NY = output only
+
+c)  YY = input/output
+
+d)  NN = no session]]></description>
+							<datatype>String</datatype>
+							<required>true</required>
+							<SwiftSystemFieldDef Name="lt-select-status" Tag="337">
+								<Format><![CDATA[2!a]]></Format>
+								<Specification><![CDATA[(lt-select-status)]]></Specification>
+								<Description><![CDATA[LT select status, where:
+
+a)  YN = input only
+
+b)  NY = output only
+
+c)  YY = input/output
+
+d)  NN = no session]]></Description>
+								<Validations>
+									<Validation>
+										<formula>In($value, "YN", "NY", "YY", "NN")</formula>
+										<error-code>V08</error-code>
+										<actionmessage>"Invalid LT Select Status '" + $value + "'"</actionmessage>
+									</Validation>
+								</Validations>
+							</SwiftSystemFieldDef>
+						</SystemField>
+						<SystemField Name="lt-directed-queue">
+							<description><![CDATA[Select output of messages from the LT-directed queue, where:
+
+a)  Y = yes
+
+b)  N = no]]></description>
+							<datatype>String</datatype>
+							<required>false</required>
+							<SwiftSystemFieldDef Name="lt-directed-queue" Tag="208">
+								<Format><![CDATA[1!a]]></Format>
+								<Specification><![CDATA[(lt-directed-queue)]]></Specification>
+								<Additional-Format><![CDATA[Y/N]]></Additional-Format>
+								<Description><![CDATA[Select output of messages from the LT-directed queue, where:
+
+a)  Y = yes
+
+b)  N = no]]></Description>
+								<Validations>
+									<Validation>
+										<formula>In($value, "Y", "N")</formula>
+										<error-code>V08</error-code>
+										<actionmessage>"Invalid LT Directed Queue '" + $value + "'"</actionmessage>
+									</Validation>
+								</Validations>
+							</SwiftSystemFieldDef>
+						</SystemField>
+						<SystemField Name="delivery-subset-list">
+							<description><![CDATA[Up to 30 delivery subsets can be selected.]]></description>
+							<datatype>String</datatype>
+							<required>false</required>
+							<SwiftSystemFieldDef Name="delivery-subset-list" Tag="338">
+								<Format><![CDATA[(180c)]]></Format>
+								<Specification><![CDATA[(delivery-subset-list)]]></Specification>
+								<Additional-Format><![CDATA[<delivery-subset-name> 6!c[*30]]]></Additional-Format>
+								<Description><![CDATA[Up to 30 delivery subsets can be selected.]]></Description>
+								<Validations>
+									<Validation>
+										<formula>Length($value)%6==0</formula>
+										<error-code>V07</error-code>
+										<actionmessage>"Invalid Delivery Subset List '"+$value+"'"</actionmessage>
+									</Validation>
+								</Validations>
+							</SwiftSystemFieldDef>
+						</SystemField>
+						<SystemField Name="value-date-today">
+							<description><![CDATA[Restricts delivery of messages, where:
+
+a)  Y = yes. Only deliver messages with a value date of today or earlier
+
+b)  N = no. Do not restrict delivery based on value date]]></description>
+							<datatype>String</datatype>
+							<required>false</required>
+							<SwiftSystemFieldDef Name="value-date-today" Tag="116">
+								<Format><![CDATA[1!a]]></Format>
+								<Specification><![CDATA[(value-date-today)]]></Specification>
+								<Description><![CDATA[Restricts delivery of messages, where:
+
+a)  Y = yes. Only deliver messages with a value date of today or earlier
+
+b)  N = no. Do not restrict delivery based on value date]]></Description>
+								<Validations>
+									<Validation>
+										<formula>In($value, "Y", "N")</formula>
+										<error-code>V08</error-code>
+										<actionmessage>"Invalid Value Date Today '" + $value + "'"</actionmessage>
+									</Validation>
+								</Validations>
+							</SwiftSystemFieldDef>
+						</SystemField>
+						<SystemField Name="lt-subsets-shared-flag">
+							<description><![CDATA[Whether an LT allows sharing of its selected FIN delivery subsets with other LTs at the same destination, where:
+
+a)  Y = yes. Destination operating in shared mode using overflow mechanism.]]></description>
+							<datatype>String</datatype>
+							<required>false</required>
+							<SwiftSystemFieldDef Name="lt-subsets-shared-flag" Tag="118">
+								<Format><![CDATA[1!a]]></Format>
+								<Specification><![CDATA[(lt-subsets-shared-flag)]]></Specification>
+								<Description><![CDATA[Whether an LT allows sharing of its selected FIN delivery subsets with other LTs at the same destination, where:
+
+a)  Y = yes. Destination operating in shared mode using overflow mechanism.]]></Description>
+								<Validations>
+									<Validation>
+										<formula>In($value, "Y")</formula>
+										<error-code>V08</error-code>
+										<actionmessage>"Invalid VLT Subsets Shared Flag '" + $value + "'"</actionmessage>
+									</Validation>
+								</Validations>
+							</SwiftSystemFieldDef>
+						</SystemField>
+					</Fields>
+				</SystemGroup>
+			</Fields>
+		</Data>
+		<Trailer>
+		</Trailer>
+	</SwiftFields>
+	<validationrules name="Default">
+		<hdrvalidationrules>
+			<fieldvalidations>
+			</fieldvalidations>
+		</hdrvalidationrules>
+		<datavalidationrules>
+			<fieldvalidations>
+			</fieldvalidations>
+		</datavalidationrules>
+		<tlrvalidationrules>
+			<fieldvalidations>
+			</fieldvalidations>
+		</tlrvalidationrules>
+	</validationrules>
+</SwiftMessageFormat>
+

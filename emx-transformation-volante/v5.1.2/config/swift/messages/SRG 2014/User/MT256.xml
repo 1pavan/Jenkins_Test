@@ -1,0 +1,874 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<SwiftMessageFormat name="MT256">
+	<standard-version><![CDATA[SRG 2014]]></standard-version>
+	<standard-release-qualifier>20140520</standard-release-qualifier>
+	<DescriptiveName><![CDATA[Advice of Non-Payment of Cheques]]></DescriptiveName>
+	<Category><![CDATA[Financial Institution Transfers]]></Category>
+	<Description><![CDATA[This message is sent by the Receiver of one or more MT 206s. It is used to inform the Sender of (a) previously sent MT 206(s) of the non-payment of specified truncated cheques.
+
+This message may only be used to specify dishonoured items that result in reversing a previous payment settlement.]]></Description>
+	<SwiftFields>
+		<customizable>true</customizable>
+		<modifiable>true</modifiable>
+		<SwiftMessageType>User</SwiftMessageType>
+		<max-length>10000</max-length>
+		<HeaderAndTrailerType>SWIFT_INPUT_OUTPUT_HEADER</HeaderAndTrailerType>
+		<Header>
+		</Header>
+		<Data>
+			<Fields>
+				<SwiftSequence Name="A">
+					<Name>A</Name>
+					<Description><![CDATA[Common Elements]]></Description>
+					<Mandatory>true</Mandatory>
+					<Repeating>false</Repeating>
+					<Fields>
+						<SwiftField Name="20">
+							<SwiftFieldDef Name="20">
+								<Generic>false</Generic>
+								<Description><![CDATA[Sender's Reference]]></Description>
+								<Option Name="">
+									<Format><![CDATA[16x]]></Format>
+									<Specification><![CDATA[(Reference)]]></Specification>
+									<Description><![CDATA[Sender's Reference]]></Description>
+								</Option>
+							</SwiftFieldDef>
+							<Repeating>false</Repeating>
+							<Presence>M</Presence>
+							<Options> </Options>
+							<Validations>
+								<SubField Name="Reference">
+									<Validation>
+										<Options> </Options>
+										<ErrorCode>T26</ErrorCode>
+										<Comment><![CDATA[This field must not start or end with a slash '/' and must not contain two consecutive slashes '//' (Error code(s): T26) .]]></Comment>
+										<ValidationPattern Type="T26">
+										</ValidationPattern>
+									</Validation>
+								</SubField>
+							</Validations>
+						</SwiftField>
+						<SwiftField Name="21">
+							<SwiftFieldDef Name="21">
+								<Generic>false</Generic>
+								<Description><![CDATA[Related Message Reference]]></Description>
+								<Option Name="">
+									<Format><![CDATA[16x]]></Format>
+									<Specification><![CDATA[(Reference)]]></Specification>
+									<Description><![CDATA[Related Message Reference]]></Description>
+								</Option>
+							</SwiftFieldDef>
+							<Repeating>false</Repeating>
+							<Presence>O</Presence>
+							<Options> </Options>
+							<Validations>
+								<SubField Name="Reference">
+									<Validation>
+										<Options> </Options>
+										<ErrorCode>T26</ErrorCode>
+										<Comment><![CDATA[This field must not start or end with a slash '/' and must not contain two consecutive slashes '//' (Error code(s): T26) .]]></Comment>
+										<ValidationPattern Type="T26">
+										</ValidationPattern>
+									</Validation>
+								</SubField>
+							</Validations>
+						</SwiftField>
+					</Fields>
+				</SwiftSequence>
+				<SwiftSequence Name="B">
+					<Name>B</Name>
+					<Description><![CDATA[Cheque Details]]></Description>
+					<Mandatory>true</Mandatory>
+					<Repeating>true</Repeating>
+					<Fields>
+						<SwiftField Name="44A">
+							<SwiftFieldDef Name="44">
+								<Generic>false</Generic>
+								<Description><![CDATA[Transaction Reference Number]]></Description>
+								<Option Name="A">
+									<Format><![CDATA[65x]]></Format>
+									<Specification><![CDATA[(Reference)]]></Specification>
+									<Description><![CDATA[Transaction Reference Number]]></Description>
+								</Option>
+							</SwiftFieldDef>
+							<Repeating>false</Repeating>
+							<Presence>M</Presence>
+							<Options>A</Options>
+						</SwiftField>
+						<SwiftField Name="21">
+							<SwiftFieldDef Name="21">
+								<Generic>false</Generic>
+								<Description><![CDATA[Related Message Reference]]></Description>
+								<Option Name="">
+									<Format><![CDATA[16x]]></Format>
+									<Specification><![CDATA[(Reference)]]></Specification>
+									<Description><![CDATA[Related Message Reference]]></Description>
+								</Option>
+							</SwiftFieldDef>
+							<Repeating>false</Repeating>
+							<Presence>O</Presence>
+							<Options> </Options>
+							<Validations>
+								<SubField Name="Reference">
+									<Validation>
+										<Options> </Options>
+										<ErrorCode>T26</ErrorCode>
+										<Comment><![CDATA[This field must not start or end with a slash '/' and must not contain two consecutive slashes '//' (Error code(s): T26) .]]></Comment>
+										<ValidationPattern Type="T26">
+										</ValidationPattern>
+									</Validation>
+								</SubField>
+							</Validations>
+						</SwiftField>
+						<SwiftField Name="21D">
+							<SwiftFieldDef Name="21">
+								<Generic>false</Generic>
+								<Description><![CDATA[Cheque Number]]></Description>
+								<Option Name="D">
+									<Format><![CDATA[35x]]></Format>
+									<Specification><![CDATA[(Cheque Number)]]></Specification>
+									<Description><![CDATA[Cheque Number]]></Description>
+								</Option>
+							</SwiftFieldDef>
+							<Repeating>false</Repeating>
+							<Presence>O</Presence>
+							<Options>D</Options>
+						</SwiftField>
+						<SwiftField Name="21E">
+							<SwiftFieldDef Name="21">
+								<Generic>false</Generic>
+								<Description><![CDATA[Cheque Reference Number]]></Description>
+								<Option Name="E">
+									<Format><![CDATA[35x]]></Format>
+									<Specification><![CDATA[(Reference)]]></Specification>
+									<Description><![CDATA[Cheque Reference Number]]></Description>
+								</Option>
+							</SwiftFieldDef>
+							<Repeating>false</Repeating>
+							<Presence>O</Presence>
+							<Options>E</Options>
+						</SwiftField>
+						<SwiftField Name="23E">
+							<SwiftFieldDef Name="23">
+								<Generic>false</Generic>
+								<Description><![CDATA[Reason for Non-Payment/Dishonour]]></Description>
+								<Option Name="E">
+									<Format><![CDATA[4!c[/30x]]]></Format>
+									<Specification><![CDATA[(Code) (Narrative)]]></Specification>
+									<Description><![CDATA[Reason for Non-Payment/Dishonour]]></Description>
+								</Option>
+							</SwiftFieldDef>
+							<Repeating>false</Repeating>
+							<Presence>M</Presence>
+							<Options>E</Options>
+							<Validations>
+								<SubField Name="Code">
+									<Validation>
+										<Options>E</Options>
+										<ErrorCode>T47</ErrorCode>
+										<Comment><![CDATA[Code must contain one of the following codes (Error code(s): T47) :]]></Comment>
+										<ValidationPattern Type="CODE">
+											<Codes>
+												<Code Name="AMAM">
+													<Description>Amount exceeds the amount limit allowed for this account.</Description>
+												</Code>
+												<Code Name="AMTL">
+													<Description>Amount exceeds the truncation limit as defined in the bilateral agreement (min. or max. amount).</Description>
+												</Code>
+												<Code Name="CLOS">
+													<Description>Closed account.</Description>
+												</Code>
+												<Code Name="COLN">
+													<Description>Error in code line.</Description>
+												</Code>
+												<Code Name="DRAW">
+													<Description>Refer to drawer.</Description>
+												</Code>
+												<Code Name="DUPL">
+													<Description>Duplicate cheque information.</Description>
+												</Code>
+												<Code Name="FRAU">
+													<Description>Fraudulent cheque.</Description>
+												</Code>
+												<Code Name="FROZ">
+													<Description>(Legally) Frozen account.</Description>
+												</Code>
+												<Code Name="FRWD">
+													<Description>Forward dated cheque.</Description>
+												</Code>
+												<Code Name="INCH">
+													<Description>Cheque number invalid.</Description>
+												</Code>
+												<Code Name="INSF">
+													<Description>Insufficient funds.</Description>
+												</Code>
+												<Code Name="INSI">
+													<Description>Insufficient information.</Description>
+												</Code>
+												<Code Name="INVA">
+													<Description>Account number invalid.</Description>
+												</Code>
+												<Code Name="NELI">
+													<Description>Cheques not eligible for truncation.</Description>
+												</Code>
+												<Code Name="NMAT">
+													<Description>Currency and account do not match.</Description>
+												</Code>
+												<Code Name="OTHR">
+													<Description>Other followed by a bilaterally agreed code to specify a reason which is not covered by the above.</Description>
+												</Code>
+												<Code Name="REVO">
+													<Description>Revocation.</Description>
+												</Code>
+												<Code Name="STLD">
+													<Description>Stale cheque, ie, deposited too late relative to the issue date.</Description>
+												</Code>
+												<Code Name="STOP">
+													<Description>Stop payment of a cheque.</Description>
+												</Code>
+											</Codes>
+										</ValidationPattern>
+									</Validation>
+								</SubField>
+							</Validations>
+						</SwiftField>
+						<SwiftField Name="32J">
+							<SwiftFieldDef Name="32">
+								<Generic>false</Generic>
+								<Description><![CDATA[Cheque Amount]]></Description>
+								<Option Name="J">
+									<Format><![CDATA[15d]]></Format>
+									<Specification><![CDATA[(Amount)]]></Specification>
+									<Description><![CDATA[Cheque Amount]]></Description>
+								</Option>
+							</SwiftFieldDef>
+							<Repeating>false</Repeating>
+							<Presence>M</Presence>
+							<Options>J</Options>
+						</SwiftField>
+						<SwiftField Name="37J">
+							<SwiftFieldDef Name="37">
+								<Generic>false</Generic>
+								<Description><![CDATA[Interest Rate]]></Description>
+								<Option Name="J">
+									<Format><![CDATA[12d]]></Format>
+									<Specification><![CDATA[(Rate)]]></Specification>
+									<Description><![CDATA[Interest Rate]]></Description>
+								</Option>
+							</SwiftFieldDef>
+							<Repeating>false</Repeating>
+							<Presence>O</Presence>
+							<Options>J</Options>
+						</SwiftField>
+						<SwiftField Name="71G">
+							<SwiftFieldDef Name="71">
+								<Generic>false</Generic>
+								<Description><![CDATA[Interest Charges]]></Description>
+								<Option Name="G">
+									<Format><![CDATA[3!a15d]]></Format>
+									<Specification><![CDATA[(Currency) (Amount)]]></Specification>
+									<Description><![CDATA[Interest Charges]]></Description>
+								</Option>
+							</SwiftFieldDef>
+							<Repeating>false</Repeating>
+							<Presence>O</Presence>
+							<Options>G</Options>
+							<Validations>
+								<SubField Name="Amount">
+									<Validation>
+										<Options>G</Options>
+										<ErrorCode>C03</ErrorCode>
+										<Comment><![CDATA[The number of digits following the comma must not exceed the maximum number allowed for the specified currency (Error code(s): C03,T40,T43) .]]></Comment>
+										<ValidationPattern Type="Decimal">
+											<currency-field>Currency</currency-field>
+										</ValidationPattern>
+									</Validation>
+								</SubField>
+								<SubField Name="Currency">
+									<Validation>
+										<Options>G</Options>
+										<ErrorCode>T52</ErrorCode>
+										<Comment><![CDATA[Currency must be a valid ISO 4217 currency code (Error code(s): T52) .]]></Comment>
+										<ValidationPattern Type="Currency Code">
+										</ValidationPattern>
+									</Validation>
+								</SubField>
+							</Validations>
+						</SwiftField>
+						<SwiftField Name="71F">
+							<SwiftFieldDef Name="71">
+								<Generic>false</Generic>
+								<Description><![CDATA[Sender's Charges]]></Description>
+								<Option Name="F">
+									<Format><![CDATA[3!a15d]]></Format>
+									<Specification><![CDATA[(Currency) (Amount)]]></Specification>
+									<Description><![CDATA[Sender's Charges]]></Description>
+								</Option>
+							</SwiftFieldDef>
+							<Repeating>false</Repeating>
+							<Presence>O</Presence>
+							<Options>F</Options>
+							<Validations>
+								<SubField Name="Amount">
+									<Validation>
+										<Options>F</Options>
+										<ErrorCode>C03</ErrorCode>
+										<Comment><![CDATA[The number of digits following the comma must not exceed the maximum number allowed for the specified currency (Error code(s): C03,T40,T43) .]]></Comment>
+										<ValidationPattern Type="Decimal">
+											<currency-field>Currency</currency-field>
+										</ValidationPattern>
+									</Validation>
+								</SubField>
+								<SubField Name="Currency">
+									<Validation>
+										<Options>F</Options>
+										<ErrorCode>T52</ErrorCode>
+										<Comment><![CDATA[Currency must be a valid ISO 4217 currency code (Error code(s): T52) .]]></Comment>
+										<ValidationPattern Type="Currency Code">
+										</ValidationPattern>
+									</Validation>
+								</SubField>
+							</Validations>
+						</SwiftField>
+						<SwiftField Name="71H">
+							<SwiftFieldDef Name="71">
+								<Generic>false</Generic>
+								<Description><![CDATA[Issuer's Financial Institution Charges]]></Description>
+								<Option Name="H">
+									<Format><![CDATA[3!a15d]]></Format>
+									<Specification><![CDATA[(Currency) (Amount)]]></Specification>
+									<Description><![CDATA[Issuer's Financial Institution Charges]]></Description>
+								</Option>
+							</SwiftFieldDef>
+							<Repeating>false</Repeating>
+							<Presence>O</Presence>
+							<Options>H</Options>
+							<Validations>
+								<SubField Name="Amount">
+									<Validation>
+										<Options>H</Options>
+										<ErrorCode>C03</ErrorCode>
+										<Comment><![CDATA[The number of digits following the comma must not exceed the maximum number allowed for the specified currency (Error code(s): C03,T40,T43) .]]></Comment>
+										<ValidationPattern Type="Decimal">
+											<currency-field>Currency</currency-field>
+										</ValidationPattern>
+									</Validation>
+								</SubField>
+								<SubField Name="Currency">
+									<Validation>
+										<Options>H</Options>
+										<ErrorCode>T52</ErrorCode>
+										<Comment><![CDATA[Currency must be a valid ISO 4217 currency code (Error code(s): T52) .]]></Comment>
+										<ValidationPattern Type="Currency Code">
+										</ValidationPattern>
+									</Validation>
+								</SubField>
+							</Validations>
+						</SwiftField>
+					</Fields>
+				</SwiftSequence>
+				<SwiftSequence Name="C">
+					<Name>C</Name>
+					<Description><![CDATA[Settlement Details]]></Description>
+					<Mandatory>true</Mandatory>
+					<Repeating>false</Repeating>
+					<Fields>
+						<SwiftField Name="32A">
+							<SwiftFieldDef Name="32">
+								<Generic>false</Generic>
+								<Description><![CDATA[Value Date, Currency Code and Total Amount Claimed]]></Description>
+								<Option Name="A">
+									<Format><![CDATA[6!n3!a15d]]></Format>
+									<Specification><![CDATA[(Date) (Currency) (Amount)]]></Specification>
+									<Description><![CDATA[Value Date, Currency Code and Total Amount Claimed]]></Description>
+								</Option>
+							</SwiftFieldDef>
+							<Repeating>false</Repeating>
+							<Presence>M</Presence>
+							<Options>A</Options>
+							<Validations>
+								<SubField Name="Amount">
+									<Validation>
+										<Options>A</Options>
+										<ErrorCode>C03</ErrorCode>
+										<Comment><![CDATA[The number of digits following the comma must not exceed the maximum number allowed for the specified currency (Error code(s): C03,T40,T43) .]]></Comment>
+										<ValidationPattern Type="Decimal">
+											<currency-field>Currency</currency-field>
+										</ValidationPattern>
+									</Validation>
+								</SubField>
+								<SubField Name="Currency">
+									<Validation>
+										<Options>A</Options>
+										<ErrorCode>T52</ErrorCode>
+										<Comment><![CDATA[Currency must be a valid ISO 4217 currency code (Error code(s): T52) .]]></Comment>
+										<ValidationPattern Type="Currency Code">
+										</ValidationPattern>
+									</Validation>
+								</SubField>
+								<SubField Name="Date">
+									<Validation>
+										<Options>A</Options>
+										<ErrorCode>T50</ErrorCode>
+										<Comment><![CDATA[Date must be a valid date expressed as YYMMDD (Error code(s): T50) .]]></Comment>
+										<ValidationPattern Type="DATE">
+											<Format>yyMMdd</Format>
+                                            <value-date>true</value-date> 
+										</ValidationPattern>
+									</Validation>
+								</SubField>
+							</Validations>
+						</SwiftField>
+						<SwiftField Name="30">
+							<SwiftFieldDef Name="30">
+								<Generic>false</Generic>
+								<Description><![CDATA[Original Value Date]]></Description>
+								<Option Name="">
+									<Format><![CDATA[6!n]]></Format>
+									<Specification><![CDATA[(Date)]]></Specification>
+									<Description><![CDATA[Original Value Date]]></Description>
+								</Option>
+							</SwiftFieldDef>
+							<Repeating>false</Repeating>
+							<Presence>O</Presence>
+							<Options> </Options>
+							<Validations>
+								<SubField Name="Date">
+									<Validation>
+										<Options> </Options>
+										<ErrorCode>T50</ErrorCode>
+										<Comment><![CDATA[Date must be a valid date expressed as YYMMDD (Error code(s): T50) .]]></Comment>
+										<ValidationPattern Type="DATE">
+											<Format>yyMMdd</Format>
+                                            <value-date>true</value-date>
+										</ValidationPattern>
+									</Validation>
+								</SubField>
+							</Validations>
+						</SwiftField>
+						<SwiftField Name="19">
+							<SwiftFieldDef Name="19">
+								<Generic>false</Generic>
+								<Description><![CDATA[Total Cheque Amount]]></Description>
+								<Option Name="">
+									<Format><![CDATA[17d]]></Format>
+									<Specification><![CDATA[(Amount)]]></Specification>
+									<Description><![CDATA[Total Cheque Amount]]></Description>
+								</Option>
+							</SwiftFieldDef>
+							<Repeating>false</Repeating>
+							<Presence>O</Presence>
+							<Options> </Options>
+						</SwiftField>
+						<SwiftField Name="71J">
+							<SwiftFieldDef Name="71">
+								<Generic>false</Generic>
+								<Description><![CDATA[Sum of Interest Charges]]></Description>
+								<Option Name="J">
+									<Format><![CDATA[3!a15d]]></Format>
+									<Specification><![CDATA[(Currency) (Amount)]]></Specification>
+									<Description><![CDATA[Sum of Interest Charges]]></Description>
+								</Option>
+							</SwiftFieldDef>
+							<Repeating>false</Repeating>
+							<Presence>O</Presence>
+							<Options>J</Options>
+							<Validations>
+								<SubField Name="Amount">
+									<Validation>
+										<Options>J</Options>
+										<ErrorCode>C03</ErrorCode>
+										<Comment><![CDATA[The number of digits following the comma must not exceed the maximum number allowed for the specified currency (Error code(s): C03,T40,T43) .]]></Comment>
+										<ValidationPattern Type="Decimal">
+											<currency-field>Currency</currency-field>
+										</ValidationPattern>
+									</Validation>
+								</SubField>
+								<SubField Name="Currency">
+									<Validation>
+										<Options>J</Options>
+										<ErrorCode>T52</ErrorCode>
+										<Comment><![CDATA[Currency must be a valid ISO 4217 currency code (Error code(s): T52) .]]></Comment>
+										<ValidationPattern Type="Currency Code">
+										</ValidationPattern>
+									</Validation>
+								</SubField>
+							</Validations>
+						</SwiftField>
+						<SwiftField Name="71L">
+							<SwiftFieldDef Name="71">
+								<Generic>false</Generic>
+								<Description><![CDATA[Sum of Sender's Charges]]></Description>
+								<Option Name="L">
+									<Format><![CDATA[3!a15d]]></Format>
+									<Specification><![CDATA[(Currency) (Amount)]]></Specification>
+									<Description><![CDATA[Sum of Sender's Charges]]></Description>
+								</Option>
+							</SwiftFieldDef>
+							<Repeating>false</Repeating>
+							<Presence>O</Presence>
+							<Options>L</Options>
+							<Validations>
+								<SubField Name="Amount">
+									<Validation>
+										<Options>L</Options>
+										<ErrorCode>C03</ErrorCode>
+										<Comment><![CDATA[The number of digits following the comma must not exceed the maximum number allowed for the specified currency (Error code(s): C03,T40,T43) .]]></Comment>
+										<ValidationPattern Type="Decimal">
+											<currency-field>Currency</currency-field>
+										</ValidationPattern>
+									</Validation>
+								</SubField>
+								<SubField Name="Currency">
+									<Validation>
+										<Options>L</Options>
+										<ErrorCode>T52</ErrorCode>
+										<Comment><![CDATA[Currency must be a valid ISO 4217 currency code (Error code(s): T52) .]]></Comment>
+										<ValidationPattern Type="Currency Code">
+										</ValidationPattern>
+									</Validation>
+								</SubField>
+							</Validations>
+						</SwiftField>
+						<SwiftField Name="71K">
+							<SwiftFieldDef Name="71">
+								<Generic>false</Generic>
+								<Description><![CDATA[Sum of Issuer's Financial Institution Charges]]></Description>
+								<Option Name="K">
+									<Format><![CDATA[3!a15d]]></Format>
+									<Specification><![CDATA[(Currency) (Amount)]]></Specification>
+									<Description><![CDATA[Sum of Issuer's Financial Institution Charges]]></Description>
+								</Option>
+							</SwiftFieldDef>
+							<Repeating>false</Repeating>
+							<Presence>O</Presence>
+							<Options>K</Options>
+							<Validations>
+								<SubField Name="Amount">
+									<Validation>
+										<Options>K</Options>
+										<ErrorCode>C03</ErrorCode>
+										<Comment><![CDATA[The number of digits following the comma must not exceed the maximum number allowed for the specified currency (Error code(s): C03,T40,T43) .]]></Comment>
+										<ValidationPattern Type="Decimal">
+											<currency-field>Currency</currency-field>
+										</ValidationPattern>
+									</Validation>
+								</SubField>
+								<SubField Name="Currency">
+									<Validation>
+										<Options>K</Options>
+										<ErrorCode>T52</ErrorCode>
+										<Comment><![CDATA[Currency must be a valid ISO 4217 currency code (Error code(s): T52) .]]></Comment>
+										<ValidationPattern Type="Currency Code">
+										</ValidationPattern>
+									</Validation>
+								</SubField>
+							</Validations>
+						</SwiftField>
+						<SwiftField Name="57a">
+							<SwiftFieldDef Name="57">
+								<Generic>false</Generic>
+								<Description><![CDATA[Account With Institution (for Settlement)]]></Description>
+								<Option Name="A">
+									<Format><![CDATA[/1!a([/34x])(CRLF4!a2!a2!c[3!c]) | [/34xCRLF](4!a2!a2!c[3!c])]]></Format>
+									<Specification><![CDATA[(CreditDebit)(Party Identifier)(Identifier Code) | (Party Identifier)(Identifier Code)]]></Specification>
+									<Description><![CDATA[Account With Institution (for Settlement)]]></Description>
+								</Option>
+								<Option Name="C">
+									<Format><![CDATA[/34x]]></Format>
+									<Specification><![CDATA[(Party Identifier)]]></Specification>
+									<Description><![CDATA[Account With Institution (for Settlement)]]></Description>
+								</Option>
+								<Option Name="D">
+									<Format><![CDATA[/1!a([/34x])(CRLF4*35x) | ([/34xCRLF])(4*35x)]]></Format>
+									<Specification><![CDATA[(CreditDebit)(Party Identifier)(Name & Address)|(Party Identifier)(Name & Address)]]></Specification>
+									<Description><![CDATA[Account With Institution (for Settlement)]]></Description>
+								</Option>
+							</SwiftFieldDef>
+							<Repeating>false</Repeating>
+							<Presence>O</Presence>
+							<Options>A, C, D</Options>
+							<Validations>
+								<SubField Name="Identifier_Code">
+									<Validation>
+										<Options>A</Options>
+										<ErrorCode>T27,T28,T29,T45</ErrorCode>
+										<Comment><![CDATA[Identifier Code must be a registered BIC or BEI (Error code(s): T27,T28,T29,T45)]]></Comment>
+										<ValidationPattern Type="BIC">
+										</ValidationPattern>
+									</Validation>
+									<Validation>
+										<Options>A</Options>
+										<ErrorCode>C05</ErrorCode>
+										<Comment><![CDATA[Identifier Code must not be a BEI. Please refer to the latest version of the BIC Directory - Corporations for more information about BEIs. This error code applies to all types of BICs referenced in a FIN message including SWIFT BICs, non-SWIFT BICs, Masters, Synonyms, Live destinations and Test & Training destinations . (Error code(s): C05) .]]></Comment>
+										<ValidationPattern Type="C05">
+										</ValidationPattern>
+									</Validation>
+								</SubField>
+								<SubField Name="CreditDebit">
+										<Validation>
+											<Options>A, D</Options>
+											<ErrorCode>T51</ErrorCode>
+											<Comment><![CDATA[CreditDebit must contain the following codes (Error Code:T51)]]></Comment>
+											<ValidationPattern xsi:type="CODE" Type="CODE">
+												<Type>CODE</Type>
+												<Codes>
+													<Code Name="C">
+														<DetailedName>Credit</DetailedName>
+													</Code>
+													<Code Name="D">
+														<DetailedName>Debit</DetailedName>
+													</Code>
+												</Codes>
+										</ValidationPattern>
+									</Validation>
+								</SubField>								
+							</Validations>
+						</SwiftField>
+						<SwiftField Name="58B">
+							<SwiftFieldDef Name="58">
+								<Generic>false</Generic>
+								<Description><![CDATA[Beneficiary Institution's Account (for Settlement)]]></Description>
+								<Option Name="B">
+									<Format><![CDATA[/1!a[/34x](CRLF35x) | /1!a[/34x] | [/34xCRLF]35x | /34x]]></Format>
+									<Specification><![CDATA[(CreditDebit) (Party Identifier) (Location) | (CreditDebit)(Party Identifier) |(Party Identifier) (Location) | (Party Identifier)]]></Specification>
+									<Description><![CDATA[Beneficiary Institution's Account (for Settlement)]]></Description>
+								</Option>
+							</SwiftFieldDef>
+							<Repeating>false</Repeating>
+							<Presence>O</Presence>
+							<Options>B</Options>
+							<Validations>
+							<SubField Name="CreditDebit">
+										<Validation>
+											<Options>B</Options>
+											<ErrorCode>T51</ErrorCode>
+											<Comment><![CDATA[CreditDebit must contain the following codes (Error Code:T51)]]></Comment>
+											<ValidationPattern xsi:type="CODE" Type="CODE">
+												<Type>CODE</Type>
+												<Codes>
+													<Code Name="C">
+														<DetailedName>Credit</DetailedName>
+													</Code>
+													<Code Name="D">
+														<DetailedName>Debit</DetailedName>
+													</Code>
+												</Codes>
+										</ValidationPattern>
+									</Validation>
+								</SubField>
+							</Validations>
+						</SwiftField>
+					</Fields>
+				</SwiftSequence>
+			</Fields>
+		</Data>
+		<Trailer>
+		</Trailer>
+	</SwiftFields>
+	<validationrules name="Default">
+		<hdrvalidationrules>
+			<fieldvalidations>
+				<fieldvalidation>
+					<name>U09</name>
+					<formula><![CDATA[if($this.Header.GetFieldIndex("User_Header") != -1) {
+    def userHeader = $this.Header.GetSection("User_Header");
+    if(userHeader.$size > 0 && userHeader[0].IsNotNull("Validation_Flag")) {
+        return false;
+    }
+}
+return true;
+]]></formula>
+					<severity>error</severity>
+					<cascade>true</cascade>
+					<error-code>U09</error-code>
+					<actionmessage><![CDATA["User has used tag 119 in a message that is not a candidate for special processing"]]></actionmessage>
+				</fieldvalidation>
+			</fieldvalidations>
+		</hdrvalidationrules>
+		<datavalidationrules>
+			<fieldvalidations>
+				<fieldvalidation>
+					<name>C1</name>
+					<fieldname>B</fieldname>
+					<comment><![CDATA[C1
+If field 37J is present, then field 71G must also be present]]></comment>
+					<formula><![CDATA[If($value.F37J.$size>0, $value.F71G.$size>0, true);]]></formula>
+					<severity>error</severity>
+					<cascade>true</cascade>
+					<error-code>E25</error-code>
+					<actionmessage><![CDATA["If field 37J is present, then field 71G must also be present (Error code(s): E25)."]]></actionmessage>
+				</fieldvalidation>
+				<fieldvalidation>
+					<name>C2</name>
+					<fieldname>C.71L.Amount</fieldname>
+					<comment><![CDATA[C2
+The amount specified in field 71L in sequence C must be equal to the sum of all occurrences of field 71F in sequence B.]]></comment>
+					<formula><![CDATA[If(SecExists(B, "F71F"), 
+   Abs($value - SecSumDouble(B, "F71F.Amount")) < 1.0E-4, 
+   true)]]></formula>
+					<severity>error</severity>
+					<cascade>true</cascade>
+					<error-code>E26</error-code>
+					<actionmessage><![CDATA["The amount specified in field 71L in sequence C must be equal to the sum of all occurrences of field 71F in sequence B (Error code(s): E26)"]]></actionmessage>
+				</fieldvalidation>
+				<fieldvalidation>
+					<name>C3</name>
+					<fieldname>C.71J.Amount</fieldname>
+					<comment><![CDATA[C3
+The amount specified in field 71J in sequence C must be equal to the sum of all occurrences of field 71G in sequence B.]]></comment>
+					<formula><![CDATA[If(SecExists(B, "F71G"), 
+   Abs($value - SecSumDouble(B, "F71G.Amount")) < 1.0E-4, 
+   true)]]></formula>
+					<severity>error</severity>
+					<cascade>true</cascade>
+					<error-code>E27</error-code>
+					<actionmessage><![CDATA["The amount specified in field 71J in sequence C must be equal to the sum of all occurrences of field 71G in sequence B (Error code(s): E27)"]]></actionmessage>
+				</fieldvalidation>
+				<fieldvalidation>
+					<name>C4</name>
+					<comment><![CDATA[C4
+The currency code in the amount fields (71F, 71G, 71H, 71J, 71K, 71L, 32A) must be the same for all occurrences of these fields in the message .]]></comment>
+					<formula><![CDATA[def currrency = C[0].F32A[0].Currency;
+foreach(def b in B) {
+    if(b.F71F.$size > 0 && b.F71F[0].Currency != currrency) {
+        return false;
+    }
+    if(b.F71G.$size > 0 && b.F71G[0].Currency != currrency) {
+        return false;
+    }
+    if(b.F71H.$size > 0 && b.F71H[0].Currency != currrency) {
+        return false;
+    }
+}
+return (C[0].F71J.$size == 0 || C[0].F71J[0].Currency == currrency) && 
+         (C[0].F71K.$size == 0 || C[0].F71K[0].Currency == currrency) && 
+         (C[0].F71L.$size == 0 || C[0].F71L[0].Currency == currrency);
+]]></formula>
+					<severity>error</severity>
+					<cascade>true</cascade>
+					<error-code>C02</error-code>
+					<actionmessage><![CDATA["The currency code in the amount fields (71F, 71G, 71H, 71J, 71K, 71L, 32A) must be the same for all occurrences of these fields in the message (Error code(s): C02)."]]></actionmessage>
+				</fieldvalidation>
+				<fieldvalidation>
+					<name>C5</name>
+					<fieldname>C.32A.Amount</fieldname>
+					<comment><![CDATA[C5
+If the amount in field 32A of sequence C is equal to the sum of the amounts in the fields 32J of sequence B, then field 19 must not be present; otherwise (that is the amount in field 32A of sequence C is not equal to the sum of the amounts in fields 32J of sequence B), field 19 must be present (Error code(s): D80).]]></comment>
+					<formula><![CDATA[If(Abs($value - SecSumDouble(B, "F32J.Amount")) < 1.0E-4, 
+   C[0].F19.$size == 0, 
+   C[0].F19.$size > 0)]]></formula>
+					<severity>error</severity>
+					<cascade>true</cascade>
+					<error-code>D80</error-code>
+					<actionmessage><![CDATA["If the amount in field 32A of sequence C is equal to the sum of the amounts in the fields 32J of sequence B, then field 19 must not be present; otherwise (that is the amount in field 32A of sequence C is not equal to the sum of the amounts in fields 32J of sequence B), field 19 must be present (Error code(s): D80)."]]></actionmessage>
+				</fieldvalidation>
+				<fieldvalidation>
+					<name>C6</name>
+					<fieldname>C.19.Amount</fieldname>
+					<comment><![CDATA[C6
+If charges are included, field 19 must be present. It must contain the sum of amounts of all fields 32J in sequence B.]]></comment>
+					<formula><![CDATA[Abs($value - SecSumDouble(B, "F32J.Amount")) < 1.0E-4]]></formula>
+					<severity>error</severity>
+					<cascade>true</cascade>
+					<error-code>C01</error-code>
+					<actionmessage><![CDATA["If charges are included, field 19 must be present. It must contain the sum of amounts of all fields 32J in sequence B (Error code(s): C01)"]]></actionmessage>
+				</fieldvalidation>
+				<fieldvalidation>
+					<name>C7</name>
+					<comment><![CDATA[C7
+Field 21 must be present either in sequence A, or in all occurrences of sequence B.]]></comment>
+					<formula><![CDATA[If(A[0].F21.$size > 0, !SecExists(B, "F21"), SecExistsInAll(B, "F21"))]]></formula>
+					<severity>error</severity>
+					<cascade>true</cascade>
+					<error-code>E28</error-code>
+					<actionmessage><![CDATA["Field 21 must be present either in sequence A, or in all occurrences of sequence B (Error code(s): E28)."]]></actionmessage>
+				</fieldvalidation>
+				<fieldvalidation>
+					<name>C8</name>
+					<comment><![CDATA[C8
+If field 71F is present in any occurrence of sequence B, then field 71L must be present in sequence C. Otherwise, field 71L is not allowed]]></comment>
+					<formula><![CDATA[If(SecExists(B, "F71F"), C[0].F71L.$size > 0, C[0].F71L.$size == 0)]]></formula>
+					<severity>error</severity>
+					<cascade>true</cascade>
+					<error-code>E29</error-code>
+					<actionmessage><![CDATA["If field 71F is present in any occurrence of sequence B, then field 71L must be present in sequence C. Otherwise, field 71L is not allowed (Error code(s): E29)"]]></actionmessage>
+				</fieldvalidation>
+				<fieldvalidation>
+					<name>C9</name>
+					<comment><![CDATA[C9
+If field 71G is present in any occurrence of sequence B, then field 71J must be present in sequence C. Otherwise, field 71J is not allowed.]]></comment>
+					<formula><![CDATA[If(SecExists(B, "F71G"), C[0].F71J.$size > 0, C[0].F71J.$size == 0)]]></formula>
+					<severity>error</severity>
+					<cascade>true</cascade>
+					<error-code>E30</error-code>
+					<actionmessage><![CDATA["If field 71G is present in any occurrence of sequence B, then field 71J must be present in sequence C. Otherwise, field 71J is not allowed (Error code(s): E30)"]]></actionmessage>
+				</fieldvalidation>
+				<fieldvalidation>
+					<name>C10</name>
+					<comment><![CDATA[C10
+If field 71H is present in any occurrence of sequence B, then field 71K must be present in sequence C. Otherwise, field 71K is not allowed.]]></comment>
+					<formula><![CDATA[If(SecExists(B, "F71H"), C[0].F71K.$size > 0, C[0].F71K.$size == 0)]]></formula>
+					<severity>error</severity>
+					<cascade>true</cascade>
+					<error-code>E31</error-code>
+					<actionmessage><![CDATA["If field 71H is present in any occurrence of sequence B, then field 71K must be present in sequence C. Otherwise, field 71K is not allowed (Error code(s): E31)"]]></actionmessage>
+				</fieldvalidation>
+				<fieldvalidation>
+					<name>C11</name>
+					<fieldname>C.71K.Amount</fieldname>
+					<comment><![CDATA[C11
+The amount specified in field 71K in sequence C must be equal to the sum of all occurrences of field 71H in sequence B.]]></comment>
+					<formula><![CDATA[If(SecExists(B, "F71H"), 
+   Abs($value - SecSumDouble(B, "F71H.Amount")) < 1.0E-4, 
+   true)]]></formula>
+					<severity>error</severity>
+					<cascade>true</cascade>
+					<error-code>E32</error-code>
+					<actionmessage><![CDATA["The amount specified in field 71K in sequence C must be equal to the sum of all occurrences of field 71H in sequence B (Error code(s): E27)"]]></actionmessage>
+				</fieldvalidation>
+				<fieldvalidation>
+					<name>FB-23E-A</name>
+					<fieldname>B.23E.Narrative</fieldname>
+					<comment><![CDATA[FB-23E-A
+Narrative may only be used in combination with the code OTHR.
+]]></comment>
+					<formula><![CDATA[B.F23E.Code == "OTHR"]]></formula>
+					<severity>error</severity>
+					<cascade>true</cascade>
+					<error-code>D81</error-code>
+					<actionmessage><![CDATA["Narrative may only be used in combination with the code OTHR (Error code(s): D81)."]]></actionmessage>
+				</fieldvalidation>
+				<fieldvalidation>
+					<name>FB-32J-A</name>
+					<fieldname>B.32J.Amount</fieldname>
+					<comment><![CDATA[FB-32J-A
+The number of digits following the comma must not exceed the maximum number allowed for the currency specified in field 32A
+]]></comment>
+					<formula><![CDATA[isValidDecimals(C[0].F32A[0].Currency,$value);]]></formula>
+					<severity>error</severity>
+					<cascade>true</cascade>
+					<error-code>C03</error-code>
+					<actionmessage><![CDATA["The number of digits following the comma must not exceed the maximum number allowed for the currency specified in field 32A (Error code(s): C03)"]]></actionmessage>
+				</fieldvalidation>
+				<fieldvalidation>
+					<name>FC-19</name>
+					<fieldname>C.19.Amount</fieldname>
+					<comment><![CDATA[FC-19
+The number of digits following the comma must not exceed the maximum number allowed for the currency specified in field 32A
+]]></comment>
+					<formula><![CDATA[isValidDecimals(C[0].F32A[0].Currency,$value);]]></formula>
+					<severity>error</severity>
+					<cascade>true</cascade>
+					<error-code>C03</error-code>
+					<actionmessage><![CDATA["The number of digits following the comma must not exceed the maximum number allowed for the currency specified in field 32A (Error code(s): C03)"]]></actionmessage>
+				</fieldvalidation>
+			</fieldvalidations>
+		</datavalidationrules>
+		<tlrvalidationrules>
+			<fieldvalidations>
+			</fieldvalidations>
+		</tlrvalidationrules>
+	</validationrules>
+</SwiftMessageFormat>
+

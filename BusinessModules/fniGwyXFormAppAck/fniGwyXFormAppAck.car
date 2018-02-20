@@ -1,0 +1,3290 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<cartridge xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="5.2.1" name="fniGwyXFormSwfAck" type="Cartridge">
+	<version>1.0</version>
+	<private>
+		<summary>
+			<service name="fniGwyXFormAppAckConfig" version="1.0" type="Internal Message">
+			</service>
+			<service name="fniGwyXFormAppAckFlow" version="1.0" type="Message Flow">
+			</service>
+			<service name="pModuleStrAck" version="1.0" type="Internal Message">
+			</service>
+			<function name="strstr"/>
+			<function name="secAddorGetElement"/>
+			<function name="getAckType"/>
+			<function name="initBMDEF"/>
+			<function name="bmProcessACK"/>
+			<function name="createFinOrGpaAckOnDemand"/>
+			<function name="getDataFeedHeaders"/>
+			<function name="setupOnDemand"/>
+			<function name="createFinOrGpaNFeackOnDemand"/>
+			<function name="addHeaderAndHistory"/>
+		</summary>
+	</private>
+	<references type="References">
+		<reference>
+			<type>Cartridge</type>
+			<relative-path>..\CommonFunctions.car</relative-path>
+			<absolute-path>E:\Projects\12-10-17\EMX_FULL\EMX_FULL\BusinessModules\CommonFunctions.car</absolute-path>
+		</reference>
+	</references>
+	<internalmessage name="fniGwyXFormAppAckConfig" type="InternalMessage">
+		<version>1.0</version>
+		<normalizedformat>
+			<xpath-namespaces>
+				<namespace value="http://www.w3.org/2005/xpath-functions" prefix="fn"/>
+				<namespace value="http://www.w3.org/2001/XMLSchema" prefix="xs"/>
+			</xpath-namespaces>
+			<fields>
+				<field xsi:type="InternalMessageFieldType">
+					<name>BusinessModuleName</name>
+					<type>String</type>
+					<notnull>false</notnull>
+					<length>-1</length>
+				</field>
+				<field xsi:type="InternalMessageFieldType">
+					<name>ApplicationHost</name>
+					<type>String</type>
+					<notnull>false</notnull>
+					<length>-1</length>
+				</field>
+				<field xsi:type="InternalMessageFieldType">
+					<name>Application</name>
+					<type>String</type>
+					<notnull>true</notnull>
+					<length>-1</length>
+				</field>
+				<field xsi:type="InternalMessageFieldType">
+					<name>NoAck</name>
+					<type>String</type>
+					<notnull>true</notnull>
+					<length>-1</length>
+				</field>
+				<field xsi:type="InternalMessageFieldType">
+					<name>MessageFormat</name>
+					<type>String</type>
+					<notnull>true</notnull>
+					<length>-1</length>
+				</field>
+				<field xsi:type="InternalMessageFieldType">
+					<name>SupportOBI</name>
+					<type>String</type>
+					<notnull>true</notnull>
+					<length>-1</length>
+				</field>
+				<field xsi:type="InternalMessageFieldType">
+					<name>ForwardFeAck</name>
+					<type>String</type>
+					<notnull>true</notnull>
+					<length>-1</length>
+				</field>
+				<field xsi:type="InternalMessageFieldType">
+					<name>CODOrCOA</name>
+					<type>String</type>
+					<notnull>true</notnull>
+					<length>-1</length>
+				</field>
+				<field xsi:type="InternalMessageFieldType">
+					<name>LTerm</name>
+					<type>String</type>
+					<notnull>false</notnull>
+					<length>-1</length>
+				</field>
+				<field xsi:type="InternalMessageFieldType">
+					<name>Gateway</name>
+					<type>String</type>
+					<notnull>false</notnull>
+					<length>-1</length>
+				</field>
+				<field xsi:type="InternalMessageFieldType">
+					<name>EnvCode</name>
+					<type>String</type>
+					<notnull>false</notnull>
+					<length>-1</length>
+				</field>
+				<field xsi:type="InternalMessageFieldType">
+					<name>GatewayContainerPrefix</name>
+					<type>String</type>
+					<notnull>false</notnull>
+					<length>-1</length>
+				</field>
+				<field xsi:type="InternalMessageFieldType">
+					<name>NumberOfOnDemandMQs</name>
+					<type>String</type>
+					<notnull>false</notnull>
+					<length>-1</length>
+				</field>
+				<field xsi:type="InternalMessageFieldType">
+					<name>OnDemandReport</name>
+					<type>String</type>
+					<notnull>false</notnull>
+					<length>-1</length>
+				</field>
+				<field xsi:type="InternalMessageFieldType">
+					<name>LinePrefix</name>
+					<type>String</type>
+					<notnull>false</notnull>
+					<length>-1</length>
+				</field>
+				<field xsi:type="InternalMessageFieldType">
+					<name>ShareLTInfoOnly</name>
+					<type>String</type>
+					<notnull>false</notnull>
+					<length>-1</length>
+				</field>
+				<field xsi:type="InternalMessageFieldType">
+					<name>ProcessPullCommand</name>
+					<type>String</type>
+					<notnull>false</notnull>
+					<length>-1</length>
+				</field>
+				<field xsi:type="InternalMessageFieldType">
+					<name>PassAreaKey</name>
+					<type>String</type>
+					<notnull>false</notnull>
+					<length>-1</length>
+				</field>
+				<field xsi:type="InternalMessageFieldType">
+					<name>ForwardDupMsg</name>
+					<type>String</type>
+					<notnull>false</notnull>
+					<length>-1</length>
+				</field>
+				<field xsi:type="InternalMessageFieldType">
+					<name>CreateSBlock</name>
+					<type>String</type>
+					<notnull>false</notnull>
+					<length>-1</length>
+				</field>
+				<field xsi:type="InternalMessageFieldType">
+					<name>AppendHistory</name>
+					<type>String</type>
+					<notnull>false</notnull>
+					<length>-1</length>
+				</field>
+				<field xsi:type="InternalMessageFieldType">
+					<name>ProcessIBR</name>
+					<type>String</type>
+					<notnull>false</notnull>
+					<length>-1</length>
+				</field>
+				<field xsi:type="InternalMessageFieldType">
+					<name>IBRRouting</name>
+					<type>String</type>
+					<notnull>false</notnull>
+					<length>-1</length>
+				</field>
+				<field xsi:type="InternalMessageFieldType">
+					<name>DedicatedIBRChannel</name>
+					<type>String</type>
+					<notnull>false</notnull>
+					<length>-1</length>
+				</field>
+				<field xsi:type="InternalMessageFieldType">
+					<name>MTSIBRSource</name>
+					<type>String</type>
+					<notnull>false</notnull>
+					<length>-1</length>
+				</field>
+				<field xsi:type="InternalMessageFieldType">
+					<name>SupportCIBC</name>
+					<type>String</type>
+					<notnull>false</notnull>
+					<length>-1</length>
+				</field>
+				<field xsi:type="InternalMessageFieldType">
+					<name>SrcAppList</name>
+					<type>String</type>
+					<notnull>false</notnull>
+					<length>-1</length>
+				</field>
+				<field xsi:type="InternalMessageFieldType">
+					<name>ConvertBic8</name>
+					<type>String</type>
+					<notnull>false</notnull>
+					<length>-1</length>
+				</field>
+			</fields>
+		</normalizedformat>
+		<validationrules name="Default" type="ValidationRules">
+		</validationrules>
+		<elementproperties>
+			<propertymap>
+				<property name="codegen.java.properties">
+					<value>
+						<propertymap type="com.tplus.transform.design.PropertiesDef">
+							<property name="Java Package Name" value="com.transform.internal.%e"/>
+							<property name="Jar Name" value="%c.jar"/>
+							<property name="Manifest Entries" value="transformrt.jar"/>
+							<property name="Data Source" value=""/>
+						</propertymap>
+					</value>
+				</property>
+			</propertymap>
+		</elementproperties>
+	</internalmessage>
+	<messageflow name="fniGwyXFormAppAckFlow" type="MessageFlow">
+		<version>1.0</version>
+		<transaction>NotRequired</transaction>
+		<variables>
+			<xpath-namespaces>
+				<namespace value="http://www.w3.org/2005/xpath-functions" prefix="fn"/>
+				<namespace value="http://www.w3.org/2001/XMLSchema" prefix="xs"/>
+				<namespace value="java:com.tplus.transform.runtime.swift.SwiftXPathFunctions" prefix="swift"/>
+			</xpath-namespaces>
+			<fields>
+				<field>
+					<name>rawIn</name>
+					<type>RawMessage</type>
+					<notnull>true</notnull>
+					<variabletype>INPUT</variabletype>
+				</field>
+				<field>
+					<name>fniGwyXFormSwfOsnConfig</name>
+					<type>DataObject</type>
+					<minoccurs>1</minoccurs>
+					<maxoccurs>1</maxoccurs>
+					<variabletype>INPUT</variabletype>
+					<message>fniGwyXFormAppAckConfig</message>
+					<fields>
+					</fields>
+				</field>
+				<field>
+					<name>rawOutSend</name>
+					<type>RawMessage</type>
+					<notnull>false</notnull>
+					<variabletype>LOCAL</variabletype>
+				</field>
+				<field>
+					<name>pGwyStrObj</name>
+					<type>DataObject</type>
+					<minoccurs>0</minoccurs>
+					<maxoccurs>1</maxoccurs>
+					<variabletype>LOCAL</variabletype>
+					<message>pGwyStr</message>
+					<fields>
+					</fields>
+				</field>
+				<field>
+					<name>pModuleStrObj</name>
+					<type>DataObject</type>
+					<minoccurs>0</minoccurs>
+					<maxoccurs>1</maxoccurs>
+					<variabletype>LOCAL</variabletype>
+					<message>pModuleStrAck</message>
+					<fields>
+					</fields>
+				</field>
+				<field>
+					<name>rawOut</name>
+					<type>RawMessage</type>
+					<notnull>false</notnull>
+					<variabletype>OUTPUT</variabletype>
+				</field>
+			</fields>
+		</variables>
+		<additional-properties>
+			<property name="main-flow" value="false"/>
+		</additional-properties>
+		<flowelement name="Start1" uid="dab9c09b-2b60-41f3-8abe-72a3d3998dde" type="Start" xsi:type="Start" >
+			<label>Start</label>
+			<description><![CDATA[]]></description>
+			<visual>
+				<position x="375" y="38"/>
+			</visual>
+		</flowelement>
+		<flowelement name="Stop1" uid="4c032c8f-e315-44e8-b036-6ba89822f02f" type="Stop" xsi:type="Stop" >
+			<label>Stop</label>
+			<description><![CDATA[]]></description>
+			<visual>
+				<position x="379" y="353"/>
+			</visual>
+		</flowelement>
+		<flowelement name="Custom1" uid="fa9a226c-7b09-45ac-a51e-d4b4eabd57bb" type="Custom" xsi:type="Custom" >
+			<label>Input To Output</label>
+			<description><![CDATA[]]></description>
+			<code><![CDATA[def rawIntxt = rawIn.toText();
+rawOut = bmProcessACK(pGwyStrObj, pModuleStrObj, fniGwyXFormSwfOsnConfig, rawIntxt).ToRawMessage();
+
+]]></code>
+			<visual>
+				<position x="374" y="281"/>
+			</visual>
+		</flowelement>
+		<flowelement name="Create1" uid="bce3acac-cfbf-4cee-8118-29b2e3d4a087" type="Create" xsi:type="Create" >
+			<label>%a %n</label>
+			<description><![CDATA[]]></description>
+			<out>pGwyStrObj</out>
+			<message>pGwyStr</message>
+			<visual>
+				<position x="375" y="105"/>
+			</visual>
+		</flowelement>
+		<flowelement name="Create2" uid="17384a91-8ec1-46d5-8608-6e0ca0c7bb2d" type="Create" xsi:type="Create" >
+			<label>%a %n</label>
+			<description><![CDATA[]]></description>
+			<out>pModuleStrObj</out>
+			<message>pModuleStrAck</message>
+			<visual>
+				<position x="374" y="193"/>
+			</visual>
+		</flowelement>
+		<link type="Default" xsi:type="Default">
+			<outputport uid="dab9c09b-2b60-41f3-8abe-72a3d3998dde" portindex="0"/>
+			<inputport uid="bce3acac-cfbf-4cee-8118-29b2e3d4a087" portindex="0"/>
+			<edge-type>DIRECT</edge-type>
+		</link>
+		<link type="Default" xsi:type="Default">
+			<outputport uid="bce3acac-cfbf-4cee-8118-29b2e3d4a087" portindex="1"/>
+			<inputport uid="17384a91-8ec1-46d5-8608-6e0ca0c7bb2d" portindex="0"/>
+			<edge-type>DIRECT</edge-type>
+		</link>
+		<link type="Default" xsi:type="Default">
+			<outputport uid="17384a91-8ec1-46d5-8608-6e0ca0c7bb2d" portindex="1"/>
+			<inputport uid="fa9a226c-7b09-45ac-a51e-d4b4eabd57bb" portindex="0"/>
+			<edge-type>DIRECT</edge-type>
+		</link>
+		<link type="Default" xsi:type="Default">
+			<outputport uid="fa9a226c-7b09-45ac-a51e-d4b4eabd57bb" portindex="1"/>
+			<inputport uid="4c032c8f-e315-44e8-b036-6ba89822f02f" portindex="0"/>
+			<edge-type>DIRECT</edge-type>
+		</link>
+		<visual>
+			<bounds x="338" y="25" width="78" height="342"/>
+		</visual>
+		<elementproperties>
+			<propertymap>
+				<property name="codegen.java.properties">
+					<value>
+						<propertymap type="com.tplus.transform.design.PropertiesDef">
+							<property name="Java Package Name" value="com.transform.flow.%e"/>
+							<property name="Jar Name" value="%c.jar"/>
+							<property name="Manifest Entries" value="transformrt.jar"/>
+							<property name="Data Source" value=""/>
+							<property name="Generate MDB" value="false"/>
+						</propertymap>
+					</value>
+				</property>
+			</propertymap>
+		</elementproperties>
+	</messageflow>
+	<resources type="Resources">
+		<Locales active="">
+		</Locales>
+		<resourcefields>
+			<resourcefield>
+				<name>APPHOST</name>
+				<type>String</type>
+				<value><![CDATA[ApplicationHost]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>LTERM</name>
+				<type>String</type>
+				<value><![CDATA[LTerm]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>GATEWAY</name>
+				<type>String</type>
+				<value><![CDATA[Gateway]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>EXECUTELOGOUTCOMMAND</name>
+				<type>String</type>
+				<value><![CDATA[ExecuteLogoutCommand]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>GWYCTNPREFIX</name>
+				<type>String</type>
+				<value><![CDATA[GatewayContainerPrefix]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>RMTQMGR</name>
+				<type>String</type>
+				<value><![CDATA[RemoteQueueManager]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>SCONLY</name>
+				<type>String</type>
+				<value><![CDATA[SessionControlOnly]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>FIN3</name>
+				<type>String</type>
+				<value><![CDATA[SupportFin3]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>KERNALVERSION</name>
+				<type>String</type>
+				<value><![CDATA[KernalVersion]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>ICCNUMBER</name>
+				<type>String</type>
+				<value><![CDATA[ICCNumber]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>ISNSEQ</name>
+				<type>String</type>
+				<value><![CDATA[{ISN:]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>REPLYQUEUELIST</name>
+				<type>String</type>
+				<value><![CDATA[ReplyQueueList]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>REPLYQUEUENAME</name>
+				<type>String</type>
+				<value><![CDATA[ReplyQueueName]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>REPLYQUEUEMANAGER</name>
+				<type>String</type>
+				<value><![CDATA[ReplyQueueManager]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>MAXREPLYQUEUE</name>
+				<type>Integer</type>
+				<value><![CDATA[10]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>MAXCORRDATALEN</name>
+				<type>Integer</type>
+				<value><![CDATA[512]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>MAXERRORLEN</name>
+				<type>Integer</type>
+				<value><![CDATA[1024]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>MAXIBRLTS</name>
+				<type>Integer</type>
+				<value><![CDATA[256]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>CORRELATION_DATA</name>
+				<type>String</type>
+				<value><![CDATA[{MSGTRACE:]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>SBLOCK</name>
+				<type>String</type>
+				<value><![CDATA[{S:]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>MERVA</name>
+				<type>Integer</type>
+				<value><![CDATA[2]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>MSGRTR</name>
+				<type>Integer</type>
+				<value><![CDATA[2]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>LTERMLEN</name>
+				<type>Integer</type>
+				<value><![CDATA[9]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>PLOGIN</name>
+				<type>String</type>
+				<value><![CDATA[+LOGIN:]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>NLOGIN</name>
+				<type>String</type>
+				<value><![CDATA[-LOGIN:]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>PSELECT</name>
+				<type>String</type>
+				<value><![CDATA[+SELECT:]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>NSELECT</name>
+				<type>String</type>
+				<value><![CDATA[-SELECT:]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>PQUIT</name>
+				<type>String</type>
+				<value><![CDATA[+QUIT:]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>NQUIT</name>
+				<type>String</type>
+				<value><![CDATA[-QUIT:]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>PLOGOUT</name>
+				<type>String</type>
+				<value><![CDATA[+LOGOUT:]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>NLOGOUT</name>
+				<type>String</type>
+				<value><![CDATA[-LOGOUT:]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>PDATA</name>
+				<type>String</type>
+				<value><![CDATA[+DATA:]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>NDATA</name>
+				<type>String</type>
+				<value><![CDATA[-DATA:]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>F01</name>
+				<type>String</type>
+				<value><![CDATA[{1:F01]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>F21</name>
+				<type>String</type>
+				<value><![CDATA[{1:F21]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>A21</name>
+				<type>String</type>
+				<value><![CDATA[{1:A21]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>L22</name>
+				<type>String</type>
+				<value><![CDATA[{1:L22]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>L42</name>
+				<type>String</type>
+				<value><![CDATA[{1:L42]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>L14</name>
+				<type>String</type>
+				<value><![CDATA[{1:L14]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>A23</name>
+				<type>String</type>
+				<value><![CDATA[{1:A23]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>A43</name>
+				<type>String</type>
+				<value><![CDATA[{1:A43]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>F25</name>
+				<type>String</type>
+				<value><![CDATA[{1:F25]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>A26</name>
+				<type>String</type>
+				<value><![CDATA[{1:A26]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>F151</name>
+				<type>String</type>
+				<value><![CDATA[{151:]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>F110</name>
+				<type>String</type>
+				<value><![CDATA[{110:]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>F333</name>
+				<type>String</type>
+				<value><![CDATA[{333:]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>BLOCK5</name>
+				<type>String</type>
+				<value><![CDATA[{5:]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>NAK</name>
+				<type>String</type>
+				<value><![CDATA[{451:1}]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>ISNPOS</name>
+				<type>Integer</type>
+				<value><![CDATA[5]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>SESSNUM</name>
+				<type>String</type>
+				<value><![CDATA[Session-Number:]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>SEQNUM</name>
+				<type>String</type>
+				<value><![CDATA[Sequence-Number:]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>MSGTRC</name>
+				<type>String</type>
+				<value><![CDATA[MsgTrace:]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>SMSGTRC</name>
+				<type>String</type>
+				<value><![CDATA[{S:{MSGTRACE:]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>B5</name>
+				<type>String</type>
+				<value><![CDATA[B5:]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>ERRCODE</name>
+				<type>String</type>
+				<value><![CDATA[Error-Code:]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>ERRDESC</name>
+				<type>String</type>
+				<value><![CDATA[Error-Description:]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>ENVCODE</name>
+				<type>String</type>
+				<value><![CDATA[EnvCode]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>LINEPREFIX</name>
+				<type>String</type>
+				<value><![CDATA[LinePrefix]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>ACTIONSCSCRIPT</name>
+				<type>String</type>
+				<value><![CDATA[fniGwySwfScAction]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>ACTIONSCRIPT</name>
+				<type>String</type>
+				<value><![CDATA[fniGwySwfAction]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>NONE</name>
+				<type>String</type>
+				<value><![CDATA[None]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>PABORT</name>
+				<type>String</type>
+				<value><![CDATA[+ABORT:]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>L56ERR</name>
+				<type>String</type>
+				<value><![CDATA[LT is not in recoverable state. CBT should execute fresh Login procedure.]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>L14ERRCODE</name>
+				<type>String</type>
+				<value><![CDATA[140]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>UNKNOWNTYPE</name>
+				<type>String</type>
+				<value><![CDATA[unknown message type.]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>UNKNOWNTYPECODE</name>
+				<type>String</type>
+				<value><![CDATA[150]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>AUTHENTICATORNOTFOUND</name>
+				<type>String</type>
+				<value><![CDATA[Authenticator key not found;]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>FAILEDAUTHORIZATIONSATRMA</name>
+				<type>String</type>
+				<value><![CDATA[Failed Authorization SAT/RMA;]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>GPA</name>
+				<type>String</type>
+				<value><![CDATA[GPA]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>FAILOFACSCANNING</name>
+				<type>String</type>
+				<value><![CDATA[The message had an OFAC hit. Operator blocked the message.]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>MSGDELETE</name>
+				<type>String</type>
+				<value><![CDATA[The message has been deleted.]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>PSCFEACK</name>
+				<type>Integer</type>
+				<value><![CDATA[1]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>NSCFEACK</name>
+				<type>Integer</type>
+				<value><![CDATA[2]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>NSCACK</name>
+				<type>Integer</type>
+				<value><![CDATA[3]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>PDAFEACK</name>
+				<type>Integer</type>
+				<value><![CDATA[4]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>NDAFEACK</name>
+				<type>Integer</type>
+				<value><![CDATA[5]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>PFINACK</name>
+				<type>Integer</type>
+				<value><![CDATA[6]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>PGPAACK</name>
+				<type>Integer</type>
+				<value><![CDATA[7]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>PLOGOUTACK</name>
+				<type>Integer</type>
+				<value><![CDATA[8]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>PQUITACK</name>
+				<type>Integer</type>
+				<value><![CDATA[9]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>PSELECTACK</name>
+				<type>Integer</type>
+				<value><![CDATA[10]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>PLOGINACK</name>
+				<type>Integer</type>
+				<value><![CDATA[11]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>PLOGINFEACK</name>
+				<type>Integer</type>
+				<value><![CDATA[12]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>NLOGINACK</name>
+				<type>Integer</type>
+				<value><![CDATA[13]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>PABORTACK</name>
+				<type>Integer</type>
+				<value><![CDATA[14]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>NLOGINABT</name>
+				<type>Integer</type>
+				<value><![CDATA[15]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>NUKTACK</name>
+				<type>Integer</type>
+				<value><![CDATA[16]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>NOACTION</name>
+				<type>Integer</type>
+				<value><![CDATA[17]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>PFINIBRACK</name>
+				<type>Integer</type>
+				<value><![CDATA[18]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>NOFAACK</name>
+				<type>Integer</type>
+				<value><![CDATA[19]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>PDELMSG</name>
+				<type>Integer</type>
+				<value><![CDATA[20]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>BIC8LENAck</name>
+				<type>Integer</type>
+				<value><![CDATA[8]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>MQMGRLEN</name>
+				<type>Integer</type>
+				<value><![CDATA[32]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>TRNLEN</name>
+				<type>Integer</type>
+				<value><![CDATA[16]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>SVCSVR_LEN</name>
+				<type>Integer</type>
+				<value><![CDATA[256]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>HOSTNAMELEN</name>
+				<type>Integer</type>
+				<value><![CDATA[32]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>MAX_SVCSERVER</name>
+				<type>Integer</type>
+				<value><![CDATA[16]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>NOSVC</name>
+				<type>Integer</type>
+				<value><![CDATA[1]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>MAX_EDIT_LENGTH</name>
+				<type>Integer</type>
+				<value><![CDATA[20000]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>MAX_SVC_BUF</name>
+				<type>Integer</type>
+				<value><![CDATA[20000]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>FORMAT_LEN</name>
+				<type>Integer</type>
+				<value><![CDATA[4]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>SVCHANDLER_LEN</name>
+				<type>Integer</type>
+				<value><![CDATA[8]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>LOGGED_OUT</name>
+				<type>String</type>
+				<value><![CDATA[LOGGED_OUT]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>WLOGINACK</name>
+				<type>String</type>
+				<value><![CDATA[WLOGINACK]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>LOGGED_IN</name>
+				<type>String</type>
+				<value><![CDATA[LOGGED_IN]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>WSELECTACK</name>
+				<type>String</type>
+				<value><![CDATA[WSELECTACK]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>SELECTED</name>
+				<type>String</type>
+				<value><![CDATA[SELECTED]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>WQUITACK</name>
+				<type>String</type>
+				<value><![CDATA[WQUITACK]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>WPACK</name>
+				<type>String</type>
+				<value><![CDATA[WPACK]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>WLOGOUTACK</name>
+				<type>String</type>
+				<value><![CDATA[WLOGOUTACK]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>IBRSESSION</name>
+				<type>String</type>
+				<value><![CDATA[0000]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>DEL</name>
+				<type>String</type>
+				<value><![CDATA[DEL]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>REP</name>
+				<type>String</type>
+				<value><![CDATA[REP]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>OND</name>
+				<type>String</type>
+				<value><![CDATA[OND]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>MAXHEADERSLEN</name>
+				<type>String</type>
+				<value><![CDATA[512]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>MAXOSNMSGLEN</name>
+				<type>String</type>
+				<value><![CDATA[15000]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>B1LTPOS</name>
+				<type>Integer</type>
+				<value><![CDATA[6]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>LTLEN</name>
+				<type>Integer</type>
+				<value><![CDATA[9]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>B1BRPOS</name>
+				<type>Integer</type>
+				<value><![CDATA[15]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>BRLEN</name>
+				<type>Integer</type>
+				<value><![CDATA[3]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>MTLEN</name>
+				<type>Integer</type>
+				<value><![CDATA[3]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>B2ILTPOSAck</name>
+				<type>Integer</type>
+				<value><![CDATA[7]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>B2IBRPOS</name>
+				<type>Integer</type>
+				<value><![CDATA[16]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>B2MTPOS</name>
+				<type>Integer</type>
+				<value><![CDATA[4]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>SESSPOS</name>
+				<type>Integer</type>
+				<value><![CDATA[18]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>SESSLEN</name>
+				<type>Integer</type>
+				<value><![CDATA[4]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>SEQNUMBERPOS</name>
+				<type>Integer</type>
+				<value><![CDATA[22]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>SEQNUMBERLEN</name>
+				<type>Integer</type>
+				<value><![CDATA[6]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>ABORTERRORCODELEN</name>
+				<type>Integer</type>
+				<value><![CDATA[32]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>BIC8LEN</name>
+				<type>Integer</type>
+				<value><![CDATA[8]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>BIC11LEN</name>
+				<type>Integer</type>
+				<value><![CDATA[11]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>B2ILTPOS</name>
+				<type>Integer</type>
+				<value><![CDATA[7]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>B1BIC8POS</name>
+				<type>Integer</type>
+				<value><![CDATA[6]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>B2BIC8POS</name>
+				<type>Integer</type>
+				<value><![CDATA[14]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>MTSTRNLEN</name>
+				<type>Integer</type>
+				<value><![CDATA[16]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>DELPOS</name>
+				<type>Integer</type>
+				<value><![CDATA[54]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>ONECHLEN</name>
+				<type>Integer</type>
+				<value><![CDATA[1]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>BIC12LEN</name>
+				<type>Integer</type>
+				<value><![CDATA[12]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>BLOCK1</name>
+				<type>String</type>
+				<value><![CDATA[{1:]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>BLOCK2</name>
+				<type>String</type>
+				<value><![CDATA[{2:]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>BLOCK1F01</name>
+				<type>String</type>
+				<value><![CDATA[{1:F01]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>TAG177</name>
+				<type>String</type>
+				<value><![CDATA[{177:]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>TAG405</name>
+				<type>String</type>
+				<value><![CDATA[{405:]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>LCRULYBRACKET</name>
+				<type>String</type>
+				<value><![CDATA[}]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>TAG177LEN</name>
+				<type>Integer</type>
+				<value><![CDATA[5]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>APPSB</name>
+				<type>String</type>
+				<value><![CDATA[{APP:]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>HISTORY</name>
+				<type>String</type>
+				<value><![CDATA[###HISTORY:]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>FNIHISTORY</name>
+				<type>String</type>
+				<value><![CDATA[HISTORY STARTS HERE]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>APPLICATIONID</name>
+				<type>String</type>
+				<value><![CDATA[###APPLICATION ID:]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>FNISWIFTMSG</name>
+				<type>String</type>
+				<value><![CDATA[###FNI SWIFT MESSAGE:]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>ACKNOWLEDGEMENT</name>
+				<type>String</type>
+				<value><![CDATA[###ACKNOWLEDGEMENT:]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>FNIHISTORYLEN</name>
+				<type>Integer</type>
+				<value><![CDATA[21]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>APPIDLEN</name>
+				<type>Integer</type>
+				<value><![CDATA[3]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>ONDEMANDREPORT</name>
+				<type>String</type>
+				<value><![CDATA[OnDemandReport]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>NUMBEROFONDEMANDMQS</name>
+				<type>String</type>
+				<value><![CDATA[NumberOfOnDemandMQs]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>COPYONDEMANDREPORT</name>
+				<type>String</type>
+				<value><![CDATA[CopyOnDemandReport]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>ONDEMANDONLY</name>
+				<type>String</type>
+				<value><![CDATA[OnDemandOnly]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>APPENDHISTORY</name>
+				<type>String</type>
+				<value><![CDATA[AppendHistory]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>NOACK</name>
+				<type>String</type>
+				<value><![CDATA[NoAck]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>FEACK</name>
+				<type>String</type>
+				<value><![CDATA[ForwardFeAck]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>NFEACK</name>
+				<type>String</type>
+				<value><![CDATA[ForwardNFeAck]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>PROD</name>
+				<type>String</type>
+				<value><![CDATA[Prod]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>IBRROUTING</name>
+				<type>String</type>
+				<value><![CDATA[IBRRouting]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>IBRROUTEDEF</name>
+				<type>String</type>
+				<value><![CDATA[IBRRouteDef]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>IBRLTERM</name>
+				<type>String</type>
+				<value><![CDATA[IBRLTerm]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>IBRLTSEQFILENAME</name>
+				<type>String</type>
+				<value><![CDATA[IBRLTSeqFileName]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>PASSAREAKEY</name>
+				<type>String</type>
+				<value><![CDATA[PassAreaKey]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>USECORRELATIONID</name>
+				<type>String</type>
+				<value><![CDATA[CorrelationId]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>USEMERVA</name>
+				<type>String</type>
+				<value><![CDATA[Merva]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>FORWADNAK</name>
+				<type>String</type>
+				<value><![CDATA[ForwardNAKOrFENAK]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>DEFAULTSVCPORT</name>
+				<type>String</type>
+				<value><![CDATA[DefaultSvcPort]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>DEFAULTSVCSVR</name>
+				<type>String</type>
+				<value><![CDATA[DefaultSvcSvr]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>SVCSERVERLIST</name>
+				<type>String</type>
+				<value><![CDATA[SvcServerList]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>SVCSERVERDEF</name>
+				<type>String</type>
+				<value><![CDATA[SvcServerDef]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>HOSTNAME</name>
+				<type>String</type>
+				<value><![CDATA[HostName]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>PORT</name>
+				<type>String</type>
+				<value><![CDATA[Port]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>SERVER</name>
+				<type>String</type>
+				<value><![CDATA[Server]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>CORRIDKEY</name>
+				<type>Integer</type>
+				<value><![CDATA[1]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>MERVAKEY</name>
+				<type>Integer</type>
+				<value><![CDATA[2]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>OFAERRORCODE</name>
+				<type>String</type>
+				<value><![CDATA[2001]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>APPLICATION</name>
+				<type>String</type>
+				<value><![CDATA[Application]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>MAXNORMALODSIZE</name>
+				<type>Integer</type>
+				<value><![CDATA[32000]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>COD</name>
+				<type>Integer</type>
+				<value><![CDATA[1]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>COA</name>
+				<type>Integer</type>
+				<value><![CDATA[2]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>NOCODORCOA</name>
+				<type>Integer</type>
+				<value><![CDATA[3]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>SCOD</name>
+				<type>String</type>
+				<value><![CDATA[COD]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>SCOA</name>
+				<type>String</type>
+				<value><![CDATA[COA]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>SNONE</name>
+				<type>String</type>
+				<value><![CDATA[None]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>CODORCOA</name>
+				<type>String</type>
+				<value><![CDATA[CODOrCOA]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>MESSAGEFORMAT</name>
+				<type>String</type>
+				<value><![CDATA[MessageFormat]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>NORMALFORMAT</name>
+				<type>String</type>
+				<value><![CDATA[Normal]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>STDFORMAT</name>
+				<type>String</type>
+				<value><![CDATA[Standard]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>SWIFTMSG</name>
+				<type>String</type>
+				<value><![CDATA[SwiftMsg]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>STDNOCORRID</name>
+				<type>String</type>
+				<value><![CDATA[StandardNoCorrId]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>INORMALFORMAT</name>
+				<type>Integer</type>
+				<value><![CDATA[1]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>ISTDFORMAT</name>
+				<type>Integer</type>
+				<value><![CDATA[2]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>ISWIFTMSG</name>
+				<type>Integer</type>
+				<value><![CDATA[3]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>ISTDNOCORRID</name>
+				<type>Integer</type>
+				<value><![CDATA[4]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>SUPPORTOBI</name>
+				<type>String</type>
+				<value><![CDATA[SupportOBI]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>REFINDEX</name>
+				<type>String</type>
+				<value><![CDATA[REF_INDEX]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>REF</name>
+				<type>String</type>
+				<value><![CDATA[REF #:]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>STX</name>
+				<type>String</type>
+				<value><![CDATA[{STX}]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>ORGMTSTRN</name>
+				<type>String</type>
+				<value><![CDATA[{ORGMTSTRN:]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>ASNAck</name>
+				<type>String</type>
+				<value><![CDATA[{ASN:]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>ORIGASN</name>
+				<type>String</type>
+				<value><![CDATA[{ORIGASN:]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>TIMECMPLT</name>
+				<type>String</type>
+				<value><![CDATA[{TIMECMPLT:]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>ASN</name>
+				<type>String</type>
+				<value><![CDATA[{ASN:]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>CID</name>
+				<type>String</type>
+				<value><![CDATA[{CID:]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>NAMEKEY</name>
+				<type>String</type>
+				<value><![CDATA[{NAMEKEY:]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>MRVTRC</name>
+				<type>String</type>
+				<value><![CDATA[{MRVTRC:]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>ACCNUM</name>
+				<type>String</type>
+				<value><![CDATA[{ACCNUM:]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>TRNPA</name>
+				<type>String</type>
+				<value><![CDATA[{TRNPA:]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>ORIGDEPT</name>
+				<type>String</type>
+				<value><![CDATA[{ORIGDEPT:]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>CHRGACCT</name>
+				<type>String</type>
+				<value><![CDATA[{CHRGACCT:]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>RECVADD1</name>
+				<type>String</type>
+				<value><![CDATA[{RECVADD1:]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>RECVADD2</name>
+				<type>String</type>
+				<value><![CDATA[{RECVADD2:]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>RECVADD3</name>
+				<type>String</type>
+				<value><![CDATA[{RECVADD3:]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>RECVADD4</name>
+				<type>String</type>
+				<value><![CDATA[{RECVADD4:]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>CHRGADD1</name>
+				<type>String</type>
+				<value><![CDATA[{CHRGADD1:]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>CHRGADD2</name>
+				<type>String</type>
+				<value><![CDATA[{CHRGADD2:]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>CHRGADD3</name>
+				<type>String</type>
+				<value><![CDATA[{CHRGADD3:]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>CHRGADD4</name>
+				<type>String</type>
+				<value><![CDATA[{CHRGADD4:]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>MSGID</name>
+				<type>String</type>
+				<value><![CDATA[{MSGID:]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>OUTSRCCODE</name>
+				<type>String</type>
+				<value><![CDATA[{OUTSRCCODE:]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>GENGTMACK</name>
+				<type>String</type>
+				<value><![CDATA[FniAckGtm]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>GENGTMACKOP</name>
+				<type>String</type>
+				<value><![CDATA[gtmAckOp]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>PROCESSED</name>
+				<type>String</type>
+				<value><![CDATA[Processed]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>FMTSUCCESS</name>
+				<type>String</type>
+				<value><![CDATA[SUCCESS:]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>SUPPORTGTMACK</name>
+				<type>String</type>
+				<value><![CDATA[SupportGTMAck]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>REPLACESNDBICONLY</name>
+				<type>String</type>
+				<value><![CDATA[ReplaceSndBicOnly]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>REPLACEBOTHSNDRCVBIC</name>
+				<type>String</type>
+				<value><![CDATA[ReplaceBothSndRcvBic]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>SUPPORTCASREPORT</name>
+				<type>String</type>
+				<value><![CDATA[SupportCASReport]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>CASBATCH1</name>
+				<type>String</type>
+				<value><![CDATA[CASBatch1]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>CASBATCH2</name>
+				<type>String</type>
+				<value><![CDATA[CASBatch1]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>CASTIMELEN</name>
+				<type>Integer</type>
+				<value><![CDATA[19]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>CASREPBUFLEN</name>
+				<type>Integer</type>
+				<value><![CDATA[64]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>CASREPCNTLEN</name>
+				<type>Integer</type>
+				<value><![CDATA[8]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>CASREPEND</name>
+				<type>Integer</type>
+				<value><![CDATA[2]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>ICASBATCH2</name>
+				<type>Integer</type>
+				<value><![CDATA[2]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>CASREPSTART</name>
+				<type>Integer</type>
+				<value><![CDATA[1]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>CASREPMSG</name>
+				<type>Integer</type>
+				<value><![CDATA[3]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>ICASBATCH1</name>
+				<type>Integer</type>
+				<value><![CDATA[1]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>ICASSND</name>
+				<type>Integer</type>
+				<value><![CDATA[1]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>ICASACK</name>
+				<type>Integer</type>
+				<value><![CDATA[2]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>ICASSNDACK</name>
+				<type>Integer</type>
+				<value><![CDATA[3]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>CASBATCH</name>
+				<type>String</type>
+				<value><![CDATA[{CASBATCH:]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>SOURCEAPP</name>
+				<type>String</type>
+				<value><![CDATA[{SOURCEAPP:]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>CIBC</name>
+				<type>String</type>
+				<value><![CDATA[CIBC]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>SOURCEREFERENCE</name>
+				<type>String</type>
+				<value><![CDATA[{SOURCEREFERENCE:]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>FROMTIME</name>
+				<type>String</type>
+				<value><![CDATA[{FROMTIME:]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>FROMSEQ</name>
+				<type>String</type>
+				<value><![CDATA[{FROMSEQ:]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>SERVICEPOS</name>
+				<type>Integer</type>
+				<value><![CDATA[0]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>INOUTINDPOS</name>
+				<type>Integer</type>
+				<value><![CDATA[4]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>INOUTINDLEN</name>
+				<type>Integer</type>
+				<value><![CDATA[1]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>IWSREFPOS</name>
+				<type>Integer</type>
+				<value><![CDATA[5]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>IWSREFLEN</name>
+				<type>Integer</type>
+				<value><![CDATA[18]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>ACKCODEPOS</name>
+				<type>Integer</type>
+				<value><![CDATA[23]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>ACKCODELEN</name>
+				<type>Integer</type>
+				<value><![CDATA[3]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>RMTAPPREFPOS</name>
+				<type>Integer</type>
+				<value><![CDATA[26]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>RMTAPPREFLEN</name>
+				<type>Integer</type>
+				<value><![CDATA[25]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>ACKDATEPOS</name>
+				<type>Integer</type>
+				<value><![CDATA[51]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>ACKDATELEN</name>
+				<type>Integer</type>
+				<value><![CDATA[6]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>ACKTIMEPOS</name>
+				<type>Integer</type>
+				<value><![CDATA[57]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>ACKTIMELEN</name>
+				<type>Integer</type>
+				<value><![CDATA[6]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>ACKSERVICEPOS</name>
+				<type>Integer</type>
+				<value><![CDATA[63]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>ACKSERVICELEN</name>
+				<type>Integer</type>
+				<value><![CDATA[3]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>FILLERPOS</name>
+				<type>String</type>
+				<value><![CDATA[66]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>FILLERLEN</name>
+				<type>String</type>
+				<value><![CDATA[34]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>BONY</name>
+				<type>String</type>
+				<value><![CDATA[BNY4]]></value>
+			</resourcefield>
+			<resourcefield>
+				<name>ACKCODE</name>
+				<type>String</type>
+				<value><![CDATA[000]]></value>
+			</resourcefield>
+		</resourcefields>
+	</resources>
+	<internalmessage name="pModuleStrAck" type="InternalMessage">
+		<version>1.0</version>
+		<normalizedformat>
+			<xpath-namespaces>
+				<namespace value="http://www.w3.org/2005/xpath-functions" prefix="fn"/>
+				<namespace value="http://www.w3.org/2001/XMLSchema" prefix="xs"/>
+				<namespace value="java:com.tplus.transform.runtime.swift.SwiftXPathFunctions" prefix="swift"/>
+			</xpath-namespaces>
+			<fields>
+				<field xsi:type="InternalMessageFieldType">
+					<name>abortAction</name>
+					<type>Boolean</type>
+					<notnull>true</notnull>
+				</field>
+				<field xsi:type="InternalMessageFieldType">
+					<name>actionTaken</name>
+					<type>Boolean</type>
+					<notnull>true</notnull>
+				</field>
+				<field xsi:type="InternalMessageFieldType">
+					<name>appendHistory</name>
+					<type>Boolean</type>
+					<notnull>true</notnull>
+				</field>
+				<field xsi:type="InternalMessageFieldType">
+					<name>cibcMsg</name>
+					<type>Boolean</type>
+					<notnull>true</notnull>
+				</field>
+				<field xsi:type="InternalMessageFieldType">
+					<name>convertBic8</name>
+					<type>Boolean</type>
+					<notnull>true</notnull>
+				</field>
+				<field xsi:type="InternalMessageFieldType">
+					<name>copyOnDemand</name>
+					<type>Boolean</type>
+					<notnull>true</notnull>
+				</field>
+				<field xsi:type="InternalMessageFieldType">
+					<name>copyOnDemandReport</name>
+					<type>Boolean</type>
+					<notnull>true</notnull>
+				</field>
+				<field xsi:type="InternalMessageFieldType">
+					<name>createF21</name>
+					<type>Boolean</type>
+					<notnull>true</notnull>
+				</field>
+				<field xsi:type="InternalMessageFieldType">
+					<name>firstGTMAck</name>
+					<type>Boolean</type>
+					<notnull>true</notnull>
+				</field>
+				<field xsi:type="InternalMessageFieldType">
+					<name>forwardNakAndFeNak</name>
+					<type>Boolean</type>
+					<notnull>true</notnull>
+				</field>
+				<field xsi:type="InternalMessageFieldType">
+					<name>handleGTMAck</name>
+					<type>Boolean</type>
+					<notnull>true</notnull>
+				</field>
+				<field xsi:type="InternalMessageFieldType">
+					<name>ibrAction</name>
+					<type>Boolean</type>
+					<notnull>true</notnull>
+				</field>
+				<field xsi:type="InternalMessageFieldType">
+					<name>isCancelGateway</name>
+					<type>Boolean</type>
+					<notnull>true</notnull>
+				</field>
+				<field xsi:type="InternalMessageFieldType">
+					<name>loginAction</name>
+					<type>Boolean</type>
+					<notnull>true</notnull>
+				</field>
+				<field xsi:type="InternalMessageFieldType">
+					<name>logoutAction</name>
+					<type>Boolean</type>
+					<notnull>true</notnull>
+				</field>
+				<field xsi:type="InternalMessageFieldType">
+					<name>needFEACK</name>
+					<type>Boolean</type>
+					<notnull>true</notnull>
+				</field>
+				<field xsi:type="InternalMessageFieldType">
+					<name>needNFEACK</name>
+					<type>Boolean</type>
+					<notnull>true</notnull>
+				</field>
+				<field xsi:type="InternalMessageFieldType">
+					<name>noAck</name>
+					<type>Boolean</type>
+					<notnull>true</notnull>
+				</field>
+				<field xsi:type="InternalMessageFieldType">
+					<name>nScFlag</name>
+					<type>Boolean</type>
+					<notnull>true</notnull>
+				</field>
+				<field xsi:type="InternalMessageFieldType">
+					<name>obi</name>
+					<type>Boolean</type>
+					<notnull>true</notnull>
+				</field>
+				<field xsi:type="InternalMessageFieldType">
+					<name>onDemand</name>
+					<type>Boolean</type>
+					<notnull>true</notnull>
+				</field>
+				<field xsi:type="InternalMessageFieldType">
+					<name>onDemandReport</name>
+					<type>Boolean</type>
+					<notnull>true</notnull>
+				</field>
+				<field xsi:type="InternalMessageFieldType">
+					<name>replaceBothSndRcvBic</name>
+					<type>Boolean</type>
+					<notnull>true</notnull>
+				</field>
+				<field xsi:type="InternalMessageFieldType">
+					<name>replaceSndBicOnly</name>
+					<type>Boolean</type>
+					<notnull>true</notnull>
+				</field>
+				<field xsi:type="InternalMessageFieldType">
+					<name>runLogoutCommand</name>
+					<type>Boolean</type>
+					<notnull>true</notnull>
+				</field>
+				<field xsi:type="InternalMessageFieldType">
+					<name>saveIBRSeq</name>
+					<type>Boolean</type>
+					<notnull>true</notnull>
+				</field>
+				<field xsi:type="InternalMessageFieldType">
+					<name>scOnly</name>
+					<type>Boolean</type>
+					<notnull>true</notnull>
+				</field>
+				<field xsi:type="InternalMessageFieldType">
+					<name>sendGTMAck</name>
+					<type>Boolean</type>
+					<notnull>true</notnull>
+				</field>
+				<field xsi:type="InternalMessageFieldType">
+					<name>sendNakAndFeNak</name>
+					<type>Boolean</type>
+					<notnull>true</notnull>
+				</field>
+				<field xsi:type="InternalMessageFieldType">
+					<name>sessionControl</name>
+					<type>Boolean</type>
+					<notnull>true</notnull>
+				</field>
+				<field xsi:type="InternalMessageFieldType">
+					<name>supportCASReport</name>
+					<type>Boolean</type>
+					<notnull>true</notnull>
+				</field>
+				<field xsi:type="InternalMessageFieldType">
+					<name>supportFin3</name>
+					<type>Boolean</type>
+					<notnull>true</notnull>
+				</field>
+				<field xsi:type="InternalMessageFieldType">
+					<name>supportGTMAck</name>
+					<type>Boolean</type>
+					<notnull>true</notnull>
+				</field>
+				<field xsi:type="InternalMessageFieldType">
+					<name>supportOBI</name>
+					<type>Boolean</type>
+					<notnull>true</notnull>
+				</field>
+				<field xsi:type="InternalMessageFieldType">
+					<name>supportSc</name>
+					<type>Boolean</type>
+					<notnull>true</notnull>
+				</field>
+				<field xsi:type="InternalMessageFieldType">
+					<name>useIbrAppHost</name>
+					<type>Boolean</type>
+					<notnull>true</notnull>
+				</field>
+				<field xsi:type="InternalMessageFieldType">
+					<name>abortErrorCode</name>
+					<type>String</type>
+					<notnull>true</notnull>
+					<length>-1</length>
+				</field>
+				<field xsi:type="InternalMessageFieldType">
+					<name>actionScript</name>
+					<type>String</type>
+					<notnull>true</notnull>
+					<length>-1</length>
+				</field>
+				<field xsi:type="InternalMessageFieldType">
+					<name>appId</name>
+					<type>String</type>
+					<notnull>true</notnull>
+					<length>-1</length>
+				</field>
+				<field xsi:type="InternalMessageFieldType">
+					<name>appName</name>
+					<type>String</type>
+					<notnull>true</notnull>
+					<length>-1</length>
+				</field>
+				<field xsi:type="InternalMessageFieldType">
+					<name>bi8ExceptionfileName</name>
+					<type>String</type>
+					<notnull>true</notnull>
+					<length>-1</length>
+				</field>
+				<field xsi:type="InternalMessageFieldType">
+					<name>casReportFileName</name>
+					<type>String</type>
+					<notnull>true</notnull>
+					<length>-1</length>
+				</field>
+				<field xsi:type="InternalMessageFieldType">
+					<name>correlationData</name>
+					<type>String</type>
+					<notnull>true</notnull>
+					<length>-1</length>
+				</field>
+				<field xsi:type="InternalMessageFieldType">
+					<name>dataFeedHeaders</name>
+					<type>String</type>
+					<notnull>true</notnull>
+					<length>-1</length>
+				</field>
+				<field xsi:type="InternalMessageFieldType">
+					<name>defaultSvcSvr</name>
+					<type>String</type>
+					<notnull>true</notnull>
+					<length>-1</length>
+				</field>
+				<field xsi:type="InternalMessageFieldType">
+					<name>envCode</name>
+					<type>String</type>
+					<notnull>true</notnull>
+					<length>-1</length>
+				</field>
+				<field xsi:type="InternalMessageFieldType">
+					<name>errorMsg</name>
+					<type>String</type>
+					<notnull>true</notnull>
+					<length>-1</length>
+				</field>
+				<field xsi:type="InternalMessageFieldType">
+					<name>fniCopyCSAReport</name>
+					<type>String</type>
+					<notnull>true</notnull>
+					<length>-1</length>
+				</field>
+				<field xsi:type="InternalMessageFieldType">
+					<name>fniHomeDir</name>
+					<type>String</type>
+					<notnull>true</notnull>
+					<length>-1</length>
+				</field>
+				<field xsi:type="InternalMessageFieldType">
+					<name>gateway</name>
+					<type>String</type>
+					<notnull>true</notnull>
+					<length>-1</length>
+				</field>
+				<field xsi:type="InternalMessageFieldType">
+					<name>gatewayContainer</name>
+					<type>String</type>
+					<notnull>true</notnull>
+					<length>-1</length>
+				</field>
+				<field xsi:type="InternalMessageFieldType">
+					<name>gtmAckMsg</name>
+					<type>String</type>
+					<notnull>true</notnull>
+					<length>-1</length>
+				</field>
+				<field xsi:type="InternalMessageFieldType">
+					<name>mqManager</name>
+					<type>String</type>
+					<notnull>true</notnull>
+					<length>-1</length>
+				</field>
+				<field xsi:type="InternalMessageFieldType">
+					<name>msgBuffer</name>
+					<type>String</type>
+					<notnull>true</notnull>
+					<length>-1</length>
+				</field>
+				<field xsi:type="InternalMessageFieldType">
+					<name>mtsTrn</name>
+					<type>String</type>
+					<notnull>true</notnull>
+					<length>-1</length>
+				</field>
+				<field xsi:type="InternalMessageFieldType">
+					<name>obiBuff</name>
+					<type>String</type>
+					<notnull>true</notnull>
+					<length>-1</length>
+				</field>
+				<field xsi:type="InternalMessageFieldType">
+					<name>prodBic8fileName</name>
+					<type>String</type>
+					<notnull>true</notnull>
+					<length>-1</length>
+				</field>
+				<field xsi:type="InternalMessageFieldType">
+					<name>svcGTMAckHandler</name>
+					<type>String</type>
+					<notnull>true</notnull>
+					<length>-1</length>
+				</field>
+				<field xsi:type="InternalMessageFieldType">
+					<name>histPt</name>
+					<type>String</type>
+					<notnull>true</notnull>
+					<length>-1</length>
+				</field>
+				<field xsi:type="InternalMessageFieldType">
+					<name>pOnDemandMsg</name>
+					<type>String</type>
+					<notnull>true</notnull>
+					<length>-1</length>
+				</field>
+				<field xsi:type="InternalMessageFieldType">
+					<name>sBlockPt</name>
+					<type>String</type>
+					<notnull>true</notnull>
+					<length>-1</length>
+				</field>
+				<field xsi:type="InternalMessageFieldType">
+					<name>passAreaKey</name>
+					<type>Integer</type>
+					<notnull>true</notnull>
+				</field>
+				<field xsi:type="InternalMessageFieldType">
+					<name>defaultSvcPort</name>
+					<type>Integer</type>
+					<notnull>true</notnull>
+				</field>
+				<field xsi:type="InternalMessageFieldType">
+					<name>messageFormat</name>
+					<type>Integer</type>
+					<notnull>true</notnull>
+				</field>
+				<field xsi:type="InternalMessageFieldType">
+					<name>applicationHost</name>
+					<type>Integer</type>
+					<notnull>true</notnull>
+				</field>
+				<field xsi:type="InternalMessageFieldType">
+					<name>ackType</name>
+					<type>Integer</type>
+					<notnull>true</notnull>
+				</field>
+				<field xsi:type="InternalMessageFieldType">
+					<name>casReportType</name>
+					<type>Integer</type>
+					<notnull>true</notnull>
+				</field>
+				<field xsi:type="InternalMessageFieldType">
+					<name>CODOrCOA</name>
+					<type>Integer</type>
+					<notnull>true</notnull>
+				</field>
+				<field xsi:type="InternalMessageFieldType">
+					<name>cReplayQueueIndex</name>
+					<type>Integer</type>
+					<notnull>true</notnull>
+				</field>
+				<field xsi:type="InternalMessageFieldType">
+					<name>currentOnDemandIndex</name>
+					<type>Integer</type>
+					<notnull>true</notnull>
+				</field>
+				<field xsi:type="InternalMessageFieldType">
+					<name>currntOutputOBIIndex</name>
+					<type>Integer</type>
+					<notnull>true</notnull>
+				</field>
+				<field xsi:type="InternalMessageFieldType">
+					<name>finSession</name>
+					<type>Integer</type>
+					<notnull>true</notnull>
+				</field>
+				<field xsi:type="InternalMessageFieldType">
+					<name>gpaSession</name>
+					<type>Integer</type>
+					<notnull>true</notnull>
+				</field>
+				<field xsi:type="InternalMessageFieldType">
+					<name>ibrSeqNumber</name>
+					<type>Integer</type>
+					<notnull>true</notnull>
+				</field>
+				<field xsi:type="InternalMessageFieldType">
+					<name>iccNumber</name>
+					<type>Integer</type>
+					<notnull>true</notnull>
+				</field>
+				<field xsi:type="InternalMessageFieldType">
+					<name>kernalVersion</name>
+					<type>Integer</type>
+					<notnull>true</notnull>
+				</field>
+				<field xsi:type="InternalMessageFieldType">
+					<name>lAreaTermIndex</name>
+					<type>Integer</type>
+					<notnull>true</notnull>
+				</field>
+				<field xsi:type="InternalMessageFieldType">
+					<name>lTermIndex</name>
+					<type>Integer</type>
+					<notnull>true</notnull>
+				</field>
+				<field xsi:type="InternalMessageFieldType">
+					<name>numberOfBic8CvtStr</name>
+					<type>Integer</type>
+					<notnull>true</notnull>
+				</field>
+				<field xsi:type="InternalMessageFieldType">
+					<name>numberOfBic8Excep</name>
+					<type>Integer</type>
+					<notnull>true</notnull>
+				</field>
+				<field xsi:type="InternalMessageFieldType">
+					<name>numberOfIbrLTs</name>
+					<type>Integer</type>
+					<notnull>true</notnull>
+				</field>
+				<field xsi:type="InternalMessageFieldType">
+					<name>numberOfNormalSizeODMQs</name>
+					<type>Integer</type>
+					<notnull>true</notnull>
+				</field>
+				<field xsi:type="InternalMessageFieldType">
+					<name>numberOfOnDemandQueues</name>
+					<type>Integer</type>
+					<notnull>true</notnull>
+				</field>
+				<field xsi:type="InternalMessageFieldType">
+					<name>numberOfReplyQueue</name>
+					<type>Integer</type>
+					<notnull>true</notnull>
+				</field>
+				<field xsi:type="InternalMessageFieldType">
+					<name>refIndexLength</name>
+					<type>Integer</type>
+					<notnull>true</notnull>
+				</field>
+			</fields>
+		</normalizedformat>
+		<validationrules name="Default" type="ValidationRules">
+		</validationrules>
+		<elementproperties>
+			<propertymap>
+				<property name="codegen.java.properties">
+					<value>
+						<propertymap type="com.tplus.transform.design.PropertiesDef">
+							<property name="Java Package Name" value="com.transform.internal.%e"/>
+							<property name="Jar Name" value="%c.jar"/>
+							<property name="Manifest Entries" value="transformrt.jar"/>
+							<property name="Data Source" value=""/>
+						</propertymap>
+					</value>
+				</property>
+			</propertymap>
+		</elementproperties>
+	</internalmessage>
+	<folder name="Function Definitions" type="FunctionDefFolder">
+		<FormulaFunctionDef name="getAckType" type="FormulaFunctionDef">
+			<description></description>
+			<Category>User Defined</Category>
+			<parameterfields>
+				<parameterfield>
+					<name>fniGwyXFormAppAckConfig</name>
+					<type>DataObject</type>
+					<message>fniGwyXFormAppAckConfig</message>
+					<minoccurs>0</minoccurs>
+					<maxoccurs>1</maxoccurs>
+				</parameterfield>
+				<parameterfield>
+					<name>inputMessage</name>
+					<type>String</type>
+				</parameterfield>
+			</parameterfields>
+			<ReturnType>Integer</ReturnType>
+			<Code><![CDATA[if(Equal(Mid(inputMessage, 0, Length(NDATA)), NDATA)) {
+    return NDAFEACK;
+}
+else if(Equal(Mid(inputMessage, 0, Length(PDATA)), PDATA)) {
+    if(fniGwyXFormAppAckConfig.ForwardFeAck == "Yes") {
+        return PDAFEACK;
+    }
+    else {
+        return NOACTION;
+    }
+}
+else if(Equal(Mid(inputMessage, 0, Length(F21)), F21)) {
+    return PFINACK;
+}
+else if(Equal(Mid(inputMessage, 0, Length(A21)), A21)) {
+    return PGPAACK;
+}
+else if(Equal(Mid(inputMessage, 0, Length(F01)), F01)) {
+    if(false) {
+        return PDELMSG;
+    }
+    else {
+        return NOACTION;
+    }
+}
+else {
+    return NOACTION;
+}
+]]></Code>
+			<function-type>Formula</function-type>
+		</FormulaFunctionDef>
+		<FormulaFunctionDef name="initBMDEF" type="FormulaFunctionDef">
+			<description></description>
+			<Category>User Defined</Category>
+			<parameterfields>
+				<parameterfield>
+					<name>pModuleStr</name>
+					<type>DataObject</type>
+					<message>pModuleStrAck</message>
+					<minoccurs>0</minoccurs>
+					<maxoccurs>1</maxoccurs>
+				</parameterfield>
+			</parameterfields>
+			<ReturnType>Void</ReturnType>
+			<Code><![CDATA[pModuleStr.defaultSvcPort = NOSVC;
+pModuleStr.runLogoutCommand = true;
+pModuleStr.logoutAction = false;
+pModuleStr.loginAction = false;
+pModuleStr.abortAction = false;
+pModuleStr.saveIBRSeq = false;
+pModuleStr.ibrAction = false;
+pModuleStr.scOnly = false;
+pModuleStr.supportFin3 = true;
+pModuleStr.kernalVersion = 4;
+pModuleStr.iccNumber = 2;
+pModuleStr.onDemand = true;
+pModuleStr.ackType = -1;
+pModuleStr.onDemandReport = true;
+pModuleStr.sessionControl = false;
+pModuleStr.appendHistory = false;
+pModuleStr.lTermIndex = -1;
+pModuleStr.ibrSeqNumber = 0;
+pModuleStr.numberOfOnDemandQueues = 1;
+pModuleStr.numberOfNormalSizeODMQs = 1;
+pModuleStr.currentOnDemandIndex = 0;
+pModuleStr.supportSc = false;
+pModuleStr.createF21 = false;
+pModuleStr.nScFlag = false;
+pModuleStr.numberOfIbrLTs = 0;
+pModuleStr.useIbrAppHost = false;
+pModuleStr.lAreaTermIndex = -1;
+pModuleStr.passAreaKey = MERVAKEY;
+pModuleStr.copyOnDemandReport = false;
+pModuleStr.copyOnDemand = false;
+pModuleStr.actionTaken = false;
+pModuleStr.noAck = false;
+pModuleStr.pOnDemandMsg = null;
+pModuleStr.numberOfReplyQueue = 0;
+pModuleStr.cReplayQueueIndex = 0;
+pModuleStr.refIndexLength = 0;
+pModuleStr.CODOrCOA = COD;
+pModuleStr.messageFormat = INORMALFORMAT;
+pModuleStr.needFEACK = false;
+pModuleStr.needNFEACK = true;
+pModuleStr.supportOBI = false;
+pModuleStr.obi = false;
+pModuleStr.currntOutputOBIIndex = 0;
+pModuleStr.forwardNakAndFeNak = false;
+pModuleStr.sendNakAndFeNak = false;
+pModuleStr.isCancelGateway = false;
+pModuleStr.sendGTMAck = false;
+pModuleStr.handleGTMAck = false;
+pModuleStr.firstGTMAck = true;
+pModuleStr.supportGTMAck = false;
+pModuleStr.replaceSndBicOnly = false;
+pModuleStr.replaceBothSndRcvBic = false;
+pModuleStr.supportCASReport = false;
+pModuleStr.casReportType = 0;
+pModuleStr.cibcMsg = false;
+pModuleStr.sBlockPt = null;
+]]></Code>
+			<function-type>Formula</function-type>
+		</FormulaFunctionDef>
+		<FormulaFunctionDef name="bmProcessACK" type="FormulaFunctionDef">
+			<description></description>
+			<Category>User Defined</Category>
+			<parameterfields>
+				<parameterfield>
+					<name>pGwyStr</name>
+					<type>DataObject</type>
+					<message>pGwyStr</message>
+					<minoccurs>0</minoccurs>
+					<maxoccurs>1</maxoccurs>
+				</parameterfield>
+				<parameterfield>
+					<name>pModuleStr</name>
+					<type>DataObject</type>
+					<message>pModuleStrAck</message>
+					<minoccurs>0</minoccurs>
+					<maxoccurs>1</maxoccurs>
+				</parameterfield>
+				<parameterfield>
+					<name>fniGwyXFormAppAckConfig</name>
+					<type>DataObject</type>
+					<message>fniGwyXFormAppAckConfig</message>
+					<minoccurs>0</minoccurs>
+					<maxoccurs>1</maxoccurs>
+				</parameterfield>
+				<parameterfield>
+					<name>input</name>
+					<type>String</type>
+				</parameterfield>
+			</parameterfields>
+			<ReturnType>String</ReturnType>
+			<Code><![CDATA[initBMDEF(pModuleStr);
+pGwyStr.inputMessage = input;
+def sBlockPt;
+def pt;
+def pCorrelation;
+def msgEnd1;
+def openFlowerbraces = "{";
+def closeFlowerbraces = "}";
+def appPt;
+def pMTSTrn;
+def currentOutputMoudleIndex = 0;
+def output3;
+if((pModuleStr.onDemand) || (pModuleStr.obi)) {
+    if(pModuleStr.obi) {
+    }
+    else {
+        sBlockPt = strstr(input, SBLOCK);
+        pModuleStr.cibcMsg = false;
+        pModuleStr.sBlockPt = null;
+        if(sBlockPt != null) {
+            pModuleStr.sBlockPt = sBlockPt;
+            pt = strstr(sBlockPt, SOURCEAPP);
+            if(pt != null) {
+                pt = pt + Length(SOURCEAPP);
+                if(!Equal(Mid(pt, 0, 4), CIBC)) {
+                    pModuleStr.cibcMsg = true;
+                }
+            }
+        }
+        
+        pCorrelation = strstr(input, CORRELATION_DATA);
+        if(pCorrelation != null) {
+            msgEnd1 = strstr(pCorrelation, closeFlowerbraces);
+            pCorrelation = pCorrelation.RightStr(CORRELATION_DATA).LeftStr(closeFlowerbraces);
+            Set(pModuleStr.correlationData, pCorrelation);
+        }
+        if((!Equal(Val(fniGwyXFormAppAckConfig.Application), REP)) || 
+             (!Equal(Val(fniGwyXFormAppAckConfig.Application), OND))) {
+            Set(pModuleStr.appName, Val(fniGwyXFormAppAckConfig.Application));
+        }
+        if((!Equal(Val(pModuleStr.appName), REP)) || (!Equal(Val(pModuleStr.appName), OND))) {
+            appPt = strstr(input, APPSB);
+            if(appPt != null) {
+                Set(pModuleStr.appId, appPt.RightStr(APPSB).Mid(0, APPIDLEN));
+            }
+        }
+        pModuleStr.histPt = strstr(input, FNIHISTORY);
+        if(pModuleStr.histPt != null) {
+            
+            pModuleStr.histPt = Mid(pModuleStr.histPt, FNIHISTORYLEN, 
+                                    Length(pModuleStr.histPt + 1) - FNIHISTORYLEN);
+            pMTSTrn = strstr(pModuleStr.histPt, REFINDEX);
+            if(pMTSTrn == null) {
+                pModuleStr.mtsTrn = null;
+            }
+            else {
+                pMTSTrn = strstr(pMTSTrn, REF);
+                if(pMTSTrn != null) {
+                    pMTSTrn = Mid(pMTSTrn, Length(REF) + 1, Length(pMTSTrn) - (Length(REF) + 1));
+                    Set(pModuleStr.mtsTrn, Mid(pMTSTrn, 0, MTSTRNLEN));
+                }
+                else {
+                    Set(pModuleStr.mtsTrn, null);
+                }
+            }
+        }
+        else {
+            Set(pModuleStr.mtsTrn, null);
+        }
+        pModuleStr.ackType = getAckType(fniGwyXFormAppAckConfig,input);
+        
+        error("pModuleStr.ackType->>>>>>>>>"+pModuleStr.ackType);
+        
+        if(!pModuleStr.noAck) {
+            if(pModuleStr.forwardNakAndFeNak) {
+                currentOutputMoudleIndex = 2 + pModuleStr.currentOnDemandIndex;
+            }
+            else {
+                currentOutputMoudleIndex = 1 + pModuleStr.currentOnDemandIndex;
+            }
+        }
+        else {
+            if(pModuleStr.forwardNakAndFeNak) {
+                currentOutputMoudleIndex = 1 + pModuleStr.currentOnDemandIndex;
+            }
+            else {
+                currentOutputMoudleIndex = pModuleStr.currentOnDemandIndex;
+            }
+        }
+        pModuleStr.currntOutputOBIIndex = currentOutputMoudleIndex + 
+                                            pModuleStr.numberOfOnDemandQueues;
+        if(Equal(pModuleStr.ackType, PFINACK)) {
+            createFinOrGpaAckOnDemand(pGwyStr, pModuleStr, fniGwyXFormAppAckConfig, 
+                                      pGwyStr.inputMessage);
+            pModuleStr.ackType = PFINACK;
+        }
+        else if(Equal(pModuleStr.ackType, PGPAACK)) {
+            createFinOrGpaAckOnDemand(pGwyStr, pModuleStr, fniGwyXFormAppAckConfig, 
+                                      pGwyStr.inputMessage);
+            return pGwyStr.outputMessage;
+        }
+        else if(Equal(pModuleStr.ackType, NDAFEACK)) {
+            def datacontent;
+            def errcontent;
+            def errdescription;
+            def msgtrccontent;
+            createFinOrGpaNFeackOnDemand(pGwyStr, pModuleStr, fniGwyXFormAppAckConfig, 
+                                         pGwyStr.inputMessage);
+           
+            def NDAFEACKOutput3 = strstr(input, "{1:F01");
+            NDAFEACKOutput3 = NDAFEACKOutput3.LeftStr("-}") + "-}";
+            NDAFEACKOutput3 = NDAFEACKOutput3.Replace("{STX}", "");
+            def b4swiftmessage = LeftStr(input, "{1:F01");
+            if(b4swiftmessage.Length() > 0) {
+                def splitchar;
+                def b4swiftmessagefindreturn = b4swiftmessage.FindFirst("\r");
+                def b4swiftmessagefindnewline = b4swiftmessage.FindFirst("\n");
+                if(b4swiftmessagefindreturn != -1 && b4swiftmessagefindnewline != -1 && 
+                     b4swiftmessagefindreturn < b4swiftmessagefindnewline) {
+                    splitchar = "\r\n";
+                }
+                else
+                    splitchar = "\n";
+                def b4swiftmessagesplitarr = Split(splitchar, b4swiftmessage);
+                for(def i = 0; i < b4swiftmessagesplitarr.Length(); ++i) {
+                    if(b4swiftmessagesplitarr[i].StartsWith(NDATA)) {
+                        datacontent = b4swiftmessagesplitarr[i].RightStr(NDATA);
+                    }
+                    else if(b4swiftmessagesplitarr[i].StartsWith(ERRCODE)) {
+                        errcontent = b4swiftmessagesplitarr[i].RightStr(ERRCODE);
+                    }
+                    else if(b4swiftmessagesplitarr[i].StartsWith(ERRDESC)) {
+                        errdescription = b4swiftmessagesplitarr[i].RightStr(ERRDESC).Replace(AUTHENTICATORNOTFOUND, 
+                                                                                             "");
+                    }
+                    else if(b4swiftmessagesplitarr[i].StartsWith(MSGTRC)) {
+                        msgtrccontent = b4swiftmessagesplitarr[i].RightStr(MSGTRC);
+                    }
+                }
+            }
+            NDAFEACKOutput3 = NDAFEACKOutput3 + "{METADATA:{CORRID:" + msgtrccontent + "}" + 
+                                "{FENAK:{ERRCODE:" + errcontent.Lpad('0', 5) + "}" + 
+                                "{ERRMSG:Failed Authorization RMA/SAT;" + errdescription + "}}}";
+            return ("Output1:\r\n" + pGwyStr.outputMessage + "\r\nOutput2:\r\n" + 
+                      pGwyStr.outputMessage + "\r\nOutput3:\r\n" + NDAFEACKOutput3);
+        }
+    }
+}
+if(pModuleStr.ackType == PDAFEACK) {
+    def datafind = FindFirst(input, PDATA);
+    def sessfind = FindFirst(input, SESSNUM);
+    def seqfind = FindFirst(input, SEQNUM);
+    def msgtrcfind = FindFirst(input, MSGTRC);
+    def datacontent;
+    def datacontentflag = true;
+    def sesscontent;
+    def sesscontentflag = true;
+    def seqcontent;
+    def seqcontentflag = true;
+    def messagetracecontent;
+    def messagetracecontentflag = true;
+    def splitchar;
+    def b4swiftmessagefindreturn = input.FindFirst("\r");
+    def b4swiftmessagefindnewline = input.FindFirst("\n");
+    if(b4swiftmessagefindreturn != -1 && b4swiftmessagefindnewline != -1 && 
+         b4swiftmessagefindreturn < b4swiftmessagefindnewline) {
+        splitchar = "\r\n";
+    }
+    else
+        splitchar = "\n";
+    def splitarr = Split(splitchar, input);
+    for(def i = 0; (i < splitarr.Length() && 
+                      (datacontentflag || sesscontentflag || seqcontentflag || 
+                         messagetracecontentflag)); ++i) {
+        if(splitarr[i].StartsWith(PDATA)) {
+            datacontent = splitarr[i].RightStr(PDATA);
+            datacontentflag = false;
+        }
+        else if(splitarr[i].StartsWith(SESSNUM)) {
+            sesscontent = splitarr[i].RightStr(SESSNUM);
+            sesscontentflag = false;
+        }
+        if(splitarr[i].StartsWith(SEQNUM)) {
+            seqcontent = splitarr[i].RightStr(SEQNUM);
+            seqcontentflag = false;
+        }
+        if(splitarr[i].StartsWith(MSGTRC)) {
+            messagetracecontent = splitarr[i].RightStr(MSGTRC);
+            messagetracecontentflag = false;
+        }
+    }
+    pGwyStr.outputMessage = "{METADATA:{CORRID:" + messagetracecontent + "}{FEACK:" + datacontent + 
+                              sesscontent + seqcontent + "}}";
+    return pGwyStr.outputMessage;
+}
+if(pModuleStr.ackType == PFINACK) {
+    def pAck = Left(input, FindFirst(input, "}}")) + "}}";
+    def pMesssage = "{1:F01" + input.RightStr("{1:F01").LeftStr("{S:");
+    if(FindFirst(input, "{5:}{S:{") != -1) {
+        pMesssage = pMesssage + "{METADATA:{CORRID:";
+    }
+    else if(FindFirst(input, "}}{S:") != -1) {
+        pMesssage = pMesssage + "{METADATA:{CORRID:";
+    }
+    if(pMesssage.FindFirst("{STX}") != -1) {
+        pMesssage = pMesssage.Replace("{STX}", "");
+    }
+    output3 = pMesssage + pModuleStr.correlationData + closeFlowerbraces + pAck + "}";
+    if(fniGwyXFormAppAckConfig.ForwardFeAck == "Yes") {
+        error("ForwardFeAck is Yes");
+        pGwyStr.outputMessage = "Output1:" + "\r\n" + pGwyStr.outputMessage + "\r\n" +"Output2:" + "\r\n" + 
+                              pGwyStr.outputMessage +"\r\n" + "Output3:" + "\r\n" + output3;                             
+    }
+    else {
+        error("ForwardFeAck is No");
+        pGwyStr.outputMessage = "Output1:" + "\r\n" + pGwyStr.outputMessage+ "\r\n" +"Output2:" + "\r\n" + pGwyStr.outputMessage ;
+    }
+    
+                            
+    return pGwyStr.outputMessage;
+}
+]]></Code>
+			<function-type>Formula</function-type>
+		</FormulaFunctionDef>
+		<FormulaFunctionDef name="createFinOrGpaAckOnDemand" type="FormulaFunctionDef">
+			<description></description>
+			<Category>User Defined</Category>
+			<parameterfields>
+				<parameterfield>
+					<name>pGwyStr</name>
+					<type>DataObject</type>
+					<message>pGwyStr</message>
+					<minoccurs>0</minoccurs>
+					<maxoccurs>1</maxoccurs>
+				</parameterfield>
+				<parameterfield>
+					<name>pModuleStr</name>
+					<type>DataObject</type>
+					<message>pModuleStrAck</message>
+					<minoccurs>0</minoccurs>
+					<maxoccurs>1</maxoccurs>
+				</parameterfield>
+				<parameterfield>
+					<name>fniGwyXFormAppAckConfig</name>
+					<type>DataObject</type>
+					<message>fniGwyXFormAppAckConfig</message>
+					<minoccurs>0</minoccurs>
+					<maxoccurs>1</maxoccurs>
+				</parameterfield>
+				<parameterfield>
+					<name>inputMessasge</name>
+					<type>String</type>
+				</parameterfield>
+			</parameterfields>
+			<ReturnType>Void</ReturnType>
+			<Code><![CDATA[def msgStart = null;
+def msgEndPt = null;
+def tmpChar;
+def sMsg = null;
+
+sMsg = strstr(inputMessasge, BLOCK1F01);
+if(sMsg != null) {
+    sMsg = Replace(sMsg, SESSPOS, SESSLEN, Mid(inputMessasge, SESSPOS, SESSLEN));
+    sMsg = Replace(sMsg, SEQNUMBERPOS, SEQNUMBERPOS, Mid(sMsg, SEQNUMBERPOS, SEQNUMBERLEN));
+}
+getDataFeedHeaders(pGwyStr, pModuleStr, fniGwyXFormAppAckConfig, inputMessasge);
+if(false) {
+}
+else {
+    addHeaderAndHistory(pGwyStr, pModuleStr, fniGwyXFormAppAckConfig, true);
+    msgEndPt = strstr(inputMessasge, "}}");
+    msgEndPt = msgEndPt + 2;
+    tmpChar = msgEndPt[0];
+    
+    Set(pGwyStr.outputMessage, Concat(pGwyStr.outputMessage, inputMessasge.leftstr("}}")+"}}"));
+}
+ 
+]]></Code>
+			<function-type>Formula</function-type>
+		</FormulaFunctionDef>
+		<FormulaFunctionDef name="getDataFeedHeaders" type="FormulaFunctionDef">
+			<description></description>
+			<Category>User Defined</Category>
+			<parameterfields>
+				<parameterfield>
+					<name>pGwyStr</name>
+					<type>DataObject</type>
+					<message>pGwyStr</message>
+					<minoccurs>0</minoccurs>
+					<maxoccurs>1</maxoccurs>
+				</parameterfield>
+				<parameterfield>
+					<name>pModuleStr</name>
+					<type>DataObject</type>
+					<message>pModuleStrAck</message>
+					<minoccurs>0</minoccurs>
+					<maxoccurs>1</maxoccurs>
+				</parameterfield>
+				<parameterfield>
+					<name>fniGwyXFormAppAckConfig</name>
+					<type>DataObject</type>
+					<message>fniGwyXFormAppAckConfig</message>
+					<minoccurs>0</minoccurs>
+					<maxoccurs>1</maxoccurs>
+				</parameterfield>
+				<parameterfield>
+					<name>input</name>
+					<type>String</type>
+				</parameterfield>
+			</parameterfields>
+			<ReturnType>Void</ReturnType>
+			<Code><![CDATA[def msgStart = null;
+def b2Start = null;
+def msgEndPt = null;
+def isIType;
+def timeBuf;
+def svcType;
+def histPt;
+def delPt;
+def tmpChar;
+def pSBlock;
+def pt;
+def ptEnd;
+def destApp = "{DESAPP";
+def sourceapp = "{SOURCEAPP:";
+def dtstring = FormatDate(Now(), "MM/dd/yyyy HH:mm:ss");
+Set(pModuleStr.dataFeedHeaders, dtstring);
+Set(pModuleStr.dataFeedHeaders, Concat(pModuleStr.dataFeedHeaders, "|"));
+pModuleStr.histPt = strstr(input, FNIHISTORY);
+if(pModuleStr.histPt != null) {
+    Set(pModuleStr.histPt, 
+        Mid(pModuleStr.histPt, FNIHISTORYLEN, Length(pModuleStr.histPt + 1) - FNIHISTORYLEN));
+}
+
+Set(pModuleStr.dataFeedHeaders, Concat(pModuleStr.dataFeedHeaders, "I|"));
+msgStart = strstr(input, BLOCK1);
+if(msgStart != null) {
+    Set(pModuleStr.dataFeedHeaders, 
+        Concat(pModuleStr.dataFeedHeaders, Mid(msgStart, B1LTPOS, LTLEN)));
+    Set(pModuleStr.dataFeedHeaders, Concat(pModuleStr.dataFeedHeaders, "|"));
+    Set(pModuleStr.dataFeedHeaders, 
+        Concat(pModuleStr.dataFeedHeaders, Mid(msgStart, B1BRPOS, BRLEN)));
+    Set(pModuleStr.dataFeedHeaders, Concat(pModuleStr.dataFeedHeaders, "|"));
+}
+else {
+    Set(pModuleStr.dataFeedHeaders, Concat(pModuleStr.dataFeedHeaders, "XXXXXXXXX"));
+    Set(pModuleStr.dataFeedHeaders, Concat(pModuleStr.dataFeedHeaders, "|"));
+    Set(pModuleStr.dataFeedHeaders, Concat(pModuleStr.dataFeedHeaders, "XXX"));
+    Set(pModuleStr.dataFeedHeaders, Concat(pModuleStr.dataFeedHeaders, "|"));
+}
+msgStart = strstr(input, BLOCK2);
+if(msgStart != null) {
+    Set(pModuleStr.dataFeedHeaders, 
+        Concat(pModuleStr.dataFeedHeaders, Mid(msgStart, B2ILTPOS, LTLEN)));
+    Set(pModuleStr.dataFeedHeaders, Concat(pModuleStr.dataFeedHeaders, "|"));
+    Set(pModuleStr.dataFeedHeaders, 
+        Concat(pModuleStr.dataFeedHeaders, Mid(msgStart, B2IBRPOS, BRLEN)));
+    Set(pModuleStr.dataFeedHeaders, Concat(pModuleStr.dataFeedHeaders, "|"));
+    Set(pModuleStr.dataFeedHeaders, 
+        Concat(pModuleStr.dataFeedHeaders, Mid(msgStart, B2MTPOS, MTLEN)));
+    Set(pModuleStr.dataFeedHeaders, Concat(pModuleStr.dataFeedHeaders, "|"));
+}
+else {
+    Set(pModuleStr.dataFeedHeaders, Concat(pModuleStr.dataFeedHeaders, "XXXXXXXXX"));
+    Set(pModuleStr.dataFeedHeaders, Concat(pModuleStr.dataFeedHeaders, "|"));
+    Set(pModuleStr.dataFeedHeaders, Concat(pModuleStr.dataFeedHeaders, "XXX"));
+    Set(pModuleStr.dataFeedHeaders, Concat(pModuleStr.dataFeedHeaders, "|"));
+    Set(pModuleStr.dataFeedHeaders, Concat(pModuleStr.dataFeedHeaders, "000"));
+    Set(pModuleStr.dataFeedHeaders, Concat(pModuleStr.dataFeedHeaders, "|"));
+}
+Set(pModuleStr.dataFeedHeaders, Concat(pModuleStr.dataFeedHeaders, "N"));
+Set(pModuleStr.dataFeedHeaders, Concat(pModuleStr.dataFeedHeaders, "|"));
+Set(pModuleStr.dataFeedHeaders, Concat(pModuleStr.dataFeedHeaders, "N"));
+Set(pModuleStr.dataFeedHeaders, Concat(pModuleStr.dataFeedHeaders, "|"));
+if(Val(fniGwyXFormAppAckConfig.PassAreaKey) == USECORRELATIONID) {
+    Set(pModuleStr.dataFeedHeaders, Concat(pModuleStr.dataFeedHeaders, pModuleStr.correlationData));
+}
+else {
+    Set(pModuleStr.dataFeedHeaders, Concat(pModuleStr.dataFeedHeaders, USEMERVA));
+}
+if(pModuleStr.histPt != null) {
+    msgStart = strstr(input, REFINDEX);
+    if(msgStart == null) {
+        Set(pModuleStr.dataFeedHeaders, Concat(pModuleStr.dataFeedHeaders, "N"));
+    }
+    else {
+        msgStart = strstr(msgStart, REF);
+        if(msgStart != null) {
+            msgStart = Mid(msgStart, Length(REF) + 1, TRNLEN);
+            Set(pModuleStr.dataFeedHeaders, Concat(pModuleStr.dataFeedHeaders, "|"));
+            Set(pModuleStr.dataFeedHeaders, Concat(pModuleStr.dataFeedHeaders, msgStart));
+        }
+        else {
+            Set(pModuleStr.dataFeedHeaders, Concat(pModuleStr.dataFeedHeaders, "|N"));
+        }
+        Set(pModuleStr.dataFeedHeaders, Concat(pModuleStr.dataFeedHeaders, "|OBI"));
+        Set(pModuleStr.dataFeedHeaders, Concat(pModuleStr.dataFeedHeaders, "|"));
+        Set(pModuleStr.dataFeedHeaders, 
+            Concat(pModuleStr.dataFeedHeaders, Val(fniGwyXFormAppAckConfig.Application)));
+        Set(pModuleStr.dataFeedHeaders, 
+            Concat(pModuleStr.dataFeedHeaders, FormatDate(Now(), "MMddyyyyHHmmssSSS")));
+        pSBlock = strstr(input, "{S:");
+        if(pSBlock != null) {
+            pt = strstr(pSBlock, destApp);
+            if(pt != null) {
+                pt = pt.RightStr(destApp);
+                if((Compare(pt, "CIBC")) == 0) {
+                    Set(pModuleStr.dataFeedHeaders, Replace(pModuleStr.dataFeedHeaders, DELPOS, 'C'));
+                }
+            }
+        }
+        else {
+            pt = strstr(pSBlock, sourceapp);
+            if(pt != null) {
+                pt = pt.RightStr(destApp);
+                if((Compare(pt, "CIBC")) == 0) {
+                    Set(pModuleStr.dataFeedHeaders, Replace(pModuleStr.dataFeedHeaders, DELPOS, 'C'));
+                }
+            }
+        }
+    }
+}
+]]></Code>
+			<function-type>Formula</function-type>
+		</FormulaFunctionDef>
+		<FormulaFunctionDef name="setupOnDemand" type="FormulaFunctionDef">
+			<description></description>
+			<Category>User Defined</Category>
+			<parameterfields>
+				<parameterfield>
+					<name>pGwyStr</name>
+					<type>DataObject</type>
+					<message>pGwyStr</message>
+					<minoccurs>0</minoccurs>
+					<maxoccurs>1</maxoccurs>
+				</parameterfield>
+			</parameterfields>
+			<ReturnType>String</ReturnType>
+			<Code><![CDATA[return null;]]></Code>
+			<function-type>Formula</function-type>
+		</FormulaFunctionDef>
+		<FormulaFunctionDef name="createFinOrGpaNFeackOnDemand" type="FormulaFunctionDef">
+			<description></description>
+			<Category>User Defined</Category>
+			<parameterfields>
+				<parameterfield>
+					<name>pGwyStr</name>
+					<type>DataObject</type>
+					<message>pGwyStr</message>
+					<minoccurs>0</minoccurs>
+					<maxoccurs>1</maxoccurs>
+				</parameterfield>
+				<parameterfield>
+					<name>pModuleStr</name>
+					<type>DataObject</type>
+					<message>pModuleStrAck</message>
+					<minoccurs>0</minoccurs>
+					<maxoccurs>1</maxoccurs>
+				</parameterfield>
+				<parameterfield>
+					<name>fniGwyXFormAppAckConfig</name>
+					<type>DataObject</type>
+					<message>fniGwyXFormAppAckConfig</message>
+					<minoccurs>0</minoccurs>
+					<maxoccurs>1</maxoccurs>
+				</parameterfield>
+				<parameterfield>
+					<name>inputMessasge</name>
+					<type>String</type>
+				</parameterfield>
+			</parameterfields>
+			<ReturnType>Void</ReturnType>
+			<Code><![CDATA[getDataFeedHeaders(pGwyStr, pModuleStr, fniGwyXFormAppAckConfig, inputMessasge);
+if(pModuleStr.dataFeedHeaders.IsNull()) {
+}
+else {
+    
+    addHeaderAndHistory(pGwyStr, pModuleStr, fniGwyXFormAppAckConfig, true);
+    def inputMessasgeTrans = inputMessasge.LeftStr("MsgTrace:");
+    def splitchar;
+    if(inputMessasgeTrans.Length() > 0) {
+             
+                def b4inputMessasgeTransfindreturn = inputMessasgeTrans.FindFirst("\r");
+                def b4inputMessasgeTransfindnewline = inputMessasgeTrans.FindFirst("\n");
+                if(b4inputMessasgeTransfindreturn != -1 && b4inputMessasgeTransfindnewline != -1 && 
+                     b4inputMessasgeTransfindreturn < b4inputMessasgeTransfindnewline) {
+                    splitchar = "\r\n";
+                }
+                else
+                    splitchar = "\n";
+                   
+                    }
+                     def splitinputMessasgeTrans = Split(splitchar, inputMessasgeTrans);
+    if(splitinputMessasgeTrans.Length() > 0) {
+        Set(pGwyStr.outputMessage, Concat(pGwyStr.outputMessage, splitinputMessasgeTrans[0]));
+    }
+    if(splitinputMessasgeTrans.Length() > 1) {
+        Set(pGwyStr.outputMessage, Concat(pGwyStr.outputMessage, splitinputMessasgeTrans[2]));
+    }
+}
+]]></Code>
+			<function-type>Formula</function-type>
+		</FormulaFunctionDef>
+		<FormulaFunctionDef name="addHeaderAndHistory" type="FormulaFunctionDef">
+			<description></description>
+			<Category>User Defined</Category>
+			<parameterfields>
+				<parameterfield>
+					<name>pGwyStr</name>
+					<type>DataObject</type>
+					<message>pGwyStr</message>
+					<minoccurs>0</minoccurs>
+					<maxoccurs>1</maxoccurs>
+				</parameterfield>
+				<parameterfield>
+					<name>pModuleStr</name>
+					<type>DataObject</type>
+					<message>pModuleStrAck</message>
+					<minoccurs>0</minoccurs>
+					<maxoccurs>1</maxoccurs>
+				</parameterfield>
+				<parameterfield>
+					<name>fniGwyXFormAppAckConfig</name>
+					<type>DataObject</type>
+					<message>fniGwyXFormAppAckConfig</message>
+					<minoccurs>0</minoccurs>
+					<maxoccurs>1</maxoccurs>
+				</parameterfield>
+				<parameterfield>
+					<name>boolvalue</name>
+					<type>Boolean</type>
+					<required>false</required>
+				</parameterfield>
+			</parameterfields>
+			<ReturnType>Void</ReturnType>
+			<Code><![CDATA[def msgStart = null;
+def msgEnd = null;
+def msgEnd1 = null;
+def tmpChar;
+def pt;
+def pEnd;
+def firstTime;
+def buf;
+def sSOURCEREFERENCE = "%%%SOURCEREFERENCE: ";
+def sFROMSEQ = "%%%FROMSEQ: ";
+def sFROMTIME = "%%%FROMTIME: ";
+def sCID = "%%%CID: ";
+def sNAMEKEY = "%%%NAMEKEY: ";
+def block3 = "{3:";
+def block4 = "{4:";
+def closingbraces = "}";
+def pt1;
+Set(pGwyStr.outputMessage, pModuleStr.dataFeedHeaders);
+Set(pGwyStr.outputMessage, Concat(pGwyStr.outputMessage, "\n"));
+pModuleStr.nScFlag = false;
+if(true) {
+    msgStart = strstr(pGwyStr.inputMessage, BLOCK1F01);
+    if(msgStart == null) {
+        msgStart = strstr(pGwyStr.inputMessage, BLOCK2);
+        if(msgStart == null) {
+            msgStart = strstr(pGwyStr.inputMessage, block3);
+            if(msgStart == null) {
+                msgStart = strstr(pGwyStr.inputMessage, block4);
+                if(msgStart == null) {
+                    msgStart = pGwyStr.inputMessage;
+                }
+            }
+        }
+    }
+    if(msgStart != null) {
+        msgEnd = strstr(msgStart, FNIHISTORY);
+        Set(pGwyStr.outputMessage, Concat(pGwyStr.outputMessage, msgStart.LeftStr(FNIHISTORY)));
+        Set(pGwyStr.outputMessage, Concat(pGwyStr.outputMessage, "\r\n"));
+    }
+}
+else {
+    msgStart = strstr(pGwyStr.inputMessage, BLOCK1);
+    if(msgStart != null) {
+        msgEnd = strstr(msgStart, FNIHISTORY);
+        Set(pGwyStr.outputMessage, Concat(pGwyStr.outputMessage, msgStart));
+        Set(pGwyStr.outputMessage, Concat(pGwyStr.outputMessage, "\r\n"));
+    }
+    else {
+        msgEnd = strstr(pGwyStr.inputMessage, FNIHISTORY);
+        pModuleStr.nScFlag = true;
+        Set(pGwyStr.outputMessage, Concat(pGwyStr.outputMessage, pGwyStr.inputMessage));
+        Set(pGwyStr.outputMessage, Concat(pGwyStr.outputMessage, "\r\n"));
+    }
+}
+Set(pGwyStr.outputMessage, Concat(pGwyStr.outputMessage, HISTORY));
+Set(pGwyStr.outputMessage, Concat(pGwyStr.outputMessage, "\r\n"));
+Set(pGwyStr.outputMessage, Concat(pGwyStr.outputMessage, pModuleStr.histPt));
+Set(pGwyStr.outputMessage, Concat(pGwyStr.outputMessage, "\r\n"));
+if(Val(fniGwyXFormAppAckConfig.Application) == "FTS") {
+    Set(pGwyStr.outputMessage, Concat(pGwyStr.outputMessage, "\r\n"));
+}
+pt = strstr(pGwyStr.inputMessage, ORGMTSTRN);
+if(pt != null) {
+    Set(pGwyStr.outputMessage, Concat(pGwyStr.outputMessage, "%%%Original MTS TRN:"));
+    pt = pt.RightStr(ORGMTSTRN);
+    pEnd = strstr(pt, closingbraces);
+    Set(pGwyStr.outputMessage, Concat(pGwyStr.outputMessage, pt));
+    Set(pGwyStr.outputMessage, Concat(pGwyStr.outputMessage, "\r\n"));
+}
+pt = strstr(pGwyStr.inputMessage, ASN);
+if(pt != null) {
+    Set(pGwyStr.outputMessage, Concat(pGwyStr.outputMessage, "%%%ASN:"));
+    pt = pt.RightStr(ASN).LeftStr(closingbraces);
+    pEnd = strstr(pt, closingbraces);
+    Set(pGwyStr.outputMessage, Concat(pGwyStr.outputMessage, pt));
+    Set(pGwyStr.outputMessage, Concat(pGwyStr.outputMessage, "\r\n"));
+}
+pt = strstr(pGwyStr.inputMessage, ORIGASN);
+if(pt != null) {
+    Set(pGwyStr.outputMessage, Concat(pGwyStr.outputMessage, "%%%ORIGASN:"));
+    pt = pt.RightStr(ORIGASN).LeftStr(closingbraces);
+    pEnd = strstr(pt, closingbraces);
+    Set(pGwyStr.outputMessage, Concat(pGwyStr.outputMessage, pt));
+    Set(pGwyStr.outputMessage, Concat(pGwyStr.outputMessage, "\r\n"));
+}
+pt = strstr(pGwyStr.inputMessage, TIMECMPLT);
+if(pt != null) {
+    Set(pGwyStr.outputMessage, Concat(pGwyStr.outputMessage, "%%%TIMECMPLT:"));
+    pt = pt.RightStr(TIMECMPLT).LeftStr(closingbraces);
+    pEnd = strstr(pt, closingbraces);
+    Set(pGwyStr.outputMessage, Concat(pGwyStr.outputMessage, pt));
+    Set(pGwyStr.outputMessage, Concat(pGwyStr.outputMessage, "\r\n"));
+}
+pt = strstr(pGwyStr.inputMessage, ACCNUM);
+if(pt != null) {
+    Set(pGwyStr.outputMessage, Concat(pGwyStr.outputMessage, "%%%ACCNUM:"));
+    pt = pt.RightStr(ACCNUM).LeftStr(closingbraces);
+    pEnd = strstr(pt, closingbraces);
+    Set(pGwyStr.outputMessage, Concat(pGwyStr.outputMessage, pt));
+    Set(pGwyStr.outputMessage, Concat(pGwyStr.outputMessage, "\r\n"));
+}
+pt = strstr(pGwyStr.inputMessage, TRNPA);
+if(pt != null) {
+    Set(pGwyStr.outputMessage, Concat(pGwyStr.outputMessage, "%%%TRNPA:"));
+    pt = pt.RightStr(TRNPA).LeftStr(closingbraces);
+    pEnd = strstr(pt, closingbraces);
+    Set(pGwyStr.outputMessage, Concat(pGwyStr.outputMessage, pt));
+    Set(pGwyStr.outputMessage, Concat(pGwyStr.outputMessage, "\r\n"));
+}
+pt = strstr(pGwyStr.inputMessage, ORIGDEPT);
+if(pt != null) {
+    Set(pGwyStr.outputMessage, Concat(pGwyStr.outputMessage, "%%%ORIGDEPT:"));
+    pt = pt.RightStr(ORIGDEPT).LeftStr(closingbraces);
+    pEnd = strstr(pt, closingbraces);
+    Set(pGwyStr.outputMessage, Concat(pGwyStr.outputMessage, pt));
+    Set(pGwyStr.outputMessage, Concat(pGwyStr.outputMessage, "\r\n"));
+}
+pt = strstr(pGwyStr.inputMessage, CHRGACCT);
+if(pt != null) {
+    Set(pGwyStr.outputMessage, Concat(pGwyStr.outputMessage, "%%%CHRGACCT:"));
+    pt = pt.RightStr(CHRGACCT).LeftStr(closingbraces);
+    pEnd = strstr(pt, closingbraces);
+    Set(pGwyStr.outputMessage, Concat(pGwyStr.outputMessage, pt));
+    Set(pGwyStr.outputMessage, Concat(pGwyStr.outputMessage, "\r\n"));
+}
+pt = strstr(pGwyStr.inputMessage, RECVADD1);
+if(pt != null) {
+    Set(pGwyStr.outputMessage, Concat(pGwyStr.outputMessage, "%%%RECVADD1:"));
+    pt = pt.RightStr(RECVADD1).LeftStr(closingbraces);
+    pEnd = strstr(pt, closingbraces);
+    Set(pGwyStr.outputMessage, Concat(pGwyStr.outputMessage, pt));
+    Set(pGwyStr.outputMessage, Concat(pGwyStr.outputMessage, "\r\n"));
+}
+pt = strstr(pGwyStr.inputMessage, RECVADD2);
+if(pt != null) {
+    Set(pGwyStr.outputMessage, Concat(pGwyStr.outputMessage, "%%%RECVADD2:"));
+    pt = pt.RightStr(RECVADD2).LeftStr(closingbraces);
+    pEnd = strstr(pt, closingbraces);
+    Set(pGwyStr.outputMessage, Concat(pGwyStr.outputMessage, pt));
+    Set(pGwyStr.outputMessage, Concat(pGwyStr.outputMessage, "\r\n"));
+}
+pt = strstr(pGwyStr.inputMessage, RECVADD3);
+if(pt != null) {
+    Set(pGwyStr.outputMessage, Concat(pGwyStr.outputMessage, "%%%RECVADD3:"));
+    pt = pt.RightStr(RECVADD3).LeftStr(closingbraces);
+    pEnd = strstr(pt, closingbraces);
+    Set(pGwyStr.outputMessage, Concat(pGwyStr.outputMessage, pt));
+    Set(pGwyStr.outputMessage, Concat(pGwyStr.outputMessage, "\r\n"));
+}
+pt = strstr(pGwyStr.inputMessage, RECVADD4);
+if(pt != null) {
+    Set(pGwyStr.outputMessage, Concat(pGwyStr.outputMessage, "%%%RECVADD4:"));
+    pt = pt.RightStr(RECVADD4).LeftStr(closingbraces);
+    pEnd = strstr(pt, closingbraces);
+    Set(pGwyStr.outputMessage, Concat(pGwyStr.outputMessage, pt));
+    Set(pGwyStr.outputMessage, Concat(pGwyStr.outputMessage, "\r\n"));
+}
+pt = strstr(pGwyStr.inputMessage, CHRGADD1);
+if(pt != null) {
+    Set(pGwyStr.outputMessage, Concat(pGwyStr.outputMessage, "%%%CHRGADD1:"));
+    pt = pt.RightStr(CHRGADD1).LeftStr(closingbraces);
+    pEnd = strstr(pt, closingbraces);
+    Set(pGwyStr.outputMessage, Concat(pGwyStr.outputMessage, pt));
+    Set(pGwyStr.outputMessage, Concat(pGwyStr.outputMessage, "\r\n"));
+}
+pt = strstr(pGwyStr.inputMessage, CHRGADD2);
+if(pt != null) {
+    Set(pGwyStr.outputMessage, Concat(pGwyStr.outputMessage, "%%%CHRGADD2:"));
+    pt = pt.RightStr(CHRGADD2).LeftStr(closingbraces);
+    pEnd = strstr(pt, closingbraces);
+    Set(pGwyStr.outputMessage, Concat(pGwyStr.outputMessage, pt));
+    Set(pGwyStr.outputMessage, Concat(pGwyStr.outputMessage, "\r\n"));
+}
+pt = strstr(pGwyStr.inputMessage, CHRGADD3);
+if(pt != null) {
+    Set(pGwyStr.outputMessage, Concat(pGwyStr.outputMessage, "%%%CHRGADD3:"));
+    pt = pt.RightStr(CHRGADD3).LeftStr(closingbraces);
+    pEnd = strstr(pt, closingbraces);
+    Set(pGwyStr.outputMessage, Concat(pGwyStr.outputMessage, pt));
+    Set(pGwyStr.outputMessage, Concat(pGwyStr.outputMessage, "\r\n"));
+}
+pt = strstr(pGwyStr.inputMessage, CHRGADD4);
+if(pt != null) {
+    Set(pGwyStr.outputMessage, Concat(pGwyStr.outputMessage, "%%%CHRGADD4:"));
+    pt = pt.RightStr(CHRGADD4).LeftStr(closingbraces);
+    pEnd = strstr(pt, closingbraces);
+    Set(pGwyStr.outputMessage, Concat(pGwyStr.outputMessage, pt));
+    Set(pGwyStr.outputMessage, Concat(pGwyStr.outputMessage, "\r\n"));
+}
+pt = strstr(pGwyStr.inputMessage, MSGID);
+if(pt != null) {
+    Set(pGwyStr.outputMessage, Concat(pGwyStr.outputMessage, "%%%MSGID:"));
+    pt = pt.RightStr(MSGID).LeftStr(closingbraces);
+    pEnd = strstr(pt, closingbraces);
+    Set(pGwyStr.outputMessage, Concat(pGwyStr.outputMessage, pt));
+    Set(pGwyStr.outputMessage, Concat(pGwyStr.outputMessage, "\r\n"));
+}
+pt = strstr(pGwyStr.inputMessage, CID);
+if(pt != null) {
+    Set(pGwyStr.outputMessage, Concat(pGwyStr.outputMessage, "%%%CID:"));
+    pt = pt.RightStr(CID).LeftStr(closingbraces);
+    pEnd = strstr(pt, closingbraces);
+    Set(pGwyStr.outputMessage, Concat(pGwyStr.outputMessage, pt));
+    Set(pGwyStr.outputMessage, Concat(pGwyStr.outputMessage, "\r\n"));
+}
+pt = strstr(pGwyStr.inputMessage, NAMEKEY);
+if(pt != null) {
+    Set(pGwyStr.outputMessage, Concat(pGwyStr.outputMessage, "%%%SENDER NAME KEY:"));
+    pt = pt.RightStr(NAMEKEY).LeftStr(closingbraces);
+    pEnd = strstr(pt, closingbraces);
+    Set(pGwyStr.outputMessage, Concat(pGwyStr.outputMessage, pt));
+    Set(pGwyStr.outputMessage, Concat(pGwyStr.outputMessage, "\r\n"));
+}
+pt = strstr(pGwyStr.inputMessage, MRVTRC);
+firstTime = true;
+while(pt != null) {
+    if(firstTime) {
+        Set(pGwyStr.outputMessage, Concat(pGwyStr.outputMessage, "%%%MERVA TRACE:"));
+        Set(pGwyStr.outputMessage, Concat(pGwyStr.outputMessage, "\r\n"));
+        firstTime = false;
+    }
+    pt = pt.RightStr(MRVTRC).LeftStr(closingbraces);
+    pEnd = strstr(pt, "}");
+    Set(pGwyStr.outputMessage, Concat(pGwyStr.outputMessage, pt));
+    Set(pGwyStr.outputMessage, Concat(pGwyStr.outputMessage, "\r\n"));
+}
+if(pModuleStr.cibcMsg) {
+    Set(pGwyStr.outputMessage, Concat(pGwyStr.outputMessage, sSOURCEREFERENCE));
+    pt = strstr(pModuleStr.sBlockPt, SOURCEREFERENCE);
+    if(pt != null) {
+        pt = pt.RightStr(SOURCEREFERENCE).LeftStr(closingbraces);
+        pt1 = strstr(pt, closingbraces);
+        Set(pGwyStr.outputMessage, Concat(pGwyStr.outputMessage, pt));
+        Set(pGwyStr.outputMessage, Concat(pGwyStr.outputMessage, "\r\n"));
+    }
+    Set(pGwyStr.outputMessage, Concat(pGwyStr.outputMessage, sFROMSEQ));
+    pt = strstr(pModuleStr.sBlockPt, FROMSEQ);
+    if(pt != null) {
+        pt = pt.RightStr(FROMSEQ).LeftStr(closingbraces);
+        pt1 = strstr(pt, closingbraces);
+        Set(pGwyStr.outputMessage, Concat(pGwyStr.outputMessage, pt));
+        Set(pGwyStr.outputMessage, Concat(pGwyStr.outputMessage, "\r\n"));
+    }
+    pt = strstr(pModuleStr.sBlockPt, sFROMTIME);
+    if(pt != null) {
+        pt = pt.RightStr(sFROMTIME).LeftStr(closingbraces);
+        pt1 = strstr(pt, closingbraces);
+        Set(pGwyStr.outputMessage, Concat(pGwyStr.outputMessage, pt));
+        Set(pGwyStr.outputMessage, Concat(pGwyStr.outputMessage, "\r\n"));
+    }
+}
+Set(pGwyStr.outputMessage, Concat(pGwyStr.outputMessage, "\r\n"));
+if(pGwyStr.outputMessage.EndsWith("\r\n\r\n\r\n")) {
+    pGwyStr.outputMessage = Left(pGwyStr.outputMessage, pGwyStr.outputMessage.Length() - 2);
+}
+if(fniGwyXFormAppAckConfig.Application == "FTS" && (pGwyStr.outputMessage.EndsWith("\r\n\r\n"))) {
+    pGwyStr.outputMessage = Left(pGwyStr.outputMessage, pGwyStr.outputMessage.Length() - 2);
+}
+Set(pGwyStr.outputMessage, Concat(pGwyStr.outputMessage, APPLICATIONID));
+if(boolvalue == false) {
+    Set(pGwyStr.outputMessage, Concat(pGwyStr.outputMessage, GPA));
+    if(pModuleStr.nScFlag) {
+        Set(pGwyStr.outputMessage, Concat(pGwyStr.outputMessage, "\r\n"));
+        Set(pGwyStr.outputMessage, Concat(pGwyStr.outputMessage, ACKNOWLEDGEMENT));
+        Set(pGwyStr.outputMessage, Concat(pGwyStr.outputMessage, "\r\n"));
+        pModuleStr.nScFlag = false;
+    }
+}
+if(boolvalue == true) {
+    if(pModuleStr.cibcMsg) {
+        Set(pGwyStr.outputMessage, Concat(pGwyStr.outputMessage, "CIBC"));
+    }
+    else {
+        Set(pGwyStr.outputMessage, 
+            Concat(pGwyStr.outputMessage, Val(fniGwyXFormAppAckConfig.Application)));
+    }
+    Set(pGwyStr.outputMessage, Concat(pGwyStr.outputMessage, "\r\n"));
+    Set(pGwyStr.outputMessage, Concat(pGwyStr.outputMessage, ACKNOWLEDGEMENT));
+    Set(pGwyStr.outputMessage, Concat(pGwyStr.outputMessage, "\r\n"));
+}
+]]></Code>
+			<function-type>Formula</function-type>
+		</FormulaFunctionDef>
+		<elementproperties>
+			<propertymap>
+			</propertymap>
+		</elementproperties>
+	</folder>
+	<elementproperties>
+		<propertymap>
+			<property name="DOCUMENT_PROPERTIES">
+				<value>
+					<propertymap>
+						<property name="Creation Time" value="Wed Apr 12 11:04:53 IST 2017"/>
+						<property name="Author" value="krishnan"/>
+						<property name="Title" value="fniGwyXFormSwfOsn"/>
+						<property name="Client Id" value="venkat_hyd@volantetech.com"/>
+						<property name="Last Author" value="sys"/>
+						<property name="Last Save Time" value="Wed Nov 01 14:47:41 IST 2017"/>
+						<property name="Designer Build" value="1629"/>
+						<property name="Revision Number" value="272"/>
+					</propertymap>
+				</value>
+			</property>
+			<property name="CARTRIDGE_INFO">
+				<value>
+					<propertymap type="com.tplus.transform.design.CartridgeInfo">
+						<property name="GeneratedFiles">
+							<value>
+								<propertymap>
+								</propertymap>
+							</value>
+						</property>
+						<property name="cartridgefilename" value="E:\Projects\12-10-17\EMX_FULL\EMX_FULL\BusinessModules\fniGwyXFormAppAck\fniGwyXFormAppAck.car"/>
+					</propertymap>
+				</value>
+			</property>
+			<property name="codegen.java.options">
+				<value>
+					<propertymap type="com.tplus.transform.design.codegen.java.JavaCodeGeneratorOptions">
+						<property name="isJBoss" value="true"/>
+						<property name="resource-references">
+							<value>
+								<propertylist>
+								</propertylist>
+							</value>
+						</property>
+						<property name="isWAR" value="false"/>
+						<property name="isOSGI" value="true"/>
+						<property name="isGenerateALSB" value="false"/>
+						<property name="isEJB" value="true"/>
+						<property name="osgi-options">
+							<value>
+								<propertymap>
+									<property name="include-dependencies" value="false"/>
+								</propertymap>
+							</value>
+						</property>
+						<property name="isOrion" value="true"/>
+						<property name="isWebSphere" value="true"/>
+						<property name="isVolante" value="true"/>
+						<property name="isRemote" value="true"/>
+						<property name="isLocal" value="true"/>
+						<property name="isWebLogic" value="true"/>
+						<property name="isGeronimo" value="true"/>
+						<property name="isGenerateJNDILinks" value="true"/>
+						<property name="isWLEVS" value="false"/>
+						<property name="ejb-jndi-prefix" value=""/>
+						<property name="isGenerateEAR" value="false"/>
+					</propertymap>
+				</value>
+			</property>
+			<property name="codegen.java.properties">
+				<value>
+					<propertymap type="com.tplus.transform.design.PropertiesDef">
+						<property name="Java Package Name" value="com.transform.cartridge.%c"/>
+						<property name="Max Class Length" value="150"/>
+					</propertymap>
+				</value>
+			</property>
+			<property name="testsuites">
+				<value>
+					<propertylist>
+					</propertylist>
+				</value>
+			</property>
+			<property name="WebServiceDefs">
+				<value>
+					<propertymap>
+						<property name="webservices">
+							<value>
+								<propertylist>
+								</propertylist>
+							</value>
+						</property>
+					</propertymap>
+				</value>
+			</property>
+			<property name="codegen.java.bindings">
+				<value>
+					<propertymap type="com.tplus.transform.design.codegen.DefaultLanguageMapping">
+					</propertymap>
+				</value>
+			</property>
+			<property name="codegen.java.general">
+				<value>
+					<propertymap>
+						<property name="additionalClasspath" value=""/>
+						<property name="debugInfo" value="false"/>
+					</propertymap>
+				</value>
+			</property>
+		</propertymap>
+	</elementproperties>
+	<workspace>
+		<selected-element root="E:\Projects\12-10-17\EMX_FULL\EMX_FULL\BusinessModules\fniGwyXFormAppAck\fniGwyXFormAppAck.car">fniGwyXFormSwfAck/Function Definitions/bmProcessACK</selected-element>
+	</workspace>
+</cartridge>
+

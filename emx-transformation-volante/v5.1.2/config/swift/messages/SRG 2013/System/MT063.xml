@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<SwiftMessageFormat name="MT063">
+	<standard-version><![CDATA[SRG 2012]]></standard-version>
+	<DescriptiveName><![CDATA[Non-Banking Days List Report]]></DescriptiveName>
+	<Category><![CDATA[System]]></Category>
+	<Description><![CDATA[This message lists the non-banking days worldwide during the next two weeks. It is the response to an MT 043 Non-Banking Days List Request.
+
+Note: Non-banking days for a country refer to full holidays applying to the entire country. Half-day holidays or holidays applying to parts of a country are not included in these reports.
+
+From: GPA                                                       To: User]]></Description>
+	<SwiftFields>
+		<customizable>false</customizable>
+		<modifiable>true</modifiable>
+		<SwiftMessageType>System</SwiftMessageType>
+		<HeaderAndTrailerType>SWIFT_INPUT_HEADER</HeaderAndTrailerType>
+		<Header>
+		</Header>
+		<Data>
+			<Fields>
+				<SystemField Name="section-number">
+					<description><![CDATA[Sequential section number, beginning with 0001, to identify the position of an individual message in a multiple-section message.]]></description>
+					<datatype>String</datatype>
+					<required>true</required>
+					<SwiftSystemFieldDef Name="section-number" Tag="202">
+						<Format><![CDATA[4!n]]></Format>
+						<Specification><![CDATA[(section-number)]]></Specification>
+						<Description><![CDATA[Sequential section number, beginning with 0001,to identify the position of an individual message in a multiple-section message.]]></Description>
+						<Validations>
+							<Validation>
+								<formula>(ToInt($value) &gt; 0)</formula>
+								<error-code>V07</error-code>
+								<actionmessage>"Invalid Section Number '" + $value + "'"</actionmessage>
+							</Validation>
+						</Validations>
+					</SwiftSystemFieldDef>
+				</SystemField>
+				<SystemField Name="total-sections">
+					<description><![CDATA[Total number of sections in a multi-section message.]]></description>
+					<datatype>String</datatype>
+					<required>true</required>
+					<SwiftSystemFieldDef Name="total-sections" Tag="203">
+						<Format><![CDATA[4!n]]></Format>
+						<Specification><![CDATA[(total-sections)]]></Specification>
+						<Description><![CDATA[Total number of sections in a multi-section message.]]></Description>
+					</SwiftSystemFieldDef>
+				</SystemField>
+				<SystemField Name="date-range">
+					<description><![CDATA[Date range, containing:
+
+a)  Start date
+
+b)  End date]]></description>
+					<datatype>Section</datatype>
+					<minoccurs>1</minoccurs>
+					<maxoccurs>1</maxoccurs>
+					<SwiftSystemFieldDef Name="date-range" Tag="172">
+						<Format><![CDATA[(4!n)(4!n)]]></Format>
+						<Specification><![CDATA[(start-date)(end-date)]]></Specification>
+						<Additional-Format><![CDATA[MMDD MMDD]]></Additional-Format>
+						<Description><![CDATA[Date range, containing:
+
+a)  Start date
+
+b)  End date]]></Description>
+						<Validations>
+							<Validation>
+								<subfield>start-date</subfield>
+								<formula>IsDate($value,"MMdd")</formula>
+								<error-code>V04</error-code>
+								<actionmessage>"Invalid Start Date '" + $value + "'. start-date should be in the format MMdd."</actionmessage>
+							</Validation>
+							<Validation>
+								<subfield>end-date</subfield>
+								<formula>IsDate($value,"MMdd")</formula>
+								<error-code>V04</error-code>
+								<actionmessage>"Invalid End Date '" + $value + "'. end-date should be in the format MMdd."</actionmessage>
+							</Validation>
+						</Validations>
+					</SwiftSystemFieldDef>
+				</SystemField>
+				<SystemField Name="non-banking-days">
+					<description><![CDATA[Can be repeated as many times as there are regions requested. For each country there can be a maximum of 14 dates.]]></description>
+					<datatype>Section</datatype>
+					<minoccurs>1</minoccurs>
+					<maxoccurs>-1</maxoccurs>
+					<SwiftSystemFieldDef Name="non-banking-days" Tag="340">
+						<Format><![CDATA[(2!a)([56n])]]></Format>
+						<Specification><![CDATA[(country-code)(dates)]]></Specification>
+						<Additional-Format><![CDATA[<country-code> 2!a [<MMDD>[*1-14 ]]]]></Additional-Format>
+						<Description><![CDATA[Can be repeated as many times as there are regions requested. For each country there can be a maximum of 14 dates.]]></Description>
+					</SwiftSystemFieldDef>
+				</SystemField>
+			</Fields>
+		</Data>
+		<Trailer>
+		</Trailer>
+	</SwiftFields>
+	<validationrules name="Default">
+		<hdrvalidationrules>
+			<fieldvalidations>
+			</fieldvalidations>
+		</hdrvalidationrules>
+		<datavalidationrules>
+			<fieldvalidations>
+			</fieldvalidations>
+		</datavalidationrules>
+		<tlrvalidationrules>
+			<fieldvalidations>
+			</fieldvalidations>
+		</tlrvalidationrules>
+	</validationrules>
+</SwiftMessageFormat>
+

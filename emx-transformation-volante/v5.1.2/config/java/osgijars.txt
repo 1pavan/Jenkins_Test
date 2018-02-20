@@ -1,0 +1,10 @@
+file:/${DESIGNER_HOME}\lib\runtime\resourcemanager.jar
+file:/${DESIGNER_HOME}\lib\runtime\jta.jar
+file:/${DESIGNER_HOME}\lib\runtime\generalutils.jar
+#foreach($jar in ${JARFILES})
+file:/${jar}
+#end
+file:/${DESIGNER_HOME}\lib\runtime\volante-osgirt.jar
+file:/${DESIGNER_HOME}\lib\runtime\volante-client.jar
+
+

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="iso-8859-1" standalone="no"?>
+<conductorcategory name="Structured">
+	<flowelement type="Sequence">
+	</flowelement>
+	<flowelement type="Loop">
+	</flowelement>
+	<flowelement type="Switch">
+	</flowelement>
+	<flowelement type="Case">
+	</flowelement>
+</conductorcategory>
+

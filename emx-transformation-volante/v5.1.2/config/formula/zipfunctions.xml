@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<formulae>
+    <formula name="GZip">
+        <description>Compresses using GZIP compression algorithm.</description>
+        <signature>GZip(message)</signature>
+        <category>ZIP</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.zip.ZIPFunctions"/>
+        <property name="method" value="gzip"/>
+    </formula>
+
+    <formula name="GUnzip">
+        <description>Uncompresses using GZIP compression algorithm.</description>
+        <signature>GUnzip(message)</signature>
+        <category>ZIP</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.zip.ZIPFunctions"/>
+        <property name="method" value="gunzip"/>
+    </formula>
+
+    <formula name="Inflate">
+        <description>Uncompresses using 'Inflate' compression algorithm.</description>
+        <signature>Inflate(message)</signature>
+        <category>ZIP</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.zip.ZIPFunctions"/>
+        <property name="method" value="inflate"/>
+    </formula>
+    <formula name="Deflate">
+        <description>Compresses using 'Deflate' compression algorithm.</description>
+        <signature>Deflate(message)</signature>
+        <category>ZIP</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.zip.ZIPFunctions"/>
+        <property name="method" value="deflate"/>
+    </formula>
+
+    <formula name="Unzip">
+        <description>Extract a file or all files in the zip.</description>
+        <signature>Unzip(message, fileNameOpt)</signature>
+        <category>ZIP</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.zip.ZIPFunctions"/>
+        <property name="method" value="unzip"/>
+    </formula>
+    
+    <formula name="Zip">
+        <description>Zips the rawMessage(s) passed. Each raw message should have its name property set.</description>
+        <signature>Zip(messages)</signature>
+        <category>ZIP</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.zip.ZIPFunctions"/>
+        <property name="method" value="zip"/>
+    </formula>
+
+</formulae>

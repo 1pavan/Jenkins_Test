@@ -1,0 +1,127 @@
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="unqualified" attributeFormDefault="unqualified">
+	<!-- include constructs -->
+	<xsd:include schemaLocation="externalmsg.xsd"/>
+	<xsd:complexType name="FastFormat">
+		<xsd:complexContent>
+			<xsd:extension base="ExternalMessageType"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:element name="Fastfields" substitutionGroup="ExternalMessageFields">
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="ExternalMessageFieldsType">
+					<xsd:sequence>
+						<xsd:element name="defaultencoding">
+							<xsd:complexType>
+								<xsd:sequence>
+									<xsd:element name="fastencoding" type="fastencodingMsgLevel"/>
+								</xsd:sequence>
+							</xsd:complexType>
+						</xsd:element>
+						<xsd:element ref="target-namespace" minOccurs="0"/>
+						<xsd:element ref="xpath-namespaces" minOccurs="0"/>
+						<xsd:element ref="platforminfo" minOccurs="0"/>
+						<xsd:element ref="field-attributes" minOccurs="0"/>
+						<xsd:element name="headerfields" type="FastFieldStructType"/>
+						<xsd:element name="datafields" type="FastFieldStructType"/>
+						<xsd:element name="trailerfields" type="FastFieldStructType"/>
+					</xsd:sequence>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:complexType name="fastencodingMsgLevel">
+		<xsd:sequence>
+			<xsd:element name="name" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="templateNs" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="id" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="type-name" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="type-reset" type="xsd:boolean" minOccurs="0"/>
+			<xsd:element name="typeNs" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="dictionary" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="namespace" type="xsd:string" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="fastencodingFieldLevel">
+		<xsd:sequence>
+			<xsd:group ref="fastencodingelem"/>
+			<xsd:element name="exponent" minOccurs="0">
+				<xsd:complexType>
+					<xsd:group ref="fastencodingelem"/>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="mantissa" minOccurs="0">
+				<xsd:complexType>
+					<xsd:group ref="fastencodingelem"/>
+				</xsd:complexType>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:group name="fastencodingelem">
+		<xsd:sequence>
+			<xsd:element name="slot" type="xsd:integer" minOccurs="0"/>
+			<xsd:element name="fast-type" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="encode-operator" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="value" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="id" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="dictionary" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="key" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="namespace" type="xsd:string" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:group>
+	<xsd:complexType name="FastAbstractFieldType" abstract="true">
+		<xsd:sequence>
+			<xsd:element name="name" type="xsd:string"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="FastFieldStructType">
+		<xsd:sequence>
+			<xsd:element ref="platforminfo" minOccurs="0"/>
+			<xsd:element ref="field-attributes" minOccurs="0"/>
+			<xsd:element name="field" type="FastAbstractFieldType" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="FastFieldType">
+		<xsd:complexContent>
+			<xsd:extension base="FastAbstractFieldType">
+				<xsd:sequence>
+					<xsd:element name="datatype" type="xsd:string"/>
+					<xsd:element name="detailed-name" type="xsd:string" minOccurs="0"/>
+					<xsd:element name="description" type="xsd:string" minOccurs="0"/>
+					<xsd:element name="aliasname" type="xsd:string" minOccurs="0"/>
+					<xsd:element name="required" type="xsd:boolean" minOccurs="0"/>
+					<xsd:element name="defaultvalue" type="xsd:string" minOccurs="0"/>
+					<xsd:element name="dateformat" type="xsd:string" minOccurs="0"/>
+					<xsd:element name="fastencoding" type="fastencodingFieldLevel" minOccurs="0"/>
+					<xsd:element ref="platforminfo" minOccurs="0"/>
+					<xsd:element ref="field-attributes" minOccurs="0"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="FastSectionType">
+		<xsd:complexContent>
+			<xsd:extension base="FastAbstractFieldType">
+				<xsd:sequence>
+					<xsd:element name="datatype" type="xsd:string" fixed="Section"/>
+					<xsd:element name="detailed-name" type="xsd:string" minOccurs="0"/>
+					<xsd:element name="description" type="xsd:string" minOccurs="0"/>
+					<xsd:element name="aliasname" type="xsd:string" minOccurs="0"/>
+					<xsd:element name="minoccurs" type="xsd:integer"/>
+					<xsd:element name="maxoccurs" type="xsd:integer"/>
+					<xsd:element name="section-type" type="xsd:string"/>
+					<xsd:element name="required" type="xsd:boolean" minOccurs="0"/>
+					<xsd:element name="repeating" type="xsd:boolean" minOccurs="0"/>
+					<xsd:element name="slot" type="xsd:integer" minOccurs="0"/>
+					<xsd:element name="id" type="xsd:string" minOccurs="0"/>
+					<xsd:element name="dictionary" type="xsd:string" minOccurs="0"/>
+					<xsd:element name="dynamic-template-ref" type="xsd:boolean" minOccurs="0"/>
+					<xsd:element name="namespace" type="xsd:string" minOccurs="0"/>
+					<xsd:element name="discriminator" type="xsd:string" minOccurs="0"/>
+					<xsd:element name="fastencoding" type="fastencodingFieldLevel" minOccurs="0"/>
+					<xsd:element name="fields" type="FastFieldStructType"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+</xsd:schema>

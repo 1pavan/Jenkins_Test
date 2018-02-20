@@ -1,0 +1,2743 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<cartridge xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="5.1.1" name="BNYToSWIFTFunctions" type="Cartridge">
+	<version>1.0</version>
+	<private>
+		<summary>
+			<service name="SWIFTToSWIFT" version="1.0" type="Message Flow">
+				<description>Parses any SWIFT message and writes it back. This is to verify that SWIFT Generic parser and serializer are sound (BNYM is not used here). Since this is round trip and we are supposed to get back the same SWIFT message it is easy to test and verify.
+
+This has been extensively tested.
+</description>
+			</service>
+			<service name="BNYToSWIFT" version="1.0" type="Message Flow">
+				<description>Parses the given BNY message and transforms it to SWIFT</description>
+			</service>
+			<service name="SWIFTToBNY" version="1.0" type="Message Flow">
+				<description>Parses the given SWIFT message and transforms it to BNY</description>
+			</service>
+			<service name="SWIFTToBNYToSWIFT" version="1.0" type="Message Flow">
+				<description>Parses a SWIFT message, converts it to BNY, maps it to back to SWIFT and serializes SWIFT. Again this is a round trip, but it goes through BNY conversion. 
+
+Apart from the SWIFT header and trailer output should match the input. Header and trailer as lost because SWIFT to BNY mapping does not include header and trailer.
+
+Note that this roundtrip does not necessarily ensure that intermediate BNY representation is as per the table of instructions.
+</description>
+			</service>
+			<service name="BNYToSWIFTToBNY" version="1.0" type="Message Flow">
+			</service>
+			<service name="CIFTest" version="1.0" type="Message Flow">
+			</service>
+			<function name="BNYM_EndOfTag"/>
+			<function name="BNYM_EndOfLine"/>
+			<function name="BNYM_ParseMultiLineFormat"/>
+			<function name="BNYM_ParseMultiLineFormat"/>
+			<function name="BNYM_SerializeMultiLineFormat"/>
+			<function name="BNYM_PrepareLine"/>
+			<function name="BNYM_GetEmptyStrIfAllSpaces"/>
+			<function name="ParseSwiftGeneric"/>
+			<function name="ParseSwiftGeneric"/>
+			<function name="SerializeSwiftGeneric"/>
+			<function name="SerializeSwiftGeneric"/>
+			<function name="Get_NoOfLines"/>
+			<function name="Get_sending_Bank"/>
+			<function name="Get_Sending_TID"/>
+			<function name="Get_Tag_Description"/>
+			<function name="serialiseMultiLineValue"/>
+			<function name="Get_BIC"/>
+			<function name="BNYM_GetSenderDetails"/>
+			<function name="BNYM_GetBICCode"/>
+			<function name="getMsTypeDescription"/>
+			<function name="BNYM_EndOfTag_WithRecLen"/>
+			<function name="BNYM_EndOfLine_WithRecLen"/>
+			<function name="BNYM_ParseMultiLineFormat_WithRecLen"/>
+			<function name="BNYM_ParseMultiLineFormat_WithRecLen"/>
+			<function name="BNYM_SerializeMultiLineFormat_WithRecLen"/>
+			<function name="BNYM_PrepareLine_WithRecLen"/>
+			<function name="BNYM_CreditDebit_Length"/>
+			<function name="BNYM_Slash1_Length"/>
+			<function name="BNYM_PartyIdentifier_Length"/>
+			<function name="BNYM_SerializeFields"/>
+		</summary>
+	</private>
+	<folder name="Function Definitions" type="FunctionDefFolder">
+		<FormulaFunctionDef name="BNYM_EndOfTag" type="FormulaFunctionDef">
+			<description></description>
+			<Category>User Defined</Category>
+			<parameterfields>
+				<parameterfield>
+					<name>text</name>
+					<type>String</type>
+				</parameterfield>
+				<parameterfield>
+					<name>tag</name>
+					<type>String</type>
+				</parameterfield>
+				<parameterfield>
+					<name>currentIndex</name>
+					<type>Integer</type>
+				</parameterfield>
+				<parameterfield>
+					<name>maxLines</name>
+					<type>Integer</type>
+				</parameterfield>
+				<parameterfield>
+					<name>maxChars</name>
+					<type>Integer</type>
+				</parameterfield>
+				<parameterfield>
+					<name>currentLine</name>
+					<type>Integer</type>
+				</parameterfield>
+			</parameterfields>
+			<ReturnType>Integer</ReturnType>
+			<Code><![CDATA[if (text.length() == 0) return 0;
+
+def RECORD_LENGTH = 40;
+def TEXT_START = 5;
+def start = 0;
+//Multi Line and Out Of Memory--Start
+if(currentIndex==0)
+{
+currentLine = ToInt (text.Mid (3, 2));
+}
+//Multi Line and Out Of Memory--End//
+def prevLine = currentLine;
+if(currentIndex != 0) {
+    start += (RECORD_LENGTH - currentIndex);
+}
+else {
+	if (currentLine != ToInt (text.Mid (3, 2)))
+		return 0;
+	prevLine = currentLine - 1;
+}
+
+if (prevLine < 0) return 0;
+
+def lineCt = 0;
+def charCt = 0;
+
+for(def i = start; i < text.Length(); i += RECORD_LENGTH) {
+    def record = text.Mid(i, RECORD_LENGTH);
+    if(!record.StartsWith(tag)) {
+        return i;
+    }
+    def curLine = ToInt (text.Mid (i + 3, 2));
+    if ((curLine < prevLine) || (curLine > (prevLine + 1)))
+    	return i;
+    
+    if (curLine == prevLine) {
+    	if (charCt >= maxChars)
+    		return i;
+    	charCt += RECORD_LENGTH - TEXT_START;
+    }
+       
+    else {
+    	if (lineCt >= maxLines)
+    		return i;
+    	lineCt++;
+    	charCt = RECORD_LENGTH - TEXT_START;
+    }
+    
+     //Out of Memory Change--Start
+     
+   if(curLine >= maxLines )
+    	{   	
+    	maxLines =curLine+1;
+    	}
+    	  //Out of Memory Change--End
+    	  
+    prevLine = curLine;  
+    
+}
+return text.Length();]]></Code>
+			<function-type>Formula</function-type>
+		</FormulaFunctionDef>
+		<FormulaFunctionDef name="BNYM_EndOfLine" type="FormulaFunctionDef">
+			<description></description>
+			<Category>User Defined</Category>
+			<parameterfields>
+				<parameterfield>
+					<name>text</name>
+					<type>String</type>
+				</parameterfield>
+				<parameterfield>
+					<name>tag</name>
+					<type>String</type>
+				</parameterfield>
+				<parameterfield>
+					<name>currentLine</name>
+					<type>Integer</type>
+				</parameterfield>
+				<parameterfield>
+					<name>currentIndex</name>
+					<type>Integer</type>
+				</parameterfield>
+			</parameterfields>
+			<ReturnType>Integer</ReturnType>
+			<Code><![CDATA[def RECORD_LENGTH = 40;
+def start = 0;
+if(currentIndex != 0) {
+    start += (RECORD_LENGTH - currentIndex);
+}
+for(def i = start; i < text.Length(); i += RECORD_LENGTH) {
+    def record = text.Mid(i, RECORD_LENGTH);
+    if(!record.StartsWith(tag + lpad(totext(currentLine), '0', 2))) {
+        return i;
+    }
+}
+return text.Length();
+]]></Code>
+			<function-type>Formula</function-type>
+		</FormulaFunctionDef>
+		<FormulaFunctionDef name="BNYM_ParseMultiLineFormat" type="FormulaFunctionDef">
+			<description></description>
+			<Category>User Defined</Category>
+			<parameterfields>
+				<parameterfield>
+					<name>text</name>
+					<type>String</type>
+				</parameterfield>
+				<parameterfield>
+					<name>tag</name>
+					<type>String</type>
+				</parameterfield>
+			</parameterfields>
+			<ReturnType>String</ReturnType>
+			<Code><![CDATA[BNYM_parseMultiLineFormat(text, tag, 0, -1);]]></Code>
+			<function-type>Formula</function-type>
+		</FormulaFunctionDef>
+		<FormulaFunctionDef name="BNYM_ParseMultiLineFormat" type="FormulaFunctionDef">
+			<description></description>
+			<Category>User Defined</Category>
+			<parameterfields>
+				<parameterfield>
+					<name>text</name>
+					<type>String</type>
+				</parameterfield>
+				<parameterfield>
+					<name>tag</name>
+					<type>String</type>
+				</parameterfield>
+				<parameterfield>
+					<name>currentLine</name>
+					<type>Integer</type>
+				</parameterfield>
+				<parameterfield>
+					<name>currentIndex</name>
+					<type>Integer</type>
+				</parameterfield>
+			</parameterfields>
+			<ReturnType>String</ReturnType>
+			<Code><![CDATA[def RECORD_LENGTH = 40;
+def TEXT_START = 5;
+def multiLine = "";
+def start = 0;
+def len;
+if(currentIndex != 0) {
+
+    def lineText = text.Mid(0, RECORD_LENGTH - currentIndex);    
+  
+    len = Length(lineText.TrimRight());
+    //start
+    // Ignore the first empty line   
+    multiLine += lineText;    
+    //End
+    start = RECORD_LENGTH - currentIndex;
+}
+for(def i = start; i < text.Length(); i += RECORD_LENGTH) {
+    def record = text.Mid(i, RECORD_LENGTH);
+    def recordTag = record.Left(3);
+   
+    if(tag != recordTag) {
+        break;
+    }
+    def line = ToInt(record.Mid(3, 2));
+    def lineText = record.Mid(TEXT_START, record.Length() - TEXT_START);
+    if(currentLine == -1) {
+        currentLine = line;;
+    }
+    else if(line != currentLine) {
+    
+        multiLine = multiLine.trimRight();
+       //Start 
+        //Combine the multi lines without adding the "crlf" character if the first line is blank
+        
+        if(multiLine.Length()>0)
+        {
+        multiLine += "\r\n";
+        }
+        
+        //End 
+        
+        currentLine = line;
+    }  
+    
+    multiLine += lineText;
+   
+}
+if(multiLine.trimRight().Length()!=0)
+{
+multiLine = multiLine.trimRight();
+}
+
+return multiLine;
+]]></Code>
+			<function-type>Formula</function-type>
+		</FormulaFunctionDef>
+		<FormulaFunctionDef name="BNYM_SerializeMultiLineFormat" type="FormulaFunctionDef">
+			<description></description>
+			<Category>User Defined</Category>
+			<parameterfields>
+				<parameterfield>
+					<name>text</name>
+					<type>String</type>
+				</parameterfield>
+				<parameterfield>
+					<name>tag</name>
+					<type>String</type>
+				</parameterfield>
+				<parameterfield>
+					<name>currentLine</name>
+					<type>Integer</type>
+				</parameterfield>
+				<parameterfield>
+					<name>currentIndex</name>
+					<type>Integer</type>
+				</parameterfield>
+			</parameterfields>
+			<ReturnType>String</ReturnType>
+			<Code><![CDATA[def RECORD_LENGTH = 40;
+def TEXT_START = 5;
+def TEXT_LENGTH = RECORD_LENGTH - TEXT_START;
+def lines = Split("\r\n", text);
+def start = 0;
+def toRet = "";
+if(currentIndex > 0) {
+    toRet += BNYM_prepareLine(lines[0], tag, currentLine, currentIndex);
+    start = 1;
+    currentLine += 1;
+}
+for(def i = start; i < lines.Length(); ++i) {
+    def line = lines[i];
+    toRet += BNYM_prepareLine(line, tag, currentLine, If(i == 0, currentIndex, 0));
+    currentLine += 1;
+}
+return toRet;
+]]></Code>
+			<function-type>Formula</function-type>
+		</FormulaFunctionDef>
+		<FormulaFunctionDef name="BNYM_PrepareLine" type="FormulaFunctionDef">
+			<description></description>
+			<Category>User Defined</Category>
+			<parameterfields>
+				<parameterfield>
+					<name>line</name>
+					<type>String</type>
+				</parameterfield>
+				<parameterfield>
+					<name>tag</name>
+					<type>String</type>
+				</parameterfield>
+				<parameterfield>
+					<name>currentLine</name>
+					<type>Integer</type>
+				</parameterfield>
+				<parameterfield>
+					<name>currentIndex</name>
+					<type>Integer</type>
+				</parameterfield>
+			</parameterfields>
+			<ReturnType>String</ReturnType>
+			<Code><![CDATA[def toRet = "";
+def TEXT_LENGTH = 35;
+def RECORD_LENGTH = 40;
+for(def j = 0; j < line.Length(); ) {
+	def remaining = TEXT_LENGTH;
+	if(j == 0 && currentIndex > 0) {
+		remaining = RECORD_LENGTH - currentIndex;
+	}
+	else {
+	    def lineStart = tag + Lpad(ToText(currentLine), '0', 2);
+	    toRet += lineStart;
+	}
+    def lineFragment = line.Mid(j, remaining);
+    toRet += Rpad(lineFragment, ' ', remaining);
+    j += remaining;
+}
+return toRet;]]></Code>
+			<function-type>Formula</function-type>
+		</FormulaFunctionDef>
+		<FormulaFunctionDef name="BNYM_GetEmptyStrIfAllSpaces" type="FormulaFunctionDef">
+			<description></description>
+			<Category>User Defined</Category>
+			<parameterfields>
+				<parameterfield>
+					<name>text</name>
+					<type>String</type>
+				</parameterfield>
+			</parameterfields>
+			<ReturnType>String</ReturnType>
+			<Code><![CDATA[return ((text.trimright().length() == 0)? "" : text);]]></Code>
+			<function-type>Formula</function-type>
+		</FormulaFunctionDef>
+		<FormulaFunctionDef name="ParseSwiftGeneric" type="FormulaFunctionDef">
+			<description></description>
+			<Category>User Defined</Category>
+			<parameterfields>
+				<parameterfield>
+					<name>text</name>
+					<type>Binary</type>
+				</parameterfield>
+				<parameterfield>
+					<name>messageObject</name>
+					<type>DataObject</type>
+				</parameterfield>
+			</parameterfields>
+			<ReturnType>Void</ReturnType>
+			<Code><![CDATA[]]></Code>
+			<function-type>Native Class</function-type>
+			<native-class-ref>com.tplus.transform.design.swift.runtime.common.ParseSwiftGeneric</native-class-ref>
+		</FormulaFunctionDef>
+		<FormulaFunctionDef name="ParseSwiftGeneric" type="FormulaFunctionDef">
+			<description></description>
+			<Category>User Defined</Category>
+			<parameterfields>
+				<parameterfield>
+					<name>text</name>
+					<type>RawMessage</type>
+				</parameterfield>
+				<parameterfield>
+					<name>messageObject</name>
+					<type>DataObject</type>
+				</parameterfield>
+			</parameterfields>
+			<ReturnType>Void</ReturnType>
+			<Code><![CDATA[]]></Code>
+			<function-type>Native Class</function-type>
+			<native-class-ref>com.tplus.transform.design.swift.runtime.common.ParseSwiftGeneric</native-class-ref>
+		</FormulaFunctionDef>
+		<FormulaFunctionDef name="SerializeSwiftGeneric" type="FormulaFunctionDef">
+			<description></description>
+			<Category>User Defined</Category>
+			<parameterfields>
+				<parameterfield>
+					<name>messageObject</name>
+					<type>DataObject</type>
+				</parameterfield>
+			</parameterfields>
+			<ReturnType>String</ReturnType>
+			<Code><![CDATA[]]></Code>
+			<function-type>Native Class</function-type>
+			<native-class-ref>com.tplus.transform.design.swift.runtime.common.SerializeSwiftGeneric</native-class-ref>
+		</FormulaFunctionDef>
+		<FormulaFunctionDef name="SerializeSwiftGeneric" type="FormulaFunctionDef">
+			<description></description>
+			<Category>User Defined</Category>
+			<parameterfields>
+				<parameterfield>
+					<name>messageObject</name>
+					<type>DataObject</type>
+				</parameterfield>
+				<parameterfield>
+					<name>outMessage</name>
+					<type>RawMessage</type>
+				</parameterfield>
+			</parameterfields>
+			<ReturnType>Void</ReturnType>
+			<Code><![CDATA[]]></Code>
+			<function-type>Native Class</function-type>
+			<native-class-ref>com.tplus.transform.design.swift.runtime.common.SerializeSwiftGeneric</native-class-ref>
+		</FormulaFunctionDef>
+		<FormulaFunctionDef name="Get_NoOfLines" type="FormulaFunctionDef">
+			<description></description>
+			<Category>User Defined</Category>
+			<parameterfields>
+				<parameterfield>
+					<name>msgInput</name>
+					<type>Binary</type>
+				</parameterfield>
+			</parameterfields>
+			<ReturnType>Integer</ReturnType>
+			<Code><![CDATA[def splitLine = Split("\r\n",totext(msgInput));
+def no_of_lines = splitLine.Length() - 2;
+return no_of_lines;]]></Code>
+			<function-type>Formula</function-type>
+		</FormulaFunctionDef>
+		<FormulaFunctionDef name="Get_sending_Bank" type="FormulaFunctionDef">
+			<description></description>
+			<Category>User Defined</Category>
+			<parameterfields>
+				<parameterfield>
+					<name>sending_bank</name>
+					<type>String</type>
+				</parameterfield>
+			</parameterfields>
+			<ReturnType>String</ReturnType>
+			<Code><![CDATA[def msg_sending_bank = "";
+if(sending_bank.trim().Equal("")||sending_bank.trim().Equal("BNYNYC")||sending_bank.trim().Equal("BNYTNG")){
+	msg_sending_bank = "bny_nyc";
+}else if(sending_bank.trim().Equal("BNYLON")){
+	msg_sending_bank = "bny_lon";
+}else if(sending_bank.trim().Equal("BNYTOK")){
+	msg_sending_bank = "bny_tok";
+}else if(sending_bank.trim().Equal("BNYOSA")){
+	msg_sending_bank = "bny_osa";
+}else if(sending_bank.trim().Equal("BNYTAI")){
+	msg_sending_bank = "bny_taipei";
+}else if(sending_bank.trim().Equal("BNYFRA")){
+	msg_sending_bank = "bny_frnk";
+}else if(sending_bank.trim().Equal("BNYHKG")){
+	msg_sending_bank = "bny_hkg";
+}else if(sending_bank.trim().Equal("BNYLUB")){
+	msg_sending_bank = "bny_lub";
+}else if(sending_bank.trim().Equal("BNYLUX")){
+	msg_sending_bank = "bny_lux";
+}else if(sending_bank.trim().Equal("BNYPUO")){
+	msg_sending_bank = "bny_pusan";
+}else if(sending_bank.trim().Equal("BNYSHO")){
+	msg_sending_bank = "bny_shanghai";
+}else if(sending_bank.trim().Equal("BNYSNG")){
+	msg_sending_bank = "bny_sing";
+}else if(sending_bank.trim().Equal("BNYSEO")){
+	msg_sending_bank = "bny_seoul";
+}else if(sending_bank.trim().Equal("BNYBRX")){
+	msg_sending_bank = "bny_brussels";
+}else if(sending_bank.trim().Equal("BNYAMS")){
+	msg_sending_bank = "bny_liberty";
+}else if(sending_bank.trim().Equal("BNYAMU")){
+	msg_sending_bank = "bny_liberty_2";
+}else if(sending_bank.trim().Equal("BNNAMS")){
+	msg_sending_bank = "bny_nyc_liberty";
+}else if(sending_bank.trim().Equal("BNNIFX")){
+	msg_sending_bank = "bny_ifx";
+}else if(sending_bank.trim().Equal("BNNCLS")){
+	msg_sending_bank = "bny_cls";
+}else if(sending_bank.trim().Equal("BNNGLN")){
+	msg_sending_bank = "bny_gln";
+}else if(sending_bank.trim().Equal("BNNPFT")){
+	msg_sending_bank = "bny_pft";
+}else if(sending_bank.trim().Equal("BNNGCO")){
+	msg_sending_bank = "bny_nyc_gco";
+}else if(sending_bank.trim().Equal("BNNGAT")){
+	msg_sending_bank = "bny_nyc_gat";
+}else if(sending_bank.trim().Equal("BNNIRD")){
+	msg_sending_bank = "bny_nyc_ird";
+}else if(sending_bank.trim().Equal("BNNADR")){
+	msg_sending_bank = "bny_nyc_adr";
+}else if(sending_bank.trim().Equal("BNNSTC")){
+	msg_sending_bank = "bny_nyc_stc";
+}else if(sending_bank.trim().Equal("BNNBDS")){
+	msg_sending_bank = "bny_nyc_bds";
+}else if(sending_bank.trim().Equal("BNNGSC")){
+	msg_sending_bank = "bny_nyc_gsc";
+}else if(sending_bank.trim().Equal("BNNFMC")){
+	msg_sending_bank = "bny_nyc_fmc";
+}else if(sending_bank.trim().Equal("BNELON")){
+	msg_sending_bank = "bne_lon";
+}else if(sending_bank.trim().Equal("BNELUX")){
+	msg_sending_bank = "bne_lux";
+}else if(sending_bank.trim().Equal("BNEJER")){
+	msg_sending_bank = "bne_jer";
+}else if(sending_bank.trim().Mid(0,3).Equal("OUT")){
+	msg_sending_bank = "bne_jer";
+}else{
+	msg_sending_bank = "unknown_sender";
+}
+return msg_sending_bank;]]></Code>
+			<function-type>Formula</function-type>
+		</FormulaFunctionDef>
+		<FormulaFunctionDef name="Get_Sending_TID" type="FormulaFunctionDef">
+			<description></description>
+			<Category>User Defined</Category>
+			<parameterfields>
+				<parameterfield>
+					<name>msg_sending_bank</name>
+					<type>String</type>
+				</parameterfield>
+			</parameterfields>
+			<ReturnType>String</ReturnType>
+			<Code><![CDATA[def sending_tid = "";
+if(msg_sending_bank.equal("bny_nyc")){
+sending_tid = "IRVTUSNXXXXX";
+}else if(msg_sending_bank.equal("bny_lon")){
+sending_tid = "IRVTGB2XXXXX";
+}else if(msg_sending_bank.equal("bny_taipei")){
+sending_tid = "IRVTTWTXXXXX";
+}else if(msg_sending_bank.equal("bny_tok")){
+sending_tid = "IRVTJPJXXXXX";
+}else if(msg_sending_bank.equal("bny_osa")){
+sending_tid = "IRVTJPJXX848";
+}else if(msg_sending_bank.equal("bny_frnk")){
+sending_tid = "IRVTDEFXXXXX";
+}else if(msg_sending_bank.equal("bny_hkg")){
+sending_tid = "IRVTHKHXXXXX";
+}else if(msg_sending_bank.equal("bny_lub")){
+sending_tid = "IRVTLULXXLUB";
+}else if(msg_sending_bank.equal("bny_lux")){
+sending_tid = "IRVTLULXXXXX";
+}else if(msg_sending_bank.equal("bny_pusan")){
+sending_tid = "IRVTKRSXX819";
+}else if(msg_sending_bank.equal("bny_shanghai")){
+sending_tid = "IRVTCNSHXXXX";
+}else if(msg_sending_bank.equal("bny_sing")){
+sending_tid = "IRVTSGSXXXXX";
+}else if(msg_sending_bank.equal("bny_seoul")){
+sending_tid = "IRVTKRSXXXXX";
+}else if(msg_sending_bank.equal("bny_brussels")){
+sending_tid = "IRVTBEBBXXXX";
+}else if(msg_sending_bank.equal("bny_nyc_ird")){
+sending_tid = "IRVTUS3NXIRD";
+}else if(msg_sending_bank.equal("bny_nyc_gco")){
+sending_tid = "IRVTUS3NXGCO";
+}else if(msg_sending_bank.equal("bny_nyc_gat")){
+sending_tid = "IRVTUS3NXGAT";
+}else if(msg_sending_bank.equal("bny_nyc_adr")){
+sending_tid = "IRVTUS3NXADR";
+}else if(msg_sending_bank.equal("bny_nyc_stc")){
+sending_tid = "IRVTUS3NXSTC";
+}else if(msg_sending_bank.equal("bny_nyc_bds")){
+sending_tid = "IRVTUS3NXBDS";
+}else if(msg_sending_bank.equal("bny_nyc_fmc")){
+sending_tid = "IRVTUS3NXFMC";
+}else if(msg_sending_bank.equal("bny_liberty")){
+sending_tid = "IRVTGB2XXAMS";
+}else if(msg_sending_bank.equal("bny_liberty_2")){
+sending_tid = "IRVTGB2XXAMU";
+}else if(msg_sending_bank.equal("bny_nyc_liberty")){
+sending_tid = "IRVTUS3NXAMS";
+}else if(msg_sending_bank.equal("bny_nyc_gsc")){
+sending_tid = "IRVTUS3NXGSC";
+}else if(msg_sending_bank.equal("bne_lon")){
+sending_tid = "SGWLGB22XXXX";
+}else if(msg_sending_bank.equal("bne_lux")){
+sending_tid = "SGWLLULXXXXX";
+}else if(msg_sending_bank.equal("bne_jer")){
+sending_tid = "SGWLJESXXXXX";
+}else if(msg_sending_bank.equal("bny_cls")){
+sending_tid = "IRVTUS3NXCLS";
+}else if(msg_sending_bank.equal("bny_gln")){
+sending_tid = "IRVTUS3NXGLN";
+}else if(msg_sending_bank.equal("bny_pft")){
+sending_tid = "IRVTUS3NXPFT";
+}else if(msg_sending_bank.equal("bny_ifx")){
+sending_tid = "IRVTUS3NXXXX";
+}
+return sending_tid;]]></Code>
+			<function-type>Formula</function-type>
+		</FormulaFunctionDef>
+		<FormulaFunctionDef name="Get_Tag_Description" type="FormulaFunctionDef">
+			<description></description>
+			<Category>User Defined</Category>
+			<parameterfields>
+				<parameterfield>
+					<name>prtIdx</name>
+					<type>String</type>
+				</parameterfield>
+			</parameterfields>
+			<ReturnType>String</ReturnType>
+			<Code><![CDATA[return prtIdx+":";]]></Code>
+			<function-type>Formula</function-type>
+		</FormulaFunctionDef>
+		<FormulaFunctionDef name="serialiseMultiLineValue" type="FormulaFunctionDef">
+			<description></description>
+			<Category>User Defined</Category>
+			<parameterfields>
+				<parameterfield>
+					<name>text</name>
+					<type>String</type>
+				</parameterfield>
+				<parameterfield>
+					<name>tag</name>
+					<type>String</type>
+				</parameterfield>
+				<parameterfield>
+					<name>maxLine</name>
+					<type>Integer</type>
+				</parameterfield>
+			</parameterfields>
+			<ReturnType>String</ReturnType>
+			<Code><![CDATA[def toRet = "";
+def TEXT_LENGTH = 35;
+def RECORD_LENGTH = 40; 
+def start = 0;
+def multiLine = "";
+def space = "";
+def lines = Split("\n", text);
+def splitLen = lines.Length();
+for(def i=start;i<splitLen;i++){
+    if(i>start && i<maxLine){
+		multiLine += "\n";
+		multiLine += Rpad(space,' ',8);
+  	}
+	multiLine += lines[i];
+}
+return multiLine;]]></Code>
+			<function-type>Formula</function-type>
+		</FormulaFunctionDef>
+		<FormulaFunctionDef name="Get_BIC" type="FormulaFunctionDef">
+			<description></description>
+			<Category>User Defined</Category>
+			<parameterfields>
+				<parameterfield>
+					<name>first_Block</name>
+					<type>String</type>
+				</parameterfield>
+				<parameterfield>
+					<name>sec_Block</name>
+					<type>String</type>
+				</parameterfield>
+				<parameterfield>
+					<name>I_O_Type</name>
+					<type>String</type>
+				</parameterfield>
+			</parameterfields>
+			<ReturnType>String</ReturnType>
+			<Code><![CDATA[def toRet = "";
+def outArray = "";
+def space = "";
+def rec_Block = "";
+def send_Block = "";
+def recBIC = "Receiving BIC Information\n";
+def sendBIC = "\nSending BIC Information\n";
+space = Rpad(space,' ',5);
+if(first_Block.Mid(1,1).Equal("1")){
+if(I_O_Type.Equal("I")){
+outArray += sendBIC;
+}else if(I_O_Type.Equal("O")){
+outArray += recBIC;
+}
+outArray += space;
+outArray += "S/"+first_Block.mid(6,12);
+outArray += "\n\n";
+}
+if(sec_Block.Mid(1,1).Equal("2")){
+if(I_O_Type.Equal("I")){
+outArray += recBIC;
+outArray += space;
+outArray += "S/"+sec_Block.mid(7,12);
+}else if(I_O_Type.Equal("O")){
+outArray += sendBIC;
+outArray += space;
+outArray += "S/"+sec_Block.mid(17,12);
+}
+outArray += "\n\n";
+}
+toRet = outArray;
+return toRet;]]></Code>
+			<function-type>Formula</function-type>
+		</FormulaFunctionDef>
+		<FormulaFunctionDef name="BNYM_GetSenderDetails" type="FormulaFunctionDef">
+			<description></description>
+			<Category>User Defined</Category>
+			<parameterfields>
+				<parameterfield>
+					<name>biccode</name>
+					<type>String</type>
+				</parameterfield>
+				<parameterfield>
+					<name>serverName</name>
+					<type>String</type>
+				</parameterfield>
+			</parameterfields>
+			<ReturnType>String</ReturnType>
+			<Code><![CDATA[]]></Code>
+			<function-type>Native Code</function-type>
+			<native-code>        String senderDetails;
+        try{
+           // String cifurl = loadURL();
+           
+	System.out.println("\n --------------------------- ");
+    long startTime = System.currentTimeMillis();
+                      
+            java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("CIFDetails");
+	        String cifurl = java.text.MessageFormat.format(bundle.getString("cif_url"),serverName);
+	        
+	long endTime = System.currentTimeMillis();
+    System.out.println("\n CIF Bundle Time         :    " + (endTime - startTime) + "ms");
+    
+    long startTime1 = System.currentTimeMillis();    
+      
+	 		java.net.URL url = new java.net.URL(cifurl + biccode);
+			java.net.HttpURLConnection conn = ( java.net.HttpURLConnection) url.openConnection();	
+     		conn.setRequestProperty("Accept", "application/json");
+			if (conn.getResponseCode() != 200) {
+				throw new RuntimeException("Failed : HTTP error code : "
+						+ conn.getResponseCode());
+			}			 		
+	 
+			BufferedReader rd = new BufferedReader(new InputStreamReader((conn.getInputStream())));
+			senderDetails = rd.readLine();            						
+            rd.close(); 
+            
+	long endTime1 = System.currentTimeMillis();
+    System.out.println("\n CIF URL Hit Time         :    " + (endTime1 - startTime1) + "ms");                
+            
+        } 
+        catch (Exception e) {
+            senderDetails = "Exception:" +e.toString();
+        }     
+	
+        return senderDetails;              
+  
+</native-code>
+		</FormulaFunctionDef>
+		<FormulaFunctionDef name="BNYM_GetBICCode" type="FormulaFunctionDef">
+			<description></description>
+			<Category>User Defined</Category>
+			<parameterfields>
+				<parameterfield>
+					<name>nmky_cid_indicator</name>
+					<type>String</type>
+				</parameterfield>
+				<parameterfield>
+					<name>nmky_cid</name>
+					<type>String</type>
+				</parameterfield>
+				<parameterfield>
+					<name>serverName</name>
+					<type>String</type>
+				</parameterfield>
+			</parameterfields>
+			<ReturnType>String</ReturnType>
+			<Code><![CDATA[]]></Code>
+			<function-type>Native Code</function-type>
+			<native-code>	    String biccode;
+        try {
+            //String cifurl = loadURL();
+
+	System.out.println("\n --------------------------- ");
+    long startTime = System.currentTimeMillis();
+                
+            java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("CIFDetails");
+	        String cifurl = java.text.MessageFormat.format(bundle.getString("cif_url"),serverName);
+	        
+	long endTime = System.currentTimeMillis();
+    System.out.println("\n CIF Bundle Time         :    " + (endTime - startTime) + "ms");
+	    
+    long startTime1 = System.currentTimeMillis();	        
+
+	 		java.net.URL url = new java.net.URL(cifurl + nmky_cid_indicator +"/" + nmky_cid);
+			java.net.HttpURLConnection conn = ( java.net.HttpURLConnection) url.openConnection();	
+     		conn.setRequestProperty("Accept", "application/json");
+			if (conn.getResponseCode() != 200) {
+				throw new RuntimeException("Failed : HTTP error code : "
+						+ conn.getResponseCode());
+			}			 		
+	 
+			BufferedReader rd = new BufferedReader(new InputStreamReader((conn.getInputStream())));
+			biccode = rd.readLine();            						
+            rd.close(); 
+                      
+	long endTime1 = System.currentTimeMillis();
+    System.out.println("\n CIF URL Hit Time         :    " + (endTime1 - startTime1) + "ms");                
+	System.out.println("\n --------------------------- ");              
+
+        } catch (Exception e) {
+           biccode = "Exception:" +e.toString();
+        }
+          
+        return biccode;   
+
+</native-code>
+		</FormulaFunctionDef>
+		<FormulaFunctionDef name="getMsTypeDescription" type="FormulaFunctionDef">
+			<description></description>
+			<Category>User Defined</Category>
+			<parameterfields>
+				<parameterfield>
+					<name>msgType</name>
+					<type>String</type>
+				</parameterfield>
+			</parameterfields>
+			<ReturnType>String</ReturnType>
+			<Code><![CDATA[def msgTypedescripton = "";
+if(msgType.Equal("101")){
+msgTypedescripton = "Request for transfer";
+}else if(msgType.Equal("102")){
+msgTypedescripton = "Multiple customer credit transfer";
+}else if(msgType.Equal("103")){
+msgTypedescripton = "Single customer credit transfer";
+}else if(msgType.Equal("104")){
+msgTypedescripton = "Direct debit and request for debit transfer message";
+}else if(msgType.Equal("105")){
+msgTypedescripton = "EDIFACT envelope";
+}else if(msgType.Equal("107")){
+msgTypedescripton = "General direct debit message";
+}else if(msgType.Equal("110")){
+msgTypedescripton = "Request for cheques";
+}else if(msgType.Equal("111")){
+msgTypedescripton = "Request for stop payment of a cheque";
+}else if(msgType.Equal("112")){
+msgTypedescripton = "Status of Request for stop payment of a cheque";
+}else if(msgType.Equal("190")){
+msgTypedescripton = "Advice of charges,Interest and other adjustments";
+}else if(msgType.Equal("191")){
+msgTypedescripton = "Request for payment of charges, Interest and other expences";
+}else if(msgType.Equal("192")){
+msgTypedescripton = "Request for Cancellation";
+}else if(msgType.Equal("195")){
+msgTypedescripton = "queries";
+}else if(msgType.Equal("196")){
+msgTypedescripton = "Answers";
+}else if(msgType.Equal("198")){
+msgTypedescripton = "Proprietary message";
+}else if(msgType.Equal("199")){
+msgTypedescripton = "Free format message";
+}else if(msgType.Equal("200")){
+msgTypedescripton = "Financial institution transfer for its own account";
+}else if(msgType.Equal("201")){
+msgTypedescripton = "Multiple Financial transfer for its own account";
+} else if(msgType.Equal("202")){
+msgTypedescripton = "General financial institution transfer";
+} else if(msgType.Equal("203")){
+msgTypedescripton = "Multiple general Financial institution transfer";
+}else if(msgType.Equal("204")){
+msgTypedescripton = "Financial Markets direct debit message";
+}else if(msgType.Equal("205")){
+msgTypedescripton = "Financial institution transfer execution";
+}else if(msgType.Equal("207")){
+msgTypedescripton = "Request for financial institution transfer";
+}else if(msgType.Equal("210")){
+msgTypedescripton = "Notice to receive";
+}else if(msgType.Equal("256")){
+msgTypedescripton = "Advice of non-payment of cheques";
+}else if(msgType.Equal("290")){
+msgTypedescripton = "Advice of charges, interests and other adjustments";
+}else if(msgType.Equal("291")){
+msgTypedescripton = "Request for payment of charges,Interest and other expences";
+}else if(msgType.Equal("292")){
+msgTypedescripton = "Request for cancellation";
+}else if(msgType.Equal("295")){
+msgTypedescripton = "Queries";
+}else if(msgType.Equal("296")){
+msgTypedescripton = "Answers";
+}else if(msgType.Equal("298")){
+msgTypedescripton = "Proprietary message";
+}else if(msgType.Equal("299")){
+msgTypedescripton = "Free format message";
+}else if(msgType.Equal("300")){
+msgTypedescripton = "Foreign Exchange Confirmation";
+}else if(msgType.Equal("303")){
+msgTypedescripton = "Forex/Currrency option allocation instruction";
+}else if(msgType.Equal("304")){
+msgTypedescripton = "Advice/Instruction of a third party deal";
+}else if(msgType.Equal("305")){
+msgTypedescripton = "Foreign Currency option conformation";
+}else if(msgType.Equal("306")){
+msgTypedescripton = "Foreign Currency option conformation";
+}else if(msgType.Equal("307")){
+msgTypedescripton = "Advice/Instruction of a third party FX deal";
+}else if(msgType.Equal("320")){
+msgTypedescripton = "Fixed Loan/Deposit Confirmation";
+}else if(msgType.Equal("321")){
+msgTypedescripton = "Instruction to settle a third party Loan/Deposit";
+}else if(msgType.Equal("330")){
+msgTypedescripton = "Call/Notice Loan/Deposit conformation";
+}else if(msgType.Equal("340")){
+msgTypedescripton = "Forward Rate Agreement Conformation";
+}else if(msgType.Equal("341")){
+msgTypedescripton = "Forward Rate Agreement settlement Conformation";
+}else if(msgType.Equal("350")){
+msgTypedescripton = "Advice of Loan/Deposit interest payment";
+}else if(msgType.Equal("360")){
+msgTypedescripton = "Single Currency Interest Rate Derivative";
+}else if(msgType.Equal("361")){
+msgTypedescripton = "Cross Currency Interest Rate Swap Confirmation";
+}else if(msgType.Equal("362")){
+msgTypedescripton = "Interest Rate Reset/Advice of payment";
+}else if(msgType.Equal("364")){
+msgTypedescripton = "Single Currency Interest Rate Derivative Termination/Recouponing Confirmation";
+}else if(msgType.Equal("365")){
+msgTypedescripton = "Cross Currency Interest Rate Swap Termination/Recouponing confirmation";
+}else if(msgType.Equal("380")){
+msgTypedescripton = "Foreign Exchange Order";
+}else if(msgType.Equal("381")){
+msgTypedescripton = "Foreign Exchange Order Confirmation";
+}else if(msgType.Equal("390")){
+msgTypedescripton = "Advice of Charges , interests ant other adjustments";
+}else if(msgType.Equal("391")){
+msgTypedescripton = "Request for payment of charges ,Interest and other expences";
+}else if(msgType.Equal("392")){
+msgTypedescripton = "Request for cancellation";
+}else if(msgType.Equal("395")){
+msgTypedescripton = "Queries";
+}else if(msgType.Equal("396")){
+msgTypedescripton = "Answers";
+}else if(msgType.Equal("398")){
+msgTypedescripton = "Proprietary message";
+}else if(msgType.Equal("399")){
+msgTypedescripton = "Free format message";
+}else if(msgType.Equal("400")){
+msgTypedescripton = "Advice of payment";
+}else if(msgType.Equal("410")){
+msgTypedescripton = "Acknowledgement";
+}else if(msgType.Equal("412")){
+msgTypedescripton = "Advice of acceptance";
+}else if(msgType.Equal("416")){
+msgTypedescripton = "Advice of Non-Payment/Non-Acceptance ";
+}else if(msgType.Equal("420")){
+msgTypedescripton = "Tracer";
+}else if(msgType.Equal("422")){
+msgTypedescripton = "Advice of Fate and request for instructions";
+}else if(msgType.Equal("430")){
+msgTypedescripton = "Amendment of instructions";
+}else if(msgType.Equal("450")){
+msgTypedescripton = "Cash Letter credit advice";
+}else if(msgType.Equal("455")){
+msgTypedescripton = "Cash Letter credit Adjustment advice";
+}else if(msgType.Equal("456")){
+msgTypedescripton = "Advice of Dishonour";
+}else if(msgType.Equal("490")){
+msgTypedescripton = "Advice of charges , interests and other adjustments";
+}else if(msgType.Equal("491")){
+msgTypedescripton = "Requests for payment of charges ,Interest and other expences";
+}else if(msgType.Equal("492")){
+msgTypedescripton = "Request for cancellation";
+}else if(msgType.Equal("495")){
+msgTypedescripton = "Queries";
+}else if(msgType.Equal("496")){
+msgTypedescripton = "Answers";
+}else if(msgType.Equal("498")){
+msgTypedescripton = "Propreitary message";
+}else if(msgType.Equal("499")){
+msgTypedescripton = "Free format message";
+}else if(msgType.Equal("500")){
+msgTypedescripton = "Instruction to register";
+}else if(msgType.Equal("501")){
+msgTypedescripton = "Confirmation of Registration or modification";
+}else if(msgType.Equal("502")){
+msgTypedescripton = "Order to buy or sell";
+}else if(msgType.Equal("503")){
+msgTypedescripton = "Collateral claim";
+}else if(msgType.Equal("504")){
+msgTypedescripton = "Collateral proposal";
+}else if(msgType.Equal("505")){
+msgTypedescripton = "Collateral Substitution";
+}else if(msgType.Equal("506")){
+msgTypedescripton = "Collateral and exposure statement";
+}else if(msgType.Equal("507")){
+msgTypedescripton = "Collateral status and processing advice";
+}else if(msgType.Equal("508")){
+msgTypedescripton = "Intra-Positive advice";
+}else if(msgType.Equal("509")){
+msgTypedescripton = "Trade status message";
+}else if(msgType.Equal("510")){
+msgTypedescripton = "Registration Status and processing advice";
+}else if(msgType.Equal("513")){
+msgTypedescripton = "Client advice of execution";
+}else if(msgType.Equal("514")){
+msgTypedescripton = "Trade Allocation instruction";
+}else if(msgType.Equal("515")){
+msgTypedescripton = "Client Conformation of Purchase or sale";
+}else if(msgType.Equal("516")){
+msgTypedescripton = "Securities loan conformation";
+}else if(msgType.Equal("517")){
+msgTypedescripton = "Trade conformation affirmation";
+}else if(msgType.Equal("518")){
+msgTypedescripton = "Market-side securities trade conformation";
+}else if(msgType.Equal("519")){
+msgTypedescripton = "Modification of client details";
+}else if(msgType.Equal("524")){
+msgTypedescripton = "Intra position instructions";
+}else if(msgType.Equal("526")){
+msgTypedescripton = "General securities Lending/Borrowing Message";
+}else if(msgType.Equal("527")){
+msgTypedescripton = "Triparty Collateral instruction";
+}else if(msgType.Equal("530")){
+msgTypedescripton = "Transaction proceesing command";
+}else if(msgType.Equal("535")){
+msgTypedescripton = "Transaction proceesing command";
+}else if(msgType.Equal("536")){
+msgTypedescripton = "Statement of transactions";
+}else if(msgType.Equal("537")){
+msgTypedescripton = "Statement of pending transactions ";
+}else if(msgType.Equal("538")){
+msgTypedescripton = "Statement of Intra-Position advices";
+}else if(msgType.Equal("540")){
+msgTypedescripton = "Receive free";
+}else if(msgType.Equal("541")){
+msgTypedescripton = "Receive against payment";
+}else if(msgType.Equal("542")){
+msgTypedescripton = "Deliver free";
+}else if(msgType.Equal("543")){
+msgTypedescripton = "Deliver against payment";
+}else if(msgType.Equal("544")){
+msgTypedescripton = "Receive free conformation";
+}else if(msgType.Equal("545")){
+msgTypedescripton = "Receive against payment conformation";
+}else if(msgType.Equal("546")){
+msgTypedescripton = "Deliver free conformation";
+}else if(msgType.Equal("547")){
+msgTypedescripton = "Deliver against payment conformation";
+}else if(msgType.Equal("548")){
+msgTypedescripton = "Settlement status and processing advice";
+}else if(msgType.Equal("549")){
+msgTypedescripton = "Request for statement Status/Advice";
+}else if(msgType.Equal("558")){
+msgTypedescripton = "Triparty collateral status and processing advice";
+}else if(msgType.Equal("559")){
+msgTypedescripton = "Paying agent's claim";
+}else if(msgType.Equal("564")){
+msgTypedescripton = "Corporate action notification";
+}else if(msgType.Equal("565")){
+msgTypedescripton = "Corporate action instruction";
+}else if(msgType.Equal("566")){
+msgTypedescripton = "Corporate action conformation";
+}else if(msgType.Equal("567")){
+msgTypedescripton = "Corporate action status and Processing advice";
+}else if(msgType.Equal("568")){
+msgTypedescripton = "Corporate action narrative";
+}else if(msgType.Equal("569")){
+msgTypedescripton = "Triparty Collateral and Exposure statement";
+}else if(msgType.Equal("574")){
+msgTypedescripton = "(IRSLST) IRS 1441 NRA";
+}else if(msgType.Equal("575")){
+msgTypedescripton = "Report of combined activtiy";
+}else if(msgType.Equal("576")){
+msgTypedescripton = "Statement of poen orders ";
+}else if(msgType.Equal("577")){
+msgTypedescripton = "Statements of numbers";
+}else if(msgType.Equal("578")){
+msgTypedescripton = "Settlement alleqements";
+}else if(msgType.Equal("579")){
+msgTypedescripton = "Certificate Numbers";
+}else if(msgType.Equal("581")){
+msgTypedescripton = "Collateral adjustment message";
+}else if(msgType.Equal("586")){
+msgTypedescripton = "Statement of settlement alleqements ";
+}else if(msgType.Equal("590")){
+msgTypedescripton = "Advice of charges , interests and other adjustments";
+}else if(msgType.Equal("591")){
+msgTypedescripton = "Requests for payment of charges ,Interest and other expences";
+}else if(msgType.Equal("592")){
+msgTypedescripton = "Request for cancellation";
+}else if(msgType.Equal("595")){
+msgTypedescripton = "Queries";
+}else if(msgType.Equal("596")){
+msgTypedescripton = "Answers";
+}else if(msgType.Equal("598")){
+msgTypedescripton = "Propreitary message";
+}else if(msgType.Equal("599")){
+msgTypedescripton = "Free format message";
+}else if(msgType.Equal("600")){
+msgTypedescripton = "Commodity Trade Confirmation";
+}else if(msgType.Equal("601")){
+msgTypedescripton = "Commodity Option Confirmation";
+}else if(msgType.Equal("604")){
+msgTypedescripton = "Commodity Transfer/Delivery order";
+}else if(msgType.Equal("605")){
+msgTypedescripton = "Commodity Notice to receive";
+}else if(msgType.Equal("606")){
+msgTypedescripton = "Commodity Debit advice";
+}else if(msgType.Equal("607")){
+msgTypedescripton = "Commodity Credit advice";
+}else if(msgType.Equal("608")){
+msgTypedescripton = "Statement of commodity account";
+}else if(msgType.Equal("609")){
+msgTypedescripton = "Statement of commodity contracts";
+}else if(msgType.Equal("620")){
+msgTypedescripton = "Commodity fixed Loan/Deposit Conformation";
+}else if(msgType.Equal("643")){
+msgTypedescripton = "Notice of Drawdown/Renewal";
+}else if(msgType.Equal("644")){
+msgTypedescripton = "Advice of rate and amount fixing";
+}else if(msgType.Equal("646")){
+msgTypedescripton = "Payment of principal and/or of interest";
+}else if(msgType.Equal("649")){
+msgTypedescripton = "General Syndicated facility message";
+}else if(msgType.Equal("670")){
+msgTypedescripton = "Standing settlement instruction update notification request";
+}else if(msgType.Equal("671")){
+msgTypedescripton = "Standing settlement instruction update notification";
+}else if(msgType.Equal("690")){
+msgTypedescripton = "Advice of charges , interests and other adjustments";
+}else if(msgType.Equal("691")){
+msgTypedescripton = "Requests for payment of charges ,Interest and other expences";
+}else if(msgType.Equal("692")){
+msgTypedescripton = "Request for cancellation";
+}else if(msgType.Equal("695")){
+msgTypedescripton = "Queries";
+}else if(msgType.Equal("696")){
+msgTypedescripton = "Answers";
+}else if(msgType.Equal("698")){
+msgTypedescripton = "Propreitary message";
+}else if(msgType.Equal("699")){
+msgTypedescripton = "Free format message";
+}else if(msgType.Equal("700")){
+msgTypedescripton = "Issue of a documentary credit";
+}else if(msgType.Equal("701")){
+msgTypedescripton = "Issue of a documentary credit";
+}else if(msgType.Equal("705")){
+msgTypedescripton = "Pre-Advice of a documentary credit";
+}else if(msgType.Equal("707")){
+msgTypedescripton = "Amendment to a document credit";
+}else if(msgType.Equal("710")){
+msgTypedescripton = "Advice of a third bank or a Non-Banks's Documentary credit";
+}else if(msgType.Equal("711")){
+msgTypedescripton = "Advice of a third bank or a Non-Banks's Documentary credit";
+}else if(msgType.Equal("720")){
+msgTypedescripton = "Transfer of Documentary credit";
+}else if(msgType.Equal("721")){
+msgTypedescripton = "Transfer of Documentary credit";
+}else if(msgType.Equal("730")){
+msgTypedescripton = "Acknowledgement";
+}else if(msgType.Equal("732")){
+msgTypedescripton = "Advice of discharge";
+}else if(msgType.Equal("734")){
+msgTypedescripton = "Advice of refusal";
+}else if(msgType.Equal("740")){
+msgTypedescripton = "Authorisation of reimburse";
+}else if(msgType.Equal("742")){
+msgTypedescripton = "Reimbursement claim";
+}else if(msgType.Equal("747")){
+msgTypedescripton = "Amendment to an authorisation to reimburse";
+}else if(msgType.Equal("750")){
+msgTypedescripton = "Advice of discrepancy";
+}else if(msgType.Equal("752")){
+msgTypedescripton = "Authorisation to pay ,Accept negotiate ";
+}else if(msgType.Equal("754")){
+msgTypedescripton = "Advice of payment/acceptance/negotiation";
+}else if(msgType.Equal("756")){
+msgTypedescripton = "Advice of reimbursement or payment ";
+}else if(msgType.Equal("760")){
+msgTypedescripton = "Guarentee/standby of credit";
+}else if(msgType.Equal("767")){
+msgTypedescripton = "Guarentee/standby of credit amendment";
+}else if(msgType.Equal("768")){
+msgTypedescripton = "Acknowledgement of a Guarentee /Standby message";
+}else if(msgType.Equal("769")){
+msgTypedescripton = "Advice of reduction or release";
+}else if(msgType.Equal("790")){
+msgTypedescripton = "Advice of charges , interests and other adjustments";
+}else if(msgType.Equal("791")){
+msgTypedescripton = "Requests for payment of charges ,Interest and other expences";
+}else if(msgType.Equal("792")){
+msgTypedescripton = "Request for cancellation";
+}else if(msgType.Equal("795")){
+msgTypedescripton = "Queries";
+}else if(msgType.Equal("796")){
+msgTypedescripton = "Answers";
+}else if(msgType.Equal("798")){
+msgTypedescripton = "Propreitary message";
+}else if(msgType.Equal("799")){
+msgTypedescripton = "Free format message";
+}else if(msgType.Equal("800")){
+msgTypedescripton = "T/C sales and settlement advice[Single]";
+}else if(msgType.Equal("801")){
+msgTypedescripton = "T/C Multiple sales advice";
+}else if(msgType.Equal("802")){
+msgTypedescripton = "T/C Settlement advice";
+}else if(msgType.Equal("824")){
+msgTypedescripton = "T/C Inventory destruction /Cancellation Notice ";
+}else if(msgType.Equal("890")){
+msgTypedescripton = "Advice of charges , interests and other adjustments";
+}else if(msgType.Equal("891")){
+msgTypedescripton = "Requests for payment of charges ,Interest and other expences";
+}else if(msgType.Equal("892")){
+msgTypedescripton = "Request for cancellation";
+}else if(msgType.Equal("895")){
+msgTypedescripton = "Queries";
+}else if(msgType.Equal("896")){
+msgTypedescripton = "Answers";
+}else if(msgType.Equal("898")){
+msgTypedescripton = "Propreitary message";
+}else if(msgType.Equal("899")){
+msgTypedescripton = "Free format message";
+}else if(msgType.Equal("900")){
+msgTypedescripton = "Confirmation of Debit";
+}else if(msgType.Equal("910")){
+msgTypedescripton = "Confirmation of credit";
+}else if(msgType.Equal("920")){
+msgTypedescripton = "Request message";
+}else if(msgType.Equal("935")){
+msgTypedescripton = "Rate change advice";
+}else if(msgType.Equal("940")){
+msgTypedescripton = "Customer statement  message";
+}else if(msgType.Equal("941")){
+msgTypedescripton = "Balance report";
+}else if(msgType.Equal("942")){
+msgTypedescripton = "Interim Transaction report";
+}else if(msgType.Equal("950")){
+msgTypedescripton = "Statement messages";
+}else if(msgType.Equal("970")){
+msgTypedescripton = "Netting statement";
+}else if(msgType.Equal("971")){
+msgTypedescripton = "Netting Balance report";
+}else if(msgType.Equal("972")){
+msgTypedescripton = "Netting Interim statement";
+}else if(msgType.Equal("973")){
+msgTypedescripton = "Netting Request message";
+}else if(msgType.Equal("985")){
+msgTypedescripton = "Status enquiry";
+}else if(msgType.Equal("986")){
+msgTypedescripton = "Status report";
+}else if(msgType.Equal("990")){
+msgTypedescripton = "Advice of charges , interests and other adjustments";
+}else if(msgType.Equal("991")){
+msgTypedescripton = "Requests for payment of charges ,Interest and other expences";
+}else if(msgType.Equal("992")){
+msgTypedescripton = "Request for cancellation";
+}else if(msgType.Equal("995")){
+msgTypedescripton = "Queries";
+}else if(msgType.Equal("996")){
+msgTypedescripton = "Answers";
+}else if(msgType.Equal("998")){
+msgTypedescripton = "Propreitary message";
+}else if(msgType.Equal("999")){
+msgTypedescripton = "Free format message";
+}else if(msgType.Equal("n90")){
+msgTypedescripton = "Advice of charges , interests and other adjustments";
+}else if(msgType.Equal("n91")){
+msgTypedescripton = "Requests for payment of charges ,Interest and other expences";
+}else if(msgType.Equal("n92")){
+msgTypedescripton = "Request for cancellation";
+}else if(msgType.Equal("n95")){
+msgTypedescripton = "Queries";
+}else if(msgType.Equal("n96")){
+msgTypedescripton = "Answers";
+}else if(msgType.Equal("n98")){
+msgTypedescripton = "Propreitary message";
+}else if(msgType.Equal("n99")){
+msgTypedescripton = "Free format message";
+}
+else if(msgType.Equal("052")){
+msgTypedescripton = "Delivery Subset Status Report";
+}
+else if(msgType.Equal("061")){
+msgTypedescripton = "Select Status Report for FIN";
+}
+return msgTypedescripton;
+]]></Code>
+			<function-type>Formula</function-type>
+		</FormulaFunctionDef>
+		<FormulaFunctionDef name="BNYM_EndOfTag_WithRecLen" type="FormulaFunctionDef">
+			<description></description>
+			<Category>User Defined</Category>
+			<parameterfields>
+				<parameterfield>
+					<name>text</name>
+					<type>String</type>
+				</parameterfield>
+				<parameterfield>
+					<name>tag</name>
+					<type>String</type>
+				</parameterfield>
+				<parameterfield>
+					<name>currentIndex</name>
+					<type>Integer</type>
+				</parameterfield>
+				<parameterfield>
+					<name>maxLines</name>
+					<type>Integer</type>
+				</parameterfield>
+				<parameterfield>
+					<name>maxChars</name>
+					<type>Integer</type>
+				</parameterfield>
+				<parameterfield>
+					<name>currentLine</name>
+					<type>Integer</type>
+				</parameterfield>
+				<parameterfield>
+					<name>recordLength</name>
+					<type>Integer</type>
+				</parameterfield>
+			</parameterfields>
+			<ReturnType>Integer</ReturnType>
+			<Code><![CDATA[if (text.length() == 0) return 0;
+
+def RECORD_LENGTH = recordLength;
+def TEXT_START = 5;
+def start = 0;
+def prevLine = currentLine;
+if(currentIndex != 0) {
+    start += (RECORD_LENGTH - currentIndex);
+}
+else {
+	if (currentLine != ToInt (text.Mid (3, 2)))
+		return 0;
+	prevLine = currentLine - 1;
+}
+
+if (prevLine < 0) return 0;
+
+def lineCt = 0;
+def charCt = 0;
+
+for(def i = start; i < text.Length(); i += RECORD_LENGTH) {
+    def record = text.Mid(i, RECORD_LENGTH);
+    if(!record.StartsWith(tag)) {
+        return i;
+    }
+    def curLine = ToInt (text.Mid (i + 3, 2));
+    if ((curLine < prevLine) || (curLine > (prevLine + 1)))
+    	return i;
+    
+    if (curLine == prevLine) {
+    	if (charCt >= maxChars)
+    		return i;
+    	charCt += RECORD_LENGTH - TEXT_START;
+    }
+    else {
+    	if (lineCt >= maxLines)
+    		return i;
+    	lineCt++;
+    	charCt = RECORD_LENGTH - TEXT_START;
+    }
+    
+    prevLine = curLine;
+}
+return text.Length();]]></Code>
+			<function-type>Formula</function-type>
+		</FormulaFunctionDef>
+		<FormulaFunctionDef name="BNYM_EndOfLine_WithRecLen" type="FormulaFunctionDef">
+			<description></description>
+			<Category>User Defined</Category>
+			<parameterfields>
+				<parameterfield>
+					<name>text</name>
+					<type>String</type>
+				</parameterfield>
+				<parameterfield>
+					<name>tag</name>
+					<type>String</type>
+				</parameterfield>
+				<parameterfield>
+					<name>currentLine</name>
+					<type>Integer</type>
+				</parameterfield>
+				<parameterfield>
+					<name>currentIndex</name>
+					<type>Integer</type>
+				</parameterfield>
+				<parameterfield>
+					<name>recordLength</name>
+					<type>Integer</type>
+				</parameterfield>
+			</parameterfields>
+			<ReturnType>Integer</ReturnType>
+			<Code><![CDATA[def RECORD_LENGTH = recordLength;
+def start = 0;
+if(currentIndex != 0) {
+    start += (RECORD_LENGTH - currentIndex);
+}
+for(def i = start; i < text.Length(); i += RECORD_LENGTH) {
+    def record = text.Mid(i, RECORD_LENGTH);
+    if(!record.StartsWith(tag + lpad(totext(currentLine), '0', 2))) {
+        return i;
+    }
+}
+return text.Length();
+]]></Code>
+			<function-type>Formula</function-type>
+		</FormulaFunctionDef>
+		<FormulaFunctionDef name="BNYM_ParseMultiLineFormat_WithRecLen" type="FormulaFunctionDef">
+			<description></description>
+			<Category>User Defined</Category>
+			<parameterfields>
+				<parameterfield>
+					<name>text</name>
+					<type>String</type>
+				</parameterfield>
+				<parameterfield>
+					<name>tag</name>
+					<type>String</type>
+				</parameterfield>
+				<parameterfield>
+					<name>recordLength</name>
+					<type>Integer</type>
+				</parameterfield>
+			</parameterfields>
+			<ReturnType>String</ReturnType>
+			<Code><![CDATA[BNYM_parseMultiLineFormat_WithRecLen(text, tag, 0, -1, recordLength);]]></Code>
+			<function-type>Formula</function-type>
+		</FormulaFunctionDef>
+		<FormulaFunctionDef name="BNYM_ParseMultiLineFormat_WithRecLen" type="FormulaFunctionDef">
+			<description></description>
+			<Category>User Defined</Category>
+			<parameterfields>
+				<parameterfield>
+					<name>text</name>
+					<type>String</type>
+				</parameterfield>
+				<parameterfield>
+					<name>tag</name>
+					<type>String</type>
+				</parameterfield>
+				<parameterfield>
+					<name>currentLine</name>
+					<type>Integer</type>
+				</parameterfield>
+				<parameterfield>
+					<name>currentIndex</name>
+					<type>Integer</type>
+				</parameterfield>
+				<parameterfield>
+					<name>recordLength</name>
+					<type>Integer</type>
+				</parameterfield>
+			</parameterfields>
+			<ReturnType>String</ReturnType>
+			<Code><![CDATA[def RECORD_LENGTH = recordLength;
+def TEXT_START = 5;
+def multiLine = "";
+def start = 0;
+if(currentIndex != 0) {
+    def lineText = text.Mid(0, RECORD_LENGTH - currentIndex);
+    multiLine += lineText;
+    start = RECORD_LENGTH - currentIndex;
+}
+for(def i = start; i < text.Length(); i += RECORD_LENGTH) {
+    def record = text.Mid(i, RECORD_LENGTH);
+    def recordTag = record.Left(3);
+    if(tag != recordTag) {
+        break;
+    }
+    def line = ToInt(record.Mid(3, 2));
+    def lineText = record.Mid(TEXT_START, record.Length() - TEXT_START);
+    if(currentLine == -1) {
+        currentLine = line;;
+    }
+    else if(line != currentLine) {
+        multiLine = multiLine.trimRight();
+        multiLine += "\r\n";
+        currentLine = line;;
+    }
+    multiLine += lineText;
+}
+multiLine = multiLine.trimRight();
+return multiLine;
+]]></Code>
+			<function-type>Formula</function-type>
+		</FormulaFunctionDef>
+		<FormulaFunctionDef name="BNYM_SerializeMultiLineFormat_WithRecLen" type="FormulaFunctionDef">
+			<description></description>
+			<Category>User Defined</Category>
+			<parameterfields>
+				<parameterfield>
+					<name>text</name>
+					<type>String</type>
+				</parameterfield>
+				<parameterfield>
+					<name>tag</name>
+					<type>String</type>
+				</parameterfield>
+				<parameterfield>
+					<name>currentLine</name>
+					<type>Integer</type>
+				</parameterfield>
+				<parameterfield>
+					<name>currentIndex</name>
+					<type>Integer</type>
+				</parameterfield>
+				<parameterfield>
+					<name>recordLength</name>
+					<type>Integer</type>
+				</parameterfield>
+			</parameterfields>
+			<ReturnType>String</ReturnType>
+			<Code><![CDATA[def RECORD_LENGTH = recordLength;
+def TEXT_START = 5;
+def TEXT_LENGTH = RECORD_LENGTH - TEXT_START;
+def lines = Split("\r\n", text);
+def start = 0;
+def toRet = "";
+if(currentIndex > 0) {
+    toRet += BNYM_PrepareLine_WithRecLen(lines[0], tag, currentLine, currentIndex, recordLength);
+    start = 1;
+    currentLine += 1;
+}
+for(def i = start; i < lines.Length(); ++i) {
+    def line = lines[i];
+    toRet += BNYM_PrepareLine_WithRecLen(line, tag, currentLine, If(i == 0, currentIndex, 0), recordLength);
+    currentLine += 1;
+}
+return toRet;
+]]></Code>
+			<function-type>Formula</function-type>
+		</FormulaFunctionDef>
+		<FormulaFunctionDef name="BNYM_PrepareLine_WithRecLen" type="FormulaFunctionDef">
+			<description></description>
+			<Category>User Defined</Category>
+			<parameterfields>
+				<parameterfield>
+					<name>line</name>
+					<type>String</type>
+				</parameterfield>
+				<parameterfield>
+					<name>tag</name>
+					<type>String</type>
+				</parameterfield>
+				<parameterfield>
+					<name>currentLine</name>
+					<type>Integer</type>
+				</parameterfield>
+				<parameterfield>
+					<name>currentIndex</name>
+					<type>Integer</type>
+				</parameterfield>
+				<parameterfield>
+					<name>recordLength</name>
+					<type>Integer</type>
+				</parameterfield>
+			</parameterfields>
+			<ReturnType>String</ReturnType>
+			<Code><![CDATA[def toRet = "";
+def TEXT_LENGTH = recordLength - 5;
+def RECORD_LENGTH = recordLength;
+for(def j = 0; j < line.Length(); ) {
+	def remaining = TEXT_LENGTH;
+	if(j == 0 && currentIndex > 0) {
+		remaining = RECORD_LENGTH - currentIndex;
+	}
+	else {
+	    def lineStart = tag + Lpad(ToText(currentLine), '0', 2);
+	    toRet += lineStart;
+	}
+    def lineFragment = line.Mid(j, remaining);
+    toRet += Rpad(lineFragment, ' ', remaining);
+    j += remaining;
+}
+return toRet;]]></Code>
+			<function-type>Formula</function-type>
+		</FormulaFunctionDef>
+		<FormulaFunctionDef name="BNYM_CreditDebit_Length" type="FormulaFunctionDef">
+			<description></description>
+			<Category>User Defined</Category>
+			<parameterfields>
+				<parameterfield>
+					<name>text</name>
+					<type>String</type>
+				</parameterfield>
+			</parameterfields>
+			<ReturnType>Integer</ReturnType>
+			<Code><![CDATA[if(EqualIgnoreCase(text,"/")) {
+    return 1;
+}
+else {
+    return 0;
+}]]></Code>
+			<function-type>Formula</function-type>
+		</FormulaFunctionDef>
+		<FormulaFunctionDef name="BNYM_Slash1_Length" type="FormulaFunctionDef">
+			<description></description>
+			<Category>User Defined</Category>
+			<parameterfields>
+				<parameterfield>
+					<name>text</name>
+					<type>String</type>
+				</parameterfield>
+				<parameterfield>
+					<name>CreditDebit</name>
+					<type>String</type>
+					<required>false</required>
+				</parameterfield>
+			</parameterfields>
+			<ReturnType>Integer</ReturnType>
+			<Code><![CDATA[if(IsNotNull(CreditDebit) && EqualIgnoreCase(text, "/")) {    
+    return 1;   
+}
+else {
+    return 0;
+}]]></Code>
+			<function-type>Formula</function-type>
+		</FormulaFunctionDef>
+		<FormulaFunctionDef name="BNYM_PartyIdentifier_Length" type="FormulaFunctionDef">
+			<description></description>
+			<Category>User Defined</Category>
+			<parameterfields>
+				<parameterfield>
+					<name>text</name>
+					<type>String</type>
+				</parameterfield>
+				<parameterfield>
+					<name>Slash1</name>
+					<type>String</type>
+					<required>false</required>
+				</parameterfield>
+				<parameterfield>
+					<name>tag</name>
+					<type>String</type>
+				</parameterfield>
+			</parameterfields>
+			<ReturnType>Integer</ReturnType>
+			<Code><![CDATA[if(IsNotNull(Slash1) && Length(Slash1) > 0) {
+    return BNYM_EndOfLine(text, tag, 0, 8);
+}
+else {
+    return BNYM_EndOfLine(text, tag, 0, 6);
+}]]></Code>
+			<function-type>Formula</function-type>
+		</FormulaFunctionDef>
+		<FormulaFunctionDef name="BNYM_SerializeFields" type="FormulaFunctionDef">
+			<description></description>
+			<Category>User Defined</Category>
+			<parameterfields>
+				<parameterfield>
+					<name>field</name>
+					<type>String</type>
+				</parameterfield>
+			</parameterfields>
+			<ReturnType>String</ReturnType>
+			<Code><![CDATA[if(IsNotNull(field))
+{
+def returnStr = field;
+for(def i=returnStr.Length();i<35;i++)
+{
+returnStr+=" ";
+}
+return returnStr;
+}]]></Code>
+			<function-type>Formula</function-type>
+		</FormulaFunctionDef>
+		<elementproperties>
+			<propertymap>
+			</propertymap>
+		</elementproperties>
+	</folder>
+	<folder name="bnyFlows" type="FolderElement">
+		<messageflow name="SWIFTToSWIFT" type="MessageFlow">
+			<version>1.0</version>
+			<description><![CDATA[Parses any SWIFT message and writes it back. This is to verify that SWIFT Generic parser and serializer are sound (BNYM is not used here). Since this is round trip and we are supposed to get back the same SWIFT message it is easy to test and verify.
+
+This has been extensively tested.
+]]></description>
+			<transaction>NotRequired</transaction>
+			<variables>
+				<xpath-namespaces>
+					<namespace value="http://www.w3.org/2005/xpath-functions" prefix="fn"/>
+					<namespace value="http://www.w3.org/2001/XMLSchema" prefix="xs"/>
+					<namespace value="java:com.tplus.transform.runtime.swift.SwiftXPathFunctions" prefix="swift"/>
+				</xpath-namespaces>
+				<fields>
+					<field>
+						<name>rawIn</name>
+						<type>RawMessage</type>
+						<notnull>true</notnull>
+						<variabletype>INPUT</variabletype>
+					</field>
+					<field>
+						<name>rawOut</name>
+						<type>RawMessage</type>
+						<notnull>false</notnull>
+						<variabletype>OUTPUT</variabletype>
+					</field>
+					<field>
+						<name>swiftGenericObj</name>
+						<type>DataObject</type>
+						<minoccurs>1</minoccurs>
+						<maxoccurs>1</maxoccurs>
+						<variabletype>OUTPUT</variabletype>
+						<message>Undefined</message>
+						<fields>
+						</fields>
+					</field>
+				</fields>
+			</variables>
+			<flowelement name="Start1" uid="701ad8ae-900f-443d-a21a-9c8c5161bc17" type="Start" xsi:type="Start" >
+				<label>Start</label>
+				<visual>
+					<position x="339" y="39"/>
+				</visual>
+			</flowelement>
+			<flowelement name="Custom1" uid="5decef34-e35d-4057-84e2-5f756eb847e0" type="Custom" xsi:type="Custom" >
+				<label>Parse Swift generic</label>
+				<description><![CDATA[]]></description>
+				<code><![CDATA[ParseSwiftGeneric(rawIn, swiftGenericObj)]]></code>
+				<visual>
+					<position x="211" y="203"/>
+				</visual>
+			</flowelement>
+			<flowelement name="Create1" uid="24ae2d8f-0a2e-42a2-8ce0-cf045595eb61" type="Create" xsi:type="Create" >
+				<label>Create</label>
+				<description><![CDATA[]]></description>
+				<out>swiftGenericObj</out>
+				<message>="SwiftGeneric"</message>
+				<visual>
+					<position x="212" y="114"/>
+				</visual>
+			</flowelement>
+			<flowelement name="Stop1" uid="6ce79674-8479-458f-bcd3-ee1ac80ad23f" type="Stop" xsi:type="Stop" >
+				<label>Stop</label>
+				<visual>
+					<position x="209" y="354"/>
+				</visual>
+			</flowelement>
+			<flowelement name="Custom2" uid="26fe1766-9192-4d81-bc7d-7cd6468e8977" type="Custom" xsi:type="Custom" >
+				<label>Serialize Swift generic</label>
+				<description><![CDATA[]]></description>
+				<code><![CDATA[rawOut = NewMessage();
+SerializeSwiftGeneric(swiftGenericObj, rawOut);
+]]></code>
+				<visual>
+					<position x="211" y="286"/>
+				</visual>
+			</flowelement>
+			<flowelement name="If1" uid="72e60d39-e9a9-49b8-bd02-12d97235170a" type="If" xsi:type="If" >
+				<label>Swift Message</label>
+				<description><![CDATA[]]></description>
+				<condition><![CDATA[true]]></condition>
+				<visual>
+					<position x="341" y="113"/>
+				</visual>
+			</flowelement>
+			<flowelement name="Parse1" uid="a74cc59f-1605-4b64-8f15-2787438f7b57" type="Parse" xsi:type="Parse" >
+				<label>Parse</label>
+				<description><![CDATA[]]></description>
+				<in>rawIn</in>
+				<out>swiftGenericObj</out>
+				<options>
+					<option name="message.format">xml</option>
+				</options>
+				<message>="SwiftGeneric"</message>
+				<cascade-exceptions>false</cascade-exceptions>
+				<visual>
+					<position x="468" y="114"/>
+				</visual>
+			</flowelement>
+			<flowelement name="Resume1" uid="5bc68a3c-766b-4043-a4ff-943317c7f2b2" type="Resume" xsi:type="Resume" >
+				<label>Resume</label>
+				<visual>
+					<position x="328" y="198"/>
+				</visual>
+			</flowelement>
+			<link type="Default" xsi:type="Default">
+				<outputport uid="24ae2d8f-0a2e-42a2-8ce0-cf045595eb61" portindex="1"/>
+				<inputport uid="5decef34-e35d-4057-84e2-5f756eb847e0" portindex="0"/>
+				<edge-type>DIRECT</edge-type>
+			</link>
+			<link type="Default" xsi:type="Default">
+				<outputport uid="5decef34-e35d-4057-84e2-5f756eb847e0" portindex="1"/>
+				<inputport uid="26fe1766-9192-4d81-bc7d-7cd6468e8977" portindex="0"/>
+				<edge-type>DIRECT</edge-type>
+			</link>
+			<link type="Default" xsi:type="Default">
+				<outputport uid="26fe1766-9192-4d81-bc7d-7cd6468e8977" portindex="1"/>
+				<inputport uid="6ce79674-8479-458f-bcd3-ee1ac80ad23f" portindex="0"/>
+				<edge-type>DIRECT</edge-type>
+			</link>
+			<link type="Default" xsi:type="Default">
+				<outputport uid="701ad8ae-900f-443d-a21a-9c8c5161bc17" portindex="0"/>
+				<inputport uid="72e60d39-e9a9-49b8-bd02-12d97235170a" portindex="0"/>
+				<edge-type>DIRECT</edge-type>
+			</link>
+			<link type="Default" xsi:type="Default">
+				<outputport uid="72e60d39-e9a9-49b8-bd02-12d97235170a" portindex="1"/>
+				<inputport uid="24ae2d8f-0a2e-42a2-8ce0-cf045595eb61" portindex="0"/>
+				<edge-type>ELBOW</edge-type>
+			</link>
+			<link type="Default" xsi:type="Default">
+				<outputport uid="72e60d39-e9a9-49b8-bd02-12d97235170a" portindex="2"/>
+				<inputport uid="a74cc59f-1605-4b64-8f15-2787438f7b57" portindex="0"/>
+				<edge-type>ELBOW</edge-type>
+			</link>
+			<link type="Default" xsi:type="Default">
+				<outputport uid="a74cc59f-1605-4b64-8f15-2787438f7b57" portindex="1"/>
+				<inputport uid="26fe1766-9192-4d81-bc7d-7cd6468e8977" portindex="0"/>
+				<edge-type>DIRECT</edge-type>
+			</link>
+			<link type="Exception" xsi:type="Exception">
+				<message>TransformException</message>
+				<cascade-exceptions>false</cascade-exceptions>
+				<outputport uid="5decef34-e35d-4057-84e2-5f756eb847e0" portindex="2"/>
+				<inputport uid="5bc68a3c-766b-4043-a4ff-943317c7f2b2" portindex="0"/>
+				<edge-type>ELBOW</edge-type>
+			</link>
+			<visual>
+				<bounds x="174" y="25" width="318" height="343"/>
+			</visual>
+			<elementproperties>
+				<propertymap>
+					<property name="codegen.java.properties">
+						<value>
+							<propertymap type="com.tplus.transform.design.PropertiesDef">
+								<property name="Java Package Name" value="com.transform.flow"/>
+								<property name="Jar Name" value="%c.jar"/>
+								<property name="Manifest Entries" value="transformrt.jar"/>
+								<property name="Data Source" value=""/>
+								<property name="Generate MDB" value="false"/>
+							</propertymap>
+						</value>
+					</property>
+				</propertymap>
+			</elementproperties>
+		</messageflow>
+		<messageflow name="BNYToSWIFT" type="MessageFlow">
+			<version>1.0</version>
+			<description><![CDATA[Parses the given BNY message and transforms it to SWIFT]]></description>
+			<transaction>NotRequired</transaction>
+			<variables>
+				<xpath-namespaces>
+					<namespace value="http://www.w3.org/2005/xpath-functions" prefix="fn"/>
+					<namespace value="http://www.w3.org/2001/XMLSchema" prefix="xs"/>
+					<namespace value="java:com.tplus.transform.runtime.swift.SwiftXPathFunctions" prefix="swift"/>
+				</xpath-namespaces>
+				<fields>
+					<field>
+						<name>rawIn</name>
+						<type>RawMessage</type>
+						<notnull>true</notnull>
+						<variabletype>INPUT</variabletype>
+					</field>
+					<field>
+						<name>rawOut</name>
+						<type>RawMessage</type>
+						<notnull>false</notnull>
+						<variabletype>OUTPUT</variabletype>
+					</field>
+					<field>
+						<name>bnyObj</name>
+						<type>DataObject</type>
+						<minoccurs>1</minoccurs>
+						<maxoccurs>1</maxoccurs>
+						<variabletype>OUTPUT</variabletype>
+						<message>Undefined</message>
+						<fields>
+						</fields>
+					</field>
+					<field>
+						<name>swiftGenericObj</name>
+						<type>DataObject</type>
+						<minoccurs>1</minoccurs>
+						<maxoccurs>1</maxoccurs>
+						<variabletype>OUTPUT</variabletype>
+						<message>Undefined</message>
+						<fields>
+						</fields>
+					</field>
+				</fields>
+			</variables>
+			<flowelement name="Start1" uid="701ad8ae-900f-443d-a21a-9c8c5161bc17" type="Start" xsi:type="Start" >
+				<label>Start</label>
+				<visual>
+					<position x="284" y="39"/>
+				</visual>
+			</flowelement>
+			<flowelement name="Stop1" uid="6ce79674-8479-458f-bcd3-ee1ac80ad23f" type="Stop" xsi:type="Stop" >
+				<label>Stop</label>
+				<visual>
+					<position x="282" y="387"/>
+				</visual>
+			</flowelement>
+			<flowelement name="Custom2" uid="26fe1766-9192-4d81-bc7d-7cd6468e8977" type="Custom" xsi:type="Custom" >
+				<label>Serialize Swift generic</label>
+				<description><![CDATA[]]></description>
+				<code><![CDATA[rawOut = NewMessage();
+SerializeSwiftGeneric(swiftGenericObj, rawOut);
+]]></code>
+				<visual>
+					<position x="283" y="319"/>
+				</visual>
+			</flowelement>
+			<flowelement name="Parse1" uid="d41d595a-4adb-4091-a510-6490a0026ab3" type="Parse" xsi:type="Parse" >
+				<label>Parse BNYMInternal</label>
+				<description><![CDATA[]]></description>
+				<in>rawIn</in>
+				<out>bnyObj</out>
+				<message>="BNYMInternal"</message>
+				<cascade-exceptions>false</cascade-exceptions>
+				<visual>
+					<position x="284" y="100"/>
+				</visual>
+			</flowelement>
+			<flowelement name="Mapping1" uid="25b274d0-6494-4e47-b230-b5248186ee4e" type="Mapping" xsi:type="Mapping" >
+				<label>BNYM Internal to SWIFT</label>
+				<description><![CDATA[]]></description>
+				<in>bnyObj</in>
+				<out>swiftGenericObj</out>
+				<messagemapping>="BNYMInternalToSwiftGeneric"</messagemapping>
+				<create-destination>true</create-destination>
+				<visual>
+					<position x="284" y="172"/>
+				</visual>
+			</flowelement>
+			<flowelement name="Custom1" uid="843b29b0-3f60-4ad5-b227-451e5a43e7f1" type="Custom" xsi:type="Custom" >
+				<label>Fill SWIFT Header</label>
+				<description><![CDATA[]]></description>
+				<code><![CDATA[def header = swiftGenericObj.getObject("Header");
+def basicHeader = header.getSection("Basic Header").secAddElement();
+basicHeader.setString("Application Identifier", "F");
+basicHeader.setString("Service Identifier", "01");
+basicHeader.setString("LT Identifier", "SAJIDEDBXXXX");
+basicHeader.setString("Session Number", "0000");
+basicHeader.setString("Sequence Number", "000000");
+
+def appHeader = header.getSection("Application Header Input").secAddElement();
+appHeader.setString("Input/Output Identifier", "I");
+appHeader.setString("Message Type", "101");
+appHeader.setString("Receiver's Address", "CHASUS33XXXX");
+appHeader.setString("Message Priority", "N");
+]]></code>
+				<visual>
+					<position x="283" y="243"/>
+				</visual>
+			</flowelement>
+			<link type="Default" xsi:type="Default">
+				<outputport uid="26fe1766-9192-4d81-bc7d-7cd6468e8977" portindex="1"/>
+				<inputport uid="6ce79674-8479-458f-bcd3-ee1ac80ad23f" portindex="0"/>
+				<edge-type>DIRECT</edge-type>
+			</link>
+			<link type="Default" xsi:type="Default">
+				<outputport uid="701ad8ae-900f-443d-a21a-9c8c5161bc17" portindex="0"/>
+				<inputport uid="d41d595a-4adb-4091-a510-6490a0026ab3" portindex="0"/>
+				<edge-type>DIRECT</edge-type>
+			</link>
+			<link type="Default" xsi:type="Default">
+				<outputport uid="d41d595a-4adb-4091-a510-6490a0026ab3" portindex="1"/>
+				<inputport uid="25b274d0-6494-4e47-b230-b5248186ee4e" portindex="0"/>
+				<edge-type>DIRECT</edge-type>
+			</link>
+			<link type="Default" xsi:type="Default">
+				<outputport uid="25b274d0-6494-4e47-b230-b5248186ee4e" portindex="1"/>
+				<inputport uid="843b29b0-3f60-4ad5-b227-451e5a43e7f1" portindex="0"/>
+				<edge-type>DIRECT</edge-type>
+			</link>
+			<link type="Default" xsi:type="Default">
+				<outputport uid="843b29b0-3f60-4ad5-b227-451e5a43e7f1" portindex="1"/>
+				<inputport uid="26fe1766-9192-4d81-bc7d-7cd6468e8977" portindex="0"/>
+				<edge-type>DIRECT</edge-type>
+			</link>
+			<visual>
+				<bounds x="242" y="25" width="88" height="376"/>
+			</visual>
+			<elementproperties>
+				<propertymap>
+					<property name="codegen.java.properties">
+						<value>
+							<propertymap type="com.tplus.transform.design.PropertiesDef">
+								<property name="Java Package Name" value="com.transform.flow"/>
+								<property name="Jar Name" value="%c.jar"/>
+								<property name="Manifest Entries" value="transformrt.jar"/>
+								<property name="Data Source" value=""/>
+								<property name="Generate MDB" value="false"/>
+							</propertymap>
+						</value>
+					</property>
+				</propertymap>
+			</elementproperties>
+		</messageflow>
+		<messageflow name="SWIFTToBNY" type="MessageFlow">
+			<version>1.0</version>
+			<description><![CDATA[Parses the given SWIFT message and transforms it to BNY]]></description>
+			<transaction>NotRequired</transaction>
+			<variables>
+				<xpath-namespaces>
+					<namespace value="http://www.w3.org/2005/xpath-functions" prefix="fn"/>
+					<namespace value="http://www.w3.org/2001/XMLSchema" prefix="xs"/>
+					<namespace value="java:com.tplus.transform.runtime.swift.SwiftXPathFunctions" prefix="swift"/>
+				</xpath-namespaces>
+				<fields>
+					<field>
+						<name>rawIn</name>
+						<type>RawMessage</type>
+						<notnull>true</notnull>
+						<variabletype>INPUT</variabletype>
+					</field>
+					<field>
+						<name>rawOut</name>
+						<type>RawMessage</type>
+						<notnull>false</notnull>
+						<variabletype>OUTPUT</variabletype>
+					</field>
+					<field>
+						<name>bnyObj</name>
+						<type>DataObject</type>
+						<minoccurs>1</minoccurs>
+						<maxoccurs>1</maxoccurs>
+						<variabletype>OUTPUT</variabletype>
+						<message>Undefined</message>
+						<fields>
+						</fields>
+					</field>
+					<field>
+						<name>swiftGenericObj</name>
+						<type>DataObject</type>
+						<minoccurs>1</minoccurs>
+						<maxoccurs>1</maxoccurs>
+						<variabletype>OUTPUT</variabletype>
+						<message>Undefined</message>
+						<fields>
+						</fields>
+					</field>
+				</fields>
+			</variables>
+			<flowelement name="Start1" uid="701ad8ae-900f-443d-a21a-9c8c5161bc17" type="Start" xsi:type="Start" >
+				<label>Start</label>
+				<visual>
+					<position x="362" y="39"/>
+				</visual>
+			</flowelement>
+			<flowelement name="Stop1" uid="6ce79674-8479-458f-bcd3-ee1ac80ad23f" type="Stop" xsi:type="Stop" >
+				<label>Stop</label>
+				<visual>
+					<position x="358" y="387"/>
+				</visual>
+			</flowelement>
+			<flowelement name="Custom2" uid="26fe1766-9192-4d81-bc7d-7cd6468e8977" type="Custom" xsi:type="Custom" >
+				<label>Parse Swift generic</label>
+				<description><![CDATA[]]></description>
+				<code><![CDATA[ParseSwiftGeneric(rawIn, swiftGenericObj);]]></code>
+				<visual>
+					<position x="361" y="177"/>
+				</visual>
+			</flowelement>
+			<flowelement name="Mapping1" uid="25b274d0-6494-4e47-b230-b5248186ee4e" type="Mapping" xsi:type="Mapping" >
+				<label>Mapping</label>
+				<description><![CDATA[]]></description>
+				<in>swiftGenericObj</in>
+				<out>bnyObj</out>
+				<messagemapping>="SwiftGenericToBNYMInternal"</messagemapping>
+				<create-destination>true</create-destination>
+				<visual>
+					<position x="360" y="254"/>
+				</visual>
+			</flowelement>
+			<flowelement name="Create1" uid="d434dfd3-2d6a-4814-9916-f5349c77385a" type="Create" xsi:type="Create" >
+				<label>Create</label>
+				<description><![CDATA[]]></description>
+				<out>swiftGenericObj</out>
+				<message>="SwiftGeneric"</message>
+				<visual>
+					<position x="361" y="100"/>
+				</visual>
+			</flowelement>
+			<flowelement name="Serialize1" uid="f04e97cf-14e3-4520-8028-5a45d72680a9" type="Serialize" xsi:type="Serialize" >
+				<label>Serialize BNY</label>
+				<description><![CDATA[]]></description>
+				<in>bnyObj</in>
+				<out>rawOut</out>
+				<message>="BNYMInternal"</message>
+				<cascade-exceptions>false</cascade-exceptions>
+				<visual>
+					<position x="359" y="325"/>
+				</visual>
+			</flowelement>
+			<flowelement name="Resume1" uid="db000c40-aaca-4f1a-9ae5-becf85ba1238" type="Resume" xsi:type="Resume" >
+				<label>Resume</label>
+				<visual>
+					<position x="495" y="197"/>
+				</visual>
+			</flowelement>
+			<link type="Default" xsi:type="Default">
+				<outputport uid="701ad8ae-900f-443d-a21a-9c8c5161bc17" portindex="0"/>
+				<inputport uid="d434dfd3-2d6a-4814-9916-f5349c77385a" portindex="0"/>
+				<edge-type>DIRECT</edge-type>
+			</link>
+			<link type="Default" xsi:type="Default">
+				<outputport uid="d434dfd3-2d6a-4814-9916-f5349c77385a" portindex="1"/>
+				<inputport uid="26fe1766-9192-4d81-bc7d-7cd6468e8977" portindex="0"/>
+				<edge-type>DIRECT</edge-type>
+			</link>
+			<link type="Default" xsi:type="Default">
+				<outputport uid="26fe1766-9192-4d81-bc7d-7cd6468e8977" portindex="1"/>
+				<inputport uid="25b274d0-6494-4e47-b230-b5248186ee4e" portindex="0"/>
+				<edge-type>DIRECT</edge-type>
+			</link>
+			<link type="Default" xsi:type="Default">
+				<outputport uid="25b274d0-6494-4e47-b230-b5248186ee4e" portindex="1"/>
+				<inputport uid="f04e97cf-14e3-4520-8028-5a45d72680a9" portindex="0"/>
+				<edge-type>DIRECT</edge-type>
+			</link>
+			<link type="Default" xsi:type="Default">
+				<outputport uid="f04e97cf-14e3-4520-8028-5a45d72680a9" portindex="1"/>
+				<inputport uid="6ce79674-8479-458f-bcd3-ee1ac80ad23f" portindex="0"/>
+				<edge-type>DIRECT</edge-type>
+			</link>
+			<link type="Exception" xsi:type="Exception">
+				<message>TransformException</message>
+				<cascade-exceptions>false</cascade-exceptions>
+				<outputport uid="26fe1766-9192-4d81-bc7d-7cd6468e8977" portindex="2"/>
+				<inputport uid="db000c40-aaca-4f1a-9ae5-becf85ba1238" portindex="0"/>
+				<edge-type>ELBOW</edge-type>
+			</link>
+			<visual>
+				<bounds x="320" y="25" width="217" height="376"/>
+			</visual>
+			<elementproperties>
+				<propertymap>
+					<property name="codegen.java.properties">
+						<value>
+							<propertymap type="com.tplus.transform.design.PropertiesDef">
+								<property name="Java Package Name" value="com.transform.flow"/>
+								<property name="Jar Name" value="%c.jar"/>
+								<property name="Manifest Entries" value="transformrt.jar"/>
+								<property name="Data Source" value=""/>
+								<property name="Generate MDB" value="false"/>
+							</propertymap>
+						</value>
+					</property>
+				</propertymap>
+			</elementproperties>
+		</messageflow>
+		<messageflow name="SWIFTToBNYToSWIFT" type="MessageFlow">
+			<version>1.0</version>
+			<description><![CDATA[Parses a SWIFT message, converts it to BNY, maps it to back to SWIFT and serializes SWIFT. Again this is a round trip, but it goes through BNY conversion. 
+
+Apart from the SWIFT header and trailer output should match the input. Header and trailer as lost because SWIFT to BNY mapping does not include header and trailer.
+
+Note that this roundtrip does not necessarily ensure that intermediate BNY representation is as per the table of instructions.
+]]></description>
+			<transaction>NotRequired</transaction>
+			<variables>
+				<xpath-namespaces>
+					<namespace value="http://www.w3.org/2005/xpath-functions" prefix="fn"/>
+					<namespace value="http://www.w3.org/2001/XMLSchema" prefix="xs"/>
+					<namespace value="java:com.tplus.transform.runtime.swift.SwiftXPathFunctions" prefix="swift"/>
+				</xpath-namespaces>
+				<fields>
+					<field>
+						<name>rawIn</name>
+						<type>RawMessage</type>
+						<notnull>true</notnull>
+						<variabletype>INPUT</variabletype>
+					</field>
+					<field>
+						<name>bnyData</name>
+						<type>RawMessage</type>
+						<notnull>true</notnull>
+						<variabletype>LOCAL</variabletype>
+					</field>
+					<field>
+						<name>rawSwiftOut</name>
+						<type>RawMessage</type>
+						<notnull>true</notnull>
+						<variabletype>OUTPUT</variabletype>
+					</field>
+				</fields>
+			</variables>
+			<flowelement name="Start1" uid="22a19676-9572-44b1-b5c5-b45b32f1ef38" type="Start" xsi:type="Start" >
+				<label>Start</label>
+				<visual>
+					<position x="285" y="39"/>
+				</visual>
+			</flowelement>
+			<flowelement name="Invoke1" uid="cb1dad37-d5ff-448d-88ca-2c3607586a8e" type="Invoke" xsi:type="Invoke" >
+				<label>Invoke SWIFt to BNY</label>
+				<description><![CDATA[]]></description>
+				<name>SWIFTToBNY</name>
+				<cascade-exceptions>false</cascade-exceptions>
+				<input>
+					<field>
+						<name>rawIn</name>
+						<type>RawMessage</type>
+						<value><![CDATA[rawIn]]></value>
+						<notnull>true</notnull>
+					</field>
+				</input>
+				<output>
+					<field>
+						<name>rawOut</name>
+						<type>RawMessage</type>
+						<value><![CDATA[bnyData]]></value>
+						<notnull>false</notnull>
+					</field>
+					<field>
+						<name>bnyObj</name>
+						<type>DataObject</type>
+						<notnull>true</notnull>
+					</field>
+					<field>
+						<name>swiftGenericObj</name>
+						<type>DataObject</type>
+						<notnull>true</notnull>
+					</field>
+				</output>
+				<visual>
+					<position x="285" y="100"/>
+				</visual>
+			</flowelement>
+			<flowelement name="Invoke2" uid="ffdb0fb0-a101-4727-9cac-37c7e125760a" type="Invoke" xsi:type="Invoke" >
+				<label>Invoke BNY to SWIFT</label>
+				<description><![CDATA[]]></description>
+				<name>BNYToSWIFT</name>
+				<cascade-exceptions>true</cascade-exceptions>
+				<input>
+					<field>
+						<name>rawIn</name>
+						<type>RawMessage</type>
+						<value><![CDATA[bnyData]]></value>
+						<notnull>true</notnull>
+					</field>
+				</input>
+				<output>
+					<field>
+						<name>rawOut</name>
+						<type>RawMessage</type>
+						<value><![CDATA[rawSwiftOut]]></value>
+						<notnull>false</notnull>
+					</field>
+					<field>
+						<name>bnyObj</name>
+						<type>DataObject</type>
+						<notnull>true</notnull>
+					</field>
+					<field>
+						<name>swiftGenericObj</name>
+						<type>DataObject</type>
+						<notnull>true</notnull>
+					</field>
+				</output>
+				<visual>
+					<position x="284" y="172"/>
+				</visual>
+			</flowelement>
+			<flowelement name="Stop1" uid="b2c54d9b-4cdc-42ec-9f13-cd0dc130045c" type="Stop" xsi:type="Stop" >
+				<label>Stop</label>
+				<visual>
+					<position x="285" y="234"/>
+				</visual>
+			</flowelement>
+			<link type="Default" xsi:type="Default">
+				<outputport uid="22a19676-9572-44b1-b5c5-b45b32f1ef38" portindex="0"/>
+				<inputport uid="cb1dad37-d5ff-448d-88ca-2c3607586a8e" portindex="0"/>
+				<edge-type>DIRECT</edge-type>
+			</link>
+			<link type="Default" xsi:type="Default">
+				<outputport uid="cb1dad37-d5ff-448d-88ca-2c3607586a8e" portindex="1"/>
+				<inputport uid="ffdb0fb0-a101-4727-9cac-37c7e125760a" portindex="0"/>
+				<edge-type>DIRECT</edge-type>
+			</link>
+			<link type="Default" xsi:type="Default">
+				<outputport uid="ffdb0fb0-a101-4727-9cac-37c7e125760a" portindex="1"/>
+				<inputport uid="b2c54d9b-4cdc-42ec-9f13-cd0dc130045c" portindex="0"/>
+				<edge-type>DIRECT</edge-type>
+			</link>
+			<visual>
+				<bounds x="243" y="25" width="87" height="223"/>
+			</visual>
+			<elementproperties>
+				<propertymap>
+					<property name="codegen.java.properties">
+						<value>
+							<propertymap type="com.tplus.transform.design.PropertiesDef">
+								<property name="Java Package Name" value="com.transform.flow"/>
+								<property name="Jar Name" value="%c.jar"/>
+								<property name="Manifest Entries" value="transformrt.jar"/>
+								<property name="Data Source" value=""/>
+								<property name="Generate MDB" value="false"/>
+							</propertymap>
+						</value>
+					</property>
+				</propertymap>
+			</elementproperties>
+		</messageflow>
+		<messageflow name="BNYToSWIFTToBNY" type="MessageFlow">
+			<version>1.0</version>
+			<transaction>NotRequired</transaction>
+			<variables>
+				<xpath-namespaces>
+					<namespace value="http://www.w3.org/2005/xpath-functions" prefix="fn"/>
+					<namespace value="http://www.w3.org/2001/XMLSchema" prefix="xs"/>
+					<namespace value="java:com.tplus.transform.runtime.swift.SwiftXPathFunctions" prefix="swift"/>
+				</xpath-namespaces>
+				<fields>
+					<field>
+						<name>rawIn</name>
+						<type>RawMessage</type>
+						<notnull>true</notnull>
+						<variabletype>INPUT</variabletype>
+					</field>
+					<field>
+						<name>swiftData</name>
+						<type>RawMessage</type>
+						<notnull>true</notnull>
+						<variabletype>LOCAL</variabletype>
+					</field>
+					<field>
+						<name>rawBNYOut</name>
+						<type>RawMessage</type>
+						<notnull>true</notnull>
+						<variabletype>OUTPUT</variabletype>
+					</field>
+				</fields>
+			</variables>
+			<flowelement name="Start1" uid="22a19676-9572-44b1-b5c5-b45b32f1ef38" type="Start" xsi:type="Start" >
+				<label>Start</label>
+				<visual>
+					<position x="285" y="39"/>
+				</visual>
+			</flowelement>
+			<flowelement name="Invoke1" uid="cb1dad37-d5ff-448d-88ca-2c3607586a8e" type="Invoke" xsi:type="Invoke" >
+				<label>Invoke BNY to SWIFT</label>
+				<description><![CDATA[]]></description>
+				<name>BNYToSWIFT</name>
+				<cascade-exceptions>false</cascade-exceptions>
+				<input>
+					<field>
+						<name>rawIn</name>
+						<type>RawMessage</type>
+						<value><![CDATA[rawIn]]></value>
+						<notnull>true</notnull>
+					</field>
+				</input>
+				<output>
+					<field>
+						<name>rawOut</name>
+						<type>RawMessage</type>
+						<value><![CDATA[swiftData]]></value>
+						<notnull>false</notnull>
+					</field>
+					<field>
+						<name>bnyObj</name>
+						<type>DataObject</type>
+						<notnull>true</notnull>
+					</field>
+					<field>
+						<name>swiftGenericObj</name>
+						<type>DataObject</type>
+						<notnull>true</notnull>
+					</field>
+				</output>
+				<visual>
+					<position x="285" y="101"/>
+				</visual>
+			</flowelement>
+			<flowelement name="Invoke2" uid="ffdb0fb0-a101-4727-9cac-37c7e125760a" type="Invoke" xsi:type="Invoke" >
+				<label>Invoke SWIFT to BNY</label>
+				<description><![CDATA[]]></description>
+				<name>SWIFTToBNY</name>
+				<cascade-exceptions>true</cascade-exceptions>
+				<input>
+					<field>
+						<name>rawIn</name>
+						<type>RawMessage</type>
+						<value><![CDATA[swiftData]]></value>
+						<notnull>true</notnull>
+					</field>
+				</input>
+				<output>
+					<field>
+						<name>rawOut</name>
+						<type>RawMessage</type>
+						<value><![CDATA[rawBNYOut]]></value>
+						<notnull>false</notnull>
+					</field>
+					<field>
+						<name>bnyObj</name>
+						<type>DataObject</type>
+						<notnull>true</notnull>
+					</field>
+					<field>
+						<name>swiftGenericObj</name>
+						<type>DataObject</type>
+						<notnull>true</notnull>
+					</field>
+				</output>
+				<visual>
+					<position x="288" y="169"/>
+				</visual>
+			</flowelement>
+			<flowelement name="Stop1" uid="b2c54d9b-4cdc-42ec-9f13-cd0dc130045c" type="Stop" xsi:type="Stop" >
+				<label>Stop</label>
+				<visual>
+					<position x="285" y="234"/>
+				</visual>
+			</flowelement>
+			<link type="Default" xsi:type="Default">
+				<outputport uid="22a19676-9572-44b1-b5c5-b45b32f1ef38" portindex="0"/>
+				<inputport uid="cb1dad37-d5ff-448d-88ca-2c3607586a8e" portindex="0"/>
+				<edge-type>DIRECT</edge-type>
+			</link>
+			<link type="Default" xsi:type="Default">
+				<outputport uid="cb1dad37-d5ff-448d-88ca-2c3607586a8e" portindex="1"/>
+				<inputport uid="ffdb0fb0-a101-4727-9cac-37c7e125760a" portindex="0"/>
+				<edge-type>DIRECT</edge-type>
+			</link>
+			<link type="Default" xsi:type="Default">
+				<outputport uid="ffdb0fb0-a101-4727-9cac-37c7e125760a" portindex="1"/>
+				<inputport uid="b2c54d9b-4cdc-42ec-9f13-cd0dc130045c" portindex="0"/>
+				<edge-type>DIRECT</edge-type>
+			</link>
+			<visual>
+				<bounds x="244" y="25" width="89" height="223"/>
+			</visual>
+			<elementproperties>
+				<propertymap>
+					<property name="codegen.java.properties">
+						<value>
+							<propertymap type="com.tplus.transform.design.PropertiesDef">
+								<property name="Java Package Name" value="com.transform.flow"/>
+								<property name="Jar Name" value="%c.jar"/>
+								<property name="Manifest Entries" value="transformrt.jar"/>
+								<property name="Data Source" value=""/>
+								<property name="Generate MDB" value="false"/>
+							</propertymap>
+						</value>
+					</property>
+				</propertymap>
+			</elementproperties>
+		</messageflow>
+		<messageflow name="CIFTest" type="MessageFlow">
+			<version>1.0</version>
+			<transaction>NotRequired</transaction>
+			<variables>
+				<xpath-namespaces>
+					<namespace value="http://www.w3.org/2005/xpath-functions" prefix="fn"/>
+					<namespace value="http://www.w3.org/2001/XMLSchema" prefix="xs"/>
+					<namespace value="java:com.tplus.transform.runtime.swift.SwiftXPathFunctions" prefix="swift"/>
+				</xpath-namespaces>
+				<fields>
+					<field>
+						<name>str</name>
+						<type>String</type>
+						<notnull>true</notnull>
+						<length>-1</length>
+						<variabletype>OUTPUT</variabletype>
+					</field>
+				</fields>
+			</variables>
+			<additional-properties>
+				<property name="main-flow" value="false"/>
+			</additional-properties>
+			<flowelement name="Start1" uid="66a865c7-e7e4-4119-a528-26e1d23ead02" type="Start" xsi:type="Start" >
+				<label>Start</label>
+				<visual>
+					<position x="290" y="90"/>
+				</visual>
+			</flowelement>
+			<flowelement name="Stop1" uid="5de277ef-7d25-4551-848f-abc624044dd6" type="Stop" xsi:type="Stop" >
+				<label>Stop</label>
+				<visual>
+					<position x="293" y="234"/>
+				</visual>
+			</flowelement>
+			<flowelement name="Custom1" uid="c7084ad5-73bd-4b76-bbea-e10482274080" type="Custom" xsi:type="Custom" >
+				<label>Custom</label>
+				<description><![CDATA[]]></description>
+				<code><![CDATA[str = BNYM_GetSenderDetails("CITGUS44M87","r851n1v");
+
+]]></code>
+				<visual>
+					<position x="290" y="162"/>
+				</visual>
+			</flowelement>
+			<link type="Default" xsi:type="Default">
+				<outputport uid="66a865c7-e7e4-4119-a528-26e1d23ead02" portindex="0"/>
+				<inputport uid="c7084ad5-73bd-4b76-bbea-e10482274080" portindex="0"/>
+				<edge-type>DIRECT</edge-type>
+			</link>
+			<link type="Default" xsi:type="Default">
+				<outputport uid="c7084ad5-73bd-4b76-bbea-e10482274080" portindex="1"/>
+				<inputport uid="5de277ef-7d25-4551-848f-abc624044dd6" portindex="0"/>
+				<edge-type>DIRECT</edge-type>
+			</link>
+			<visual>
+				<bounds x="258" y="77" width="66" height="171"/>
+			</visual>
+			<elementproperties>
+				<propertymap>
+					<property name="codegen.java.properties">
+						<value>
+							<propertymap type="com.tplus.transform.design.PropertiesDef">
+								<property name="Java Package Name" value="com.transform.flow"/>
+								<property name="Jar Name" value="%c.jar"/>
+								<property name="Manifest Entries" value="transformrt.jar"/>
+								<property name="Data Source" value=""/>
+								<property name="Generate MDB" value="false"/>
+							</propertymap>
+						</value>
+					</property>
+				</propertymap>
+			</elementproperties>
+		</messageflow>
+		<elementproperties>
+			<propertymap>
+			</propertymap>
+		</elementproperties>
+	</folder>
+	<elementproperties>
+		<propertymap>
+			<property name="CARTRIDGE_INFO">
+				<value>
+					<propertymap type="com.tplus.transform.design.CartridgeInfo">
+						<property name="GeneratedFiles">
+							<value>
+								<propertymap>
+									<property name="Java/EJB">
+										<value>
+											<propertymap>
+												<property name="assembly">
+													<value>
+														<propertylist>
+															<value>
+																<propertymap type="com.tplus.transform.design.AssemblyInfo">
+																	<property name="groupId" value="com.volantetech.volante.cartridge"/>
+																	<property name="name" value="C:\Users\xbblqjx\Desktop\june 3\Transformation_Flows\BNYInternal\java\BNYToSWIFTFunctions.jar"/>
+																	<property name="artifactId" value="cartridge-BNYToSWIFTFunctions"/>
+																	<property name="type" value="assembly"/>
+																	<property name="version" value="1.0"/>
+																</propertymap>
+															</value>
+														</propertylist>
+													</value>
+												</property>
+												<property name="EXTERNAL_DEPENDENCY">
+													<value>
+														<propertylist>
+															<value>
+																<propertymap type="com.tplus.transform.design.ModuleInfo">
+																	<property name="name" value="C:\Users\xbblqjx\Desktop\june 3\Transformation_Flows\BNYInternal\swiftgenericrt.jar"/>
+																	<property name="type" value="EXTERNAL_DEPENDENCY"/>
+																</propertymap>
+															</value>
+															<value>
+																<propertymap type="com.tplus.transform.design.ModuleInfo">
+																	<property name="name" value="C:\Program Files (x86)\Volante old\lib\runtime\swiftrt.jar"/>
+																	<property name="type" value="EXTERNAL_DEPENDENCY"/>
+																</propertymap>
+															</value>
+														</propertylist>
+													</value>
+												</property>
+												<property name="DEPENDENCY">
+													<value>
+														<propertylist>
+															<value>
+																<propertymap type="com.tplus.transform.design.ModuleInfo">
+																	<property name="groupId" value="com.volantetech.volante"/>
+																	<property name="name" value="C:\Program Files (x86)\Volante old\lib\runtime\transformrt.jar"/>
+																	<property name="artifactId" value="volante-core"/>
+																	<property name="type" value="DEPENDENCY"/>
+																	<property name="version" value="5.1.1"/>
+																</propertymap>
+															</value>
+															<value>
+																<propertymap type="com.tplus.transform.design.ModuleInfo">
+																	<property name="groupId" value="com.volantetech.volante"/>
+																	<property name="name" value="C:\Program Files (x86)\Volante old\lib\runtime\generalutils.jar"/>
+																	<property name="artifactId" value="volante-utils"/>
+																	<property name="type" value="DEPENDENCY"/>
+																	<property name="version" value="5.1.1"/>
+																</propertymap>
+															</value>
+														</propertylist>
+													</value>
+												</property>
+												<property name="auxiliary-assembly">
+													<value>
+														<propertylist>
+															<value>
+																<propertymap type="com.tplus.transform.design.ModuleInfo">
+																	<property name="name" value="C:\Users\xbblqjx\Desktop\june 3\Transformation_Flows\BNYInternal\java\alsb\BNYToSWIFTFunctions-alsb.jar"/>
+																	<property name="type" value="auxiliary-assembly"/>
+																</propertymap>
+															</value>
+														</propertylist>
+													</value>
+												</property>
+											</propertymap>
+										</value>
+									</property>
+								</propertymap>
+							</value>
+						</property>
+						<property name="cartridgefilename" value="C:\Users\xbblqjx\Desktop\june 3\Transformation_Flows\BNYInternal\BNYToSwiftFunctions.car"/>
+					</propertymap>
+				</value>
+			</property>
+			<property name="DOCUMENT_PROPERTIES">
+				<value>
+					<propertymap>
+						<property name="Creation Time" value="Mon Dec 20 11:27:47 IST 2010"/>
+						<property name="Author" value="krish"/>
+						<property name="Title" value="BNYToSWIFT"/>
+						<property name="Client Id" value="shemerson@inautix.co.in"/>
+						<property name="Last Author" value="xbblqjx"/>
+						<property name="Last Save Time" value="Tue Jun 14 18:13:00 IST 2016"/>
+						<property name="Designer Build" value="1596"/>
+						<property name="Revision Number" value="742"/>
+					</propertymap>
+				</value>
+			</property>
+			<property name="codegen.java.options">
+				<value>
+					<propertymap type="com.tplus.transform.design.codegen.java.JavaCodeGeneratorOptions">
+						<property name="isJBoss" value="false"/>
+						<property name="resource-references">
+							<value>
+								<propertylist>
+								</propertylist>
+							</value>
+						</property>
+						<property name="service-bus-options">
+							<value>
+								<propertymap>
+									<property name="include-dependencies" value="true"/>
+									<property name="copy-to-dir" value="false"/>
+									<property name="application-jar-file" value="${cartridge.home}/java/alsb/${cartridge.name}-alsb.jar"/>
+									<property name="application-jar" value="true"/>
+								</propertymap>
+							</value>
+						</property>
+						<property name="isWAR" value="false"/>
+						<property name="isOSGI" value="false"/>
+						<property name="isGenerateALSB" value="true"/>
+						<property name="isEJB" value="false"/>
+						<property name="isOrion" value="false"/>
+						<property name="isWebSphere" value="false"/>
+						<property name="isVolante" value="true"/>
+						<property name="isRemote" value="false"/>
+						<property name="isLocal" value="false"/>
+						<property name="isWebLogic" value="false"/>
+						<property name="isGeronimo" value="false"/>
+						<property name="isGenerateJNDILinks" value="false"/>
+						<property name="isWLEVS" value="false"/>
+						<property name="ejb-jndi-prefix" value=""/>
+						<property name="isGenerateEAR" value="false"/>
+					</propertymap>
+				</value>
+			</property>
+			<property name="codegen.java.properties">
+				<value>
+					<propertymap type="com.tplus.transform.design.PropertiesDef">
+						<property name="Java Package Name" value="com.transform.cartridge.%c"/>
+						<property name="Max Class Length" value="150"/>
+					</propertymap>
+				</value>
+			</property>
+			<property name="WebServiceDefs">
+				<value>
+					<propertymap>
+						<property name="webservices">
+							<value>
+								<propertylist>
+								</propertylist>
+							</value>
+						</property>
+					</propertymap>
+				</value>
+			</property>
+			<property name="codegen.java.externalsources">
+				<value>
+					<propertylist>
+						<value>
+							<propertymap>
+								<property name="filename" value="SwiftField.xml"/>
+							</propertymap>
+						</value>
+					</propertylist>
+				</value>
+			</property>
+			<property name="codegen.java.bindings">
+				<value>
+					<propertymap type="com.tplus.transform.design.codegen.DefaultLanguageMapping">
+						<property name="com.tplus.transform.design.swift.runtime.common.ParseSwiftGeneric" value="com.tplus.transform.design.swift.runtime.common.ParseSwiftGeneric"/>
+						<property name="com.tplus.transform.design.swift.runtime.common.SerializeSwiftGeneric" value="com.tplus.transform.design.swift.runtime.common.SerializeSwiftGeneric"/>
+					</propertymap>
+				</value>
+			</property>
+			<property name="codegen.java.general">
+				<value>
+					<propertymap>
+						<property name="additionalClasspath" value="${cartridge.home}\swiftgenericrt.jar;${designer.home}\lib\runtime\swiftrt.jar;"/>
+						<property name="debugInfo" value="false"/>
+					</propertymap>
+				</value>
+			</property>
+		</propertymap>
+	</elementproperties>
+	<workspace>
+		<selected-element root="C:\Users\xbblqjx\Desktop\june 3\Transformation_Flows\BNYInternal\BNYToSwiftFunctions.car">BNYToSWIFTFunctions/Function Definitions/Get_BIC</selected-element>
+	</workspace>
+</cartridge>
+

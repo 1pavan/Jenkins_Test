@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<SwiftMessageFormat name="MT031">
+	<standard-version><![CDATA[SRG 2016]]></standard-version>
+	<standard-release-qualifier>20160308</standard-release-qualifier>
+	<DescriptiveName><![CDATA[Session History Request]]></DescriptiveName>
+	<Category><![CDATA[System]]></Category>
+	<Description><![CDATA[The response to this request is a message containing the number of messages sent and received for all General Purpose Application or FIN sessions started and closed within the specified time period, and closed at the time of the request.It is possible to request a global session history report for all logical terminals belonging to a SWIFT address. The response to this message is contained in the MT 051 Session History Report.
+
+From: User    To: GPA or FIN 
+
+================= ===========
+Notes
+
+
+The two occurrences of field 177 specify a date-time range where the first field 177 is the start time and the second is the end time. The first field 177 must be a date not older than 30 days. If the start date is older than 30 days, the report received is empty. The second field 177 must not be more than seven days after the first field 177.
+
+The 30 day period is a rolling window of exactly 30 x 24 hours back from the moment of the request, eg, if the request is sent at 11:05 local time, the report will provide information as from 11:05 local time 30 x 24 hours ago.]]></Description>
+	<SwiftFields>
+		<customizable>true</customizable>
+		<modifiable>true</modifiable>
+		<SwiftMessageType>System</SwiftMessageType>
+		<HeaderAndTrailerType>SWIFT_INPUT_HEADER</HeaderAndTrailerType>
+		<Header>
+		</Header>
+		<Data>
+			<Fields>
+				<SystemField Name="lt-code">
+					<description><![CDATA[9th character of BIC-12. The value X signifies details of all LTs belonging to the destination.]]></description>
+					<datatype>String</datatype>
+					<required>true</required>
+					<SwiftSystemFieldDef Name="lt-code" Tag="303">
+						<Format><![CDATA[1!c]]></Format>
+						<Specification><![CDATA[(lt-code)]]></Specification>
+						<Description><![CDATA[9th character of BIC-12. The value X signifies details of all LTs belonging to the destination.]]></Description>
+					</SwiftSystemFieldDef>
+				</SystemField>
+				<SystemField Name="start-date-time">
+					<description><![CDATA[Start date and time. Must not be more than 30 days before the date of this message.]]></description>
+					<datatype>String</datatype>
+					<required>true</required>
+					<SwiftSystemFieldDef Name="date-time" Tag="177">
+						<Format><![CDATA[(10!n)]]></Format>
+						<Specification><![CDATA[(date-time)]]></Specification>
+						<Additional-Format><![CDATA[YYMMDDHHMM]]></Additional-Format>
+						<Description><![CDATA[Date and time are always given as local, unless otherwise specified. Local time for the SWIFT Network is in GMT.]]></Description>
+						<Validations>
+							<Validation>
+								<formula>IsDate($value,"yyMMddHHmm")</formula>
+								<error-code>V05</error-code>
+								<actionmessage>"Invalid Date/Time '" + $value + "'"</actionmessage>
+							</Validation>
+						</Validations>
+					</SwiftSystemFieldDef>
+				</SystemField>
+				<SystemField Name="end-date-time">
+					<description><![CDATA[End date and time. Must not be more than 7 days after the start date and time.]]></description>
+					<datatype>String</datatype>
+					<required>true</required>
+					<SwiftSystemFieldDef Name="date-time" Tag="177">
+						<Format><![CDATA[(10!n)]]></Format>
+						<Specification><![CDATA[(date-time)]]></Specification>
+						<Additional-Format><![CDATA[YYMMDDHHMM]]></Additional-Format>
+						<Description><![CDATA[Date and time are always given as local, unless otherwise specified. Local time for the SWIFT Network is in GMT.]]></Description>
+						<Validations>
+							<Validation>
+								<formula>IsDate($value,"yyMMddHHmm")</formula>
+								<error-code>V05</error-code>
+								<actionmessage>"Invalid Date/Time '" + $value + "'"</actionmessage>
+							</Validation>
+						</Validations>
+					</SwiftSystemFieldDef>
+				</SystemField>
+			</Fields>
+		</Data>
+		<Trailer>
+			<fields>
+			</fields>
+		</Trailer>
+	</SwiftFields>
+	<validationrules name="Default">
+		<hdrvalidationrules>
+			<fieldvalidations>
+			</fieldvalidations>
+		</hdrvalidationrules>
+		<datavalidationrules>
+			<fieldvalidations>
+				<fieldvalidation>
+					<name>E1</name>
+					<comment><![CDATA[The field 'start-date-time' must be a date not older than 30 days and the field 'end-date-time' must not be more than seven days after the date in the field 'start-date-time'.]]></comment>
+					<formula><![CDATA[def sdt = ParseDate(start_date_time,"yyMMddHHmm");
+def cdt = ParseDate(end_date_time,"yyMMddHHmm");
+def min1 = ((ToTimeStamp(cdt) - ToTimeStamp(sdt))/(1000*60));
+def min2 = ((ToTimeStamp(Now()) - ToTimeStamp(sdt))/(1000*60));
+(min1<(7*24*60))&&(min2<(30*24*60))]]></formula>
+					<severity>error</severity>
+					<cascade>true</cascade>
+					<error-code>V05</error-code>
+					<actionmessage><![CDATA["The field 'start-date-time' must be a date not older than 30 days and the field 'end-date-time' must not be more than seven days after the date in the field 'start-date-time'."]]></actionmessage>
+				</fieldvalidation>
+			</fieldvalidations>
+		</datavalidationrules>
+		<tlrvalidationrules>
+			<fieldvalidations>
+			</fieldvalidations>
+		</tlrvalidationrules>
+	</validationrules>
+</SwiftMessageFormat>
+

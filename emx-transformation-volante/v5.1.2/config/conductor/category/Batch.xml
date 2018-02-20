@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="iso-8859-1" standalone="no"?>
+<conductorcategory name="Batch">
+	<flowelement type="BatchParse"/>
+	<flowelement type="CreateBatchMessage"/>
+    <flowelement type="BatchSerialize"/>
+    <flowelement type="BatchQuery"/>
+    <flowelement type="PhasedParse"/>
+    <flowelement type="PhasedSerialize"/>
+</conductorcategory>
+

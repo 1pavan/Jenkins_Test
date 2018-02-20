@@ -1,0 +1,956 @@
+<MXMetaData>
+	<tagdetails>
+		<tagdetail tag="Abstn">
+			<name>Abstain</name>
+			<description>Number of votes expressed as abstain for one resolution.</description>
+		</tagdetail>
+		<tagdetail tag="Accptd">
+			<name>Accepted</name>
+			<description>Specifies whether a resolution is accepted or not.</description>
+		</tagdetail>
+		<tagdetail tag="AcctDtls">
+			<name>AccountDetails</name>
+			<description>Identification of the securities account.</description>
+		</tagdetail>
+		<tagdetail tag="AcctId">
+			<name>AccountIdentification</name>
+			<description>Unique and unambiguous identification for the account between the account owner and the account servicer.</description>
+		</tagdetail>
+		<tagdetail tag="AcctOwnr">
+			<name>AccountOwner</name>
+			<description>Party that legally owns the account.</description>
+		</tagdetail>
+		<tagdetail tag="AddtlDcmnttnURLAdr">
+			<name>AdditionalDocumentationURLAddress</name>
+			<description>Address to use over the www (HTTP) service where addtional information on the meeting may be found.</description>
+		</tagdetail>
+		<tagdetail tag="AddtlInf">
+			<name>AdditionalInformation</name>
+			<description>Information on where additionnal information can be received.</description>
+		</tagdetail>
+		<tagdetail tag="AddtlVtngRqrmnts">
+			<name>AdditionalVotingRequirements</name>
+			<description>Additional information on specific requirements for allowing a person to vote.</description>
+		</tagdetail>
+		<tagdetail tag="Adr">
+			<name>Address</name>
+			<description>Postal address of a party.</description>
+		</tagdetail>
+		<tagdetail tag="AdrLine">
+			<name>AddressLine</name>
+			<description>Information that locates and identifies a specific address, as defined by postal services, that is presented in free format text.</description>
+		</tagdetail>
+		<tagdetail tag="AdrTp">
+			<name>AddressType</name>
+			<description>Identifies the nature of the postal address.</description>
+		</tagdetail>
+		<tagdetail tag="Agnst">
+			<name>Against</name>
+			<description>Number of votes against one resolution</description>
+		</tagdetail>
+		<tagdetail tag="AgnstMgmt">
+			<name>AgainstManagement</name>
+			<description>Number of votes against the voting recommendation of the management.</description>
+		</tagdetail>
+		<tagdetail tag="AlnRegnNb">
+			<name>AlienRegistrationNumber</name>
+			<description>Number assigned by a government agency to identify foreign nationals.</description>
+		</tagdetail>
+		<tagdetail tag="Amdmnt">
+			<name>Amendment</name>
+			<description>Information specific to an amendment.</description>
+		</tagdetail>
+		<tagdetail tag="Amt">
+			<name>Amount</name>
+			<description>Price expressed as a currency and value.</description>
+		</tagdetail>
+		<tagdetail tag="AnncmntDt">
+			<name>AnnouncementDate</name>
+			<description>Official meeting announcement date.</description>
+		</tagdetail>
+		<tagdetail tag="AttndncCardDtls">
+			<name>AttendanceCardDetails</name>
+			<description>Specifies details related to the attendance card.</description>
+		</tagdetail>
+		<tagdetail tag="AttndncCardLbllg">
+			<name>AttendanceCardLabelling</name>
+			<description>Information to be indicated on the attendance card.</description>
+		</tagdetail>
+		<tagdetail tag="AttndncConfDdln">
+			<name>AttendanceConfirmationDeadline</name>
+			<description>Date and time by which the beneficial owner or agent must notify of their intention to participate in a meeting. This deadline is set by an intermediary.</description>
+		</tagdetail>
+		<tagdetail tag="AttndncConfInf">
+			<name>AttendanceConfirmationInformation</name>
+			<description>Indicates how to order the attendance card or to give notice of attendance.</description>
+		</tagdetail>
+		<tagdetail tag="AttndncConfMktDdln">
+			<name>AttendanceConfirmationMarketDeadline</name>
+			<description>Date and time by which the attendance to the meeting should be confirmed. This deadline is set by the issuer.</description>
+		</tagdetail>
+		<tagdetail tag="AttndncConfSTPDdln">
+			<name>AttendanceConfirmationSTPDeadline</name>
+			<description>Date and time by which the beneficial owner or agent must notify of their intention to participate in a meeting (STP mode). This deadline is set by an intermediary.</description>
+		</tagdetail>
+		<tagdetail tag="AttndncReqrd">
+			<name>AttendanceRequired</name>
+			<description>Indicates whether physical participation to a meeting is required in order to be allowed to vote.</description>
+		</tagdetail>
+		<tagdetail tag="AuthrsdPrxy">
+			<name>AuthorisedProxy</name>
+			<description>Specifies the proxy persons which are authorised by the issuer.</description>
+		</tagdetail>
+		<tagdetail tag="BICOrBEI">
+			<name>BICOrBEI</name>
+			<description>Unique and unambiguous identifier for an organisation that is allocated by an institution;</description>
+		</tagdetail>
+		<tagdetail tag="Bal">
+			<name>Balance</name>
+			<description>Total quantity of financial instrument for the referenced holding.</description>
+		</tagdetail>
+		<tagdetail tag="BalTp">
+			<name>BalanceType</name>
+			<description>Reason a security is not available or additional information about the financial instrument for which the balance is given, for example, unregistered, registered in nominee name.</description>
+		</tagdetail>
+		<tagdetail tag="BirthNm">
+			<name>BirthName</name>
+			<description>Name received at birth, eg, maiden name.</description>
+		</tagdetail>
+		<tagdetail tag="BlckgScties">
+			<name>BlockingSecurities</name>
+			<description>Request to block the securities</description>
+		</tagdetail>
+		<tagdetail tag="BldgNb">
+			<name>BuildingNumber</name>
+			<description>Number that identifies the position of a building on a street.</description>
+		</tagdetail>
+		<tagdetail tag="BnfclOwnrDsclsr">
+			<name>BeneficialOwnerDisclosure</name>
+			<description>Indicates whether beneficiary details (eg name and address) must be supplied in order to take part to a meeting.</description>
+		</tagdetail>
+		<tagdetail tag="CUSIP">
+			<name>CUSIP</name>
+			<description>Committee on Uniform Securities and Identification Procedures (CUSIP). The standards body that created and maintains the securities classification system in the US. The CUSIP is composed of a 9-character number that uniquely identifies a particular security.  Non-US securities have a similar number called the CINS number.</description>
+		</tagdetail>
+		<tagdetail tag="Ccy" attribute="true">
+			<name>Currency</name>
+		</tagdetail>
+		<tagdetail tag="Cd">
+			<name>Code</name>
+			<description>Specifies the reason for cancelling a meeting in coded form.</description>
+		</tagdetail>
+		<tagdetail tag="ClctnDt">
+			<name>CalculationDate</name>
+			<description>Date of calculation of the total number of oustanding securities.</description>
+		</tagdetail>
+		<tagdetail tag="Clssfctn">
+			<name>Classification</name>
+			<description>Classifies the type of meeting.</description>
+		</tagdetail>
+		<tagdetail tag="CreDtTm">
+			<name>CreationDateTime</name>
+			<description>Date of creation of the message.</description>
+		</tagdetail>
+		<tagdetail tag="CtctPrsn">
+			<name>ContactPerson</name>
+			<description>Identifies a contact person by a name, a given name and an address.</description>
+		</tagdetail>
+		<tagdetail tag="CtctPrsnDtls">
+			<name>ContactPersonDetails</name>
+			<description>Contact person at the party organising the meeting, at the issuer or at an intermediary.</description>
+		</tagdetail>
+		<tagdetail tag="Ctry">
+			<name>Country</name>
+			<description>Nation with its own government.</description>
+		</tagdetail>
+		<tagdetail tag="CtrySubDvsn">
+			<name>CountrySubDivision</name>
+			<description>Identifies a subdivision of a country eg, state, region, county.</description>
+		</tagdetail>
+		<tagdetail tag="CxlId">
+			<name>CancellationIdentification</name>
+			<description>Identifies the cancellation message.</description>
+		</tagdetail>
+		<tagdetail tag="CxlRsn">
+			<name>CancellationReason</name>
+			<description>Provides more information on the reason for cancelling a meeting in free format form.</description>
+		</tagdetail>
+		<tagdetail tag="CxlSts">
+			<name>CancellationStatus</name>
+			<description>Status applying to the instruction cancellation request received. The instruction cancellation is identified by the InstructionCancellationIdentification.</description>
+		</tagdetail>
+		<tagdetail tag="Ddln">
+			<name>Deadline</name>
+			<description>Date by which the information on proxy assignment must be received by the intermediary.</description>
+		</tagdetail>
+		<tagdetail tag="Desc">
+			<name>Description</name>
+			<description>Description of the premium.</description>
+		</tagdetail>
+		<tagdetail tag="DlvryMtd">
+			<name>DeliveryMethod</name>
+			<description>Specifies where the attendance card must be delivered.</description>
+		</tagdetail>
+		<tagdetail tag="DmstIdSrc">
+			<name>DomesticIdentificationSource</name>
+			<description>Country of the proprietary identification scheme.</description>
+		</tagdetail>
+		<tagdetail tag="DrvrsLicNb">
+			<name>DriversLicenseNumber</name>
+			<description>Number assigned by a license authority to a driver's license.</description>
+		</tagdetail>
+		<tagdetail tag="Dscrtnry">
+			<name>Discretionary</name>
+			<description>Number of votes for which decision is left to the party that will exercise the voting right.</description>
+		</tagdetail>
+		<tagdetail tag="Dt">
+			<name>Date</name>
+			<description>Date expressed as a calendar date.</description>
+		</tagdetail>
+		<tagdetail tag="DtAndTm">
+			<name>DateAndTime</name>
+			<description>Date and time at which the meeting will take place.</description>
+		</tagdetail>
+		<tagdetail tag="DtCd">
+			<name>DateCode</name>
+			<description>Indicates that date is unknown.</description>
+		</tagdetail>
+		<tagdetail tag="DtSts">
+			<name>DateStatus</name>
+			<description>Indicates the status of a meeting date.</description>
+		</tagdetail>
+		<tagdetail tag="DtldInstrSts">
+			<name>DetailedInstructionStatus</name>
+			<description>Status applying to individual instructions of a MeetingInstruction.</description>
+		</tagdetail>
+		<tagdetail tag="ElctrncVote">
+			<name>ElectronicVote</name>
+			<description>Electronic address, e-mail or website, where a security holder can vote.</description>
+		</tagdetail>
+		<tagdetail tag="Elgblty">
+			<name>Eligibility</name>
+			<description>Defines the dates determining eligibility.</description>
+		</tagdetail>
+		<tagdetail tag="EmailAdr">
+			<name>EmailAddress</name>
+			<description>Address for electronic mail (e-mail).</description>
+		</tagdetail>
+		<tagdetail tag="EmplngPty">
+			<name>EmployingParty</name>
+			<description>Organisation represented by a person, or for which a person works.</description>
+		</tagdetail>
+		<tagdetail tag="EntitlmntDesc">
+			<name>EntitlementDescription</name>
+			<description>Specifies the calculation method of the number of votes assigned to one security. This element should be used when the entitlement calculation rule is complex.</description>
+		</tagdetail>
+		<tagdetail tag="EntitlmntFxgDt">
+			<name>EntitlementFixingDate</name>
+			<description>Date at which the positions are struck to note which parties will receive the entitlement, e.g. record date, book close date...</description>
+		</tagdetail>
+		<tagdetail tag="EntitlmntNtfctnId">
+			<name>EntitlementNotificationIdentification</name>
+			<description>Identifies the notification of entitlement instruction.</description>
+		</tagdetail>
+		<tagdetail tag="EntitlmntRatio">
+			<name>EntitlementRatio</name>
+			<description>Number of votes assigned to one security. </description>
+		</tagdetail>
+		<tagdetail tag="EntitlmntSpcfctn">
+			<name>EntitlementSpecification</name>
+			<description>Specifies the entitlement ratio and the different deadlines for calculating the entitlement.</description>
+		</tagdetail>
+		<tagdetail tag="FaceAmt">
+			<name>FaceAmount</name>
+			<description>Quantity expressed as an amount representing the face amount, ie, the principal, of a debt instrument.</description>
+		</tagdetail>
+		<tagdetail tag="FaxNb">
+			<name>FaxNumber</name>
+			<description>Collection of information that identifies a FAX number, as defined by telecom services.</description>
+		</tagdetail>
+		<tagdetail tag="For">
+			<name>For</name>
+			<description>Number of votes in favour of one resolution</description>
+		</tagdetail>
+		<tagdetail tag="ForInfOnly">
+			<name>ForInformationOnly</name>
+			<description>Indicates whether the resolution is listed for information or for voting.</description>
+		</tagdetail>
+		<tagdetail tag="GblInstrSts">
+			<name>GlobalInstructionStatus</name>
+			<description>Status applying globally to the instruction received. The instruction is identified by the InstructionIdentification.</description>
+		</tagdetail>
+		<tagdetail tag="GblVoteInstr">
+			<name>GlobalVoteInstruction</name>
+			<description>Instruction specifiying a vote instruction per resolution for the entire entitlement. </description>
+		</tagdetail>
+		<tagdetail tag="GvnNm">
+			<name>GivenName</name>
+			<description>First name of a person.</description>
+		</tagdetail>
+		<tagdetail tag="HldgBal">
+			<name>HoldingBalance</name>
+			<description>Net position of a segregated holding of a single security within the overall position held in a securities account, eg, sub-balance per status.</description>
+		</tagdetail>
+		<tagdetail tag="ISIN">
+			<name>ISIN</name>
+			<description>International Securities Identification Number (ISIN).  A numbering system designed by the United Nation's International Organisation for Standardisation (ISO). The ISIN is composed of a 2-character prefix representing the country of issue, followed by the national security number (if one exists), and a check digit. Each country has a national numbering agency that assigns ISIN numbers for securities in that country.</description>
+		</tagdetail>
+		<tagdetail tag="Id">
+			<name>Identification</name>
+			<description>Unique and unambiguous identification of a person, eg passport.</description>
+		</tagdetail>
+		<tagdetail tag="IdAsCtry">
+			<name>IdentificationAsCountry</name>
+			<description>Place of safekeeping expressed with a country code.</description>
+		</tagdetail>
+		<tagdetail tag="IdAsDSS">
+			<name>IdentificationAsDSS</name>
+			<description>Place of safekeeping expressed with a propriety identification scheme.</description>
+		</tagdetail>
+		<tagdetail tag="IdTp">
+			<name>IdentificationType</name>
+			<description>Specifies the nature of the identifier.
+Usage: IdentificationType is used to specify what kind of identifier is used. It should be used in case the identifier is different from the identifiers listed in the pre-defined identifier list.</description>
+		</tagdetail>
+		<tagdetail tag="IdntyCardNb">
+			<name>IdentityCardNumber</name>
+			<description>Number assigned by a national authority to an identity card.</description>
+		</tagdetail>
+		<tagdetail tag="IncntivPrm">
+			<name>IncentivePremium</name>
+			<description>Cash premium paid to the security holder when voting.</description>
+		</tagdetail>
+		<tagdetail tag="Inf">
+			<name>Information</name>
+			<description>Proprietary information, often a code, issued by the data source scheme issuer.</description>
+		</tagdetail>
+		<tagdetail tag="InstdBal">
+			<name>InstructedBalance</name>
+			<description>Quantity of securities in the sub-balance.</description>
+		</tagdetail>
+		<tagdetail tag="InstdPos">
+			<name>InstructedPosition</name>
+			<description>Identifies the account and instructed positions for which the instruction cancellation request applies.</description>
+		</tagdetail>
+		<tagdetail tag="InstgPty">
+			<name>InstructingParty</name>
+			<description>Party notifying the instructions.</description>
+		</tagdetail>
+		<tagdetail tag="Instr">
+			<name>Instruction</name>
+			<description>Identifies the position of the instructing party and the action that they want to take.</description>
+		</tagdetail>
+		<tagdetail tag="InstrCxlId">
+			<name>InstructionCancellationIdentification</name>
+			<description>Uniquely identifies the cancellation request.</description>
+		</tagdetail>
+		<tagdetail tag="InstrId">
+			<name>InstructionIdentification</name>
+			<description>Identifies the meeting instruction message for which the status is provided.</description>
+		</tagdetail>
+		<tagdetail tag="InstrSts">
+			<name>InstructionStatus</name>
+			<description>Status applying to the instruction request received. The instruction is identified by the InstructionIdentification.</description>
+		</tagdetail>
+		<tagdetail tag="Issr">
+			<name>Issuer</name>
+			<description>Specifies the institution that is the issuer of the security to which the meeting applies.</description>
+		</tagdetail>
+		<tagdetail tag="IssrAgt">
+			<name>IssuerAgent</name>
+			<description>Agents of the issuer.</description>
+		</tagdetail>
+		<tagdetail tag="IssrLabl">
+			<name>IssuerLabel</name>
+			<description>Numbering of the resolution as specified by the issuer or  its agent.</description>
+		</tagdetail>
+		<tagdetail tag="IssrMtgId">
+			<name>IssuerMeetingIdentification</name>
+			<description>Identification assigned to a meeting by the issuer. It must be unique for the issuer.</description>
+		</tagdetail>
+		<tagdetail tag="Lctn">
+			<name>Location</name>
+			<description>Place of the company meeting for the scheduled meeting date.</description>
+		</tagdetail>
+		<tagdetail tag="LctnCd">
+			<name>LocationCode</name>
+			<description>Indicates that the location is unknown.</description>
+		</tagdetail>
+		<tagdetail tag="LglRqrmnt">
+			<name>LegalRequirement</name>
+			<description>Specifies whether the power of attorney needs to be validated by some authority.</description>
+		</tagdetail>
+		<tagdetail tag="MgmtRcmmndtn">
+			<name>ManagementRecommendation</name>
+			<description>Indicates how the management of the issuing company wishes the security holders to vote.</description>
+		</tagdetail>
+		<tagdetail tag="MktDdln">
+			<name>MarketDeadline</name>
+			<description>Date by which the information on proxy assignment must be received by the issuer.</description>
+		</tagdetail>
+		<tagdetail tag="MplyrIdNb">
+			<name>EmployerIdentificationNumber</name>
+			<description>Number assigned to an employer by a registration authority.</description>
+		</tagdetail>
+		<tagdetail tag="MsgCxl">
+			<name>MessageCancellation</name>
+			<description>Information indicating that the cancellation of a message previously sent is requested (and not the cancellation of the meeting).</description>
+		</tagdetail>
+		<tagdetail tag="Mtg">
+			<name>Meeting</name>
+			<description>Specifies information about the meeting. This component contains meeting identifications, various deadlines, contact persons, electronic and postal locations for accessing information and proxy assignment parameters.</description>
+		</tagdetail>
+		<tagdetail tag="MtgAttndee">
+			<name>MeetingAttendee</name>
+			<description>Identification of the security holder who will attend and vote at the meeting in person and/or a person assigned by the security holder to attend the meeting without having any voting rights or taking any action. </description>
+		</tagdetail>
+		<tagdetail tag="MtgDtAndTm">
+			<name>MeetingDateAndTime</name>
+			<description>Date and time at which the meeting will take place.</description>
+		</tagdetail>
+		<tagdetail tag="MtgDtls">
+			<name>MeetingDetails</name>
+			<description>Dates and details of the shareholders meeting.</description>
+		</tagdetail>
+		<tagdetail tag="MtgId">
+			<name>MeetingIdentification</name>
+			<description>Identification assigned to a general meeting by the party notifying the meeting. It must be unique for the party notifying the meeting.</description>
+		</tagdetail>
+		<tagdetail tag="MtgInstrId">
+			<name>MeetingInstructionIdentification</name>
+			<description>Identifies the meeting instruction message. </description>
+		</tagdetail>
+		<tagdetail tag="MtgInstrStsId">
+			<name>MeetingInstructionStatusIdentification</name>
+			<description>Identifies the meeting instruction status message.</description>
+		</tagdetail>
+		<tagdetail tag="MtgNtfctnId">
+			<name>MeetingNotificationIdentification</name>
+			<description>Identifies the meeting notification message.</description>
+		</tagdetail>
+		<tagdetail tag="MtgRef">
+			<name>MeetingReference</name>
+			<description>Series of elements which allow to identify a meeting.</description>
+		</tagdetail>
+		<tagdetail tag="MtgRsltDssmntnId">
+			<name>MeetingResultDisseminationIdentification</name>
+			<description>Identifies the meeting dissemination notification message.</description>
+		</tagdetail>
+		<tagdetail tag="Nm">
+			<name>Name</name>
+			<description>Name by which a party is known and which is usually used to identify that party.</description>
+		</tagdetail>
+		<tagdetail tag="NmAndAdr">
+			<name>NameAndAddress</name>
+			<description>Name by which a party is known and which is usually used to identify that party.</description>
+		</tagdetail>
+		<tagdetail tag="NmPrfx">
+			<name>NamePrefix</name>
+			<description>Specifies the terms used to formally address a person, eg, Ms.</description>
+		</tagdetail>
+		<tagdetail tag="NoActn">
+			<name>NoAction</name>
+			<description>Number of votes for which no action has been taken.</description>
+		</tagdetail>
+		<tagdetail tag="Nrrtv">
+			<name>Narrative</name>
+			<description>Additional information.</description>
+		</tagdetail>
+		<tagdetail tag="NtfctnSts">
+			<name>NotificationStatus</name>
+			<description>Defines the global status of the event contained in the notification.</description>
+		</tagdetail>
+		<tagdetail tag="NtifngPty">
+			<name>NotifyingParty</name>
+			<description>Party notifying the cancellation of the meeting.</description>
+		</tagdetail>
+		<tagdetail tag="NtifngPtyRcmmndtn">
+			<name>NotifyingPartyRecommendation</name>
+			<description>Indicates how the notifying party recommends that the security holders vote.</description>
+		</tagdetail>
+		<tagdetail tag="OthrAdr">
+			<name>OtherAddress</name>
+			<description>Name and address of a party.</description>
+		</tagdetail>
+		<tagdetail tag="OthrDcmnttn">
+			<name>OtherDocumentation</name>
+			<description>Specifies the documents needed to obtain a valid power of attorney. </description>
+		</tagdetail>
+		<tagdetail tag="OthrId">
+			<name>OtherIdentification</name>
+			<description>Identifier issued to a person for which no specific identifier has been defined.</description>
+		</tagdetail>
+		<tagdetail tag="PctgOfVtngRghts">
+			<name>PercentageOfVotingRights</name>
+			<description>Percentage of rights participating to the vote versus total voting rights.</description>
+		</tagdetail>
+		<tagdetail tag="PerAttndee">
+			<name>PerAttendee</name>
+			<description>Indicates that the premium is given per attendee.</description>
+		</tagdetail>
+		<tagdetail tag="PerScty">
+			<name>PerSecurity</name>
+			<description>Number of securities giving right to a premium.</description>
+		</tagdetail>
+		<tagdetail tag="PerVote">
+			<name>PerVote</name>
+			<description>Number of votes giving right to a premium.</description>
+		</tagdetail>
+		<tagdetail tag="PhneNb">
+			<name>PhoneNumber</name>
+			<description>Collection of information that identifies a phone number, as defined by telecom services.</description>
+		</tagdetail>
+		<tagdetail tag="PlcOfListg">
+			<name>PlaceOfListing</name>
+			<description>The identification of a financial market, as stipulated in the norm ISO 10383 'Codes for exchanges and market identifications'.</description>
+		</tagdetail>
+		<tagdetail tag="PlcSfkpg">
+			<name>PlaceSafekeeping</name>
+			<description>Place of safekeeping as a code.</description>
+		</tagdetail>
+		<tagdetail tag="PmtDt">
+			<name>PaymentDate</name>
+			<description>Date for the payment of the premium.</description>
+		</tagdetail>
+		<tagdetail tag="Pos">
+			<name>Position</name>
+			<description>Amount of securities that are eligible for the vote.</description>
+		</tagdetail>
+		<tagdetail tag="PrcgSts">
+			<name>ProcessingStatus</name>
+			<description>Status advising on the processing of the cancellation request.</description>
+		</tagdetail>
+		<tagdetail tag="PrsnDtls">
+			<name>PersonDetails</name>
+			<description>Person, other than the Chairman of the meeting, assigned by the security holder as proxy.</description>
+		</tagdetail>
+		<tagdetail tag="PrssgndPrxy">
+			<name>PreassignedProxy</name>
+			<description>Identifies an authorized proxy which has been assigned by the issuer of the meeting.</description>
+		</tagdetail>
+		<tagdetail tag="Prtcptn">
+			<name>Participation</name>
+			<description>Information about the participation to the voting process.</description>
+		</tagdetail>
+		<tagdetail tag="PrtcptnRegn">
+			<name>ParticipationRegistration</name>
+			<description>Request to register for participation to the meeting.</description>
+		</tagdetail>
+		<tagdetail tag="PrtlVoteAllwd">
+			<name>PartialVoteAllowed</name>
+			<description>Specifies whether it is allowed to only vote on a part of the entire holding, leaving part of the position un-voted.</description>
+		</tagdetail>
+		<tagdetail tag="PrtryId">
+			<name>ProprietaryIdentification</name>
+			<description>Unique and unambiguous identifier, as assigned to a financial institution using a proprietary identification scheme.</description>
+		</tagdetail>
+		<tagdetail tag="PrtryIdSrc">
+			<name>ProprietaryIdentificationSource</name>
+			<description>Entity that issues the proprietary identification.</description>
+		</tagdetail>
+		<tagdetail tag="PrvsRef">
+			<name>PreviousReference</name>
+			<description>Identifies the instruction to be cancelled.</description>
+		</tagdetail>
+		<tagdetail tag="Prxy">
+			<name>Proxy</name>
+			<description>Identification of the person appointed by the security holder as proxy.</description>
+		</tagdetail>
+		<tagdetail tag="PrxyAppntmntNtfctnAdr">
+			<name>ProxyAppointmentNotificationAddress</name>
+			<description>Address where the information on the proxy should be sent.</description>
+		</tagdetail>
+		<tagdetail tag="PrxyNotAllwd">
+			<name>ProxyNotAllowed</name>
+			<description>Indicates that no proxy is allowed for a meeting.</description>
+		</tagdetail>
+		<tagdetail tag="PrxyTp">
+			<name>ProxyType</name>
+			<description>Specifies the type of proxy.</description>
+		</tagdetail>
+		<tagdetail tag="PsptNb">
+			<name>PassportNumber</name>
+			<description>Number assigned by a passport authority to a passport.</description>
+		</tagdetail>
+		<tagdetail tag="PstCd">
+			<name>PostCode</name>
+			<description>Identifier consisting of a group of letters and/or numbers that is added to a postal address to assist the sorting of mail.</description>
+		</tagdetail>
+		<tagdetail tag="Pty">
+			<name>Party</name>
+			<description>Place of safekeeping.</description>
+		</tagdetail>
+		<tagdetail tag="PwrOfAttnyRqrmnts">
+			<name>PowerOfAttorneyRequirements</name>
+			<description>Specifies requirements relative to the use of Power of Attorney.</description>
+		</tagdetail>
+		<tagdetail tag="QUICK">
+			<name>QUICK</name>
+			<description>Identifier of a security assigned by the Japanese QUICK identification scheme for financial instruments.</description>
+		</tagdetail>
+		<tagdetail tag="QrmQty">
+			<name>QuorumQuantity</name>
+			<description>Minimum quantity of securities required to hold a meeting.</description>
+		</tagdetail>
+		<tagdetail tag="QrmQtyPctg">
+			<name>QuorumQuantityPercentage</name>
+			<description>Minimum quantity of securities, expressed as a percentage, required to hold a meeting.</description>
+		</tagdetail>
+		<tagdetail tag="QrmReqrd">
+			<name>QuorumRequired</name>
+			<description>Specifies whether a minimum number of security representation is required to hold a meeting.</description>
+		</tagdetail>
+		<tagdetail tag="Rate">
+			<name>Rate</name>
+			<description>Price expressed as a rate, ie, percentage.</description>
+		</tagdetail>
+		<tagdetail tag="RcnfrmInstrs">
+			<name>ReconfirmInstructions</name>
+			<description>Indicates whether instructions must be resent (in case of modification of the parameters of a meeting for which instructions have already been sent).</description>
+		</tagdetail>
+		<tagdetail tag="RegnMtd">
+			<name>RegistrationMethod</name>
+			<description>Indicates how to register a proxy.</description>
+		</tagdetail>
+		<tagdetail tag="RegnPrtcptnDdln">
+			<name>RegistrationParticipationDeadline</name>
+			<description>Date by which the holder needs to register its intention to participate in the meeting process in order to be allowed to participate in the meeting event. This deadline is specified by an intermediary.</description>
+		</tagdetail>
+		<tagdetail tag="RegnPrtcptnMktDdln">
+			<name>RegistrationParticipationMarketDeadline</name>
+			<description>Date by which the holder needs to register its intention to participate in the meeting process in order to be allowed to participate in the meeting event. This deadline is set by the issuer.</description>
+		</tagdetail>
+		<tagdetail tag="RegnPrtcptnSTPDdln">
+			<name>RegistrationParticipationSTPDeadline</name>
+			<description>Date by which the holder needs to register its intention to participate in the meeting process in order to be allowed to participate in the meeting event. This deadline is specified by an intermediary (STP mode).</description>
+		</tagdetail>
+		<tagdetail tag="RegnSctiesDdln">
+			<name>RegistrationSecuritiesDeadline</name>
+			<description>Date by which the securities have to be registered. This deadline is specified by an intermediary.</description>
+		</tagdetail>
+		<tagdetail tag="RegnSctiesMktDdln">
+			<name>RegistrationSecuritiesMarketDeadline</name>
+			<description>Date by which the securities have to be registered. This deadline is set by the issuer.</description>
+		</tagdetail>
+		<tagdetail tag="RegnSctiesSTPDdln">
+			<name>RegistrationSecuritiesSTPDeadline</name>
+			<description>Date by which the securities have to be registered. This deadline is specified by an intermediary (STP mode).</description>
+		</tagdetail>
+		<tagdetail tag="ReqdExctnDt">
+			<name>RequestedExecutionDate</name>
+			<description>Date at which the instruction must be executed.</description>
+		</tagdetail>
+		<tagdetail tag="RghtsHldr">
+			<name>RightsHolder</name>
+			<description>Owner of the voting rights.</description>
+		</tagdetail>
+		<tagdetail tag="RjctnSts">
+			<name>RejectionStatus</name>
+			<description>Status advising on the rejection of the cancellation request.</description>
+		</tagdetail>
+		<tagdetail tag="RltdRef">
+			<name>RelatedReference</name>
+			<description>Identifies the meeting entitlement message to be modified.</description>
+		</tagdetail>
+		<tagdetail tag="Role">
+			<name>Role</name>
+			<description>Specifies the role of the Issuer agent.</description>
+		</tagdetail>
+		<tagdetail tag="RptgPty">
+			<name>ReportingParty</name>
+			<description>Party confirming the votes.</description>
+		</tagdetail>
+		<tagdetail tag="RqstngPty">
+			<name>RequestingParty</name>
+			<description>Party requesting the cancellation.</description>
+		</tagdetail>
+		<tagdetail tag="RsltPblctnDt">
+			<name>ResultPublicationDate</name>
+			<description>Date on which a company publishes the results of its meeting.</description>
+		</tagdetail>
+		<tagdetail tag="Rsltn">
+			<name>Resolution</name>
+			<description>Detailed information of a resolution proposed to the vote.</description>
+		</tagdetail>
+		<tagdetail tag="RsltnPrpslDdln">
+			<name>ResolutionProposalDeadline</name>
+			<description>Date and time by which security holders can propose amendments or new resolutions. This deadline is set by an intermediary.</description>
+		</tagdetail>
+		<tagdetail tag="RsltnPrpslMktDdln">
+			<name>ResolutionProposalMarketDeadline</name>
+			<description>Date and time by which security holders can propose amendments or new resolutions. This deadline is set by the issuer.</description>
+		</tagdetail>
+		<tagdetail tag="RsltnPrpslThrshld">
+			<name>ResolutionProposalThreshold</name>
+			<description>Specifies the minimum stake in share capital or cash value or number of security holders required to table resolutions.</description>
+		</tagdetail>
+		<tagdetail tag="RsltnPrpslThrshldPctg">
+			<name>ResolutionProposalThresholdPercentage</name>
+			<description>Specifies the minimum stake in share capital or cash value or number of security holders required to table resolutions. This minimum is expressed as a percentage.</description>
+		</tagdetail>
+		<tagdetail tag="Rsn">
+			<name>Reason</name>
+			<description>Defines the justification for the cancellation.</description>
+		</tagdetail>
+		<tagdetail tag="RvcbltyDdln">
+			<name>RevocabilityDeadline</name>
+			<description>Date till which the instructing party can revoke, change or withdraw its voting instruction. This deadline is specified by an intermediary.</description>
+		</tagdetail>
+		<tagdetail tag="RvcbltyMktDdln">
+			<name>RevocabilityMarketDeadline</name>
+			<description>Date till which the instructing party can revoke, change or withdraw its voting instruction. This deadline is set by the issuer.</description>
+		</tagdetail>
+		<tagdetail tag="RvcbltySTPDdln">
+			<name>RevocabilitySTPDeadline</name>
+			<description>Date till which the instructing party can revoke, change or withdraw its voting instruction. This deadline is specified by an intermediary (STP mode).</description>
+		</tagdetail>
+		<tagdetail tag="SEDOL">
+			<name>SEDOL</name>
+			<description>Stock Exchange Daily Official List (SEDOL) number.  A code used by the London Stock Exchange to identify foreign stocks, especially those that aren't actively traded in the US and don't have a CUSIP number.</description>
+		</tagdetail>
+		<tagdetail tag="STPDdln">
+			<name>STPDeadline</name>
+			<description>Date by which the information on proxy assignment must be received by the intermediary (STP mode).</description>
+		</tagdetail>
+		<tagdetail tag="SchmeNm">
+			<name>SchemeName</name>
+			<description>Name of the identification scheme, eg, "UK National Insurance Number".</description>
+		</tagdetail>
+		<tagdetail tag="SclSctyNb">
+			<name>SocialSecurityNumber</name>
+			<description>Number assigned by a social security agency.</description>
+		</tagdetail>
+		<tagdetail tag="SctiesBlckgDdln">
+			<name>SecuritiesBlockingDeadline</name>
+			<description>Date by which the securities should be blocked. This deadline is set by an intermediary.</description>
+		</tagdetail>
+		<tagdetail tag="SctiesBlckgMktDdln">
+			<name>SecuritiesBlockingMarketDeadline</name>
+			<description>Date by which the securities should be blocked. This deadline is set by the issuer.</description>
+		</tagdetail>
+		<tagdetail tag="SctiesBlckgPrdEndDt">
+			<name>SecuritiesBlockingPeriodEndDate</name>
+			<description>Date by which the blocking period for the securities should end.</description>
+		</tagdetail>
+		<tagdetail tag="SctiesBlckgSTPDdln">
+			<name>SecuritiesBlockingSTPDeadline</name>
+			<description>Date by which the securities should be blocked. This deadline is set by the issuer. (STP mode)</description>
+		</tagdetail>
+		<tagdetail tag="SctiesQtyReqrdToVote">
+			<name>SecuritiesQuantityRequiredToVote</name>
+			<description>Number of holdings required for a vote.</description>
+		</tagdetail>
+		<tagdetail tag="SctiesRegn">
+			<name>SecuritiesRegistration</name>
+			<description>Request to register the securities for the meeting.</description>
+		</tagdetail>
+		<tagdetail tag="Scty">
+			<name>Security</name>
+			<description>Identifies the security for which the meeting was organised.</description>
+		</tagdetail>
+		<tagdetail tag="SctyId">
+			<name>SecurityIdentification</name>
+			<description>Identifies the security for which the meeting is organised.</description>
+		</tagdetail>
+		<tagdetail tag="SfkpgPlc">
+			<name>SafekeepingPlace</name>
+			<description>Place where the securities are safe-kept, physically or notionally.  This place can be, for example, a local custodian, a Central Securities Depository (CSD) or an International Central Securities Depository (ICSD).</description>
+		</tagdetail>
+		<tagdetail tag="Shrhldr">
+			<name>Shareholder</name>
+			<description>Specifies the name and address of the shareholder to whom the rights to vote are transferred for resolutions added during the meeting.</description>
+		</tagdetail>
+		<tagdetail tag="SpcfcInstrReq">
+			<name>SpecificInstructionRequest</name>
+			<description>Request to execute specific instructions, such as participation registration, securities registration or blocking of securities.</description>
+		</tagdetail>
+		<tagdetail tag="SpltVoteAllwd">
+			<name>SplitVoteAllowed</name>
+			<description>Specifies whether it is allowed to vote in different directions for the entire holding.</description>
+		</tagdetail>
+		<tagdetail tag="StgInstr">
+			<name>StandingInstruction</name>
+			<description>Indicates whether standing instructions have been applied or not.</description>
+		</tagdetail>
+		<tagdetail tag="Strd">
+			<name>Structured</name>
+			<description>Information that locates and identifies a specific address, as defined by postal services, that is presented in a formal structure.</description>
+		</tagdetail>
+		<tagdetail tag="StrtNm">
+			<name>StreetName</name>
+			<description>Name of a street or thoroughfare.</description>
+		</tagdetail>
+		<tagdetail tag="Sts">
+			<name>Status</name>
+			<description>Indicates whether the resolution is active or withdrawn.</description>
+		</tagdetail>
+		<tagdetail tag="SubAcctDtls">
+			<name>SubAccountDetails</name>
+			<description>Identification of a subaccount within the safekeeping account</description>
+		</tagdetail>
+		<tagdetail tag="SubAcctId">
+			<name>SubAccountIdentification</name>
+			<description>Identifies the subaccount of the safekeeping account.</description>
+		</tagdetail>
+		<tagdetail tag="SubmittdBySctyHldr">
+			<name>SubmittedBySecurityHolder</name>
+			<description>Indicates whether the resolution has been submitted by the security holder. </description>
+		</tagdetail>
+		<tagdetail tag="TaxIdNb">
+			<name>TaxIdentificationNumber</name>
+			<description>Number assigned by a tax authority to an entity.</description>
+		</tagdetail>
+		<tagdetail tag="TckrSymb">
+			<name>TickerSymbol</name>
+			<description>Letters that identify a stock traded on a stock exchange. The Ticker Symbol is a short and convenient way of identifying a stock, eg, RTR.L for Reuters quoted in London.</description>
+		</tagdetail>
+		<tagdetail tag="Titl">
+			<name>Title</name>
+			<description>Abbreviated description of the resolution.</description>
+		</tagdetail>
+		<tagdetail tag="Tp">
+			<name>Type</name>
+			<description>Specifies the type of meeting for which  instructions are sent.</description>
+		</tagdetail>
+		<tagdetail tag="TtlNbOfSctiesOutsdng">
+			<name>TotalNumberOfSecuritiesOutstanding</name>
+			<description>Number of securities admitted to the vote, expressed as an amount and a currency.</description>
+		</tagdetail>
+		<tagdetail tag="TtlNbOfVtngRghts">
+			<name>TotalNumberOfVotingRights</name>
+			<description>Number of rights admitted to the vote.</description>
+		</tagdetail>
+		<tagdetail tag="TwnNm">
+			<name>TownName</name>
+			<description>Name of a built-up area, with defined boundaries, and a local government.</description>
+		</tagdetail>
+		<tagdetail tag="URLAdr">
+			<name>URLAddress</name>
+			<description>Address for the Universal Resource Locator (URL), eg, used over the www (HTTP) service.</description>
+		</tagdetail>
+		<tagdetail tag="Unit">
+			<name>Unit</name>
+			<description>Quantity expressed as a number, eg, a number of shares.</description>
+		</tagdetail>
+		<tagdetail tag="Ustrd">
+			<name>Unstructured</name>
+			<description>Information that locates and identifies a specific address, as defined by postal services, that is presented in free format text.</description>
+		</tagdetail>
+		<tagdetail tag="Vote">
+			<name>Vote</name>
+			<description>Specifies the conditions to be allowed to vote, the different voting methods and options, the voting deadlines and the parameters of the incentive premium.</description>
+		</tagdetail>
+		<tagdetail tag="VoteByMail">
+			<name>VoteByMail</name>
+			<description>Specifies the address where voting ballot can be sent. </description>
+		</tagdetail>
+		<tagdetail tag="VoteByTel">
+			<name>VoteByTelephone</name>
+			<description>Telephone number providing access to an automated voting system.</description>
+		</tagdetail>
+		<tagdetail tag="VoteDdln">
+			<name>VoteDeadline</name>
+			<description>Date and time by which the vote instructions should be submitted to the intermediary.</description>
+		</tagdetail>
+		<tagdetail tag="VoteDtls">
+			<name>VoteDetails</name>
+			<description>Specifies detailed voting instructions.</description>
+		</tagdetail>
+		<tagdetail tag="VoteExctnConf">
+			<name>VoteExecutionConfirmation</name>
+			<description>Indicates that a Vote execution confirmation is requested.</description>
+		</tagdetail>
+		<tagdetail tag="VoteExctnConfId">
+			<name>VoteExecutionConfirmationIdentification</name>
+			<description>Identifies the vote execution confirmation message.</description>
+		</tagdetail>
+		<tagdetail tag="VoteIndctn">
+			<name>VoteIndication</name>
+			<description>Specifies the vote recommendation for resolutions added during the meeting.</description>
+		</tagdetail>
+		<tagdetail tag="VoteInstr">
+			<name>VoteInstruction</name>
+			<description>Specifies how a party has voted for each agenda item.</description>
+		</tagdetail>
+		<tagdetail tag="VoteInstrForAgndRsltn">
+			<name>VoteInstructionForAgendaResolution</name>
+			<description>Indicates the vote instruction for the resolutions which are announced via the meeting agenda in advance of the meeting.</description>
+		</tagdetail>
+		<tagdetail tag="VoteInstrForMtgRsltn">
+			<name>VoteInstructionForMeetingResolution</name>
+			<description>Indicates the vote instruction for the resolutions that will be added during the meeting.</description>
+		</tagdetail>
+		<tagdetail tag="VoteInstrTp">
+			<name>VoteInstructionType</name>
+			<description>Identifies the possible types of voting instructions. When used at the resolution level, it supersedes the value specified in the meeting notice.</description>
+		</tagdetail>
+		<tagdetail tag="VoteMktDdln">
+			<name>VoteMarketDeadline</name>
+			<description>Date and time by which the vote instructions should be submitted to the issuer.</description>
+		</tagdetail>
+		<tagdetail tag="VoteMthds">
+			<name>VoteMethods</name>
+			<description>Indicates the different methods that can be used to vote.</description>
+		</tagdetail>
+		<tagdetail tag="VoteOptn">
+			<name>VoteOption</name>
+			<description>Specifies the different instructions which can be used to vote.</description>
+		</tagdetail>
+		<tagdetail tag="VotePerRsltn">
+			<name>VotePerResolution</name>
+			<description>Details of the vote.</description>
+		</tagdetail>
+		<tagdetail tag="VoteRslt">
+			<name>VoteResult</name>
+			<description>Results per resolution.</description>
+		</tagdetail>
+		<tagdetail tag="VoteSTPDdln">
+			<name>VoteSTPDeadline</name>
+			<description>Date and time by which the vote instructions should be submitted to the intermediary (STP mode).</description>
+		</tagdetail>
+		<tagdetail tag="VoteThrghNtwk">
+			<name>VoteThroughNetwork</name>
+			<description>Network address through which a voting party can cast its vote via a structured message.</description>
+		</tagdetail>
+		<tagdetail tag="VoteWthPrmDdln">
+			<name>VoteWithPremiumDeadline</name>
+			<description>Date and time by which the vote instructions should be submitted to the intermediary to take advantage of the premium. </description>
+		</tagdetail>
+		<tagdetail tag="VoteWthPrmMktDdln">
+			<name>VoteWithPremiumMarketDeadline</name>
+			<description>Date and time by which the vote instructions should be submitted to the issuer to take advantage of the premium. </description>
+		</tagdetail>
+		<tagdetail tag="VoteWthPrmSTPDdln">
+			<name>VoteWithPremiumSTPDeadline</name>
+			<description>Date and time by which the vote instructions should be submitted to the intermediary to take advantage of the premium (STP mode).</description>
+		</tagdetail>
+		<tagdetail tag="VtngBlltElctrncAdr">
+			<name>VotingBallotElectronicAddress</name>
+			<description>Electronic location, e-mail or URL address, where the voting ballot can be requested.</description>
+		</tagdetail>
+		<tagdetail tag="VtngBlltReqAdr">
+			<name>VotingBallotRequestAddress</name>
+			<description>Specifies the postal address where the voting ballot can be requested.</description>
+		</tagdetail>
+		<tagdetail tag="WthMgmt">
+			<name>WithManagement</name>
+			<description>Number of votes in line with the votes of the management.</description>
+		</tagdetail>
+		<tagdetail tag="Wthhld">
+			<name>Withhold</name>
+			<description>Number of votes withheld for one resolution</description>
+		</tagdetail>
+		<tagdetail tag="XtndedCd">
+			<name>ExtendedCode</name>
+			<description>Specifies the reason for cancelling a meeting in free text form.</description>
+		</tagdetail>
+		<tagdetail tag="XtndedClssfctn">
+			<name>ExtendedClassification</name>
+			<description>This code can be used in case another meeting classifications is required. </description>
+		</tagdetail>
+		<tagdetail tag="XtndedRsn">
+			<name>ExtendedReason</name>
+			<description>This code can be used in case another reason is required. </description>
+		</tagdetail>
+	</tagdetails>
+</MXMetaData>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<formulae> 
+		<formula name="GetMessageFlows">
+			<description>Returns a list of all message flow names defined</description>
+			<signature>GetMessageFlows()</signature>
+			<category>Util</category>
+	  		<Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+			<property name="class" value="com.tplus.transform.runtime.formula.ServiceFunctions" />
+			<property name="method" value="getMessageFlows" />
+    	</formula>
+
+		<formula name="GetMessageMappings">
+			<description>Returns a list of all message mappings defined</description>
+			<signature>GetMessageMappings()</signature>
+			<category>Util</category>
+	  		<Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+			<property name="class" value="com.tplus.transform.runtime.formula.ServiceFunctions" />
+			<property name="method" value="getMessageMappings" />
+    	</formula>
+
+		<formula name="GetMessages">
+			<description>Returns a list of all message names defined</description>
+			<signature>GetMessages()</signature>
+			<category>Util</category>
+	  		<Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+			<property name="class" value="com.tplus.transform.runtime.formula.ServiceFunctions" />
+			<property name="method" value="getMessages" />
+    	</formula>
+
+		<formula name="GetExternalMessages">
+			<description>Returns a list of all external message names defined</description>
+			<signature>GetExternalMessages()</signature>
+			<category>Util</category>
+	  		<Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+			<property name="class" value="com.tplus.transform.runtime.formula.ServiceFunctions" />
+			<property name="method" value="getExternalMessages" />
+    	</formula>
+
+
+		<formula name="GetInternalMessages">
+			<description>Returns a list of all internal message names defined</description>
+			<signature>GetInternalMessages()</signature>
+			<category>Util</category>
+	  		<Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+			<property name="class" value="com.tplus.transform.runtime.formula.ServiceFunctions" />
+			<property name="method" value="getInternalMessages" />
+    	</formula>
+
+		<formula name="GetBatchMessages">
+			<description>Returns a list of all batch message names defined</description>
+			<signature>GetBatchMessages()</signature>
+			<category>Util</category>
+	  		<Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+			<property name="class" value="com.tplus.transform.runtime.formula.ServiceFunctions" />
+			<property name="method" value="getBatchMessages" />
+    	</formula>
+
+</formulae> 

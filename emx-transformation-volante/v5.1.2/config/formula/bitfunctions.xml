@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+
+<!-- 
+	1. These function are applicable for both long and int types 
+    2. For the primitive operations (and, or, xor etc) you can either use
+       the function name or the corresponding operator (Java/C++ syntax).
+       For e.g   BitOr(1, 2) is same as 1 | 2
+-->
+<formulae> 
+
+		<formula name="BitAnd">
+			<description>Bitwise And.</description>
+			<signature>BitAnd(value1, value2)</signature>
+			<category>Bit Operation</category>
+	  		<Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+			<property name="class" value="com.tplus.transform.runtime.formula.BitFunctions" />
+			<property name="method" value="bitAnd" />
+    	</formula>
+
+		<formula name="BitOr">
+			<description>Bitwise Or.</description>
+			<signature>BitOr(value1, value2)</signature>
+			<category>Bit Operation</category>
+	  		<Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+			<property name="class" value="com.tplus.transform.runtime.formula.BitFunctions" />
+			<property name="method" value="bitOr" />
+    	</formula>
+		<formula name="BitXOR">
+			<description>Bitwise XOR.</description>
+			<signature>BitXOR(value1, value2)</signature>
+			<category>Bit Operation</category>
+	  		<Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+			<property name="class" value="com.tplus.transform.runtime.formula.BitFunctions" />
+			<property name="method" value="bitXOR" />
+    	</formula>
+		<formula name="BitNot">
+			<description>Bitwise Not.</description>
+			<signature>BitNot(value1)</signature>
+			<category>Bit Operation</category>
+	  		<Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+			<property name="class" value="com.tplus.transform.runtime.formula.BitFunctions" />
+			<property name="method" value="bitNot" />
+    	</formula>
+		<formula name="LeftShift">
+			<description>Shifts the number left by the specified number of bits.</description>
+			<signature>LeftShift(number, by)</signature>
+			<category>Bit Operation</category>
+	  		<Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+			<property name="class" value="com.tplus.transform.runtime.formula.BitFunctions" />
+			<property name="method" value="leftShift" />
+    	</formula>
+		<formula name="RightShift">
+			<description>Shifts the number right by the specified number of bits. It propagates the sign bit.</description>
+			<signature>RightShift(number, by)</signature>
+			<category>Bit Operation</category>
+	  		<Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+			<property name="class" value="com.tplus.transform.runtime.formula.BitFunctions" />
+			<property name="method" value="rightShift" />
+    	</formula>
+		<formula name="UnsignedRightShift">
+			<description>Shifts the number right by the specified number of bits. It propagates the zero bit.</description>
+			<signature>UnsignedRightShift(number, by)</signature>
+			<category>Bit Operation</category>
+	  		<Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+			<property name="class" value="com.tplus.transform.runtime.formula.BitFunctions" />
+			<property name="method" value="unsignedRightShift" />
+    	</formula>
+		<formula name="IsBitSet">
+			<description>Gets the bit at the specified offset (returns true or false). Note that the index/offset of the least significant bit is zero.</description>
+			<signature>IsBitSet(number, at)</signature>
+			<category>Bit Operation</category>
+	  		<Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+			<property name="class" value="com.tplus.transform.runtime.formula.BitFunctions" />
+			<property name="method" value="isBitSet" />
+    	</formula>
+		<formula name="SetBit">
+			<description>Sets the bit at specified offset and returns the modified value. Note that the index/offset of the least significant bit is zero.</description>
+			<signature>SetBit(number, at)</signature>
+			<category>Bit Operation</category>
+	  		<Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+			<property name="class" value="com.tplus.transform.runtime.formula.BitFunctions" />
+			<property name="method" value="setBit" />
+    	</formula>
+		<formula name="ClearBit">
+			<description>Clears the bit at specified offset and returns the modified value. Note that the index/offset of the least significant bit is zero.</description>
+			<signature>ClearBit(number, at)</signature>
+			<category>Bit Operation</category>
+	  		<Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+			<property name="class" value="com.tplus.transform.runtime.formula.BitFunctions" />
+			<property name="method" value="clearBit" />
+    	</formula>
+		<formula name="FlipBit">
+			<description>Flips the bit at specified offset and returns the modified value. Note that the index/offset of the least significant bit is zero.</description>
+			<signature>FlipBit(number, at)</signature>
+			<category>Bit Operation</category>
+	  		<Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+			<property name="class" value="com.tplus.transform.runtime.formula.BitFunctions" />
+			<property name="method" value="flipBit" />
+    	</formula>
+</formulae> 

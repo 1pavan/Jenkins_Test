@@ -1,0 +1,1084 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<SwiftMessageFormat name="MT671">
+	<standard>SWIFT</standard>
+	<standard-name>MT671</standard-name>
+	<standard-version>SRG 2017</standard-version>
+	<standard-release-qualifier>20170227</standard-release-qualifier>
+	<DescriptiveName><![CDATA[Standing Settlement Instruction Update Notification]]></DescriptiveName>
+	<Category>Reference Data</Category>
+	<Description>The MT 671 Standing Settlement Instruction (SSI) Update Notification message is sent by SWIFT to a financial institution as a result of receiving an MT 670 Standing Settlement Instruction Update Notification Request. The MT 671 is created from the corresponding MT 670. The MT 671 is a notification of an SSI update from the party identified in the message as the Submitting Party to: 
+
+one or more financial institutions (up to 100 institutions) or 
+
+all SWIFT MT users in one or more countries (up to 80 countries) or 
+
+all SWIFT MT users specified in the request 
+
+The MT 671 specifies standing cash settlement information for the account of the Submitting Party or on behalf of another party. The party and account information in the SSI is then used in FX confirmations, payments messages, etc. 
+
+The MT 671 is sent by SWIFT to one or more financial institutions as defined in the MT 670
+</Description>
+	<SwiftFields>
+		<customizable>true</customizable>
+		<modifiable>false</modifiable>
+		<SwiftMessageType>User</SwiftMessageType>
+		<max-length>10000</max-length>
+		<HeaderAndTrailerType>SWIFT_INPUT_OUTPUT_HEADER</HeaderAndTrailerType>
+		<Header>
+		</Header>
+		<Data>
+			<Fields>
+				<SwiftSequence Name="A">
+					<Name>A</Name>
+					<Description><![CDATA[General Information]]></Description>
+					<Mandatory>true</Mandatory>
+					<Repeating>false</Repeating>
+					<BlockDelimited>true</BlockDelimited>
+					<Code>GENL</Code>
+					<StartBlockField>16R</StartBlockField>
+					<StartFieldFormat>16c</StartFieldFormat>
+					<EndBlockField>16S</EndBlockField>
+					<EndFieldFormat>16c</EndFieldFormat>
+					<Fields>
+						<SwiftField Name="20C">
+							<SwiftFieldDef Name="20">
+								<Generic>true</Generic>
+								<Description><![CDATA[Transaction Reference Number]]></Description>
+								<Option Name="C">
+									<Format><![CDATA[:4!c//16x]]></Format>
+									<Specification><![CDATA[(Qualifier) (Reference)]]></Specification>
+									<Description><![CDATA[Reference]]></Description>
+								</Option>
+							</SwiftFieldDef>
+							<Qualifier Name="SEME">
+								<Description><![CDATA[Sender's Message Reference]]></Description>
+								<Repeating>false</Repeating>
+								<Presence>M</Presence>
+								<Options>C</Options>
+							</Qualifier>
+						</SwiftField>
+						<SwiftField Name="23G">
+							<SwiftFieldDef Name="23">
+								<Generic>false</Generic>
+								<Option Name="G">
+									<Format><![CDATA[4!c[/4!c]]]></Format>
+									<Specification><![CDATA[(Function) (Subfunction)]]></Specification>
+									<Description><![CDATA[Function of the Message]]></Description>
+								</Option>
+							</SwiftFieldDef>
+							<Repeating>false</Repeating>
+							<Presence>M</Presence>
+							<Options>G</Options>
+							<Validations>
+								<SubField Name="Function">
+									<Validation>
+										<Options>G</Options>
+										<ErrorCode>T86</ErrorCode>
+										<Comment><![CDATA[Function must contain one of the following codes (Error code(s): T86):]]></Comment>
+										<ValidationPattern xsi:type="CODE" Type="CODE">
+											<Type>CODE</Type>
+											<Codes>
+												<Code Name="NEWM">
+													<DetailedName>New</DetailedName>
+													<Description>New SSI update notification message.</Description>
+												</Code>
+											</Codes>
+										</ValidationPattern>
+									</Validation>
+								</SubField>
+								<SubField Name="Subfunction">
+									<Validation>
+										<Options>G</Options>
+										<ErrorCode>T85</ErrorCode>
+										<Comment><![CDATA[When present, Subfunction must contain one of the following codes (Error code(s): T85):]]></Comment>
+										<ValidationPattern xsi:type="CODE" Type="CODE">
+											<Type>CODE</Type>
+											<Codes>
+												<Code Name="CODU">
+													<DetailedName>Copy Duplicate</DetailedName>
+													<Description>Message is a copy to a party other than the account owner/account servicer, for information purposes and the message is a duplicate of a message previously sent.</Description>
+												</Code>
+												<Code Name="COPY">
+													<DetailedName>Copy</DetailedName>
+													<Description>Message is a copy to a party other than the account owner/account servicer, for information purposes.</Description>
+												</Code>
+												<Code Name="DUPL">
+													<DetailedName>Duplicate</DetailedName>
+													<Description>Message is for information/confirmation purposes. It is a duplicate of a message previously sent.</Description>
+												</Code>
+											</Codes>
+										</ValidationPattern>
+									</Validation>
+								</SubField>
+							</Validations>
+						</SwiftField>
+						<SwiftSequence Name="A1">
+							<Name>A1</Name>
+							<Description><![CDATA[Linkages]]></Description>
+							<Mandatory>false</Mandatory>
+							<Repeating>true</Repeating>
+							<BlockDelimited>true</BlockDelimited>
+							<Code>LINK</Code>
+							<StartBlockField>16R</StartBlockField>
+							<StartFieldFormat>16c</StartFieldFormat>
+							<EndBlockField>16S</EndBlockField>
+							<EndFieldFormat>16c</EndFieldFormat>
+							<Fields>
+								<SwiftField Name="20C">
+									<SwiftFieldDef Name="20">
+										<Generic>true</Generic>
+										<Description><![CDATA[Transaction Reference Number]]></Description>
+										<Option Name="C">
+											<Format><![CDATA[:4!c//16x]]></Format>
+											<Specification><![CDATA[(Qualifier) (Reference)]]></Specification>
+											<Description><![CDATA[Reference]]></Description>
+										</Option>
+									</SwiftFieldDef>
+									<Qualifier Name="RELA">
+										<Description><![CDATA[Related Message Reference]]></Description>
+										<Repeating>false</Repeating>
+										<Presence>M</Presence>
+										<Options>C</Options>
+									</Qualifier>
+									<Qualifier Name="PREV">
+										<Description><![CDATA[Previous Message Reference]]></Description>
+										<Repeating>false</Repeating>
+										<Presence>OR</Presence>
+										<Options>C</Options>
+									</Qualifier>
+								</SwiftField>
+							</Fields>
+						</SwiftSequence>
+						<SwiftField Name="95a">
+							<SwiftFieldDef Name="95">
+								<Generic>true</Generic>
+								<Description><![CDATA[Party]]></Description>
+								<Option Name="P">
+									<Format><![CDATA[:4!c(//4!a2!a2!c[3!c])]]></Format>
+									<Specification><![CDATA[(Qualifier) (Identifier Code)]]></Specification>
+								</Option>
+								<Option Name="Q">
+									<Format><![CDATA[:4!c//4*35x]]></Format>
+									<Specification><![CDATA[ (Qualifier) (Name & Address) ]]></Specification>
+								</Option>
+							</SwiftFieldDef>
+							<Qualifier Name="SUBM">
+								<Description><![CDATA[Submitting Party]]></Description>
+								<Repeating>false</Repeating>
+								<Presence>M</Presence>
+								<Options>P</Options>
+							</Qualifier>
+							<Qualifier Name="CONT">
+								<Description><![CDATA[Contact Person]]></Description>
+								<Repeating>true</Repeating>
+								<Presence>O</Presence>
+								<Options>Q</Options>
+							</Qualifier>
+							<Qualifier Name="TRAD">
+								<Description><![CDATA[Trade Party]]></Description>
+								<Repeating>true</Repeating>
+								<Presence>O</Presence>
+								<Options>P, Q</Options>
+							</Qualifier>
+						</SwiftField>
+						<SwiftField Name="22F">
+							<SwiftFieldDef Name="22">
+								<Generic>true</Generic>
+								<Description><![CDATA[Indicator]]></Description>
+								<Option Name="F">
+									<Format><![CDATA[:4!c/[8c]/4!c]]></Format>
+									<Specification><![CDATA[(Qualifier) (Data Source Scheme) (Indicator)]]></Specification>
+									<Description><![CDATA[Indicator]]></Description>
+								</Option>
+							</SwiftFieldDef>
+							<Qualifier Name="UDTP">
+								<Description><![CDATA[SSI Update Type]]></Description>
+								<Repeating>false</Repeating>
+								<Presence>M</Presence>
+								<Options>F</Options>
+							</Qualifier>
+							<Validations>
+								<SubField Name="Indicator">
+									<Validation>
+										<Qualifiers>UDTP</Qualifiers>
+										<Options>F</Options>
+										<NullField>Data_Source_Scheme</NullField>
+										<ErrorCode>K22</ErrorCode>
+										<Comment><![CDATA[If Data Source Scheme is not present, Indicator must contain the following code (Error code(s): K22):]]></Comment>
+										<ValidationPattern xsi:type="CODE" Type="CODE">
+											<Type>CODE</Type>
+											<Codes>
+												<Code Name="CASH">
+													<DetailedName>Cash</DetailedName>
+													<Description>SSI Update notification is for a cash SSI.</Description>
+												</Code>
+											</Codes>
+										</ValidationPattern>
+									</Validation>
+								</SubField>
+							</Validations>
+						</SwiftField>
+						<SwiftField Name="97A">
+							<SwiftFieldDef Name="97">
+								<Generic>true</Generic>
+								<Description><![CDATA[Account]]></Description>
+								<Option Name="A">
+									<Format><![CDATA[:4!c//35x]]></Format>
+									<Specification><![CDATA[(Qualifier) (Account Number)]]></Specification>
+								</Option>
+							</SwiftFieldDef>
+							<Qualifier Name="SAFE">
+								<Description><![CDATA[Safekeeping Account]]></Description>
+								<Repeating>false</Repeating>
+								<Presence>O</Presence>
+								<Options>A</Options>
+							</Qualifier>
+						</SwiftField>
+					</Fields>
+				</SwiftSequence>
+				<SwiftSequence Name="B">
+					<Name>B</Name>
+					<Description><![CDATA[Standing Settlement Instruction Details]]></Description>
+					<Mandatory>true</Mandatory>
+					<Repeating>true</Repeating>
+					<BlockDelimited>true</BlockDelimited>
+					<Code>SSIDET</Code>
+					<StartBlockField>16R</StartBlockField>
+					<StartFieldFormat>16c</StartFieldFormat>
+					<EndBlockField>16S</EndBlockField>
+					<EndFieldFormat>16c</EndFieldFormat>
+					<Fields>
+						<SwiftField Name="22H">
+							<SwiftFieldDef Name="22">
+								<Generic>true</Generic>
+								<Description><![CDATA[Indicator]]></Description>
+								<Option Name="H">
+									<Format><![CDATA[:4!c//4!c]]></Format>
+									<Specification><![CDATA[(Qualifier) (Indicator)]]></Specification>
+									<Description><![CDATA[Indicator]]></Description>
+								</Option>
+							</SwiftFieldDef>
+							<Qualifier Name="SSIP">
+								<Description><![CDATA[SSI Purpose]]></Description>
+								<Repeating>false</Repeating>
+								<Presence>M</Presence>
+								<Options>H</Options>
+							</Qualifier>
+							<Validations>
+								<SubField Name="Indicator">
+									<Validation>
+										<Qualifiers>SSIP</Qualifiers>
+										<Options>H</Options>
+										<ErrorCode>K22</ErrorCode>
+										<Comment><![CDATA[Indicator must contain one of the following codes (Error code(s): K22).]]></Comment>
+										<ValidationPattern xsi:type="CODE" Type="CODE">
+											<Type>CODE</Type>
+											<Codes>
+												<Code Name="NEWS">
+													<DetailedName>New</DetailedName>
+													<Description>Individual SSI is new</Description>
+												</Code>
+													<Code Name="NONE">
+														<DetailedName>No SSI</DetailedName>
+														<Description>No longer any SSI for currency and market area</Description>
+													</Code>
+												<Code Name="RECO">
+													<DetailedName>Re-confirmation</DetailedName>
+													<Description>Individual SSI is re-confirmed.</Description>
+												</Code>
+											</Codes>
+										</ValidationPattern>
+									</Validation>
+								</SubField>
+							</Validations>
+						</SwiftField>
+						<SwiftField Name="20C">
+							<SwiftFieldDef Name="20">
+								<Generic>true</Generic>
+								<Description><![CDATA[Transaction Reference Number]]></Description>
+								<Option Name="C">
+									<Format><![CDATA[:4!c//16x]]></Format>
+									<Specification><![CDATA[(Qualifier) (Reference)]]></Specification>
+									<Description><![CDATA[Reference]]></Description>
+								</Option>
+							</SwiftFieldDef>
+							<Qualifier Name="SSIR">
+								<Description><![CDATA[SSI Reference]]></Description>
+								<Repeating>false</Repeating>
+								<Presence>O</Presence>
+								<Options>C</Options>
+							</Qualifier>
+						</SwiftField>
+						<SwiftField Name="11A">
+							<SwiftFieldDef Name="11">
+								<Generic>true</Generic>
+								<Description><![CDATA[Currency]]></Description>
+								<Option Name="A">
+									<Format><![CDATA[:4!c//3!a]]></Format>
+									<Specification><![CDATA[(Qualifier) (Currency Code)]]></Specification>
+								</Option>
+							</SwiftFieldDef>
+							<Qualifier Name="SETT">
+								<Description><![CDATA[SSI Currency]]></Description>
+								<Repeating>false</Repeating>
+								<Presence>M</Presence>
+								<Options>A</Options>
+							</Qualifier>
+						</SwiftField>
+						<SwiftField Name="98A">
+							<SwiftFieldDef Name="98">
+								<Generic>true</Generic>
+								<Description><![CDATA[Date/Time]]></Description>
+								<Option Name="A">
+									<Format><![CDATA[:4!c//8!n]]></Format>
+									<Specification><![CDATA[(Qualifier)(Date)]]></Specification>
+									<Description><![CDATA[Date/Time]]></Description>
+								</Option>
+							</SwiftFieldDef>
+							<Qualifier Name="EFFD">
+								<Description><![CDATA[Effective Date]]></Description>
+								<Repeating>false</Repeating>
+								<Presence>M</Presence>
+								<Options>A</Options>
+							</Qualifier>
+						</SwiftField>
+						<SwiftField Name="22F">
+							<SwiftFieldDef Name="22">
+								<Generic>true</Generic>
+								<Description><![CDATA[Indicator]]></Description>
+								<Option Name="F">
+									<Format><![CDATA[:4!c/[8c]/4!c]]></Format>
+									<Specification><![CDATA[(Qualifier) (Data Source Scheme) (Indicator)]]></Specification>
+									<Description><![CDATA[Indicator]]></Description>
+								</Option>
+							</SwiftFieldDef>
+							<Qualifier Name="EFFD">
+								<Description><![CDATA[Effective Date Indicator]]></Description>
+								<Repeating>true</Repeating>
+								<Presence>O</Presence>
+								<Options>F</Options>
+							</Qualifier>
+							<Qualifier Name="MARK">
+								<Description><![CDATA[Market Area Indicator]]></Description>
+								<Repeating>true</Repeating>
+								<Presence>M</Presence>
+								<Options>F</Options>
+							</Qualifier>
+							<Validations>
+								<SubField Name="Indicator">
+									<Validation>
+										<Qualifiers>EFFD</Qualifiers>
+										<Options>F</Options>
+										<NullField>Data_Source_Scheme</NullField>
+										<ErrorCode>K22</ErrorCode>
+										<Comment><![CDATA[If Qualifier is EFFD and Data Source Scheme is not present, Indicator must contain one of the following codes (Error code(s): K22):]]></Comment>
+										<ValidationPattern xsi:type="CODE" Type="CODE">
+											<Type>CODE</Type>
+											<Codes>
+												<Code Name="FUTU">
+													<DetailedName>Future</DetailedName>
+													<Description>SSI update is to be applied to future trades.</Description>
+												</Code>
+												<Code Name="OUTS">
+													<DetailedName>Outstanding Trade</DetailedName>
+													<Description>SSI update is effective for all trades settling on and after effective date irrespective of trade date.</Description>
+												</Code>
+												<Code Name="RCON">
+													<DetailedName>Reconfirmation</DetailedName>
+													<Description>SSI update is effective for all trades settling on and after effective date irrespective of trade date and they need to be reconfirmed.</Description>
+												</Code>
+												<Code Name="SETT">
+													<DetailedName>Settlement Date</DetailedName>
+													<Description>SSI update is effective on the settlement date.</Description>
+												</Code>
+												<Code Name="TRAD">
+													<DetailedName>Trade Date</DetailedName>
+													<Description>SSI update is effective for all trades booked on and after effective date</Description>
+												</Code>
+											</Codes>
+										</ValidationPattern>
+									</Validation>
+									<Validation>
+										<Qualifiers>MARK</Qualifiers>
+										<Options>F</Options>
+										<NullField>Data_Source_Scheme</NullField>
+										<ErrorCode>K22</ErrorCode>
+										<Comment><![CDATA[If Qualifier is MARK and Data Source Scheme is not present, Indicator must contain one of the following codes (Error code(s): K22):]]></Comment>
+										<ValidationPattern xsi:type="CODE" Type="CODE">
+											<Type>CODE</Type>
+											<Codes>
+												<Code Name="ANYY">
+													<DetailedName>Any</DetailedName>
+													<Description>Any market area.</Description>
+												</Code>
+												<Code Name="CASH">
+													<DetailedName>Cash</DetailedName>
+													<Description>Bank to bank cash movements.</Description>
+												</Code>
+												<Code Name="COLL">
+													<DetailedName>Collections</DetailedName>
+													<Description>Collections.</Description>
+												</Code>
+												<Code Name="COMM">
+													<DetailedName>Commodities</DetailedName>
+													<Description>Precious metals and other commodities such as palm oil.</Description>
+												</Code>
+												<Code Name="COPA">
+													<DetailedName>Commercial Payments</DetailedName>
+													<Description>Payment in which one of the parties is not a financial institution.</Description>
+												</Code>
+												<Code Name="DERI">
+													<DetailedName>Derivatives</DetailedName>
+													<Description>Futures contracts, options, forward contracts, swaps, etc.</Description>
+												</Code>
+												<Code Name="DOCC">
+													<DetailedName>Documentary Credits</DetailedName>
+													<Description>Documentary credits.</Description>
+												</Code>
+												<Code Name="FOEX">
+													<DetailedName>Foreign Exchange</DetailedName>
+													<Description>Foreign Exchange</Description>
+												</Code>
+												<Code Name="GUAR">
+													<DetailedName>Guarantees</DetailedName>
+													<Description>Guarantees.</Description>
+												</Code>
+												<Code Name="LETT">
+													<DetailedName>Letters of Credit</DetailedName>
+													<Description>Letters of credit</Description>
+												</Code>
+												<Code Name="LOAN">
+													<DetailedName>Loans</DetailedName>
+													<Description>Loans and deposits.</Description>
+												</Code>
+												<Code Name="MMKT">
+													<DetailedName>Money Markets</DetailedName>
+													<Description>Loans and deposits</Description>
+												</Code>
+												<Code Name="NDLF">
+													<DetailedName>Non Deliverable Forward</DetailedName>
+													<Description>FX forward trade for which only balance is settled.</Description>
+												</Code>
+												<Code Name="OPTI">
+													<DetailedName>Options</DetailedName>
+													<Description>FX Options, swapoptions, etc.</Description>
+												</Code>
+												<Code Name="SECU">
+													<DetailedName>Securities</DetailedName>
+													<Description>Bonds, equities, futures</Description>
+												</Code>
+												<Code Name="TFIN">
+													<DetailedName>Trade Finance</DetailedName>
+													<Description>Documentary credits, collections, guarantees, letters of credit.</Description>
+												</Code>
+												<Code Name="TREA">
+													<DetailedName>Treasury</DetailedName>
+													<Description>Cash management activities.</Description>
+												</Code>
+											</Codes>
+										</ValidationPattern>
+									</Validation>
+								</SubField>
+							</Validations>
+						</SwiftField>
+						<SwiftSequence Name="B1">
+							<Name>B1</Name>
+							<Description><![CDATA[Cash Parties]]></Description>
+							<Mandatory>true</Mandatory>
+							<Repeating>true</Repeating>
+							<BlockDelimited>true</BlockDelimited>
+							<Code>CSHPRTY</Code>
+							<StartBlockField>16R</StartBlockField>
+							<StartFieldFormat>16c</StartFieldFormat>
+							<EndBlockField>16S</EndBlockField>
+							<EndFieldFormat>16c</EndFieldFormat>
+							<Fields>
+								<SwiftField Name="95a">
+									<SwiftFieldDef Name="95">
+										<Generic>true</Generic>
+										<Description><![CDATA[Party]]></Description>
+										<Option Name="P">
+											<Format><![CDATA[:4!c(//4!a2!a2!c[3!c])]]></Format>
+											<Specification><![CDATA[(Qualifier) (Identifier Code)]]></Specification>
+										</Option>
+										<Option Name="Q">
+											<Format><![CDATA[:4!c//4*35x]]></Format>
+											<Specification><![CDATA[ (Qualifier) (Name & Address) ]]></Specification>
+										</Option>
+										<Option Name="R">
+											<Format><![CDATA[:4!c/8c/34x]]></Format>
+											<Specification><![CDATA[(Qualifier) (Data Source Scheme) (Proprietary Code)]]></Specification>
+										</Option>
+										<Option Name="S">
+											<Format><![CDATA[:4!c/[8c]/4!c/2!a/30x]]></Format>
+											<Specification><![CDATA[(Qualifier) (Data Source Scheme) (Type of ID) (Country Code) (Alternate ID)]]></Specification>
+										</Option>
+									</SwiftFieldDef>
+									<Qualifier Name="ACCW">
+										<Description><![CDATA[Account With Institution]]></Description>
+										<Repeating>true</Repeating>
+										<Presence>M</Presence>
+										<Options>P, Q, R</Options>
+									</Qualifier>
+									<Qualifier Name="BENM">
+										<Description><![CDATA[Beneficiary]]></Description>
+										<Repeating>true</Repeating>
+										<Presence>OR</Presence>
+										<Options>P, Q, R</Options>
+									</Qualifier>
+									<Qualifier Name="INT1">
+										<Description><![CDATA[Intermediary]]></Description>
+										<Repeating>true</Repeating>
+										<Presence>OR</Presence>
+										<Options>P, Q, R</Options>
+									</Qualifier>
+									<Qualifier Name="INT2">
+										<Description><![CDATA[Second intermediary]]></Description>
+										<Repeating>true</Repeating>
+										<Presence>OR</Presence>
+										<Options>P, Q, R</Options>
+									</Qualifier>
+									<Qualifier Name="ALTE">
+										<Description><![CDATA[Alternate ID]]></Description>
+										<Repeating>true</Repeating>
+										<Presence>O</Presence>
+										<Options>S</Options>
+									</Qualifier>
+									<Validations>
+										<SubField Name="Type_of_ID">
+											<Validation>
+												<Qualifiers>ALTE</Qualifiers>
+												<Options>S</Options>
+												<NullField>Data_Source_Scheme</NullField>
+												<ErrorCode>K95</ErrorCode>
+												<Comment><![CDATA[In option S, if Data Source Scheme is not present, Type of ID must contain one of the following codes (Error code(s): K95):]]></Comment>
+												<ValidationPattern xsi:type="CODE" Type="CODE">
+													<Type>CODE</Type>
+													<Codes>
+														<Code Name="ARNU">
+															<DetailedName>Alien Registration Number</DetailedName>
+															<Description>Number assigned by a government agency to identify foreign nationals.</Description>
+														</Code>
+														<Code Name="CCPT">
+															<DetailedName>Passport Number</DetailedName>
+															<Description>Number assigned by a passport authority.</Description>
+														</Code>
+														<Code Name="CHTY">
+															<DetailedName>Tax Exempt Identification Number</DetailedName>
+															<Description>Number assigned to a tax exempt entity.</Description>
+														</Code>
+														<Code Name="CORP">
+															<DetailedName>Corporate Identification</DetailedName>
+															<Description>Number assigned to a corporate entity.</Description>
+														</Code>
+														<Code Name="DRLC">
+															<DetailedName>Driver's License Number</DetailedName>
+															<Description>Number assigned to a driver's license.</Description>
+														</Code>
+														<Code Name="EMPL">
+															<DetailedName>Employee Identification Number</DetailedName>
+															<Description>Number assigned to a specific employee for employee trade reporting.</Description>
+														</Code>
+														<Code Name="FIIN">
+															<DetailedName>Foreign Investment Identity Number</DetailedName>
+															<Description>Number assigned to a foreign investor (other than the alien number).</Description>
+														</Code>
+														<Code Name="TXID">
+															<DetailedName>Tax Identification Number</DetailedName>
+															<Description>Number assigned by a tax authority to an entity.</Description>
+														</Code>
+													</Codes>
+												</ValidationPattern>
+											</Validation>
+										</SubField>
+									</Validations>
+								</SwiftField>
+								<SwiftField Name="97A">
+									<SwiftFieldDef Name="97">
+										<Generic>true</Generic>
+										<Description><![CDATA[Account]]></Description>
+										<Option Name="A">
+											<Format><![CDATA[:4!c//35x]]></Format>
+											<Specification><![CDATA[(Qualifier) (Account Number)]]></Specification>
+										</Option>
+									</SwiftFieldDef>
+									<Qualifier Name="CASH">
+										<Description><![CDATA[Cash Account]]></Description>
+										<Repeating>false</Repeating>
+										<Presence>O</Presence>
+										<Options>A</Options>
+									</Qualifier>
+								</SwiftField>
+							</Fields>
+						</SwiftSequence>
+						<SwiftSequence Name="B2">
+							<Name>B2</Name>
+							<Description><![CDATA[Other Details]]></Description>
+							<Mandatory>false</Mandatory>
+							<Repeating>false</Repeating>
+							<BlockDelimited>true</BlockDelimited>
+							<Code>OTHRDET</Code>
+							<StartBlockField>16R</StartBlockField>
+							<StartFieldFormat>16c</StartFieldFormat>
+							<EndBlockField>16S</EndBlockField>
+							<EndFieldFormat>16c</EndFieldFormat>
+							<Fields>
+								<SwiftField Name="70E">
+									<SwiftFieldDef Name="70">
+										<Generic>true</Generic>
+										<Description><![CDATA[Narrative]]></Description>
+										<Option Name="E">
+											<Format><![CDATA[:4!c//10*35x]]></Format>
+											<Specification><![CDATA[(Qualifier)(Narrative)]]></Specification>
+											<Description><![CDATA[Narrative]]></Description>
+										</Option>
+									</SwiftFieldDef>
+									<Qualifier Name="ADTX">
+										<Description><![CDATA[Additional Text Narrative]]></Description>
+										<Repeating>true</Repeating>
+										<Presence>O</Presence>
+										<Options>E</Options>
+									</Qualifier>
+								</SwiftField>
+								<SwiftField Name="22F">
+									<SwiftFieldDef Name="22">
+										<Generic>true</Generic>
+										<Description><![CDATA[Indicator]]></Description>
+										<Option Name="F">
+											<Format><![CDATA[:4!c/[8c]/4!c]]></Format>
+											<Specification><![CDATA[(Qualifier) (Data Source Scheme) (Indicator)]]></Specification>
+											<Description><![CDATA[Indicator]]></Description>
+										</Option>
+									</SwiftFieldDef>
+									<Qualifier Name="PMTH">
+										<Description><![CDATA[Payment Method Indicator]]></Description>
+										<Repeating>false</Repeating>
+										<Presence>O</Presence>
+										<Options>F</Options>
+									</Qualifier>
+									<Validations>
+										<SubField Name="Indicator">
+											<Validation>
+												<Qualifiers>PMTH</Qualifiers>
+												<Options>F</Options>
+												<NullField>Data_Source_Scheme</NullField>
+												<ErrorCode>K22</ErrorCode>
+												<Comment><![CDATA[If Data Source Scheme is not present, Indicator must contain the following code (Error code(s): K22):]]></Comment>
+												<ValidationPattern xsi:type="CODE" Type="CODE">
+													<Type>CODE</Type>
+													<Codes>
+														<Code Name="COVE">
+															<DetailedName>Cover</DetailedName>
+															<Description>Direct payment (that is, MT 103 with MT 202 COV as a cover) is permitted.</Description>
+														</Code>
+													</Codes>
+												</ValidationPattern>
+											</Validation>
+										</SubField>
+									</Validations>
+								</SwiftField>
+									<SwiftField Name="22H">
+										<SwiftFieldDef Name="22">
+											<Generic>true</Generic>
+											<Description><![CDATA[Indicator]]></Description>
+											<Option Name="H">
+												<Format><![CDATA[:4!c//4!c]]></Format>
+												<Specification><![CDATA[(Qualifier) (Indicator)]]></Specification>
+												<Description><![CDATA[Indicator]]></Description>
+											</Option>
+										</SwiftFieldDef>
+										<Qualifier Name="PRCD">
+											<Description><![CDATA[Precedence Indicator]]></Description>
+											<Repeating>false</Repeating>
+											<Presence>O</Presence>
+											<Options>H</Options>
+										</Qualifier>
+										<Validations>
+											<SubField Name="Indicator">
+												<Validation>
+													<Qualifiers>PRCD</Qualifiers>
+													<Options>H</Options>
+													<ErrorCode>K22</ErrorCode>
+													<Comment><![CDATA[Indicator must contain the following code (Error code(s): K22):]]></Comment>
+													<ValidationPattern xsi:type="CODE" Type="CODE">
+														<Type>CODE</Type>
+														<Codes>
+															<Code Name="PREF">
+																<DetailedName>Preferred</DetailedName>
+																<Description>The preferred SSI for a currency and market area</Description>
+															</Code>
+														</Codes>
+													</ValidationPattern>
+												</Validation>
+											</SubField>
+										</Validations>
+									</SwiftField>
+							</Fields>
+						</SwiftSequence>
+					</Fields>
+				</SwiftSequence>
+				<SwiftSequence Name="C">
+					<Name>C</Name>
+					<Description><![CDATA[Other Details]]></Description>
+					<Mandatory>false</Mandatory>
+					<Repeating>false</Repeating>
+					<BlockDelimited>true</BlockDelimited>
+					<Code>OTHRDET</Code>
+					<StartBlockField>16R</StartBlockField>
+					<StartFieldFormat>16c</StartFieldFormat>
+					<EndBlockField>16S</EndBlockField>
+					<EndFieldFormat>16c</EndFieldFormat>
+					<Fields>
+						<SwiftField Name="70E">
+							<SwiftFieldDef Name="70">
+								<Generic>true</Generic>
+								<Description><![CDATA[Narrative]]></Description>
+								<Option Name="E">
+									<Format><![CDATA[:4!c//10*35x]]></Format>
+									<Specification><![CDATA[(Qualifier)(Narrative)]]></Specification>
+									<Description><![CDATA[Narrative]]></Description>
+								</Option>
+							</SwiftFieldDef>
+							<Qualifier Name="ADTX">
+								<Description><![CDATA[Additional Text Narrative]]></Description>
+								<Repeating>true</Repeating>
+								<Presence>O</Presence>
+								<Options>E</Options>
+							</Qualifier>
+						</SwiftField>
+						<SwiftField Name="22F">
+							<SwiftFieldDef Name="22">
+								<Generic>true</Generic>
+								<Description><![CDATA[Indicator]]></Description>
+								<Option Name="F">
+									<Format><![CDATA[:4!c/[8c]/4!c]]></Format>
+									<Specification><![CDATA[(Qualifier) (Data Source Scheme) (Indicator)]]></Specification>
+									<Description><![CDATA[Indicator]]></Description>
+								</Option>
+							</SwiftFieldDef>
+							<Qualifier Name="PMTH">
+								<Description><![CDATA[Payment Method Indicator]]></Description>
+								<Repeating>false</Repeating>
+								<Presence>O</Presence>
+								<Options>F</Options>
+							</Qualifier>
+							<Validations>
+								<SubField Name="Indicator">
+									<Validation>
+										<Qualifiers>PMTH</Qualifiers>
+										<Options>F</Options>
+										<NullField>Data_Source_Scheme</NullField>
+										<ErrorCode>K22</ErrorCode>
+										<Comment><![CDATA[If Data Source Scheme is not present, Indicator must contain the following code (Error code(s): K22):]]></Comment>
+										<ValidationPattern xsi:type="CODE" Type="CODE">
+											<Type>CODE</Type>
+											<Codes>
+												<Code Name="COVE">
+													<DetailedName>Cover</DetailedName>
+													<Description>Direct payment (that is, MT 103 with MT 202 COV as a cover) is permitted.</Description>
+												</Code>
+											</Codes>
+										</ValidationPattern>
+									</Validation>
+								</SubField>
+							</Validations>
+						</SwiftField>
+					</Fields>
+				</SwiftSequence>
+			</Fields>
+		</Data>
+		<Trailer>
+		</Trailer>
+	</SwiftFields>
+	<validationrules name="Default">
+		<hdrvalidationrules>
+			<fieldvalidations>
+				<fieldvalidation>
+					<name>U09</name>
+					<formula><![CDATA[if($this.Header.GetFieldIndex("User_Header") != -1) {
+				       def userHeader = $this.Header.GetSection("User_Header");
+				       if(userHeader.$size > 0 && userHeader[0].IsNotNull("Validation_Flag")) {
+				           return false;
+				       }
+				   }
+				   return true;
+				   ]]></formula>
+					<severity>error</severity>
+					<cascade>true</cascade>
+					<error-code>U09</error-code>
+					<actionmessage><![CDATA["User has used tag 119 in a message that is not a candidate for special processing"]]></actionmessage>
+				</fieldvalidation>
+	<fieldvalidation>
+						<name>U12</name>
+		<fieldname>User Header</fieldname>
+		<formula><![CDATA[Iff(IsNotNull(User_Header.Service_Type_Identifier), 
+    IsNotNull(User_Header.Unique_End_To_End_Transaction_Reference))]]></formula>
+		<severity>error</severity>
+		<cascade>true</cascade>
+						<error-code>U12</error-code>
+		<actionmessage><![CDATA["When populating an end-to-end reference, both fields 111 and 121 must be populated: a message that contains only one of these two fields will not be accepted by FIN."]]></actionmessage>
+	</fieldvalidation>
+					<fieldvalidation>
+						<name>U03</name>
+						<fieldname>User Header.Unique End-To-End Transaction Reference</fieldname>
+						<formula><![CDATA[Matches("[a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[a-b8-9]{1}[a-f0-9]{3}-[a-f0-9]{12}", $value)]]></formula>
+						<severity>error</severity>
+						<cascade>true</cascade>
+						<error-code>U03</error-code>
+						<actionmessage><![CDATA["Invalid format! Format must be 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx' where x is any hexadecimal character (lower case only) and y is one of 8, 9, a, or b."]]></actionmessage>
+					</fieldvalidation>
+			</fieldvalidations>
+		</hdrvalidationrules>
+		<datavalidationrules>
+			<fieldvalidations>
+				<fieldvalidation>
+					<name>C1</name>
+					<fieldname>A.95a</fieldname>
+					<comment><![CDATA[C3
+In sequence A General Information, field :95P::TRAD Trade Party may only be present once. Field :95Q::TRAD Trade Party may only be present once. Both fields :95P::TRAD Trade Party and :95Q::TRAD Trade Party may be present]]></comment>
+					<formula><![CDATA[SecFilter($value.TRAD, "$filterObj.FormatOption == \'P\'").$size <= 1 && 
+  SecFilter($value.TRAD, "$filterObj.FormatOption == \'Q\'").$size <= 1]]></formula>
+					<severity>error</severity>
+					<cascade>true</cascade>
+					<error-code>E23</error-code>
+					<actionmessage><![CDATA["In sequence A General Information, field :95P::TRAD Trade Party may only be present once. Field :95Q::TRAD Trade Party may only be present once. Both fields :95P::TRAD Trade Party and :95Q::TRAD Trade Party may be present"]]></actionmessage>
+				</fieldvalidation>
+				<fieldvalidation>
+					<name>C2-1</name>
+					<fieldname>B</fieldname>
+					<comment><![CDATA[C4-1
+In each occurrence of sequence B SSI Details, qualifier ACCW may only be present in one iteration of subsequence B1 Cash Parties]]></comment>
+					<formula><![CDATA[def accwpresent;
+def count = 0;
+foreach(def b in B.B1) {
+    def accw_eachinstanceOfB1 = SecCount(b.F95a, "ACCW");
+    if(accw_eachinstanceOfB1 == 0)
+        accwpresent = "notpresent";
+
+    else if(accw_eachinstanceOfB1 > 0) {
+        accwpresent = "present";
+        count += 1;
+    }
+}
+if(count > 1)
+    return false;
+
+return true;
+]]></formula>
+					<severity>error</severity>
+					<cascade>true</cascade>
+					<error-code>E84</error-code>
+					<actionmessage><![CDATA["In each occurrence of sequence B SSI Details, qualifier ACCW may only be present in one iteration of subsequence B1 Cash Parties"]]></actionmessage>
+				</fieldvalidation>
+				<fieldvalidation>
+					<name>C2-2</name>
+					<fieldname>B</fieldname>
+					<comment><![CDATA[C4-2
+In each occurrence of sequence B SSI Details, qualifier INT1 may only be present in one iteration of subsequence B1 Cash Parties]]></comment>
+					<formula><![CDATA[def int1present;
+def count = 0;
+foreach(def b in B.B1) {
+    def int1_eachinstanceOfB1 = SecCount(b.F95a, "INT1");
+    if(int1_eachinstanceOfB1 == 0)
+        int1present = "notpresent";
+
+    else if(int1_eachinstanceOfB1 > 0) {
+        int1present = "present";
+        count += 1;
+    }
+}
+if(count > 1)
+    return false;
+
+return true;
+]]></formula>
+					<severity>error</severity>
+					<cascade>true</cascade>
+					<error-code>E84</error-code>
+					<actionmessage><![CDATA["In each occurrence of sequence B SSI Details, qualifier INT1 may only be present in one iteration of subsequence B1 Cash Parties"]]></actionmessage>
+				</fieldvalidation>
+				<fieldvalidation>
+					<name>C2-3</name>
+					<fieldname>B</fieldname>
+					<comment><![CDATA[C4-3
+In each occurrence of sequence B SSI Details, qualifier INT2 may only be present in one iteration of subsequence B1 Cash Parties]]></comment>
+					<formula><![CDATA[def int2present;
+def count = 0;
+foreach(def b in B.B1) {
+    def int2_eachinstanceOfB1 = SecCount(b.F95a, "INT2");
+    if(int2_eachinstanceOfB1 == 0)
+        int2present = "notpresent";
+
+    else if(int2_eachinstanceOfB1 > 0) {
+        int2present = "present";
+        count += 1;
+    }
+}
+if(count > 1)
+    return false;
+
+return true;
+]]></formula>
+					<severity>error</severity>
+					<cascade>true</cascade>
+					<error-code>E84</error-code>
+					<actionmessage><![CDATA["In each occurrence of sequence B SSI Details, qualifier INT2 may only be present in one iteration of subsequence B1 Cash Parties"]]></actionmessage>
+				</fieldvalidation>
+				<fieldvalidation>
+					<name>C3</name>
+					<fieldname>B</fieldname>
+					<comment><![CDATA[C5
+In each occurrence of sequence B SSI Details, if subsequence B1 Cash Parties contains :95a::INT2 Second Intermediary then :95a::INT1 Intermediary must be present in another subsequence B1 Cash Parties]]></comment>
+					<formula><![CDATA[If(SecExistsInAtLeastOne(B.B1, "F95a.INT2"), 
+   SecExistsInAtLeastOne(B.B1, "F95a.INT1"), 
+   true)]]></formula>
+					<severity>error</severity>
+					<cascade>true</cascade>
+					<error-code>D11</error-code>
+					<actionmessage><![CDATA["In each occurrence of sequence B SSI Details, if subsequence B1 Cash Parties contains :95a::INT2 Second Intermediary then :95a::INT1 Intermediary must be present in another subsequence B1 Cash Parties"]]></actionmessage>
+				</fieldvalidation>
+				<fieldvalidation>
+					<name>C4-1</name>
+					<fieldname>B</fieldname>
+					<comment><![CDATA[C6
+In each occurrence of sequence B SSI Details, in subsequence B1 Cash Parties, field :95P::BENM or :95Q::BENM or :95R::BENM Beneficiary of Money must be present.]]></comment>
+					<formula><![CDATA[FieldValueExistsInAtLeastOne(B.B1, "F95a.BENM.FormatOption", "P") || 
+  FieldValueExistsInAtLeastOne(B.B1, "F95a.BENM.FormatOption", "Q") || 
+  FieldValueExistsInAtLeastOne(B.B1, "F95a.BENM.FormatOption", "R");
+]]></formula>
+					<severity>error</severity>
+					<cascade>true</cascade>
+					<error-code>D12</error-code>
+					<actionmessage><![CDATA["In each occurrence of sequence B SSI Details, in subsequence B1 Cash Parties, field :95P::BENM or :95Q::BENM or :95R::BENM Beneficiary of Money must be present."]]></actionmessage>
+				</fieldvalidation>
+				<fieldvalidation>
+					<name>C4-2</name>
+					<fieldname>B.B1.95a</fieldname>
+					<comment><![CDATA[C6
+In each occurrence of sequence B SSI Details, in subsequence B1 Cash Parties, field :95P::BENM or :95Q::BENM or :95R::BENM Beneficiary of Money may all be present but once only]]></comment>
+					<formula><![CDATA[SecFilter($value.BENM, "$filterObj.FormatOption == \'P\'").$size <= 1 &&
+SecFilter($value.BENM, "$filterObj.FormatOption == \'Q\'").$size <= 1 &&
+SecFilter($value.BENM, "$filterObj.FormatOption == \'R\'").$size <= 1;]]></formula>
+					<severity>error</severity>
+					<cascade>true</cascade>
+					<error-code>D12</error-code>
+					<actionmessage><![CDATA["In each occurrence of sequence B SSI Details, in subsequence B1 Cash Parties, field :95P::BENM or :95Q::BENM or :95R::BENM Beneficiary of Money may all be present but once only"]]></actionmessage>
+				</fieldvalidation>
+				<fieldvalidation>
+					<name>C5-1</name>
+					<fieldname>B.B1.95a</fieldname>
+					<comment><![CDATA[C7-1
+In each occurrence of subsequence B1 SSI Details, fields :95P::ACCW, :95Q::ACCW and :95R::ACCW Account with Institution may all be present but once only]]></comment>
+					<formula><![CDATA[SecFilter($value.ACCW, "$filterObj.FormatOption == \'P\'").$size <= 1 &&
+SecFilter($value.ACCW, "$filterObj.FormatOption == \'Q\'").$size <= 1 &&
+SecFilter($value.ACCW, "$filterObj.FormatOption == \'R\'").$size <= 1;]]></formula>
+					<severity>error</severity>
+					<cascade>true</cascade>
+					<error-code>D15</error-code>
+					<actionmessage><![CDATA["In each occurrence of subsequence B1 SSI Details, fields :95P::ACCW, :95Q::ACCW and :95R::ACCW Account with Institution may all be present but once only"]]></actionmessage>
+				</fieldvalidation>
+				<fieldvalidation>
+					<name>C5-2</name>
+					<fieldname>B.B1.95a</fieldname>
+					<comment><![CDATA[C7-2
+In each occurrence of subsequence B1 SSI Details, fields :95P::INT1, :95Q::INT1 and :95R::INT1 Intermediary may all be present but once only]]></comment>
+					<formula><![CDATA[SecFilter($value.INT1, "$filterObj.FormatOption == \'P\'").$size <= 1 &&
+SecFilter($value.INT1, "$filterObj.FormatOption == \'Q\'").$size <= 1 &&
+SecFilter($value.INT1, "$filterObj.FormatOption == \'R\'").$size <= 1;]]></formula>
+					<severity>error</severity>
+					<cascade>true</cascade>
+					<error-code>D15</error-code>
+					<actionmessage><![CDATA["In each occurrence of subsequence B1 SSI Details, fields :95P::INT1, :95Q::INT1 and :95R::INT1 Intermediary may all be present but once only"]]></actionmessage>
+				</fieldvalidation>
+				<fieldvalidation>
+					<name>C5-3</name>
+					<fieldname>B.B1.95a</fieldname>
+					<comment><![CDATA[C7-3
+In each occurrence of subsequence B1 SSI Details, fields :95P::INT2, :95Q:INT2 and :95R::INT2 Second Intermediary may all be present but once only]]></comment>
+					<formula><![CDATA[SecFilter($value.INT2, "$filterObj.FormatOption == \'P\'").$size <= 1 &&
+SecFilter($value.INT2, "$filterObj.FormatOption == \'Q\'").$size <= 1 &&
+SecFilter($value.INT2, "$filterObj.FormatOption == \'R\'").$size <= 1;]]></formula>
+					<severity>error</severity>
+					<cascade>true</cascade>
+					<error-code>D15</error-code>
+					<actionmessage><![CDATA["In each occurrence of subsequence B1 SSI Details, fields :95P::INT2, :95Q:INT2 and :95R::INT2 Second Intermediary may all be present but once only"]]></actionmessage>
+				</fieldvalidation>
+				<fieldvalidation>
+					<name>C6_1</name>
+					<fieldname>B.B2</fieldname>
+					<comment><![CDATA[C9_1
+In subsequence B2 Other Details, fields 16R and 16S may not be the only fields present. If field 16R is present, then at least one of the other fields of the same subsequence must be present]]></comment>
+					<formula><![CDATA[IsSwiftSequenceEmpty($value)]]></formula>
+					<severity>error</severity>
+					<cascade>true</cascade>
+					<error-code>D13</error-code>
+					<actionmessage><![CDATA["In subsequence B2 Other Details, fields 16R and 16S may not be the only fields present. If field 16R is present, then at least one of the other fields of the same subsequence must be present"]]></actionmessage>
+				</fieldvalidation>
+				<fieldvalidation>
+					<name>C6_2</name>
+					<fieldname>C</fieldname>
+					<comment><![CDATA[C9_2
+In sequence C Other Details, fields 16R and 16S may not be the only fields present. If field 16R is present, then at least one of the other fields of the same sequence must be present]]></comment>
+					<formula><![CDATA[IsSwiftSequenceEmpty($value)]]></formula>
+					<severity>error</severity>
+					<cascade>true</cascade>
+					<error-code>D13</error-code>
+					<actionmessage><![CDATA["In sequence C Other Details, fields 16R and 16S may not be the only fields present. If field 16R is present, then at least one of the other fields of the same sequence must be present"]]></actionmessage>
+				</fieldvalidation>
+				<fieldvalidation>
+					<name>C7</name>
+					<fieldname>B.B2.22F</fieldname>
+					<comment><![CDATA[C8
+In sequence C, field :22F::PMTH is only allowed when subsequence B2, field :22F::PMTH is not present]]></comment>
+					<formula><![CDATA[if($value.PMTH.$size > 0) {
+    if(C.$size > 0 && C[0].F22F.$size > 0) {
+        return (C[0].F22F[0].PMTH.$size == 0);
+    }
+}
+return true;
+]]></formula>
+					<severity>error</severity>
+					<cascade>true</cascade>
+					<error-code>D14</error-code>
+					<actionmessage><![CDATA["In sequence C, field :22F::PMTH is only allowed when subsequence B2, field :22F::PMTH is not present"]]></actionmessage>
+				</fieldvalidation>
+			</fieldvalidations>
+		</datavalidationrules>
+		<tlrvalidationrules>
+			<fieldvalidations>
+			</fieldvalidations>
+		</tlrvalidationrules>
+	</validationrules>
+	<folder name="Function Definitions" type="FunctionDefFolder">
+		<FormulaFunctionDef name="IsSwiftSequenceEmpty" type="FormulaFunctionDef">
+			<description>Returns false if the sequence is empty. If the sequence has atleast one valid field present, returns true.</description>
+			<Category>User Defined</Category>
+			<parameterfields>
+				<parameterfield>
+					<name>Obj</name>
+					<type>Any</type>
+				</parameterfield>
+			</parameterfields>
+			<ReturnType>Boolean</ReturnType>
+			<Code><![CDATA[def fldcount = 0;
+for(def i = 0; i < Obj[0].GetFieldCount(); ++i) {
+	def count = Obj[0].GetFieldCount();
+    def fld = Obj[0].GetSection(i);
+    if(fld.$size > 0)
+	    fldcount += 1;
+    if(fldcount > 0)
+	    break;
+}
+if(fldcount == 0)
+    return false;
+return true;
+]]></Code>
+			<function-type>Formula</function-type>
+		</FormulaFunctionDef>
+		<elementproperties>
+			<propertymap>
+			</propertymap>
+		</elementproperties>
+	</folder>
+</SwiftMessageFormat>
+

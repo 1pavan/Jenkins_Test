@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<formulae>
+    <formula name="renderWebForm">
+        <description>Render the normalized using the specified form.</description>
+        <signature>renderWebForm(messageName, formName, dataObject)</signature>
+        <category>Web Form</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.webforms.WebFormFunctions"/>
+        <property name="method" value="renderWebForm"/>
+        <property name="args" value="3"/>
+        <property name="arg1" value="String"/>
+        <property name="arg2" value="String"/>
+        <property name="arg3" value="com.tplus.transform.runtime.DataObject"/>
+        <property name="returns" value="com.tplus.transform.runtime.RawMessage"/>
+        <property name="lib" value="webformsrt"/>
+    </formula>
+
+
+</formulae>

@@ -1,0 +1,336 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<formulae>
+    <formula name="GetProperty">
+        <description>Gets the property indicated by the specified name. If the specified property is not present, the given default value is returned.</description>
+        <signature>GetProperty(message, propertyName, defaultValueOpt)</signature>
+        <category>Message</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.MessageFunctions"/>
+        <property name="method" value="getProperty"/>
+    </formula>
+    <formula name="GetObjectProperty">
+        <description>Gets the property indicated by the specified name as an object/variant. If the specified property is not present, returns null.</description>
+        <signature>GetObjectProperty(message, propertyName)</signature>
+        <category>Message</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.MessageFunctions"/>
+        <property name="method" value="getObjectProperty"/>
+    </formula>
+
+    <formula name="GetProperties">
+        <description>Returns a list of all the properties with the specified property name prefix.</description>
+        <signature>GetProperties(message, propertyNamePrefix)</signature>
+        <category>Message</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.MessageFunctions"/>
+        <property name="method" value="getProperties"/>
+    </formula>
+    <formula name="SetProperty">
+        <description>Sets the property indicated by the specified name</description>
+        <signature>SetProperty(message, propertyName, propertyValue)</signature>
+        <category>Message</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.MessageFunctions"/>
+        <property name="method" value="setProperty"/>
+    </formula>
+
+    <formula name="SetObjectProperty">
+        <description>Sets the property indicated by the specified name</description>
+        <signature>SetObjectProperty(message, propertyName, propertyValue)</signature>
+        <category>Message</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.MessageFunctions"/>
+        <property name="method" value="setObjectProperty"/>
+    </formula>
+
+    <formula name="HasProperty">
+        <description>Returns 'true' if there is a property with the specified name. Otherwise, it returns 'false'.</description>
+        <signature>HasProperty(message, propertyName)</signature>
+        <category>Message</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.MessageFunctions"/>
+        <property name="method" value="hasProperty"/>
+    </formula>
+
+    <formula name="RemoveProperty">
+        <description>Removes the specified property.</description>
+        <signature>RemoveProperty(message, propertyName)</signature>
+        <category>Message</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.MessageFunctions"/>
+        <property name="method" value="removeProperty"/>
+    </formula>
+
+    <formula name="ClearProperties">
+        <description>Clears all the properties.</description>
+        <signature>ClearProperties(message)</signature>
+        <category>Message</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.MessageFunctions"/>
+        <property name="method" value="clearProperties"/>
+    </formula>
+
+    <formula name="PutProperties">
+        <description>Copies all properties defined in src to dest.</description>
+        <signature>PutProperties(dest, src)</signature>
+        <category>Message</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.MessageFunctions"/>
+        <property name="method" value="putProperties"/>
+    </formula>
+    <formula name="GetPropertyNames">
+        <description>Returns a list of available property names.</description>
+        <signature>GetPropertyNames(message)</signature>
+        <category>Message</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.MessageFunctions"/>
+        <property name="method" value="getPropertyNames"/>
+    </formula>
+
+    <formula name="GetPropertyCount">
+        <description>Returns the number of properties.</description>
+        <signature>GetPropertyCount(message)</signature>
+        <category>Message</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.MessageFunctions"/>
+        <property name="method" value="getPropertyCount"/>
+    </formula>
+
+    <formula name="GetAttachment">
+        <description>Gets the attachment indicated by the specified name from a Raw Message.</description>
+        <signature>GetAttachment(message, attachmentName)</signature>
+        <category>Message</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.MessageFunctions"/>
+        <property name="method" value="getAttachment"/>
+    </formula>
+
+    <formula name="SetAttachment">
+        <description>Attaches a message indicated by the specified name to a Raw Message. The attachment should be a Raw Message.</description>
+        <signature>SetAttachment(message, attachmentName, attachmentMessage)</signature>
+        <category>Message</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.MessageFunctions"/>
+        <property name="method" value="setAttachment"/>
+    </formula>
+
+    <formula name="GetAttachmentNames">
+        <description>Returns a list of available attachment names.</description>
+        <signature>GetAttachmentNames(message)</signature>
+        <category>Message</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.MessageFunctions"/>
+        <property name="method" value="getAttachmentNames"/>
+    </formula>
+
+    <formula name="GetName">
+        <description>Returns the name of the message.</description>
+        <signature>GetName(message)</signature>
+        <category>Message</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.MessageFunctions"/>
+        <property name="method" value="getName"/>
+    </formula>
+
+    <formula name="SetName">
+        <description>Sets the name of the message.</description>
+        <signature>SetName(message, name)</signature>
+        <category>Message</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.MessageFunctions"/>
+        <property name="method" value="setName"/>
+    </formula>
+
+    <formula name="GetEncoding">
+        <description>Returns the encoding of the message. By default, message uses platform default encoding</description>
+        <signature>GetEncoding(message)</signature>
+        <category>Message</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.MessageFunctions"/>
+        <property name="method" value="getEncoding"/>
+    </formula>
+
+    <formula name="SetEncoding">
+        <description>Sets the encoding of the message.</description>
+        <signature>SetEncoding(message, encoding)</signature>
+        <category>Message</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.MessageFunctions"/>
+        <property name="method" value="setEncoding"/>
+    </formula>
+
+    <formula name="GetAttachments">
+        <description>Returns a list of available attachments.</description>
+        <signature>GetAttachments(message)</signature>
+        <category>Message</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.MessageFunctions"/>
+        <property name="method" value="getAttachments"/>
+    </formula>
+
+    <formula name="HasAttachment">
+        <description>Returns 'true' if there is an attachment with the specified name in the Raw Message. Otherwise, it returns 'false'.</description>
+        <signature>HasAttachment(message, attachmentName)</signature>
+        <category>Message</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.MessageFunctions"/>
+        <property name="method" value="hasAttachment"/>
+    </formula>
+
+    <formula name="ToRawMessage">
+        <description>Converts the given string or binary value to Raw Message. The encoding parameter if specified will later be used for conversion of text to binary or binary to text.</description>
+        <signature>ToRawMessage(binary_or_text, encodingOpt)</signature>
+        <category>Message</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.MessageFunctions"/>
+        <property name="method" value="toRawMessage"/>
+    </formula>
+
+
+    <formula name="ToText">
+        <description>Returns the text representation of the Raw Message.</description>
+        <signature>ToText(rawMessage)</signature>
+        <category>Message</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.MessageFunctions"/>
+        <property name="method" value="toText"/>
+    </formula>
+
+
+    <formula name="ToBinary">
+        <description>Returns the binary representation of the Raw Message.</description>
+        <signature>ToBinary(rawMessage)</signature>
+        <category>Message</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.MessageFunctions"/>
+        <property name="method" value="toBinary"/>
+    </formula>
+
+    <formula name="Append">
+        <description>Appends the value to the message. The value can be of Binary, String or another RawMessage.</description>
+        <signature>Append(rawMessage, value)</signature>
+        <category>Message</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.MessageFunctions"/>
+        <property name="method" value="append"/>
+    </formula>
+
+    <formula name="NewMessage">
+        <description>Creates a new message.</description>
+        <signature>NewMessage()</signature>
+        <category>Message</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.MessageFunctions"/>
+        <property name="method" value="newMessage"/>
+    </formula>
+
+    <formula name="NewCachedMessage">
+        <description>[Beta]Creates a new cached message that uses in-memory storage for small data and uses a temporary file for large data</description>
+        <signature>NewCachedMessage()</signature>
+        <category>Message</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.MessageFunctions"/>
+        <property name="method" value="newCachedMessage"/>
+    </formula>
+
+    <formula name="NewFileMessage">
+        <description>Creates a new message with the contents of the file. You can read from the message or write to it based on the options used</description>
+        <signature>NewFileMessage(fileName, optionsOpt, encodingOpt)</signature>
+        <category>Message</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.MessageFunctions"/>
+        <property name="method" value="newFileMessage"/>
+    </formula>
+
+    <formula name="Close">
+        <description>Closes or disposes a message. This needs to be called if the message holds any other resources (typically for file based message) and also to immediately free up memory. Any operation on RawMessage after invoking close can fail fatally</description>
+        <signature>Close(rawMessage)</signature>
+        <category>Message</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.MessageFunctions"/>
+        <property name="method" value="close"/>
+    </formula>
+
+    <formula name="Length">
+        <description>Returns the length of the message. Note that, for stream based messages it may not be possible to determine the length and would throw an exception.</description>
+        <signature>Length(rawMessage)</signature>
+        <category>Message</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.MessageFunctions"/>
+        <property name="method" value="length"/>
+    </formula>
+
+    <formula name="LongLength">
+        <description>Returns the length of the message. Note that, for stream based messages it may not be possible to determine the length and would throw an exception.</description>
+        <signature>LongLength(rawMessage)</signature>
+        <category>Message</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.MessageFunctions"/>
+        <property name="method" value="longLength"/>
+    </formula>
+
+    <formula name="At">
+        <description>Returns the byte (as int) at the specified index.</description>
+        <signature>At(rawMessage, index)</signature>
+        <category>Message</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.MessageFunctions"/>
+        <property name="method" value="byteAt"/>
+    </formula>
+
+    <formula name="Left">
+        <description>Returns the leftmost, specified no. of bytes from the message.</description>
+        <signature>Left(rawMessage, num_bytes)</signature>
+        <category>Message</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.MessageFunctions"/>
+        <property name="method" value="left"/>
+    </formula>
+
+    <formula name="Right">
+        <description>Returns the rightmost specified no. of bytes from the message.</description>
+        <signature>Right(rawMessage, num_bytes)</signature>
+        <category>Message</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.MessageFunctions"/>
+        <property name="method" value="right"/>
+    </formula>
+
+    <formula name="Mid">
+        <description>Returns the specified no. of bytes from the message starting from the specified start_index.</description>
+        <signature>Mid(rawMessage, start_index, num_bytes)</signature>
+        <category>Message</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.MessageFunctions"/>
+        <property name="method" value="mid"/>
+    </formula>
+
+    <formula name="SubMessage">
+        <description>Returns the specified no. of bytes from the message starting from the specified start_index.</description>
+        <signature>SubMessage(rawMessage, start_index, num_bytes)</signature>
+        <category>Message</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.MessageFunctions"/>
+        <property name="method" value="subMessage"/>
+    </formula>
+
+    <formula name="FindFirst">
+        <description>Returns the index of the first occurrence of a string/character in the message, searching from the index specified. If the index is not specified, searches from the beginning of the message.</description>
+        <signature>FindFirst(rawMessage, toFind, start_index_opt)</signature>
+        <category>Message</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.MessageFunctions"/>
+        <property name="method" value="findFirst"/>
+    </formula>
+
+    <formula name="FindLast">
+        <description>Returns the index of the last occurrence of a string/character in the message, searching from the index specified. If the index is not specified, searches from the end of the message. The search is from right to left of the message.</description>
+        <signature>FindLast(rawMessage, toFind, start_index_opt)</signature>
+        <category>Message</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.MessageFunctions"/>
+        <property name="method" value="findLast"/>
+    </formula>
+
+
+</formulae> 

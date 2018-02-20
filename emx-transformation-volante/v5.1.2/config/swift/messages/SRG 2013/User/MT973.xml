@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<SwiftMessageFormat name="MT973">
+	<standard-version><![CDATA[SRG 2013]]></standard-version>
+	<DescriptiveName><![CDATA[Netting Request Message]]></DescriptiveName>
+	<Category><![CDATA[Cash Management & Customer Status]]></Category>
+	<Description><![CDATA[This message type is sent by a financial institution to a netting system.
+
+It is used to request the netting system to transmit an MT 971 Netting Balance Report, an MT 972 Netting Interim Statement or an MT 998 Proprietary Message containing the latest available information.]]></Description>
+	<SwiftFields>
+		<customizable>false</customizable>
+		<modifiable>true</modifiable>
+		<SwiftMessageType>User</SwiftMessageType>
+		<max-length>2000</max-length>
+		<Header>
+		</Header>
+		<Data>
+			<Fields>
+				<SwiftField Name="20">
+					<SwiftFieldDef Name="20">
+						<Generic>false</Generic>
+						<Description><![CDATA[Transaction Reference Number]]></Description>
+						<Option Name="">
+							<Format><![CDATA[16x]]></Format>
+							<Specification><![CDATA[(Reference)]]></Specification>
+							<Description><![CDATA[Transaction Reference Number]]></Description>
+						</Option>
+					</SwiftFieldDef>
+					<Description><![CDATA[]]></Description>
+					<Repeating>false</Repeating>
+					<Presence>M</Presence>
+					<Options></Options>
+					<Validations>
+						<SubField Name="Reference">
+							<Validation>
+								<Options></Options>
+								<ErrorCode>T26</ErrorCode>
+								<Comment><![CDATA[This field must not start or end with a slash '/' and must not contain two consecutive slashes '//' (Error code(s): T26) .]]></Comment>
+								<ValidationPattern Type="T26">
+								</ValidationPattern>
+							</Validation>
+						</SubField>
+					</Validations>
+				</SwiftField>
+				<SwiftSequence Name="A">
+					<Name>A</Name>
+					<Description><![CDATA[A]]></Description>
+					<Mandatory>true</Mandatory>
+					<Repeating>true</Repeating>
+					<Fields>
+						<SwiftField Name="12">
+							<SwiftFieldDef Name="12">
+								<Generic>false</Generic>
+								<Option Name="">
+									<Format><![CDATA[(2!n1!n)]]></Format>
+									<Specification><![CDATA[(MT Number)]]></Specification>
+									<Description><![CDATA[Sub-Message Type]]></Description>
+								</Option>
+							</SwiftFieldDef>
+							<Description><![CDATA[]]></Description>
+							<Repeating>false</Repeating>
+							<Presence>M</Presence>
+							<Options></Options>
+							<Validations>
+								<SubField Name="MT_Number">
+									<Validation>
+										<Options></Options>
+										<ErrorCode>T88</ErrorCode>
+										<Comment><![CDATA[This field must contain one of the following message type numbers (Error code(s): T88):]]></Comment>
+										<ValidationPattern Type="CODE">
+											<Codes>
+												<Code Name="971">
+													<Description>Netting Balance Report</Description>
+												</Code>
+												<Code Name="972">
+													<Description>Netting Interim Statement</Description>
+												</Code>
+												<Code Name="998">
+													<Description>Proprietary Message</Description>
+												</Code>
+											</Codes>
+										</ValidationPattern>
+									</Validation>
+								</SubField>
+							</Validations>
+						</SwiftField>
+						<SwiftField Name="25">
+							<SwiftFieldDef Name="25">
+								<Generic>false</Generic>
+								<Description><![CDATA[Account Identification]]></Description>
+								<Option Name="">
+									<Format><![CDATA[35x]]></Format>
+									<Specification><![CDATA[(Account)]]></Specification>
+									<Description><![CDATA[Account Identification]]></Description>
+								</Option>
+							</SwiftFieldDef>
+							<Description><![CDATA[]]></Description>
+							<Repeating>false</Repeating>
+							<Presence>M</Presence>
+							<Options></Options>
+						</SwiftField>
+					</Fields>
+				</SwiftSequence>
+			</Fields>
+		</Data>
+		<Trailer>
+		</Trailer>
+	</SwiftFields>
+	<validationrules>
+		<hdrvalidationrules>
+			<fieldvalidations>
+				<fieldvalidation>
+					<name>U09</name>
+					<formula><![CDATA[if($this.Header.GetFieldIndex("User_Header") != -1) {
+    def userHeader = $this.Header.GetSection("User_Header");
+    if(userHeader.$size > 0 && userHeader[0].IsNotNull("Validation_Flag")) {
+        return false;
+    }
+}
+return true;
+]]></formula>
+					<severity>error</severity>
+					<cascade>true</cascade>
+					<error-code>U09</error-code>
+					<actionmessage><![CDATA["User has used tag 119 in a message that is not a candidate for special processing"]]></actionmessage>
+				</fieldvalidation>
+			</fieldvalidations>
+		</hdrvalidationrules>
+		<datavalidationrules>
+			<fieldvalidations>
+			</fieldvalidations>
+		</datavalidationrules>
+		<tlrvalidationrules>
+			<fieldvalidations>
+			</fieldvalidations>
+		</tlrvalidationrules>
+	</validationrules>
+</SwiftMessageFormat>
+

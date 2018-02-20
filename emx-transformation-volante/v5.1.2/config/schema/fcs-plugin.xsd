@@ -1,0 +1,134 @@
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="unqualified" attributeFormDefault="unqualified">
+	<!-- include constructs -->
+	<xsd:include schemaLocation="externalmsg.xsd"/>
+	<xsd:complexType name="FCSFormat">
+		<xsd:complexContent>
+			<xsd:extension base="ExternalMessageType"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:element name="FCSFields" substitutionGroup="ExternalMessageFields">
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="ExternalMessageFieldsType">
+					<xsd:sequence>
+						<xsd:element ref="target-namespace" minOccurs="0"/>
+						<xsd:element ref="xpath-namespaces" minOccurs="0"/>
+						<xsd:element ref="platforminfo" minOccurs="0"/>
+						<xsd:element ref="field-attributes" minOccurs="0"/>
+						<xsd:element name="HeaderAndTrailerType" type="xsd:string" minOccurs="0"/>
+						<xsd:element name="UseFraction" type="xsd:string" minOccurs="0"/>
+						<xsd:element name="Header" type="FCSFieldStructType"/>
+						<xsd:element name="Data" type="FCSFieldStructType"/>
+						<xsd:element name="Trailer" type="FCSFieldStructType"/>
+					</xsd:sequence>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:complexType name="FCSFieldStructType">
+		<xsd:sequence>
+			<xsd:element name="Fields">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element ref="FCSLine" minOccurs="0" maxOccurs="unbounded"/>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element ref="platforminfo" minOccurs="0"/>
+			<xsd:element ref="field-attributes" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:element name="FCSLine">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="LineNumber" type="xsd:string" minOccurs="0"/>
+				<xsd:element name="Empty" type="xsd:boolean" minOccurs="0"/>
+				<xsd:element name="Optional" type="xsd:boolean" minOccurs="0"/>
+				<xsd:element name="Repeating" type="xsd:boolean" minOccurs="0"/>
+				<xsd:element name="Description" type="xsd:string" minOccurs="0"/>
+				<xsd:element name="LineLength" type="xsd:integer" minOccurs="0"/>
+				<xsd:element name="LineName" type="xsd:string" minOccurs="0"/>
+				<xsd:element name="aliasname" type="xsd:string" minOccurs="0"/>
+				<xsd:element ref="LineField" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:element name="fcsfields" minOccurs="0">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="fcsfield" minOccurs="0" maxOccurs="unbounded">
+								<xsd:complexType>
+									<xsd:sequence>
+										<xsd:element ref="platforminfo" minOccurs="0"/>
+										<xsd:element ref="field-attributes" minOccurs="0"/>
+										<xsd:element name="aliasname" type="xsd:string" minOccurs="0"/>
+									</xsd:sequence>
+									<xsd:attribute name="Name" type="xsd:string"/>
+								</xsd:complexType>
+							</xsd:element>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element ref="platforminfo" minOccurs="0"/>
+				<xsd:element ref="field-attributes" minOccurs="0"/>
+			</xsd:sequence>
+			<xsd:attribute name="Name" type="xsd:string"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="LineField">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="Name" type="xsd:string"/>
+				<xsd:element name="DataType" type="xsd:string"/>
+				<xsd:element name="Description" type="xsd:string" minOccurs="0"/>
+				<xsd:element name="Optional" type="xsd:boolean" minOccurs="0"/>
+				<xsd:choice>
+					<xsd:group ref="LineFieldGroup_1"/>
+					<xsd:group ref="LineFieldGroup_2"/>
+				</xsd:choice>
+			</xsd:sequence>
+			<xsd:attribute name="FieldType" type="xsd:string"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:group name="LineFieldGroup_1">
+		<xsd:sequence>
+			<xsd:element name="Format" type="xsd:string"/>
+			<xsd:choice minOccurs="0">
+				<xsd:element name="FieldInfoValues">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="FieldInfoValue" minOccurs="0" maxOccurs="unbounded">
+								<xsd:complexType>
+									<xsd:sequence>
+										<xsd:element name="Description" type="xsd:string" minOccurs="0"/>
+									</xsd:sequence>
+									<xsd:attribute name="ActualValue" type="xsd:string"/>
+									<xsd:attribute name="MappedValue" type="xsd:string"/>
+								</xsd:complexType>
+							</xsd:element>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name="FormulaValues">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="Formula" type="xsd:string" minOccurs="0"/>
+							<xsd:element name="Formula-Serial" type="xsd:string" minOccurs="0"/>
+							<xsd:element name="Condition" type="xsd:string" minOccurs="0"/>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+			</xsd:choice>
+		</xsd:sequence>
+	</xsd:group>
+	<xsd:group name="LineFieldGroup_2">
+		<xsd:sequence>
+			<xsd:element name="FCSFieldOption" minOccurs="0" maxOccurs="unbounded">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="Name" type="xsd:string"/>
+						<xsd:element name="Description" type="xsd:string" minOccurs="0"/>
+						<xsd:element ref="LineField" minOccurs="0" maxOccurs="unbounded"/>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:group>
+</xsd:schema>

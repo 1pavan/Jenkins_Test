@@ -1,0 +1,376 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<formulae>
+
+    <formula name="Day">
+        <description>Returns the day of the month(a number from 1 to 31) from the specified date</description>
+        <signature>Day(date)</signature>
+        <category>Date Time</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.DateFunctions"/>
+        <property name="method" value="day"/>
+    </formula>
+
+    <formula name="Month">
+        <description>Returns the month of the year(a number from 1 to 12) from the specified date</description>
+        <signature>Month(date)</signature>
+        <category>Date Time</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.DateFunctions"/>
+        <property name="method" value="month"/>
+    </formula>
+
+    <formula name="Year">
+        <description>Returns the year from the specified date</description>
+        <signature>Year(date)</signature>
+        <category>Date Time</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.DateFunctions"/>
+        <property name="method" value="year"/>
+    </formula>
+
+    <formula name="Hour">
+        <description>Returns the hour from the specified date time</description>
+        <signature>Hour(date)</signature>
+        <category>Date Time</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.DateFunctions"/>
+        <property name="method" value="hour"/>
+    </formula>
+
+    <formula name="Minute">
+        <description>Returns the minutes from the specified date time</description>
+        <signature>Minute(date)</signature>
+        <category>Date Time</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.DateFunctions"/>
+        <property name="method" value="minute"/>
+    </formula>
+
+    <formula name="Second">
+        <description>Returns the seconds from the specified date time</description>
+        <signature>Second(date)</signature>
+        <category>Date Time</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.DateFunctions"/>
+        <property name="method" value="second"/>
+    </formula>
+
+    <formula name="Millis">
+        <description>Returns the milliseconds from the specified date time</description>
+        <signature>Millis(date)</signature>
+        <category>Date Time</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.DateFunctions"/>
+        <property name="method" value="millis"/>
+    </formula>
+
+    <formula name="ToTimeStamp">
+        <description>Returns the number of milliseconds between midnight, January 1, 1970 Coordinated Universal Time (UTC) and the supplied date</description>
+        <signature>ToTimeStamp(date)</signature>
+        <category>Date Time</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.DateFunctions"/>
+        <property name="method" value="toTimestamp"/>
+    </formula>
+
+    <formula name="FromTimeStamp">
+        <description>Converts the number of milliseconds after midnight, January 1, 1970 Coordinated Universal Time (UTC) to date</description>
+        <signature>FromTimeStamp(long)</signature>
+        <category>Date Time</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.DateFunctions"/>
+        <property name="method" value="fromTimestamp"/>
+    </formula>
+
+    <formula name="WeekDay">
+        <description>Returns a number from 1 to 7 identifying the day of the week</description>
+        <signature>WeekDay(date)</signature>
+        <category>Date Time</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.DateFunctions"/>
+        <property name="method" value="weekDay"/>
+    </formula>
+
+    <formula name="WeekDayName">
+        <description>Returns the name of the day for the specified date</description>
+        <signature>WeekDayName(date)</signature>
+        <category>Date Time</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.DateFunctions"/>
+        <property name="method" value="weekDayName"/>
+    </formula>
+
+    <formula name="Today">
+        <description>Returns today's date</description>
+        <signature>Today()</signature>
+        <category>Date Time</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.DateFunctions"/>
+        <property name="method" value="today"/>
+    </formula>
+
+    <formula name="Now">
+        <description>Returns the current time</description>
+        <signature>Now()</signature>
+        <category>Date Time</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.DateFunctions"/>
+        <property name="method" value="now"/>
+    </formula>
+
+    <formula name="DatePart">
+        <description>Returns the date part of the date. The time values are cleared</description>
+        <signature>DatePart(Date)</signature>
+        <category>Date Time</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.DateFunctions"/>
+        <property name="method" value="datePart"/>
+    </formula>
+
+
+    <formula name="TimePart">
+        <description>Returns the time part of the date. The date values are cleared (reset to some starting date)</description>
+        <signature>TimePart(Date)</signature>
+        <category>Date Time</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.DateFunctions"/>
+        <property name="method" value="timePart"/>
+    </formula>
+
+    <formula name="Date">
+        <description>Create a new date object. The time values are cleared (reset to 0)</description>
+        <signature>Date(year, month, date)</signature>
+        <category>Date Time</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.DateFunctions"/>
+        <property name="method" value="newDate"/>
+    </formula>
+
+    <formula name="Time">
+        <description>Create a new time object. The date values are empty(reset to some starting date)</description>
+        <signature>Time(hour, min, sec, millisOpt)</signature>
+        <category>Date Time</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.DateFunctions"/>
+        <property name="method" value="newTime"/>
+    </formula>
+
+    <formula name="DateTime">
+        <description>Creates a new data time object</description>
+        <signature>DateTime(year, month, date, hour, min, sec, millisOpt)</signature>
+        <category>Date Time</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.DateFunctions"/>
+        <property name="method" value="newDateTime"/>
+    </formula>
+
+    <formula name="NextDay">
+        <description>Returns the specified date's next date</description>
+        <signature>NextDay(date)</signature>
+        <category>Date Time</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.DateFunctions"/>
+        <property name="method" value="nextDay"/>
+    </formula>
+
+    <formula name="PreviousDay">
+        <description>Returns the specified date's previous date</description>
+        <signature>PreviousDay(date)</signature>
+        <category>Date Time</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.DateFunctions"/>
+        <property name="method" value="previousDay"/>
+    </formula>
+
+    <formula name="AddDays">
+        <description>Adds the days specified to the date and returns the date</description>
+        <signature>AddDays(date, days)</signature>
+        <category>Date Time</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.DateFunctions"/>
+        <property name="method" value="addDays"/>
+    </formula>
+
+    <formula name="AddMonths">
+        <description>Adds the months specified to the date and returns the date</description>
+        <signature>AddMonths(date, months)</signature>
+        <category>Date Time</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.DateFunctions"/>
+        <property name="method" value="addMonths"/>
+    </formula>
+
+    <formula name="AddYears">
+        <description>Adds the years specified to the date and returns the date</description>
+        <signature>AddYears(date, years)</signature>
+        <category>Date Time</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.DateFunctions"/>
+        <property name="method" value="addYears"/>
+    </formula>
+
+    <formula name="AddHours">
+        <description>Adds the hours specified to the date and returns the date</description>
+        <signature>AddHours(date, hours)</signature>
+        <category>Date Time</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.DateFunctions"/>
+        <property name="method" value="addHours"/>
+    </formula>
+
+    <formula name="AddMinutes">
+        <description>Adds the minutes specified to the date and returns the date</description>
+        <signature>AddMinutes(date, minutes)</signature>
+        <category>Date Time</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.DateFunctions"/>
+        <property name="method" value="addMinutes"/>
+    </formula>
+
+    <formula name="AddSeconds">
+        <description>Adds the seconds specified to the date and returns the date</description>
+        <signature>AddSeconds(date, seconds)</signature>
+        <category>Date Time</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.DateFunctions"/>
+        <property name="method" value="addSeconds"/>
+    </formula>
+    <formula name="DayOfYear">
+        <description>Returns the number of days elapsed in the year</description>
+        <signature>DayOfYear(date1)</signature>
+        <category>Date Time</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.DateFunctions"/>
+        <property name="method" value="getDayOfYear"/>
+    </formula>
+
+    <formula name="DaysBetween">
+        <description>Returns the number of days between two dates</description>
+        <signature>DaysBetween(date1, date2)</signature>
+        <category>Date Time</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.DateFunctions"/>
+        <property name="method" value="daysBetween"/>
+    </formula>
+
+    <formula name="MonthsBetween">
+        <description>Returns the number of months between two dates</description>
+        <signature>MonthsBetween(date1, date2)</signature>
+        <category>Date Time</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.DateFunctions"/>
+        <property name="method" value="monthsBetween"/>
+    </formula>
+
+    <formula name="YearsBetween">
+        <description>Returns the number of Years between two dates</description>
+        <signature>YearsBetween(date1, date2)</signature>
+        <category>Date Time</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.DateFunctions"/>
+        <property name="method" value="yearsBetween"/>
+    </formula>
+
+
+    <formula name="Equal">
+        <description>Returns TRUE if date1 is equal to date2. Returns FALSE otherwise</description>
+        <signature>Equal(date1, date2)</signature>
+        <category>Logical</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.DateFunctions"/>
+        <property name="method" value="equal"/>
+        <property name="nullable" value="true" />
+    </formula>
+
+    <formula name="NotEqual">
+        <description>Returns TRUE if date1 is not equal to date2. Returns FALSE otherwise</description>
+        <signature>NotEqual(date1, date2)</signature>
+        <category>Logical</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.DateFunctions"/>
+        <property name="method" value="notEqual"/>
+        <property name="nullable" value="true" />
+    </formula>
+
+
+    <formula name="Greater">
+        <description>Returns TRUE if date1 is after date2. Returns FALSE otherwise</description>
+        <signature>Greater(date1, date2)</signature>
+        <category>Logical</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.DateFunctions"/>
+        <property name="method" value="greater"/>
+    </formula>
+
+    <formula name="Less">
+        <description>Returns TRUE if date1 is before date2. Returns FALSE otherwise</description>
+        <signature>Less(date1, date2)</signature>
+        <category>Logical</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.DateFunctions"/>
+        <property name="method" value="less"/>
+    </formula>
+
+    <formula name="LessEqual">
+        <description>Returns TRUE if argument1 is less than or equal to argument2. The two arguments must be of the same type.</description>
+        <signature>LessEqual(val1, val2)</signature>
+        <category>Logical</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.DateFunctions"/>
+        <property name="method" value="lessEqual"/>
+    </formula>
+
+
+    <formula name="GreaterEqual">
+        <description>Returns TRUE if argument1 is greater than or equal to argument2. The two arguments must be of the same type.</description>
+        <signature>GreaterEqual(val1, val2)</signature>
+        <category>Logical</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.DateFunctions"/>
+        <property name="method" value="greaterEqual"/>
+    </formula>
+
+    <formula name="ToISODate">
+        <description>Converts the given date to an ISO date taking into account the optional zone offset in minutes.</description>
+        <signature>ToISODate(date, zoneOffsetOpt)</signature>
+        <category>Date Time</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.DateFunctions"/>
+        <property name="method" value="toISODate"/>
+    </formula>
+
+    <formula name="ToDate">
+        <description>Converts the given ISO date to date.</description>
+        <signature>ToDate(isoDate)</signature>
+        <category>Date Time</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.DateFunctions"/>
+        <property name="method" value="toDate"/>
+    </formula>
+
+    <formula name="TimeZoneOffset">
+        <description>Returns an integer indicating the time zone offset (in minutes) of the default time zone</description>
+        <signature>TimeZoneOffset()</signature>
+        <category>Date Time</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.DateFunctions"/>
+        <property name="method" value="getTimeZoneOffset"/>
+    </formula>
+
+    <formula name="ToUTCTime">
+        <description>The UTC DateTime equivalent to the local time. This method assumes that the localTime parameter holds the local time value, and not a UTC time.</description>
+        <signature>ToUTCTime(localTime)</signature>
+        <category>Date Time</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.DateFunctions"/>
+        <property name="method" value="toUTCTime"/>
+    </formula>
+    <formula name="ToLocalTime">
+        <description>The DateTime equivalent to the specified UTC time, adjusted to the local time zone and daylight saving time. This method assumes that the utcTime parameter holds the UTC time value, and not a local time.</description>
+        <signature>ToLocalTime(utcTime)</signature>
+        <category>Date Time</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.DateFunctions"/>
+        <property name="method" value="toLocalTime"/>
+    </formula>
+</formulae>

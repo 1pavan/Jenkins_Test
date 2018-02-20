@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<SwiftMessageFormat name="MT056">
+	<standard-version><![CDATA[SRG 2016]]></standard-version>
+	<standard-release-qualifier>20160308</standard-release-qualifier>
+	<DescriptiveName><![CDATA[Logical Terminal History Report]]></DescriptiveName>
+	<Category><![CDATA[System]]></Category>
+	<Description><![CDATA[This message contains General Purpose Application login history information for the requested time period. It is the response to an MT 036 Logical Terminal History Request.
+
+From: General Purpose Application To: User]]></Description>
+	<SwiftFields>
+		<customizable>false</customizable>
+		<modifiable>true</modifiable>
+		<SwiftMessageType>System</SwiftMessageType>
+		<HeaderAndTrailerType>SWIFT_INPUT_HEADER</HeaderAndTrailerType>
+		<Header>
+		</Header>
+		<Data>
+			<Fields>
+				<SystemField Name="section-number">
+					<description><![CDATA[Sequential section number, beginning with 0001, identifying the position of an individual message in a multiple-section message.]]></description>
+					<datatype>String</datatype>
+					<required>true</required>
+					<SwiftSystemFieldDef Name="section-number" Tag="202">
+						<Format><![CDATA[4!n]]></Format>
+						<Specification><![CDATA[(section-number)]]></Specification>
+						<Description><![CDATA[Sequential section number, beginning with 0001, identifying the position of an individual message in a multiple-section message.]]></Description>
+						<Validations>
+							<Validation>
+								<formula>(ToInt($value) &gt; 0)</formula>
+								<error-code>V07</error-code>
+								<actionmessage>"Invalid Section Number '" + $value + "'"</actionmessage>
+							</Validation>
+						</Validations>
+					</SwiftSystemFieldDef>
+				</SystemField>
+				<SystemField Name="total-sections">
+					<description><![CDATA[Total number of sections in a multi-section message.]]></description>
+					<datatype>String</datatype>
+					<required>true</required>
+					<SwiftSystemFieldDef Name="total-sections" Tag="203">
+						<Format><![CDATA[4!n]]></Format>
+						<Specification><![CDATA[(total-sections)]]></Specification>
+						<Description><![CDATA[Total number of sections in a multi-section message.]]></Description>
+					</SwiftSystemFieldDef>
+				</SystemField>
+				<SystemField Name="lt-code">
+					<description><![CDATA[9th character of BIC-12.]]></description>
+					<datatype>String</datatype>
+					<required>true</required>
+					<SwiftSystemFieldDef Name="lt-code" Tag="305">
+						<Format><![CDATA[1!c]]></Format>
+						<Specification><![CDATA[(lt-code)]]></Specification>
+						<Description><![CDATA[9th character of BIC-12.]]></Description>
+					</SwiftSystemFieldDef>
+				</SystemField>
+				<SystemField Name="login-attempt">
+					<description><![CDATA[YYMMDDHHMM
+
+02 Login Request Message LAK or LNK ( 22 Login Positive Acknowledgement (LAK) or 42 Login Negative Acknowledgement (LNK) )]]></description>
+					<datatype>Section</datatype>
+					<minoccurs>1</minoccurs>
+					<maxoccurs>-1</maxoccurs>
+					<SwiftSystemFieldDef Name="login-attempt" Tag="270">
+						<Format><![CDATA[(10!n)(99*65x)([99*65x])]]></Format>
+						<Specification><![CDATA[(timestamp)(login-block)(login-result)]]></Specification>
+						<Additional-Format><![CDATA[<timestamp> 10!n<login-block>[<login-result>]]]></Additional-Format>
+						<Description><![CDATA[YYMMDDHHMM
+
+02 Login Request Message LAK or LNK ( 22 Login Positive Acknowledgement (LAK) or 42 Login Negative Acknowledgement (LNK) )]]></Description>
+					</SwiftSystemFieldDef>
+				</SystemField>
+			</Fields>
+		</Data>
+		<Trailer>
+		</Trailer>
+	</SwiftFields>
+	<validationrules name="Default">
+		<hdrvalidationrules>
+			<fieldvalidations>
+			</fieldvalidations>
+		</hdrvalidationrules>
+		<datavalidationrules>
+			<fieldvalidations>
+			</fieldvalidations>
+		</datavalidationrules>
+		<tlrvalidationrules>
+			<fieldvalidations>
+			</fieldvalidations>
+		</tlrvalidationrules>
+	</validationrules>
+</SwiftMessageFormat>
+

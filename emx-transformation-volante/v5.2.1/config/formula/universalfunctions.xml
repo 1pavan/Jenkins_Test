@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<formulae>
+    <formula name="Peek">
+        <description>Returns 'length' characters as string from the location specified by 'start', relative to current parser location (requires universal plugin).</description>
+        <signature>Peek(start, length)</signature>
+        <category>Universal</category>
+        <Class>com.tplus.transform.design.universal.formula.functions.UniversalStaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.universal.UniversalInputRecord"/>
+        <property name="method" value="peekString"/>
+        <property name="args" value="3"/>
+        <property name="arg1" value="java.lang.Object"/>
+        <property name="arg2" value="int"/>
+        <property name="arg3" value="int"/>
+        <property name="returns" value="java.lang.String"/>
+    </formula>
+    <formula name="Peek">
+        <description>Returns 'length' characters from the current parser location (requires universal plugin).</description>
+        <signature>Peek(length)</signature>
+        <category>Universal</category>
+        <Class>com.tplus.transform.design.universal.formula.functions.UniversalStaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.universal.UniversalInputRecord"/>
+        <property name="method" value="peekString"/>
+        <property name="args" value="2"/>
+        <property name="arg1" value="java.lang.Object"/>
+        <property name="arg2" value="int"/>
+        <property name="returns" value="java.lang.String"/>
+    </formula>
+    <formula name="PeekRest">
+        <description>Returns the rest of the characters in the current record (requires universal plugin).</description>
+        <signature>PeekRest()</signature>
+        <category>Universal</category>
+        <Class>com.tplus.transform.design.universal.formula.functions.UniversalStaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.universal.UniversalInputRecord"/>
+        <property name="method" value="peekRest"/>
+        <property name="args" value="1"/>
+        <property name="arg1" value="java.lang.Object"/>
+        <property name="returns" value="java.lang.String"/>
+    </formula>
+    <formula name="IsNext">
+        <description>Matches the next available input (during parsing) with the string 'str' and returns true if it starts with the specified string (requires universal plugin).</description>
+        <signature>IsNext(str)</signature>
+        <category>Universal</category>
+        <Class>com.tplus.transform.design.universal.formula.functions.UniversalStaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.universal.UniversalInputRecord"/>
+        <property name="method" value="isNext"/>
+        <property name="args" value="2"/>
+        <property name="arg1" value="java.lang.Object"/>
+        <property name="arg2" value="java.lang.String"/>
+        <property name="returns" value="boolean"/>
+    </formula>
+    <formula name="SetDelimiter">
+        <description></description>
+        <signature>SetDelimiter(name , value)</signature>
+        <category>Universal</category>
+        <Class>com.tplus.transform.design.universal.formula.functions.UniversalStaticMethodFunction</Class>
+        <property name="this" value="0"/>
+        <property name="method" value="setDelimiter"/>
+        <property name="args" value="3"/>
+        <property name="arg1" value="java.lang.Object"/>
+        <property name="arg2" value="java.lang.String"/>
+        <property name="arg3" value="java.lang.String"/>
+        <property name="returns" value="void"/>
+    </formula>
+</formulae>

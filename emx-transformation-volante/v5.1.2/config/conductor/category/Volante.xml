@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="iso-8859-1" standalone="no"?>
+<conductorcategory name="Volante">
+	<flowelement type="Parse"/>
+	<flowelement type="Serialize"/>
+	<flowelement type="Validate"/>
+	<flowelement type="Create"/>
+    <flowelement type="Mapping"/>
+	<flowelement type="MapException"/>
+	<flowelement type="Process"/>
+	<flowelement type="Invoke"/>
+	<flowelement type="Send"/>
+</conductorcategory>
+

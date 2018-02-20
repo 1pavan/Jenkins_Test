@@ -1,0 +1,42 @@
+<help-topics>
+	<topic id="index" location="${designer.home}/docs/index.doc"/>
+	<topic id="designer" location="${designer.home}/docs/Designer/DesignerGuide.doc"/>
+	<topic id="mapping" location="${designer.home}/docs/Designer/Mapping/MappingTutorial.doc"/>
+	<topic id="validation" location="${designer.home}/docs/Designer/Validation/ValidationRulesGuide.doc"/>
+	<topic id="formula" location="${designer.home}/docs/Designer/Formula/FormulaFunctions.chm"/>
+	<topic id="source-control" location="${designer.home}/docs/Designer/SourceControl/SourceControl.doc"/>
+	<topic id="custom-classes" location="${designer.home}/docs/Java/DefiningCustomClasses.doc"/>
+	<topic id="simulator" location="${designer.home}/docs/Designer/Simulator.doc"/>
+
+	<topic id="explorer" location="${designer.home}/docs/Designer/DesignerGuide.doc"/>
+
+	<topic id="TaskList" location="${designer.home}/docs/Designer/DesignerGuide.doc"/>
+
+	<topic id="FieldsValidationRules" location="${designer.home}/docs/Designer/Validation/ValidationRulesGuide.doc"/>
+	<topic id="Cartridge" location="${designer.home}/docs/Designer/DesignerGuide.doc"/>
+	<topic id="ProcessingRules" location="${designer.home}/docs/Designer/Validation/ValidationRulesGuide.doc"/>
+	<topic id="NormalizedFormat" location="file:///${designer.home}/docs/Designer/DesignerGuide.doc#DefineIMFmt"/>
+	<topic id="InternalMessage" location="file:///${designer.home}/docs/Designer/DesignerGuide.doc"/>
+
+	<topic id="MessageMapping" location="${designer.home}/docs/Designer/Mapping/MappingTutorial.doc"/>
+	<topic id="OutputMappingRules" location="${designer.home}/docs/Designer/Mapping/MappingTutorial.doc"/>
+	<topic id="InputMappingRules" location="${designer.home}/docs/Designer/Mapping/MappingTutorial.doc"/>
+
+	<topic id="MessageFlow" location="${designer.home}/docs/Designer/MessageFlow/MessageFlow.doc"/>
+
+	<topic id="SwiftFieldsFormat" location="${designer.home}/docs/Designer/SWIFT.doc"/>
+	<topic id="XMLFieldsFormat" location="${designer.home}/docs/Designer/XML.doc"/>
+	<topic id="UniversalFieldsFormat" location="${designer.home}/docs/Designer/Universal.doc"/>
+	<topic id="FCSFieldsFormat" location="${designer.home}/docs/Designer/FCS.doc"/>
+
+	<topic id="WebFormUIDesignElement" location="${designer.home}/docs/Designer/WebForm/WebForms.doc"/>
+	<topic id="WebFormDesigner" location="${designer.home}/docs/Designer/WebForm/WebForms.doc"/>
+
+	<topic id="PersistenceManager" location="${designer.home}/docs/Designer/Persistence/PersistenceDesigner.doc"/>
+	<topic id="DatabaseTable" location="${designer.home}/docs/Designer/Persistence/PersistenceDesigner.doc"/>
+	<topic id="QueryManager" location="${designer.home}/docs/Designer/Persistence/PersistenceDesigner.doc"/>
+	<topic id="DatabaseMapping" location="${designer.home}/docs/Designer/Persistence/PersistenceDesigner.doc"/>
+
+	<topic id="FormulaFunctionDef" location="${designer.home}/docs/Designer/Formula/FunctionDefinition.doc"/>
+	<topic id="releasenotes" location="${designer.home}/docs/ReleaseNotes/ReleaseNotes.doc"/>
+</help-topics>

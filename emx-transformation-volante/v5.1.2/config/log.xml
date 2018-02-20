@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
+
+	<appender name="DesignerLog" class="org.apache.log4j.RollingFileAppender">
+            <param name="File"   value="${designer.user.home}/log/designer.log" />
+        <param name="MaxFileSize" value="1500KB"/>
+            <param name="MaxBackupIndex" value="1" />	    	
+            <layout class="org.apache.log4j.PatternLayout">
+				<param name="ConversionPattern" value="%d{yyyy-MM-dd HH:mm:ss}[%5p] (%F:%L) - %m%n"/>
+            </layout>	    
+	</appender>
+	
+	<appender name="ConsoleLog" class="org.apache.log4j.ConsoleAppender">
+        <param name="Threshold" value="warn" />	    	
+		<layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern"  value="[%5p] %m%n"/>
+		</layout>		
+	</appender>
+	
+	<appender name="ConsoleInternalLog" class="org.apache.log4j.ConsoleAppender">
+        <param name="Threshold" value="debug" />	    	
+		<layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern"  value="[%5p] (%F:%L) %m%n"/>
+		</layout>		
+	</appender>
+	
+	<appender name="RuntimeLog" class="org.apache.log4j.RollingFileAppender">
+            <param name="File"   value="${designer.user.home}/log/runtime.log" />
+            <param name="MaxFileSize" value="200KB" />	    	
+            <param name="MaxBackupIndex" value="1" />	    	
+            <layout class="org.apache.log4j.PatternLayout">
+				<param name="ConversionPattern" value="%d{yyyy-MM-dd HH:mm:ss}[%5p] [%c] - %m%n"/>
+            </layout>	    
+	</appender>
+
+    <appender name="TomcatLog" class="org.apache.log4j.RollingFileAppender">
+        <param name="File" value="${designer.user.home}/log/tomcat.log"/>
+        <param name="MaxFileSize" value="200KB"/>
+        <param name="MaxBackupIndex" value="1"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%d{yyyy-MM-dd HH:mm:ss}[%5p] [%c] - %m%n"/>
+        </layout>
+    </appender>
+	<category name="volante.runtime">
+    	<priority value="TRACE" />
+		<appender-ref ref="RuntimeLog"/>
+	</category>
+	
+    <category name="org.apache.coyote">
+        <priority value="INFO"/>
+        <appender-ref ref="TomcatLog"/>
+    </category>
+
+    <category name="org.apache.catalina">
+        <priority value="INFO"/>
+        <appender-ref ref="TomcatLog"/>
+    </category>
+    <category name="org.apache.tomcat">
+        <priority value="INFO"/>
+        <appender-ref ref="TomcatLog"/>
+    </category>
+    <category name="org.apache.fop">
+        <priority value="WARN"/>
+        <appender-ref ref="TomcatLog"/>
+    </category>
+    <category name="org.apache.commons.modeler">
+        <priority value="INFO"/>
+        <appender-ref ref="TomcatLog"/>
+    </category>
+
+    <category name="org.apache.commons.digester">
+        <priority value="INFO"/>
+        <appender-ref ref="TomcatLog"/>
+    </category>
+
+    <category name="org.apache.jasper">
+        <priority value="INFO"/>
+        <appender-ref ref="TomcatLog"/>
+    </category>
+
+	<root>
+	   <priority value ="TRACE" />
+   	   <appender-ref ref="ConsoleLog" />
+   	   <appender-ref ref="DesignerLog" />
+	</root>
+	
+</log4j:configuration>

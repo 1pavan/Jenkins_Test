@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<SwiftMessageFormat name="MT024">
+	<standard-version><![CDATA[SRG 2014]]></standard-version>
+	<standard-release-qualifier>20140520</standard-release-qualifier>
+	<DescriptiveName><![CDATA[Bulk Retrieval Request]]></DescriptiveName>
+	<Category><![CDATA[System]]></Category>
+	<Description><![CDATA[This message is used to request a retrieval of FIN messages previously sent or received by all logical terminals belonging to the requesting destination during the specified time range. If this message is sent by a master destination that owns synonyms, then FIN messages sent or received by all logical terminals of the master and all of its synonyms are retrieved.
+
+Live BICs may retrieve messages up to 124 days old. Test & Training BICS may only retrieve messages up to 24 hours old.
+
+From: User To: FIN]]></Description>
+	<SwiftFields>
+		<customizable>false</customizable>
+		<modifiable>true</modifiable>
+		<SwiftMessageType>System</SwiftMessageType>
+		<HeaderAndTrailerType>SWIFT_INPUT_HEADER</HeaderAndTrailerType>
+		<Header>
+		</Header>
+		<Data>
+			<Fields>
+				<SystemField Name="retrieval-identifier">
+					<description><![CDATA[User's retrieval identifier..]]></description>
+					<datatype>String</datatype>
+					<required>false</required>
+					<SwiftSystemFieldDef Name="retrieval-identifier" Tag="140">
+						<Format><![CDATA[15!n]]></Format>
+						<Specification><![CDATA[(retrieval-identifier)]]></Specification>
+						<Description><![CDATA[User's retrieval identifier..]]></Description>
+					</SwiftSystemFieldDef>
+				</SystemField>
+				<SystemField Name="start-date-time">
+					<description><![CDATA[Starting date and time (GMT) of time range for retrieval, in YYYYMMDDHHMM format.]]></description>
+					<datatype>String</datatype>
+					<required>true</required>
+					<SwiftSystemFieldDef Name="start-date-time" Tag="142">
+						<Format><![CDATA[12!n]]></Format>
+						<Specification><![CDATA[(start-date-time)]]></Specification>
+						<Additional-Format><![CDATA[YYYYMMDDHHMM]]></Additional-Format>
+						<Description><![CDATA[Starting date and time (GMT) of time range for retrieval, in YYYYMMDDHHMM format.]]></Description>
+						<Validations>
+							<Validation>
+								<formula>IsDate($value,"yyyyMMddHHmm")</formula>
+								<error-code>V05</error-code>
+								<actionmessage>"Invalid start-date-time '" + $value + "'"</actionmessage>
+							</Validation>
+						</Validations>
+					</SwiftSystemFieldDef>
+				</SystemField>
+				<SystemField Name="end-date-time">
+					<description><![CDATA[Ending date and time (GMT) of time range for retrieval, in YYYYMMDDHHMM format.]]></description>
+					<datatype>String</datatype>
+					<required>true</required>
+					<SwiftSystemFieldDef Name="end-date-time" Tag="143">
+						<Format><![CDATA[12!n]]></Format>
+						<Specification><![CDATA[(end-date-time)]]></Specification>
+						<Additional-Format><![CDATA[YYYYMMDDHHMM]]></Additional-Format>
+						<Description><![CDATA[Ending date and time (GMT) of time range for retrieval, in YYYYMMDDHHMM format.]]></Description>
+						<Validations>
+							<Validation>
+								<formula>IsDate($value,"yyyyMMddHHmm")</formula>
+								<error-code>V05</error-code>
+								<actionmessage>"Invalid end-date-time '" + $value + "'"</actionmessage>
+							</Validation>
+						</Validations>
+					</SwiftSystemFieldDef>
+				</SystemField>
+			</Fields>
+		</Data>
+		<Trailer>
+		</Trailer>
+	</SwiftFields>
+	<validationrules name="Default">
+		<hdrvalidationrules>
+			<fieldvalidations>
+			</fieldvalidations>
+		</hdrvalidationrules>
+		<datavalidationrules>
+			<fieldvalidations>
+			</fieldvalidations>
+		</datavalidationrules>
+		<tlrvalidationrules>
+			<fieldvalidations>
+			</fieldvalidations>
+		</tlrvalidationrules>
+	</validationrules>
+</SwiftMessageFormat>
+

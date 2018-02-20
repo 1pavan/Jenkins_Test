@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<SwiftMessageFormat name="MT025">
+	<standard-version><![CDATA[SRG 2012]]></standard-version>
+	<DescriptiveName><![CDATA[Bulk Retrieval Response]]></DescriptiveName>
+	<Category><![CDATA[System]]></Category>
+	<Description><![CDATA[This message is the response to MT 024 Bulk Retrieval Request. This message notifies the user of the results of bulk retrieval processing at FIN. Note that this response does not contain the retrieved messages but is a confirmation that FIN has finished processing the corresponding MT 024 request.
+
+From: FIN To: User]]></Description>
+	<SwiftFields>
+		<customizable>false</customizable>
+		<modifiable>true</modifiable>
+		<SwiftMessageType>System</SwiftMessageType>
+		<HeaderAndTrailerType>SWIFT_INPUT_HEADER</HeaderAndTrailerType>
+		<Header>
+		</Header>
+		<Data>
+			<Fields>
+				<SystemField Name="mir">
+					<description><![CDATA[MIR of the  corresponding MT 024 Bulk Retrieval Request]]></description>
+					<datatype>Section</datatype>
+					<minoccurs>1</minoccurs>
+					<maxoccurs>1</maxoccurs>
+					<SwiftSystemFieldDef Name="mir" Tag="251">
+						<Format><![CDATA[(6!n)(4!a2!a2!c1!c)(3!a)(4!n)(6!n)]]></Format>
+						<Specification><![CDATA[(date)(lt-identifier)(branch-code)(session-number)(isn)]]></Specification>
+						<Description><![CDATA[MIR of the individual message that is to be retrieved. It consists of:
+
+a)  Date of input of the message
+
+b)  Sending LT and branch code XXX (irrespective of the branch code used in the original message)
+
+c)  Session number
+
+d)  ISN]]></Description>
+						<Validations>
+							<Validation>
+								<subfield>date</subfield>
+								<formula>IsDate($value,"yyMMdd")</formula>
+								<error-code>V04</error-code>
+								<actionmessage>"Invalid Input Date '" + $value + "'"</actionmessage>
+							</Validation>
+						</Validations>
+					</SwiftSystemFieldDef>
+				</SystemField>
+				<SystemField Name="retrieval-identifier">
+					<description><![CDATA[Retrieval identifier of the corresponding MT 024 Bulk RetrievalRequest, if present.]]></description>
+					<datatype>String</datatype>
+					<required>false</required>
+					<SwiftSystemFieldDef Name="retrieval-identifier" Tag="140">
+						<Format><![CDATA[15!n]]></Format>
+						<Specification><![CDATA[(retrieval-identifier)]]></Specification>
+						<Description><![CDATA[User's retrieval identifier..]]></Description>
+					</SwiftSystemFieldDef>
+				</SystemField>
+				<SystemField Name="status">
+					<description><![CDATA[Retrieval status.]]></description>
+					<datatype>String</datatype>
+					<required>true</required>
+					<SwiftSystemFieldDef Name="status" Tag="144">
+						<Format><![CDATA[2!n]]></Format>
+						<Specification><![CDATA[(status)]]></Specification>
+						<Description><![CDATA[Retrieval status.]]></Description>
+						<Validations>
+							<Validation>
+								<formula>In($value, "00", "01", "03", "08", "09", "11", "12", "13", "14", "15", "16", "17", "19", "20", "22")</formula>
+								<error-code>V08</error-code>
+								<actionmessage>"Invalid status '" + $value + "'. Valid status  are 00, 01, 03, 08, 09, 11, 12, 13, 14, 15, 16, 17, 19, 20 and 22."</actionmessage>
+							</Validation>
+						</Validations>
+					</SwiftSystemFieldDef>
+				</SystemField>
+			</Fields>
+		</Data>
+		<Trailer>
+		</Trailer>
+	</SwiftFields>
+	<validationrules name="Default">
+		<hdrvalidationrules>
+			<fieldvalidations>
+			</fieldvalidations>
+		</hdrvalidationrules>
+		<datavalidationrules>
+			<fieldvalidations>
+			</fieldvalidations>
+		</datavalidationrules>
+		<tlrvalidationrules>
+			<fieldvalidations>
+			</fieldvalidations>
+		</tlrvalidationrules>
+	</validationrules>
+</SwiftMessageFormat>
+

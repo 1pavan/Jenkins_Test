@@ -1,0 +1,558 @@
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="unqualified"
+            attributeFormDefault="unqualified">
+    <!-- include constructs -->
+    <xsd:include schemaLocation="externalmsg.xsd"/>
+    <xsd:complexType name="UniversalFormat">
+        <xsd:complexContent>
+            <xsd:extension base="ExternalMessageType"/>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:element name="Universalfields" substitutionGroup="ExternalMessageFields">
+        <xsd:complexType>
+            <xsd:complexContent>
+                <xsd:extension base="ExternalMessageFieldsType">
+                    <xsd:sequence>
+                        <xsd:element name="batch-support" type="xsd:boolean" minOccurs="0"/>
+                        <xsd:element ref="delimiters"/>
+                        <xsd:element ref="defaultencoding"/>
+                        <xsd:element ref="ccb-settings" minOccurs="0"/>
+                        <xsd:element ref="target-namespace" minOccurs="0"/>
+                        <xsd:element ref="xpath-namespaces" minOccurs="0"/>
+                        <xsd:element ref="platforminfo" minOccurs="0"/>
+                        <xsd:element ref="field-attributes" minOccurs="0"/>
+                        <xsd:element name="headerfields" type="UniversalFieldStructType"/>
+                        <xsd:element name="datafields" type="UniversalFieldStructType"/>
+                        <xsd:element name="trailerfields" type="UniversalFieldStructType"/>
+                    </xsd:sequence>
+                </xsd:extension>
+            </xsd:complexContent>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:complexType name="UniversalAbstractFieldType" abstract="true"/>
+    <xsd:complexType name="UniversalFieldStructType">
+        <xsd:sequence>
+            <xsd:element ref="platforminfo" minOccurs="0"/>
+            <xsd:element ref="field-attributes" minOccurs="0"/>
+            <xsd:element name="field" type="UniversalAbstractFieldType" minOccurs="0" maxOccurs="unbounded"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="UniversalSectionType">
+        <xsd:complexContent>
+            <xsd:extension base="UniversalAbstractFieldType">
+                <xsd:sequence>
+                    <xsd:element name="name" type="xsd:string"/>
+                    <xsd:element name="datatype" type="xsd:string" fixed="Section"/>
+                    <xsd:element name="detailed-name" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="description" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="aliasname" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="minoccurs" type="xsd:integer"/>
+                    <xsd:element name="maxoccurs" type="xsd:integer"/>
+                    <xsd:element name="occurence" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="section-type">
+                        <xsd:complexType>
+                            <xsd:attribute name="type" type="xsd:string"/>
+                        </xsd:complexType>
+                    </xsd:element>
+                    <xsd:element name="fieldref" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="discriminator" minOccurs="0">
+                        <xsd:complexType>
+                            <xsd:sequence>
+                                <xsd:element name="in" type="xsd:string" minOccurs="0"/>
+                            </xsd:sequence>
+                        </xsd:complexType>
+                    </xsd:element>
+                    <xsd:element name="delimiter" minOccurs="0">
+                        <xsd:complexType>
+                            <xsd:complexContent>
+                                <xsd:extension base="delim">
+                                    <xsd:attribute name="section-delimiter" type="xsd:string"/>
+                                </xsd:extension>
+                            </xsd:complexContent>
+                        </xsd:complexType>
+                    </xsd:element>
+                    <xsd:element name="length" minOccurs="0">
+                        <xsd:complexType>
+                            <xsd:sequence>
+                                <xsd:element name="fieldref">
+                                    <xsd:complexType>
+                                        <xsd:simpleContent>
+                                            <xsd:extension base="xsd:string">
+                                                <xsd:attribute name="ignoretrailingfields" type="xsd:string"/>
+                                                <xsd:attribute name="retain-delimiter" type="xsd:string"/>
+                                            </xsd:extension>
+                                        </xsd:simpleContent>
+                                    </xsd:complexType>
+                                </xsd:element>
+                            </xsd:sequence>
+                            <xsd:attribute name="type" type="xsd:string"/>
+                        </xsd:complexType>
+                    </xsd:element>
+                    <xsd:element ref="field-delimiter" minOccurs="0"/>
+                    <xsd:element name="tag" minOccurs="0">
+                        <xsd:complexType>
+                            <xsd:attribute name="value" type="xsd:string"/>
+                            <xsd:attribute name="separator" type="xsd:string"/>
+                        </xsd:complexType>
+                    </xsd:element>
+                    <xsd:element name="choiceoption" minOccurs="0">
+                        <xsd:complexType>
+                            <xsd:sequence>
+                                <xsd:element name="pad-choice" type="xsd:boolean" minOccurs="0"/>
+                                <xsd:element name="discriminator" minOccurs="0" maxOccurs="unbounded">
+                                    <xsd:complexType>
+                                        <xsd:sequence>
+                                            <xsd:element name="in" type="xsd:string" minOccurs="0"/>
+                                        </xsd:sequence>
+                                        <xsd:attribute name="field" type="xsd:string" use="required"/>
+                                    </xsd:complexType>
+                                </xsd:element>
+                            </xsd:sequence>
+                        </xsd:complexType>
+                    </xsd:element>
+                    <xsd:element name="dictionary-field" type="xsd:boolean" minOccurs="0"/>
+                    <xsd:element name="fields" minOccurs="0">
+                        <xsd:complexType>
+                            <xsd:sequence>
+                                <xsd:element name="field" type="UniversalAbstractFieldType" minOccurs="0"
+                                             maxOccurs="unbounded"/>
+                            </xsd:sequence>
+                        </xsd:complexType>
+                    </xsd:element>
+                    <xsd:element ref="platforminfo" minOccurs="0"/>
+                    <xsd:element ref="field-attributes" minOccurs="0"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="UniversalFieldType">
+        <xsd:complexContent>
+            <xsd:extension base="UniversalAbstractFieldType">
+                <xsd:sequence>
+                    <xsd:element name="name" type="xsd:string"/>
+                    <xsd:element name="enabled" type="xsd:boolean" minOccurs="0"/>
+                    <xsd:element name="datatype" type="xsd:string"/>
+                    <xsd:element name="detailed-name" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="description" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="aliasname" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="required" type="xsd:boolean"/>
+                    <xsd:element name="defaultvalue" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="filler" type="xsd:boolean" minOccurs="0"/>
+                    <xsd:element name="dateformat" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="length" minOccurs="0">
+                        <xsd:complexType>
+                            <xsd:all>
+                                <xsd:element name="fieldref" type="xsd:string" minOccurs="0"/>
+                                <xsd:element name="min-length" type="xsd:integer" minOccurs="0"/>
+                                <xsd:element name="max-length" type="xsd:integer" minOccurs="0"/>
+                                <xsd:element ref="field-delimiter" minOccurs="0"/>
+                                <xsd:element name="value" type="xsd:integer" minOccurs="0"/>
+                            </xsd:all>
+                            <xsd:attribute name="type" type="xsd:string" use="required"/>
+                        </xsd:complexType>
+                    </xsd:element>
+                    <xsd:element name="parsed-value" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="serialized-value" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="encoding" type="xsd:string"/>
+                    <xsd:element name="binaryencoding" minOccurs="0">
+                        <xsd:complexType>
+                            <xsd:attribute name="endian" type="xsd:string"/>
+                            <xsd:attribute name="unsigned" type="xsd:boolean"/>
+                        </xsd:complexType>
+                    </xsd:element>
+                    <xsd:element ref="encodingElem" minOccurs="0" maxOccurs="unbounded"/>
+                    <xsd:element name="facets" minOccurs="0">
+                        <xsd:complexType>
+                            <xsd:sequence>
+                                <xsd:element name="maxExclusive" minOccurs="0" maxOccurs="unbounded">
+                                    <xsd:complexType>
+                                        <xsd:sequence>
+                                            <xsd:element name="description" type="xsd:string" minOccurs="0"/>
+                                        </xsd:sequence>
+                                        <xsd:attribute name="value" type="xsd:string"/>
+                                    </xsd:complexType>
+                                </xsd:element>
+                                <xsd:element name="minExclusive" minOccurs="0" maxOccurs="unbounded">
+                                    <xsd:complexType>
+                                        <xsd:sequence>
+                                            <xsd:element name="description" type="xsd:string" minOccurs="0"/>
+                                        </xsd:sequence>
+                                        <xsd:attribute name="value" type="xsd:string"/>
+                                    </xsd:complexType>
+                                </xsd:element>
+                                <xsd:element name="maxInclusive" minOccurs="0" maxOccurs="unbounded">
+                                    <xsd:complexType>
+                                        <xsd:sequence>
+                                            <xsd:element name="description" type="xsd:string" minOccurs="0"/>
+                                        </xsd:sequence>
+                                        <xsd:attribute name="value" type="xsd:string"/>
+                                    </xsd:complexType>
+                                </xsd:element>
+                                <xsd:element name="minInclusive" minOccurs="0" maxOccurs="unbounded">
+                                    <xsd:complexType>
+                                        <xsd:sequence>
+                                            <xsd:element name="description" type="xsd:string" minOccurs="0"/>
+                                        </xsd:sequence>
+                                        <xsd:attribute name="value" type="xsd:string"/>
+                                    </xsd:complexType>
+                                </xsd:element>
+                                <xsd:element name="pattern" minOccurs="0" maxOccurs="unbounded">
+                                    <xsd:complexType>
+                                        <xsd:sequence>
+                                            <xsd:element name="description" type="xsd:string" minOccurs="0"/>
+                                        </xsd:sequence>
+                                        <xsd:attribute name="value" type="xsd:string"/>
+                                    </xsd:complexType>
+                                </xsd:element>
+                                <xsd:element name="enumeration" minOccurs="0" maxOccurs="unbounded">
+                                    <xsd:complexType>
+                                        <xsd:sequence>
+                                            <xsd:element name="description" type="xsd:string" minOccurs="0"/>
+                                        </xsd:sequence>
+                                        <xsd:attribute name="value" type="xsd:string"/>
+                                    </xsd:complexType>
+                                </xsd:element>
+                            </xsd:sequence>
+                        </xsd:complexType>
+                    </xsd:element>
+                    <xsd:element name="tag" minOccurs="0">
+                        <xsd:complexType>
+                            <xsd:attribute name="value" type="xsd:string"/>
+                            <xsd:attribute name="separator" type="xsd:string"/>
+                        </xsd:complexType>
+                    </xsd:element>
+                    <xsd:element name="dictionary-field" type="xsd:boolean" minOccurs="0"/>
+                    <xsd:element ref="platforminfo" minOccurs="0"/>
+                    <xsd:element ref="field-attributes" minOccurs="0"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="encodingOptionType"/>
+    <xsd:element name="encodingElem" type="encodingOptionType"/>
+    <xsd:element name="packeddecimalencoding" substitutionGroup="encodingElem">
+        <xsd:complexType>
+            <xsd:complexContent>
+                <xsd:extension base="encodingOptionType">
+                    <xsd:sequence>
+                        <xsd:element name="justification" type="xsd:string" minOccurs="0"/>
+                        <xsd:element name="decimalformat" type="xsd:string" minOccurs="0"/>
+                        <xsd:element name="unsigned" type="xsd:boolean" minOccurs="0"/>
+                    </xsd:sequence>
+                </xsd:extension>
+            </xsd:complexContent>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="asciistringoption" substitutionGroup="encodingElem">
+        <xsd:complexType>
+            <xsd:complexContent>
+                <xsd:extension base="encodingOptionType">
+                    <xsd:sequence>
+                        <xsd:element name="justification" type="xsd:string" minOccurs="0"/>
+                        <xsd:element name="padding" type="xsd:string" minOccurs="0"/>
+                        <xsd:element name="field-terminator" type="xsd:string" minOccurs="0"/>
+                        <xsd:element name="trimoption" type="xsd:string" minOccurs="0"/>
+                    </xsd:sequence>
+                </xsd:extension>
+            </xsd:complexContent>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="asciicharoption" substitutionGroup="encodingElem">
+        <xsd:complexType>
+            <xsd:complexContent>
+                <xsd:extension base="encodingOptionType">
+                    <xsd:sequence>
+                        <xsd:element name="justification" type="xsd:string" minOccurs="0"/>
+                        <xsd:element name="padding" type="xsd:string" minOccurs="0"/>
+                        <xsd:element name="field-terminator" type="xsd:string" minOccurs="0"/>
+                        <xsd:element name="trimoption" type="xsd:string" minOccurs="0"/>
+                    </xsd:sequence>
+                </xsd:extension>
+            </xsd:complexContent>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="asciiintegeroption" substitutionGroup="encodingElem">
+        <xsd:complexType>
+            <xsd:complexContent>
+                <xsd:extension base="encodingOptionType">
+                    <xsd:sequence>
+                        <xsd:element name="justification" type="xsd:string" minOccurs="0"/>
+                        <xsd:element name="padding" type="xsd:string" minOccurs="0"/>
+                        <xsd:element name="field-terminator" type="xsd:string" minOccurs="0"/>
+                        <xsd:element name="sign" type="xsd:string" minOccurs="0"/>
+                    </xsd:sequence>
+                </xsd:extension>
+            </xsd:complexContent>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="asciilongoption" substitutionGroup="encodingElem">
+        <xsd:complexType>
+            <xsd:complexContent>
+                <xsd:extension base="encodingOptionType">
+                    <xsd:sequence>
+                        <xsd:element name="justification" type="xsd:string" minOccurs="0"/>
+                        <xsd:element name="padding" type="xsd:string" minOccurs="0"/>
+                        <xsd:element name="field-terminator" type="xsd:string" minOccurs="0"/>
+                        <xsd:element name="sign" type="xsd:string" minOccurs="0"/>
+                    </xsd:sequence>
+                </xsd:extension>
+            </xsd:complexContent>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="asciidateoption" substitutionGroup="encodingElem">
+        <xsd:complexType>
+            <xsd:complexContent>
+                <xsd:extension base="encodingOptionType">
+                    <xsd:sequence>
+                        <xsd:element name="justification" type="xsd:string" minOccurs="0"/>
+                        <xsd:element name="field-terminator" type="xsd:string" minOccurs="0"/>
+                    </xsd:sequence>
+                </xsd:extension>
+            </xsd:complexContent>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="asciifloatoption" substitutionGroup="encodingElem">
+        <xsd:complexType>
+            <xsd:complexContent>
+                <xsd:extension base="encodingOptionType">
+                    <xsd:sequence>
+                        <xsd:element name="justification" type="xsd:string" minOccurs="0"/>
+                        <xsd:element name="padding" type="xsd:string" minOccurs="0"/>
+                        <xsd:element name="field-terminator" type="xsd:string" minOccurs="0"/>
+                        <xsd:element name="decimalpointoption" type="xsd:string" minOccurs="0"/>
+                        <xsd:element name="format" type="xsd:string" minOccurs="0"/>
+                        <xsd:element name="exprep" type="xsd:boolean" minOccurs="0"/>
+                        <xsd:element name="sign" type="xsd:string" minOccurs="0"/>
+                    </xsd:sequence>
+                </xsd:extension>
+            </xsd:complexContent>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="asciidoubleoption" substitutionGroup="encodingElem">
+        <xsd:complexType>
+            <xsd:complexContent>
+                <xsd:extension base="encodingOptionType">
+                    <xsd:sequence>
+                        <xsd:element name="justification" type="xsd:string" minOccurs="0"/>
+                        <xsd:element name="padding" type="xsd:string" minOccurs="0"/>
+                        <xsd:element name="field-terminator" type="xsd:string" minOccurs="0"/>
+                        <xsd:element name="decimalpointoption" type="xsd:string" minOccurs="0"/>
+                        <xsd:element name="format" type="xsd:string" minOccurs="0"/>
+                        <xsd:element name="exprep" type="xsd:boolean" minOccurs="0"/>
+                        <xsd:element name="sign" type="xsd:string" minOccurs="0"/>
+                    </xsd:sequence>
+                </xsd:extension>
+            </xsd:complexContent>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="asciibooleanoption" substitutionGroup="encodingElem">
+        <xsd:complexType>
+            <xsd:complexContent>
+                <xsd:extension base="encodingOptionType">
+                    <xsd:sequence>
+                        <xsd:element name="justification" type="xsd:string" minOccurs="0"/>
+                        <xsd:element name="padding" type="xsd:string" minOccurs="0"/>
+                        <xsd:element name="field-terminator" type="xsd:string" minOccurs="0"/>
+                        <xsd:element name="truevalue" type="xsd:string" minOccurs="0"/>
+                        <xsd:element name="falsevalue" type="xsd:string" minOccurs="0"/>
+                    </xsd:sequence>
+                </xsd:extension>
+            </xsd:complexContent>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="asciidateonlyoption" substitutionGroup="encodingElem">
+        <xsd:complexType>
+            <xsd:complexContent>
+                <xsd:extension base="encodingOptionType">
+                    <xsd:sequence>
+                        <xsd:element name="justification" type="xsd:string" minOccurs="0"/>
+                        <xsd:element name="field-terminator" type="xsd:string" minOccurs="0"/>
+                    </xsd:sequence>
+                </xsd:extension>
+            </xsd:complexContent>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="asciitimeonlyoption" substitutionGroup="encodingElem">
+        <xsd:complexType>
+            <xsd:complexContent>
+                <xsd:extension base="encodingOptionType">
+                    <xsd:sequence>
+                        <xsd:element name="justification" type="xsd:string" minOccurs="0"/>
+                        <xsd:element name="field-terminator" type="xsd:string" minOccurs="0"/>
+                    </xsd:sequence>
+                </xsd:extension>
+            </xsd:complexContent>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="asciibigintegeroption" substitutionGroup="encodingElem">
+        <xsd:complexType>
+            <xsd:complexContent>
+                <xsd:extension base="encodingOptionType">
+                    <xsd:sequence>
+                        <xsd:element name="justification" type="xsd:string" minOccurs="0"/>
+                        <xsd:element name="padding" type="xsd:string" minOccurs="0"/>
+                        <xsd:element name="field-terminator" type="xsd:string" minOccurs="0"/>
+                        <xsd:element name="sign" type="xsd:string" minOccurs="0"/>
+                    </xsd:sequence>
+                </xsd:extension>
+            </xsd:complexContent>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="asciibigdecimaloption" substitutionGroup="encodingElem">
+        <xsd:complexType>
+            <xsd:complexContent>
+                <xsd:extension base="encodingOptionType">
+                    <xsd:sequence>
+                        <xsd:element name="justification" type="xsd:string" minOccurs="0"/>
+                        <xsd:element name="padding" type="xsd:string" minOccurs="0"/>
+                        <xsd:element name="field-terminator" type="xsd:string" minOccurs="0"/>
+                        <xsd:element name="decimalpointoption" type="xsd:string" minOccurs="0"/>
+                        <xsd:element name="format" type="xsd:string" minOccurs="0"/>
+                        <xsd:element name="exprep" type="xsd:boolean" minOccurs="0"/>
+                        <xsd:element name="sign" type="xsd:string" minOccurs="0"/>
+                    </xsd:sequence>
+                </xsd:extension>
+            </xsd:complexContent>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="asciiscaleddecimaloption" substitutionGroup="encodingElem">
+        <xsd:complexType>
+            <xsd:complexContent>
+                <xsd:extension base="encodingOptionType">
+                    <xsd:sequence>
+                        <xsd:element name="justification" type="xsd:string" minOccurs="0"/>
+                        <xsd:element name="padding" type="xsd:string" minOccurs="0"/>
+                        <xsd:element name="field-terminator" type="xsd:string" minOccurs="0"/>
+                        <xsd:element name="decimalpointoption" type="xsd:string" minOccurs="0"/>
+                        <xsd:element name="format" type="xsd:string" minOccurs="0"/>
+                        <xsd:element name="exprep" type="xsd:boolean" minOccurs="0"/>
+                        <xsd:element name="sign" type="xsd:string" minOccurs="0"/>
+                    </xsd:sequence>
+                </xsd:extension>
+            </xsd:complexContent>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="asciibinaryoption" substitutionGroup="encodingElem">
+        <xsd:complexType>
+            <xsd:complexContent>
+                <xsd:extension base="encodingOptionType">
+                    <xsd:sequence>
+                        <xsd:element name="format" type="xsd:string" minOccurs="0"/>
+                        <xsd:element name="justification" type="xsd:string" minOccurs="0"/>
+                        <xsd:element name="field-terminator" type="xsd:string" minOccurs="0"/>
+                    </xsd:sequence>
+                </xsd:extension>
+            </xsd:complexContent>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="defaultencoding">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="default" type="xsd:string" default="ASCII"/>
+                <xsd:element name="defaultfieldtype" type="xsd:string" default="Fixed Length"/>
+                <xsd:element name="binaryencoding" minOccurs="0">
+                    <xsd:complexType>
+                        <xsd:attribute name="endian">
+                            <xsd:simpleType>
+                                <xsd:restriction base="xsd:string">
+                                    <xsd:enumeration value="Big Endian"/>
+                                    <xsd:enumeration value="Little Endian"/>
+                                </xsd:restriction>
+                            </xsd:simpleType>
+                        </xsd:attribute>
+                    </xsd:complexType>
+                </xsd:element>
+                <xsd:element name="zoneddecimalencoding" minOccurs="0">
+                    <xsd:complexType>
+                        <xsd:sequence>
+                            <xsd:element name="charset" type="xsd:string" minOccurs="0"/>
+                        </xsd:sequence>
+                    </xsd:complexType>
+                </xsd:element>
+                <xsd:element name="text-encoding" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="partial-trailing-field" type="xsd:boolean" minOccurs="0"/>
+                <xsd:element ref="asciistringoption"/>
+                <xsd:element ref="asciicharoption"/>
+                <xsd:element ref="asciiintegeroption"/>
+                <xsd:element ref="asciilongoption"/>
+                <xsd:element ref="asciidateoption"/>
+                <xsd:element ref="asciifloatoption"/>
+                <xsd:element ref="asciidoubleoption"/>
+                <xsd:element ref="asciibooleanoption"/>
+                <xsd:element ref="asciidateonlyoption"/>
+                <xsd:element ref="asciitimeonlyoption"/>
+                <xsd:element ref="asciibigintegeroption"/>
+                <xsd:element ref="asciibigdecimaloption"/>
+                <xsd:element ref="asciiscaleddecimaloption"/>
+                <xsd:element ref="asciibinaryoption"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="delimiters">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="named-delimiters">
+                    <xsd:complexType>
+                        <xsd:sequence>
+                            <xsd:element name="named-delimiter" minOccurs="0" maxOccurs="unbounded">
+                                <xsd:complexType>
+                                    <xsd:attribute name="name" type="xsd:string"/>
+                                    <xsd:attribute name="value" type="xsd:string"/>
+                                </xsd:complexType>
+                            </xsd:element>
+                        </xsd:sequence>
+                    </xsd:complexType>
+                </xsd:element>
+                <xsd:element name="header-delimiter" type="delim"/>
+                <xsd:element name="data-delimiter" type="delim"/>
+                <xsd:element name="trailer-delimiter" type="delim"/>
+                <xsd:element name="record-delimiter">
+                    <xsd:complexType>
+                        <xsd:complexContent>
+                            <xsd:extension base="delim">
+                                <xsd:attribute name="section-delimiter" type="xsd:string"/>
+                            </xsd:extension>
+                        </xsd:complexContent>
+                    </xsd:complexType>
+                </xsd:element>
+                <xsd:element ref="field-delimiter"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="field-delimiter">
+        <xsd:complexType>
+            <xsd:attribute name="value"/>
+            <xsd:attribute name="quotechar"/>
+            <xsd:attribute name="releasechar"/>
+            <xsd:attribute name="quote-option"/>
+            <xsd:attribute name="exclude" type="xsd:boolean"/>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:complexType name="delim">
+        <xsd:attribute name="value" type="xsd:string" use="optional"/>
+        <xsd:attribute name="ignoretrailingfields" type="xsd:boolean" use="required"/>
+        <xsd:attribute name="retain-delimiter" type="xsd:string"/>
+        <xsd:attribute name="exclude" type="xsd:boolean"/>
+    </xsd:complexType>
+    <xsd:element name="ccb-settings">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="ccb-file" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="margin-start" type="xsd:integer" minOccurs="0"/>
+                <xsd:element name="margin-end" type="xsd:integer" minOccurs="0"/>
+                <xsd:element name="redefines" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="replacements" minOccurs="0">
+                    <xsd:complexType>
+                        <xsd:sequence>
+                            <xsd:element name="replacement" minOccurs="0">
+                                <xsd:complexType>
+                                    <xsd:attribute name="name" type="xsd:string" use="optional"/>
+                                    <xsd:attribute name="value" type="xsd:string" use="optional"/>
+                                </xsd:complexType>
+                            </xsd:element>
+                        </xsd:sequence>
+                    </xsd:complexType>
+                </xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+</xsd:schema>

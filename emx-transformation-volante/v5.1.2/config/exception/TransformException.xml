@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="iso-8859-1" standalone="no"?>
+<normalizedformat>
+	<fields>
+		<field>
+			<name>Type</name>
+			<type>String</type>
+			<description><![CDATA[Type of the exception]]></description>
+			<hidden>true</hidden>
+		</field>
+		<field>
+			<name>Message</name>
+			<type>String</type>
+			<description><![CDATA[Detailed error message. For example, for a validation exception, this may contain details about validation failure.]]></description>
+		</field>
+		<field>
+			<name>ErrorCode</name>
+			<type>String</type>
+			<description><![CDATA[An alphanumeric error code which represents this type of error]]></description>
+			<notnull>false</notnull>
+		</field>
+		<field>
+			<name>Severity</name>
+			<type>String</type>
+			<description><![CDATA[Severity of the exception. Values: fatal, error, warn]]></description>
+		</field>
+		<field>
+			<name>Cascadable</name>
+			<type>Boolean</type>
+			<description><![CDATA[Can the exception be accumulated?]]></description>
+		</field>
+		<field>
+			<name>FieldName</name>
+			<type>String</type>
+			<notnull>false</notnull>
+			<description><![CDATA[Qualified name of the field (in dot notation)]]></description>
+		</field>
+		<field>
+			<name>FieldID</name>
+			<type>String</type>
+			<notnull>false</notnull>
+			<description><![CDATA[Field id that uniquely identifies the field. This is the qualifed name with indexes for sections included.]]></description>
+		</field>
+
+	</fields>
+</normalizedformat>
+

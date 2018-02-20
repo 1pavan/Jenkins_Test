@@ -1,0 +1,571 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<SwiftMessageFormat name="MT705">
+	<standard-version><![CDATA[SRG 2015]]></standard-version>
+	<standard-release-qualifier>20150304</standard-release-qualifier>
+	<DescriptiveName><![CDATA[Pre-Advice of a Documentary Credit]]></DescriptiveName>
+	<Category><![CDATA[Documentary Credits & Guarantees]]></Category>
+	<Description><![CDATA[This message is sent by the issuing bank to the advising bank.
+
+It is a brief advice of a documentary credit, the full details of which will follow.
+
+The pre-advice is not an operative credit instrument. Unless otherwise stated, the issuing bank must forward the operative credit instrument, ie, MT 700 Issue of a Documentary credit, without delay.]]></Description>
+	<SwiftFields>
+		<customizable>true</customizable>
+		<modifiable>true</modifiable>
+		<SwiftMessageType>User</SwiftMessageType>
+		<max-length>2000</max-length>
+		<HeaderAndTrailerType>SWIFT_OUTPUT_HEADER</HeaderAndTrailerType>
+		<Header>
+		</Header>
+		<Data>
+			<Fields>
+				<SwiftField Name="40A">
+					<SwiftFieldDef Name="40">
+						<Generic>false</Generic>
+						<Description><![CDATA[Form of Documentary Credit]]></Description>
+						<Option Name="A">
+							<Format><![CDATA[24x]]></Format>
+							<Specification><![CDATA[(Type)]]></Specification>
+							<Description><![CDATA[Form of Documentary Credit]]></Description>
+						</Option>
+					</SwiftFieldDef>
+					<Repeating>false</Repeating>
+					<Presence>M</Presence>
+					<Options>A</Options>
+					<Validations>
+						<SubField Name="Type">
+							<Validation>
+								<Options>A</Options>
+								<ErrorCode>T60</ErrorCode>
+								<Comment><![CDATA[One of the following codes must be used (Error code(s): T60) :]]></Comment>
+								<ValidationPattern Type="CODE">
+									<Codes>
+										<Code Name="IRREVOC TRANS STANDBY">
+											<Description>The standby letter of credit is irrevocable and transferable.</Description>
+										</Code>
+										<Code Name="IRREVOCABLE">
+											<Description>The documentary credit is irrevocable.</Description>
+										</Code>
+										<Code Name="IRREVOCABLE STANDBY">
+											<Description>The standby letter of credit is irrevocable.</Description>
+										</Code>
+										<Code Name="IRREVOCABLE TRANSFERABLE">
+											<Description>The documentary credit is irrevocable and transferable.</Description>
+										</Code>
+										<Code Name="REVOCABLE">
+											<Description>The documentary credit is revocable.</Description>
+										</Code>
+										<Code Name="REVOCABLE STANDBY">
+											<Description>The standby letter of credit is revocable.</Description>
+										</Code>
+										<Code Name="REVOCABLE TRANSFERABLE">
+											<Description>The documentary credit is revocable and transferable.</Description>
+										</Code>
+									</Codes>
+								</ValidationPattern>
+							</Validation>
+						</SubField>
+					</Validations>
+				</SwiftField>
+				<SwiftField Name="20">
+					<SwiftFieldDef Name="20">
+						<Generic>false</Generic>
+						<Description><![CDATA[Documentary Credit Number]]></Description>
+						<Option Name="">
+							<Format><![CDATA[16x]]></Format>
+							<Specification><![CDATA[(Documentary Credit Number)]]></Specification>
+							<Description><![CDATA[Documentary Credit Number]]></Description>
+						</Option>
+					</SwiftFieldDef>
+					<Repeating>false</Repeating>
+					<Presence>M</Presence>
+					<Options> </Options>
+					<Validations>
+						<SubField Name="Documentary_Credit_Number">
+							<Validation>
+								<Options> </Options>
+								<ErrorCode>T26</ErrorCode>
+								<Comment><![CDATA[This field must not start or end with a slash '/' and must not contain two consecutive slashes '//' (Error code(s): T26) .]]></Comment>
+								<ValidationPattern Type="T26">
+								</ValidationPattern>
+							</Validation>
+						</SubField>
+					</Validations>
+				</SwiftField>
+				<SwiftField Name="31D">
+					<SwiftFieldDef Name="31">
+						<Generic>false</Generic>
+						<Description><![CDATA[Date and Place of Expiry]]></Description>
+						<Option Name="D">
+							<Format><![CDATA[6!n29x]]></Format>
+							<Specification><![CDATA[(Date) (Place)]]></Specification>
+							<Description><![CDATA[Date and Place of Expiry]]></Description>
+						</Option>
+					</SwiftFieldDef>
+					<Repeating>false</Repeating>
+					<Presence>M</Presence>
+					<Options>D</Options>
+					<Validations>
+						<SubField Name="Date">
+							<Validation>
+								<Options>D</Options>
+								<ErrorCode>T50</ErrorCode>
+								<Comment><![CDATA[Date must be a valid date expressed as YYMMDD (Error code(s): T50) .]]></Comment>
+								<ValidationPattern Type="DATE">
+									<Format>yyMMdd</Format>
+								</ValidationPattern>
+							</Validation>
+						</SubField>
+					</Validations>
+				</SwiftField>
+				<SwiftField Name="50">
+					<SwiftFieldDef Name="50">
+						<Generic>false</Generic>
+						<Description><![CDATA[Applicant]]></Description>
+						<Option Name="">
+							<Format><![CDATA[4*35x]]></Format>
+							<Specification><![CDATA[(Narrative)]]></Specification>
+							<Description><![CDATA[Applicant]]></Description>
+						</Option>
+					</SwiftFieldDef>
+					<Repeating>false</Repeating>
+					<Presence>M</Presence>
+					<Options> </Options>
+				</SwiftField>
+				<SwiftField Name="59">
+					<SwiftFieldDef Name="59">
+						<Generic>false</Generic>
+						<Description><![CDATA[Beneficiary]]></Description>
+						<Option Name="">
+							<Format><![CDATA[[/34xCRLF]4*35x]]></Format>
+							<Specification><![CDATA[(Account) (Name & Address)]]></Specification>
+							<Description><![CDATA[Beneficiary]]></Description>
+						</Option>
+					</SwiftFieldDef>
+					<Repeating>false</Repeating>
+					<Presence>M</Presence>
+					<Options> </Options>
+				</SwiftField>
+				<SwiftField Name="32B">
+					<SwiftFieldDef Name="32">
+						<Generic>false</Generic>
+						<Description><![CDATA[Currency Code, Amount]]></Description>
+						<Option Name="B">
+							<Format><![CDATA[3!a15d]]></Format>
+							<Specification><![CDATA[(Currency) (Amount)]]></Specification>
+							<Description><![CDATA[Currency Code, Amount]]></Description>
+						</Option>
+					</SwiftFieldDef>
+					<Repeating>false</Repeating>
+					<Presence>M</Presence>
+					<Options>B</Options>
+					<Validations>
+						<SubField Name="Amount">
+							<Validation>
+								<Options>B</Options>
+								<ErrorCode>C03</ErrorCode>
+								<Comment><![CDATA[The number of digits following the comma must not exceed the maximum number allowed for the specified currency (Error code(s): C03, T40, T43) .]]></Comment>
+								<ValidationPattern Type="Decimal">
+									<currency-field>Currency</currency-field>
+								</ValidationPattern>
+							</Validation>
+						</SubField>
+						<SubField Name="Currency">
+							<Validation>
+								<Options>B</Options>
+								<ErrorCode>T52</ErrorCode>
+								<Comment><![CDATA[Currency must be a valid ISO 4217 currency code (Error code(s): T52) .]]></Comment>
+								<ValidationPattern Type="Currency Code">
+								</ValidationPattern>
+							</Validation>
+						</SubField>
+					</Validations>
+				</SwiftField>
+				<SwiftField Name="39A">
+					<SwiftFieldDef Name="39">
+						<Generic>false</Generic>
+						<Description><![CDATA[Percentage Credit Amount Tolerance]]></Description>
+						<Option Name="A">
+							<Format><![CDATA[2n/2n]]></Format>
+							<Specification><![CDATA[(Tolerance 1) (Tolerance 2)]]></Specification>
+							<Description><![CDATA[Percentage Credit Amount Tolerance]]></Description>
+						</Option>
+					</SwiftFieldDef>
+					<Repeating>false</Repeating>
+					<Presence>O</Presence>
+					<Options>A</Options>
+				</SwiftField>
+				<SwiftField Name="39B">
+					<SwiftFieldDef Name="39">
+						<Generic>false</Generic>
+						<Description><![CDATA[Maximum Credit Amount]]></Description>
+						<Option Name="B">
+							<Format><![CDATA[13x]]></Format>
+							<Specification><![CDATA[(Code)]]></Specification>
+							<Description><![CDATA[Maximum Credit Amount]]></Description>
+						</Option>
+					</SwiftFieldDef>
+					<Repeating>false</Repeating>
+					<Presence>O</Presence>
+					<Options>B</Options>
+					<Validations>
+						<SubField Name="Code">
+							<Validation>
+								<Options>B</Options>
+								<ErrorCode>T01</ErrorCode>
+								<Comment><![CDATA[The following code must be used (Error code(s): T01) :]]></Comment>
+								<ValidationPattern Type="CODE">
+									<Codes>
+										<Code Name="NOT EXCEEDING">
+											<Description>Qualifies the documentary credit amount.</Description>
+										</Code>
+									</Codes>
+								</ValidationPattern>
+							</Validation>
+						</SubField>
+					</Validations>
+				</SwiftField>
+				<SwiftField Name="39C">
+					<SwiftFieldDef Name="39">
+						<Generic>false</Generic>
+						<Description><![CDATA[Additional Amounts Covered]]></Description>
+						<Option Name="C">
+							<Format><![CDATA[4*35x]]></Format>
+							<Specification><![CDATA[(Narrative)]]></Specification>
+							<Description><![CDATA[Additional Amounts Covered]]></Description>
+						</Option>
+					</SwiftFieldDef>
+					<Repeating>false</Repeating>
+					<Presence>O</Presence>
+					<Options>C</Options>
+				</SwiftField>
+				<SwiftField Name="41a">
+					<SwiftFieldDef Name="41">
+						<Generic>false</Generic>
+						<Description><![CDATA[Available With... By...]]></Description>
+						<Option Name="A">
+							<Format><![CDATA[(4!a2!a2!c[3!c]CRLF)14x]]></Format>
+							<Specification><![CDATA[(Identifier Code) (Code)]]></Specification>
+							<Description><![CDATA[Available With... By...]]></Description>
+						</Option>
+						<Option Name="D">
+							<Format><![CDATA[(4*35x)CRLF14x | (3*35x)CRLF14x | (2*35x)CRLF14x | (35x)CRLF14x]]></Format>
+							<Specification><![CDATA[(Name & Address)(Code) |(Name & Address)(Code) |(Name & Address)(Code)|(Name & Address)(Code)]]></Specification>
+							<Description><![CDATA[Available With... By...]]></Description>
+						</Option>
+					</SwiftFieldDef>
+					<Repeating>false</Repeating>
+					<Presence>O</Presence>
+					<Options>A, D</Options>
+					<Validations>
+						<SubField Name="Identifier_Code">
+							<Validation>
+								<Options>A</Options>
+								<ErrorCode>T27, T28, T29, T45</ErrorCode>
+								<Comment><![CDATA[Identifier Code must be a registered BIC or BEI (Error code(s): T27,T28,T29,T45)]]></Comment>
+								<ValidationPattern Type="BIC">
+								</ValidationPattern>
+							</Validation>
+							<Validation>
+								<Options>A</Options>
+								<ErrorCode>C05</ErrorCode>
+								<Comment><![CDATA[Identifier Code must not be a BEI. Please refer to the latest version of the BIC Directory - Corporations for more information about BEIs. This error code applies to all types of BICs referenced in a FIN message including SWIFT BICs, non-SWIFT BICs, Masters, Synonyms, Live destinations and Test & Training destinations . (Error code(s): C05) .]]></Comment>
+								<ValidationPattern Type="C05">
+								</ValidationPattern>
+							</Validation>
+						</SubField>
+						<SubField Name="Code">
+							<Validation>
+								<Options>A, D</Options>
+								<ErrorCode>T68</ErrorCode>
+								<Comment><![CDATA[Code must contain one of the following codes (Error code(s): T68):]]></Comment>
+								<ValidationPattern Type="CODE">
+									<Codes>
+										<Code Name="BY PAYMENT">
+										</Code>
+										<Code Name="BY ACCEPTANCE">
+										</Code>
+										<Code Name="BY NEGOTIATION">
+										</Code>
+										<Code Name="BY DEF PAYMENT">
+										</Code>
+										<Code Name="BY MIXED PYMT">
+										</Code>
+									</Codes>
+								</ValidationPattern>
+							</Validation>
+						</SubField>
+					</Validations>
+				</SwiftField>
+				<SwiftField Name="44A">
+					<SwiftFieldDef Name="44">
+						<Generic>false</Generic>
+						<Description><![CDATA[Place of Taking in Charge /Dispatch from... / Place of Receipt]]></Description>
+						<Option Name="A">
+							<Format><![CDATA[1*65x]]></Format>
+							<Specification><![CDATA[(Narrative)]]></Specification>
+							<Description><![CDATA[Place of Taking in Charge /Dispatch from... / Place of Receipt]]></Description>
+						</Option>
+					</SwiftFieldDef>
+					<Repeating>false</Repeating>
+					<Presence>O</Presence>
+					<Options>A</Options>
+				</SwiftField>
+				<SwiftField Name="44E">
+					<SwiftFieldDef Name="44">
+						<Generic>false</Generic>
+						<Description><![CDATA[Port of Loading/Airport of Departure]]></Description>
+						<Option Name="E">
+							<Format><![CDATA[1*65x]]></Format>
+							<Specification><![CDATA[(Narrative)]]></Specification>
+							<Description><![CDATA[Port of Loading/Airport of Departure]]></Description>
+						</Option>
+					</SwiftFieldDef>
+					<Repeating>false</Repeating>
+					<Presence>O</Presence>
+					<Options>E</Options>
+				</SwiftField>
+				<SwiftField Name="44F">
+					<SwiftFieldDef Name="44">
+						<Generic>false</Generic>
+						<Description><![CDATA[Port of Discharge/Airport of Destination]]></Description>
+						<Option Name="F">
+							<Format><![CDATA[1*65x]]></Format>
+							<Specification><![CDATA[(Narrative)]]></Specification>
+							<Description><![CDATA[Port of Discharge/Airport of Destination]]></Description>
+						</Option>
+					</SwiftFieldDef>
+					<Repeating>false</Repeating>
+					<Presence>O</Presence>
+					<Options>F</Options>
+				</SwiftField>
+				<SwiftField Name="44B">
+					<SwiftFieldDef Name="44">
+						<Generic>false</Generic>
+						<Description><![CDATA[Place of Final Destination/For Transportation to.../Place of Delivery]]></Description>
+						<Option Name="B">
+							<Format><![CDATA[1*65x]]></Format>
+							<Specification><![CDATA[(Narrative)]]></Specification>
+							<Description><![CDATA[Place of Final Destination/For Transportation to.../Place of Delivery]]></Description>
+						</Option>
+					</SwiftFieldDef>
+					<Repeating>false</Repeating>
+					<Presence>O</Presence>
+					<Options>B</Options>
+				</SwiftField>
+				<SwiftField Name="44C">
+					<SwiftFieldDef Name="44">
+						<Generic>false</Generic>
+						<Description><![CDATA[Latest Date of Shipment]]></Description>
+						<Option Name="C">
+							<Format><![CDATA[6!n]]></Format>
+							<Specification><![CDATA[(Date)]]></Specification>
+							<Description><![CDATA[Latest Date of Shipment]]></Description>
+						</Option>
+					</SwiftFieldDef>
+					<Repeating>false</Repeating>
+					<Presence>O</Presence>
+					<Options>C</Options>
+					<Validations>
+						<SubField Name="Date">
+							<Validation>
+								<Options>C</Options>
+								<ErrorCode>T50</ErrorCode>
+								<Comment><![CDATA[Date must be a valid date expressed as YYMMDD (Error code(s): T50) .]]></Comment>
+								<ValidationPattern Type="DATE">
+									<Format>yyMMdd</Format>
+								</ValidationPattern>
+							</Validation>
+						</SubField>
+					</Validations>
+				</SwiftField>
+				<SwiftField Name="44D">
+					<SwiftFieldDef Name="44">
+						<Generic>false</Generic>
+						<Description><![CDATA[Shipment Period]]></Description>
+						<Option Name="D">
+							<Format><![CDATA[6*65x]]></Format>
+							<Specification><![CDATA[(Narrative)]]></Specification>
+							<Description><![CDATA[Shipment Period]]></Description>
+						</Option>
+					</SwiftFieldDef>
+					<Repeating>false</Repeating>
+					<Presence>O</Presence>
+					<Options>D</Options>
+				</SwiftField>
+				<SwiftField Name="45A">
+					<SwiftFieldDef Name="45">
+						<Generic>false</Generic>
+						<Description><![CDATA[Description of Goods and/or Services]]></Description>
+						<Option Name="A">
+							<Format><![CDATA[100*65x]]></Format>
+							<Specification><![CDATA[(Narrative)]]></Specification>
+							<Description><![CDATA[Description of Goods and/or Services]]></Description>
+						</Option>
+					</SwiftFieldDef>
+					<Repeating>false</Repeating>
+					<Presence>O</Presence>
+					<Options>A</Options>
+				</SwiftField>
+				<SwiftField Name="57a">
+					<SwiftFieldDef Name="57">
+						<Generic>false</Generic>
+						<Description><![CDATA['Advise Through' Bank]]></Description>
+						<Option Name="A">
+							<Format><![CDATA[/1!a([/34x])(CRLF4!a2!a2!c[3!c]) | [/34xCRLF](4!a2!a2!c[3!c])]]></Format>
+							<Specification><![CDATA[(CreditDebit)(Party Identifier)(Identifier Code) | (Party Identifier)(Identifier Code)]]></Specification>
+							<Description><![CDATA['Advise Through' Bank]]></Description>
+						</Option>
+						<Option Name="B">
+							<Format><![CDATA[/1!a[/34x](CRLF35x) | /1!a[/34x] | [/34xCRLF]35x | /34x]]></Format>
+							<Specification><![CDATA[(CreditDebit) (Party Identifier) (Location) | (CreditDebit)(Party Identifier) |(Party Identifier) (Location) | (Party Identifier)]]></Specification>
+							<Description><![CDATA['Advise Through' Bank]]></Description>
+						</Option>
+						<Option Name="D">
+							<Format><![CDATA[/1!a([/34x])(CRLF4*35x) | ([/34xCRLF])(4*35x)]]></Format>
+							<Specification><![CDATA[(CreditDebit)(Party Identifier)(Name & Address)|(Party Identifier)(Name & Address)]]></Specification>
+							<Description><![CDATA['Advise Through' Bank]]></Description>
+						</Option>
+					</SwiftFieldDef>
+					<Repeating>false</Repeating>
+					<Presence>O</Presence>
+					<Options>A, B, D</Options>
+					<Validations>
+						<SubField Name="Identifier_Code">
+							<Validation>
+								<Options>A</Options>
+								<ErrorCode>T27, T28, T29, T45</ErrorCode>
+								<Comment><![CDATA[Identifier Code must be a registered BIC or BEI (Error code(s): T27,T28,T29,T45)]]></Comment>
+								<ValidationPattern Type="BIC">
+								</ValidationPattern>
+							</Validation>
+							<Validation>
+								<Options>A</Options>
+								<ErrorCode>C05</ErrorCode>
+								<Comment><![CDATA[Identifier Code must not be a BEI. Please refer to the latest version of the BIC Directory - Corporations for more information about BEIs. This error code applies to all types of BICs referenced in a FIN message including SWIFT BICs, non-SWIFT BICs, Masters, Synonyms, Live destinations and Test & Training destinations . (Error code(s): C05) .]]></Comment>
+								<ValidationPattern Type="C05">
+								</ValidationPattern>
+							</Validation>
+						</SubField>
+									<SubField Name="CreditDebit">
+										<Validation>
+											<Options>A, B, D</Options>
+											<ErrorCode>T51</ErrorCode>
+											<Comment><![CDATA[CreditDebit must contain the following codes (Error Code:T51)]]></Comment>
+											<ValidationPattern xsi:type="CODE" Type="CODE">
+												<Type>CODE</Type>
+												<Codes>
+													<Code Name="C">
+														<DetailedName>Credit</DetailedName>
+													</Code>
+													<Code Name="D">
+														<DetailedName>Debit</DetailedName>
+													</Code>
+												</Codes>
+										</ValidationPattern>
+									</Validation>
+								</SubField>						
+					</Validations>
+				</SwiftField>
+				<SwiftField Name="79">
+					<SwiftFieldDef Name="79">
+						<Generic>false</Generic>
+						<Description><![CDATA[Narrative]]></Description>
+						<Option Name="">
+							<Format><![CDATA[35*50x]]></Format>
+							<Specification><![CDATA[(Narrative)]]></Specification>
+							<Description><![CDATA[Narrative]]></Description>
+						</Option>
+					</SwiftFieldDef>
+					<Repeating>false</Repeating>
+					<Presence>O</Presence>
+					<Options> </Options>
+				</SwiftField>
+				<SwiftField Name="72">
+					<SwiftFieldDef Name="72">
+						<Generic>false</Generic>
+						<Description><![CDATA[Sender to Receiver Information]]></Description>
+						<Option Name="">
+							<Format><![CDATA[6*35x]]></Format>
+							<Specification><![CDATA[(Narrative)]]></Specification>
+							<Description><![CDATA[Sender to Receiver Information]]></Description>
+						</Option>
+					</SwiftFieldDef>
+					<Repeating>false</Repeating>
+					<Presence>O</Presence>
+					<Options> </Options>
+				</SwiftField>
+			</Fields>
+		</Data>
+		<Trailer>
+		</Trailer>
+	</SwiftFields>
+	<validationrules name="Default">
+		<hdrvalidationrules>
+			<fieldvalidations>
+				<fieldvalidation>
+					<name>U09</name>
+					<formula><![CDATA[if($this.Header.GetFieldIndex("User_Header") != -1) {
+    def userHeader = $this.Header.GetSection("User_Header");
+    if(userHeader.$size > 0 && userHeader[0].IsNotNull("Validation_Flag")) {
+        return false;
+    }
+}
+return true;
+]]></formula>
+					<severity>error</severity>
+					<cascade>true</cascade>
+					<error-code>U09</error-code>
+					<actionmessage><![CDATA["User has used tag 119 in a message that is not a candidate for special processing"]]></actionmessage>
+				</fieldvalidation>
+			</fieldvalidations>
+		</hdrvalidationrules>
+		<datavalidationrules>
+			<fieldvalidations>
+				<fieldvalidation>
+					<name>C1</name>
+					<comment><![CDATA[C1
+Either field 39A or 39B, but not both, may be present (Error code(s): D05). ]]></comment>
+					<formula><![CDATA[!(F39A.$size > 0 && F39B.$size > 0)]]></formula>
+					<severity>error</severity>
+					<cascade>true</cascade>
+					<error-code>D05</error-code>
+					<actionmessage><![CDATA["Either field 39A or 39B, but not both, may be present"]]></actionmessage>
+				</fieldvalidation>
+				<fieldvalidation>
+					<name>C2</name>
+					<comment><![CDATA[C2
+Either field 44C or 44D, but not both, may be present (Error code(s): D06).]]></comment>
+					<formula><![CDATA[!(F44C.$size > 0 && F44D.$size > 0)]]></formula>
+					<severity>error</severity>
+					<cascade>true</cascade>
+					<error-code>D06</error-code>
+					<actionmessage><![CDATA["Either field 44C or 44D, but not both, may be present"]]></actionmessage>
+				</fieldvalidation>
+				<fieldvalidation>
+					<name>ERI</name>
+					<fieldname>72.Narrative</fieldname>
+						<formula><![CDATA[ApplyERICodeValidationStructured($value);]]></formula>
+						<severity>error</severity>
+						<cascade>true</cascade>
+						<error-code>T47</error-code>
+						<actionmessage><![CDATA["In an ERI field (i.e. fields 61, 72, 77A, 79, 86) the data part of a code word /OCMT/, or /CHGS/, is being validated, but the ending separator (i.e. third slash) is missing or the code words are duplicated."]]></actionmessage>
+					</fieldvalidation>
+					<fieldvalidation>
+						<name>ERI</name>
+						<fieldname>79.Narrative</fieldname>
+					<formula><![CDATA[ApplyERICodeValidationUnstructured($value);]]></formula>
+					<severity>error</severity>
+					<cascade>true</cascade>
+					<error-code>T47</error-code>
+					<actionmessage><![CDATA["In an ERI field (i.e. fields 61, 72, 77A, 79, 86) the data part of a code word /OCMT/, or /CHGS/, is being validated, but the ending separator (i.e. third slash) is missing or the code words are duplicated."]]></actionmessage>
+				</fieldvalidation>
+			</fieldvalidations>
+		</datavalidationrules>
+		<tlrvalidationrules>
+			<fieldvalidations>
+			</fieldvalidations>
+		</tlrvalidationrules>
+	</validationrules>
+</SwiftMessageFormat>
+

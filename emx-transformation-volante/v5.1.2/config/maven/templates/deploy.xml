@@ -1,0 +1,38 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.volantetech.volante</groupId>
+    <artifactId>volante</artifactId>
+    <packaging>jar</packaging>
+    <version>5.0.0</version>
+    <name>Install Jars</name>
+    <url>http://volantetech.com</url>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-deploy-plugin</artifactId>
+                <version>2.7</version>
+                <executions>
+#foreach($jar in ${JARFILES})
+#set( $num = $velocityCount - 1 )
+                    <execution>
+                        <id>Id-$velocityCount</id>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>deploy-file</goal>
+                        </goals>
+                        <configuration>
+                            <file>${jar}</file>
+                            <pomFile>$POMFILES.get($num)</pomFile>
+                            <url>${url}</url>
+                            <repositoryId>${repositoryId}</repositoryId>
+                        </configuration>
+                    </execution>
+#end
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>

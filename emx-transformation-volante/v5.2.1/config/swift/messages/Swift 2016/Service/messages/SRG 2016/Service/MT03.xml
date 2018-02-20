@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<SwiftMessageFormat name="MT03">
+	<standard-version><![CDATA[SRG 2016]]></standard-version>
+	<standard-release-qualifier>20160308</standard-release-qualifier>
+	<DescriptiveName><![CDATA[Select Command]]></DescriptiveName>
+	<Category><![CDATA[Service]]></Category>
+	<Description><![CDATA[This message initiates a FIN session for the LT. It also allows the user to specify the scope of the session (input/output) and the destination delivery subsets to be associated with the selecting LT. The subsets are emptied in the sequence in which they are listed in the Select Command. If selected, the LT-directed queue is emptied before any other subsets.
+
+This message cannot be issued by a synonym.
+
+From: User To: GPA
+
+Notes
+When field 204: <select-state> has the value NY or YY, then one of the following conditions must
+be met:
+
+field 208: <lt-directed-queue> must have the value Y
+
+field 338: <delivery-subset-list> must be defined.
+
+When field 204: <select-state> has the value NY (output only), then the system only accepts the 05 Quit Command at input.
+
+When field 204: <select-state> has the value YN (input only), then field 338: <deliverysubset-
+list> cannot be defined.
+
+Field 204: <select-state> with the value NN is not allowed.
+The Trailer Block is only present if the message is sent by a Test & Training LT and contains a TNG trailer.
+
+The default branch code XXX must be used in this message.
+
+Field tag 501 is mandatory in SWIFTNet Phase 1 and not allowed in SWIFTNet Phase 2.]]></Description>
+	<SwiftFields>
+		<customizable>false</customizable>
+		<modifiable>true</modifiable>
+		<SwiftMessageType>Service</SwiftMessageType>
+		<HeaderAndTrailerType>SWIFT_INPUT_HEADER</HeaderAndTrailerType>
+		<Header>
+		</Header>
+		<Data>
+			<Fields>
+				<SystemField Name="application-id">
+					<description><![CDATA[Application Identifier, where:
+
+a)  F = FIN application
+
+b)  A/L = GPA application
+
+c)  X = all applications]]></description>
+					<datatype>String</datatype>
+					<required>true</required>
+					<SwiftSystemFieldDef Name="application-id" Tag="101">
+						<Format><![CDATA[1!c]]></Format>
+						<Specification><![CDATA[(application-id)]]></Specification>
+						<Description><![CDATA[Application Identifier, where:
+
+a)  F = FIN application
+
+b)  A/L = GPA application
+
+c)  X = all applications]]></Description>
+						<Validations>
+							<Validation>
+								<formula>In($value, "F", "A", "L", "X")</formula>
+								<error-code>V08</error-code>
+								<actionmessage>"Invalid Application Identifier '" + $value + "'. Valid Application Identifier values are : F, A, L, X."</actionmessage>
+							</Validation>
+						</Validations>
+					</SwiftSystemFieldDef>
+				</SystemField>
+				<SystemField Name="window-size">
+					<description><![CDATA[Maximum number of messages sent or received without waiting for or sending acknowledgement. Value between 001 and 012.Default FIN session window size is 12.]]></description>
+					<datatype>String</datatype>
+					<required>true</required>
+					<SwiftSystemFieldDef Name="window-size" Tag="110">
+						<Format><![CDATA[3!n]]></Format>
+						<Specification><![CDATA[(window-size)]]></Specification>
+						<Description><![CDATA[Maximum number of messages sent or received without waiting for or sending acknowledgement.Default FIN session window size is 12.]]></Description>
+					</SwiftSystemFieldDef>
+				</SystemField>
+				<SystemField Name="select-state">
+					<description><![CDATA[LT select state, where:
+
+a)  YN = input only
+
+b)  NY = output only
+
+c)  YY = input and output.
+
+Output refers to messages which are not LT-directed.]]></description>
+					<datatype>String</datatype>
+					<required>true</required>
+					<SwiftSystemFieldDef Name="select-state" Tag="204">
+						<Format><![CDATA[2!a]]></Format>
+						<Specification><![CDATA[(select-state)]]></Specification>
+						<Description><![CDATA[LT select state, where:
+
+a)  YN = input only
+
+b)  NY = output only
+
+c)  YY = input and output.
+
+Output refers to messages which are not LT-directed.]]></Description>
+						<Validations>
+							<Validation>
+								<formula>In($value, "YN", "NY", "YY")</formula>
+								<error-code>V08</error-code>
+								<actionmessage>"Invalid State '" + $value + "'. Valid State values are : YN, NY, YY."</actionmessage>
+							</Validation>
+						</Validations>
+					</SwiftSystemFieldDef>
+				</SystemField>
+				<SystemField Name="lt-directed-queue">
+					<description><![CDATA[Select output of messages from the LT-directed queue, where:
+
+a)  Y = yes
+
+b)  N = no]]></description>
+					<datatype>String</datatype>
+					<required>true</required>
+					<SwiftSystemFieldDef Name="lt-directed-queue" Tag="208">
+						<Format><![CDATA[1!a]]></Format>
+						<Specification><![CDATA[(lt-directed-queue)]]></Specification>
+						<Additional-Format><![CDATA[Y/N]]></Additional-Format>
+						<Description><![CDATA[Select output of messages from the LT-directed queue, where:
+
+a)  Y = yes
+
+b)  N = no]]></Description>
+						<Validations>
+							<Validation>
+								<formula>In($value, "Y", "N")</formula>
+								<error-code>V08</error-code>
+								<actionmessage>"Invalid LT Directed Queue '" + $value + "'"</actionmessage>
+							</Validation>
+						</Validations>
+					</SwiftSystemFieldDef>
+				</SystemField>
+				<SystemField Name="delivery-subset-list">
+					<description><![CDATA[Up to 30 delivery subsets can be selected.]]></description>
+					<datatype>String</datatype>
+					<required>false</required>
+					<SwiftSystemFieldDef Name="delivery-subset-list" Tag="338">
+						<Format><![CDATA[(180c)]]></Format>
+						<Specification><![CDATA[(delivery-subset-list)]]></Specification>
+						<Additional-Format><![CDATA[<delivery-subset-name> 6!c[*30]]]></Additional-Format>
+						<Description><![CDATA[Up to 30 delivery subsets can be selected.]]></Description>
+						<Validations>
+							<Validation>
+								<formula>Length($value)%6==0</formula>
+								<error-code>V07</error-code>
+								<actionmessage>"Invalid Delivery Subset List '"+$value+"'"</actionmessage>
+							</Validation>
+						</Validations>
+					</SwiftSystemFieldDef>
+				</SystemField>
+				<SystemField Name="current-session-info">
+					<description><![CDATA[Current session information. For example: 00250000450000440000500000501 where:
+
+a)  session-number = 0025
+
+b)  isn = 000045
+
+c)  isnnak = 000044
+
+d)  osn = 000050
+
+e)  osnnak = 000050
+
+f)  ack-replay-indicator = 1]]></description>
+					<datatype>Section</datatype>
+					<minoccurs>0</minoccurs>
+					<maxoccurs>1</maxoccurs>
+					<SwiftSystemFieldDef Name="current-session-info" Tag="330">
+						<Format><![CDATA[(4!n)(6!n)(6!n)(6!n)(6!n)(1!n)]]></Format>
+						<Specification><![CDATA[(session-number)(isn)(isnnak)(osn)(osnnak)(ack-replay-indicator)]]></Specification>
+						<Description><![CDATA[Current session information. For example: 00250000450000440000500000501 where:
+
+a)  session-number = 0025
+
+b)  isn = 000045
+
+c)  isnnak = 000044
+
+d)  osn = 000050
+
+e)  osnnak = 000050
+
+f)  ack-replay-indicator = 1]]></Description>
+					</SwiftSystemFieldDef>
+				</SystemField>
+			</Fields>
+		</Data>
+		<Trailer>
+		</Trailer>
+	</SwiftFields>
+	<validationrules name="Default">
+		<hdrvalidationrules>
+			<fieldvalidations>
+			</fieldvalidations>
+		</hdrvalidationrules>
+		<datavalidationrules>
+			<fieldvalidations>
+				<fieldvalidation>
+					<name>E1</name>
+					<fieldname>select-state</fieldname>
+					<comment><![CDATA[When field 204:<select-state> has the value NY or YY, then one of the following conditions must be met: field 208: <lt-directed-queue> must have the value Y , field 338: <delivery-subset-list> must be defined.]]></comment>
+					<formula><![CDATA[Implies($value == "NY" || $value == "YY", lt_directed_queue == "Y" || Exists(delivery_subset_list))]]></formula>
+					<severity>error</severity>
+					<cascade>true</cascade>
+					<error-code>V07</error-code>
+					<actionmessage><![CDATA["When field 204: 'select-state' has the value NY or YY, then one of the following conditions must be met: field 208: 'lt-directed-queue' must have the value Y , field 338: 'delivery-subset-list' must be defined."]]></actionmessage>
+				</fieldvalidation>
+                                  <fieldvalidation>
+						<name>E2</name>
+						<formula><![CDATA[def header = $this.Header;
+def BranchCode = Mid(header.Basic_Header[0].LT_Identifier, 9, 3);
+if(BranchCode != "XXX")
+    return false;
+
+return true;
+]]></formula>
+						<severity>error</severity>
+						<cascade>true</cascade>
+						<error-code>H21</error-code>
+						<actionmessage><![CDATA["The default branch code XXX must be used in this message."]]></actionmessage>
+				</fieldvalidation>
+				<fieldvalidation>
+					<name>E3</name>
+					<fieldname>select-state</fieldname>
+					<formula><![CDATA[Implies($value == "YN", IsNull(delivery_subset_list))]]></formula>
+					<severity>error</severity>
+					<cascade>true</cascade>
+					<error-code>V07</error-code>
+					<actionmessage><![CDATA["When field 204: 'select-state' has the value YN (input only), then field 338: 'delivery-subset-list' cannot be defined."]]></actionmessage>
+				</fieldvalidation>
+			</fieldvalidations>
+		</datavalidationrules>
+		<tlrvalidationrules>
+			<fieldvalidations>
+			</fieldvalidations>
+		</tlrvalidationrules>
+	</validationrules>
+</SwiftMessageFormat>
+

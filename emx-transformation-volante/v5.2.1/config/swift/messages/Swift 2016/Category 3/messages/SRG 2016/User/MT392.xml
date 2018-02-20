@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<SwiftMessageFormat name="MT392">
+	<standard>SWIFT</standard>
+	<standard-name>MT392</standard-name>
+	<standard-version>SRG 2016</standard-version>
+	<standard-release-qualifier>20160308</standard-release-qualifier>
+	<DescriptiveName><![CDATA[Request for Cancellation]]></DescriptiveName>
+	<Category>Treasury Markets Foreign Exchange,Money Markets &amp;Derivatives</Category>
+	<Description>This message is: 
+
+a) sent by a financial institution to request a second financial institution to consider cancellation of the SWIFT message identified in the request. 
+
+b) sent by a corporate customer to request a financial institution to consider cancellation of the SWIFT message identified in the request. 
+
+If the Receiver of the request for cancellation has already acted on the message for which cancellation is requested, the MT n92 asks for a retransfer, that is, reversal, with the beneficiary's consent.
+
+</Description>
+	<SwiftFields>
+		<customizable>true</customizable>
+		<modifiable>false</modifiable>
+		<SwiftMessageType>User</SwiftMessageType>
+		<max-length>2000</max-length>
+		<HeaderAndTrailerType>SWIFT_INPUT_OUTPUT_HEADER</HeaderAndTrailerType>
+		<Header>
+		</Header>
+		<Data>
+			<Fields>
+				<SwiftField Name="20">
+					<SwiftFieldDef Name="20">
+						<Generic>false</Generic>
+						<Description><![CDATA[Reference]]></Description>
+						<Option Name="">
+							<Format><![CDATA[16x]]></Format>
+							<Specification><![CDATA[(Reference)]]></Specification>
+							<Description><![CDATA[Transaction Reference Number]]></Description>
+						</Option>
+					</SwiftFieldDef>
+					<Repeating>false</Repeating>
+					<Presence>M</Presence>
+					<Options> </Options>
+					<Validations>
+						<SubField Name="Reference">
+							<Validation>
+								<Options> </Options>
+								<ErrorCode>T26</ErrorCode>
+								<Comment><![CDATA[This field must not start or end with a slash '/' and must not contain two consecutive slashes '//'(Error code(s): T26).]]></Comment>
+								<ValidationPattern xsi:type="T26" Type="T26">
+									<Type>T26</Type>
+								</ValidationPattern>
+							</Validation>
+						</SubField>
+					</Validations>
+				</SwiftField>
+				<SwiftField Name="21">
+					<SwiftFieldDef Name="21">
+						<Generic>false</Generic>
+						<Option Name="">
+							<Format><![CDATA[16x]]></Format>
+							<Specification><![CDATA[(Reference)]]></Specification>
+							<Description><![CDATA[Related Reference]]></Description>
+						</Option>
+					</SwiftFieldDef>
+					<Repeating>false</Repeating>
+					<Presence>M</Presence>
+					<Options> </Options>
+					<Validations>
+						<SubField Name="Reference">
+							<Validation>
+								<Options> </Options>
+								<ErrorCode>T26</ErrorCode>
+								<Comment><![CDATA[This field must not start or end with a slash '/' and must not contain two consecutive slashes '//'(Error code(s): T26).]]></Comment>
+								<ValidationPattern xsi:type="T26" Type="T26">
+									<Type>T26</Type>
+								</ValidationPattern>
+							</Validation>
+						</SubField>
+					</Validations>
+				</SwiftField>
+				<SwiftField Name="11S">
+					<SwiftFieldDef Name="11">
+						<Generic>false</Generic>
+						<Description><![CDATA[Currency]]></Description>
+						<Option Name="S">
+							<Format><![CDATA[3!nCRLF6!n[CRLF4!n6!n]]]></Format>
+							<Specification><![CDATA[(MT Number)(Date)(Session Number) (ISN)]]></Specification>
+							<Description><![CDATA[MT and Date of the Original Message]]></Description>
+						</Option>
+					</SwiftFieldDef>
+					<Repeating>false</Repeating>
+					<Presence>M</Presence>
+					<Options>S</Options>
+					<Validations>
+						<SubField Name="Date">
+							<Validation>
+								<Options>S</Options>
+								<ErrorCode>T50</ErrorCode>
+								<Comment><![CDATA[Date must be a valid date expressed as YYMMDD (Error code(s): T50).]]></Comment>
+								<ValidationPattern xsi:type="DATE" Type="DATE">
+									<Type>DATE</Type>
+									<Format>yyMMdd</Format>
+								</ValidationPattern>
+							</Validation>
+						</SubField>
+					</Validations>
+				</SwiftField>
+				<SwiftField Name="79">
+					<SwiftFieldDef Name="79">
+						<Generic>false</Generic>
+						<Option Name="">
+							<Format><![CDATA[35*50x]]></Format>
+							<Specification><![CDATA[(Narrative)]]></Specification>
+							<Description><![CDATA[Narrative Description of the Original Message]]></Description>
+						</Option>
+					</SwiftFieldDef>
+					<Repeating>false</Repeating>
+					<Presence>O</Presence>
+					<Options> </Options>
+				</SwiftField>
+				<CopyOfFields Name="Copy Of Fields">
+					<Description><![CDATA[Copy of at least the Mandatory Fields of the Original Message]]></Description>
+					<Mandatory>false</Mandatory>
+				</CopyOfFields>
+			</Fields>
+		</Data>
+		<Trailer>
+		</Trailer>
+	</SwiftFields>
+	<validationrules name="Default">
+		<hdrvalidationrules>
+			<fieldvalidations>
+				<fieldvalidation>
+					<name>U09</name>
+					<formula><![CDATA[if($this.Header.GetFieldIndex("User_Header") != -1) {
+    def userHeader = $this.Header.GetSection("User_Header");
+    if(userHeader.$size > 0 && userHeader[0].IsNotNull("Validation_Flag")) {
+        return false;
+    }
+}
+return true;
+]]></formula>
+					<severity>error</severity>
+					<cascade>true</cascade>
+					<error-code>U09</error-code>
+					<actionmessage><![CDATA["User has used tag 119 in a message that is not a candidate for special processing"]]></actionmessage>
+				</fieldvalidation>
+	<fieldvalidation>
+		<name>U03</name>
+		<fieldname>User Header</fieldname>
+		<formula><![CDATA[Iff(IsNotNull(User_Header.Service_Type_Identifier), 
+    IsNotNull(User_Header.Unique_End_To_End_Transaction_Reference))]]></formula>
+		<severity>error</severity>
+		<cascade>true</cascade>
+		<error-code>U03</error-code>
+		<actionmessage><![CDATA["When populating an end-to-end reference, both fields 111 and 121 must be populated: a message that contains only one of these two fields will not be accepted by FIN."]]></actionmessage>
+	</fieldvalidation>
+			</fieldvalidations>
+		</hdrvalidationrules>
+		<datavalidationrules>
+			<fieldvalidations>
+				<fieldvalidation>
+					<name>F11S</name>
+					<fieldname>11S.MT_Number</fieldname>
+					<formula><![CDATA[Between($value, 100, 999)]]></formula>
+					<severity>error</severity>
+					<cascade>true</cascade>
+					<error-code>T18</error-code>
+					<actionmessage><![CDATA["In field 11S, MT Number must be a number in the range 100 - 999."]]></actionmessage>
+				</fieldvalidation>
+				<fieldvalidation>
+					<name>C1</name>
+					<formula><![CDATA[If(F79.$size == 0, IsNotNull(Copy_Of_Fields), true)]]></formula>
+					<severity>error</severity>
+					<cascade>true</cascade>
+					<error-code>C25</error-code>
+					<actionmessage><![CDATA["Either field 79 or a copy of at least the mandatory fields of the original message must be present."]]></actionmessage>
+				</fieldvalidation>
+				<fieldvalidation>
+					<name>FCP</name>
+					<fieldname>Copy Of Fields</fieldname>
+					<formula><![CDATA[def ActualValue = replace($value, "\r\n", "\n");
+(FindFirst(ActualValue, "\n:77F:") == -1 && 
+   FindFirst(ActualValue, "\n:77G:") == -1 && 
+   FindFirst(ActualValue, "\n:77S:") == -1 && 
+   FindFirst(ActualValue, "\n:77T:") == -1) && 
+  (!StartsWith(ActualValue, ":77F:") && 
+     !StartsWith(ActualValue, ":77G:") && 
+     !StartsWith(ActualValue, ":77S:") && 
+     !StartsWith(ActualValue, ":77T:"))]]></formula>
+					<severity>error</severity>
+					<cascade>true</cascade>
+					<error-code>T13</error-code>
+					<actionmessage><![CDATA["Tags 77F, 77G, 77S or 77T cannot appear in Copy Of Fields."]]></actionmessage>
+				</fieldvalidation>
+				<fieldvalidation>
+					<name>ERI</name>
+					<fieldname>79.Narrative</fieldname>
+					<formula><![CDATA[ApplyERICodeValidationUnstructured($value);]]></formula>
+					<severity>error</severity>
+					<cascade>true</cascade>
+					<error-code>T47</error-code>
+					<actionmessage><![CDATA["In an ERI field (i.e. fields 61, 72, 77A, 79, 86) the data part of a code word /OCMT/, or /CHGS/, is being validated, but the ending separator (i.e. third slash) is missing or the code words are duplicated."]]></actionmessage>
+				</fieldvalidation>
+			</fieldvalidations>
+		</datavalidationrules>
+		<tlrvalidationrules>
+			<fieldvalidations>
+			</fieldvalidations>
+		</tlrvalidationrules>
+	</validationrules>
+</SwiftMessageFormat>
+

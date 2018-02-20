@@ -1,0 +1,40 @@
+<?xml version="1.0" standalone="yes"?>
+
+<project basedir="." default="build">
+	<!--property name="designer.home" value="$DESIGNER_HOME"/-->
+	<property name="designer.runtime.lib" value="5.2.1/lib/runtime"/>
+	<property name="entity.dir" value="."/>
+
+	<!-- =================================================================== -->
+	<!-- Define the code generator task                                      -->
+	<!-- =================================================================== -->
+	<taskdef name="cgtask" classname="com.volante.util.tasks.ant.CGTask" classpath="../../../5.2.1/lib/volante-tasks.jar" />
+    <taskdef name="testtask" classname="com.volante.util.tasks.ant.TestTask" classpath="../../../5.2.1/lib/volante-tasks.jar" />
+	<!-- =================================================================== -->
+	<!-- Builds the project/cartridge (using the task above)                        -->
+	<!-- =================================================================== -->
+	<target name="build" description="Compile cartridge/project">
+		<echo message="Building cartridge/project $ENTITY_NAME ..."/>
+		<cgtask platform="java" home="5.2.1"
+                        rebuild="false" stopOnFailure = "true" noDebug="true">
+
+		</cgtask>    <!-- targetDir=".\target" includeDependencies="true" -->
+	</target>
+
+    <target name="test" depends="build" description="Test cartridge/project">
+   		<echo message="Testing cartridge/project $ENTITY_NAME ..."/>
+   		<testtask platform="java" home="5.2.1" stopOnFailure = "true">
+	   	<!--	<report type="junit" format="html" option="frames" toDir="./target/junitreport" ></report> -->
+   		</testtask>
+   	</target>
+
+
+	<!-- =================================================================== -->
+	<!-- Clean the generated java dir   -->
+	<!-- =================================================================== -->
+	<target name="clean" description="Deletes all the generated artifacts.">
+        <delete includeemptydirs="true">
+            <fileset dir="${entity.dir}" includes="**/java/"/>
+         </delete>
+	</target>
+</project>

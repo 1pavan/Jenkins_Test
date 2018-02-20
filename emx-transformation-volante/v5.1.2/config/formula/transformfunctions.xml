@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<formulae>
+
+    <formula name="SecFilter">
+        <description>Filters the section elements based on the given criteria. The criteria should be a string literal conforming to formulae syntax. The fields you refer in the criteria should be fully qualified names.
+        </description>
+        <signature>SecFilter(section, criteria)</signature>
+        <category>Transform</category>
+        <Class>com.tplus.transform.design.formula.functions.DataObjectFilterFunction</Class>
+    </formula>
+
+    <formula name="SecGroup">
+        <description>Groups the section based on the specified field and returns a collection of grouped elements.</description>
+        <signature>SecGroup(section, groupByFieldName)</signature>
+        <category>Transform</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.SectionTransformFunctions"/>
+        <property name="method" value="secGroup"/>
+        <property name="designclass" value="com.tplus.transform.design.formula.functions.SectionFunctions"/>
+        <property name="designmethod" value="secGroup"/>
+    </formula>
+
+    <formula name="SecSort">
+        <description>Sorts the section based on the specified field and returns a sorted collection (original section is left untouched).</description>
+        <signature>SecSort(section, sortByFieldName)</signature>
+        <category>Transform</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.SectionTransformFunctions"/>
+        <property name="method" value="secSort"/>
+        <property name="designclass" value="com.tplus.transform.design.formula.functions.SectionFunctions"/>
+        <property name="designmethod" value="secSort"/>
+    </formula>
+
+    <formula name="SecSort">
+        <description>Sorts the section based on the specified field(s); the original section is sorted. Multiple field name can be passed as list; field name can also refer to a nested field using the dot notation
+        </description>
+        <signature>SecSort(section, sortByFieldNames, ascDescOpt)</signature>
+        <category>Transform</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.SectionTransformFunctions"/>
+        <property name="method" value="sectionSort"/>
+    </formula>
+
+    <formula name="SecJoin">
+        <description>[Beta]Joins two sections.</description>
+        <signature>SecJoin(section1, section2)</signature>
+        <category>Transform</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.SectionTransformFunctions"/>
+        <property name="method" value="secJoin"/>
+        <property name="designclass" value="com.tplus.transform.design.formula.functions.SectionFunctions"/>
+        <property name="designmethod" value="secJoin"/>
+    </formula>
+
+
+    <formula name="SecDistinct">
+        <description>[Beta]Remove duplicate elements from the section.</description>
+        <signature>SecDistinct(section1)</signature>
+        <category>Transform</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.SectionTransformFunctions"/>
+        <property name="method" value="secDistinct"/>
+        <property name="designclass" value="com.tplus.transform.design.formula.functions.SectionFunctions"/>
+        <property name="designmethod" value="secDistinct"/>
+    </formula>
+
+    <formula name="SecUnion">
+        <description>[Beta]Merges two sections.</description>
+        <signature>SecUnion(section1, section2)</signature>
+        <category>Transform</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.SectionTransformFunctions"/>
+        <property name="method" value="secUnion"/>
+        <property name="designclass" value="com.tplus.transform.design.formula.functions.SectionFunctions"/>
+        <property name="designmethod" value="secUnion"/>
+    </formula>
+
+    <formula name="SecSelect">
+        <description>Given the section and the related field names (can be section names as well), this function would return a section consisting of only the given fields.</description>
+        <signature>SecSelect(section, selectFields)</signature>
+        <category>Transform</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.SectionTransformFunctions"/>
+        <property name="method" value="secSelect"/>
+        <property name="designclass" value="com.tplus.transform.design.formula.functions.SectionFunctions"/>
+        <property name="designmethod" value="secSelect"/>
+    </formula>
+
+    <formula name="SecSelectFirst">
+        <description>Given a section and a related field name, this function would return first encountered value of the field.</description>
+        <signature>SecSelectFirst(section, selectField, defaultValue)</signature>
+        <category>Transform</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.SectionTransformFunctions"/>
+        <property name="method" value="secSelectFirst"/>
+        <property name="designclass" value="com.tplus.transform.design.formula.functions.SectionFunctions"/>
+        <property name="designmethod" value="secSelectFirst"/>
+    </formula>
+
+    <formula name="SecSelectValues">
+        <description>Given a section and the related field name (can be section name as well), this function would return a collection consisting of only the given field's values.</description>
+        <signature>SecSelectValues(section, selectField)</signature>
+        <category>Transform</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.SectionTransformFunctions"/>
+        <property name="method" value="secSelectValues"/>
+        <property name="designclass" value="com.tplus.transform.design.formula.functions.SectionFunctions"/>
+        <property name="designmethod" value="secSelectValues"/>
+    </formula>
+
+    <formula name="GetStrings">
+        <description>Given a section and a nested field name of type string, this function would return a collection consisting of only the given field's values.</description>
+        <signature>GetStrings(section, selectField)</signature>
+        <category>Transform</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.SectionTransformFunctions"/>
+        <property name="method" value="secSelectValuesString"/>
+    </formula>
+    <formula name="GetChars">
+        <description>Given a section and a nested field name of type character, this function would return a collection consisting of only the given field's values.</description>
+        <signature>GetChars(section, selectField)</signature>
+        <category>Transform</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.SectionTransformFunctions"/>
+        <property name="method" value="secSelectValuesCharacter"/>
+    </formula>
+
+    <formula name="GetInts">
+        <description>Given a section and a nested field name of type int, this function would return a collection consisting of only the given field's values.</description>
+        <signature>GetInts(section, selectField)</signature>
+        <category>Transform</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.SectionTransformFunctions"/>
+        <property name="method" value="secSelectValuesInteger"/>
+    </formula>
+
+    <formula name="GetLongs">
+        <description>Given a section and a nested field name of type long, this function would return a collection consisting of only the given field's values.</description>
+        <signature>GetLongs(section, selectField)</signature>
+        <category>Transform</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.SectionTransformFunctions"/>
+        <property name="method" value="secSelectValuesLong"/>
+    </formula>
+
+    <formula name="GetDoubles">
+        <description>Given a section and a nested field name of type double, this function would return a collection consisting of only the given field's values.</description>
+        <signature>GetDoubles(section, selectField)</signature>
+        <category>Transform</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.SectionTransformFunctions"/>
+        <property name="method" value="secSelectValuesDouble"/>
+    </formula>
+
+    <formula name="GetFloats">
+        <description>Given a section and a nested field name of type float, this function would return a collection consisting of only the given field's values.</description>
+        <signature>GetFloats(section, selectField)</signature>
+        <category>Transform</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.SectionTransformFunctions"/>
+        <property name="method" value="secSelectValuesFloat"/>
+    </formula>
+
+    <formula name="GetBigIntegers">
+        <description>Given a section and a nested field name of type BigInteger, this function would return a collection consisting of only the given field's values.</description>
+        <signature>GetBigIntegers(section, selectField)</signature>
+        <category>Transform</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.SectionTransformFunctions"/>
+        <property name="method" value="secSelectValuesBigInteger"/>
+    </formula>
+
+    <formula name="GetBigDecimals">
+        <description>Given a section and a nested field name of type BigDecimal, this function would return a collection consisting of only the given field's values.</description>
+        <signature>GetBigDecimals(section, selectField)</signature>
+        <category>Transform</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.SectionTransformFunctions"/>
+        <property name="method" value="secSelectValuesBigDecimal"/>
+    </formula>
+
+    <formula name="GetScaledDecimals">
+        <description>Given a section and a nested field name of type ScaledDecimal, this function would return a collection consisting of only the given field's values.</description>
+        <signature>GetScaledDecimals(section, selectField)</signature>
+        <category>Transform</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.SectionTransformFunctions"/>
+        <property name="method" value="secSelectValuesScaledDecimal"/>
+    </formula>
+    <formula name="GetDates">
+        <description>Given a section and a nested field name of type date, this function would return a collection consisting of only the given field's values.</description>
+        <signature>GetDates(section, selectField)</signature>
+        <category>Transform</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.SectionTransformFunctions"/>
+        <property name="method" value="secSelectValuesDateTime"/>
+    </formula>
+
+    <formula name="GetISODates">
+        <description>Given a section and a nested field name of type ISODate, this function would return a collection consisting of only the given field's values.</description>
+        <signature>GetISODates(section, selectField)</signature>
+        <category>Transform</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.SectionTransformFunctions"/>
+        <property name="method" value="secSelectValuesISODate"/>
+    </formula>
+
+    <formula name="GetBooleans">
+        <description>Given a section and a nested field name of type boolean, this function would return a collection consisting of only the given field's values.</description>
+        <signature>GetBooleans(section, selectField)</signature>
+        <category>Transform</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.SectionTransformFunctions"/>
+        <property name="method" value="secSelectValuesBoolean"/>
+    </formula>
+
+    <formula name="GetSections">
+        <description>Given a section and a nested field name of type section, this function would return a collection consisting of only the given field's values.</description>
+        <signature>GetSections(section, selectField)</signature>
+        <category>Transform</category>
+        <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.SectionTransformFunctions"/>
+        <property name="method" value="secSelectValuesSection"/>
+        <property name="designclass" value="com.tplus.transform.design.formula.functions.SectionFunctions"/>
+        <property name="designmethod" value="secSelectValuesOptType"/>
+
+    </formula>
+
+    <formula name="SecAddColumn">
+        <description>[Beta]Adds a column to the section.</description>
+        <signature>SecAddColumn(section, columnName, criteria)</signature>
+        <category>Transform</category>
+        <Class>com.tplus.transform.design.formula.functions.SecAddColumnFunction</Class>
+    </formula>
+
+</formulae> 

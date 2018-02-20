@@ -1,0 +1,44 @@
+<cartridge-build-info xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" platform="Java/EJB" designer-build="1631">
+	<propertymap>
+		<property name="assembly">
+			<value>
+				<propertylist>
+					<value>
+						<propertymap type="com.tplus.transform.design.AssemblyInfo">
+							<property name="groupId" value="com.volantetech.volante.cartridge"/>
+							<property name="name" value="C:\Users\sys\Desktop\Source_Maven\FNITransformationFlow\flow\java\TransformationFlow.jar"/>
+							<property name="artifactId" value="cartridge-TransformationFlow"/>
+							<property name="type" value="assembly"/>
+							<property name="version" value="1.0"/>
+						</propertymap>
+					</value>
+				</propertylist>
+			</value>
+		</property>
+		<property name="DEPENDENCY">
+			<value>
+				<propertylist>
+					<value>
+						<propertymap type="com.tplus.transform.design.ModuleInfo">
+							<property name="groupId" value="com.volantetech.volante"/>
+							<property name="name" value="C:\Users\sys\Desktop\Source_Maven\emx-transformation-volante\v5.2.1\lib\runtime\transformrt.jar"/>
+							<property name="artifactId" value="volante-core"/>
+							<property name="type" value="DEPENDENCY"/>
+							<property name="version" value="5.2.1"/>
+						</propertymap>
+					</value>
+					<value>
+						<propertymap type="com.tplus.transform.design.ModuleInfo">
+							<property name="groupId" value="com.volantetech.volante"/>
+							<property name="name" value="C:\Users\sys\Desktop\Source_Maven\emx-transformation-volante\v5.2.1\lib\runtime\generalutils.jar"/>
+							<property name="artifactId" value="volante-utils"/>
+							<property name="type" value="DEPENDENCY"/>
+							<property name="version" value="5.2.1"/>
+						</propertymap>
+					</value>
+				</propertylist>
+			</value>
+		</property>
+	</propertymap>
+</cartridge-build-info>
+

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<SwiftMessageFormat name="MT015">
+	<standard-version><![CDATA[SRG 2014]]></standard-version>
+	<standard-release-qualifier>20140520</standard-release-qualifier>
+	<DescriptiveName><![CDATA[Delayed NAK]]></DescriptiveName>
+	<Category><![CDATA[System]]></Category>
+	<Description><![CDATA[This message notifies the user that a previous message has been rejected.
+
+From: GPA or FIN    To: User]]></Description>
+	<SwiftFields>
+		<customizable>true</customizable>
+		<modifiable>true</modifiable>
+		<SwiftMessageType>System</SwiftMessageType>
+		<HeaderAndTrailerType>SWIFT_INPUT_HEADER</HeaderAndTrailerType>
+		<Header>
+		</Header>
+		<Data>
+			<Fields>
+				<SystemField Name="rejection-reason">
+					<description><![CDATA[Reason for rejection. See FIN Error Codes for the full set of error codes.
+
+Also contains a line number (for user-to-user messages) or a field number (for system messages).]]></description>
+					<datatype>Section</datatype>
+					<minoccurs>1</minoccurs>
+					<maxoccurs>1</maxoccurs>
+					<SwiftSystemFieldDef Name="rejection-reason" Tag="405">
+						<Format><![CDATA[(3!c)([3!n])]]></Format>
+						<Specification><![CDATA[(error-code)(line-tag)]]></Specification>
+						<Additional-Format><![CDATA[<error-code> 3!c [<line-tag>]]]></Additional-Format>
+						<Description><![CDATA[Reason for rejection. See FIN Error Codes for the full set of error codes.
+
+Also contains a line number (for user-to-user messages) or a field number (for system messages).]]></Description>
+					</SwiftSystemFieldDef>
+				</SystemField>
+			</Fields>
+		</Data>
+		<Trailer>
+		</Trailer>
+	</SwiftFields>
+	<validationrules name="Default">
+		<hdrvalidationrules>
+			<fieldvalidations>
+			</fieldvalidations>
+		</hdrvalidationrules>
+		<datavalidationrules>
+			<fieldvalidations>
+			</fieldvalidations>
+		</datavalidationrules>
+		<tlrvalidationrules>
+			<fieldvalidations>
+			</fieldvalidations>
+		</tlrvalidationrules>
+	</validationrules>
+</SwiftMessageFormat>
+

@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<formulae> 
+		<formula name="ToHexString">
+			<description>Returns the hex string representation of the binary value.</description>
+			<signature>ToHexString(binary)</signature>
+			<category>Binary</category>
+	  		<Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+			<property name="class" value="com.tplus.transform.runtime.formula.BinaryFunctions" />
+			<property name="method" value="toHexString" />
+   	</formula>
+
+		<formula name="ToHexBinary">
+			<description>Returns the binary representation of the hex string.</description>
+			<signature>ToHexBinary(str)</signature>
+			<category>Binary</category>
+	  		<Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+			<property name="class" value="com.tplus.transform.runtime.formula.BinaryFunctions" />
+			<property name="method" value="toHexBinary" />
+    	</formula>
+
+		<formula name="ToBase64String">
+			<description>Returns the base64 string representation of the binary value.</description>
+			<signature>ToBase64String(binary)</signature>
+			<category>Binary</category>
+	  		<Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+			<property name="class" value="com.tplus.transform.runtime.formula.BinaryFunctions" />
+			<property name="method" value="toBase64String" />
+    	</formula>
+
+		<formula name="ToBase64Binary">
+			<description>Returns the binary representation of the base64 string.</description>
+			<signature>ToBase64Binary(str)</signature>
+			<category>Binary</category>
+	  		<Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+			<property name="class" value="com.tplus.transform.runtime.formula.BinaryFunctions" />
+			<property name="method" value="toBase64Binary" />
+    	</formula>
+
+		<formula name="ToASCIIString">
+			<description>Returns the ASCII string representation of the binary value. This is equivalent to calling BinaryToString with encoding as 'ascii'.</description>
+			<signature>ToASCIIString(binary)</signature>
+			<category>Binary</category>
+	  		<Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+			<property name="class" value="com.tplus.transform.runtime.formula.BinaryFunctions" />
+			<property name="method" value="toASCIIString" />
+    	</formula>
+
+		<formula name="ToASCIIBinary">
+			<description>Returns the binary representation of the ASCII string. This is equivalent to calling StringToBinary with encoding as 'ascii'.</description>
+			<signature>ToASCIIBinary(str)</signature>
+			<category>Binary</category>
+	  		<Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+			<property name="class" value="com.tplus.transform.runtime.formula.BinaryFunctions" />
+			<property name="method" value="toASCIIBinary" />
+    	</formula>
+
+		<formula name="BinaryToString">
+			<description>Converts binary data to String using the specified encoding.</description>
+			<signature>BinaryToString(binary, encodingOpt)</signature>
+			<category>Binary</category>
+	  		<Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+			<property name="class" value="com.tplus.transform.runtime.formula.BinaryFunctions" />
+			<property name="method" value="binaryToString" />
+    	</formula>
+
+		<formula name="StringToBinary">
+			<description>Converts string to binary data using the specified encoding.</description>
+			<signature>StringToBinary(str, encodingOpt)</signature>
+			<category>Binary</category>
+	  		<Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+			<property name="class" value="com.tplus.transform.runtime.formula.BinaryFunctions" />
+			<property name="method" value="stringToBinary" />
+   		</formula>
+		<formula name="ToBinary">
+			<description>Converts value to binary data.</description>
+			<signature>ToBinary(value)</signature>
+			<category>Binary</category>
+	  		<Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+			<property name="class" value="com.tplus.transform.runtime.formula.BinaryFunctions" />
+			<property name="method" value="toBinary" />
+   		</formula>
+		<formula name="ToBinary">
+			<description>Converts value to binary data.</description>
+			<signature>ToBinary(value, length, signed, bigEndian)</signature>
+			<category>Binary</category>
+	  		<Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+			<property name="class" value="com.tplus.transform.runtime.formula.BinaryFunctions" />
+			<property name="method" value="toBinary" />
+   		</formula>
+    	
+		<formula name="GetBinaryInt">
+			<description>This function extracts a integer value from a binary object. offset - Location of the integer. length - Length of the integer. Should be one of (1,2,4).  signed - specifies whether the integer is signed. bigEndian - specifies how the integer is stored.</description>
+			<signature>GetBinaryInt(binary, offsetOpt, lengthOpt, signed, bigEndian) </signature>
+			<category>Binary</category>
+	  		<Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+			<property name="class" value="com.tplus.transform.runtime.formula.BinaryFunctions" />
+			<property name="method" value="getBinaryInt" />
+		</formula>
+		
+		<formula name="GetBinaryLong">
+			<description>This function extracts a long value from a binary object. offset - Location of the integer. length - Length of the integer. Should be one of (1,2,4,8).  signed - specifies whether the integer is signed. bigEndian - specifies how the integer is stored.</description>
+			<signature>GetBinaryLong(binary, offsetOpt, lengthOpt, signed, bigEndian)</signature>
+			<category>Binary</category>
+	  		<Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+			<property name="class" value="com.tplus.transform.runtime.formula.BinaryFunctions" />
+			<property name="method" value="getBinaryLong" />
+		</formula>
+		
+    <formula name="SetBinaryInt">
+        <description>This function sets a integer value in a binary object. offset - Location of the integer. length - Length of the integer. Should be one of (1,2,4).  signed - specifies whether the integer is signed. bigEndian - specifies how the integer is stored.</description>
+        <signature>SetBinaryInt(binary, value, offsetOpt, lengthOpt, signed, bigEndian) </signature>
+        <category>Binary</category>
+          <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.BinaryFunctions" />
+        <property name="method" value="setBinaryInt" />
+    </formula>
+
+    <formula name="SetBinaryLong">
+        <description>This function set6s a long value in a binary object. offset - Location of the integer. length - Length of the integer. Should be one of (1,2,4,8).  signed - specifies whether the integer is signed. bigEndian - specifies how the integer is stored.</description>
+        <signature>SetBinaryLong(binary, value, offsetOpt, lengthOpt, signed, bigEndian)</signature>
+        <category>Binary</category>
+          <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+        <property name="class" value="com.tplus.transform.runtime.formula.BinaryFunctions" />
+        <property name="method" value="setBinaryLong" />
+    </formula>
+
+	<formula name="Equal">
+			<description>Returns true if the two binary values are equal (every bytes must be the same).</description>
+			<signature>Equal(binary, binary)</signature>
+			<category>Binary</category>
+	  		<Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+			<property name="class" value="com.tplus.transform.runtime.formula.BinaryFunctions" />
+			<property name="method" value="byteEquals" />
+            <property name="nullable" value="true" />
+   	</formula>
+    <formula name="NotEqual">
+            <description>Returns true if the two binary values are not equal (at least one byte is different).</description>
+            <signature>NotEqual(binary, binary)</signature>
+            <category>Binary</category>
+              <Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+            <property name="class" value="com.tplus.transform.runtime.formula.BinaryFunctions" />
+            <property name="method" value="notEqual" />
+            <property name="nullable" value="true" />
+       </formula>
+
+		<formula name="Length">
+			<description>Returns the length of the binary object.</description>
+			<signature>Length(Binary)</signature>
+			<category>Binary</category>
+	  		<Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+			<property name="class" value="com.tplus.transform.runtime.formula.BinaryFunctions" />
+			<property name="method" value="length" />
+    	</formula>
+
+		<formula name="At">
+			<description>Returns the byte (as int) at the specified index</description>
+			<signature>At(Binary, index)</signature>
+			<category>Binary</category>
+	  		<Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+			<property name="class" value="com.tplus.transform.runtime.formula.BinaryFunctions" />
+			<property name="method" value="byteAt" />
+   	</formula>
+		
+		<formula name="Left">
+			<description>Returns the leftmost, specified no. of bytes from the Binary object.</description>
+			<signature>Left(binary, num_bytes)</signature>
+			<category>Binary</category>
+	  		<Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+			<property name="class" value="com.tplus.transform.runtime.formula.BinaryFunctions" />
+			<property name="method" value="left" />
+    </formula>
+
+		<formula name="Right">
+			<description>Returns the rightmost specified no.of bytes from a Binary object. </description>
+			<signature>Right(binary, num_bytes)</signature>
+			<category>Binary</category>
+	  		<Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+			<property name="class" value="com.tplus.transform.runtime.formula.BinaryFunctions" />
+			<property name="method" value="right" />
+    </formula>
+    	
+		<formula name="Mid">
+			<description>Returns the specified no.of bytes from the Binary starting from the specified start_index.</description>
+			<signature>Mid(binary, start_index, num_bytes)</signature>
+			<category>Binary</category>
+	  		<Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+			<property name="class" value="com.tplus.transform.runtime.formula.BinaryFunctions" />
+			<property name="method" value="mid" />
+    </formula>
+    
+		<formula name="Sub">
+			<description>Returns a sub binary object (same as Mid).</description>
+			<signature>Sub(Binary, offset, length)</signature>
+			<category>Binary</category>
+	  		<Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+			<property name="class" value="com.tplus.transform.runtime.formula.BinaryFunctions" />
+			<property name="method" value="sub" />
+    </formula>
+		<formula name="FindFirst">
+			<description>Returns the index of first occurrence of a string/character in another string, searching from the index specified. If the index is not specified, searches from the beginning of the string. </description>
+			<signature>FindFirst(withinStr, toFind, start_index_opt)</signature>
+			<category>Text</category>
+	  		<Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+			<property name="class" value="com.tplus.transform.runtime.formula.BinaryFunctions" />
+			<property name="method" value="findFirst" />
+    	</formula>
+
+		<formula name="FindLast">
+			<description>Returns the index of last occurrence of a string/character in another string, searching from the index specified. If the index is not specified, searches from the end of the string. The search is from right to left of the string.</description>
+			<signature>FindLast(withinStr, toFind, start_index_opt)</signature>
+			<category>Text</category>
+	  		<Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+			<property name="class" value="com.tplus.transform.runtime.formula.BinaryFunctions" />
+			<property name="method" value="findLast" />
+    	</formula>
+
+
+		<formula name="Plus">
+			<description>Returns the sum of the arguments. You can also use the + operator instead.</description>
+			<signature>Plus(binary1, binary2)</signature>
+			<category>Arithmetic</category>
+	  		<Class>com.tplus.transform.design.formula.functions.StaticMethodFunction</Class>
+			<property name="class" value="com.tplus.transform.runtime.formula.BinaryFunctions" />
+			<property name="method" value="plus" />
+   	</formula>
+		
+</formulae> 

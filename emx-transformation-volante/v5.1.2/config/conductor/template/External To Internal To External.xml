@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<messageflowtemplate name="External To Internal To External">
+	<descriptiveName><![CDATA[External To Internal To External]]></descriptiveName>
+	<category><![CDATA[General]]></category>
+	<serviceelements>
+		<serviceelement>
+			<reference-value>MT304External</reference-value>
+			<prompt>External Messsage</prompt>
+			<type>External Message</type>
+		</serviceelement>
+		<serviceelement>
+			<reference-value>MT304InMapping</reference-value>
+			<prompt>External to Internal Mapping</prompt>
+			<type>Mapping</type>
+		</serviceelement>
+		<serviceelement>
+			<reference-value>MT304</reference-value>
+			<prompt>Internal Message</prompt>
+			<type>Internal Message</type>
+		</serviceelement>
+		<serviceelement>
+			<reference-value>MT304OutMapping</reference-value>
+			<prompt>Internal to External Mapping</prompt>
+			<type>Mapping</type>
+		</serviceelement>
+	</serviceelements>
+	<variables>
+		<variable>
+			<reference-value>MT304ExternalIn</reference-value>
+			<template-value>${MT304External}In</template-value>
+			<type>Binary</type>
+		</variable>
+		<variable>
+			<reference-value>MT304ExternalObj</reference-value>
+			<template-value>${MT304External}Obj</template-value>
+			<type>MT304OutExternal</type>
+		</variable>
+		<variable>
+			<reference-value>MT304Obj</reference-value>
+			<template-value>${MT304}Obj</template-value>
+			<type>Internal Format</type>
+		</variable>
+		<variable>
+			<reference-value>MT304ExternalOutObj</reference-value>
+			<template-value>${MT304External}OutObj</template-value>
+			<type>MT304OutExternal</type>
+		</variable>
+		<variable>
+			<reference-value>MT304ExternalOut</reference-value>
+			<template-value>${MT304External}Out</template-value>
+			<type>Binary</type>
+		</variable>
+	</variables>
+	<originalmessageflow>
+		<messageflow name="ExternalToNOToExternal" type="MessageFlow">
+			<version>1.0</version>
+			<description></description>
+			<transaction>Required</transaction>
+			<variables>
+				<fields>
+					<field>
+						<name>MT304ExternalIn</name>
+						<type>Binary</type>
+						<variabletype>INPUT</variabletype>
+					</field>
+					<field>
+						<name>MT304ExternalObj</name>
+						<type>Message</type>
+						<minoccurs>0</minoccurs>
+						<maxoccurs>1</maxoccurs>
+						<variabletype>LOCAL</variabletype>
+						<message>MT304External</message>
+						<fields>
+						</fields>
+					</field>
+					<field>
+						<name>MT304Obj</name>
+						<type>Message</type>
+						<minoccurs>0</minoccurs>
+						<maxoccurs>1</maxoccurs>
+						<variabletype>LOCAL</variabletype>
+						<message>MT304</message>
+						<fields>
+						</fields>
+					</field>
+					<field>
+						<name>MT304ExternalOutObj</name>
+						<type>Message</type>
+						<minoccurs>0</minoccurs>
+						<maxoccurs>1</maxoccurs>
+						<variabletype>LOCAL</variabletype>
+						<message>MT304External</message>
+						<fields>
+						</fields>
+					</field>
+					<field>
+						<name>MT304ExternalOut</name>
+						<type>Binary</type>
+						<variabletype>OUTPUT</variabletype>
+					</field>
+				</fields>
+			</variables>
+			<flowelement name="Start1" uid="8032990a-dded-498a-829f-1601d47e32f5" type="Start" >
+				<label>Start</label>
+				<visual>
+					<position x="284" y="42"/>
+					<line-color>#008000</line-color>
+					<text-color>#000000</text-color>
+					<fill-color>#F0F0FF</fill-color>
+				</visual>
+			</flowelement>
+			<flowelement name="Stop1" uid="ca4e8636-9675-486d-ae44-92d1396e56f8" type="Stop" >
+				<label>Stop</label>
+				<visual>
+					<position x="281" y="617"/>
+					<line-color>#008000</line-color>
+					<text-color>#000000</text-color>
+					<fill-color>#F0F0FF</fill-color>
+				</visual>
+			</flowelement>
+			<flowelement name="Parse1" uid="0245722a-e79b-4798-bbbf-9ceb3db625fe" type="Parse" >
+				<label>Parse</label>
+				<in>MT304ExternalIn</in>
+				<out>MT304ExternalObj</out>
+				<message>MT304External</message>
+				<visual>
+					<position x="284" y="107"/>
+					<line-color>#008000</line-color>
+					<text-color>#000000</text-color>
+					<fill-color>#FFFFE1</fill-color>
+				</visual>
+			</flowelement>
+			<flowelement name="Validate1" uid="ce1f25e8-9221-406a-8f5d-c5bcb7a95795" type="Validate" >
+				<label>Validate</label>
+				<in>MT304ExternalObj</in>
+				<message>MT304External</message>
+				<visual>
+					<position x="284" y="181"/>
+					<line-color>#008000</line-color>
+					<text-color>#000000</text-color>
+					<fill-color>#FFFFE1</fill-color>
+				</visual>
+			</flowelement>
+			<flowelement name="Mapping1" uid="3dc64ed2-a7bb-4918-a047-0d3c2bac7d8e" type="Mapping" >
+				<label>Mapping</label>
+				<in>MT304ExternalObj</in>
+				<out>MT304Obj</out>
+				<messagemapping>MT304InMapping</messagemapping>
+				<visual>
+					<position x="283" y="256"/>
+					<line-color>#FFA200</line-color>
+					<text-color>#000000</text-color>
+					<fill-color>#FFFFCC</fill-color>
+				</visual>
+			</flowelement>
+			<flowelement name="Validate3" uid="c0661a37-d5f7-419d-9e4d-8c64c762c4eb" type="Validate" >
+				<label>Validate</label>
+				<in>MT304Obj</in>
+				<message>MT304</message>
+				<visual>
+					<position x="283" y="330"/>
+					<line-color>#008000</line-color>
+					<text-color>#000000</text-color>
+					<fill-color>#FFFFE1</fill-color>
+				</visual>
+			</flowelement>
+			<flowelement name="Mapping2" uid="c31e9110-e71a-4e31-8f13-5c477d4b1ed2" type="Mapping" >
+				<label>Mapping</label>
+				<in>MT304Obj</in>
+				<out>MT304ExternalOutObj</out>
+				<messagemapping>MT304OutMapping</messagemapping>
+				<visual>
+					<position x="283" y="404"/>
+					<line-color>#FFA200</line-color>
+					<text-color>#000000</text-color>
+					<fill-color>#FFFFCC</fill-color>
+				</visual>
+			</flowelement>
+			<flowelement name="Validate2" uid="77ada259-17a0-4404-b57f-4120dabe15ab" type="Validate" >
+				<label>Validate</label>
+				<in>MT304ExternalOutObj</in>
+				<message>MT304External</message>
+				<visual>
+					<position x="283" y="478"/>
+					<line-color>#008000</line-color>
+					<text-color>#000000</text-color>
+					<fill-color>#FFFFE1</fill-color>
+				</visual>
+			</flowelement>
+			<flowelement name="Serialize1" uid="7008ca72-be71-408c-8bd7-c4f76adba8c5" type="Serialize" >
+				<label>Serialize</label>
+				<in>MT304ExternalOutObj</in>
+				<out>MT304ExternalOut</out>
+				<message>MT304External</message>
+				<visual>
+					<position x="284" y="553"/>
+					<line-color>#008000</line-color>
+					<text-color>#000000</text-color>
+					<fill-color>#FFFFE1</fill-color>
+				</visual>
+			</flowelement>
+			<link type="Default">
+				<controlflow>true</controlflow>
+				<dataflow>false</dataflow>
+				<outputport uid="8032990a-dded-498a-829f-1601d47e32f5" portindex="0"/>
+				<inputport uid="0245722a-e79b-4798-bbbf-9ceb3db625fe" portindex="0"/>
+				<edge-type>DIRECT</edge-type>
+			</link>
+			<link type="Default">
+				<controlflow>true</controlflow>
+				<dataflow>false</dataflow>
+				<outputport uid="0245722a-e79b-4798-bbbf-9ceb3db625fe" portindex="1"/>
+				<inputport uid="ce1f25e8-9221-406a-8f5d-c5bcb7a95795" portindex="0"/>
+				<edge-type>DIRECT</edge-type>
+			</link>
+			<link type="Default">
+				<controlflow>true</controlflow>
+				<dataflow>false</dataflow>
+				<outputport uid="ce1f25e8-9221-406a-8f5d-c5bcb7a95795" portindex="1"/>
+				<inputport uid="3dc64ed2-a7bb-4918-a047-0d3c2bac7d8e" portindex="0"/>
+				<edge-type>DIRECT</edge-type>
+			</link>
+			<link type="Default">
+				<controlflow>true</controlflow>
+				<dataflow>false</dataflow>
+				<outputport uid="3dc64ed2-a7bb-4918-a047-0d3c2bac7d8e" portindex="1"/>
+				<inputport uid="c0661a37-d5f7-419d-9e4d-8c64c762c4eb" portindex="0"/>
+				<edge-type>DIRECT</edge-type>
+			</link>
+			<link type="Default">
+				<controlflow>true</controlflow>
+				<dataflow>false</dataflow>
+				<outputport uid="c0661a37-d5f7-419d-9e4d-8c64c762c4eb" portindex="1"/>
+				<inputport uid="c31e9110-e71a-4e31-8f13-5c477d4b1ed2" portindex="0"/>
+				<edge-type>DIRECT</edge-type>
+			</link>
+			<link type="Default">
+				<controlflow>true</controlflow>
+				<dataflow>false</dataflow>
+				<outputport uid="c31e9110-e71a-4e31-8f13-5c477d4b1ed2" portindex="1"/>
+				<inputport uid="77ada259-17a0-4404-b57f-4120dabe15ab" portindex="0"/>
+				<edge-type>DIRECT</edge-type>
+			</link>
+			<link type="Default">
+				<controlflow>true</controlflow>
+				<dataflow>false</dataflow>
+				<outputport uid="77ada259-17a0-4404-b57f-4120dabe15ab" portindex="1"/>
+				<inputport uid="7008ca72-be71-408c-8bd7-c4f76adba8c5" portindex="0"/>
+				<edge-type>DIRECT</edge-type>
+			</link>
+			<link type="Default">
+				<controlflow>true</controlflow>
+				<dataflow>false</dataflow>
+				<outputport uid="7008ca72-be71-408c-8bd7-c4f76adba8c5" portindex="1"/>
+				<inputport uid="ca4e8636-9675-486d-ae44-92d1396e56f8" portindex="0"/>
+				<edge-type>DIRECT</edge-type>
+			</link>
+			<visual>
+				<bounds x="252" y="30" width="248" height="600"/>
+			</visual>
+		</messageflow>
+	</originalmessageflow>
+</messageflowtemplate>
+

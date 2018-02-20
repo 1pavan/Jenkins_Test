@@ -1,0 +1,481 @@
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="unqualified"
+            attributeFormDefault="unqualified">
+    <!-- include constructs -->
+    <xsd:include schemaLocation="externalmsg.xsd"/>
+    <xsd:complexType name="SwiftFormat">
+        <xsd:complexContent>
+            <xsd:extension base="ExternalMessageType"/>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:element name="SwiftFields" substitutionGroup="ExternalMessageFields">
+        <xsd:complexType>
+            <xsd:complexContent>
+                <xsd:extension base="ExternalMessageFieldsType">
+                    <xsd:sequence>
+                        <xsd:element ref="target-namespace" minOccurs="0"/>
+                        <xsd:element ref="xpath-namespaces" minOccurs="0"/>
+                        <xsd:element ref="platforminfo" minOccurs="0"/>
+                        <xsd:element ref="field-attributes" minOccurs="0"/>
+                        <xsd:element name="customizable" type="xsd:boolean" minOccurs="0"/>
+                        <xsd:element name="modifiable" type="xsd:boolean" minOccurs="0"/>
+                        <xsd:element name="SwiftMessageType" type="xsd:string" minOccurs="0"/>
+                        <xsd:element name="max-length" type="xsd:integer" minOccurs="0"/>
+                        <xsd:element name="HeaderAndTrailerType" type="xsd:string" minOccurs="0"/>
+                        <xsd:element name="enable-field-validations" type="xsd:boolean" minOccurs="0"/>
+                        <xsd:element name="use-bigdecimal" type="xsd:boolean" minOccurs="0"/>
+                        <xsd:element name="Header" type="SwiftHdrTlrStruct"/>
+                        <xsd:element name="Data" type="SwiftDataFieldsStruct"/>
+                        <xsd:element name="Trailer" type="SwiftHdrTlrStruct"/>
+                    </xsd:sequence>
+                </xsd:extension>
+            </xsd:complexContent>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:complexType name="SwiftHdrTlrStruct">
+        <xsd:sequence>
+            <xsd:element name="fields">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="field" type="SwiftFieldType" minOccurs="0" maxOccurs="unbounded"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element ref="platforminfo" minOccurs="0"/>
+            <xsd:element ref="field-attributes" minOccurs="0"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="SwiftFieldType">
+        <xsd:sequence>
+            <xsd:element name="name" type="xsd:string"/>
+            <xsd:element name="description" type="xsd:string" minOccurs="0"/>
+            <xsd:element name="datatype" type="xsd:string"/>
+            <xsd:element name="required" type="xsd:boolean" minOccurs="0"/>
+            <xsd:choice>
+                <xsd:group ref="SwiftFieldGroup"/>
+                <xsd:group ref="SwiftSectionGroup"/>
+            </xsd:choice>
+            <xsd:element ref="platforminfo" minOccurs="0"/>
+            <xsd:element ref="field-attributes" minOccurs="0"/>
+            <!--<xsd:element name="field-attributes" minOccurs="0">-->
+            <!--<xsd:complexType>-->
+            <!--<xsd:sequence>-->
+            <!--<xsd:element name="field-attribute" minOccurs="0" maxOccurs="unbounded">-->
+            <!--<xsd:complexType>-->
+            <!--<xsd:simpleContent>-->
+            <!--<xsd:extension base="xsd:string">-->
+            <!--<xsd:attribute name="name" type="xsd:string" use="required"/>-->
+            <!--</xsd:extension>-->
+            <!--</xsd:simpleContent>-->
+            <!--</xsd:complexType>-->
+            <!--</xsd:element>-->
+            <!--</xsd:sequence>-->
+            <!--</xsd:complexType>-->
+            <!--</xsd:element>-->
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:group name="SwiftFieldGroup">
+        <xsd:sequence>
+            <xsd:element name="length" type="xsd:integer"/>
+            <xsd:element name="tag" type="xsd:string" minOccurs="0"/>
+        </xsd:sequence>
+    </xsd:group>
+    <xsd:group name="SwiftSectionGroup">
+        <xsd:sequence>
+            <xsd:element name="repeating" type="xsd:boolean"/>
+            <xsd:element name="fields" minOccurs="0">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="field" type="SwiftFieldType" minOccurs="0" maxOccurs="unbounded"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:group>
+    <xsd:group name="SwiftUserMsgsDataFieldsStruct">
+        <xsd:sequence>
+            <xsd:group ref="SwiftUserMsgsDataFieldsStruct_1" minOccurs="0" maxOccurs="unbounded"/>
+        </xsd:sequence>
+    </xsd:group>
+    <xsd:group name="SwiftUserMsgsDataFieldsStruct_1">
+        <xsd:choice>
+            <xsd:element ref="SwiftSequence"/>
+            <xsd:element ref="SwiftField"/>
+            <xsd:element ref="CopyOfFields"/>
+        </xsd:choice>
+    </xsd:group>
+    <xsd:group name="SwiftSystemMsgsDataFieldsStruct">
+        <xsd:sequence>
+            <xsd:group ref="SwiftSystemMsgsDataFieldsStruct_1" minOccurs="0" maxOccurs="unbounded"/>
+        </xsd:sequence>
+    </xsd:group>
+    <xsd:group name="SwiftSystemMsgsDataFieldsStruct_1">
+        <xsd:choice>
+            <xsd:element ref="SystemField"/>
+            <xsd:element ref="SystemGroup"/>
+        </xsd:choice>
+    </xsd:group>
+    <xsd:complexType name="SwiftDataFieldsStruct">
+        <xsd:sequence>
+            <xsd:element name="Fields" minOccurs="1">
+                <xsd:complexType>
+                    <xsd:choice>
+                        <xsd:group ref="SwiftUserMsgsDataFieldsStruct"/>
+                        <xsd:group ref="SwiftSystemMsgsDataFieldsStruct"/>
+                    </xsd:choice>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element ref="platforminfo" minOccurs="0"/>
+            <xsd:element ref="field-attributes" minOccurs="0"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <!-- Swift System Messages field structure -->
+    <xsd:element name="SystemField">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="description" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="datatype" type="xsd:string"/>
+                <xsd:element name="aliasname" type="xsd:string" minOccurs="0"/>
+                <xsd:choice>
+                    <xsd:element name="required" type="xsd:boolean" minOccurs="0"/>
+                    <xsd:group ref="SwiftSecSysGroup"/>
+                </xsd:choice>
+                <xsd:element name="SwiftSystemFieldDef">
+                    <xsd:complexType>
+                        <xsd:sequence>
+                            <xsd:element name="Format" type="xsd:string"/>
+                            <xsd:element name="Specification" type="xsd:string"/>
+                            <xsd:element name="Additional-Format" type="xsd:string" minOccurs="0"/>
+                            <xsd:element name="Description" type="xsd:string" minOccurs="0"/>
+                            <xsd:element name="Validations" minOccurs="0">
+                                <xsd:complexType>
+                                    <xsd:sequence>
+                                        <xsd:element name="Validation" minOccurs="0" maxOccurs="unbounded">
+                                            <xsd:complexType>
+                                                <xsd:sequence>
+                                                    <xsd:element name="subfield" type="xsd:string" minOccurs="0"/>
+                                                    <xsd:element name="formula" type="xsd:string"/>
+                                                    <xsd:element name="error-code" type="xsd:string"/>
+                                                    <xsd:element name="actionmessage" type="xsd:string"/>
+                                                </xsd:sequence>
+                                            </xsd:complexType>
+                                        </xsd:element>
+                                    </xsd:sequence>
+                                </xsd:complexType>
+                            </xsd:element>
+                        </xsd:sequence>
+                        <xsd:attribute name="Name" type="xsd:string"/>
+                        <xsd:attribute name="Tag" type="xsd:string"/>
+                    </xsd:complexType>
+                </xsd:element>
+            </xsd:sequence>
+            <xsd:attribute name="Name" type="xsd:string"/>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:group name="SwiftSecSysGroup">
+        <xsd:sequence>
+            <xsd:element name="minoccurs" type="xsd:integer"/>
+            <xsd:element name="maxoccurs" type="xsd:integer"/>
+        </xsd:sequence>
+    </xsd:group>
+    <xsd:element name="SystemGroup">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="description" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="datatype" type="xsd:string" fixed="Section"/>
+                <xsd:element name="aliasname" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="minoccurs" type="xsd:integer"/>
+                <xsd:element name="maxoccurs" type="xsd:integer"/>
+                <xsd:element name="Fields">
+                    <xsd:complexType>
+                        <xsd:choice minOccurs="0" maxOccurs="unbounded">
+                            <xsd:element ref="SystemField"/>
+                            <xsd:element ref="SystemGroup"/>
+                        </xsd:choice>
+                        <xsd:attribute name="Name" type="xsd:string"/>
+                    </xsd:complexType>
+                </xsd:element>
+            </xsd:sequence>
+            <xsd:attribute name="Name" type="xsd:string"/>
+        </xsd:complexType>
+    </xsd:element>
+    <!-- End Swift System Messages field structure -->
+    <!--  Swift User Messages field structure -->
+    <xsd:element name="SwiftSequence">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="Enabled" type="xsd:boolean" minOccurs="0"/>
+                <xsd:element name="Name" type="xsd:string"/>
+                <xsd:element name="aliasname" type="xsd:string" minOccurs="0"/>
+                <xsd:element ref="platforminfo" minOccurs="0"/>
+                <xsd:element ref="field-attributes" minOccurs="0"/>
+                <xsd:element name="Description" type="xsd:string"/>
+                <xsd:element name="Mandatory" type="xsd:boolean"/>
+                <xsd:element name="Repeating" type="xsd:boolean"/>
+                <xsd:element name="NewSequeceStart" type="xsd:boolean" minOccurs="0"/>
+                <xsd:element name="BlockDelimited" type="xsd:boolean" minOccurs="0"/>
+                <xsd:element name="Code" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="StartBlockField" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="StartFieldFormat" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="EndBlockField" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="EndFieldFormat" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Fields" minOccurs="1">
+                    <xsd:complexType>
+                        <xsd:choice minOccurs="0" maxOccurs="unbounded">
+                            <xsd:element ref="SwiftSequence"/>
+                            <xsd:element ref="SwiftField"/>
+                            <xsd:element ref="CopyOfFields"/>
+                        </xsd:choice>
+                    </xsd:complexType>
+                </xsd:element>
+            </xsd:sequence>
+            <xsd:attribute name="Name" type="xsd:string"/>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="CopyOfFields">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="aliasname" type="xsd:string" minOccurs="0"/>
+                <xsd:element ref="platforminfo" minOccurs="0"/>
+                <xsd:element ref="field-attributes" minOccurs="0"/>
+                <xsd:element name="Description" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Mandatory" type="xsd:boolean" minOccurs="0"/>
+            </xsd:sequence>
+            <xsd:attribute name="Name" type="xsd:string"/>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="SwiftField">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="aliasname" type="xsd:string" minOccurs="0"/>
+                <xsd:element ref="platforminfo" minOccurs="0"/>
+                <xsd:element ref="field-attributes" minOccurs="0"/>
+                <xsd:element name="Enabled" type="xsd:boolean" minOccurs="0"/>
+                <xsd:element ref="SwiftFieldDef"/>
+                <xsd:element name="Suffix" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Definition" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Usage" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Repeating" type="xsd:boolean" minOccurs="0"/>
+                <xsd:element name="Presence" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Options" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="DisableOptions" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="subfields" minOccurs="0">
+                    <xsd:complexType>
+                        <xsd:sequence>
+                            <xsd:element name="subfield" minOccurs="0" maxOccurs="unbounded">
+                                <xsd:complexType>
+                                    <xsd:sequence>
+                                        <xsd:element name="aliasname" type="xsd:string"/>
+                                    </xsd:sequence>
+                                    <xsd:attribute name="Name" type="xsd:string"/>
+                                </xsd:complexType>
+                            </xsd:element>
+                        </xsd:sequence>
+                    </xsd:complexType>
+                </xsd:element>
+                <xsd:element name="Qualifier" minOccurs="0" maxOccurs="unbounded">
+                    <xsd:complexType>
+                        <xsd:sequence>
+                            <xsd:element name="Enabled" type="xsd:boolean" minOccurs="0"/>
+                            <xsd:element name="Description" type="xsd:string"/>
+                            <xsd:element name="Repeating" type="xsd:boolean"/>
+                            <xsd:element name="Presence" type="xsd:string"/>
+                            <xsd:element name="Options" type="xsd:string"/>
+                            <xsd:element name="DisableOptions" type="xsd:string" minOccurs="0"/>
+                        </xsd:sequence>
+                        <xsd:attribute name="Name" type="xsd:string" use="required"/>
+                    </xsd:complexType>
+                </xsd:element>
+                <xsd:element name="Validations" minOccurs="0">
+                    <xsd:complexType>
+                        <xsd:sequence>
+                            <xsd:element ref="SubField" minOccurs="0" maxOccurs="unbounded"/>
+                        </xsd:sequence>
+                    </xsd:complexType>
+                </xsd:element>
+            </xsd:sequence>
+            <xsd:attribute name="Name" type="xsd:string"/>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="SwiftFieldDef">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="Generic" type="xsd:boolean" minOccurs="0"/>
+                <xsd:element name="Description" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Option" minOccurs="0" maxOccurs="unbounded">
+                    <xsd:complexType>
+                        <xsd:sequence>
+                            <xsd:element name="Format" type="xsd:string"/>
+                            <xsd:element name="Specification" type="xsd:string"/>
+                            <xsd:element name="Description" type="xsd:string" minOccurs="0"/>
+                        </xsd:sequence>
+                        <xsd:attribute name="Name" type="xsd:string"/>
+                    </xsd:complexType>
+                </xsd:element>
+            </xsd:sequence>
+            <xsd:attribute name="Name" type="xsd:string"/>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="SubField">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="Validation" minOccurs="0" maxOccurs="unbounded">
+                    <xsd:complexType>
+                        <xsd:sequence>
+                            <xsd:element name="Enabled" type="xsd:boolean" minOccurs="0"/>
+                            <xsd:element name="Qualifiers" type="xsd:string" minOccurs="0"/>
+                            <xsd:element name="Options" type="xsd:string" minOccurs="0"/>
+                            <xsd:element name="NullField" type="xsd:string" minOccurs="0"/>
+                            <xsd:element name="ErrorCode" type="xsd:string" minOccurs="0"/>
+                            <xsd:element name="Comment" type="xsd:string" minOccurs="0"/>
+                            <xsd:element name="ValidationPattern" type="ValidationPatternAbstractType"/>
+                        </xsd:sequence>
+                    </xsd:complexType>
+                </xsd:element>
+            </xsd:sequence>
+            <xsd:attribute name="Name" type="xsd:string"/>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:complexType name="ValidationPatternAbstractType" abstract="true">
+        <xsd:sequence>
+            <xsd:element name="Type" type="xsd:string" minOccurs="0"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="CODE">
+        <xsd:complexContent>
+            <xsd:extension base="ValidationPatternAbstractType">
+                <xsd:sequence>
+                    <xsd:element name="Codes">
+                        <xsd:complexType>
+                            <xsd:sequence>
+                                <xsd:element name="Code" minOccurs="0" maxOccurs="unbounded">
+                                    <xsd:complexType>
+                                        <xsd:sequence>
+                                            <xsd:element name="DetailedName" type="xsd:string" minOccurs="0"/>
+                                            <xsd:element name="Description" type="xsd:string" minOccurs="0"/>
+                                        </xsd:sequence>
+                                        <xsd:attribute name="Name" type="xsd:string"/>
+                                    </xsd:complexType>
+                                </xsd:element>
+                            </xsd:sequence>
+                        </xsd:complexType>
+                    </xsd:element>
+                </xsd:sequence>
+                <xsd:attribute name="Type" type="xsd:string" use="required" fixed="CODE"/>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="Party_Identification">
+        <xsd:complexContent>
+            <xsd:extension base="ValidationPatternAbstractType">
+                <xsd:sequence>
+                    <xsd:element name="Codes">
+                        <xsd:complexType>
+                            <xsd:sequence>
+                                <xsd:element name="Code" minOccurs="0" maxOccurs="unbounded">
+                                    <xsd:complexType>
+                                        <xsd:sequence>
+                                            <xsd:element name="NewGroup" type="xsd:boolean" minOccurs="0"/>
+                                            <xsd:element name="Format" type="xsd:string" minOccurs="0"/>
+                                            <xsd:element name="Mandatory" type="xsd:boolean" minOccurs="0"/>
+                                            <xsd:element name="Description" type="xsd:string" minOccurs="0"/>
+                                        </xsd:sequence>
+                                        <xsd:attribute name="Name" type="xsd:string"/>
+                                    </xsd:complexType>
+                                </xsd:element>
+                            </xsd:sequence>
+                        </xsd:complexType>
+                    </xsd:element>
+                </xsd:sequence>
+                <xsd:attribute name="Type" type="xsd:string" use="required" fixed="Party Identification"/>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="T26">
+        <xsd:complexContent>
+            <xsd:extension base="ValidationPatternAbstractType">
+                <xsd:attribute name="Type" type="xsd:string" use="required" fixed="T26"/>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="Time_Offset">
+        <xsd:complexContent>
+            <xsd:extension base="ValidationPatternAbstractType">
+                <xsd:attribute name="Type" type="xsd:string" use="required" fixed="Time Offset"/>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="UTC_Offset">
+        <xsd:complexContent>
+            <xsd:extension base="ValidationPatternAbstractType">
+                <xsd:attribute name="Type" type="xsd:string" use="required" fixed="UTC Offset"/>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="UTC_Sign">
+        <xsd:complexContent>
+            <xsd:extension base="ValidationPatternAbstractType">
+                <xsd:attribute name="Type" type="xsd:string" use="required" fixed="UTC Sign"/>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="BIC">
+        <xsd:complexContent>
+            <xsd:extension base="ValidationPatternAbstractType">
+                <xsd:attribute name="Type" type="xsd:string" use="required" fixed="BIC"/>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="C05">
+        <xsd:complexContent>
+            <xsd:extension base="ValidationPatternAbstractType">
+                <xsd:attribute name="Type" type="xsd:string" use="required" fixed="C05"/>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="T14">
+        <xsd:complexContent>
+            <xsd:extension base="ValidationPatternAbstractType">
+                <xsd:sequence>
+                    <xsd:element name="sign-field" type="xsd:string" minOccurs="0"/>
+                </xsd:sequence>
+                <xsd:attribute name="Type" type="xsd:string" use="required" fixed="T14"/>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="DATE">
+        <xsd:complexContent>
+            <xsd:extension base="ValidationPatternAbstractType">
+                <xsd:sequence>
+                    <xsd:element name="Format" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="value-date" type="xsd:boolean" minOccurs="0"/>
+                </xsd:sequence>
+                <xsd:attribute name="Type" type="xsd:string" use="required" fixed="DATE"/>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="Decimal">
+        <xsd:complexContent>
+            <xsd:extension base="ValidationPatternAbstractType">
+                <xsd:sequence>
+                    <xsd:element name="currency-field" type="xsd:string" minOccurs="0"/>
+                </xsd:sequence>
+                <xsd:attribute name="Type" type="xsd:string" use="required" fixed="Decimal"/>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="Currency_Code">
+        <xsd:complexContent>
+            <xsd:extension base="ValidationPatternAbstractType">
+                <xsd:attribute name="Type" type="xsd:string" use="required" fixed="Currency Code"/>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="Country_Code">
+        <xsd:complexContent>
+            <xsd:extension base="ValidationPatternAbstractType">
+                <xsd:attribute name="Type" type="xsd:string" use="required" fixed="Country Code"/>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <!--  END Swift User Messages field structure -->
+</xsd:schema>
