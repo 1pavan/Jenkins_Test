@@ -21,7 +21,7 @@
 					<value>
 						<propertymap type="com.tplus.transform.design.ModuleInfo">
 							<property name="groupId" value="com.volantetech.volante"/>
-							<property name="name" value="C:\Users\sys\Desktop\Source_Maven\emx-transformation-volante\v5.2.1\lib\runtime\transformrt.jar"/>
+							<property name="name" value="C:\Program Files (x86)\Jenkins\workspace\New-FNI\emx-transformation-volante\v5.2.1\lib\runtime\transformrt.jar"/>
 							<property name="artifactId" value="volante-core"/>
 							<property name="type" value="DEPENDENCY"/>
 							<property name="version" value="5.2.1"/>
@@ -30,7 +30,7 @@
 					<value>
 						<propertymap type="com.tplus.transform.design.ModuleInfo">
 							<property name="groupId" value="com.volantetech.volante"/>
-							<property name="name" value="C:\Users\sys\Desktop\Source_Maven\emx-transformation-volante\v5.2.1\lib\runtime\generalutils.jar"/>
+							<property name="name" value="C:\Program Files (x86)\Jenkins\workspace\New-FNI\emx-transformation-volante\v5.2.1\lib\runtime\generalutils.jar"/>
 							<property name="artifactId" value="volante-utils"/>
 							<property name="type" value="DEPENDENCY"/>
 							<property name="version" value="5.2.1"/>

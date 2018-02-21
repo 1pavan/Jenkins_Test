@@ -25,7 +25,7 @@
 		<reference>
 			<type>Cartridge</type>
 			<relative-path>..\CommonFunctions.car</relative-path>
-			<absolute-path>E:\Projects\12-10-17\EMX_FULL\EMX_FULL\BusinessModules\CommonFunctions.car</absolute-path>
+			<absolute-path>C:\Users\sys\Desktop\Source_Maven\BusinessModules\CommonFunctions.car</absolute-path>
 		</reference>
 	</references>
 	<internalmessage name="fniGwyXFormAppAckConfig" type="InternalMessage">
@@ -2425,7 +2425,7 @@ if((pModuleStr.onDemand) || (pModuleStr.obi)) {
         }
         pModuleStr.ackType = getAckType(fniGwyXFormAppAckConfig,input);
         
-        error("pModuleStr.ackType->>>>>>>>>"+pModuleStr.ackType);
+        
         
         if(!pModuleStr.noAck) {
             if(pModuleStr.forwardNakAndFeNak) {
@@ -3187,9 +3187,9 @@ if(boolvalue == true) {
 						<property name="Title" value="fniGwyXFormSwfOsn"/>
 						<property name="Client Id" value="venkat_hyd@volantetech.com"/>
 						<property name="Last Author" value="sys"/>
-						<property name="Last Save Time" value="Wed Nov 01 14:47:41 IST 2017"/>
+						<property name="Last Save Time" value="Tue Feb 20 15:26:30 IST 2018"/>
 						<property name="Designer Build" value="1629"/>
-						<property name="Revision Number" value="272"/>
+						<property name="Revision Number" value="276"/>
 					</propertymap>
 				</value>
 			</property>
@@ -3202,7 +3202,7 @@ if(boolvalue == true) {
 								</propertymap>
 							</value>
 						</property>
-						<property name="cartridgefilename" value="E:\Projects\12-10-17\EMX_FULL\EMX_FULL\BusinessModules\fniGwyXFormAppAck\fniGwyXFormAppAck.car"/>
+						<property name="cartridgefilename" value="C:\Users\sys\Desktop\Source_Maven\BusinessModules\fniGwyXFormAppAck\fniGwyXFormAppAck.car"/>
 					</propertymap>
 				</value>
 			</property>
@@ -3284,7 +3284,7 @@ if(boolvalue == true) {
 		</propertymap>
 	</elementproperties>
 	<workspace>
-		<selected-element root="E:\Projects\12-10-17\EMX_FULL\EMX_FULL\BusinessModules\fniGwyXFormAppAck\fniGwyXFormAppAck.car">fniGwyXFormSwfAck/Function Definitions/bmProcessACK</selected-element>
+		<selected-element root="C:\Users\sys\Desktop\Source_Maven\BusinessModules\fniGwyXFormAppAck\fniGwyXFormAppAck.car">fniGwyXFormSwfAck/Function Definitions/bmProcessACK</selected-element>
 	</workspace>
 </cartridge>
 
