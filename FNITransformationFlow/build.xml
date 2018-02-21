@@ -238,6 +238,6 @@
 	</target>
 
 	<!--Primary target for this build.xml-->
-	<target name="run" depends="clean.target,compile.all,copy.runtime.jars,build.maven.folders,build.nested.folders" description="Build all EMX Validation cartridges">
+	<target name="run" depends="clean.target,compile.all,copy.runtime.jars" description="Build all EMX Validation cartridges">
 	</target>
 </project>
