@@ -1,0 +1,28 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	
+    <modelVersion>4.0.0</modelVersion>
+
+	<groupId>emx.volante.gateway</groupId>
+	<artifactId>emx-fni-gateway-transformation-flow</artifactId>
+	<version>1.0.2-SNAPSHOT</version>
+	<packaging>pom</packaging>
+	<name>EMX GatewayTransformation Project</name>
+	<description>EMX Transformation Service : EMX GatewayTransformation</description>
+
+	 <!-- <parent> <groupId>emx</groupId> <artifactId>emx-parent</artifactId> 
+		<version>0.0.2</version> </parent>
+ -->
+	
+   	<scm>
+		<url>scm:git:git@github.com:1pavan/Jenkins_Test.git</url>
+		<connection>scm:git:git@github.com:1pavan/Jenkins_Test.git</connection>
+		<developerConnection>scm:git:git@github.com:1pavan/Jenkins_Test.git</developerConnection>
+	    <tag>HEAD</tag>
+    </scm>
+	
+	<modules>
+		<module>Transformation_Flows</module>
+		<module>BusinessModules</module>	
+		<module>FNITransformationFlow</module>	
+	</modules>
+</project>

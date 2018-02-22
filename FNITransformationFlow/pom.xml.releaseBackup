@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<groupId>emx.volante.gateway</groupId>
+	<artifactId>FNITransformationFlow</artifactId>
+	<modelVersion>4.0.0</modelVersion>
+	<packaging>pom</packaging>
+	<name>EMX Gateway Transformation Flow</name>
+	<url>http://maven.apache.org</url>
+	<parent>
+		<groupId>emx.volante.gateway</groupId>
+		<artifactId>emx-fni-gateway-transformation-flow</artifactId>
+		<version>1.0.2-SNAPSHOT</version>
+	</parent>
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+
+	<profiles>
+		<profile>
+			<id>BNYM</id>
+		</profile>
+	</profiles>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.eclipse.aether</groupId>
+			<artifactId>aether-ant-tasks</artifactId>
+			<version>1.0.1.v20141111</version>
+			<classifier>uber</classifier>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.maven</groupId>
+			<artifactId>maven-ant-tasks</artifactId>
+			<version>2.1.3</version>
+		</dependency>
+		<dependency>
+			<groupId>ant-contrib</groupId>
+			<artifactId>ant-contrib</artifactId>
+			<version>1.0b3</version>
+		</dependency>
+	</dependencies>
+	<build>
+		<finalName>volante</finalName>
+		<plugins>
+			<plugin>
+				<artifactId>maven-antrun-plugin</artifactId>
+				<version>1.8</version>
+				<executions>
+					<execution>
+						<id>default-cli</id>
+						<phase>compile</phase>
+						<configuration>
+							<target>
+								<property name="compile_classpath" refid="maven.compile.classpath" />
+								<property name="runtime_classpath" refid="maven.runtime.classpath" />
+								<property name="test_classpath" refid="maven.test.classpath" />
+								<property name="plugin_classpath" refid="maven.plugin.classpath" />
+								<echo message="compiling" />
+								<ant antfile="${project.basedir}/build.xml">
+									<target name="run" />
+								</ant>
+							</target>
+						</configuration>
+						<goals>
+							<goal>run</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>clean</id>
+						<phase>clean</phase>
+						<configuration>
+							<target>
+								<property name="compile_classpath" refid="maven.compile.classpath" />
+								<property name="runtime_classpath" refid="maven.runtime.classpath" />
+								<property name="test_classpath" refid="maven.test.classpath" />
+								<property name="plugin_classpath" refid="maven.plugin.classpath" />
+								<echo message="ANT CONTRIB : ${ant-contrib:ant-contrib:jar}" />
+								<ant antfile="${project.basedir}/build.xml">
+									<target name="clean.target" />
+								</ant>
+							</target>
+						</configuration>
+						<goals>
+							<goal>run</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+	
+</project>

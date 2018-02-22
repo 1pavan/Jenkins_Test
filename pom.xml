@@ -4,7 +4,7 @@
 
 	<groupId>emx.volante.gateway</groupId>
 	<artifactId>emx-fni-gateway-transformation-flow</artifactId>
-	<version>1.0.2-SNAPSHOT</version>
+	<version>Y</version>
 	<packaging>pom</packaging>
 	<name>EMX GatewayTransformation Project</name>
 	<description>EMX Transformation Service : EMX GatewayTransformation</description>
@@ -13,7 +13,12 @@
 		<version>0.0.2</version> </parent>
  -->
 	
-
+   	<scm>
+		<url>git@github.com:1pavan/Jenkins_Test.git</url>
+		<connection>scm:git:git@github.com:1pavan/Jenkins_Test.git</connection>
+		<developerConnection>scm:git:git@github.com:1pavan/Jenkins_Test.git</developerConnection>
+	    <tag>head</tag>
+    </scm>
 	
 	<modules>
 		<module>Transformation_Flows</module>
